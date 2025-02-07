@@ -106,7 +106,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 # alias zconf="$EDITOR ~/.zshrc"
 alias kanata="sudo ~/.config/kanata/kanata -c ~/.config/kanata/kanata.kbd"
-alias exa="exa --icons --git -l -G -h"
+alias exa="exa --icons --git -l -G -h -a"
 # neovim fzf inegration
 alias vi='nvim $(fzf)'
 
