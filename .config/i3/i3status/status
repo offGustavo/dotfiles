@@ -1,0 +1,67 @@
+general {
+	output_format = "i3bar"
+	interval = 5
+	markup = "pango"
+	separator = " "
+	colors = true
+	color_good = "#ffffff"
+	color_degraded = "#ffffff"
+	color_bad = "#ffffff"
+	color_separator = "#000000"
+}
+
+
+order += "volume master"
+order += "battery all"
+order += "wireless _first_"
+order += "time"
+
+## Module :: wireless 
+wireless _first_ {
+	# %quality | %essid | %bitrate | %frequency | %ip
+	format_up = "  %ip"
+	format_down = "󱞐 "
+	format_bitrate = "%g %cb/s"
+	format_noise = "%03d%s"
+	format_quality = "%03d%s"
+	format_signal = "%03d%s"
+}
+
+## Module :: battery 
+battery all {
+	# %percentage | %status | %remaining | %emptytime | %consumption
+	format = "%status %percentage"
+	# format = "%status %percentage (%remaining)"
+	format_down = "No Battery"
+	format_percentage = "%.00f%s"
+	integer_battery_capacity = true
+	last_full_capacity = true
+	hide_seconds = true
+	low_threshold = 20
+	threshold_type = percentage
+	status_chr = ""
+	status_bat = " "
+	status_unk = " "
+	status_full = " "
+}
+
+
+## Module :: time 
+time {
+	format = "󰥔  %H:%M   %d/%m/%y "
+}
+
+## Module :: volume 
+volume master {
+	device = "pulse"
+	format = "  %volume"
+	format_muted = " Muted"
+}
+
+## Module :: read_file 
+read_file UPTIME {
+	format = "%title: %content"
+	format_bad = "%title - %errno: %error"
+	path = "/proc/uptime"
+	Max_characters = 255
+}
