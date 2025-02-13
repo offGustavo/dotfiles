@@ -2,6 +2,7 @@ eval "$(zoxide init zsh)"
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin/$PATH
+export PATH=$PATH:$HOME/.config/emacs/bin
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -107,8 +108,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zconf="$EDITOR ~/.zshrc"
 alias kanata="sudo ~/.config/kanata/kanata -c ~/.config/kanata/kanata.kbd"
 alias exa="exa --icons --git -l -G -h -a"
+
 # neovim fzf inegration
 alias vi='nvim $(fzf)'
+alias ni='zi && nvim'
+alias nala="sudo nala"
 
 
 # FZF defaults
@@ -142,69 +146,68 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 # export FZF_DEFAULT_COMMAND='find . -printf "%P\\n"'
 
 # Fastfetch show on startup
-eval 'fastfetch'
+eval 'fastfetch' 
 
-# Nala pacman style commands
-nala() {
-  package_name="$2"
-  case "$1" in
-    -S)
-      [[ -n "$package_name" ]] && sudo nala install "$package_name"
-      ;;
-    -s)
-      [[ -n "$package_name" ]] && nala search "$package_name"
-      ;;
-    -Rs)
-      [[ -n "$package_name" ]] && sudo nala remove "$package_name"
-      ;;
-    -Yc)
-      sudo nala autoremove
-      ;;
-    install)
-      [[ -n "$package_name" ]] && sudo nala install "$package_name"
-      ;;
-    remove)
-      [[ -n "$package_name" ]] && sudo nala remove "$package_name"
-      ;;
-    purge)
-      [[ -n "$package_name" ]] && sudo nala purge "$package_name"
-      ;;
-    search)
-      [[ -n "$package_name" ]] && nala search "$package_name"
-      ;;
-    show)
-      [[ -n "$package_name" ]] && sudo nala show "$package_name"
-      ;;
-    list)
-      [[ -n "$package_name" ]] && command nala list "$package_name"
-      ;;
-    history)
-      sudo nala history
-      ;;
-    fetch)
-      sudo nala fetch
-      ;;
-    clean)
-      sudo nala clean
-      ;;
-    autoremove)
-      sudo nala autoremove
-      ;;
-    autopurge)
-      sudo nala autopurge
-      ;;
-    update)
-      sudo nala update
-      ;;
-    upgrade)
-      sudo nala upgrade
-      ;;
-    full-upgrade)
-      sudo nala full-upgrade
-      ;;
-    "")
-      sudo nala update && sudo nala upgrade
-      ;;
-  esac
-}
-
+# # Nala pacman style commands
+# nala() {
+#   package_name="$2"
+#   case "$1" in
+#     -S)
+#       [[ -n "$package_name" ]] && sudo nala install "$package_name"
+#       ;;
+#     -s)
+#       [[ -n "$package_name" ]] && sudo nala search "$package_name"
+#       ;;
+#     -Rs)
+#       [[ -n "$package_name" ]] && sudo nala remove "$package_name"
+#       ;;
+#     -Yc)
+#       sudo nala autoremove
+#       ;;
+#     install)
+#       [[ -n "$package_name" ]] && sudo nala install "$package_name"
+#       ;;
+#     remove)
+#       [[ -n "$package_name" ]] && sudo nala remove "$package_name"
+#       ;;
+#     purge)
+#       [[ -n "$package_name" ]] && sudo nala purge "$package_name"
+#       ;;
+#     search)
+#       [[ -n "$package_name" ]] && sudo nala search "$package_name"
+#       ;;
+#     show)
+#       [[ -n "$package_name" ]] && sudo nala show "$package_name"
+#       ;;
+#     list)
+#       [[ -n "$package_name" ]] && command nala list "$package_name"
+#       ;;
+#     history)
+#       sudo nala history
+#       ;;
+#     fetch)
+#       sudo nala fetch
+#       ;;
+#     clean)
+#       sudo nala clean
+#       ;;
+#     autoremove)
+#       sudo nala autoremove
+#       ;;
+#     autopurge)
+#       sudo nala autopurge
+#       ;;
+#     update)
+#       sudo nala update
+#       ;;
+#     upgrade)
+#       sudo nala upgrade
+#       ;;
+#     full-upgrade)
+#       sudo nala full-upgrade
+#       ;;
+#     "")
+#       sudo nala update && sudo nala upgrade
+#       ;;
+#   esac
+# }
