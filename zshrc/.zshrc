@@ -116,6 +116,8 @@ alias ni='zi && nvim'
 alias nala="sudo nala"
 alias gengar="pokeget --hide-name gengar| fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
 
+# Fastfetch show on startup
+eval 'gengar' 
 
 # FZF defaults
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
@@ -147,8 +149,6 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 # export FZF_DEFAULT_COMMAND='find .'
 # export FZF_DEFAULT_COMMAND='find . -printf "%P\\n"'
 
-# Fastfetch show on startup
-eval 'fastfetch' 
 
 # # Nala pacman style commands
 # nala() {
