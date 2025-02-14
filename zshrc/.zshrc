@@ -114,6 +114,7 @@ alias exa="exa --icons --git -l -G -h -a"
 alias vi='nvim $(fzf)'
 alias ni='zi && nvim'
 alias nala="sudo nala"
+alias gengar="pokeget --hide-name gengar| fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
 
 
 # FZF defaults
