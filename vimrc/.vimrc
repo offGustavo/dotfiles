@@ -13,8 +13,7 @@ nmap <S-h> :bp!<Cr>
 nmap <space>, :Buffers<Cr>
 
 " Vim File Explorer
-nmap <space>e :Ex<Cr>
-nmap <space><Cr> :Ex<Cr>
+nmap <space><Cr> :E<Cr>
 " nmap <space><space> :SearchFiles<Cr>
 nmap <space><space> :Files<Cr>
 
@@ -95,17 +94,20 @@ call delete(l:tempname)
 	" :Files
 command! SearchFiles call FZF()
 
+nmap <space>ff :SearchFiles<Cr>
+
 call plug#begin()
 
-nmap <space>ff :SearchFiles<Cr>
 " List your plugins here
 Plug 'fxn/vim-monochrome'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
+" Plug 'tpope/vim-vinegar'
 
 call plug#end()
+
 set termguicolors
 
 let g:tokyonight_style = 'night' " available: night, storm
