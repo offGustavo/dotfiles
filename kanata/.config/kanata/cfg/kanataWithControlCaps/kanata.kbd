@@ -1,0 +1,129 @@
+(defcfg
+  movemouse-smooth-diagonals yes
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt menu rctl 
+)
+
+(defalias
+
+  ;; Definer as layer
+;; Define a layer dos números e teclas F1 a F12
+num (layer-toggle numbers)
+;; Define a layer com as teclas de navegação e mídia
+nav (layer-toggle navgation)
+nav2 (layer-switch navgation2)
+bas (layer-switch qwerty)
+sei(tap-hold 100 300 @nav2 @nav )
+;; Define a layer com os simbolos
+syb (layer-toggle symbols)
+;; Define a layer de movimento do mouse
+mov (layer-toggle mouse)
+
+;; Navgation
+lnv (tap-hold 100 300 x @nav) 
+rnv (tap-hold 100 300 , @nav) 
+;; Numbers
+
+lnm (tap-hold 100 300 c @num)
+rnm (tap-hold 100 300 m @num)
+
+;; Symbols
+lsy (tap-hold 100 300 v @syb)  
+rsy (tap-hold 100 300 n @syb)  
+lmv (tap-hold 100 300 z @mov)
+rmv (tap-hold 100 300 . @mov)
+
+  ;; Remap
+
+;; Space Shift layer de simbolos
+;;css (tap-hold 100 500 spc @syb)
+css (tap-hold-release 100 300 spc lsft)
+;; Ret to Ret/Control
+rrc (tap-hold 100 300 ret lctl)
+;; Caps Lock to Esc/Control
+lec (tap-hold 100 300 esc lctl)
+;; Left Shift to Esc/Shift
+lel (tap-hold-release 100 300 esc lsft)
+;; Right Shift to CapsLock/Shift
+lcl(tap-hold 100 100 caps lsft)
+;; Control
+rcj (tap-hold 100 300 j lctl)
+lcf (tap-hold 100 300 f lctl)
+
+;; Shift
+lsd (tap-hold 100 300 d lsft)
+rsk (tap-hold 100 300 k lsft)
+
+;; Super/Windows
+lms (tap-hold 100 300 s lmet)   
+rml (tap-hold 100 300 l lmet)
+
+;; Alt
+laa (tap-hold 100 300 a lalt) 
+ras (tap-hold 100 300 ; lalt) 
+
+
+;; Mouse
+mwu (mwheel-up 50 120)
+mwd (mwheel-down 50 120)
+mwl (mwheel-left 50 120)
+mwr (mwheel-right 50 120)
+mau (movemouse-accel-up 1 2000 1 10)
+mal (movemouse-accel-left 1 2000 1 10)
+mad (movemouse-accel-down 1 2000 1 10)
+mar (movemouse-accel-right 1 2000 1 10)
+
+)
+
+(deflayer qwerty
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc 
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \ 
+  @lec @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    @rrc 
+  @lel @lmv @lnv @lnm @lsy b    @rsy @rnm @rnv @rmv /    @lcl 
+  lctl lmet @sei           @css           lctl lalt rctl 
+)
+
+(deflayer numbers
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _   
+  _    f1   f2   f3   f4   _    .    kp7  kp8  kp9  kp-  _    =    _ 
+  _    f5   f6   f7   f8   _    kp*  kp4  kp5  kp6  kp+  _    _  
+  _    f9   f10  f11  f12  _    ,    kp1  kp2  kp3  kp/  _   
+  _    _    _              kp0            _    _    _    
+)
+(deflayer navgation2
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _   
+  _    1    2    3    4    5    6    7    8    9    0    -    =    _ 
+  _    prev vold volu next _    lft  down up   rght del  bspc _  
+  _    mute pp   menu _    _    ins  home end  pgup pgdn _   
+  _    _    @bas           _              _    _    _    
+)
+(deflayer navgation
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _   
+  _    1    2    3    4    5    6    7    8    9    0    -    =    _ 
+  _    prev vold volu next _    lft  down up   rght del  bspc _  
+  _    mute pp   menu _    _    ins  home end  pgup pgdn _   
+  _    _    _              _              _    _    _    
+)
+
+
+(deflayer symbols
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _   
+  _    1    2    3    4    5    6    7    8    9    0    -    =    \ 
+  _    S-\  [    S-[  ]    S-]  _    =    S-=  grv  S-6  S-grv _  
+  _    \    _    _    S-,  S-.  _    S--  '    S-'  _    _   
+  _    _    _              _              _    _    _    
+)
+
+(deflayer mouse
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _   
+  _    _    mwu  @mau mwl  _    _    mwu  @mau mwl  mfwd _    _    _ 
+  _    mlft @mal mrgt @mar _    mmid @mal mrgt @mar mlft _    _  
+  _    mwd  @mad mwr  _    _    _    mwd  @mad mwr  mbck _   
+  _    _    _              _              _    _    _    
+)

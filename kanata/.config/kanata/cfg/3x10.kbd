@@ -1,0 +1,52 @@
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defalias
+  ;; Definer as layer
+  nav (layer-toggle navgation)
+  syb (layer-toggle symbols)
+
+  lsx(tap-hold 100 300 x @nav)
+  lsv(tap-hold 100 300 , @nav)
+  lnc(tap-hold 100 300 c @syb)
+  lnm(tap-hold 100 300 m @syb)
+  ;; Control
+  rcj (tap-hold 100 300 j lalt)
+  lcf (tap-hold 100 300 f lalt)
+  ;; Shift
+  lsd (tap-hold 100 300 d lmet)
+  rsk (tap-hold 100 300 k rmet)
+  ;; Super/Windows
+  lms (tap-hold 100 300 s lctl)   
+  rml (tap-hold 100 300 l rctl)
+  ;; Alt
+  laa (tap-hold 100 300 a lsft) 
+  ras (tap-hold 100 300 spc lsft) 
+)
+(deflayer qwerty
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX  
+  XX   q    w    e    r    t    y    u    i    o    p    XX   XX   XX
+  XX    @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras XX   XX 
+  XX     z   @lsx @lnc v    b    n    @lnm @lsv .    /   XX 
+  XX   XX   XX             XX             XX    XX   XX  
+)
+(deflayer symbols
+
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   
+  XX    1    2    3    4    5    6    7    8    9    0    XX   XX   XX
+  XX     esc  tab  [    ]    grv  -    ;    =    ret  bspc XX       XX 
+  XX      \    _    _    _    caps _    '    _    _    _            XX   
+  XX     XX     XX             XX               XX     XX           XX  
+)
+(deflayer navgation
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   
+  _     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   _   
+  _      esc  ret  tab bspc _    lft  down up   rght del  bspc     _  
+  _       _    _    _    _    _    ins  home end  pgup pgdn         _   
+  _    _    _              _              _    _                    _   
+)
