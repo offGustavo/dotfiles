@@ -32,8 +32,6 @@ vmap <S-j> :m '>+1<CR>gv=gv
 nmap j gj
 nmap k gk
 
-" Fzf Grep 
-nmap <space>/ :RG<Cr>
 
 " Search Movement
 nmap n nzz 
@@ -65,7 +63,6 @@ tmap <Esc><Esc> <C-\><C-n>
 " tmap <C-k> <C-w>k
 " tmap <C-l> <C-w>l
 
-
 " Options 
 set nu
 set rnu
@@ -79,22 +76,22 @@ let g:netrw_banner = 0
 
 let g:netrw_liststyle = 0
 
-" FZF Vim
-function! FZF() abort
-let l:tempname = tempname()
-" fzf | awk '{ print $1":1:0" }' > file
-execute 'silent !fzf --multi --no-preview ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-try
-execute 'cfile! ' . l:tempname
-redraw!
-	finally
-call delete(l:tempname)
-	endtry
-	endfunction
-	" :Files
-command! SearchFiles call FZF()
-
-nmap <space>ff :SearchFiles<Cr>
+" " FZF Vim
+" function! FZF() abort
+" let l:tempname = tempname()
+" " fzf | awk '{ print $1":1:0" }' > file
+" execute 'silent !fzf --multi --no-preview ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+" try
+" execute 'cfile! ' . l:tempname
+" redraw!
+" 	finally
+" call delete(l:tempname)
+" 	endtry
+" 	endfunction
+" 	" :Files
+" command! SearchFiles call FZF()
+"
+" nmap <space>ff :SearchFiles<Cr>
 
 call plug#begin()
 
@@ -104,10 +101,13 @@ Plug 'ghifarit53/tokyonight-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
+" Fzf Grep 
+nmap <space>/ :RG<Cr>
+" Fzf Themes
+nmap <space>uC :Colors<Cr>
 set termguicolors
 
 let g:tokyonight_style = 'night' " available: night, storm

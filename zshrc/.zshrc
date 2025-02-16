@@ -1,4 +1,7 @@
 eval "$(zoxide init zsh)"
+# init Fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin/$PATH
@@ -74,7 +77,7 @@ ZSH_THEME="josh" # set by `omz`
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -144,8 +147,10 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --preview='bat --color=always {}'
 "
 
-# I love rust
 export FZF_DEFAULT_COMMAND='fd --hidden'
+
+# I LOVE RUST
+#
 # export FZF_DEFAULT_COMMAND='find .'
 # export FZF_DEFAULT_COMMAND='find . -printf "%P\\n"'
 
@@ -213,3 +218,4 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 #       ;;
 #   esac
 # }
+
