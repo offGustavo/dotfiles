@@ -54,5 +54,29 @@ vim.keymap.set("n", "<C-w>n", vim.cmd.bn, { silent = false, desc = "Previous Buf
 
 vim.keymap.set("n", "<leader>fp", ":BufferLinePick<Cr>", { silent = true, desc = "Buffer Picker" })
 
-vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vim Edit Command" })
--- vim.keymap.set("n", "<leader><Cr>", vim.cmd.Ex, { silent = true, desc = "Netrw File Explorer" })
+vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
+
+-- File Explorer
+vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
+
+-- Colorizer Config
+vim.keymap.set(
+  "n",
+  "<leader>oca",
+  "<Cmd>ColorizerAttachToBuffer<Cr>",
+  { silent = true, desc = "Colorizer Attach To Buffer" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>ocr",
+  "<Cmd>ColorizerReloadAllBuffers<Cr>",
+  { silent = true, desc = "Colorizer Reload All Buffers" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>ocd",
+  "<Cmd>ColorizerDetachFromBuffer<Cr>",
+  { silent = true, desc = "Colorizer Detach To Buffer" }
+)
+
+vim.keymap.set("n", "<leader>oct", "<Cmd>ColorizerToggle<Cr>", { silent = true, desc = "Colorizer Toggle" })

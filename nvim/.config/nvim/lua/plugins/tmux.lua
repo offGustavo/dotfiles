@@ -1,4 +1,3 @@
--- return {}
 return {
   "christoomey/vim-tmux-navigator",
   cmd = {
@@ -6,7 +5,6 @@ return {
     "TmuxNavigateDown",
     "TmuxNavigateUp",
     "TmuxNavigateRight",
-    "TmuxNavigatePrevious",
   },
   keys = {
     { "<C-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },

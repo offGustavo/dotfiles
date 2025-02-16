@@ -291,7 +291,7 @@ return {
 
     -- Markview
     require("which-key").add({
-      { "<leader>m", group = "Markdown", mode = "n" },
+      { "<leader>m", group = "Markdown", mode = "n", icon = "" },
     })
     vim.keymap.set(
       { "n", "v" },
