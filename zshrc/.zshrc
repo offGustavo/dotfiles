@@ -5,8 +5,8 @@ eval "$(zoxide init zsh)"
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin/$PATH
-export PATH=$PATH:$HOME/.config/emacs/bin
 export XDG_CONFIG_HOME="$HOME/.config"
+
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -218,4 +218,4 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 #       ;;
 #   esac
 # }
-
+#
