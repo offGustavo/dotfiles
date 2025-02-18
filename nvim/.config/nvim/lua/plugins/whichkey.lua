@@ -35,16 +35,11 @@ return {
         { "<C-j>", name = "Go to Lower Window" },
         { "<C-k>", name = "Go to Upper Window" },
         { "<C-l>", name = "Go to Right Window" },
-
-        { "<leader>;", icon = { icon = "" } },
+        { "<leader>;", icon = "" },
         { "<leader>`", hidden = true },
         { "<leader><space>", hidden = true }, -- hide this keymap
-        -- { "<leader>L", hidden = true },
         { "<leader>-", hidden = true },
         { "<leader>|", hidden = true },
-        -- { "<leader>?", hidden = true },
-        -- { "<leader>e", hidden = true },
-        -- { "<leader>E", hidden = true },
         {
           "<leader>b",
           group = "buffer",

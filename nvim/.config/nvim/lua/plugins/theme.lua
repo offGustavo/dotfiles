@@ -5,8 +5,8 @@ return {
       style = "night",
       transparent = false,
       styles = {
-        -- sidebars = "transparent",
-        -- floats = "transparent",
+        sidebars = "transparent",
+        floats = "transparent",
         -- keywords = { bold = true },
         -- functions = { bold = true },
       },
@@ -22,35 +22,14 @@ return {
         -- vim.api.nvim_set_hl(0, "BufferLineBufferVisible", { bg = "none" })
         -- vim.api.nvim_set_hl(0, "BufferLineCloseButton", { bg = "none" })
       end,
-      config = function()
-        local bg_transparent = true
-
-        local toggleTransparent = function()
-          bg_transparent = not bg_transparent
-
-          require("tokyonight").setup({
-            transparent = bg_transparent,
-          })
-        end
-
-        vim.keymap.set(
-          "n",
-          "<leader>bg",
-          toggleTransparent(),
-          { silent = true, desc = "Toggle Background Transparency" }
-        )
-      end,
-    },
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight",
     },
   },
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    opts = {
+      transparent_background = true,
+    },
     priority = 1000,
     config = function()
       require("catppuccin").setup({
