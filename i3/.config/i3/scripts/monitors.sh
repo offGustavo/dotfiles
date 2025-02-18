@@ -1,7 +1,6 @@
 #!/bin/bash
 
-chosen=$(echo -e "Ativar Externo Esquerda\nAtivar Externo Acima\nDesativar Externo\nAtivar Interno\nDesativar Interno\nEspelhar" | rofi -theme "~/.config/i3/rofi/black.rasi" -dmenu -p "Escolha uma opção:")
-# chosen=$(echo -e "Ativar Externo Esquerda\nAtivar Externo Acima\nDesativar Externo\nAtivar Interno\nDesativar Interno\nEspelhar" | rofi -dmenu -p "Escolha uma opção:")
+chosen=$(echo -e "Ativar Externo Esquerda\nAtivar Externo Acima\nDesativar Externo\nAtivar Interno\nDesativar Interno\nEspelhar" | rofi -theme "~/.config/i3/rofi/config.rasi" -dmenu -p "Escolha uma opção:")
 
 case "$chosen" in
 "Ativar Externo Esquerda")

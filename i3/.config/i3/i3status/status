@@ -3,13 +3,15 @@ general {
 	interval = 5
 	markup = "pango"
 	separator = " "
-	colors = true
-	color_good = "#ffffff"
-	color_degraded = "#ffffff"
-	color_bad = "#ffffff"
-	color_separator = "#000000"
+# Tokyo Night Theme
+	# colors = true
+# Minimal Theme
+	colors = false
+	color_good = "#98c379"
+	color_degraded = "#7aa2f7"
+	color_bad = "#f7768e"
+	color_separator = "#1a1b26"
 }
-
 
 order += "volume master"
 order += "battery all"
@@ -45,7 +47,6 @@ battery all {
 	status_full = " "
 }
 
-
 ## Module :: time 
 time {
 	format = "󰥔  %H:%M   %d/%m/%y "
@@ -56,12 +57,4 @@ volume master {
 	device = "pulse"
 	format = "  %volume"
 	format_muted = " Muted"
-}
-
-## Module :: read_file 
-read_file UPTIME {
-	format = "%title: %content"
-	format_bad = "%title - %errno: %error"
-	path = "/proc/uptime"
-	Max_characters = 255
 }

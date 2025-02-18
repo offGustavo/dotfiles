@@ -18,7 +18,7 @@
 
 # Import Current Theme
 DIR="$HOME/.config/i3"
-RASI="$DIR/rofi/black.rasi"
+RASI="$DIR/rofi/config.rasi"
 
 # Constants
 goback="Back"

@@ -1,4 +1,0 @@
-#!/bin/bash
-
-rofi -show drun -theme ~/.config/i3/rofi/black.rasi
-# rofi -show drun
