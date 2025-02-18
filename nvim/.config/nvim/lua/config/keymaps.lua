@@ -26,12 +26,15 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To 
 -- vim.keymap.set("t", "<C-o>", "<C-\\><C-o>", { silent = true, desc = "Go To Command Mode in Terminal" })
 
 ---- Move in windows on Terminal Mode
-vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h")
-vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j")
-vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k")
-vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l")
+vim.keymap.set("t", "<C-h>", "<C-\\><C-N><cmd>TmuxNavigateLeft<cr>")
+vim.keymap.set("t", "<C-j>", "<C-\\><C-N><cmd>TmuxNavigateDown<cr>")
+vim.keymap.set("t", "<C-k>", "<C-\\><C-N><cmd>TmuxNavigateUp<cr>")
+vim.keymap.set("t", "<C-l>", "<C-\\><C-N><cmd>TmuxNavigateRight<cr>")
 
+-- Close Window
+vim.keymap.set("n", "<leader>wc", "<Cmd>close<Cr>")
 -- Move Lines Up/Down
+--
 vim.keymap.set("v", "<S-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move Line Up" })
 vim.keymap.set("v", "<S-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move Line Down" })
 
@@ -49,11 +52,13 @@ vim.keymap.set("i", "<C-k>", "<Esc>lDa")
 vim.keymap.set("i", "<C-u>", "<Esc>d0xi")
 vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a")
 
+--
 vim.keymap.set("n", "<C-w>p", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
+vim.keymap.set("n", "<leader>wp", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
 vim.keymap.set("n", "<C-w>n", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
+vim.keymap.set("n", "<leader>wn", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
 
-vim.keymap.set("n", "<leader>fp", ":BufferLinePick<Cr>", { silent = true, desc = "Buffer Picker" })
-
+--
 vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
 
 -- File Explorer
