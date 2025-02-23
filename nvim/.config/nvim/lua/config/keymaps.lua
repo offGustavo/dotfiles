@@ -2,6 +2,8 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+        -- stylua: ignore
+        ---@type vim.
 vim.keymap.set({ "n", "v" }, "n", "nzz", { silent = true, desc = "Next Search Result" })
 vim.keymap.set("n", "N", "Nzz", { silent = true, desc = "Previous Search Result" })
 vim.keymap.set("n", "<c-d>", "<c-d>zz", { silent = true, desc = "Half Scroll Down" })
@@ -39,20 +41,20 @@ vim.keymap.set("v", "<S-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move L
 vim.keymap.set("v", "<S-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move Line Down" })
 
 -- Emacs Keybinds in Insert Mode
-vim.keymap.set("i", "<C-a>", "<Home>")
-vim.keymap.set("i", "<C-f>", "<Right>")
-vim.keymap.set("i", "<C-p>", "<Up>")
-vim.keymap.set("i", "<C-n>", "<Down>")
-vim.keymap.set("i", "<C-b>", "<Left>")
-vim.keymap.set("i", "<C-e>", "<End>")
-vim.keymap.set("i", "<A-b>", "<C-Left>")
-vim.keymap.set("i", "<A-f>", "<C-Right>")
-vim.keymap.set("i", "<A-d>", "<C-o>dw")
-vim.keymap.set("i", "<C-k>", "<Esc>lDa")
-vim.keymap.set("i", "<C-u>", "<Esc>d0xi")
-vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a")
+vim.keymap.set({ "i", "c" }, "<C-a>", "<Home>")
+vim.keymap.set({ "i", "c" }, "<C-f>", "<Right>")
+vim.keymap.set({ "i", "c" }, "<C-p>", "<Up>")
+vim.keymap.set({ "i", "c" }, "<C-n>", "<Down>")
+vim.keymap.set({ "i", "c" }, "<C-b>", "<Left>")
+vim.keymap.set({ "i", "c" }, "<C-e>", "<End>")
+vim.keymap.set({ "i", "c" }, "<A-b>", "<C-Left>")
+vim.keymap.set({ "i", "c" }, "<A-f>", "<C-Right>")
+vim.keymap.set({ "i", "c" }, "<A-d>", "<C-o>dw")
+vim.keymap.set({ "i", "c" }, "<C-k>", "<Esc>lDa")
+vim.keymap.set({ "i", "c" }, "<C-u>", "<Esc>d0xi")
+vim.keymap.set({ "i", "c" }, "<C-x><C-s>", "<Esc>:w<CR>a")
 
---
+-- Buffer Movement
 vim.keymap.set("n", "<C-w>p", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
 vim.keymap.set("n", "<leader>wp", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
 vim.keymap.set("n", "<C-w>n", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
@@ -61,27 +63,11 @@ vim.keymap.set("n", "<leader>wn", vim.cmd.bn, { silent = false, desc = "Previous
 --
 vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
 
--- File Explorer
-vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
+vim.keymap.set("n", "<S-Esc>", "<Cmd>Neotree close", { silent = true, desc = "Close Neotree" })
 
--- Colorizer Config
-vim.keymap.set(
-  "n",
-  "<leader>oca",
-  "<Cmd>ColorizerAttachToBuffer<Cr>",
-  { silent = true, desc = "Colorizer Attach To Buffer" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>ocr",
-  "<Cmd>ColorizerReloadAllBuffers<Cr>",
-  { silent = true, desc = "Colorizer Reload All Buffers" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>ocd",
-  "<Cmd>ColorizerDetachFromBuffer<Cr>",
-  { silent = true, desc = "Colorizer Detach To Buffer" }
-)
-
-vim.keymap.set("n", "<leader>oct", "<Cmd>ColorizerToggle<Cr>", { silent = true, desc = "Colorizer Toggle" })
+if vim.g.vscode then
+  -- VS CODE CONFI
+  vim.keymap.set("n", "<leader>,", "<Cmd>call VSCodeNotify('workbench.action.showAllEditors')<CR>")
+  vim.keymap.set("n", "<leader>e", "<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>")
+  vim.keymap.set("n", "<leader>tt", "<Cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
+end
