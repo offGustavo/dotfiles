@@ -3,6 +3,7 @@
 # vim: set et ts=4 sw=4 :
 #
 # encoding:utf8
+#
 """NetworkManager command line dmenu script.
 
 To add new connections or enable/disable networking requires policykit
@@ -38,7 +39,7 @@ ENV = os.environ.copy()
 ENC = locale.getpreferredencoding()
 
 CONF = configparser.ConfigParser()
-CONF.read(expanduser("~/Cosmic/networkmenu_config.ini"))
+CONF.read(expanduser("~/.config/fuzzel/scripts/networkmenu_config.ini"))
 
 
 def cli_args():
