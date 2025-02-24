@@ -4,7 +4,7 @@ general {
 	markup = "pango"
 	separator = " "
 # Tokyo Night Theme
-	# colors = true
+	 # colors = true
 # Minimal Theme
 	colors = false
 	color_good = "#98c379"
@@ -49,8 +49,8 @@ battery all {
 
 ## Module :: time 
 time {
+	format = "󰥔 %H:%M  %d/%m/%y "
 }
-format = "󰥔 %H:%M  %d/%m/%y "
 
 ## Module :: volume 
 volume master {
