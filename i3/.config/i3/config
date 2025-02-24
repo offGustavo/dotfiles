@@ -95,7 +95,7 @@ bindsym $super+b exec --no-startup-id  $scripts/bluetooth.py
 bindsym $super+v exec --no-startup-id  $scripts/output.sh
 
 # run rofi monitors script
-bindsym $super+Shift+m exec --no-startup-id  $scripts/monitors
+bindsym $super+Shift+m exec --no-startup-id  $scripts/monitors.sh
 
 # change focus
 bindsym $super+h focus left
@@ -162,9 +162,9 @@ bindsym $super+Shift+r restart
 bindsym $super+Shift+q exec i3-msg exit
 
 bar {
-  status_command i3status -c ~/.config/i3/i3status/status
+  status_command i3status -c ~/.config/i3/i3status/config
     position top
-    font pango:Jetbrains Mono Nerd Font 8
+    font pango:Jetbrains Mono Nerd Font 10
     tray_output none
     colors {
       background $bg
