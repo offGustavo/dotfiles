@@ -28,10 +28,10 @@ nmap <C-d> <C-d>zz
 nmap <C-u> <C-u>zz
 nmap <C-f> <C-f>zz
 nmap <C-b> <C-b>zz
-"nmap j gj
-"vmap j gj
-"vmap k gk
-"nmap k gk
+nmap j gj
+vmap j gj
+vmap k gk
+nmap k gk
 
 " Search Movement
 nmap n nzz 
@@ -76,46 +76,30 @@ let g:netrw_banner = 0
 
 let g:netrw_liststyle = 0
 
-" FZF Vim
- function! FZF() abort
- let l:tempname = tempname()
- " fzf | awk '{ print $1":1:0" }' > file
- execute 'silent !fzf --multi --no-preview ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
- try
- execute 'cfile! ' . l:tempname
- redraw!
- 	finally
- call delete(l:tempname)
- 	endtry
- 	endfunction
- 	" :SearchFiles
- command! SearchFiles call FZF()
- nmap <space><space> :SearchFiles<Cr>
+call plug#begin()
 
-"call plug#begin()
-"
-"" List your plugins here
-"Plug 'fxn/vim-monochrome'
-"Plug 'ghifarit53/tokyonight-vim'
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf.vim'
-"Plug 'christoomey/vim-tmux-navigator'
-"
-"call plug#end()
+" List your plugins here
+Plug 'fxn/vim-monochrome'
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'christoomey/vim-tmux-navigator'
 
-"" Fzf Grep 
-"nmap <space>/ :RG<Cr>
-"" Fzf Themes
-"nmap <space>uC :Colors<Cr>
-"" Ffz Find Files
-"nmap <space><space> :Files<Cr>
-"" Fzf Buffers
-"nmap <space>, :Buffers<Cr>
+call plug#end()
+
+" Fzf Grep 
+nmap <space>/ :RG<Cr>
+" Fzf Themes
+nmap <space>uC :Colors<Cr>
+" Ffz Find Files
+nmap <space><space> :Files<Cr>
+" Fzf Buffers
+nmap <space>, :Buffers<Cr>
 
 " Theme Settings
 set termguicolors
 
-"let g:tokyonight_style = 'night' " available: night, storm
-"let g:tokyonight_enable_italic = 1
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
 
-"colorscheme tokyonight
+colorscheme tokyonight
