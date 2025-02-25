@@ -73,7 +73,7 @@ ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "josh" "smt" "example")
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+plugins=(git)
 
 # Init Oh My Zsh
 source $ZSH/oh-my-zsh.sh
@@ -111,15 +111,16 @@ eval "$(zoxide init zsh)"
 
 #
 # Example aliases
-# alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
-# alias zconf="$EDITOR ~/.zshrc"
+alias zconf="$EDITOR ~/.zshrc"
+alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"'
 alias kanata="sudo ~/.config/kanata/kanata -c ~/.config/kanata/kanata.kbd"
+alias nitro="sudo ~/.config/kanata/kanata -c ~/.config/kanata/nitro.kbd"
+alias keyball39="sudo ~/.config/kanata/kanata -c ~/.config/kanata/keyball39.kbd"
 alias exa="exa --icons --git -l -G -h -a"
 
 # neovim fzf inegration
 alias vi='nvim $(fzf)'
 alias ni='zi && nvim'
-alias nala="sudo nala"
 alias gengar="pokeget --hide-name gengar| fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
 
 # Fastfetch show on startup
@@ -159,6 +160,10 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 
 
 # # Nala pacman style commands
+
+alias nala='sudo nala'
+# alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
+
 # nala() {
 #   package_name="$2"
 #   case "$1" in
@@ -221,4 +226,5 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 #       ;;
 #   esac
 # }
+
 
