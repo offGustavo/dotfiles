@@ -1,8 +1,8 @@
-
 @define-color bg #1a1b26;
 @define-color bg-highlight #292e42;
 @define-color blue #7aa2f7;
 @define-color fg #c0caf5;
+@define-color fg-dark #a9b1d6;
 @define-color green #9ece6a;
 @define-color orange #ff9e64;
 @define-color red #f7768e;
@@ -11,7 +11,7 @@
     border: none;
     font-size: 10px;
     font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
-    /*min-height: 25px;*/
+    /*height: 10px;*/
     color: @fg;
 }
 
@@ -42,6 +42,34 @@ window#waybar {
 /*  margin-top: 2px;*/
 /*}*/
 
+
+#workspaces button {
+  padding: 5px 10px;
+}
+/*#workspaces button.active {*/
+/*}*/
+/*#workspaces{*/
+/*}*/
+/*#workspaces button.empty{*/
+/*}*/
+/*#workspaces button.persistent{*/
+/*}*/
+/*#workspaces button.special{*/
+/*}*/
+
+#workspaces button.visible{
+  background: @blue;
+}
+
+#workspaces button.urgent{
+  background: @red;
+}
+
+#workspaces button.visible label,
+#workspaces button.urgent label{
+    color: @bg;
+}
+
 #custom-logo,
 #battery,
 #custom-clipboard,
@@ -69,10 +97,13 @@ window#waybar {
   padding-top: 4px;
 }
 
-#temperature.critical,
 #pulseaudio.muted {
-  color: #FF0000;
   padding-top: 0;
+  color: @fg-dark ;
+}
+#temperature.critical{
+  padding-top: 0;
+  color: @red ;
 }
 
 
@@ -83,18 +114,18 @@ window#waybar {
 /*}*/
 
 #battery.charging {
-    color: #ffffff;
+    color: @bg;
     background-color: @green;
 }
 
 #battery.warning:not(.charging) {
+  color: @bg;
     background-color: @orange;
-    color: @bg;
 }
 
 #battery.critical:not(.charging) {
+  color: @fg;
     background-color: @red;
-    color: @fg;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;

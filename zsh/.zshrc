@@ -127,11 +127,14 @@ alias gengar="pokeget --hide-name gengar| fastfetch --file-raw - -c ~/.config/fa
 eval 'gengar' 
 
 # FZF defaults
+#
+  # --border=none \
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --info=inline-right \
   --ansi \
   --layout=reverse \
-  --border=none \
+  --border=rounded \
+  --margin=3% \
   --color=bg+:#283457 \
   --color=bg:#16161e \
   --color=border:#27a1b9 \
@@ -148,8 +151,13 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=scrollbar:#27a1b9 \
   --color=separator:#ff9e64 \
   --color=spinner:#ff007c \
-  --preview='bat --color=always {}'
+  --preview 'if [ -d {} ]; then exa -a -T {}; else bat --color=always {}; fi'
 "
+
+
+  # --preview 'if [ -d {} ]; then exa -a -T {}; else bat --color=always {}; fi'
+# --preview='bat --color=always {}'
+# --preview='exa -a -T {}'
 
 export FZF_DEFAULT_COMMAND='fd --hidden'
 
