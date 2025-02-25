@@ -27,48 +27,49 @@
 
  ;; Navgation
  lnv (tap-hold 100 300 x @nav) 
- rnv (tap-hold 100 300 , @nav) 
- ;; ssc (tap-hold 100 300 spc @nav)
+ rnv (tap-hold 100 200 , @nav) 
+ rrn (tap-hold 100 200 ret @nav)
 
  ;; Numbers
-  lnm (tap-hold 100 300 c @num)
-rnm (tap-hold 100 300 m @num)
-  ;; ssc (tap-hold 100 300 spc @num)
+  lnm (tap-hold 100 200 c @num)
+  rnm (tap-hold 100 200 m @num)
+  ;; ssc (tap-hold 100 200 spc @num)
 
   ;; Symbols
-  lsy (tap-hold 100 300 v @syb)  
-rsy (tap-hold 100 300 n @syb)  
-  ;;ssc (tap-hold 100 300 spc @syb)
+  lsy (tap-hold 100 200 v @syb)  
+  rsy (tap-hold 100 200 n @syb)  
+  ssc (tap-hold 100 200 spc @syb)
+  lsb (tap-hold 100 +200 bspc lsft)
 
   ;; Mouse
-  lmv (tap-hold 100 300 z @mov)
-rmv (tap-hold 100 300 . @mov)
+  lmv (tap-hold 100 200 z @mov)
+rmv (tap-hold 100 200 . @mov)
 
   ;; Remap
 
   ;; Caps
-ecc (tap-hold 100 300 esc caps)
+ecc (tap-hold 100 200 esc caps)
 
   ;; Control
-  lcf (tap-hold 100 300 f lctl)
-  rcj (tap-hold 100 300 j lctl)
-cNe (tap-hold 100 300 next lctl)
+  lcf (tap-hold 100 200 f lctl)
+  rcj (tap-hold 100 200 j lctl)
+cNe (tap-hold 100 200 next lctl)
 
   ;; Shift
-  lsd (tap-hold 100 300 d lsft)
-  rsk (tap-hold 100 300 k lsft)
-  sVu (tap-hold 100 300 volu lsft)
-ssc (tap-hold-release 100 300 spc lsft)
+  lsd (tap-hold 100 200 d lsft)
+  rsk (tap-hold 100 200 k lsft)
+  sVu (tap-hold 100 200 volu lsft)
+;;ssc (tap-hold-release 100 200 spc lsft)
 
   ;; Super/Windows
-  lms (tap-hold 100 300 s lmet)   
-  rml (tap-hold 100 300 l lmet)
-mVd (tap-hold 100 300 vold lmet)
+  lms (tap-hold 100 200 s lmet)   
+  rml (tap-hold 100 200 l lmet)
+mVd (tap-hold 100 200 vold lmet)
 
   ;; Alt
-laa (tap-hold 100 300 a lalt) 
-  ras (tap-hold 100 300 ; lalt) 
-aPr (tap-hold 100 300 prev lalt)
+laa (tap-hold 100 200 a lalt) 
+  ras (tap-hold 100 200 ; lalt) 
+aPr (tap-hold 100 200 prev lalt)
 
   ;; Mouse
   mwu (mwheel-up 50 120)
@@ -91,7 +92,7 @@ mar (movemouse-right 1 1)
    tab  q    w    e    r    t    y    u    i    o    p    [    ]    \ 
    @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret 
    lsft @lmv @lnv @lnm @lsy b    @rsy @rnm @rnv @rmv /    rsft 
-   lctl lmet lalt           @ssc           ralt menu rctl 
+   lctl lmet @lsb                @ssc           @rrn  menu rctl 
   )
 
   (deflayer numbers

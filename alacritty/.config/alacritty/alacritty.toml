@@ -1,26 +1,3 @@
-## Copyright (C) 2020-2024 Aditya Shakya <adi1090x@gmail.com>
-##
-## Configuration for Alacritty, the GPU enhanced terminal emulator.
-## It's a very basic and simple config file, for full configuration, Run `man 5 alacritty`
-
-## GENERAL --------------------------------------------------------
-
-## Import additional configuration files.
-# import = ["~/.config/alacritty/colorschemes/Tokyo_night.toml", "~/.config/i3/alacritty/fonts.toml"]
-
-## You can set shell.program to the path of your favorite shell, e.g. /bin/zsh.
-## Entries in shell.args are passed as arguments to the shell.
-#shell = { program = "/bin/zsh", args = ["--login"] }
-
-## Directory the shell is started in. When this is unset, or "None",
-## the working directory of the parent process will be used.
-#working_directory = "None"
-
-## Live config reload
-live_config_reload = true
-
-## Offer IPC using alacritty msg
-ipc_socket = true
 
 ## ENVIRONMENT ----------------------------------------------------
 
@@ -182,3 +159,28 @@ y = 0
 [font.glyph_offset]
 x = 0
 y = 0
+
+# [general]
+## Copyright (C) 2020-2024 Aditya Shakya <adi1090x@gmail.com>
+##
+## Configuration for Alacritty, the GPU enhanced terminal emulator.
+## It's a very basic and simple config file, for full configuration, Run `man 5 alacritty`
+
+## GENERAL --------------------------------------------------------
+
+## Import additional configuration files.
+# import = ["~/.config/alacritty/colorschemes/Tokyo_night.toml", "~/.config/i3/alacritty/fonts.toml"]
+
+## You can set shell.program to the path of your favorite shell, e.g. /bin/zsh.
+## Entries in shell.args are passed as arguments to the shell.
+#shell = { program = "/bin/zsh", args = ["--login"] }
+
+## Directory the shell is started in. When this is unset, or "None",
+## the working directory of the parent process will be used.
+#working_directory = "None"
+
+## Live config reload
+# live_config_reload = true
+
+## Offer IPC using alacritty msg
+# ipc_socket = true
