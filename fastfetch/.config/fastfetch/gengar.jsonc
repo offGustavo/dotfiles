@@ -7,11 +7,12 @@
     "os",
     "host",
     "kernel",
-    {
-      "type": "command",
-      "text": "date +'%H:%M %d, %b %y'",
-      "key": "Date"
-    },
+    "wm",
+    // {
+    //   "type": "command",
+    //   "text": "date +'%H:%M %d, %b %y'",
+    //   "key": "Date"
+    // },
     "uptime",
     "packages",
     "memory",
