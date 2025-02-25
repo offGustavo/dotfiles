@@ -9,7 +9,7 @@ return {
       -- Id is automatically added at the beginning, and name at the end
       -- See :help oil-columns
       columns = {
-        "icon",
+        -- "icon",
         -- "permissions",
         -- "size",
         -- "mtime",
@@ -64,13 +64,14 @@ return {
       keymaps = {
         ["g?"] = { "actions.show_help", mode = "n" },
         ["<CR>"] = "actions.select",
-        ["<C-s>"] = { "actions.select", opts = { vertical = true } },
         ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
         ["<C-t>"] = { "actions.select", opts = { tab = true } },
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = { "actions.close", mode = "n" },
         ["<C-l>"] = "actions.refresh",
         ["-"] = { "actions.parent", mode = "n" },
+        -- TODO: Change backspaces name
+        ["<Bs>"] = { "actions.parent", mode = "n" },
         ["_"] = { "actions.open_cwd", mode = "n" },
         ["`"] = { "actions.cd", mode = "n" },
         ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
@@ -206,6 +207,7 @@ return {
     })
 
     -- File Explorer
-    vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
+    -- vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
+    vim.keymap.set("n", "<Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
   end,
 }

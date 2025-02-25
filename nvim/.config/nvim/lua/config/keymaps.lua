@@ -24,8 +24,8 @@ vim.keymap.set("n", "<leader>ts", "<cmd>horizontal terminal<CR>", { silent = tru
 
 ---- Terminal Mode to Normal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal" })
--- vim.keymap.set("t", "<A-p>", "<C-\\><C-n>: ", { silent = true, desc = "Go To Command Mode in Terminal" })
--- vim.keymap.set("t", "<C-o>", "<C-\\><C-o>", { silent = true, desc = "Go To Command Mode in Terminal" })
+vim.keymap.set("t", "<A-p>", "<C-\\><C-n>:", { desc = "Go To Command Mode in Terminal" })
+vim.keymap.set("t", "<C-o>", "<C-\\><C-o>", { desc = "Go To Command Mode in Terminal" })
 
 ---- Move in windows on Terminal Mode
 vim.keymap.set("t", "<C-h>", "<C-\\><C-N><cmd>TmuxNavigateLeft<cr>")
@@ -64,6 +64,17 @@ vim.keymap.set("n", "<leader>wn", vim.cmd.bn, { silent = false, desc = "Previous
 vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
 
 vim.keymap.set("n", "<S-Esc>", "<Cmd>Neotree close", { silent = true, desc = "Close Neotree" })
+
+-- Diagnostic keymaps (quickstart keymaps)
+vim.keymap.set("n", "<leader>qf", vim.diagnostic.setloclist, { desc = "Open diagnostic Quickfix list" })
+
+--- Primeagen
+vim.keymap.set(
+  "n",
+  "<leader>s/",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Substitute Current Word" }
+)
 
 if vim.g.vscode then
   -- VS CODE CONFI
