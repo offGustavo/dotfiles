@@ -87,12 +87,30 @@ Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
+function! FZF() abort
+	let l:tempname = tempname()
+	" fzf | awk '{ print $1":1:0" }' > file
+	execute 'silent !fzf --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+	try
+		execute 'cfile ' . l:tempname
+		redraw!
+	finally
+		call delete(l:tempname)
+	endtry
+endfunction
+
+" :SearchFiles
+command! SearchFiles call FZF()
+
+" \ff
+nnoremap <space><space> :SearchFiles<cr>
+
 " Fzf Grep 
 nmap <space>/ :RG<Cr>
 " Fzf Themes
 nmap <space>uC :Colors<Cr>
 " Ffz Find Files
-nmap <space><space> :Files<Cr>
+nmap <space>ff :Files<Cr>
 " Fzf Buffers
 nmap <space>, :Buffers<Cr>
 
