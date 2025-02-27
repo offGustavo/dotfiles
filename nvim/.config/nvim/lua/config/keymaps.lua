@@ -60,10 +60,9 @@ vim.keymap.set("n", "<leader>wp", vim.cmd.bp, { silent = false, desc = "Next Buf
 vim.keymap.set("n", "<C-w>n", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
 vim.keymap.set("n", "<leader>wn", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
 
---
 vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
 
-vim.keymap.set("n", "<S-Esc>", "<Cmd>Neotree close", { silent = true, desc = "Close Neotree" })
+vim.keymap.set("n", "<S-Esc>", "<Cmd>Neotree close<Cr>", { silent = true, desc = "Close Neotree" })
 
 -- Diagnostic keymaps (quickstart keymaps)
 vim.keymap.set("n", "<leader>qf", vim.diagnostic.setloclist, { desc = "Open diagnostic Quickfix list" })
@@ -76,9 +75,11 @@ vim.keymap.set(
   { desc = "Substitute Current Word" }
 )
 
+-- VS CODE CONFI
 if vim.g.vscode then
-  -- VS CODE CONFI
   vim.keymap.set("n", "<leader>,", "<Cmd>call VSCodeNotify('workbench.action.showAllEditors')<CR>")
   vim.keymap.set("n", "<leader>e", "<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>")
+  vim.keymap.set("n", "<Cr>", "<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>")
   vim.keymap.set("n", "<leader>tt", "<Cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
+  vim.keymap.set("n", "<leader>/", "<Cmd>call VSCodeNotify('workbench.action.quickTextSearch')<CR>")
 end

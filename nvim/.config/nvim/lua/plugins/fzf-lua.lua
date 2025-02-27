@@ -171,7 +171,7 @@ return {
       "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>",
       desc = "Switch Buffer",
     },
-    { "<leader>/", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
+    { "<leader>/", LazyVim.pick("live_grep", { root = false }), desc = "Live Grep" },
     { "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
     -- { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
     { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
