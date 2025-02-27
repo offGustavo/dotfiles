@@ -160,7 +160,7 @@ y = 0
 x = 0
 y = 0
 
-# [general]
+[general]
 ## Copyright (C) 2020-2024 Aditya Shakya <adi1090x@gmail.com>
 ##
 ## Configuration for Alacritty, the GPU enhanced terminal emulator.
@@ -180,7 +180,7 @@ y = 0
 #working_directory = "None"
 
 ## Live config reload
-# live_config_reload = true
+live_config_reload = true
 
 ## Offer IPC using alacritty msg
-# ipc_socket = true
+ipc_socket = true
