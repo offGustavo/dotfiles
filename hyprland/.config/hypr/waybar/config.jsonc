@@ -19,11 +19,11 @@
     "tray",
     // "custom/updates",
     // "custom/clipboard",
-    "group/blight",
+    "backlight",
     // "idle_inhibitor",
     "custom/colorpicker",
+    "pulseaudio",
     "bluetooth",
-    "group/audio",
     // "custom/hotspot",
     "group/networking",
     "battery"
@@ -148,8 +148,8 @@
     ]
   },
   "backlight": {
+    "format": "{icon} {percent}%",
     "device": "intel_backlight",
-    "format": "{icon}",
     "format-icons": [
       "",
       "",
@@ -161,9 +161,10 @@
       "",
       "",
       "",
+      "󰽢",
     ],
-    "on-scroll-down": "light -U 10",
-    "on-scroll-up": "light -A 10",
+    "on-scroll-down": "brightnessctl set 10%+",
+    "on-scroll-up": "brightnessctl set 10%-",
     "smooth-scrolling-threshold": 1
   },
   "backlight/slider": {
@@ -173,7 +174,7 @@
     "device": "intel_backlight"
   },
   "idle_inhibitor": {
-    "format": "<span font='12'>{icon}</span>",
+    "format": "{icon}",
     "format-icons": {
       "activated": "󰾪",
       "deactivated": "󰅶"
@@ -187,11 +188,11 @@
     "on-click": "sleep 1 && ~/.config/waybar/scripts/colorpicker.sh",
   },
   "bluetooth": {
-    "format-on": "󰂰",
+    "format-on": "󰂯 ",
     "format-off": "",
-    "format-disabled": "󰂲",
-    "format-connected": "󰂴",
-    "format-connected-battery": "{device_battery_percentage}% 󰂴",
+    "format-disabled": "",
+    "format-connected": "󰂯 {device_alias}",
+    "format-connected-battery": "󰂯 {device_alias} {device_battery_percentage}%",
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
@@ -200,17 +201,16 @@
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-bluetooth": "󰂰 ",
     "format-muted": "  Muted",
-    "tooltip-format": "{volume}% {icon}",
+    // "tooltip-format": "{icon} {volume}%",
     "format-icons": {
-      "headphones": "",
-      "bluetooth": "󰥰",
-      "handsfree": "",
-      "headset": "󱡬",
-      "phone": "",
-      "portable": "",
-      "car": "",
+      // "headphones": "",
+      // "bluetooth": "󰥰",
+      // "handsfree": "",
+      // "headset": "",
+      // "phone": "",
+      // "portable": "",
+      // "car": "",
       "default": [
         "🕨",
         "🕩",
@@ -306,17 +306,17 @@
     "format-time": "{H}h {M}min",
     "tooltip": "{time}",
     "format-charging": "{capacity}% {icon}",
-    "format-plugged": "{capacity}% 󰠠",
+    "format-plugged": "{capacity}% 󰂄",
     "format-alt": "{time} {icon}",
     "format-icons": [
-      "󰪞",
-      "󰪟",
-      "󰪠",
-      "󰪡",
-      "󰪢",
-      "󰪣",
-      "󰪤",
-      "󰪥"
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂁",
+      "󰁹"
     ],
     "on-click": "~/.config/rofi/scripts/powermenu.sh"
   },

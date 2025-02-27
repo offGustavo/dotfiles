@@ -39,7 +39,7 @@ ENV = os.environ.copy()
 ENC = locale.getpreferredencoding()
 
 CONF = configparser.ConfigParser()
-CONF.read(expanduser("~/.config/fuzzel/scripts/networkmenu_config.ini"))
+CONF.read(expanduser("~/.config/hypr/fuzzel/scripts/networkmenu_config.ini"))
 
 
 def cli_args():
@@ -124,7 +124,8 @@ def dmenu_cmd(num_lines, prompt="Network:", active_lines=None):
                         "rofi": ['-password'],
                         "bemenu": ['-x'],
                         "wofi": ['-P'],
-                        "fuzzel": ['--password']}
+                        "fuzzel": ['--password']
+                        }
         command.extend(pass_prompts.get(cmd_base, []))
     return command
 
