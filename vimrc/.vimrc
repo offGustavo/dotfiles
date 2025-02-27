@@ -14,7 +14,7 @@ nmap <S-h> :bp!<Cr>
 nmap <space>, :ls<Cr>:b! 
 
 " Vim File Explorer
-nmap <space><Cr> :Ex<Cr>
+nmap <Cr> :Ex<Cr>
 
 " Command Line in Vi-Mode
 nmap <space>; :<C-f>
@@ -79,18 +79,18 @@ let g:netrw_liststyle = 0
 call plug#begin()
 
 " List your plugins here
-Plug 'fxn/vim-monochrome'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
-function! FZF() abort
+function! Search() abort
 	let l:tempname = tempname()
 	" fzf | awk '{ print $1":1:0" }' > file
-	execute 'silent !fzf --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+   execute 'silent !fzf --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+   
+   " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
 	try
 		execute 'cfile ' . l:tempname
 		redraw!
@@ -100,7 +100,7 @@ function! FZF() abort
 endfunction
 
 " :SearchFiles
-command! SearchFiles call FZF()
+command! SearchFiles call Search()
 
 " \ff
 nnoremap <space><space> :SearchFiles<cr>
@@ -112,7 +112,7 @@ nmap <space>uC :Colors<Cr>
 " Ffz Find Files
 nmap <space>ff :Files<Cr>
 " Fzf Buffers
-nmap <space>, :Buffers<Cr>
+nmap <space>fb :Buffers<Cr>
 
 " Theme Settings
 set termguicolors
