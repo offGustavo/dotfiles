@@ -151,10 +151,16 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=scrollbar:#27a1b9 \
   --color=separator:#ff9e64 \
   --color=spinner:#ff007c \
-  --preview 'if [ -d {} ]; then exa -a -T {}; else bat --color=always {}; fi'
+  --preview 'if [ -d {} ]; then exa -a -T {}; else fzf-preview.sh {}; fi' \
+  --multi  \
+  --bind ctrl-q:toggle-all,alt-q:toggle-all \
+  --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
 "
 
 
+  # --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all  \
+ # --preview ''
+ #  --preview 'if [ -d {} ]; then exa -a -T {}; else fzf-preview.sh {} {}; fi'
   # --preview 'if [ -d {} ]; then exa -a -T {}; else bat --color=always {}; fi'
 # --preview='bat --color=always {}'
 # --preview='exa -a -T {}'
