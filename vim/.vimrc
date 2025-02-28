@@ -14,7 +14,7 @@ nmap <S-h> :bp!<Cr>
 nmap <space>, :ls<Cr>:b! 
 
 " Vim File Explorer
-nmap <Cr> :Ex<Cr>
+nmap <space><Cr> :Ex<Cr>
 
 " Command Line in Vi-Mode
 nmap <space>; :<C-f>
@@ -70,6 +70,7 @@ set cursorline
 set nowrap
 set ignorecase
 set smartcase
+set clipboard+=unnamedplus
 
 " Netrw Config
 let g:netrw_banner = 0
