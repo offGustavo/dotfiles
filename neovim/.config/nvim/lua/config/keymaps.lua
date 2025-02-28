@@ -13,14 +13,14 @@ vim.keymap.set("n", "<c-b>", "<c-b>zz", { silent = true, desc = "Scroll Up" })
 
 -- Terminal
 ---- Normal Mode to Terminal
-vim.keymap.set("n", "<leader>tt", "<cmd>terminal<CR>", { silent = true, desc = "New Buffer Terminal" })
+vim.keymap.set("n", "<leader>tt", "<Cmd>terminal<CR>", { silent = true, desc = "New Buffer Terminal" })
 vim.keymap.set("n", "<leader>tj", function()
   Snacks.terminal()
 end, { silent = true, desc = "New Small Terminal" })
-vim.keymap.set("t", "<A-n>", "<cmd>terminal<CR>", { silent = true, desc = "New Terminal in Terminal Mode" })
-vim.keymap.set("n", "<leader>tv", "<cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
-vim.keymap.set("t", "<A-p> c", "<cmd>horizontal terminal<CR>", { silent = true, desc = "Normal Mode in Terminal" })
-vim.keymap.set("n", "<leader>ts", "<cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
+vim.keymap.set("t", "<A-n>", "<Cmd>terminal<CR>", { silent = true, desc = "New Terminal in Terminal Mode" })
+vim.keymap.set("n", "<leader>tv", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
+vim.keymap.set("t", "<A-p> c", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Normal Mode in Terminal" })
+vim.keymap.set("n", "<leader>ts", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
 
 ---- Terminal Mode to Normal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal" })
@@ -28,10 +28,10 @@ vim.keymap.set("t", "<A-p>", "<C-\\><C-n>:", { desc = "Go To Command Mode in Ter
 vim.keymap.set("t", "<C-o>", "<C-\\><C-o>", { desc = "Go To Command Mode in Terminal" })
 
 ---- Move in windows on Terminal Mode
-vim.keymap.set("t", "<C-h>", "<C-\\><C-N><cmd>TmuxNavigateLeft<cr>")
-vim.keymap.set("t", "<C-j>", "<C-\\><C-N><cmd>TmuxNavigateDown<cr>")
-vim.keymap.set("t", "<C-k>", "<C-\\><C-N><cmd>TmuxNavigateUp<cr>")
-vim.keymap.set("t", "<C-l>", "<C-\\><C-N><cmd>TmuxNavigateRight<cr>")
+vim.keymap.set("t", "<C-h>", "<C-\\><C-N><Cmd>TmuxNavigateLeft<cr>")
+vim.keymap.set("t", "<C-j>", "<C-\\><C-N><Cmd>TmuxNavigateDown<cr>")
+vim.keymap.set("t", "<C-k>", "<C-\\><C-N><Cmd>TmuxNavigateUp<cr>")
+vim.keymap.set("t", "<C-l>", "<C-\\><C-N><Cmd>TmuxNavigateRight<cr>")
 
 -- Close Window
 vim.keymap.set("n", "<leader>wc", "<Cmd>close<Cr>")
@@ -65,7 +65,12 @@ vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command M
 vim.keymap.set("n", "<S-Esc>", "<Cmd>Neotree close<Cr>", { silent = true, desc = "Close Neotree" })
 
 -- Diagnostic keymaps (quickstart keymaps)
-vim.keymap.set("n", "<leader>qf", vim.diagnostic.setloclist, { desc = "Open diagnostic Quickfix list" })
+vim.keymap.set("n", "<leader>qf", vim.diagnostic.setloclist, { desc = "Open Diagnostic Quickfix List" })
+vim.keymap.set("n", "<leader>qw", "<Cmd>wq!<Cr>", { desc = "Save and Quit" })
+vim.keymap.set("n", "<leader>qn", "<Cmd>cnext<Cr>", { desc = "Open Next in Quickfix List" })
+vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { desc = "Open Previous in Quickfix List" })
+vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { desc = "Open Quickfix List" })
+vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { desc = "Close Quickfix List" })
 
 --- Primeagen
 vim.keymap.set(
@@ -79,7 +84,7 @@ vim.keymap.set(
 if vim.g.vscode then
   vim.keymap.set("n", "<leader>,", "<Cmd>call VSCodeNotify('workbench.action.showAllEditors')<CR>")
   vim.keymap.set("n", "<leader>e", "<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>")
-  vim.keymap.set("n", "<Cr>", "<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>")
+  vim.keymap.set("n", "<leader><Cr>", "<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>")
   vim.keymap.set("n", "<leader>tt", "<Cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
   vim.keymap.set("n", "<leader>/", "<Cmd>call VSCodeNotify('workbench.action.quickTextSearch')<CR>")
 end

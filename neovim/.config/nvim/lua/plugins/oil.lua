@@ -208,6 +208,6 @@ return {
 
     -- File Explorer
     -- vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
-    vim.keymap.set("n", "<Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
+    vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
   end,
 }
