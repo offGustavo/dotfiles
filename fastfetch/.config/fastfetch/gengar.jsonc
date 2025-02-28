@@ -8,6 +8,7 @@
     "host",
     "kernel",
     "wm",
+    "terminal",
     // {
     //   "type": "command",
     //   "text": "date +'%H:%M %d, %b %y'",
