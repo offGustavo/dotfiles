@@ -28,6 +28,11 @@ set $green #98c379
 set $purple #c678dd
 
 
+
+
+
+
+
 ## Print all window titles in format of 'class | title'
 title_align center
 for_window [class=".*"] title_format "%class | %title"
