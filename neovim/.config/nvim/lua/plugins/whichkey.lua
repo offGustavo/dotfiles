@@ -31,10 +31,6 @@ return {
         { "<leader>t", group = "Terminal" },
         { "<leader>o", group = "Options", icon = "" },
         { "<leader>oc", group = "Colorizer" },
-        { "<C-h>", name = "Go to Left Window" },
-        { "<C-j>", name = "Go to Lower Window" },
-        { "<C-k>", name = "Go to Upper Window" },
-        { "<C-l>", name = "Go to Right Window" },
         { "<leader>;", icon = "" },
         { "<leader>`", hidden = true },
         { "<leader><space>", hidden = true }, -- hide this keymap
