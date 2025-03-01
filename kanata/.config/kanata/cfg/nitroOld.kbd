@@ -15,6 +15,7 @@
   nav (layer-toggle navgation)
   syb (layer-toggle symbols)
   mov (layer-toggle mouse)
+  
   ;; Nav
   lnv (tap-hold 100 300 x @nav) 
   rnv (tap-hold 100 300 , @nav) 
