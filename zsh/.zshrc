@@ -2,6 +2,7 @@
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin/$PATH
 export PATH=$PATH:$HOME/.config/emacs/bin
+export PATH=$PATH:$HOME/Scripts
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Path to your Oh My Zsh installation.
@@ -117,6 +118,7 @@ alias kanata="sudo ~/.config/kanata/kanata -c ~/.config/kanata/kanata.kbd"
 alias nitro="sudo ~/.config/kanata/kanata -c ~/.config/kanata/nitro.kbd"
 alias keyball39="sudo ~/.config/kanata/kanata -c ~/.config/kanata/keyball39.kbd"
 alias exa="exa --icons --git -l -G -h -a"
+alias vim=nvim
 
 # neovim fzf inegration
 alias vi='nvim $(fzf)'
