@@ -171,7 +171,7 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 
 # # Nala pacman style commands
 
-alias nala='sudo nala'
+# alias nala='sudo nala'
 # alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
 
 # nala() {
