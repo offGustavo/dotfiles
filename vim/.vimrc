@@ -106,14 +106,36 @@ command! SearchFiles call Search()
 " \ff
 nnoremap <space><space> :SearchFiles<cr>
 
-" Fzf Grep 
-nmap <space>/ :RG<Cr>
-" Fzf Themes
-nmap <space>uC :Colors<Cr>
-" Ffz Find Files
-nmap <space>ff :Files<Cr>
-" Fzf Buffers
-nmap <space>fb :Buffers<Cr>
+function! RG(args) abort
+    let l:tempname = tempname()
+    let l:pattern = '.'
+    if len(a:args) > 0
+        let l:pattern = a:args
+    endif
+    " rg --vimgrep <pattern> | fzf -m > file
+    execute 'silent !rg --vimgrep ''' . l:pattern . ''' | fzf --no-preview -m > ' . fnameescape(l:tempname)
+    try
+        execute 'cfile ' . l:tempname
+        redraw!
+    finally
+        call delete(l:tempname)
+    endtry
+endfunction
+
+" :Rg [pattern]
+command! -nargs=* Rg call RG(<q-args>)
+
+" \fs
+nnoremap <space>/ :Rg<cr>
+
+" " Fzf Grep 
+" nmap <space>/ :RG<Cr>
+" " Fzf Themes
+" nmap <space>uC :Colors<Cr>
+" " Ffz Find Files
+" nmap <space>ff :Files<Cr>
+" " Fzf Buffers
+" nmap <space>fb :Buffers<Cr>
 
 " Theme Settings
 set termguicolors
