@@ -12,7 +12,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="random" # set by `omz`
+ZSH_THEME="smt" # set by `omz`
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -114,28 +114,27 @@ eval "$(zoxide init zsh)"
 # Example aliases
 alias zconf="$EDITOR ~/.zshrc"
 alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"'
-alias kanata="sudo ~/.config/kanata/kanata -c ~/.config/kanata/kanata.kbd"
-alias nitro="sudo ~/.config/kanata/kanata -c ~/.config/kanata/nitro.kbd"
-alias keyball39="sudo ~/.config/kanata/kanata -c ~/.config/kanata/keyball39.kbd"
 alias exa="exa --icons --git -l -G -h -a"
-alias vim=nvim
 
 # neovim fzf inegration
 alias vi='nvim $(fzf)'
 alias ni='zi && nvim'
+
+# Gengar Fastfetch
 alias gengar="pokeget --hide-name gengar| fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
 
 # Fastfetch show on startup
 eval 'gengar' 
 
 # FZF defaults
-#
+
   # --border=none \
+  # --border=rounded \
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --info=inline-right \
   --ansi \
   --layout=reverse \
-  --border=rounded \
+  --border=none \
   --margin=3% \
   --color=bg+:#283457 \
   --color=bg:#16161e \
@@ -159,21 +158,16 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
 "
 
-
-  # --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all  \
- # --preview ''
- #  --preview 'if [ -d {} ]; then exa -a -T {}; else fzf-preview.sh {} {}; fi'
-  # --preview 'if [ -d {} ]; then exa -a -T {}; else bat --color=always {}; fi'
+# --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all  \
+# --preview ''
+# --preview 'if [ -d {} ]; then exa -a -T {}; else fzf-preview.sh {} {}; fi'
+# --preview 'if [ -d {} ]; then exa -a -T {}; else bat --color=always {}; fi'
 # --preview='bat --color=always {}'
 # --preview='exa -a -T {}'
 
 export FZF_DEFAULT_COMMAND='fd --hidden'
-
-# I LOVE RUST
-#
 # export FZF_DEFAULT_COMMAND='find .'
 # export FZF_DEFAULT_COMMAND='find . -printf "%P\\n"'
-
 
 # # Nala pacman style commands
 
