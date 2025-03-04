@@ -126,11 +126,15 @@ if vim.g.vscode then
   vim.keymap.set("n", "<leader>/", "<Cmd>call VSCodeNotify('workbench.action.quickTextSearch')<CR>")
 else
   vim.keymap.set("n", "<leader><space>", function()
-    Snacks.picker.files()
+    Snacks.picker.files({
+      hidden = true,
+    })
   end, { desc = "Snacks Picker Files" })
 
   vim.keymap.set("n", "<leader>/", function()
-    Snacks.picker.grep()
+    Snacks.picker.grep({
+      hidden = true,
+    })
   end, { desc = "Snacks Picker Grep" })
 end
 
