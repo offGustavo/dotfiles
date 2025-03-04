@@ -35,7 +35,7 @@
     "on-click": "~/.config/rofi/scripts/powermenu.sh"
   },
   "clock": {
-    "format": "{:%H:%M %d, %b }",
+    "format": "{:%H:%M %a %d, %b }",
     "interval": 1,
     "tooltip-format": "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "calendar-weeks-pos": "right",
@@ -197,7 +197,7 @@
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-    "on-click": "rofi-bluetooth",
+    "on-click": "~/.config/hypr/fuzzel/scripts/bluetooth.sh",
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
