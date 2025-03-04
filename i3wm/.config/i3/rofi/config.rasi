@@ -1,6 +1,7 @@
 /* 
 *
-* vim: set ft=css 
+* vim config:
+  set ft=css 
 *
 */
 
@@ -15,7 +16,7 @@
 
 /*****----- Configuration -----*****/
 configuration {
-  modi:                       "drun,window";
+  modi:                       "drun,window,run";
   show-icons:                 false;
   display-drun:               "Run";
   display-window:             "Window";

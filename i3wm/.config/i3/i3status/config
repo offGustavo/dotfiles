@@ -1,3 +1,4 @@
+
 general {
 	output_format = "i3bar"
 	interval = 5
