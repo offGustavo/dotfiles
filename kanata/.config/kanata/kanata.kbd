@@ -1,5 +1,6 @@
 (defcfg
   movemouse-smooth-diagonals yes
+
   )
 
 (deflocalkeys-linux
@@ -135,3 +136,4 @@
   _    mwd  @mad mwr  _    _    _    mwd  @mad mwr  mbck _
   _    _    _              _              _     _    _
   )
+

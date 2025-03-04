@@ -1,7 +1,0 @@
-(defsrc 
-  caps
-)
-
-(deflayer base
-  esc
-)
