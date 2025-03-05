@@ -287,7 +287,7 @@ show_menu() {
 }
 
 # Rofi command to pipe into, can add any options here
-rofi_command="fuzzel --config $HOME/.config/hypr/fuzzel/fuzzel.ini  -d -p Bluetooth:"
+rofi_command="fuzzel --config $HOME/.config/hypr/fuzzel/fuzzel.ini  -d -p Bluetooth: "
 
 case "$1" in
 --status)

@@ -86,7 +86,7 @@ def dmenu_pass(command, color):
     return ["-P"] if dm_patch else ["-nb", color, "-nf", color]
 
 
-def dmenu_cmd(num_lines, prompt="Network:", active_lines=None):
+def dmenu_cmd(num_lines, prompt="Network: ", active_lines=None):
     """Parse config.ini for menu options
 
     Args: args - num_lines: number of lines to display
