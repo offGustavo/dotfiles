@@ -32,11 +32,11 @@ return {
         { "<leader>t", group = "Terminal" },
         { "<leader>o", group = "Options", icon = "" },
         { "<leader>oc", group = "Colorizer" },
-        { "<leader>;", icon = "" },
-        { "<leader>`", hidden = true },
-        { "<leader><space>", hidden = true }, -- hide this keymap
-        { "<leader>-", hidden = true },
-        { "<leader>|", hidden = true },
+        -- { "<leader>;", icon = "" },
+        -- { "<leader>`", hidden = true },
+        -- { "<leader><space>", hidden = true }, -- hide this keymap
+        -- { "<leader>-", hidden = true },
+        -- { "<leader>|", hidden = true },
         {
           "<leader>b",
           group = "buffer",

@@ -6,6 +6,8 @@ vim.g.snacks_animate = false
 
 vim.opt.scrolloff = 0
 
+vim.o.wrap = false
+
 if vim.g.neovide then
   vim.o.guifont = "JetbrainsmonoNL NF:h14" -- text below applies for VimScript
   vim.g.neovide_padding_top = 8

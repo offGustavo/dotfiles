@@ -16,12 +16,7 @@ return {
     require("which-key").add({
       { "<leader>m", group = "Markdown", mode = "n", icon = "" },
     })
-    vim.keymap.set(
-      { "n", "v" },
-      "<leader>mm",
-      "<cmd>Markview toggleAll<CR>",
-      { silent = true, desc = "Toggle Markview" }
-    )
+    vim.keymap.set({ "n", "v" }, "<leader>mm", "<cmd>Markview Toggle<CR>", { silent = true, desc = "Toggle Markview" })
     vim.keymap.set(
       { "n", "v" },
       "<leader>mh",
