@@ -1,4 +1,4 @@
-" My Simple config 
+"My Simple config 
 
 " Clean Search Highligth
 nmap <Esc><Esc> :noh<Cr>
@@ -8,16 +8,17 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-" Buffer Control
-nmap <S-l> :bn!<Cr>
-nmap <S-h> :bp!<Cr>
-nmap <space>, :ls<Cr>:b! 
+
+" Buffers 
+nmap [b :bp<Cr>
+nmap ]b :bn<Cr>
+nmap <space>, :ls<Cr> :b! 
 
 " Vim File Explorer
 nmap <space><Cr> :Ex<Cr>
 
 " Command Line in Vi-Mode
-nmap <space>; :<C-f>
+" nmap <space>; :<C-f>
 
 " Text Managment
 vmap <S-k> :m '<-2<CR>gv=gv
@@ -32,6 +33,8 @@ nmap j gj
 vmap j gj
 vmap k gk
 nmap k gk
+nmap <pagedown> <pagedown>zz
+nmap <pageup> <pageup>zz
 
 " Search Movement
 nmap n nzz 
@@ -64,13 +67,16 @@ tmap <C-k> <C-w>k
 tmap <C-l> <C-w>l
 
 " Options 
-set nu
-set rnu
-set cursorline 
+" set nu
+" set rnu
+" set cursorline 
 set nowrap
 set ignorecase
 set smartcase
 set clipboard+=unnamedplus
+  set tabstop=2
+set shiftwidth=2
+set expandtab
 
 " Netrw Config
 let g:netrw_banner = 0
@@ -86,61 +92,40 @@ Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
-function! Search() abort
-	let l:tempname = tempname()
-	" fzf | awk '{ print $1":1:0" }' > file
-   execute 'silent !fzf --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-   
-   " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-	try
-		execute 'cfile ' . l:tempname
-		redraw!
-	finally
-		call delete(l:tempname)
-	endtry
-endfunction
+" function! Search() abort
+" 	let l:tempname = tempname()
+" 	" fzf | awk '{ print $1":1:0" }' > file
+"    execute 'silent !fzf --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+"    
+"    " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+" 	try
+" 		execute 'cfile ' . l:tempname
+" 		redraw!
+" 	finally
+" 		call delete(l:tempname)
+" 	endtry
+" endfunction
+" 
+" " :SearchFiles
+" command! SearchFiles call Search()
+" 
+" nnoremap <space><space> :SearchFiles<cr>
 
-" :SearchFiles
-command! SearchFiles call Search()
-
-" \ff
-nnoremap <space><space> :SearchFiles<cr>
-
-function! RG(args) abort
-    let l:tempname = tempname()
-    let l:pattern = '.'
-    if len(a:args) > 0
-        let l:pattern = a:args
-    endif
-    " rg --vimgrep <pattern> | fzf -m > file
-    execute 'silent !rg --vimgrep ''' . l:pattern . ''' | fzf --no-preview -m > ' . fnameescape(l:tempname)
-    try
-        execute 'cfile ' . l:tempname
-        redraw!
-    finally
-        call delete(l:tempname)
-    endtry
-endfunction
-
-" :Rg [pattern]
-command! -nargs=* Rg call RG(<q-args>)
-
-" \fs
-nnoremap <space>/ :Rg<cr>
-
-" " Fzf Grep 
-" nmap <space>/ :RG<Cr>
-" " Fzf Themes
-" nmap <space>uC :Colors<Cr>
-" " Ffz Find Files
-" nmap <space>ff :Files<Cr>
-" " Fzf Buffers
-" nmap <space>fb :Buffers<Cr>
+" Fzf Grep 
+nmap <space>/ :RG<Cr>
+" Ffz Find Files
+nmap <space><space> :Files<Cr>
+" Fzf Buffers
+" nmap <space>, :Buffers<Cr>
 
 " Theme Settings
 set termguicolors
 
-let g:tokyonight_style = 'night' " available: night, storm
+" let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
 
+
 colorscheme tokyonight
+
+" Turn Off Syntax
+" syntax off
