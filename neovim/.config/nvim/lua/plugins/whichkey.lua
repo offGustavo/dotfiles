@@ -3,8 +3,8 @@ return {
   event = "VeryLazy",
   opts_extend = { "spec" },
   opts = {
-    preset = "modern",
-    -- preset = "helix",
+    -- preset = "modern",
+    preset = "helix",
     -- preset = "classic",
     defaults = {},
     spec = {
@@ -21,7 +21,7 @@ return {
         { "<leader>s", group = "search" },
         { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
         { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
-        { "<leader>p", group = "Snacks Pickers", icon = { icon = "💤", color = "green" } },
+        -- { "<leader>p", group = "Snacks Pickers", icon = { icon = "💤", color = "green" } },
         { "<leader>K", name = "Man Pages", icon = { icon = " " } },
         { "<leader><Cr>", icon = { icon = "󰮯" } },
         { "[", group = "prev" },

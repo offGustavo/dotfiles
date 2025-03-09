@@ -8,20 +8,15 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "Half Scroll Dow
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true, desc = "Half Scroll Up" })
 vim.keymap.set("n", "<C-f>", "<C-f>zz", { silent = true, desc = "Scroll Down" })
 vim.keymap.set("n", "<C-b>", "<C-b>zz", { silent = true, desc = "Scroll Up" })
-vim.keymap.set("n", "<pagedown>", "<pagedown>zz")
-vim.keymap.set("n", "<pageup>", "<pageup>zz")
 
 -- Terminal
 ---- Normal Mode to Terminal
-vim.keymap.set("n", "<leader>tt", "<Cmd>terminal<CR>", { silent = true, desc = "New Buffer Terminal" })
-vim.keymap.set("n", "<leader>tj", function()
-  Snacks.terminal()
-end, { silent = true, desc = "Terminal" })
 
 vim.keymap.set({ "n", "t" }, "<A-/>", function()
   Snacks.terminal()
-end, { silent = true, desc = "New Small Terminal" })
-vim.keymap.set("t", "<A-n>", "<Cmd>terminal<CR>", { silent = true, desc = "New Terminal in Terminal Mode" })
+end, { silent = true, desc = "Open Terminal" })
+
+vim.keymap.set("n", "<leader>tt", "<Cmd>ter<Cr>", { silent = true, desc = "New Buffer Terminal" })
 vim.keymap.set("n", "<leader>tv", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
 vim.keymap.set("n", "<leader>ts", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
 
@@ -74,10 +69,10 @@ end, { silent = true, desc = "Close Neotree" })
 -- Diagnostic keymaps (quickstart keymaps)
 vim.keymap.set("n", "<leader>qf", vim.diagnostic.setloclist, { desc = "Open Diagnostic Quickfix List" })
 vim.keymap.set("n", "<leader>qw", "<Cmd>wq!<Cr>", { desc = "Save and Quit" })
-vim.keymap.set("n", "<leader>qn", "<Cmd>cnext<Cr>", { desc = "Open Next in Quickfix List" })
-vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { desc = "Open Previous in Quickfix List" })
-vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { desc = "Open Quickfix List" })
-vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { desc = "Close Quickfix List" })
+-- vim.keymap.set("n", "<leader>qn", "<Cmd>cnext<Cr>", { desc = "Open Next in Quickfix List" })
+-- vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { desc = "Open Previous in Quickfix List" })
+-- vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { desc = "Open Quickfix List" })
+-- vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { desc = "Close Quickfix List" })
 
 --- ThePrimeagen
 vim.keymap.set(
@@ -93,73 +88,49 @@ vim.keymap.set(
   { desc = "Substitute Current Word" }
 )
 
-vim.keymap.set("n", "<leader>fa", "<Cmd> FzfLua builtin <Cr>", { desc = "Fzf All Pickers" })
-
-vim.keymap.set("n", "<leader>ta", "<Cmd> Telescope builtin <Cr>", { desc = "Telescope All Pickers" })
-
-vim.keymap.set("n", "<leader>pa", function()
-  Snacks.picker()
-end, { desc = "Snacks All Pickers" })
-
-vim.keymap.set("n", "<leader>pz", function()
-  Snacks.picker.zoxide()
-end, { desc = "Snacks Picker Zoxide" })
-
-vim.keymap.set("n", "<leader>pe", function()
-  Snacks.picker.explorer()
-end, { desc = "Snacks Picker Explorer" })
-
-vim.keymap.set("n", "<leader>pf", function()
-  Snacks.picker.files()
-end, { desc = "Snacks Picker Files" })
-
-vim.keymap.set("n", "<leader>pg", function()
-  Snacks.picker.git_files()
-end, { desc = "Snacks Picker Git Files" })
-
-vim.keymap.set("n", "<leader>pi", function()
-  Snacks.picker.icons()
-end, { desc = "Snacks Picker Icons" })
-
-vim.keymap.set("n", "<leader>pb", function()
-  Snacks.picker.buffers()
-end, { desc = "Snacks Picker Buffers" })
-
-vim.keymap.set({ "n", "i" }, "<A-o>", function()
-  Snacks.picker.files({
-    hidden = true,
-  })
-end, { silent = true, desc = "File File Picker" })
-vim.keymap.set({ "n", "i" }, "<A-i>", function()
-  Snacks.picker.grep({
-    hidden = true,
-  })
-end, { silent = true, desc = "Fzf Live Grep" })
-
-vim.keymap.set({ "n", "i" }, "<A-u>", function()
-  Snacks.picker.buffers({
-    -- I always want my buffers picker to start in normal mode
-    on_show = function()
-      vim.cmd.stopinsert()
-    end,
-    finder = "buffers",
-    format = "buffer",
-    hidden = false,
-    unloaded = true,
-    current = true,
-    sort_lastused = true,
-    win = {
-      input = {
-        keys = {
-          ["d"] = "bufdelete",
-        },
-      },
-      list = { keys = { ["d"] = "bufdelete" } },
-    },
-    -- In case you want to override the layout for this keymap
-    -- layout = "ivy",
-  })
-end, { silent = true, desc = "Fzf Buffers" })
+-- vim.keymap.set("n", "<leader>fa", "<Cmd> FzfLua builtin <Cr>", { desc = "Fzf All Pickers" })
+--
+-- vim.keymap.set("n", "<leader>ta", "<Cmd> Telescope builtin <Cr>", { desc = "Telescope All Pickers" })
+--
+-- vim.keymap.set("n", "<leader>pa", function()
+--   Snacks.picker()
+-- end, { desc = "Snacks All Pickers" })
+--
+-- vim.keymap.set({ "n", "i" }, "<A-o>", function()
+--   Snacks.picker.files({
+--     hidden = true,
+--   })
+-- end, { silent = true, desc = "File File Picker" })
+-- vim.keymap.set({ "n", "i" }, "<A-i>", function()
+--   Snacks.picker.grep({
+--     hidden = true,
+--   })
+-- end, { silent = true, desc = "Fzf Live Grep" })
+--
+-- vim.keymap.set({ "n", "i" }, "<A-u>", function()
+--   Snacks.picker.buffers({
+--     -- I always want my buffers picker to start in normal mode
+--     on_show = function()
+--       vim.cmd.stopinsert()
+--     end,
+--     finder = "buffers",
+--     format = "buffer",
+--     hidden = false,
+--     unloaded = true,
+--     current = true,
+--     sort_lastused = true,
+--     win = {
+--       input = {
+--         keys = {
+--           ["d"] = "bufdelete",
+--         },
+--       },
+--       list = { keys = { ["d"] = "bufdelete" } },
+--     },
+--     -- In case you want to override the layout for this keymap
+--     -- layout = "ivy",
+--   })
+-- end, { silent = true, desc = "Fzf Buffers" })
 
 -- VS CODE CONFI
 if vim.g.vscode then
@@ -168,6 +139,9 @@ if vim.g.vscode then
   vim.keymap.set("n", "<leader>tt", "<Cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
   vim.keymap.set("n", "<leader>/", "<Cmd>call VSCodeNotify('workbench.action.quickTextSearch')<CR>")
 else
+  vim.keymap.set("n", "<leader>z", function()
+    Snacks.picker.zoxide()
+  end, { desc = "Snacks Picker Zoxide" })
   vim.keymap.set("n", "<leader><space>", function()
     Snacks.picker.files({
       hidden = true,
