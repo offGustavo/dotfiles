@@ -2,7 +2,7 @@ return {
   {
     "folke/tokyonight.nvim",
     opts = {
-      dim_inactive = true,
+      dim_inactive = false,
       style = "night",
       transparent = false,
       styles = {
@@ -30,7 +30,6 @@ return {
     name = "catppuccin",
   },
   { "rebelot/kanagawa.nvim", name = "kanagawa" },
-
   {
     "rose-pine/neovim",
   },
