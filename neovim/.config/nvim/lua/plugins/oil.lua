@@ -1,6 +1,9 @@
 return {
   "stevearc/oil.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  keys = {
+    { "<leader><Cr>", "<Cmd>Oil<Cr>", desc = "Oil Float" },
+  },
   config = function()
     require("oil").setup({
       -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
@@ -208,6 +211,6 @@ return {
 
     -- File Explorer
     -- vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
-    vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
+    -- vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
   end,
 }
