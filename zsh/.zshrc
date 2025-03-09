@@ -12,7 +12,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="smt" # set by `omz`
+ZSH_THEME="josh" # set by `omz`
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -96,7 +96,7 @@ eval "$(zoxide init zsh)"
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-  export EDITOR='nvim'
+export EDITOR='nvim'
 # fi
 
 # Compilation flags
@@ -117,46 +117,51 @@ alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/oh
 alias exa="exa --icons --git -l -G -h -a"
 
 # neovim fzf inegration
+
 alias vi='nvim $(fzf)'
 alias ni='zi && nvim'
+alias mi="zi && tmux new-session nvim"
+alias pi="tmux new-session nvim"
+# alias wi="tmux -f ~/.config/tmux/minimal-tmux.conf new-session -s vim 'nvim -u ~/.config/minimal-nvim/init.lua'"
 
 # Gengar Fastfetch
-alias gengar="pokeget --hide-name gengar| fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
+alias gengar="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
 
 # Fastfetch show on startup
-eval 'gengar' 
+eval 'gengar'   
 
 # FZF defaults
 
   # --border=none \
   # --border=rounded \
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-  --info=inline-right \
-  --ansi \
-  --layout=reverse \
-  --border=none \
-  --margin=3% \
-  --color=bg+:#283457 \
-  --color=bg:#16161e \
-  --color=border:#27a1b9 \
-  --color=fg:#c0caf5 \
-  --color=gutter:#16161e \
-  --color=header:#ff9e64 \
-  --color=hl+:#2ac3de \
-  --color=hl:#2ac3de \
-  --color=info:#545c7e \
-  --color=marker:#ff007c \
-  --color=pointer:#ff007c \
-  --color=prompt:#2ac3de \
-  --color=query:#c0caf5:regular \
-  --color=scrollbar:#27a1b9 \
-  --color=separator:#ff9e64 \
-  --color=spinner:#ff007c \
-  --preview 'if [ -d {} ]; then exa -a -T {}; else fzf-preview.sh {}; fi' \
-  --multi  \
-  --bind ctrl-q:toggle-all,alt-q:toggle-all \
-  --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
-"
+  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+    --info=inline-right \
+    --ansi \
+    --layout=reverse \
+    --border=rounded \
+    --style=full \
+    --margin=3% \
+    --color=bg+:#1a1b26 \
+    --color=bg:#16161e \
+    --color=border:#27a1b9 \
+    --color=fg:#c0caf5 \
+    --color=gutter:#16161e \
+    --color=header:#ff9e64 \
+    --color=hl+:#2ac3de \
+    --color=hl:#2ac3de \
+    --color=info:#545c7e \
+    --color=marker:#ff007c \
+    --color=pointer:#ff007c \
+    --color=prompt:#2ac3de \
+    --color=query:#c0caf5:regular \
+    --color=scrollbar:#27a1b9 \
+    --color=separator:#ff9e64 \
+    --color=spinner:#ff007c \
+    --preview 'if [ -d {} ]; then exa -a -T --icons {}; else fzf-preview.sh {}; fi' \
+    --multi  \
+    --bind ctrl-q:toggle-all,alt-q:toggle-all \
+    --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
+      "
 
 # --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all  \
 # --preview ''
@@ -181,60 +186,60 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 #       [[ -n "$package_name" ]] && sudo nala install "$package_name"
 #       ;;
 #     -s)
-#       [[ -n "$package_name" ]] && sudo nala search "$package_name"
-#       ;;
+  #       [[ -n "$package_name" ]] && sudo nala search "$package_name"
+  #       ;;
 #     -Rs)
-#       [[ -n "$package_name" ]] && sudo nala remove "$package_name"
-#       ;;
+  #       [[ -n "$package_name" ]] && sudo nala remove "$package_name"
+  #       ;;
 #     -Yc)
-#       sudo nala autoremove
-#       ;;
+  #       sudo nala autoremove
+  #       ;;
 #     install)
-#       [[ -n "$package_name" ]] && sudo nala install "$package_name"
-#       ;;
+  #       [[ -n "$package_name" ]] && sudo nala install "$package_name"
+  #       ;;
 #     remove)
-#       [[ -n "$package_name" ]] && sudo nala remove "$package_name"
-#       ;;
+  #       [[ -n "$package_name" ]] && sudo nala remove "$package_name"
+  #       ;;
 #     purge)
-#       [[ -n "$package_name" ]] && sudo nala purge "$package_name"
-#       ;;
+  #       [[ -n "$package_name" ]] && sudo nala purge "$package_name"
+  #       ;;
 #     search)
-#       [[ -n "$package_name" ]] && sudo nala search "$package_name"
-#       ;;
+  #       [[ -n "$package_name" ]] && sudo nala search "$package_name"
+  #       ;;
 #     show)
-#       [[ -n "$package_name" ]] && sudo nala show "$package_name"
-#       ;;
+  #       [[ -n "$package_name" ]] && sudo nala show "$package_name"
+  #       ;;
 #     list)
-#       [[ -n "$package_name" ]] && command nala list "$package_name"
-#       ;;
+  #       [[ -n "$package_name" ]] && command nala list "$package_name"
+  #       ;;
 #     history)
-#       sudo nala history
-#       ;;
+  #       sudo nala history
+  #       ;;
 #     fetch)
-#       sudo nala fetch
-#       ;;
+  #       sudo nala fetch
+  #       ;;
 #     clean)
-#       sudo nala clean
-#       ;;
+  #       sudo nala clean
+  #       ;;
 #     autoremove)
-#       sudo nala autoremove
-#       ;;
+  #       sudo nala autoremove
+  #       ;;
 #     autopurge)
-#       sudo nala autopurge
-#       ;;
+  #       sudo nala autopurge
+  #       ;;
 #     update)
-#       sudo nala update
-#       ;;
+  #       sudo nala update
+  #       ;;
 #     upgrade)
-#       sudo nala upgrade
-#       ;;
+  #       sudo nala upgrade
+  #       ;;
 #     full-upgrade)
-#       sudo nala full-upgrade
-#       ;;
+  #       sudo nala full-upgrade
+  #       ;;
 #     "")
-#       sudo nala update && sudo nala upgrade
-#       ;;
-#   esac
-# }
+  #       sudo nala update && sudo nala upgrade
+  #       ;;
+  #   esac
+  # }
 
 
