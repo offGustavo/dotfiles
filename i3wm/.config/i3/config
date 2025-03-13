@@ -183,7 +183,7 @@ bar {
         focused_workspace  $blue   $blue $bg
         active_workspace   $bg     $bg   $fg
         inactive_workspace $bg     $bg   $fg
-        urgent_workspace   $re     $red  $bg
+        urgent_workspace   $red    $red  $bg
         binding_mode       $bg     $bg   $fg
     }
 }
