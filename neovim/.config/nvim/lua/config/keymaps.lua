@@ -139,6 +139,9 @@ if vim.g.vscode then
   vim.keymap.set("n", "<leader>tt", "<Cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
   vim.keymap.set("n", "<leader>/", "<Cmd>call VSCodeNotify('workbench.action.quickTextSearch')<CR>")
 else
+  vim.keymap.set("n", "<leader>fa", function()
+    Snacks.picker()
+  end, { desc = "All Snacks Pickers" })
   vim.keymap.set("n", "<leader>z", function()
     Snacks.picker.zoxide()
   end, { desc = "Snacks Picker Zoxide" })
