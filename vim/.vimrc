@@ -1,5 +1,24 @@
 "My Simple config 
 
+" Options 
+set nu
+set rnu
+set cursorline 
+set nowrap
+set ignorecase
+set smartcase
+set clipboard+=unnamedplus
+set tabstop=2
+set shiftwidth=2
+set expandtab
+" set path=**
+" set wildoptions=pum
+
+" Netrw Config
+let g:netrw_banner = 0
+
+let g:netrw_liststyle = 0
+
 " Clean Search Highligth
 nmap <Esc><Esc> :noh<Cr>
 " Window Control 
@@ -7,15 +26,18 @@ nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
-
+nmap <space>w <C-w>
 
 " Buffers 
 nmap [b :bp<Cr>
 nmap ]b :bn<Cr>
-nmap <space>, :ls<Cr> :b! 
+" nmap <space>, :ls<Cr> :b! 
 
 " Vim File Explorer
 nmap <space><Cr> :Ex<Cr>
+
+" Find Files
+" nmap <space>ff :find 
 
 " Command Line in Vi-Mode
 " nmap <space>; :<C-f>
@@ -66,22 +88,9 @@ tmap <C-j> <C-w>j
 tmap <C-k> <C-w>k
 tmap <C-l> <C-w>l
 
-" Options 
-" set nu
-" set rnu
-" set cursorline 
-set nowrap
-set ignorecase
-set smartcase
-set clipboard+=unnamedplus
-  set tabstop=2
-set shiftwidth=2
-set expandtab
-
-" Netrw Config
-let g:netrw_banner = 0
-
-let g:netrw_liststyle = 0
+" Quick Fix
+nmap ]q :cnext<Cr>
+nmap [q :cprev<Cr>
 
 call plug#begin()
 
@@ -92,38 +101,52 @@ Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
-" function! Search() abort
-" 	let l:tempname = tempname()
-" 	" fzf | awk '{ print $1":1:0" }' > file
-"    execute 'silent !fzf --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-"    
-"    " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-" 	try
-" 		execute 'cfile ' . l:tempname
-" 		redraw!
-" 	finally
-" 		call delete(l:tempname)
-" 	endtry
-" endfunction
-" 
-" " :SearchFiles
-" command! SearchFiles call Search()
-" 
-" nnoremap <space><space> :SearchFiles<cr>
+function! Search() abort
+	let l:tempname = tempname()
+	" fzf | awk '{ print $1":1:0" }' > file
+   execute 'silent !fzf --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+   
+   " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+	try
+		execute 'cfile ' . l:tempname
+		redraw!
+	finally
+		call delete(l:tempname)
+	endtry
+endfunction
+
+" :SearchFiles
+command! SearchFiles call Search()
+
+nnoremap <space>ff :SearchFiles<cr>
+
+" FZF config
+
+" let g:fzf_vim.buffers_jump = 1
+
+" Initialize configuration dictionary
+" let g:fzf_vim = {} 
+
+" let g:fzf_layout = { 'window': 'enew' }
+
+" let g:fzf_vim.buffers_options = ['--style', 'minimal', '--border-label', ' Open Buffers ']
 
 " Fzf Grep 
 nmap <space>/ :RG<Cr>
 " Ffz Find Files
 nmap <space><space> :Files<Cr>
 " Fzf Buffers
-" nmap <space>, :Buffers<Cr>
+nmap <space>, :Buffers<Cr>
+ 
+" let g:fzf_vim.buffers_jump = 1
+
+" let g:fzf_layout = { 'window': 'enew' }
 
 " Theme Settings
 set termguicolors
 
 " let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
-
 
 colorscheme tokyonight
 
