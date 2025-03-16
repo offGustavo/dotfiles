@@ -10,13 +10,14 @@
     "temperature",
     // "custom/powerDraw",
     "hyprland/workspaces",
-    "mpd"
+    "mpd",
+    "tray",
   ],
   // "modules-center": [
   // ],
   "modules-right": [
     "hyprland/window",
-    "tray",
+    "hyprland/language",
     // "custom/updates",
     // "custom/clipboard",
     "backlight",
@@ -45,10 +46,9 @@
     "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>"
   },
   "hyprland/language": {
-    "format": "Lang: {long}",
-    "format-en": "AMERICA, HELL YEAH!",
-    "format-tr": "As bayrakları",
-    "keyboard-name": "at-translated-set-2-keyboard"
+    "format": "{}",
+    "keyboard-name": "at-translated-set-2-keyboard",
+    "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
   },
   "disk": {
     "interval": 30,
