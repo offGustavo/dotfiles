@@ -123,7 +123,7 @@ alias ni='zi && nvim'
 alias mi="zi && tmux new-session nvim"
 alias pi="tmux new-session nvim"
 # --style=minimal --no-border --no-margin
-alias ti='tmux switch-client -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
+alias ti='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
 alias wi="tmux -f ~/.config/minimal-nvim-tmux/tmux.conf new-session -s vim 'nvim -u ~/.config/minimal-nvim-tmux/init.lua'"
 
 # Gengar Fastfetch
