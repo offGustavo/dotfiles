@@ -6,7 +6,7 @@ OPTIONS=(
   "TV Acima (HDMI-A-1): HDMI-A-1, 3840x2160@60, 0x-1080, 2.0"
   "TV a Esquerda (HDMI-A-1): HDMI-A-1, 3840x2160@59.94Hz, -1920x0, 2.0"
   "Ativar eDP-1: eDP-1, 1920x1080@60Hz, 0x0, 1.0"
-  "Desativar InternInternoo eDP-1: eDP-1, disable"
+  "Desativar Interno eDP-1: eDP-1, disable"
   "Desativar Externo HDMI-A-1: HDMI-A-1, disable"
   "Espelhar Monitores: HDMI-A-1, 1920x1080@60Hz, 0x0, 1, mirror, eDP-1"
 )
