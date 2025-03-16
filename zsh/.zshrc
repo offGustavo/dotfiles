@@ -74,7 +74,7 @@ ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "josh" "smt" "example")
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+plugins=(git)
 
 # Init Oh My Zsh
 source $ZSH/oh-my-zsh.sh
@@ -122,6 +122,8 @@ alias vi='nvim $(fzf)'
 alias ni='zi && nvim'
 alias mi="zi && tmux new-session nvim"
 alias pi="tmux new-session nvim"
+# --style=minimal --no-border --no-margin
+alias ti='tmux switch-client -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
 alias wi="tmux -f ~/.config/minimal-nvim-tmux/tmux.conf new-session -s vim 'nvim -u ~/.config/minimal-nvim-tmux/init.lua'"
 
 # Gengar Fastfetch
