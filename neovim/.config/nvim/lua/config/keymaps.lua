@@ -4,10 +4,10 @@
 
 vim.keymap.set({ "n", "v" }, "n", "nzz", { silent = true, desc = "Next Search Result" })
 vim.keymap.set("n", "N", "Nzz", { silent = true, desc = "Previous Search Result" })
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "Half Scroll Down" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true, desc = "Half Scroll Up" })
-vim.keymap.set("n", "<C-f>", "<C-f>zz", { silent = true, desc = "Scroll Down" })
-vim.keymap.set("n", "<C-b>", "<C-b>zz", { silent = true, desc = "Scroll Up" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "Half Scroll Down and Center" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true, desc = "Half Scroll Up and Center" })
+-- vim.keymap.set("n", "<C-f>", "<C-f>zz", { silent = true, desc = "Scroll Down" })
+-- vim.keymap.set("n", "<C-b>", "<C-b>zz", { silent = true, desc = "Scroll Up" })
 
 -- Terminal
 ---- Normal Mode to Terminal
@@ -63,8 +63,8 @@ vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a")
 -- vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
 
 vim.keymap.set("n", "<S-Esc>", function()
-  Snacks.explorer.open()
-end, { silent = true, desc = "Close Neotree" })
+  Snacks.explorer()
+end, { silent = true, desc = "Toggle File Tree" })
 
 -- Diagnostic keymaps (quickstart keymaps)
 vim.keymap.set("n", "<leader>qf", vim.diagnostic.setloclist, { desc = "Open Diagnostic Quickfix List" })
