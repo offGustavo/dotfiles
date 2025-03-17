@@ -39,7 +39,7 @@ ENV = os.environ.copy()
 ENC = locale.getpreferredencoding()
 
 CONF = configparser.ConfigParser()
-CONF.read(expanduser("./networkmenu_config.ini"))
+CONF.read(expanduser("~/Scripts/networkmenu_config.ini"))
 
 
 def cli_args():
