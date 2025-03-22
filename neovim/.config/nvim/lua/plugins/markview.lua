@@ -12,20 +12,21 @@ return {
       },
     })
 
-    -- Markview Keymaps
-    require("which-key").add({
-      { "<leader>m", group = "Markdown", mode = "n", icon = "" },
-    })
-    vim.keymap.set({ "n", "v" }, "<leader>mm", "<cmd>Markview Toggle<CR>", { silent = true, desc = "Toggle Markview" })
+    -- -- Markview Keymaps
+    -- require("which-key").add({
+    --   { "<leader>m", group = "Markdown", mode = "n", icon = "" },
+    --
+    -- })
+    vim.keymap.set({ "n", "v" }, "<leader>omm", "<cmd>Markview Toggle<CR>", { silent = true, desc = "Toggle Markview" })
     vim.keymap.set(
       { "n", "v" },
-      "<leader>mh",
+      "<leader>omh",
       "<cmd>Markview hybridToggle<CR>",
       { silent = true, desc = "Toggle Hybrid Mode" }
     )
     vim.keymap.set(
       { "n", "v" },
-      "<leader>mp",
+      "<leader>omp",
       "<cmd>Markview splitToggle<CR>",
       { silent = true, desc = "Toggle Split View" }
     )
