@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$CHOICE=$(echo -e "Power Saver\nBalenced\nPerformance" | fzf --no-multi --no-preview --header "Current Mode: $(powerprofilesctl get)")
+CHOICE=$(echo -e "Power Saver\nBalenced\nPerformance" | fzf --no-multi --no-preview --header "Current Mode: $(powerprofilesctl get)")
 
 case "$CHOICE" in
 "Power Saver")
