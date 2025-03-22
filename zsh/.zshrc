@@ -74,7 +74,7 @@ ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "josh" "smt" "example")
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git vi-mode)
 
 # Init Oh My Zsh
 source $ZSH/oh-my-zsh.sh
@@ -121,6 +121,7 @@ alias exa="exa --icons --git -l -G -h -a"
 alias vi='nvim $(fzf)'
 alias ni='zi && nvim'
 alias mi="zi && tmux new-session nvim"
+alias ci="zi && tmux"
 alias pi="tmux new-session nvim"
 # --style=minimal --no-border --no-margin
 alias ti='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
@@ -130,12 +131,16 @@ alias wi="tmux -f ~/.config/minimal-nvim-tmux/tmux.conf new-session -s vim 'nvim
 alias gengar="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
 
 # Fastfetch show on startup
+# eval 'colorscript -r'
 eval 'gengar'   
 
 # FZF defaults
 
   # --border=none \
   # --border=rounded \
+  #
+  #
+  
   export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
     --info=inline-right \
     --ansi \
@@ -175,6 +180,9 @@ eval 'gengar'
 export FZF_DEFAULT_COMMAND='fd --hidden'
 # export FZF_DEFAULT_COMMAND='find .'
 # export FZF_DEFAULT_COMMAND='find . -printf "%P\\n"'
+# export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS --preview='tree {}'"
+#
+# export _ZO_FZF_OPTS="$_ZO_FZF_OPTS --style=minimal --preview='tree $(echo {} | awk -F'\t' '{print $2}')'"
 
 # # Nala pacman style commands
 
