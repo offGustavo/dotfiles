@@ -67,8 +67,8 @@ vim.keymap.set("n", "<S-Esc>", function()
 end, { silent = true, desc = "Toggle File Tree" })
 
 -- Diagnostic keymaps (quickstart keymaps)
-vim.keymap.set("n", "<leader>qf", vim.diagnostic.setloclist, { desc = "Open Diagnostic Quickfix List" })
 vim.keymap.set("n", "<leader>qw", "<Cmd>wq!<Cr>", { desc = "Save and Quit" })
+-- vim.keymap.set("n", "<leader>qf", vim.diagnostic.setloclist, { desc = "Open Diagnostic Quickfix List" })
 -- vim.keymap.set("n", "<leader>qn", "<Cmd>cnext<Cr>", { desc = "Open Next in Quickfix List" })
 -- vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { desc = "Open Previous in Quickfix List" })
 -- vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { desc = "Open Quickfix List" })
@@ -79,7 +79,7 @@ vim.keymap.set(
   "n",
   "<leader>s/",
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Substitute Current Word" }
+  { desc = "Substitute Current Word Globally" }
 )
 vim.keymap.set(
   "n",
@@ -183,7 +183,7 @@ else
   end, { silent = true, desc = "Snacks Pic Buffers" })
 end
 
-vim.keymap.set("x", "<leader><S-p>", '"_dP', { desc = "Past Without Copy" })
+-- vim.keymap.set("x", "<leader>pp", '"_dP', { desc = "Past Without Copy" })
 
 vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Executable" })
 
