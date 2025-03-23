@@ -10,7 +10,7 @@ case "$chosen" in
   xrandr --output HDMI-1-0 --mode 1920x1080 --preferred --above eDP-1
   ;;
 "Desativar Externo")
-  xrandr --output HDMI-1-0 --off
+  xrandr --output HDMI-1-0 --off --output eDP-1 --mode 1920x1080 --preferred
   ;;
 "Desativar Interno")
   xrandr --output eDP-1 --off
@@ -25,4 +25,3 @@ case "$chosen" in
   echo "Opção inválida"
   ;;
 esac
-sac
