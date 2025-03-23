@@ -2,7 +2,8 @@ return {
   "stevearc/oil.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = {
-    { "<leader><Cr>", "<Cmd>Oil<Cr>", desc = "Oil" },
+    { "<leader>se", "<Cmd>Oil<Cr>", desc = "Oil" },
+    { "<leader><Cr>", "<Cmd>Oil --float<Cr>", desc = "Oil" },
   },
   config = function()
     require("oil").setup({
@@ -12,7 +13,7 @@ return {
       -- Id is automatically added at the beginning, and name at the end
       -- See :help oil-columns
       columns = {
-        -- "icon",
+        "icon",
         -- "permissions",
         -- "size",
         -- "mtime",
@@ -71,6 +72,7 @@ return {
         ["<C-t>"] = { "actions.select", opts = { tab = true } },
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = { "actions.close", mode = "n" },
+        ["q"] = { "actions.close", mode = "n" },
         ["<C-l>"] = "actions.refresh",
         ["-"] = { "actions.parent", mode = "n" },
         -- TODO: Change backspaces name
@@ -131,10 +133,10 @@ return {
       -- Configuration for the floating window in oil.open_float
       float = {
         -- Padding around the floating window
-        padding = 2,
+        padding = 5,
         -- max_width and max_height can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-        max_width = 0,
-        max_height = 0,
+        max_width = 0.5,
+        max_height = 0.5,
         border = "rounded",
         win_options = {
           winblend = 0,
