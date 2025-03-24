@@ -4,10 +4,10 @@
   "modules-left": [
     "custom/logo",
     "clock",
-    "disk",
-    "memory",
     "cpu",
+    "memory",
     "temperature",
+    "disk",
     // "custom/powerDraw",
     "hyprland/workspaces",
     "mpd",
