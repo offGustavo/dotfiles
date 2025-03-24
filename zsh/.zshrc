@@ -120,12 +120,13 @@ alias exa="exa --icons --git -l -G -h -a"
 
 alias vi='nvim $(fzf)'
 alias ni='zi && nvim'
-alias mi="zi && tmux new-session nvim"
+alias mi="zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim"
 alias ci="zi && tmux"
 alias pi="tmux new-session nvim"
 # --style=minimal --no-border --no-margin
 alias ti='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
 alias wi="tmux -f ~/.config/minimal-nvim-tmux/tmux.conf new-session -s vim 'nvim -u ~/.config/minimal-nvim-tmux/init.lua'"
+alias lvim="nvim -u ~/.config/minimal-nvim-tmux/init.lua"
 
 # Gengar Fastfetch
 alias gengar="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
@@ -252,4 +253,18 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
   #   esac
   # }
 
+# bindkey -s ^f "tmux-sessionizer\n"
 
+#
+# # Definir a função para executar o comando
+# function execute_mi() {
+#   zi && tmux new-session nvim
+# }
+#
+# # Mapear Alt+O para executar a função
+# bindkey -s '^[i' "zi && tmux new-session -s \$(basename \"\$PWD\") nvim\n"
+bindkey -s '^[i' "zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim\n"
+#
+#p
+# bindkey -s '^[c' zi
+# bindkey -s '^[u' "tmux attach -t $(tmux list-session -F '#{session_name}' | fzf --no-preview )" 
