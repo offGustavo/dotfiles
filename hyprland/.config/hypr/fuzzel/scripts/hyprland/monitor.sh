@@ -9,6 +9,7 @@ OPTIONS=(
   "Desativar Interno eDP-1: eDP-1, disable"
   "Desativar Externo HDMI-A-1: HDMI-A-1, disable"
   "Espelhar Monitores: HDMI-A-1, 1920x1080@60Hz, 0x0, 1, mirror, eDP-1"
+  "Fatec: HDMI-A-1, 1920x1080@60.00Hz, 0x-1080, 1.0"
 )
 
 CHOICE=$(printf '%s\n' "${OPTIONS[@]}" | fuzzel -d --config $HOME/.config/hypr/fuzzel/fuzzel.ini -p "Monitors: ")
@@ -22,32 +23,3 @@ SELECTED_CONFIG="monitor ${CHOICE#*: }"
 
 echo $SELECTED_CONFIG
 hyprctl keyword $SELECTED_CONFIG
-
-##!/bin/bash
-#
-#chosen=$(echo -e "Ativar Externo Esquerda\nAtivar Externo Acima\nDesativar Externo\nAtivar Interno\nDesativar Interno\nEspelhar" | fzf --no-preview)
-#
-#case "$chosen" in
-#"Ativar Externo Esquerda")
-#  xrandr --output HDMI-1-0 --mode 1920x1080 --preferred --left-of eDP-1
-#  ;;
-#"Ativar Externo Acima")
-#  xrandr --output HDMI-1-0 --mode 1920x1080 --preferred --above eDP-1
-#  ;;
-#"Desativar Externo")
-#  xrandr --output HDMI-1-0 --off
-#  ;;
-#"Desativar Interno")
-#  xrandr --output eDP-1 --off
-#  ;;
-#"Ativar Interno")
-#  xrandr --output eDP-1 --mode 1920x1080 --right-of HDMI-1-0
-#  ;;
-#"Espelhar")
-#  xrandr --output HDMI-1-0 --same-as eDP-1
-#  ;;
-#*)
-#  echo "Opção inválida"
-#  ;;
-#esac
-#sac
