@@ -8,8 +8,9 @@ vim.opt.scrolloff = 0
 
 vim.o.wrap = false
 
+vim.o.list = false
+
 if vim.g.neovide then
-  vim.o.guifont = "JetbrainsmonoNL NF:h14" -- text below applies for VimScript
   vim.g.neovide_padding_top = 8
   vim.g.neovide_padding_bottom = 8
   vim.g.neovide_padding_right = 8
