@@ -7,8 +7,8 @@ return {
     { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<Cr>", desc = "Delete Non-Pinned Buffers" },
     { "<leader>br", "<Cmd>BufferLineCloseRight<Cr>", desc = "Delete Buffers to the Right" },
     { "<leader>bl", "<Cmd>BufferLineCloseLeft<Cr>", desc = "Delete Buffers to the Left" },
-    { "<S-h>", "<cmd>BufferLineCyclePrev<Cr>", desc = "Prev Buffer" },
-    { "<S-l>", "<cmd>BufferLineCycleNext<Cr>", desc = "Next Buffer" },
+    -- { "<S-h>", "<cmd>BufferLineCyclePrev<Cr>", desc = "Prev Buffer" },
+    -- { "<S-l>", "<cmd>BufferLineCycleNext<Cr>", desc = "Next Buffer" },
     { "[b", "<cmd>BufferLineCyclePrev<Cr>", desc = "Prev Buffer" },
     { "]b", "<cmd>BufferLineCycleNext<Cr>", desc = "Next Buffer" },
     { "[B", "<cmd>BufferLineMovePrev<Cr>", desc = "Move buffer prev" },
@@ -17,7 +17,8 @@ return {
   },
   opts = {
     options = {
-      numbers = "ordinal",
+      -- numbers = "ordinal",
+      -- numbers = "buffer_id",
       -- stylua: ignore
       close_command = function(n) Snacks.bufdelete(n) end,
       -- stylua: ignore
@@ -70,11 +71,15 @@ return {
         end
         for k, v in ipairs(buffers) do
           vim.keymap.set("n", "<C-" .. k .. ">", "<cmd>buffer " .. v .. "<cr>")
+          vim.keymap.set("n", "g" .. k, "<cmd>buffer " .. v .. "<cr>")
           require("which-key").add({
             { "<C-" .. k .. ">", hidden = true }, -- hide this keymap
+            { "g" .. k, hidden = true }, -- hide this keymap
           })
         end
       end,
     })
+
+    -- End config
   end,
 }
