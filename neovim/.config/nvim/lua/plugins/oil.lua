@@ -210,9 +210,5 @@ return {
         border = "rounded",
       },
     })
-
-    -- File Explorer
-    -- vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
-    -- vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
   end,
 }

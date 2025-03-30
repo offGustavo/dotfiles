@@ -13,10 +13,6 @@ return {
     })
 
     -- -- Markview Keymaps
-    -- require("which-key").add({
-    --   { "<leader>m", group = "Markdown", mode = "n", icon = "" },
-    --
-    -- })
     vim.keymap.set({ "n", "v" }, "<leader>omm", "<cmd>Markview Toggle<CR>", { silent = true, desc = "Toggle Markview" })
     vim.keymap.set(
       { "n", "v" },
