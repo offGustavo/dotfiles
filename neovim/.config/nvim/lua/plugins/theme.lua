@@ -36,4 +36,8 @@ return {
   {
     "shaunsingh/nord.nvim",
   },
+
+  { "ellisonleao/gruvbox.nvim" },
+
+  { "echasnovski/mini.base16", version = false },
 }
