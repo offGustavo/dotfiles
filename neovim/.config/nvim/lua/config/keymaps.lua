@@ -6,24 +6,20 @@ vim.keymap.set({ "n", "v" }, "n", "nzz", { silent = true, desc = "Next Search Re
 vim.keymap.set("n", "N", "Nzz", { silent = true, desc = "Previous Search Result" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "Half Scroll Down and Center" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true, desc = "Half Scroll Up and Center" })
--- vim.keymap.set("n", "<C-f>", "<C-f>zz", { silent = true, desc = "Scroll Down" })
--- vim.keymap.set("n", "<C-b>", "<C-b>zz", { silent = true, desc = "Scroll Up" })
+-- vim.keymap.set("n", "<C-f>", "<C-f>zz", { silent = true, desc = "Scroll Down and Center" })
+-- vim.keymap.set("n", "<C-b>", "<C-b>zz", { silent = true, desc = "Scroll Up and Center" })
 
 -- Terminal
 ---- Normal Mode to Terminal
-
 vim.keymap.set({ "n", "t" }, "<A-/>", function()
   Snacks.terminal()
 end, { silent = true, desc = "Open Terminal" })
-
-vim.keymap.set("n", "<leader>tt", "<Cmd>ter<Cr>", { silent = true, desc = "New Buffer Terminal" })
+vim.keymap.set("n", "<leader>tn", "<Cmd>terminal<Cr>", { silent = true, desc = "New Buffer Terminal" })
 vim.keymap.set("n", "<leader>tv", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
 vim.keymap.set("n", "<leader>ts", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
 
 ---- Terminal Mode to Normal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal" })
-vim.keymap.set("t", "<A-p>", "<C-\\><C-n>:", { desc = "Go To Command Mode in Terminal" })
-vim.keymap.set("t", "<C-o>", "<C-\\><C-o>", { desc = "Go To Command Mode in Terminal" })
 
 ---- Move in windows on Terminal Mode
 vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h")
@@ -187,10 +183,11 @@ end
 
 vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Executable" })
 
+-- Remove Lazyvim default keymap
 vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
 
-vim.keymap.set("n", "<leader>un", function()
+vim.keymap.set("n", "<leader>uN", function()
   if vim.o.signcolumn == "no" then
     vim.o.signcolumn = "yes"
     vim.opt.number = true
@@ -201,3 +198,26 @@ vim.keymap.set("n", "<leader>un", function()
     vim.opt.relativenumber = false
   end
 end, { silent = true, desc = "Toggle Relative Line Number and Sign Column" })
+
+-- Neovide Font Resize
+if vim.g.neovide then
+  FontSize = 12
+  function SetFontSize(amount)
+    FontSize = FontSize + amount
+    vim.o.guifont = "JetbrainsmonoNL NF:h" .. FontSize
+    print("Font Size: " .. FontSize)
+  end
+
+  SetFontSize(0)
+
+  vim.keymap.set("n", "<C-=>", function()
+    SetFontSize(1)
+  end)
+  vim.keymap.set("n", "<C-->", function()
+    SetFontSize(-1)
+  end)
+  vim.keymap.set("n", "<C-0>", function()
+    vim.o.guifont = "JetbrainsmonoNL NF:h12"
+    FontSize = 12
+  end)
+end
