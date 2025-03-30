@@ -9,6 +9,7 @@
     "temperature",
     "disk",
     // "custom/powerDraw",
+    "custom/weather",
     "hyprland/workspaces",
     "mpd",
     "tray",
@@ -293,6 +294,13 @@
       "network",
       "network#speed"
     ]
+  },
+  "custom/weather": {
+    "format": "{}",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "~/.config/hypr/waybar/scripts/weather.sh",
+    "return-type": "json"
   },
   "battery": {
     "interval": 1,
