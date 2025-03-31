@@ -27,6 +27,18 @@ vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j")
 vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k")
 vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l")
 
+-- Move Window
+vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
+vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
+vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
+vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+-- resize window
+vim.keymap.set("n", "<C-A-h>", "<C-w><", { desc = "Move window to the left" })
+vim.keymap.set("n", "<C-A-l>", "<C-w>>", { desc = "Move window to the right" })
+vim.keymap.set("n", "<C-A-j>", "<C-w>+", { desc = "Move window to the lower" })
+vim.keymap.set("n", "<C-A-k>", "<C-w>-", { desc = "Move window to the upper" })
+
 -- Close Window
 vim.keymap.set("n", "<leader>wc", "<Cmd>close<Cr>")
 -- Move Lines Up/Down
