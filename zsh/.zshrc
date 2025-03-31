@@ -263,7 +263,8 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 #
 # # Mapear Alt+O para executar a função
 # bindkey -s '^[i' "zi && tmux new-session -s \$(basename \"\$PWD\") nvim\n"
-bindkey -s '^[i' "zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim\n"
+bindkey -s '^[o' "zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim\n"
+# bindkey -s '^[i' "zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim\n"
 #
 #p
 # bindkey -s '^[c' zi
