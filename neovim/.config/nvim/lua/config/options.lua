@@ -10,6 +10,8 @@ vim.o.wrap = false
 
 vim.o.list = false
 
+vim.opt.spelllang = { "pt_br", "en_us", "es" }
+
 if vim.g.neovide then
   vim.g.neovide_padding_top = 8
   vim.g.neovide_padding_bottom = 8
