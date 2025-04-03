@@ -3,8 +3,8 @@ return {
   event = "VeryLazy",
   opts_extend = { "spec" },
   opts = {
-    -- preset = "modern",
-    preset = "helix",
+    preset = "modern",
+    -- preset = "helix",
     -- preset = "classic",
     defaults = {},
     spec = {
@@ -32,7 +32,8 @@ return {
         { "<leader>t", group = "Terminal" },
         { "<leader>o", group = "Options", icon = "" },
         { "<leader>om", group = "Markdown", icon = "" },
-        { "<leader>oc", group = "Colorizer" },
+        { "<leader>oc", group = "Colorizer", icon = "󰌁" },
+        { "g<C-a>", desc = "Increase numbres in order" },
         -- { "<leader>;", icon = "" },
         -- { "<leader>`", hidden = true },
         -- { "<leader><space>", hidden = true }, -- hide this keymap
