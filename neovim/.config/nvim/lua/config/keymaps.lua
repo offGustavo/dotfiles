@@ -199,7 +199,7 @@ vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Execut
 vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
 
-vim.keymap.set("n", "<leader>uN", function()
+vim.keymap.set("n", "<leader>on", function()
   if vim.o.signcolumn == "no" then
     vim.o.signcolumn = "yes"
     vim.opt.number = true
