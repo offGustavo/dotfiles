@@ -8,8 +8,8 @@ return {
 
     -- Remove default keymap for flash in lazyvim
     config = function ()
-      vim.keymap.del("n", "s")
-      vim.keymap.del("n", "S")
+        vim.keymap.del({"n", "x", "o"} , "s")
+        vim.keymap.del({"n", "x", "o"} , "S")
     end,
 
   keys = {
