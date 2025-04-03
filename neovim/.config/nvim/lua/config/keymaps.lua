@@ -224,12 +224,12 @@ if vim.g.neovide then
 
   vim.keymap.set("n", "<C-=>", function()
     SetFontSize(1)
-  end)
+  end, { desc = "Increase Font Size in neovide", silent = true })
   vim.keymap.set("n", "<C-->", function()
     SetFontSize(-1)
-  end)
+  end, { desc = "Decrease Font Size in neovide", silent = true })
   vim.keymap.set("n", "<C-0>", function()
     vim.o.guifont = "JetbrainsmonoNL NF:h12"
     FontSize = 12
-  end)
+  end, { desc = "Restore Font Size in neovide", silent = true })
 end
