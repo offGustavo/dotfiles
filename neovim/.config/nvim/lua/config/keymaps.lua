@@ -5,9 +5,7 @@
 vim.keymap.set({ "n", "v" }, "n", "nzz", { silent = true, desc = "Next Search Result" })
 vim.keymap.set("n", "N", "Nzz", { silent = true, desc = "Previous Search Result" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "Half Scroll Down and Center" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true, desc = "Half Scroll Up and Center" })
--- vim.keymap.set("n", "<C-f>", "<C-f>zz", { silent = true, desc = "Scroll Down and Center" })
--- vim.keymap.set("n", "<C-b>", "<C-b>zz", { silent = true, desc = "Scroll Up and Center" })
+vim.keymap.set("n", "<C-u>", "<c-u>zz", { silent = true, desc = "Half Scroll Up and Center" })
 
 -- Terminal
 ---- Normal Mode to Terminal
@@ -229,7 +227,8 @@ if vim.g.neovide then
     SetFontSize(-1)
   end, { desc = "Decrease Font Size in neovide", silent = true })
   vim.keymap.set("n", "<C-0>", function()
-    vim.o.guifont = "JetbrainsmonoNL NF:h12"
     FontSize = 12
+    vim.o.guifont = "JetbrainsmonoNL NF:h" .. FontSize
+    print("Font Size: " .. FontSize)
   end, { desc = "Restore Font Size in neovide", silent = true })
 end
