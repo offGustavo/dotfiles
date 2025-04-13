@@ -108,7 +108,9 @@ vim.opt.relativenumber = true
 vim.opt.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
-vim.opt.showmode = true
+vim.opt.showmode = false
+
+vim.o.cmdheight = 0
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -140,6 +142,8 @@ vim.opt.timeoutlen = 400
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+
+vim.opt.spelllang = { 'pt_br', 'en_us', 'es' }
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -181,6 +185,11 @@ vim.keymap.set('n', '<leader>wt', ':ter<cr>', { desc = 'new terminal' })
 vim.keymap.set('v', '<S-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'Move Line Up' })
 vim.keymap.set('v', '<S-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'Move Line Down' })
 
+vim.keymap.set('n', 'j', 'gj', { silent = true, desc = '' })
+vim.keymap.set('n', 'k', 'gk', { silent = true, desc = '' })
+-- vim.keymap.set('n', '$', 'g$', { silent = true, desc = '' })
+-- vim.keymap.set('n', '0', 'g0', { silent = true, desc = '' })
+
 vim.keymap.set('n', '[b', '<Cmd>bp<Cr>', { silent = true })
 vim.keymap.set('n', ']b', '<Cmd>bn<Cr>', { silent = true })
 
@@ -214,10 +223,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move focus to the upper window' })
 
 -- NOTE: Some terminals have coliding keymaps or are not able to send distinct keycodes
 vim.keymap.set('n', '<C-S-h>', '<C-w>H', { desc = 'Move window to the left' })
@@ -232,7 +241,7 @@ vim.keymap.set('n', '<C-A-j>', '<C-w>+', { desc = 'Move window to the lower' })
 vim.keymap.set('n', '<C-A-k>', '<C-w>-', { desc = 'Move window to the upper' })
 
 -- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
+--  See `:help lua-guide-autocommnds`
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -1793,11 +1802,12 @@ require('lazy').setup(
           desc = 'Dismiss All Notifications',
         },
         {
-          '<c-/>',
+          '<a-/>',
           function()
             Snacks.terminal()
           end,
           desc = 'Toggle Terminal',
+          mode = { 'n', 't' },
         },
         {
           '<c-_>',
@@ -2100,42 +2110,44 @@ require('lazy').setup(
           linewise_hybrid_mode = true,
         },
         -- list_items
-        list_items = {
-          enable = true,
-          wrap = false,
+        markdown = {
+          list_items = {
+            enable = true,
+            wrap = false,
 
-          indent_size = 2,
-          shift_width = 4,
+            indent_size = 2,
+            shift_width = 4,
 
-          marker_minus = {
-            add_padding = true,
-            conceal_on_checkboxes = true,
+            marker_minus = {
+              add_padding = true,
+              conceal_on_checkboxes = true,
 
-            text = '',
-            hl = 'MarkviewListItemMinus',
-          },
+              text = '',
+              hl = 'MarkviewListItemMinus',
+            },
 
-          marker_plus = {
-            add_padding = true,
-            conceal_on_checkboxes = true,
+            marker_plus = {
+              add_padding = true,
+              conceal_on_checkboxes = true,
 
-            text = '',
-            hl = 'MarkviewListItemPlus',
-          },
-          marker_star = {
-            add_padding = true,
-            conceal_on_checkboxes = true,
-            text = '',
-            hl = 'MarkviewListItemStar',
-          },
-          marker_dot = {
-            add_padding = true,
-            conceal_on_checkboxes = true,
-          },
+              text = '',
+              hl = 'MarkviewListItemPlus',
+            },
+            marker_star = {
+              add_padding = true,
+              conceal_on_checkboxes = true,
+              text = '',
+              hl = 'MarkviewListItemStar',
+            },
+            marker_dot = {
+              add_padding = true,
+              conceal_on_checkboxes = true,
+            },
 
-          marker_parenthesis = {
-            add_padding = true,
-            conceal_on_checkboxes = true,
+            marker_parenthesis = {
+              add_padding = true,
+              conceal_on_checkboxes = true,
+            },
           },
         },
       },
@@ -2198,6 +2210,218 @@ require('lazy').setup(
     },
   }
 )
+
+-- Neovide Font Resize
+if vim.g.neovide then
+  vim.g.neovide_padding_top = 8
+  vim.g.neovide_padding_bottom = 8
+  vim.g.neovide_padding_right = 8
+  vim.g.neovide_padding_left = 8
+  FontSize = 12
+  function SetFontSize(amount)
+    FontSize = FontSize + amount
+    vim.o.guifont = 'JetbrainsmonoNL NF:h' .. FontSize
+    print('Font Size: ' .. FontSize)
+  end
+  SetFontSize(0)
+  vim.keymap.set('n', '<C-=>', function()
+    SetFontSize(1)
+  end, { desc = 'Increase Font Size in neovide', silent = true })
+  vim.keymap.set('n', '<C-->', function()
+    SetFontSize(-1)
+  end, { desc = 'Decrease Font Size in neovide', silent = true })
+  vim.keymap.set('n', '<C-0>', function()
+    FontSize = 12
+    vim.o.guifont = 'JetbrainsmonoNL NF:h' .. FontSize
+    print('Font Size: ' .. FontSize)
+  end, { desc = 'Restore Font Size in neovide', silent = true })
+end
+
+-- Statusline
+
+local modes = {
+  ['n'] = 'NORMAL',
+  ['no'] = 'NORMAL',
+  ['v'] = 'VISUAL',
+  ['V'] = 'VISUAL LINE',
+  [''] = 'VISUAL BLOCK',
+  ['s'] = 'SELECT',
+  ['S'] = 'SELECT LINE',
+  [''] = 'SELECT BLOCK',
+  ['i'] = 'INSERT',
+  ['ic'] = 'INSERT',
+  ['R'] = 'REPLACE',
+  ['Rv'] = 'VISUAL REPLACE',
+  ['c'] = 'COMMAND',
+  ['cv'] = 'VIM EX',
+  ['ce'] = 'EX',
+  ['r'] = 'PROMPT',
+  ['rm'] = 'MOAR',
+  ['r?'] = 'CONFIRM',
+  ['!'] = 'SHELL',
+  ['t'] = 'TERMINAL',
+}
+local function mode()
+  local current_mode = vim.api.nvim_get_mode().mode
+  return string.format('%s', modes[current_mode]):upper()
+end
+local function update_mode_colors()
+  local current_mode = vim.api.nvim_get_mode().mode
+  local mode_color = '%#StatusLineAccent#'
+  if current_mode == 'n' then
+    mode_color = '%#MiniStatuslineModeNormal#'
+    -- mode_color = '%#StatuslineAccent#'
+  elseif current_mode == 'i' or current_mode == 'ic' then
+    mode_color = '%#MiniStatuslineModeInsert#'
+    -- mode_color = '%#StatuslineInsertAccent#'
+  elseif current_mode == 'v' or current_mode == 'V' or current_mode == '' then
+    mode_color = '%#MiniStatuslineModeVisual#'
+    -- mode_color = '%#StatuslineVisualAccent#'
+  elseif current_mode == 'R' then
+    mode_color = '%#MiniStatuslineModeReplace#'
+    -- mode_color = '%#StatuslineReplaceAccent#'
+  elseif current_mode == 'c' then
+    mode_color = '%#MiniStatuslineModeCommand#'
+    -- mode_color = '%#StatuslineCmdLineAccent#'
+  elseif current_mode == 't' then
+    mode_color = '%#MiniStatuslineModeOther#'
+    -- mode_color = '%#StatuslineTerminalAccent#'
+  end
+  return mode_color
+end
+local function filepath()
+  local fpath = vim.fn.fnamemodify(vim.fn.expand '%', ':~:.:h')
+  if fpath == '' or fpath == '.' then
+    return ' '
+  end
+  return string.format(' %%<%s/', fpath)
+end
+local function filename()
+  local fname = vim.fn.expand '%:t'
+  if fname == '' then
+    return ''
+  end
+  return fname .. ' '
+end
+
+local function lsp()
+  local count = {}
+  local levels = {
+    errors = 'Error',
+    warnings = 'Warn',
+    info = 'Info',
+    hints = 'Hint',
+  }
+
+  for k, level in pairs(levels) do
+    count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
+  end
+
+  local errors = ''
+  local warnings = ''
+  local hints = ''
+  local info = ''
+
+  if count['errors'] ~= 0 then
+    errors = '  ' .. count['errors']
+    -- errors = ' %#LspDiagnosticsSignError# ' .. count['errors']
+  end
+  if count['warnings'] ~= 0 then
+    warnings = '  ' .. count['warnings']
+    -- warnings = ' %#LspDiagnosticsSignWarning# ' .. count['warnings']
+  end
+  if count['hints'] ~= 0 then
+    hints = '  ' .. count['hints']
+    -- hints = ' %#LspDiagnosticsSignHint# ' .. count['hints']
+  end
+  if count['info'] ~= 0 then
+    info = '  ' .. count['info']
+    -- info = ' %#LspDiagnosticsSignInformation# ' .. count['info']
+  end
+
+  return errors .. warnings .. hints .. info .. '%#Normal#'
+end
+local function filetype()
+  return string.format(' %s ', vim.bo.filetype):upper()
+end
+local function lineinfo()
+  if vim.bo.filetype == 'alpha' then
+    return ''
+  end
+  return ' %P %l:%c '
+end
+local function git()
+  local git_info = vim.b.gitsigns_status_dict
+  if not git_info or git_info.head == '' then
+    return ''
+  end
+  local added = git_info.added and ('+' .. git_info.added .. ' ') or ''
+  -- local added = git_info.added and ('%#GitSignsAdd#+' .. git_info.added .. ' ') or ''
+  local changed = git_info.changed and ('~' .. git_info.changed .. ' ') or ''
+  -- local changed = git_info.changed and ('%#GitSignsChange#~' .. git_info.changed .. ' ') or ''
+  local removed = git_info.removed and ('-' .. git_info.removed .. ' ') or ''
+  -- local removed = git_info.removed and ('%#GitSignsDelete#-' .. git_info.removed .. ' ') or ''
+  if git_info.added == 0 then
+    added = ''
+  end
+  if git_info.changed == 0 then
+    changed = ''
+  end
+  if git_info.removed == 0 then
+    removed = ''
+  end
+  return table.concat {
+    ' ',
+    added,
+    changed,
+    removed,
+    ' ',
+    -- '%#GitSignsAdd# ',
+    '  ',
+    git_info.head,
+    ' %#Normal#',
+  }
+end
+
+Statusline = {}
+
+-- '%#Statusline#',
+Statusline.active = function()
+  return table.concat {
+    '%#Normal# ',
+    -- update_mode_colors(),
+    mode(),
+    '%#Normal# ',
+    filepath(),
+    filename(),
+    '%=%#StatusLineExtra#',
+    '%#Normal#',
+    git(),
+    lsp(),
+    filetype(),
+    lineinfo(),
+  }
+end
+vim.api.nvim_exec(
+  [[
+  augroup Statusline
+  au!
+  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
+  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
+  au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
+  augroup END
+]],
+  false
+)
+function Statusline.inactive()
+  return ' %f'
+end
+
+function Statusline.short()
+  return '%#StatusLineNC#   NvimTree'
+end
+
+--
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
