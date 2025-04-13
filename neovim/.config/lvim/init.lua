@@ -185,8 +185,8 @@ vim.keymap.set('n', '<leader>wt', ':ter<cr>', { desc = 'new terminal' })
 vim.keymap.set('v', '<S-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'Move Line Up' })
 vim.keymap.set('v', '<S-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'Move Line Down' })
 
-vim.keymap.set('n', 'j', 'gj', { silent = true, desc = '' })
-vim.keymap.set('n', 'k', 'gk', { silent = true, desc = '' })
+-- vim.keymap.set('n', 'j', 'gj', { silent = true, desc = 'Down in Wrap' })
+-- vim.keymap.set('n', 'k', 'gk', { silent = true, desc = 'Up in Wrap' })
 -- vim.keymap.set('n', '$', 'g$', { silent = true, desc = '' })
 -- vim.keymap.set('n', '0', 'g0', { silent = true, desc = '' })
 
@@ -1340,7 +1340,9 @@ require('lazy').setup(
         {
           '<leader><space>',
           function()
-            Snacks.picker.files { hidden = true }
+            Snacks.picker.files {
+              hidden = true,
+            }
           end,
           desc = 'Find Files',
         },
@@ -1355,9 +1357,9 @@ require('lazy').setup(
           '<leader>,',
           function()
             Snacks.picker.buffers {
-              on_show = function()
-                vim.cmd.stopinsert()
-              end,
+              -- on_show = function()
+              --   vim.cmd.stopinsert()
+              -- end,
               win = {
                 input = {
                   keys = {
@@ -2221,7 +2223,7 @@ if vim.g.neovide then
   function SetFontSize(amount)
     FontSize = FontSize + amount
     vim.o.guifont = 'JetbrainsmonoNL NF:h' .. FontSize
-    print('Font Size: ' .. FontSize)
+    -- print('Font Size: ' .. FontSize)
   end
   SetFontSize(0)
   vim.keymap.set('n', '<C-=>', function()
@@ -2383,6 +2385,22 @@ local function git()
   }
 end
 
+-- vim.o.laststatus = 3
+
+-- local function Winbar()
+--   local normal_color = '%#Normal#'
+--   local mode = '%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}'
+--   local file_name = '%-.16t'
+--   local buf_nr = '[%n]'
+--   local modified = ' %-m'
+--   local file_type = ' %y'
+--   local right_align = '%='
+--   local line_no = '%10([%l/%L%)]'
+--   local pct_thru_file = '%5p%%'
+--   return string.format('%s%s', normal_color, file_name)
+-- end
+-- vim.opt.winbar = Winbar()
+
 Statusline = {}
 
 -- '%#Statusline#',
@@ -2394,6 +2412,7 @@ Statusline.active = function()
     '%#Normal# ',
     filepath(),
     filename(),
+    '%m',
     '%=%#StatusLineExtra#',
     '%#Normal#',
     git(),
@@ -2414,14 +2433,12 @@ vim.api.nvim_exec(
   false
 )
 function Statusline.inactive()
-  return ' %f'
+  return '%#Normal#%f'
 end
 
 function Statusline.short()
   return '%#StatusLineNC#   NvimTree'
 end
-
---
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
