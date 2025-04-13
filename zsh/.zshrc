@@ -116,10 +116,11 @@ alias zconf="$EDITOR ~/.zshrc"
 alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"'
 alias exa="exa --icons --git -l -G -h -a"
 
+
 # neovim fzf inegration
 
 alias :v='nvim $(fzf)'
-alias vi='nvim $(fzf)'
+# alias vi='nvim $(fzf)'
 alias :vf='zi && nvim'
 alias ni='zi && nvim'
 alias :s="zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim"
@@ -131,10 +132,16 @@ alias pi="tmux new-session nvim"
 # --style=minimal --no-border --no-margin
 alias :S='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
 alias ti='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
-alias :Vs="tmux -f ~/.config/minimal-nvim-tmux/tmux.conf new-session -s vim 'nvim -u ~/.config/minimal-nvim-tmux/init.lua'"
-alias wi="tmux -f ~/.config/minimal-nvim-tmux/tmux.conf new-session -s vim 'nvim -u ~/.config/minimal-nvim-tmux/init.lua'"
-alias :L="nvim -u ~/.config/minimal-nvim-tmux/init.lua"
-alias lvim="nvim -u ~/.config/minimal-nvim-tmux/init.lua"
+
+# lunarvim config
+LVIM='NVIM_APPNAME=lvim nvim'
+alias lvim=$LVIM
+alias :L=$LVIM
+# clean tmux config
+alias :S="tmux -f ~/.config/cmux/tmux.conf"
+alias cmux="tmux -f ~/.config/cmux/tmux.conf"
+
+alias :Ls="tmux -f ~/.config/cmux/tmux.conf new-session -s vim '$LVIM nvim'"
 
 # Gengar Fastfetch
 alias :Ge="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
