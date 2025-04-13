@@ -7,3 +7,4 @@ neovim/.config/nvim/spell/es.utf-8.add.spl
 neovim/.config/nvim/spell/en.utf-8.add.spl
 tmux/.config/tmux/plugins/vim-tmux-navigator
 tmux/.config/tmux/plugins/tmux-sessionx/
+tmux/.config/tmux/plugins/tpm
