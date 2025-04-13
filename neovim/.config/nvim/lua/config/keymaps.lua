@@ -60,7 +60,7 @@ vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a")
 
 -- Buffer Movement
 -- vim.keymap.set("n", "<C-w>p", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
--- vim.keymap.set("n", "<leader>wp", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
+-- vim.keymap.set("n", "<leader>wp", vim.cmd.bp, { silent = false, desc = "Next Buffer" }i)
 -- vim.keymap.set("n", "<leader>bp", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
 -- vim.keymap.set("n", "<C-w>n", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
 -- vim.keymap.set("n", "<leader>wn", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
@@ -186,7 +186,7 @@ else
       -- In case you want to override the layout for this keymap
       -- layout = "ivy",
     })
-  end, { silent = true, desc = "Snacks Pic Buffers" })
+  end, { silent = true, desc = "Snacks Picker Buffers" })
 end
 
 -- vim.keymap.set("x", "<leader>pp", '"_dP', { desc = "Past Without Copy" })
@@ -197,17 +197,25 @@ vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Execut
 vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
 
-vim.keymap.set("n", "<leader>on", function()
-  if vim.o.signcolumn == "no" then
-    vim.o.signcolumn = "yes"
-    vim.opt.number = true
-    vim.opt.relativenumber = true
-  else
-    vim.o.signcolumn = "no"
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-  end
-end, { silent = true, desc = "Toggle Relative Line Number and Sign Column" })
+Snacks.toggle
+  .new({
+    id = "toggle_sing_and_line_column",
+    name = "Relative Line Number and Sign Column",
+    get = function()
+      return vim.o.relativenumber
+    end,
+    set = function(state)
+      if state then
+        vim.o.signcolumn = "no"
+        vim.opt.number = false
+        vim.opt.relativenumber = false
+      end
+      vim.o.signcolumn = "yes"
+      vim.opt.number = state
+      vim.opt.relativenumber = state
+    end,
+  })
+  :map("<leader>on")
 
 -- Neovide Font Resize
 if vim.g.neovide then

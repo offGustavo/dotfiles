@@ -157,11 +157,11 @@ else
             end
           end
           for k, v in ipairs(buffers) do
+            -- keymaps
             vim.keymap.set("n", "<C-" .. k .. ">", "<cmd>buffer " .. v .. "<cr>")
-            vim.keymap.set("n", "g" .. k, "<cmd>buffer " .. v .. "<cr>")
+            -- Whickkey
             require("which-key").add({
               { "<C-" .. k .. ">", hidden = true }, -- hide this keymap
-              { "g" .. k, hidden = true }, -- hide this keymap
             })
           end
         end,
