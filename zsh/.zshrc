@@ -118,18 +118,36 @@ alias exa="exa --icons --git -l -G -h -a"
 
 # neovim fzf inegration
 
+alias :v='nvim $(fzf)'
 alias vi='nvim $(fzf)'
+alias :vf='zi && nvim'
 alias ni='zi && nvim'
+alias :s="zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim"
 alias mi="zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim"
+alias :sf="zi && tmux"
 alias ci="zi && tmux"
+alias :vl="tmux new-session nvim"
 alias pi="tmux new-session nvim"
 # --style=minimal --no-border --no-margin
+alias :S='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
 alias ti='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
+alias :Vs="tmux -f ~/.config/minimal-nvim-tmux/tmux.conf new-session -s vim 'nvim -u ~/.config/minimal-nvim-tmux/init.lua'"
 alias wi="tmux -f ~/.config/minimal-nvim-tmux/tmux.conf new-session -s vim 'nvim -u ~/.config/minimal-nvim-tmux/init.lua'"
+alias :L="nvim -u ~/.config/minimal-nvim-tmux/init.lua"
 alias lvim="nvim -u ~/.config/minimal-nvim-tmux/init.lua"
 
 # Gengar Fastfetch
+alias :Ge="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
 alias gengar="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
+
+# Exit terminal
+alias :q=exit
+
+# Edit File
+alias :e=nvim
+
+# File Explorer
+alias :E=nvim
 
 # Fastfetch show on startup
 # eval 'colorscript -r'
