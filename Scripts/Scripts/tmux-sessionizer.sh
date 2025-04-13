@@ -3,8 +3,12 @@
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(find ~/Faculdade/ ~/dotfiles/ ~/Projetos/ ~/ -mindepth 1 -maxdepth 2 -type d | fzf)
+  selected=$(fd --hidden -E .git -E .cache -E .astah -E Documents/ -E .cargo -E .local -E .docker -E .fzf -E Downloads -E Documents -E Pictures --type d --search-path ~/.config/ | fzf)
+  # selected=$(fd --hidden -E .git --type d --max-depth=2 --search-path ~/Faculdade/ --search-path ~/dotfiles/ --search-path ~/Projetos/ | fzf)
+  # selected=$(find ~/Faculdade/ ~/dotfiles/ ~/Projetos/ ~/ -mindepth 1 -maxdepth 2 -type d | fzf)
   # selected=$(fd --hidden --type d | fzf)
+  #
+# ⚡ fd --search-path ~/ -E={.git,.fzf,TMP,go,.docker,Pictures,Downloads,Documents,snap,Music,Desktop,StirlingPDF} --type d --max-depth=2                   <<<
 fi
 
 if [[ -z $selected ]]; then
