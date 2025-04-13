@@ -225,9 +225,7 @@ if vim.g.neovide then
     vim.o.guifont = "JetbrainsmonoNL NF:h" .. FontSize
     print("Font Size: " .. FontSize)
   end
-
   SetFontSize(0)
-
   vim.keymap.set("n", "<C-=>", function()
     SetFontSize(1)
   end, { desc = "Increase Font Size in neovide", silent = true })
