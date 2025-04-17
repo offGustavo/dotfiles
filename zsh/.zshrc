@@ -150,10 +150,10 @@ alias gengar="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/f
 # Exit terminal
 alias :q=exit
 
-# Edit File
-alias :e=nvim
+# Edit File in Vim
+alias :e=vim
 
-# File Explorer
+# Edit File in Neovim
 alias :E=nvim
 
 # Fastfetch show on startup
