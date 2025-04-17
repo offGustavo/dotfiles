@@ -2161,6 +2161,53 @@ require('lazy').setup(
       },
     },
 
+    --  Harpoon
+    {
+      'ThePrimeagen/harpoon',
+      branch = 'harpoon2',
+      opts = {
+        menu = {
+          width = vim.api.nvim_win_get_width(0) - 4,
+        },
+        settings = {
+          save_on_toggle = true,
+        },
+      },
+      keys = function()
+        local keys = {
+          {
+            '<leader>h',
+            function()
+              require('harpoon'):list():add()
+            end,
+            desc = 'Harpoon File',
+          },
+          {
+            '<leader><S-h>',
+            function()
+              local harpoon = require 'harpoon'
+              harpoon.ui:toggle_quick_menu(harpoon:list())
+            end,
+            desc = 'Harpoon Quick Menu',
+          },
+        }
+
+        for i = 1, 9 do
+          table.insert(keys, {
+            '<leader>' .. i,
+            function()
+              require('harpoon'):list():select(i)
+            end,
+            desc = 'Harpoon to File ' .. i,
+          })
+          require('which-key').add {
+            { '<leader>' .. i, hidden = true }, -- hide this keymap
+          }
+        end
+        return keys
+      end,
+    },
+
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
     -- init.lua. If you want these files, they are in the repository, so you can just download them and
     -- place them in the correct locations.
@@ -2344,7 +2391,7 @@ local function lsp()
   return errors .. warnings .. hints .. info .. '%#Normal#'
 end
 local function filetype()
-  return string.format(' %s ', vim.bo.filetype):upper()
+  return string.format(' %s', vim.bo.filetype):upper()
 end
 local function lineinfo()
   if vim.bo.filetype == 'alpha' then
@@ -2357,11 +2404,14 @@ local function git()
   if not git_info or git_info.head == '' then
     return ''
   end
-  local added = git_info.added and ('+' .. git_info.added .. ' ') or ''
+  local added = git_info.added and ('󰐙 ' .. git_info.added .. ' ') or ''
+  -- local added = git_info.added and ('+' .. git_info.added .. ' ') or ''
   -- local added = git_info.added and ('%#GitSignsAdd#+' .. git_info.added .. ' ') or ''
-  local changed = git_info.changed and ('~' .. git_info.changed .. ' ') or ''
+  local changed = git_info.changed and ('󰝶 ' .. git_info.changed .. ' ') or ''
+  -- local changed = git_info.changed and ('~' .. git_info.changed .. ' ') or ''
   -- local changed = git_info.changed and ('%#GitSignsChange#~' .. git_info.changed .. ' ') or ''
-  local removed = git_info.removed and ('-' .. git_info.removed .. ' ') or ''
+  local removed = git_info.removed and ('󰍷 ' .. git_info.removed .. ' ') or ''
+  -- local removed = git_info.removed and ('-' .. git_info.removed .. ' ') or ''
   -- local removed = git_info.removed and ('%#GitSignsDelete#-' .. git_info.removed .. ' ') or ''
   if git_info.added == 0 then
     added = ''
@@ -2377,11 +2427,10 @@ local function git()
     added,
     changed,
     removed,
-    ' ',
     -- '%#GitSignsAdd# ',
-    '  ',
+    ' ',
     git_info.head,
-    ' %#Normal#',
+    '%#Normal#',
   }
 end
 
