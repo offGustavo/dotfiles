@@ -54,15 +54,12 @@ window#waybar {
 /*}*/
 /*#workspaces button.special{*/
 /*}*/
-
 #workspaces button.visible{
   background: @blue;
 }
-
 #workspaces button.urgent{
   background: @red;
 }
-
 #workspaces button.visible label,
 #workspaces button.urgent label{
     color: @bg;
@@ -103,9 +100,6 @@ window#waybar {
   padding-top: 0;
   color: @red ;
 }
-
-
-
 
 /*#clock{*/
 /*  color: #5fd1fa;*/

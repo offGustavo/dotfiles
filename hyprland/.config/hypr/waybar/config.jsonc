@@ -9,7 +9,7 @@
     "temperature",
     "disk",
     // "custom/powerDraw",
-    "custom/weather",
+    // "custom/weather",
     "hyprland/workspaces",
     "mpd",
     "tray",
