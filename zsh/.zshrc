@@ -138,10 +138,10 @@ LVIM='NVIM_APPNAME=lvim nvim'
 alias lvim=$LVIM
 alias :L=$LVIM
 # clean tmux config
-alias :S="tmux -f ~/.config/cmux/tmux.conf"
-alias cmux="tmux -f ~/.config/cmux/tmux.conf"
+alias :S="tmux -f ~/.config/cmux/cmux.conf"
+alias cmux="tmux -f ~/.config/cmux/cmux.conf"
 
-alias :Ls="tmux -f ~/.config/cmux/tmux.conf new-session -s vim '$LVIM nvim'"
+alias :Ls="tmux -f ~/.config/cmux/cmux.conf new-session -s vim '$LVIM nvim'"
 
 # Gengar Fastfetch
 alias :Ge="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
