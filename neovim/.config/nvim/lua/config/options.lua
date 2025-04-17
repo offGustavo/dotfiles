@@ -4,6 +4,7 @@
 
 vim.g.snacks_animate = false
 
+-- vim.opt.scrolloff = 28
 vim.opt.scrolloff = 0
 
 vim.o.wrap = false
@@ -11,6 +12,10 @@ vim.o.wrap = false
 vim.o.list = false
 
 vim.opt.spelllang = { "pt_br", "en_us", "es" }
+
+----------------------
+-- NEOVIDE          --
+----------------------
 
 if vim.g.neovide then
   vim.g.neovide_padding_top = 8

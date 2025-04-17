@@ -217,6 +217,10 @@ Snacks.toggle
   })
   :map("<leader>on")
 
+----------------------
+-- NEOVIDE          --
+----------------------
+
 -- Neovide Font Resize
 if vim.g.neovide then
   FontSize = 12
