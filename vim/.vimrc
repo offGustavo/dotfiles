@@ -21,7 +21,7 @@ let g:netrw_liststyle = 0
 
 " vimrc
 nmap <space>rr :so ~/.vimrc<Cr>
-nmap <space>re :e ~/.vimrc<Cr>
+nmap <space>fc :e ~/.vimrc<Cr>
 
 " Clean Search Highligth
 nmap <Esc><Esc> :noh<Cr>
@@ -40,9 +40,6 @@ nmap ]b :bn!<Cr>
 " Vim File Explorer
 nmap - :Ex<Cr>
 nmap <space><Cr> :Ex<Cr>
-
-" Find Files
-" nmap <space>ff :find 
 
 " Command Line in Vi-Mode
 " nmap <space>; :<C-f>
@@ -97,46 +94,44 @@ tmap <C-l> <C-w>l
 nmap ]q :cnext<Cr>
 nmap [q :cprev<Cr>
 
-
 call plug#begin()
-
 " List your plugins here
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
 call plug#end()
 
 " function! Search() abort
 " 	let l:tempname = tempname()
 " 	" fzf | awk '{ print $1":1:0" }' > file
-"    execute 'silent !fzf --style default --no-border --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-"    
+"    execute 'silent !fzf --style minimal --no-border --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
 "    " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-" 	try
+" try
 " 		execute 'cfile ' . l:tempname
 " 		redraw!
 " 	finally
 " 		call delete(l:tempname)
 " 	endtry
 " endfunction
-" 
 " " :SearchFiles
 " command! SearchFiles call Search()
-" 
 " nnoremap <space>ff :SearchFiles<cr>
 
 " FZF config
 
-" let g:fzf_vim.buffers_jump = 1
-
-" Initialize configuration dictionary
+" " Initialize configuration dictionary
 " let g:fzf_vim = {} 
-
+" " Set to jump to buffer
+" let g:fzf_vim.buffers_jump = 1
+" " Set to open in new window
 " let g:fzf_layout = { 'window': 'enew' }
-
+" " Change Style for buffers picker
 " let g:fzf_vim.buffers_options = ['--style', 'minimal', '--border-label', ' Open Buffers ']
 
+" FZF config
+
+" Fzf Find Word
+nmap <space>sw :RG <C-r><C-w><Cr>
 " Fzf Grep 
 nmap <space>/ :RG<Cr>
 " Ffz Find Files
@@ -144,16 +139,15 @@ nmap <space><space> :Files<Cr>
 " Fzf Buffers
 nmap <space>, :Buffers<Cr>
  
-" let g:fzf_vim.buffers_jump = 1
-
-" let g:fzf_layout = { 'window': 'enew' }
-
 " Theme Settings
+
+"
 set termguicolors
-
-" let g:tokyonight_style = 'night' " available: night, storm
-" let g:tokyonight_enable_italic = 1
-
+" Set Style
+let g:tokyonight_style = 'night' " available: night, storm
+" Enable Italic
+let g:tokyonight_enable_italic = 1
+" Set colorscheme
 colorscheme tokyonight
 
 " Turn Off Syntax
