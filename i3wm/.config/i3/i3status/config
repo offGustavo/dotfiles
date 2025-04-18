@@ -1,3 +1,4 @@
+# vim: ft=config
 
 general {
 	output_format = "i3bar"
