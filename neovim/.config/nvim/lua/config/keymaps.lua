@@ -94,14 +94,6 @@ vim.keymap.set(
   { desc = "Substitute Current Word" }
 )
 
--- vim.keymap.set("n", "<leader>fa", "<Cmd> FzfLua builtin <Cr>", { desc = "Fzf All Pickers" })
---
--- vim.keymap.set("n", "<leader>ta", "<Cmd> Telescope builtin <Cr>", { desc = "Telescope All Pickers" })
---
--- vim.keymap.set("n", "<leader>pa", function()
---   Snacks.picker()
--- end, { desc = "Snacks All Pickers" })
-
 -- VS CODE CONFI
 if vim.g.vscode then
   vim.keymap.set("n", "<leader>,", "<Cmd>call VSCodeNotify('workbench.action.showAllEditors')<CR>")
