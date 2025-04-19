@@ -27,14 +27,15 @@ return {
         { "[", group = "prev" },
         { "]", group = "next" },
         { "g", group = "goto" },
-        { "gs", group = "surround" },
         { "z", group = "fold" },
+
         { "<leader>t", group = "Terminal" },
         { "<leader>o", group = "Options", icon = "" },
         { "<leader>om", group = "Markdown", icon = "" },
         { "<leader>oc", group = "Colorizer", icon = "󰌁" },
         { "g<C-a>", desc = "Increase numbres in order" },
         { "<leader>z", icon = { icon = "", color = "purple" } },
+        { "<leader>cj", group = "Java" },
         -- { "<leader>;", icon = "" },
         -- { "<leader>`", hidden = true },
         -- { "<leader><space>", hidden = true }, -- hide this keymap
