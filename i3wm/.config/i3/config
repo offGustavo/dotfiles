@@ -171,7 +171,7 @@ bindsym $super+Shift+r restart
 bindsym $super+Shift+q exec i3-msg exit
 
 bar {
-  status_command i3status -c ~/.config/i3/i3status/config
+  status_command i3status -c ~/.config/i3/i3status/status
     position top
     font pango:Jetbrains Mono Nerd Font 8
     tray_output none
