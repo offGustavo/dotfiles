@@ -25,11 +25,14 @@ return {
       end,
     },
   },
+
   {
     "catppuccin/nvim",
     name = "catppuccin",
   },
+
   { "rebelot/kanagawa.nvim", name = "kanagawa" },
+
   {
     "rose-pine/neovim",
   },
@@ -40,4 +43,14 @@ return {
   { "ellisonleao/gruvbox.nvim" },
 
   { "echasnovski/mini.base16", version = false },
+
+  {
+    "sponkurtus2/angelic.nvim",
+    lazy = false,
+  },
+
+  {
+    "srt0/codescope.nvim",
+    lazy = false,
+  },
 }
