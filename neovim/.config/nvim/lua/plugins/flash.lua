@@ -4,14 +4,13 @@ return {
   vscode = true,
   ---@type Flash.Config
   opts = {},
-    -- stylua: ignore
-
-    -- Remove default keymap for flash in lazyvim
-    config = function ()
-        vim.keymap.del({"n", "x", "o"} , "s")
-        vim.keymap.del({"n", "x", "o"} , "S")
-    end,
-
+  -- stylua: ignore
+  --NOTE:
+  -- Remove default keymap for flash in lazyvim
+  config = function ()
+    vim.keymap.del({"n", "x", "o"} , "s")
+    vim.keymap.del({"n", "x", "o"} , "S")
+  end,
   keys = {
     {
       "ss",
