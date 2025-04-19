@@ -34,10 +34,7 @@ return {
         function()
           require("harpoon"):list():select(i)
         end,
-        desc = "Harpoon to File " .. i,
-      })
-      require("which-key").add({
-        { "<leader>" .. i, hidden = true }, -- hide this keymap
+        desc = "which_key_ignore",
       })
     end
     return keys
