@@ -8,3 +8,5 @@ neovim/.config/nvim/spell/en.utf-8.add.spl
 tmux/.config/tmux/plugins/vim-tmux-navigator
 tmux/.config/tmux/plugins/tmux-sessionx/
 tmux/.config/tmux/plugins/tpm
+neovim/.config/lvim/lazy-lock.json
+neovim/.config/nvim/lazy-lock.json
