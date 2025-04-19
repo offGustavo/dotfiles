@@ -185,6 +185,9 @@ vim.keymap.set('n', '<leader>wt', ':ter<cr>', { desc = 'new terminal' })
 vim.keymap.set('v', '<S-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'Move Line Up' })
 vim.keymap.set('v', '<S-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'Move Line Down' })
 
+-- vim.keymap.set('v', '<C-d>', "<C-d>zz", { silent = true, desc = 'Move Up and center' })
+-- vim.keymap.set('v', '<C-u>', "<C-u>zz", { silent = true, desc = 'Move Down and center' })
+
 -- vim.keymap.set('n', 'j', 'gj', { silent = true, desc = 'Down in Wrap' })
 -- vim.keymap.set('n', 'k', 'gk', { silent = true, desc = 'Up in Wrap' })
 -- vim.keymap.set('n', '$', 'g$', { silent = true, desc = '' })
@@ -983,7 +986,6 @@ require('lazy').setup(
         -- - sd'   - [S]urround [D]elete [']quotes
         -- - sr)'  - [S]urround [R]eplace [)] [']
         require('mini.surround').setup()
-
         -- -- Simple and easy statusline.
         -- --  You could remove this setup call if you don't like it,
         -- --  and try some other statusline plugin
@@ -997,9 +999,11 @@ require('lazy').setup(
         -- statusline.section_location = function()
         --   return '%2l:%-2v'
         -- end
-
         -- ... and there is more!
         --  Check out: https://github.com/echasnovski/mini.nvim
+
+        -- Mini pcik config
+        -- require('mini.pick').setup()
       end,
     },
 
@@ -1011,13 +1015,11 @@ require('lazy').setup(
       ---@type Flash.Config
       opts = {},
     -- stylua: ignore
-
     -- Remove default keymap for flash in lazyvim
     -- config = function ()
     --   vim.keymap.del("n", "s")
     --   vim.keymap.del("n", "S")
     -- end,
-
     keys = {
       {
         "ss",
@@ -1061,7 +1063,6 @@ require('lazy').setup(
       },
     },
     },
-
     { -- Highlight, edit, and navigate code
       'nvim-treesitter/nvim-treesitter',
       build = ':TSUpdate',
@@ -1300,7 +1301,6 @@ require('lazy').setup(
             border = 'rounded',
           },
         }
-
         -- File Explorer
         -- vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
         -- vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil<Cr>", { silent = true, desc = "Oil File Manager" })
@@ -1865,7 +1865,6 @@ require('lazy').setup(
               Snacks.debug.backtrace()
             end
             vim.print = _G.dd -- Override print to use snacks for `:=` command
-
             -- Create some toggle mappings
             Snacks.toggle.option('spell', { name = 'Spelling' }):map '<leader>us'
             Snacks.toggle.option('wrap', { name = 'Wrap' }):map '<leader>uw'
@@ -1894,6 +1893,14 @@ require('lazy').setup(
 
     -- Themes
     {
+      'sponkurtus2/angelic.nvim',
+      lazy = false,
+    },
+    {
+      'srt0/codescope.nvim',
+      lazy = false,
+    },
+    {
       'catppuccin/nvim',
       name = 'catppuccin',
     },
@@ -1914,125 +1921,6 @@ require('lazy').setup(
       'echasnovski/mini.base16',
       version = false,
     },
-
-    -- {
-    --   {
-    --     'folke/snacks.nvim',
-    --     priority = 1000,
-    --     lazy = false,
-    --     opts = {
-    --       picker = {
-    --         enabled = true,
-    --         sources = {
-    --           explorer = {
-    --             auto_close = true,
-    --             hidden = true,
-    --             layout = {
-    --               preset = 'default',
-    --               preview = false,
-    --             },
-    --             actions = {
-    --               copy_file_path = {
-    --                 action = function(_, item)
-    --                   if not item then
-    --                     return
-    --                   end
-    --                   local vals = {
-    --                     ['BASENAME'] = vim.fn.fnamemodify(item.file, ':t:r'),
-    --                     ['EXTENSION'] = vim.fn.fnamemodify(item.file, ':t:e'),
-    --                     ['FILENAME'] = vim.fn.fnamemodify(item.file, ':t'),
-    --                     ['PATH'] = item.file,
-    --                     ['PATH (CWD)'] = vim.fn.fnamemodify(item.file, ':.'),
-    --                     ['PATH (HOME)'] = vim.fn.fnamemodify(item.file, ':~'),
-    --                     ['URI'] = vim.uri_from_fname(item.file),
-    --                   }
-    --                   local options = vim.tbl_filter(function(val)
-    --                     return vals[val] ~= ''
-    --                   end, vim.tbl_keys(vals))
-    --                   if vim.tbl_isempty(options) then
-    --                     vim.notify('No values to copy', vim.log.levels.WARN)
-    --                     return
-    --                   end
-    --                   table.sort(options)
-    --                   vim.ui.select(options, {
-    --                     prompt = 'Choose to copy to clipboard:',
-    --                     format_item = function(list_item)
-    --                       return ('%s: %s'):format(list_item, vals[list_item])
-    --                     end,
-    --                   }, function(choice)
-    --                     local result = vals[choice]
-    --                     if result then
-    --                       vim.fn.setreg('+', result)
-    --                       Snacks.notify.info('Yanked `' .. result .. '`')
-    --                     end
-    --                   end)
-    --                 end,
-    --               },
-    --               search_in_directory = {
-    --                 action = function(_, item)
-    --                   if not item then
-    --                     return
-    --                   end
-    --                   local dir = vim.fn.fnamemodify(item.file, ':p:h')
-    --                   Snacks.picker.grep {
-    --                     cwd = dir,
-    --                     cmd = 'rg',
-    --                     args = {
-    --                       '-g',
-    --                       '!.git',
-    --                       '-g',
-    --                       '!node_modules',
-    --                       '-g',
-    --                       '!dist',
-    --                       '-g',
-    --                       '!build',
-    --                       '-g',
-    --                       '!coverage',
-    --                       '-g',
-    --                       '!.DS_Store',
-    --                       '-g',
-    --                       '!.docusaurus',
-    --                       '-g',
-    --                       '!.dart_tool',
-    --                     },
-    --                     show_empty = true,
-    --                     hidden = true,
-    --                     ignored = true,
-    --                     follow = false,
-    --                     supports_live = true,
-    --                   }
-    --                 end,
-    --               },
-    --               diff = {
-    --                 action = function(picker)
-    --                   picker:close()
-    --                   local sel = picker:selected()
-    --                   if #sel > 0 and sel then
-    --                     Snacks.notify.info(sel[1].file)
-    --                     vim.cmd('tabnew ' .. sel[1].file)
-    --                     vim.cmd('vert diffs ' .. sel[2].file)
-    --                     Snacks.notify.info('Diffing ' .. sel[1].file .. ' against ' .. sel[2].file)
-    --                     return
-    --                   end
-    --                   Snacks.notify.info 'Select two entries for the diff'
-    --                 end,
-    --               },
-    --             },
-    --             win = {
-    --               list = {
-    --                 keys = {
-    --                   ['y'] = 'copy_file_path',
-    --                   ['s'] = 'search_in_directory',
-    --                   ['D'] = 'diff',
-    --                 },
-    --               },
-    --             },
-    --           },
-    --         },
-    --       },
-    --     },
-    --   },
-    -- },
 
     -- Colorizer
     {
@@ -2116,22 +2004,17 @@ require('lazy').setup(
           list_items = {
             enable = true,
             wrap = false,
-
             indent_size = 2,
             shift_width = 4,
-
             marker_minus = {
               add_padding = true,
               conceal_on_checkboxes = true,
-
               text = '',
               hl = 'MarkviewListItemMinus',
             },
-
             marker_plus = {
               add_padding = true,
               conceal_on_checkboxes = true,
-
               text = '',
               hl = 'MarkviewListItemPlus',
             },
@@ -2145,7 +2028,6 @@ require('lazy').setup(
               add_padding = true,
               conceal_on_checkboxes = true,
             },
-
             marker_parenthesis = {
               add_padding = true,
               conceal_on_checkboxes = true,
@@ -2153,7 +2035,6 @@ require('lazy').setup(
           },
         },
       },
-
       keys = {
         { '<leader>omm', '<Cmd>Markview Toggle<Cr>', { desc = 'Toggle Markview' } },
         { '<leader>omh', '<Cmd>Markview hybridToggle<Cr>', { desc = 'Toggle Hybrid Mode' } },
@@ -2191,21 +2072,126 @@ require('lazy').setup(
             desc = 'Harpoon Quick Menu',
           },
         }
-
         for i = 1, 9 do
           table.insert(keys, {
             '<leader>' .. i,
             function()
               require('harpoon'):list():select(i)
             end,
-            desc = 'Harpoon to File ' .. i,
+            -- desc = 'Harpoon to File ' .. i,
+            desc = 'which_key_ignore',
           })
-          require('which-key').add {
-            { '<leader>' .. i, hidden = true }, -- hide this keymap
-          }
+          -- require('which-key').add {
+          --   { '<leader>' .. i, hidden = true }, -- hide this keymap
+          -- }
         end
         return keys
       end,
+    },
+
+    -- screenkey
+    {
+      'NStefan002/screenkey.nvim',
+      lazy = false,
+      version = '*', -- or branch = "main", to use the latest commit
+      config = function()
+        require('screenkey').setup {
+          win_opts = {
+            row = vim.o.lines - vim.o.cmdheight - 1,
+            col = vim.o.columns - 1,
+            relative = 'editor',
+            anchor = 'SE',
+            width = 40,
+            height = 3,
+            border = 'single',
+            title = 'Screenkey',
+            title_pos = 'center',
+            style = 'minimal',
+            focusable = true,
+            noautocmd = true,
+          },
+          compress_after = 3,
+          clear_after = 3,
+          disable = {
+            filetypes = {},
+            buftypes = {},
+            events = false,
+          },
+          show_leader = true,
+          group_mappings = true,
+          display_infront = {},
+          display_behind = {},
+          filter = function(keys)
+            return keys
+          end,
+          -- separator = ' ',
+          keys = {
+            ['<TAB>'] = '󰌒',
+            ['<CR>'] = '󰌑',
+            ['<ESC>'] = 'Esc',
+            ['<SPACE>'] = '␣',
+            ['<BS>'] = '󰌥',
+            ['<DEL>'] = 'Del',
+            ['<LEFT>'] = '',
+            ['<RIGHT>'] = '',
+            ['<UP>'] = '',
+            ['<DOWN>'] = '',
+            ['<HOME>'] = 'Home',
+            ['<END>'] = 'End',
+            ['<PAGEUP>'] = 'PgUp',
+            ['<PAGEDOWN>'] = 'PgDn',
+            ['<INSERT>'] = 'Ins',
+            ['<F1>'] = '󱊫',
+            ['<F2>'] = '󱊬',
+            ['<F3>'] = '󱊭',
+            ['<F4>'] = '󱊮',
+            ['<F5>'] = '󱊯',
+            ['<F6>'] = '󱊰',
+            ['<F7>'] = '󱊱',
+            ['<F8>'] = '󱊲',
+            ['<F9>'] = '󱊳',
+            ['<F10>'] = '󱊴',
+            ['<F11>'] = '󱊵',
+            ['<F12>'] = '󱊶',
+            ['CTRL'] = 'Ctrl',
+            ['ALT'] = 'Alt',
+            ['SUPER'] = '󰘳',
+            ['<leader>'] = '<leader>',
+          },
+        }
+      end,
+    },
+
+    -- snaks image
+    {
+      'folke/snacks.nvim',
+      ---@type snacks.Config
+      opts = {
+        image = {
+          -- your image configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        },
+      },
+    },
+
+    -- img-clip
+    {
+      'HakonHarnes/img-clip.nvim',
+      event = 'VeryLazy',
+      opts = {
+        -- add options here
+        -- or leave it empty to use the default settings
+        default = {
+          -- file and directory options
+          dir_path = 'assets', ---@type string | fun(): string
+          use_absolute_path = false, ---@type boolean | fun(): boolean
+        },
+      },
+      keys = {
+        -- suggested keymap
+        { '<leader>pi', '<cmd>PasteImage<cr>', desc = 'Paste image from system clipboard' },
+      },
     },
 
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
