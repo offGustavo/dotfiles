@@ -94,12 +94,13 @@ vim.keymap.set(
   { desc = "Substitute Current Word" }
 )
 
--- VS CODE CONFI
+-- VS CODE CONFIG
 if vim.g.vscode then
   vim.keymap.set("n", "<leader>,", "<Cmd>call VSCodeNotify('workbench.action.showAllEditors')<CR>")
   vim.keymap.set("n", "<leader>e", "<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>")
   vim.keymap.set("n", "<leader>tt", "<Cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
   vim.keymap.set("n", "<leader>/", "<Cmd>call VSCodeNotify('workbench.action.quickTextSearch')<CR>")
+  vim.keymap.set("n", "<leader>gg", "<Cmd>call VSCodeNotify('lazygit.openLazygit')<CR>")
 else
   vim.keymap.set("n", "<leader>fa", function()
     Snacks.picker()
