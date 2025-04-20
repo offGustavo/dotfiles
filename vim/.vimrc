@@ -15,11 +15,10 @@ set expandtab
 set showcmd
 set nocompatible
 
-" Set cursor to line in insert mode
-let &t_SI = "\e[5 q"
-
-" Set cursor to block in normal mode
-let &t_EI = "\e[2 q"
+" " Set cursor to line in insert mode
+" let &t_SI = "\e[5 q"
+" " Set cursor to block in normal mode
+" let &t_EI = "\e[2 q"
 
 ""STATUSLINE
 "set laststatus=2
@@ -55,15 +54,15 @@ let &t_EI = "\e[2 q"
 
 " Netrw Config
 let g:netrw_banner = 0
-
 let g:netrw_liststyle = 0
 
 " vimrc
 nmap <space>rr :so ~/.vimrc<Cr>
 nmap <space>fc :e ~/.vimrc<Cr>
 
-" Clean Search Highligth
-nmap silent <Esc> :noh<Cr>
+" " Clean Search Highligth
+" nmap <Esc> :noh<Cr>
+
 " Window Control 
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
@@ -74,10 +73,9 @@ nmap <space>w <C-w>
 " Buffers 
 nmap [b :bp!<Cr>
 nmap ]b :bn!<Cr>
-" nmap <space>, :ls<Cr> :b! 
+nmap <space>sb :ls<Cr> :b! 
 
 " Vim File Explorer
-nmap - :Ex<Cr>
 nmap <space><Cr> :Ex<Cr>
 
 " Command Line in Vi-Mode
@@ -168,7 +166,6 @@ call plug#end()
 " nnoremap <space>ff :SearchFiles<cr>
 
 " FZF config
-
 " " Initialize configuration dictionary
 " let g:fzf_vim = {} 
 " " Set to jump to buffer
@@ -177,9 +174,6 @@ call plug#end()
 " let g:fzf_layout = { 'window': 'enew' }
 " " Change Style for buffers picker
 " let g:fzf_vim.buffers_options = ['--style', 'minimal', '--border-label', ' Open Buffers ']
-
-" FZF config
-
 " Fzf Find Word
 nmap <space>sw :RG <C-r><C-w><Cr>
 " Fzf Grep 
@@ -188,10 +182,10 @@ nmap <space>/ :RG<Cr>
 nmap <space><space> :Files<Cr>
 " Fzf Buffers
 nmap <space>, :Buffers<Cr>
+" Fzf Colors
+nmap <space>uC :Colors<Cr>
 
 " Theme Settings
-
-"
 set termguicolors
 " Set Style
 let g:tokyonight_style = 'night' " available: night, storm
