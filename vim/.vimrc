@@ -15,10 +15,10 @@ set expandtab
 set showcmd
 set nocompatible
 
-" " Set cursor to line in insert mode
-" let &t_SI = "\e[5 q"
-" " Set cursor to block in normal mode
-" let &t_EI = "\e[2 q"
+" Set cursor to line in insert mode
+let &t_SI = "\e[5 q"
+" Set cursor to block in normal mode
+let &t_EI = "\e[2 q"
 
 ""STATUSLINE
 "set laststatus=2
@@ -174,6 +174,7 @@ call plug#end()
 " let g:fzf_layout = { 'window': 'enew' }
 " " Change Style for buffers picker
 " let g:fzf_vim.buffers_options = ['--style', 'minimal', '--border-label', ' Open Buffers ']
+
 " Fzf Find Word
 nmap <space>sw :RG <C-r><C-w><Cr>
 " Fzf Grep 
@@ -187,7 +188,8 @@ nmap <space>uC :Colors<Cr>
 
 " Theme Settings
 set termguicolors
-" Set Style
+set background=dark
+" Set Tokyo
 let g:tokyonight_style = 'night' " available: night, storm
 " Enable Italic
 let g:tokyonight_enable_italic = 1
