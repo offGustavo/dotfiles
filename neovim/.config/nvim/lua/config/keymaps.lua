@@ -164,7 +164,9 @@ Snacks.toggle
   })
   :map("<leader>on")
 
--- Obsidian Daily Note
+--------------------------
+-- Obsidian Daily Note ---
+--------------------------
 vim.keymap.set("n", "<leader>ood", function()
   local current_date = os.date("%Y-%m-%d")
   local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
