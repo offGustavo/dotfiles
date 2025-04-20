@@ -9,7 +9,7 @@ OPTIONS=(
   "Desativar Interno eDP-1: eDP-1, disable"
   "Desativar Externo HDMI-A-1: HDMI-A-1, disable"
   "Espelhar Monitores: HDMI-A-1, 1920x1080@60Hz, 0x0, 1, mirror, eDP-1"
-  "Fatec: HDMI-A-1, 1920x1080@60.00Hz, 0x-1080, 1.0"
+  "General: HDMI-A-1, preferred, 0x-1080, auto"
 )
 
 CHOICE=$(printf '%s\n' "${OPTIONS[@]}" | fuzzel -d --config $HOME/.config/hypr/fuzzel/fuzzel.ini -p "Monitors: ")
