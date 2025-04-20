@@ -210,11 +210,11 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 #
 # export _ZO_FZF_OPTS="$_ZO_FZF_OPTS --style=minimal --preview='tree $(echo {} | awk -F'\t' '{print $2}')'"
 
-# # Nala pacman style commands
+# Nala aliases
+alias nala='sudo nala'
+alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
 
-# alias nala='sudo nala'
-# alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
-
+# Nala pacman style commands
 # nala() {
 #   package_name="$2"
 #   case "$1" in
