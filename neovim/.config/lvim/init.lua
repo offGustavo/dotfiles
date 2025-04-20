@@ -174,10 +174,10 @@ vim.opt.confirm = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.wrap = false
-vim.o.tabstop = 2 -- A TAB character looks like 4 spaces
+vim.o.tabstop = 2      -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.o.softtabstop = 2 -- Number of spaces inserted instead of a TAB character
-vim.o.shiftwidth = 2 -- Number of spaces inserted when indenting
+vim.o.softtabstop = 2  -- Number of spaces inserted instead of a TAB character
+vim.o.shiftwidth = 2   -- Number of spaces inserted when indenting
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.showmode = true
@@ -359,7 +359,7 @@ require('lazy').setup(
     -- Then, because we use the `opts` key (recommended), the configuration runs
     -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
-    { -- Useful plugin to show you pending keybinds.
+    {                     -- Useful plugin to show you pending keybinds.
       'folke/which-key.nvim',
       event = 'VimEnter', -- Sets the loading event to 'VimEnter'
       opts = {
@@ -406,7 +406,7 @@ require('lazy').setup(
 
         -- Document existing key chains
         spec = {
-          { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
+          { '<leader>c', group = '[C]ode',              mode = { 'n', 'x' } },
           { '<leader>d', group = '[D]ocument' },
           { '<leader>r', group = '[R]ename/[R]eference' },
           { '<leader>s', group = '[S]earch' },
@@ -416,7 +416,7 @@ require('lazy').setup(
           { '<leader>b', group = '[B]uffer' },
           { '<leader>w', group = '[W]indow' },
           { '<leader>t', group = '[T]oggle' },
-          { '<leader>o', group = '[O]ptions', mode = { 'n' } },
+          { '<leader>o', group = '[O]ptions',           mode = { 'n' } },
         },
       },
     },
@@ -558,7 +558,7 @@ require('lazy').setup(
         'WhoIsSethDaniel/mason-tool-installer.nvim',
 
         -- Useful status updates for LSP.
-        { 'j-hui/fidget.nvim', opts = {} },
+        { 'j-hui/fidget.nvim',       opts = {} },
 
         -- Allows extra capabilities provided by nvim-cmp
         'hrsh7th/cmp-nvim-lsp',
@@ -1042,54 +1042,54 @@ require('lazy').setup(
       vscode = true,
       ---@type Flash.Config
       opts = {},
-    -- stylua: ignore
-    -- Remove default keymap for flash in lazyvim
-    -- config = function ()
-    --   vim.keymap.del("n", "s")
-    --   vim.keymap.del("n", "S")
-    -- end,
-    keys = {
-      {
-        "ss",
-        mode = { "n", "x", "o" },
-        function()
-          require("flash").jump()
-        end,
-        desc = "Flash",
+      -- stylua: ignore
+      -- Remove default keymap for flash in lazyvim
+      -- config = function ()
+      --   vim.keymap.del("n", "s")
+      --   vim.keymap.del("n", "S")
+      -- end,
+      keys = {
+        {
+          "ss",
+          mode = { "n", "x", "o" },
+          function()
+            require("flash").jump()
+          end,
+          desc = "Flash",
+        },
+        {
+          "sS",
+          mode = { "n", "o", "x" },
+          function()
+            require("flash").treesitter()
+          end,
+          desc = "Flash Treesitter",
+        },
+        {
+          "r",
+          mode = "o",
+          function()
+            require("flash").remote()
+          end,
+          desc = "Remote Flash",
+        },
+        {
+          "R",
+          mode = { "o", "x" },
+          function()
+            require("flash").treesitter_search()
+          end,
+          desc = "Treesitter Search",
+        },
+        {
+          "<c-s>",
+          mode = { "c" },
+          function()
+            require("flash").toggle()
+          end,
+          desc = "Toggle Flash Search",
+        },
       },
-      {
-        "sS",
-        mode = { "n", "o", "x" },
-        function()
-          require("flash").treesitter()
-        end,
-        desc = "Flash Treesitter",
-      },
-      {
-        "r",
-        mode = "o",
-        function()
-          require("flash").remote()
-        end,
-        desc = "Remote Flash",
-      },
-      {
-        "R",
-        mode = { "o", "x" },
-        function()
-          require("flash").treesitter_search()
-        end,
-        desc = "Treesitter Search",
-      },
-      {
-        "<c-s>",
-        mode = { "c" },
-        function()
-          require("flash").toggle()
-        end,
-        desc = "Toggle Flash Search",
-      },
-    },
     },
     { -- Highlight, edit, and navigate code
       'nvim-treesitter/nvim-treesitter',
@@ -1150,7 +1150,7 @@ require('lazy').setup(
       'stevearc/oil.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       keys = {
-        { '<leader>se', '<Cmd>Oil<Cr>', desc = 'Oil' },
+        { '<leader>se',   '<Cmd>Oil<Cr>',         desc = 'Oil' },
         { '<leader><Cr>', '<Cmd>Oil --float<Cr>', desc = 'Oil' },
       },
       config = function()
@@ -1928,7 +1928,8 @@ require('lazy').setup(
             Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map '<leader>uL'
             Snacks.toggle.diagnostics():map '<leader>ud'
             Snacks.toggle.line_number():map '<leader>ul'
-            Snacks.toggle.option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map '<leader>uc'
+            Snacks.toggle.option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+                :map '<leader>uc'
             Snacks.toggle.treesitter():map '<leader>uT'
             Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map '<leader>ub'
             Snacks.toggle.inlay_hints():map '<leader>uh'
@@ -2315,6 +2316,7 @@ if vim.g.neovide then
     vim.o.guifont = 'JetbrainsmonoNL NF:h' .. FontSize
     -- print('Font Size: ' .. FontSize)
   end
+
   SetFontSize(0)
   vim.keymap.set('n', '<C-=>', function()
     SetFontSize(1)
