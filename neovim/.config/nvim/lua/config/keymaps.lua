@@ -73,7 +73,6 @@ vim.keymap.set("n", "<S-Esc>", function()
 end, { silent = true, desc = "Toggle File Tree" })
 
 -- Diagnostic keymaps (quickstart keymaps)
-vim.keymap.set("n", "<leader>qw", "<Cmd>wq!<Cr>", { desc = "Save and Quit" })
 -- vim.keymap.set("n", "<leader>qf", vim.diagnostic.setloclist, { desc = "Open Diagnostic Quickfix List" })
 -- vim.keymap.set("n", "<leader>qn", "<Cmd>cnext<Cr>", { desc = "Open Next in Quickfix List" })
 -- vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { desc = "Open Previous in Quickfix List" })
