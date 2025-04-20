@@ -1,3 +1,6 @@
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et
+
 --[[
 
 =====================================================================
@@ -143,6 +146,7 @@ vim.opt.timeoutlen = 400
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.o.spell = false
 vim.opt.spelllang = { 'pt_br', 'en_us', 'es' }
 
 -- Sets how neovim will display certain whitespace characters in the editor.
@@ -185,6 +189,11 @@ vim.keymap.set('n', '<leader>wt', ':ter<cr>', { desc = 'new terminal' })
 vim.keymap.set('v', '<S-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'Move Line Up' })
 vim.keymap.set('v', '<S-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'Move Line Down' })
 
+vim.keymap.set('n', ']q', '<cmd>cnext<cr>', { desc = 'Next Quickfix' })
+vim.keymap.set('n', ']Q', '<cmd>clast<cr>', { desc = 'Last Quickfix' })
+vim.keymap.set('n', '[q', '<cmd>cprev<cr>', { desc = 'Previous Quickfix' })
+vim.keymap.set('n', '[Q', '<cmd>cfisrt<cr>', { desc = 'First Quickfix' })
+
 -- vim.keymap.set('v', '<C-d>', "<C-d>zz", { silent = true, desc = 'Move Up and center' })
 -- vim.keymap.set('v', '<C-u>', "<C-u>zz", { silent = true, desc = 'Move Down and center' })
 
@@ -204,7 +213,23 @@ vim.keymap.set('n', ']b', '<Cmd>bn<Cr>', { silent = true })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.dd), { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>xx', function()
+  vim.diagnostic.setqflist()
+end, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- local quickfix_open = false
+-- local function toggle_quickfix(quickfix_state)
+--   if quickfix_open then
+--     vim.cmd 'cclose'
+--     quickfix_open = false
+--   else
+--     vim.cmd 'copen'
+--     quickfix_open = true
+--   end
+-- end
+-- vim.keymap.set('n', '<leader>xx', function()
+--   vim.diagnostic.setqflist()
+-- end, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -986,6 +1011,7 @@ require('lazy').setup(
         -- - sd'   - [S]urround [D]elete [']quotes
         -- - sr)'  - [S]urround [R]eplace [)] [']
         require('mini.surround').setup()
+        --
         -- -- Simple and easy statusline.
         -- --  You could remove this setup call if you don't like it,
         -- --  and try some other statusline plugin
@@ -999,10 +1025,12 @@ require('lazy').setup(
         -- statusline.section_location = function()
         --   return '%2l:%-2v'
         -- end
-        -- ... and there is more!
-        --  Check out: https://github.com/echasnovski/mini.nvim
+        -- -- ... and there is more!
+        -- --  Check out: https://github.com/echasnovski/mini.nvim
 
-        -- Mini pcik config
+        -- -- Mini tabline
+        -- require('mini.tabline').setup()
+        -- -- Mini pick config
         -- require('mini.pick').setup()
       end,
     },
@@ -1069,7 +1097,36 @@ require('lazy').setup(
       main = 'nvim-treesitter.configs', -- Sets main module to use for opts
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
       opts = {
-        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+        ensure_installed = {
+          'java',
+          'javadoc',
+          'bash',
+          'c',
+          'diff',
+          'html',
+          'css',
+          'javascript',
+          'jsdoc',
+          'json',
+          'jsonc',
+          'lua',
+          'luadoc',
+          'luap',
+          'markdown',
+          'markdown_inline',
+          'printf',
+          'python',
+          'query',
+          'regex',
+          'toml',
+          'tsx',
+          'typescript',
+          'vim',
+          'vimdoc',
+          'xml',
+          'yaml',
+          'rust',
+        },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = {
@@ -2190,7 +2247,7 @@ require('lazy').setup(
       },
       keys = {
         -- suggested keymap
-        { '<leader>pi', '<cmd>PasteImage<cr>', desc = 'Paste image from system clipboard' },
+        { '<leader>op', '<cmd>PasteImage<cr>', desc = 'Paste image from system clipboard' },
       },
     },
 
@@ -2474,6 +2531,3 @@ end
 function Statusline.short()
   return '%#StatusLineNC#   NvimTree'
 end
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
