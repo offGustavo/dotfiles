@@ -39,8 +39,8 @@ vim.keymap.set("n", "<C-A-k>", "<C-w>-", { desc = "Move window to the upper" })
 
 -- Close Window
 vim.keymap.set("n", "<leader>wc", "<Cmd>close<Cr>")
+
 -- Move Lines Up/Down
---
 vim.keymap.set("v", "<S-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move Line Up" })
 vim.keymap.set("v", "<S-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move Line Down" })
 
@@ -58,7 +58,7 @@ vim.keymap.set("i", "<C-k>", "<Esc>lDa")
 vim.keymap.set("i", "<C-u>", "<Esc>d0xi")
 vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a")
 
--- Buffer Movement
+-- -- Buffer Movement
 -- vim.keymap.set("n", "<C-w>p", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
 -- vim.keymap.set("n", "<leader>wp", vim.cmd.bp, { silent = false, desc = "Next Buffer" }i)
 -- vim.keymap.set("n", "<leader>bp", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
