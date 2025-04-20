@@ -66,6 +66,7 @@ vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a")
 -- vim.keymap.set("n", "<leader>wn", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
 -- vim.keymap.set("n", "<leader>bn", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
 
+-- Normal mode in command line
 -- vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
 
 vim.keymap.set("n", "<S-Esc>", function()
