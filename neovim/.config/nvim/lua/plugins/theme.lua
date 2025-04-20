@@ -1,4 +1,5 @@
 return {
+
   {
     "folke/tokyonight.nvim",
     opts = {
@@ -26,31 +27,13 @@ return {
     },
   },
 
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-  },
+  { "catppuccin/nvim", name = "catppuccin" },
 
   { "rebelot/kanagawa.nvim", name = "kanagawa" },
 
-  {
-    "rose-pine/neovim",
-  },
-  {
-    "shaunsingh/nord.nvim",
-  },
+  { "rose-pine/neovim" },
+
+  { "shaunsingh/nord.nvim" },
 
   { "ellisonleao/gruvbox.nvim" },
-
-  { "echasnovski/mini.base16", version = false },
-
-  {
-    "sponkurtus2/angelic.nvim",
-    lazy = false,
-  },
-
-  {
-    "srt0/codescope.nvim",
-    lazy = false,
-  },
 }
