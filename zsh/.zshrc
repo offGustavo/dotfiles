@@ -74,7 +74,7 @@ ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "josh" "smt" "example")
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+plugins=(git vi-mode tmux)
 
 # Init Oh My Zsh
 source $ZSH/oh-my-zsh.sh
