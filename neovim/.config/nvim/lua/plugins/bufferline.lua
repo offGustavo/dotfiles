@@ -6,7 +6,7 @@ if vim.g.neovide then
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<Cr>", desc = "Toggle Pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<Cr>", desc = "Delete Non-Pinned Buffers" },
-      { "<leader>br", "<Cmd>BufferLineCloseRight<Cr>", desc = "Delete Buffers to the Right" },
+      { "<leader>bh", "<Cmd>BufferLineCloseRight<Cr>", desc = "Delete Buffers to the Right" },
       { "<leader>bl", "<Cmd>BufferLineCloseLeft<Cr>", desc = "Delete Buffers to the Left" },
       -- { "<S-h>", "<cmd>BufferLineCyclePrev<Cr>", desc = "Prev Buffer" },
       -- { "<S-l>", "<cmd>BufferLineCycleNext<Cr>", desc = "Next Buffer" },
@@ -14,7 +14,7 @@ if vim.g.neovide then
       { "]b", "<cmd>BufferLineCycleNext<Cr>", desc = "Next Buffer" },
       { "[B", "<cmd>BufferLineMovePrev<Cr>", desc = "Move buffer prev" },
       { "]B", "<cmd>BufferLineMoveNext<Cr>", desc = "Move buffer next" },
-      { "<leader>fp", "<Cmd>BufferLinePick<Cr>", desc = "Buffer Picker" },
+      -- { "<leader>fp", "<Cmd>BufferLinePick<Cr>", desc = "Buffer Picker" },
     },
     opts = {
       options = {
@@ -72,10 +72,8 @@ if vim.g.neovide then
       --     end
       --     for k, v in ipairs(buffers) do
       --       vim.keymap.set("n", "<C-" .. k .. ">", "<cmd>buffer " .. v .. "<cr>")
-      --       vim.keymap.set("n", "g" .. k, "<cmd>buffer " .. v .. "<cr>")
       --       require("which-key").add({
       --         { "<C-" .. k .. ">", hidden = true }, -- hide this keymap
-      --         { "g" .. k, hidden = true }, -- hide this keymap
       --       })
       --     end
       --   end,
