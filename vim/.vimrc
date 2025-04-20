@@ -13,6 +13,45 @@ set expandtab
 " set path=**
 " set wildoptions=pum
 set showcmd
+set nocompatible
+
+" Set cursor to line in insert mode
+let &t_SI = "\e[5 q"
+
+" Set cursor to block in normal mode
+let &t_EI = "\e[2 q"
+
+""STATUSLINE
+"set laststatus=2
+"set noshowmode
+""STATUSLINE MODE
+"let g:currentmode={
+"            \ 'n' : 'NORMAL ',
+"            \ 'v' : 'VISUAL ',
+"            \ 'V' : 'V-LINE ',
+"            \ '\' : 'V-BLOCK' ,
+"            \ 'i' : 'INSERT ',
+"            \ 'R' : 'REPLACE ',
+"            \ 'Rv' : 'V-REPLACE ',
+"            \ 'c' : 'COMMAND ',
+"            \}
+"set statusline=
+"set statusline+=%#Icon#
+"set statusline+=\ %#NormalC#%{(mode()=='n')?'\ NORMAL\ ':''}
+"set statusline+=%#InsertC#%{(mode()=='i')?'\ INSERT\ ':''}
+"set statusline+=%#VisualC#%{(mode()=='v')?'\ VISUAL\ ':''}
+"set statusline+=%#Filename#
+"set statusline+=\ %f
+"set statusline+=%#ReadOnly#
+"set statusline+=\ %r
+"set statusline+=%m
+"set statusline+=%=
+"set statusline+=%#Fileformat#
+"set statusline+=\ %y
+"set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+"set statusline+=\ [%{&fileformat}\]
+"set statusline+=%#Position#
+"set statusline+=\ [%l/%L]
 
 " Netrw Config
 let g:netrw_banner = 0
@@ -24,7 +63,7 @@ nmap <space>rr :so ~/.vimrc<Cr>
 nmap <space>fc :e ~/.vimrc<Cr>
 
 " Clean Search Highligth
-nmap <Esc><Esc> :noh<Cr>
+nmap silent <Esc> :noh<Cr>
 " Window Control 
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
@@ -92,13 +131,24 @@ tmap <C-l> <C-w>l
 
 " Quick Fix
 nmap ]q :cnext<Cr>
+nmap ]Q :clast<Cr>
 nmap [q :cprev<Cr>
+nmap [Q :cfirst<Cr>
+function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+    else
+        cclose
+    endif
+endfunction
+nnoremap <silent> <space>xq :call ToggleQuickFix()<cr>
 
 call plug#begin()
 " List your plugins here
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " function! Search() abort
@@ -138,7 +188,7 @@ nmap <space>/ :RG<Cr>
 nmap <space><space> :Files<Cr>
 " Fzf Buffers
 nmap <space>, :Buffers<Cr>
- 
+
 " Theme Settings
 
 "
