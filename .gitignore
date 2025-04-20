@@ -10,3 +10,4 @@ tmux/.config/tmux/plugins/tmux-sessionx/
 tmux/.config/tmux/plugins/tpm
 neovim/.config/lvim/lazy-lock.json
 neovim/.config/nvim/lazy-lock.json
+neovim/.config/nvim/lazy-lock.json
