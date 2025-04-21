@@ -93,6 +93,8 @@ vim.keymap.set(
   [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = "Substitute Current Word" }
 )
+vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste Without Copy" })
+vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Executable" })
 
 --  Remap Default picker
 vim.keymap.set("n", "<leader>fa", function()
@@ -135,10 +137,6 @@ vim.keymap.set({ "n", "i" }, "<leader>,", function()
     -- layout = "ivy",
   })
 end, { silent = true, desc = "Snacks Picker Buffers" })
-
--- vim.keymap.set("x", "<leader>pp", '"_dP', { desc = "Past Without Copy" })
-
-vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Executable" })
 
 -- Remove Lazyvim default keymap
 vim.keymap.del("n", "<S-h>")
