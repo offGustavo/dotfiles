@@ -96,48 +96,6 @@ vim.keymap.set(
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste Without Copy" })
 vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Executable" })
 
---  Remap Default picker
-vim.keymap.set("n", "<leader>fa", function()
-  Snacks.picker()
-end, { desc = "All Snacks Pickers" })
-vim.keymap.set("n", "<leader>z", function()
-  Snacks.picker.zoxide()
-end, { desc = "Snacks Picker Zoxide" })
-vim.keymap.set("n", "<leader><space>", function()
-  Snacks.picker.files({
-    hidden = true,
-  })
-end, { desc = "Snacks Picker Files" })
-vim.keymap.set("n", "<leader>/", function()
-  Snacks.picker.grep({
-    hidden = true,
-  })
-end, { desc = "Snacks Picker Grep" })
-vim.keymap.set({ "n", "i" }, "<leader>,", function()
-  Snacks.picker.buffers({
-    -- I always want my buffers picker to start in normal mode
-    -- on_show = function()
-    --   vim.cmd.stopinsert()
-    -- end,
-    finder = "buffers",
-    format = "buffer",
-    hidden = false,
-    unloaded = true,
-    current = true,
-    sort_lastused = true,
-    win = {
-      input = {
-        keys = {
-          ["d"] = "bufdelete",
-        },
-      },
-      list = { keys = { ["d"] = "bufdelete" } },
-    },
-    -- In case you want to override the layout for this keymap
-    -- layout = "ivy",
-  })
-end, { silent = true, desc = "Snacks Picker Buffers" })
-
 -- Remove Lazyvim default keymap
 vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
@@ -185,11 +143,57 @@ end, { desc = "Daily Note" })
 if vim.g.vscode then
   vim.keymap.set("n", "<leader>,", "<Cmd>call VSCodeNotify('workbench.action.showAllEditors')<CR>")
   vim.keymap.set("n", "<leader>e", "<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>")
-  vim.keymap.set("n", "<leader>tt", "<Cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
+  vim.keymap.set("n", "<leader><Cr>", "<Cmd>call VSCodeNotify('oil-code.open')<CR>")
+  vim.keymap.set("n", "<leader>tn", "<Cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
   vim.keymap.set("n", "<leader>/", "<Cmd>call VSCodeNotify('workbench.action.quickTextSearch')<CR>")
   vim.keymap.set("n", "<leader>gg", "<Cmd>call VSCodeNotify('lazygit.openLazygit')<CR>")
+  vim.keymap.set("n", "gd", "<Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>")
+  vim.keymap.set("n", "gr", "<Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>")
+else
+  -----------------------------
+  ---  REMAP DEFAULT PICKER ---
+  -----------------------------
+  vim.keymap.set("n", "<leader>fa", function()
+    Snacks.picker()
+  end, { desc = "All Snacks Pickers" })
+  vim.keymap.set("n", "<leader>z", function()
+    Snacks.picker.zoxide()
+  end, { desc = "Snacks Picker Zoxide" })
+  vim.keymap.set("n", "<leader><space>", function()
+    Snacks.picker.files({
+      hidden = true,
+    })
+  end, { desc = "Snacks Picker Files" })
+  vim.keymap.set("n", "<leader>/", function()
+    Snacks.picker.grep({
+      hidden = true,
+    })
+  end, { desc = "Snacks Picker Grep" })
+  vim.keymap.set({ "n", "i" }, "<leader>,", function()
+    Snacks.picker.buffers({
+      -- I always want my buffers picker to start in normal mode
+      -- on_show = function()
+      --   vim.cmd.stopinsert()
+      -- end,
+      finder = "buffers",
+      format = "buffer",
+      hidden = false,
+      unloaded = true,
+      current = true,
+      sort_lastused = true,
+      win = {
+        input = {
+          keys = {
+            ["d"] = "bufdelete",
+          },
+        },
+        list = { keys = { ["d"] = "bufdelete" } },
+      },
+      -- In case you want to override the layout for this keymap
+      -- layout = "ivy",
+    })
+  end, { silent = true, desc = "Snacks Picker Buffers" })
 end
-
 ----------------------
 -- NEOVIDE          --
 ----------------------
