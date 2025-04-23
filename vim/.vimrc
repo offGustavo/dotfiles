@@ -10,7 +10,7 @@ set smartcase
 set tabstop=2
 set shiftwidth=2
 set expandtab
-" set path=**
+set path=**
 " set wildoptions=pum
 set showcmd
 set nocompatible
@@ -70,7 +70,11 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 nmap <space>w <C-w>
 
-" Buffers 
+" Grep
+nmap <space>sg :grep -R  .<Left><Left>
+nmap <space>sG :grep
+
+"Buffers 
 nmap [b :bp!<Cr>
 nmap ]b :bn!<Cr>
 nmap <space>sb :ls<Cr> :b! 
