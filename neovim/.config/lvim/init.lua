@@ -174,10 +174,10 @@ vim.opt.confirm = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.wrap = false
-vim.o.tabstop = 2      -- A TAB character looks like 4 spaces
+vim.o.tabstop = 2 -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.o.softtabstop = 2  -- Number of spaces inserted instead of a TAB character
-vim.o.shiftwidth = 2   -- Number of spaces inserted when indenting
+vim.o.softtabstop = 2 -- Number of spaces inserted instead of a TAB character
+vim.o.shiftwidth = 2 -- Number of spaces inserted when indenting
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.showmode = true
@@ -193,6 +193,18 @@ vim.keymap.set('n', ']q', '<cmd>cnext<cr>', { desc = 'Next Quickfix' })
 vim.keymap.set('n', ']Q', '<cmd>clast<cr>', { desc = 'Last Quickfix' })
 vim.keymap.set('n', '[q', '<cmd>cprev<cr>', { desc = 'Previous Quickfix' })
 vim.keymap.set('n', '[Q', '<cmd>cfisrt<cr>', { desc = 'First Quickfix' })
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.goto_prev()
+end, { desc = 'Previous Diagnostic' })
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.goto_next()
+end, { desc = 'Next Diagnostic' })
+vim.keymap.set('n', ']e', function()
+  vim.diagnostic.goto_next { severity = vim.diagnostic.severity.ERROR, wrap = true }
+end, { desc = 'Next Error' })
+vim.keymap.set('n', '[e', function()
+  vim.diagnostic.goto_prev { severity = vim.diagnostic.severity.ERROR, wrap = true }
+end, { desc = 'Previous Error' })
 
 -- vim.keymap.set('v', '<C-d>', "<C-d>zz", { silent = true, desc = 'Move Up and center' })
 -- vim.keymap.set('v', '<C-u>', "<C-u>zz", { silent = true, desc = 'Move Down and center' })
@@ -359,7 +371,7 @@ require('lazy').setup(
     -- Then, because we use the `opts` key (recommended), the configuration runs
     -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
-    {                     -- Useful plugin to show you pending keybinds.
+    { -- Useful plugin to show you pending keybinds.
       'folke/which-key.nvim',
       event = 'VimEnter', -- Sets the loading event to 'VimEnter'
       opts = {
@@ -406,7 +418,7 @@ require('lazy').setup(
 
         -- Document existing key chains
         spec = {
-          { '<leader>c', group = '[C]ode',              mode = { 'n', 'x' } },
+          { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
           { '<leader>d', group = '[D]ocument' },
           { '<leader>r', group = '[R]ename/[R]eference' },
           { '<leader>s', group = '[S]earch' },
@@ -416,7 +428,7 @@ require('lazy').setup(
           { '<leader>b', group = '[B]uffer' },
           { '<leader>w', group = '[W]indow' },
           { '<leader>t', group = '[T]oggle' },
-          { '<leader>o', group = '[O]ptions',           mode = { 'n' } },
+          { '<leader>o', group = '[O]ptions', mode = { 'n' } },
         },
       },
     },
@@ -558,7 +570,7 @@ require('lazy').setup(
         'WhoIsSethDaniel/mason-tool-installer.nvim',
 
         -- Useful status updates for LSP.
-        { 'j-hui/fidget.nvim',       opts = {} },
+        { 'j-hui/fidget.nvim', opts = {} },
 
         -- Allows extra capabilities provided by nvim-cmp
         'hrsh7th/cmp-nvim-lsp',
@@ -1027,7 +1039,34 @@ require('lazy').setup(
         -- end
         -- -- ... and there is more!
         -- --  Check out: https://github.com/echasnovski/mini.nvim
+        -- Mini pairs
+        require('mini.pairs').setup {
+          -- In which modes mappings from this `config` should be created
+          modes = { insert = true, command = false, terminal = false },
 
+          -- Global mappings. Each right hand side should be a pair information, a
+          -- table with at least these fields (see more in |MiniPairs.map|):
+          -- - <action> - one of 'open', 'close', 'closeopen'.
+          -- - <pair> - two character string for pair to be used.
+          -- By default pair is not inserted after `\`, quotes are not recognized by
+          -- <CR>, `'` does not insert pair after a letter.
+          -- Only parts of tables can be tweaked (others will use these defaults).
+          mappings = {
+            ['('] = { action = 'open', pair = '()', neigh_pattern = '[^\\].' },
+            ['['] = { action = 'open', pair = '[]', neigh_pattern = '[^\\].' },
+            ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\].' },
+            ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
+
+            [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
+            [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
+            ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+            ['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
+
+            ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^\\].', register = { cr = false } },
+            ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%a\\].', register = { cr = false } },
+            ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^\\].', register = { cr = false } },
+          },
+        }
         -- -- Mini tabline
         -- require('mini.tabline').setup()
         -- -- Mini pick config
@@ -1150,7 +1189,7 @@ require('lazy').setup(
       'stevearc/oil.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       keys = {
-        { '<leader>se',   '<Cmd>Oil<Cr>',         desc = 'Oil' },
+        { '<leader>se', '<Cmd>Oil<Cr>', desc = 'Oil' },
         { '<leader><Cr>', '<Cmd>Oil --float<Cr>', desc = 'Oil' },
       },
       config = function()
@@ -1372,7 +1411,79 @@ require('lazy').setup(
       ---@type snacks.Config
       opts = {
         bigfile = { enabled = true },
-        dashboard = { enabled = false },
+        dashboard = {
+          enabled = false,
+          ---@class snacks.dashboard.Config
+          ---@field enabled? boolean
+          ---@field sections snacks.dashboard.Section
+          ---@field formats table<string, snacks.dashboard.Text|fun(item:snacks.dashboard.Item, ctx:snacks.dashboard.Format.ctx):snacks.dashboard.Text>
+          width = 60,
+          row = nil, -- dashboard position. nil for center
+          col = nil, -- dashboard position. nil for center
+          pane_gap = 4, -- empty columns between vertical panes
+          autokeys = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', -- autokey sequence
+          -- These settings are used by some built-in sections
+          preset = {
+            -- Defaults to a picker that supports `fzf-lua`, `telescope.nvim` and `mini.pick`
+            ---@type fun(cmd:string, opts:table)|nil
+            pick = nil,
+            -- Used by the `keys` section to show keymaps.
+            -- Set your custom keymaps here.
+            -- When using a function, the `items` argument are the default keymaps.
+            ---@type snacks.dashboard.Item[]
+            keys = {
+              { icon = ' ', key = 'f', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files')" },
+              { icon = ' ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
+              { icon = ' ', key = 'g', desc = 'Find Text', action = ":lua Snacks.dashboard.pick('live_grep')" },
+              { icon = ' ', key = 'r', desc = 'Recent Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
+              { icon = ' ', key = 'z', desc = 'Change Directory', action = ":lua Snacks.dashboard.pick('zoxide')" },
+              { icon = ' ', key = 'c', desc = 'Config', action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+              { icon = ' ', key = 's', desc = 'Restore Session', section = 'session' },
+              { icon = '󰒲 ', key = 'L', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
+              { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
+            },
+            -- Used by the `header` section
+            header = [[
+██       ██     ██ ██    ██    ███    ████████  ██     ██ ████ ██     ██ 
+██       ██     ██ ███   ██   ██ ██   ██     ██ ██     ██  ██  ███   ███ 
+██       ██     ██ ████  ██  ██   ██  ██     ██ ██     ██  ██  ████ ████ 
+██       ██     ██ ██ ██ ██ ██     ██ ████████  ██     ██  ██  ██ ███ ██ 
+██       ██     ██ ██  ████ █████████ ██   ██    ██   ██   ██  ██     ██ 
+██       ██     ██ ██   ███ ██     ██ ██    ██    ██ ██    ██  ██     ██ 
+████████  ███████  ██    ██ ██     ██ ██     ██    ███    ████ ██     ██ 
+]],
+          },
+          -- item field formatters
+          formats = {
+            icon = function(item)
+              if item.file and item.icon == 'file' or item.icon == 'directory' then
+                return M.icon(item.file, item.icon)
+              end
+              return { item.icon, width = 2, hl = 'icon' }
+            end,
+            footer = { '%s', align = 'center' },
+            header = { '%s', align = 'center' },
+            file = function(item, ctx)
+              local fname = vim.fn.fnamemodify(item.file, ':~')
+              fname = ctx.width and #fname > ctx.width and vim.fn.pathshorten(fname) or fname
+              if #fname > ctx.width then
+                local dir = vim.fn.fnamemodify(fname, ':h')
+                local file = vim.fn.fnamemodify(fname, ':t')
+                if dir and file then
+                  file = file:sub(-(ctx.width - #dir - 2))
+                  fname = dir .. '/…' .. file
+                end
+              end
+              local dir, file = fname:match '^(.*)/(.+)$'
+              return dir and { { dir .. '/', hl = 'dir' }, { file, hl = 'file' } } or { { fname, hl = 'file' } }
+            end,
+          },
+          sections = {
+            { section = 'header' },
+            { section = 'keys', gap = 1, padding = 1 },
+            { section = 'startup' },
+          },
+        },
         explorer = { enabled = true },
         indent = { enabled = true },
         input = { enabled = false },
@@ -1394,6 +1505,20 @@ require('lazy').setup(
       },
       keys = {
         -- Top Pickers & Explorer
+        {
+          '<leader>L',
+          function()
+            Snacks.dashboard.open()
+          end,
+          desc = 'Open Dashboard',
+        },
+
+        {
+          '<leader>l',
+          '<Cmd>Lazy<Cr>',
+          desc = 'Open Lazy',
+        },
+
         {
           '<leader><space>',
           function()
@@ -1928,8 +2053,7 @@ require('lazy').setup(
             Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map '<leader>uL'
             Snacks.toggle.diagnostics():map '<leader>ud'
             Snacks.toggle.line_number():map '<leader>ul'
-            Snacks.toggle.option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-                :map '<leader>uc'
+            Snacks.toggle.option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map '<leader>uc'
             Snacks.toggle.treesitter():map '<leader>uT'
             Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map '<leader>ub'
             Snacks.toggle.inlay_hints():map '<leader>uh'
