@@ -7,7 +7,10 @@ vim.keymap.set("n", "N", "Nzz", { silent = true, desc = "Previous Search Result"
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "Half Scroll Down and Center" })
 vim.keymap.set("n", "<C-u>", "<c-u>zz", { silent = true, desc = "Half Scroll Up and Center" })
 
--- Terminal
+---------------
+-- TERMINAL ---
+---------------
+
 ---- Normal Mode to Terminal
 vim.keymap.set({ "n", "t" }, "<A-/>", function()
   Snacks.terminal()
@@ -120,9 +123,11 @@ Snacks.toggle
   })
   :map("<leader>on")
 
---------------------------
--- Obsidian Daily Note ---
---------------------------
+---------------
+-- OBSIDIAN ---
+---------------
+
+-- Obsidian Daily Note
 vim.keymap.set("n", "<leader>ood", function()
   local current_date = os.date("%Y-%m-%d")
   local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
@@ -194,6 +199,7 @@ else
     })
   end, { silent = true, desc = "Snacks Picker Buffers" })
 end
+
 ----------------------
 -- NEOVIDE          --
 ----------------------
