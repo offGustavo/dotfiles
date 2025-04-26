@@ -36,4 +36,6 @@ return {
   { "shaunsingh/nord.nvim" },
 
   { "ellisonleao/gruvbox.nvim" },
+
+  { "SomeCoder99/darkslate.nvim", opts = {} },
 }
