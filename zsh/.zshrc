@@ -11,7 +11,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="josh" # set by `omz`
+ZSH_THEME="random" # set by `omz`
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -124,8 +124,8 @@ alias :v='nvim $(fzf)'
 # alias vi='nvim $(fzf)'
 alias :vf='zi && nvim'
 alias ni='zi && nvim'
-alias :s="zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim"
-alias mi="zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim"
+alias mi="SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)\n"
+alias :s="SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)\n"
 alias :sf="zi && tmux"
 alias ci="zi && tmux"
 alias :vl="tmux new-session nvim"
@@ -157,23 +157,24 @@ alias :e=vim
 # Edit File in Neovim
 alias :E=nvim
 
+# Nala aliases
+alias nala='sudo nala'
+alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
+
 # Fastfetch show on startup
 # eval 'colorscript -r'
 eval 'gengar'   
 
-# FZF defaults
+####################
+### FZF defaults ###
+####################
 
-  # --border=none \
-  # --border=rounded \
-  #
-  #
-  
   export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
     --info=inline-right \
     --ansi \
     --layout=reverse \
     --border=rounded \
-    --style=full \
+    --style=minimal \
     --margin=3% \
     --color=bg+:#1a1b26 \
     --color=bg:#16161e \
@@ -191,12 +192,15 @@ eval 'gengar'
     --color=scrollbar:#27a1b9 \
     --color=separator:#ff9e64 \
     --color=spinner:#ff007c \
-    --preview 'if [ -d {} ]; then exa -a -T --icons {}; else fzf-preview.sh {}; fi' \
+    --preview 'if [ -d {} ]; then exa -a -l --icons {}; else fzf-preview.sh {}; fi' \
     --multi  \
     --bind ctrl-q:toggle-all,alt-q:toggle-all \
     --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
       "
 
+
+# --border=none \
+# --border=rounded \
 # --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all  \
 # --preview ''
 # --preview 'if [ -d {} ]; then exa -a -T {}; else fzf-preview.sh {} {}; fi'
@@ -211,83 +215,14 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 #
 # export _ZO_FZF_OPTS="$_ZO_FZF_OPTS --style=minimal --preview='tree $(echo {} | awk -F'\t' '{print $2}')'"
 
-# Nala aliases
-alias nala='sudo nala'
-alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
 
-# Nala pacman style commands
-# nala() {
-#   package_name="$2"
-#   case "$1" in
-#     -S)
-#       [[ -n "$package_name" ]] && sudo nala install "$package_name"
-#       ;;
-#     -s)
-  #       [[ -n "$package_name" ]] && sudo nala search "$package_name"
-  #       ;;
-#     -Rs)
-  #       [[ -n "$package_name" ]] && sudo nala remove "$package_name"
-  #       ;;
-#     -Yc)
-  #       sudo nala autoremove
-  #       ;;
-#     install)
-  #       [[ -n "$package_name" ]] && sudo nala install "$package_name"
-  #       ;;
-#     remove)
-  #       [[ -n "$package_name" ]] && sudo nala remove "$package_name"
-  #       ;;
-#     purge)
-  #       [[ -n "$package_name" ]] && sudo nala purge "$package_name"
-  #       ;;
-#     search)
-  #       [[ -n "$package_name" ]] && sudo nala search "$package_name"
-  #       ;;
-#     show)
-  #       [[ -n "$package_name" ]] && sudo nala show "$package_name"
-  #       ;;
-#     list)
-  #       [[ -n "$package_name" ]] && command nala list "$package_name"
-  #       ;;
-#     history)
-  #       sudo nala history
-  #       ;;
-#     fetch)
-  #       sudo nala fetch
-  #       ;;
-#     clean)
-  #       sudo nala clean
-  #       ;;
-#     autoremove)
-  #       sudo nala autoremove
-  #       ;;
-#     autopurge)
-  #       sudo nala autopurge
-  #       ;;
-#     update)
-  #       sudo nala update
-  #       ;;
-#     upgrade)
-  #       sudo nala upgrade
-  #       ;;
-#     full-upgrade)
-  #       sudo nala full-upgrade
-  #       ;;
-#     "")
-  #       sudo nala update && sudo nala upgrade
-  #       ;;
-  #   esac
-  # }
+##############
+### KEYMAP ###
+##############
 
-# bindkey -s ^f "tmux-sessionizer\n"
+# Map Alt+o to create a new tmux session with zoxide directory picker
+SESSION_PRINT='{print $2}'
+bindkey -s '^[o' 'SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)\n'
+# Map Alt+u to picker open tmux session with fzf
+bindkey -s '^[u' 'SESSION=$(tmux list-sessions -F "#{session_name}" | fzf --no-preview) && [ -n "$SESSION" ] && tmux attach -t "$SESSION"\n'
 
-# # Definir a função para executar o comando
-# function execute_mi() {
-#   zi && tmux new-session nvim
-# }
-
-# Mapear Alt+o para criar uma nova sessão utilizando o zoxide
-bindkey -s '^[o' 'zi && SESSION=$(basename "$PWD") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION")\n'
-
-# Mapear Alt+i para conecar as sessões ativas do tmux
-bindkey -s '^[i' 'SESSION=$(tmux list-sessions -F "#{session_name}" | fzf --no-preview) && [ -n "$SESSION" ] && tmux attach -t "$SESSION"\n'
