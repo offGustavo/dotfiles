@@ -428,7 +428,7 @@ require('lazy').setup(
           { '<leader>b', group = '[B]uffer' },
           { '<leader>w', group = '[W]indow' },
           { '<leader>t', group = '[T]oggle' },
-          { '<leader>o', group = '[O]ptions', mode = { 'n' } },
+          { '<leader>o', group = '[O]ptions/Custom', mode = { 'n' } },
         },
       },
     },
@@ -1189,7 +1189,7 @@ require('lazy').setup(
       'stevearc/oil.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       keys = {
-        { '<leader>se', '<Cmd>Oil<Cr>', desc = 'Oil' },
+        { '<leader>oe', '<Cmd>Oil<Cr>', desc = 'Oil' },
         { '<leader><Cr>', '<Cmd>Oil --float<Cr>', desc = 'Oil' },
       },
       config = function()
@@ -2603,21 +2603,21 @@ local function git()
   }
 end
 
--- vim.o.laststatus = 3
+vim.o.laststatus = 3
 
--- local function Winbar()
---   local normal_color = '%#Normal#'
---   local mode = '%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}'
---   local file_name = '%-.16t'
---   local buf_nr = '[%n]'
---   local modified = ' %-m'
---   local file_type = ' %y'
---   local right_align = '%='
---   local line_no = '%10([%l/%L%)]'
---   local pct_thru_file = '%5p%%'
---   return string.format('%s%s', normal_color, file_name)
--- end
--- vim.opt.winbar = Winbar()
+local function Winbar()
+  local normal_color = '%#Normal#'
+  local mode = '%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}'
+  local file_name = '%-.16t'
+  local buf_nr = '[%n]'
+  local modified = ' %-m'
+  local file_type = ' %y'
+  local right_align = '%='
+  local line_no = '%10([%l/%L%)]'
+  local pct_thru_file = '%5p%%'
+  return string.format('%s%s%s', normal_color, file_name, modified)
+end
+vim.opt.winbar = Winbar()
 
 Statusline = {}
 
