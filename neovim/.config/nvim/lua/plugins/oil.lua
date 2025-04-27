@@ -72,7 +72,7 @@ return {
         ["<C-t>"] = { "actions.select", opts = { tab = true } },
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = { "actions.close", mode = "n" },
-        ["<Esc>"] = { "actions.close", mode = "n" },
+        ["<Esc><Esc>"] = { "actions.close", mode = "n" },
         ["<C-l>"] = "actions.refresh",
         ["-"] = { "actions.parent", mode = "n" },
         ["<Bs>"] = { "actions.parent", mode = "n" },
