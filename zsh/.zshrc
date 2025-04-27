@@ -115,6 +115,8 @@ alias zconf="$EDITOR ~/.zshrc"
 alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"'
 alias exa="exa --icons --git -l -G -h -a"
 
+# Edit File with Sudo
+alias svim='sudoedit'
 
 # neovim fzf inegration
 
