@@ -12,9 +12,10 @@ vim.keymap.set("n", "<C-u>", "<c-u>zz", { silent = true, desc = "Half Scroll Up 
 ---------------
 
 ---- Normal Mode to Terminal
-vim.keymap.set({ "n", "t" }, "<A-/>", function()
+vim.keymap.set({ "n", "t", "i", "v" }, "<A-/>", function()
   Snacks.terminal()
 end, { silent = true, desc = "Open Terminal" })
+
 vim.keymap.set("n", "<leader>tn", "<Cmd>terminal<Cr>", { silent = true, desc = "New Buffer Terminal" })
 vim.keymap.set("n", "<leader>tv", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
 vim.keymap.set("n", "<leader>ts", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
@@ -71,10 +72,6 @@ vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a")
 
 -- Normal mode in command line
 -- vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
-
-vim.keymap.set("n", "<S-Esc>", function()
-  Snacks.explorer()
-end, { silent = true, desc = "Toggle File Tree" })
 
 -- Diagnostic keymaps (quickstart keymaps)
 -- vim.keymap.set("n", "<leader>qf", vim.diagnostic.setloclist, { desc = "Open Diagnostic Quickfix List" })
@@ -158,6 +155,11 @@ else
   -----------------------------
   ---  REMAP DEFAULT PICKER ---
   -----------------------------
+  vim.keymap.set("n", "<S-Esc>", function()
+    Snacks.explorer({
+      hidden = true,
+    })
+  end, { silent = true, desc = "Toggle File Tree" })
   vim.keymap.set("n", "<leader>fa", function()
     Snacks.picker()
   end, { desc = "All Snacks Pickers" })
