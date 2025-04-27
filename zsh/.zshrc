@@ -279,17 +279,13 @@ alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
 
 # bindkey -s ^f "tmux-sessionizer\n"
 
-#
 # # Definir a função para executar o comando
 # function execute_mi() {
 #   zi && tmux new-session nvim
 # }
-#
-# # Mapear Alt+O para executar a função
-# bindkey -s '^[i' "zi && tmux new-session -s \$(basename \"\$PWD\") nvim\n"
-bindkey -s '^[o' "zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim\n"
-# bindkey -s '^[i' "zi && SESSION=\$(basename \"\$PWD\") && tmux has-session -t \"\$SESSION\" 2>/dev/null && tmux attach-session -t \"\$SESSION\" || tmux new-session -s \"\$SESSION\" nvim\n"
-#
-#p
-# bindkey -s '^[c' zi
-# bindkey -s '^[u' "tmux attach -t $(tmux list-session -F '#{session_name}' | fzf --no-preview )" 
+
+# Mapear Alt+o para criar uma nova sessão utilizando o zoxide
+bindkey -s '^[o' 'zi && SESSION=$(basename "$PWD") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION")\n'
+
+# Mapear Alt+i para conecar as sessões ativas do tmux
+bindkey -s '^[i' 'SESSION=$(tmux list-sessions -F "#{session_name}" | fzf --no-preview) && [ -n "$SESSION" ] && tmux attach -t "$SESSION"\n'
