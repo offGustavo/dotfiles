@@ -21,7 +21,7 @@ return {
       desc = "Flash",
     },
     {
-      "sS",
+      "st",
       mode = { "n", "o", "x" },
       function()
         require("flash").treesitter()
