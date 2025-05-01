@@ -163,7 +163,11 @@ alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
 
 # Fastfetch show on startup
 # eval 'colorscript -r'
-eval 'gengar'   
+distro_gengar=$(grep '^id=' /etc/os-release | cut -d'=' -f2)
+# verifica se é arch linux e executa o comando
+if [[ "$distro_gengar" == "arch" ]]; then
+    eval gengar
+fi
 
 ####################
 ### FZF defaults ###
