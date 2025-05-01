@@ -14,6 +14,9 @@ set path=**
 " set wildoptions=pum
 set showcmd
 set nocompatible
+"set clipboard+=unnamedplus
+
+
 
 " Set cursor to line in insert mode
 let &t_SI = "\e[5 q"
