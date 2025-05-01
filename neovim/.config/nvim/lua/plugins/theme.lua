@@ -70,7 +70,6 @@ return {
             colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
           end,
         })
-        vim.cmd("colorscheme default")
         vim.cmd("colorscheme tokyonight-night")
       end, { desc = "Turn on opacity" })
 
@@ -85,7 +84,6 @@ return {
             colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
           end,
         })
-        vim.cmd("colorscheme default")
         vim.cmd("colorscheme tokyonight-night")
       end, { desc = "Turn off opacity" })
     end,
