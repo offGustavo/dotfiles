@@ -11,7 +11,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="random" # set by `omz`
+ZSH_THEME="smt" # set by `omz`
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -163,11 +163,11 @@ alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
 
 # Fastfetch show on startup
 # eval 'colorscript -r'
-distro_gengar=$(grep '^id=' /etc/os-release | cut -d'=' -f2)
-# verifica se é arch linux e executa o comando
-if [[ "$distro_gengar" == "arch" ]]; then
+# distro_gengar=$(grep '^id=' /etc/os-release | cut -d'=' -f2)
+# # verifica se é arch linux e executa o comando
+# if [[ "$distro_gengar" == "arch" ]]; then
     eval gengar
-fi
+# fi
 
 ####################
 ### FZF defaults ###
