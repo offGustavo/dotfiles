@@ -151,6 +151,7 @@ if vim.g.vscode then
   vim.keymap.set("n", "<leader>gg", "<Cmd>call VSCodeNotify('lazygit.openLazygit')<CR>")
   vim.keymap.set("n", "gd", "<Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>")
   vim.keymap.set("n", "gr", "<Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>")
+  vim.o.showmode = true
 else
   -----------------------------
   ---  REMAP DEFAULT PICKER ---
