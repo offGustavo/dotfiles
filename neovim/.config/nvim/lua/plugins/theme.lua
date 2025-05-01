@@ -5,7 +5,7 @@ return {
     opts = {
       dim_inactive = false,
       style = "night",
-      transparent = false,
+      transparent = true,
       styles = {
         sidebars = "transparent",
         floats = "transparent",
@@ -25,68 +25,6 @@ return {
         -- vim.api.nvim_set_hl(0, "BufferLineCloseButton", { bg = "none" })
       end,
     },
-    config = function()
-      -- Tokyonight_night_transparency = false
-      -- vim.keymap.set("n", "<leader>ou", function()
-      --   if Tokyonight_night_transparency then
-      --     require("tokyonight").setup({
-      --       transparent = false,
-      --       styles = {
-      --         sidebars = "transparent",
-      --         floats = "transparent",
-      --       },
-      --       on_colors = function(colors)
-      --         colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
-      --       end,
-      --     })
-      --     vim.cmd("colorscheme default")
-      --     vim.cmd("colorscheme tokyonight-night")
-      --     Tokyonight_night_transparency = false
-      --   else
-      --     require("tokyonight").setup({
-      --       transparent = false,
-      --       styles = {
-      --         sidebars = "transparent",
-      --         floats = "transparent",
-      --       },
-      --       on_colors = function(colors)
-      --         colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
-      --       end,
-      --     })
-      --     vim.cmd("colorscheme default")
-      --     vim.cmd("colorscheme tokyonight-night")
-      --     Tokyonight_night_transparency = true
-      --   end
-      -- end, { desc = "Turn on opacity" })
-
-      vim.keymap.set("n", "<leader>ou", function()
-        require("tokyonight").setup({
-          transparent = true,
-          styles = {
-            sidebars = "transparent",
-            floats = "transparent",
-          },
-          on_colors = function(colors)
-            colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
-          end,
-        })
-        vim.cmd("colorscheme tokyonight-night")
-      end, { desc = "Turn on opacity" })
-
-      vim.keymap.set("n", "<leader>oU", function()
-        require("tokyonight").setup({
-          transparent = false,
-          styles = {
-            sidebars = "transparent",
-            floats = "transparent",
-          },
-          on_colors = function(colors)
-            colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
-          end,
-        })
-        vim.cmd("colorscheme tokyonight-night")
-      end, { desc = "Turn off opacity" })
-    end,
   },
 
   { "catppuccin/nvim", name = "catppuccin" },
