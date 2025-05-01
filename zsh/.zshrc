@@ -124,8 +124,8 @@ alias :v='nvim $(fzf)'
 # alias vi='nvim $(fzf)'
 alias :vf='zi && nvim'
 alias ni='zi && nvim'
-alias mi='SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)\n'
-alias :s='SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)\n'
+alias mi='SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)'
+alias :s='SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)'
 alias :sf="zi && tmux"
 alias ci="zi && tmux"
 alias :vl="tmux new-session nvim"
@@ -174,7 +174,7 @@ eval 'gengar'
     --ansi \
     --layout=reverse \
     --border=rounded \
-    --style=minimal \
+    --style=full \
     --margin=3% \
     --color=bg+:#1a1b26 \
     --color=bg:#16161e \
