@@ -1,15 +1,15 @@
 #!/bin/bash
 
 # Obtém a lista de dispositivos de saída de áudio
-sinks=$(pactl list short sinks | awk '{print $1" "$2}')
+sinks=$(pactl list sinks | awk ' /^\s*Name:/ { name = substr($0, index($0, $2)) } /^\s*Description:/ { desc = substr($0, index($0, $2)); print desc " [" name "]"; } ')
 
-# Usa o fuzzel --config $HOME/.config/hypr/fuzzel/fuzzel.ini  no modo dmenu para selecionar a saída de som
-selected_sink=$(echo "$sinks" | fuzzel --config $HOME/.config/hypr/fuzzel/fuzzel.ini --dmenu -p "Sound: " | awk '{print $2}')
+# Usa o fuzzel no modo dmenu para selecionar a saída de som
+selected_sink=$(echo "$sinks" | fuzzel -d | awk -F'[][]' '{ print $2 }')
 
 # Se um dispositivo foi selecionado, define como saída padrão
 if [ -n "$selected_sink" ]; then
   pactl set-default-sink "$selected_sink"
-  notify-send "Saída de áudio alterada para: $selected_sink"
+  # notify-send "Saída de áudio alterada para: $selected_sink"
 else
   notify-send "Nenhuma saída de áudio selecionada"
 fi
