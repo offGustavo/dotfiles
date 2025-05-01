@@ -2605,19 +2605,19 @@ end
 
 vim.o.laststatus = 3
 
-local function Winbar()
-  local normal_color = '%#Normal#'
-  local mode = '%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}'
-  local file_name = '%-.16t'
-  local buf_nr = '[%n]'
-  local modified = ' %-m'
-  local file_type = ' %y'
-  local right_align = '%='
-  local line_no = '%10([%l/%L%)]'
-  local pct_thru_file = '%5p%%'
-  return string.format('%s%s%s', normal_color, file_name, modified)
-end
-vim.opt.winbar = Winbar()
+-- local function Winbar()
+--   local normal_color = '%#Normal#'
+--   local mode = '%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}'
+--   local file_name = '%-.16t'
+--   local buf_nr = '[%n]'
+--   local modified = ' %-m'
+--   local file_type = ' %y'
+--   local right_align = '%='
+--   local line_no = '%10([%l/%L%)]'
+--   local pct_thru_file = '%5p%%'
+--   return string.format('%s%s%s', normal_color, file_name, modified)
+-- end
+-- vim.opt.winbar = Winbar()
 
 Statusline = {}
 
