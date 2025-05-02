@@ -96,6 +96,8 @@ vim.keymap.set(
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste Without Copy" })
 vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Executable" })
 
+vim.keymap.set("n", "<leader>fX", ":!%<Cr>", { desc = "Execute File" })
+
 -- Remove Lazyvim default keymap
 vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
@@ -130,8 +132,6 @@ vim.keymap.set("n", "<leader>ood", function()
   local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
   vim.cmd("e " .. daily_note_date)
 end, { desc = "Daily Note" })
-
--- -- Obsidian Commit
 -- vim.keymap.set("n", "<leader>ooc", function()
 --   local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
 --   local commit_date = "vault backup: " .. current_date_and_time
