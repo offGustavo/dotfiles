@@ -11,13 +11,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="smt" # set by `omz`
+ZSH_THEME="random" # set by `omz`
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
-ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "josh" "smt" "example")
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "josh" "smt" "example")
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -124,8 +124,8 @@ alias :v='nvim $(fzf)'
 # alias vi='nvim $(fzf)'
 alias :vf='zi && nvim'
 alias ni='zi && nvim'
-alias mi='SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)'
-alias :s='SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)'
+alias mi='SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION")'
+alias :s='SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION")'
 alias :sf="zi && tmux"
 alias ci="zi && tmux"
 alias :vl="tmux new-session nvim"
@@ -226,7 +226,7 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 
 # Map Alt+o to create a new tmux session with zoxide directory picker
 SESSION_PRINT='{print $2}'
-bindkey -s '^[o' 'SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)\n'
+bindkey -s '^[o' 'SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION")\n'
 # Map Alt+u to picker open tmux session with fzf
 bindkey -s '^[u' 'SESSION=$(tmux list-sessions -F "#{session_name}" | fzf --no-preview) && [ -n "$SESSION" ] && tmux attach -t "$SESSION"\n'
 
