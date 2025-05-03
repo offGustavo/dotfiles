@@ -98,6 +98,8 @@ vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Execut
 
 vim.keymap.set("n", "<leader>fX", ":!%<Cr>", { desc = "Execute File" })
 
+vim.keymap.set("n", "<leader>m", "`", { desc = "Go to Marks" })
+
 -- Remove Lazyvim default keymap
 vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
