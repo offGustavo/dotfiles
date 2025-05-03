@@ -167,21 +167,21 @@ Plug 'junegunn/fzf.vim'
 " Plug 'tpope/vim-fugitive'
 call plug#end()
 
-" function! Search() abort
-" 	let l:tempname = tempname()
-" 	" fzf | awk '{ print $1":1:0" }' > file
-"    execute 'silent !fzf --style minimal --no-border --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-"    " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-" try
-" 		execute 'cfile ' . l:tempname
-" 		redraw!
-" 	finally
-" 		call delete(l:tempname)
-" 	endtry
-" endfunction
-" " :SearchFiles
-" command! SearchFiles call Search()
-" nnoremap <space>ff :SearchFiles<cr>
+function! Search() abort
+	let l:tempname = tempname()
+	" fzf | awk '{ print $1":1:0" }' > file
+   execute 'silent !fzf --style minimal --no-border --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+   " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+try
+		execute 'cfile ' . l:tempname
+		redraw!
+	finally
+		call delete(l:tempname)
+	endtry
+endfunction
+" :SearchFiles
+command! SearchFiles call Search()
+nnoremap <space>ff :SearchFiles<cr>
 
 " FZF config
 " " Initialize configuration dictionary
