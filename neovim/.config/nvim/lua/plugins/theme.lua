@@ -5,7 +5,7 @@ return {
     opts = {
       dim_inactive = false,
       style = "night",
-      transparent = true,
+      transparent = false,
       styles = {
         sidebars = "transparent",
         floats = "transparent",
