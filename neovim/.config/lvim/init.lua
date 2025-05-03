@@ -1259,10 +1259,9 @@ require('lazy').setup(
             ['<C-t>'] = { 'actions.select', opts = { tab = true } },
             ['<C-p>'] = 'actions.preview',
             ['<C-c>'] = { 'actions.close', mode = 'n' },
-            ['q'] = { 'actions.close', mode = 'n' },
+            ['<Esc><Esc>'] = { 'actions.close', mode = 'n' },
             ['<C-l>'] = 'actions.refresh',
             ['-'] = { 'actions.parent', mode = 'n' },
-            -- TODO: Change backspaces name
             ['<Bs>'] = { 'actions.parent', mode = 'n' },
             ['_'] = { 'actions.open_cwd', mode = 'n' },
             ['`'] = { 'actions.cd', mode = 'n' },
@@ -2064,15 +2063,6 @@ require('lazy').setup(
       end,
     },
 
-    -- -- Java LSP PLugin
-    -- {
-    --   'nvim-java/nvim-java',
-    --   config = function()
-    --     require('java').setup()
-    --     require('lspconfig').jdtls.setup {}
-    --   end,
-    -- },
-
     -- Themes
     {
       'sponkurtus2/angelic.nvim',
@@ -2454,6 +2444,8 @@ if vim.g.neovide then
     print('Font Size: ' .. FontSize)
   end, { desc = 'Restore Font Size in neovide', silent = true })
 end
+
+vim.o.updatetime = 50
 
 -- Statusline
 
