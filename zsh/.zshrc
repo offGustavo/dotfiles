@@ -73,7 +73,7 @@ ZSH_THEME="smt" # set by `omz`
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode tmux)
+plugins=(git vi-mode)
 
 # Init Oh My Zsh
 source $ZSH/oh-my-zsh.sh
