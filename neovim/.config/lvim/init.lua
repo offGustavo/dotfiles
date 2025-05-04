@@ -280,6 +280,8 @@ vim.keymap.set('n', '<C-A-l>', '<C-w>>', { desc = 'Move window to the right' })
 vim.keymap.set('n', '<C-A-j>', '<C-w>+', { desc = 'Move window to the lower' })
 vim.keymap.set('n', '<C-A-k>', '<C-w>-', { desc = 'Move window to the upper' })
 
+vim.keymap.set('n', '<leader>m', '`', { desc = 'Go to Mark' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommnds`
 
