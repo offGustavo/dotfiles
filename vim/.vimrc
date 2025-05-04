@@ -59,6 +59,20 @@ let &t_EI = "\e[2 q"
 let g:netrw_banner = 0
 let g:netrw_liststyle = 0
 
+" Better Marks
+nmap <space>m `
+nmap <space>M '
+nmap <space>1 `1
+nmap <space>2 `2
+nmap <space>3 `3
+nmap <space>4 `4
+nmap <space>5 `5
+nmap <space>6 `6
+nmap <space>7 `7
+nmap <space>8 `8
+nmap <space>9 `9
+nmap <space>0 `0
+
 " vimrc
 nmap <space>rr :so ~/.vimrc<Cr>
 nmap <space>fc :e ~/.vimrc<Cr>
