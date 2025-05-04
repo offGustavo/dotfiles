@@ -27,15 +27,15 @@ return {
     },
   },
 
-  { "catppuccin/nvim", name = "catppuccin" },
+  { "catppuccin/nvim", name = "catppuccin", lazy = true },
 
-  { "rebelot/kanagawa.nvim", name = "kanagawa" },
+  { "rebelot/kanagawa.nvim", name = "kanagawa", lazy = true },
 
-  { "rose-pine/neovim" },
+  { "rose-pine/neovim", lazy = true },
 
-  { "shaunsingh/nord.nvim" },
+  { "shaunsingh/nord.nvim", lazy = true },
 
-  { "ellisonleao/gruvbox.nvim" },
+  { "ellisonleao/gruvbox.nvim", lazy = true },
 
-  { "SomeCoder99/darkslate.nvim", opts = {} },
+  { "SomeCoder99/darkslate.nvim", lazy = true },
 }
