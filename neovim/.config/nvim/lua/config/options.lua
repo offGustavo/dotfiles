@@ -11,6 +11,8 @@ vim.o.wrap = false
 
 vim.o.list = false
 
+-- vim.o.swapfile = false
+
 vim.opt.spelllang = { "pt_br", "en_us", "es" }
 
 -- local function Winbar()
