@@ -134,12 +134,12 @@ vim.keymap.set("n", "<leader>ood", function()
   local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
   vim.cmd("e " .. daily_note_date)
 end, { desc = "Daily Note" })
--- vim.keymap.set("n", "<leader>ooc", function()
---   local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
---   local commit_date = "vault backup: " .. current_date_and_time
---   print(commit_date)
---   -- vim.cmd("e " .. daily_note_date)
--- end, { desc = "Daily Note" })
+
+vim.keymap.set("n", "<leader>ooc", function()
+  local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
+  local commit_date = "vault backup: " .. current_date_and_time
+  vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '" && git push')
+end, { desc = "Commit All Changes" })
 
 ----------------------
 -- VS CODE CONFIG  ---
