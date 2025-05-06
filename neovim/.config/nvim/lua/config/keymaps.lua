@@ -83,6 +83,9 @@ vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a")
 -- vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { desc = "Close Quickfix List" })
 
 --- ThePrimeagen Keymaps
+
+vim.keymap.set("i", "<C-c>", "<Esc>")
+
 vim.keymap.set(
   "n",
   "<leader>s/",
