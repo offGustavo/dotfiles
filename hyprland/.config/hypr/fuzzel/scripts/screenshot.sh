@@ -1,18 +1,18 @@
 #!/bin/bash
 
-CHOOSE=$(echo -e "Selecionar(Clipboard)\nSelecionar(Salvar)\nMonitor(Clipboard)\nMonitor(Salvar)" | fuzzel -d)
+CHOOSE=$(echo -e "Selecionar(Clipboard) Super+Shift+s\nSelecionar(Salvar) Super+Shift+Control+s\nMonitor(Clipboard) Super+Alt+s\nMonitor(Salvar) Super+Control+s" | fuzzel -d)
 
 case "$CHOOSE" in
-"Selecionar(Clipboard)")
+"Selecionar(Clipboard) Super+Shift+s")
   hyprshot -m region --clipboard-only
   ;;
-"Selecionar(Salvar)")
+"Selecionar(Salvar) Super+Shift+Control+s")
   hyprshot -m region -o ~/Pictures/Screenshots/Hyprshot
   ;;
-"Monitor(Clipboard)")
+"Monitor(Clipboard) Super+Alt+s")
   hyprshot -m monitor --clipboard-only
   ;;
-"Monitor(Salvar)")
+"Monitor(Salvar) Super+Control+s")
   hyprshot -m monitor -o ~/Pictures/Screenshots/Hyprshot
   ;;
 esac
