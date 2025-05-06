@@ -2447,9 +2447,8 @@ if vim.g.neovide then
   end, { desc = 'Restore Font Size in neovide', silent = true })
 end
 
-vim.o.updatetime = 50
-
 -- Statusline
+vim.o.updatetime = 50
 
 local modes = {
   ['n'] = 'NORMAL',
