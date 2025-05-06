@@ -6,6 +6,8 @@ vim.keymap.set({ "n", "v" }, "n", "nzz", { silent = true, desc = "Next Search Re
 vim.keymap.set("n", "N", "Nzz", { silent = true, desc = "Previous Search Result" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "Half Scroll Down and Center" })
 vim.keymap.set("n", "<C-u>", "<c-u>zz", { silent = true, desc = "Half Scroll Up and Center" })
+vim.keymap.set("n", ">", ">gv", { silent = true, desc = "Half Scroll Up and Center" })
+vim.keymap.set("n", "<", "<gv", { silent = true, desc = "Half Scroll Up and Center" })
 
 ---------------
 -- TERMINAL ---
