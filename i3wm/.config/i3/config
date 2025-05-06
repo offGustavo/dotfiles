@@ -7,7 +7,7 @@ set $alt Mod1
 
 set $scripts ~/.config/i3/scripts
 
-set $terminal alacritty
+set $terminal kitty
 
 # # Minimal Theme
 # set $fg #ffffff
