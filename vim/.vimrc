@@ -15,8 +15,7 @@ set path=**
 set showcmd
 set nocompatible
 "set clipboard+=unnamedplus
-
-
+let mapleader="\ "  
 
 " Set cursor to line in insert mode
 let &t_SI = "\e[5 q"
@@ -60,22 +59,22 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 0
 
 " Better Marks
-nmap <space>m `
-nmap <space>M '
-nmap <space>1 `1
-nmap <space>2 `2
-nmap <space>3 `3
-nmap <space>4 `4
-nmap <space>5 `5
-nmap <space>6 `6
-nmap <space>7 `7
-nmap <space>8 `8
-nmap <space>9 `9
-nmap <space>0 `0
+nmap <leader>m `
+nmap <leader>M '
+nmap <leader>1 `1
+nmap <leader>2 `2
+nmap <leader>3 `3
+nmap <leader>4 `4
+nmap <leader>5 `5
+nmap <leader>6 `6
+nmap <leader>7 `7
+nmap <leader>8 `8
+nmap <leader>9 `9
+nmap <leader>0 `0
 
 " vimrc
-nmap <space>rr :so ~/.vimrc<Cr>
-nmap <space>fc :e ~/.vimrc<Cr>
+nmap <leader>rr :so ~/.vimrc<Cr>
+nmap <leader>fc :e ~/.vimrc<Cr>
 
 " " Clean Search Highligth
 " nmap <Esc> :noh<Cr>
@@ -85,30 +84,30 @@ nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
-nmap <space>w <C-w>
+nmap <leader>w <C-w>
 
 " Grep
-nmap <space>sg :grep -R  .<Left><Left>
-nmap <space>sG :grep
+nmap <leader>sg :grep -R  .<Left><Left>
+nmap <leader>sG :grep
 
 "Buffers 
 nmap [b :bp!<Cr>
 nmap ]b :bn!<Cr>
-nmap <space>sb :ls<Cr> :b! 
+nmap <leader>sb :ls<Cr> :b! 
 
 " Vim File Explorer
-nmap <space><Cr> :Ex<Cr>
+nmap <leader><Cr> :Ex<Cr>
 
 " Command Line in Vi-Mode
-" nmap <space>; :<C-f>
+" nmap <leader>; :<C-f>
 
 " Text Managment
 vmap <S-k> :m '<-2<CR>gv=gv
 vmap <S-j> :m '>+1<CR>gv=gv
 
 " Word Substitution
-nmap <space>s/ :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
-nmap <space>s. :s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+nmap <leader>s/ :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+nmap <leader>s. :s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
 " Text Movement 
 nmap <C-d> <C-d>zz
@@ -141,7 +140,7 @@ execute "set <M-char-100>=\ed"
 imap <M-char-100> <C-o>dw
 
 " Vim Terminal
-nmap <space>tn :ter<Cr><C-w>j:w<Cr><C-w>c
+nmap <leader>tn :ter<Cr><C-w>j:w<Cr><C-w>c
 tmap <Esc><Esc> <C-\><C-n>
 tmap <C-h> <C-w>h
 tmap <C-j> <C-w>j
@@ -160,7 +159,7 @@ function! ToggleQuickFix()
         cclose
     endif
 endfunction
-nnoremap <silent> <space>xq :call ToggleQuickFix()<cr>
+nnoremap <silent> <leader>xq :call ToggleQuickFix()<cr>
 
 " Install vim-plug if not found
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -195,7 +194,7 @@ try
 endfunction
 " :SearchFiles
 command! SearchFiles call Search()
-nnoremap <space>ff :SearchFiles<cr>
+nnoremap <leader>ff :SearchFiles<cr>
 
 " FZF config
 " " Initialize configuration dictionary
@@ -208,15 +207,15 @@ nnoremap <space>ff :SearchFiles<cr>
 " let g:fzf_vim.buffers_options = ['--style', 'minimal', '--border-label', ' Open Buffers ']
 
 " Fzf Find Word
-nmap <space>sw :RG <C-r><C-w><Cr>
+nmap <leader>sw :RG <C-r><C-w><Cr>
 " Fzf Grep 
-nmap <space>/ :RG<Cr>
+nmap <leader>/ :RG<Cr>
 " Ffz Find Files
-nmap <space><space> :Files<Cr>
+nmap <leader><space> :Files<Cr>
 " Fzf Buffers
-nmap <space>, :Buffers<Cr>
+nmap <leader>, :Buffers<Cr>
 " Fzf Colors
-nmap <space>uC :Colors<Cr>
+nmap <leader>uC :Colors<Cr>
 
 " Theme Settings
 set termguicolors
