@@ -21,7 +21,7 @@ if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
 fi
 
 if ! tmux has-session -t=$selected_name 2>/dev/null; then
-  tmux new-session -ds $selected_name -c $selected_path
+  tmux new-session -ds $selected_name -c $selected_path nvim
 fi
 
 tmux switch-client -t $selected_name
