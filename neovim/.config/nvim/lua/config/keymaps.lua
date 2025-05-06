@@ -99,6 +99,7 @@ vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste Without Copy" })
 vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Executable" })
 
 vim.keymap.set("n", "<leader>fX", ":!%<Cr>", { desc = "Execute File" })
+vim.keymap.set("n", "<leader>fs", ":so %<Cr>", { desc = "Source File" })
 
 vim.keymap.set("n", "<leader>m", "`", { desc = "Go to Marks" })
 
