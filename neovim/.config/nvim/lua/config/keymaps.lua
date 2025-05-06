@@ -153,6 +153,15 @@ if vim.g.vscode then
   vim.keymap.set("n", "<leader>gg", "<Cmd>call VSCodeNotify('lazygit.openLazygit')<CR>")
   vim.keymap.set("n", "gd", "<Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>")
   vim.keymap.set("n", "gr", "<Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>")
+  vim.keymap.set("n", "<leader>1", "`1")
+  vim.keymap.set("n", "<leader>2", "`2")
+  vim.keymap.set("n", "<leader>3", "`3")
+  vim.keymap.set("n", "<leader>4", "`4")
+  vim.keymap.set("n", "<leader>5", "`5")
+  vim.keymap.set("n", "<leader>6", "`6")
+  vim.keymap.set("n", "<leader>7", "`7")
+  vim.keymap.set("n", "<leader>8", "`8")
+  vim.keymap.set("n", "<leader>9", "`9")
   vim.o.showmode = true
 else
   -----------------------------
