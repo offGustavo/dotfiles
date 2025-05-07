@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Install my programs
+sudo pacman -S --noconfirm gnome zsh neovim fzf tmux git stow zen-browser
+
+git clone https://github.com/offGustavo/dotfiles ~/
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 echo "Setting Super+{1..9} To move to Workspace"
 for i in {1..9}; do gsettings set "org.gnome.desktop.wm.keybindings" "switch-to-workspace-$i" "['<Super>$i']"; done
 
@@ -15,4 +22,4 @@ gsettings set "org.gnome.desktop.wm.keybindings" "move-to-workspace-10" "['<Supe
 echo "Setting Super+Alt+{1..9} To switch to Application"
 for i in {1..9}; do gsettings set "org.gnome.shell.keybindings" "switch-to-application-$i" "['<Super><Alt>$i']"; done
 
-printf "Finish Config Processs\n\tEnjoy your gnome"
+printf "I use Arch btw"
