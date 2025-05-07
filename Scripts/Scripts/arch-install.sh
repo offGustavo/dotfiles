@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S --noconfirm gnome kitty zsh neovim fzf tmux git stow zen-browser
+sudo pacman -S --noconfirm gnome kitty zsh neovim fzf tmux git stow zen-browser ttf-jetbrains-mono
 
 git clone https://github.com/offGustavo/dotfiles ~/
 
