@@ -1,15 +1,26 @@
 return {
-  {
-    "nvim-java/nvim-java",
-    config = function()
-      require("java").setup()
-      require("lspconfig").jdtls.setup({})
-    end,
-    keys = {
-      { "<leader>cjr", "<Cmd>JavaRunnerRunMain<Cr>", { desc = "Run Main" } },
-      { "<leader>cjs", "<Cmd>JavaRunnerStopMain<Cr>", { desc = "Stop Main" } },
-    },
-  },
+  -- {
+  --   "nvim-java/nvim-java",
+  --   config = function()
+  --     require("java").setup({
+  --
+  --       jdtls = {
+  --         version = "v1.43.0",
+  --       },
+  --
+  --       jdk = {
+  --         -- install jdk using mason.nvim
+  --         auto_install = true,
+  --         version = "21.0.7",
+  --       },
+  --     })
+  --     require("lspconfig").jdtls.setup({})
+  --   end,
+  --   keys = {
+  --     -- { "<leader>cjr", "<Cmd>JavaRunnerRunMain<Cr>", { desc = "Run Main" } },
+  --     -- { "<leader>cjs", "<Cmd>JavaRunnerStopMain<Cr>", { desc = "Stop Main" } },
+  --   },
+  -- },
   -- {
   --   "JavaHello/spring-boot.nvim",
   --   ft = "java",
@@ -20,5 +31,14 @@ return {
   --   config = function()
   --     require("spring_boot").setup({})
   --   end,
+  -- },
+  --
+  -- {
+  --   "neoclide/coc.nvim",
+  --   branch = "release",
+  -- },
+  --
+  -- {
+  --   "mfussenegger/nvim-jdtls",
   -- },
 }
