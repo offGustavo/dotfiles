@@ -1,9 +1,12 @@
 #!/bin/bash
 
-# Install my programs
-sudo pacman -S --noconfirm gnome zsh neovim fzf tmux git stow zen-browser
+sudo pacman -S --noconfirm gnome kitty zsh neovim fzf tmux git stow zen-browser
 
 git clone https://github.com/offGustavo/dotfiles ~/
+
+cd ~/dotfiles/
+
+stow neovim kitty zsh Xcompose tmux Scripts
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
