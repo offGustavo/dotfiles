@@ -242,13 +242,21 @@ config.keys = {
 	{ key = "<", mods = "ALT|SHIFT", action = act.MoveTabRelative(-1) },
 	{ key = ">", mods = "ALT|SHIFT", action = act.MoveTabRelative(1) },
 
+	-- Zoom
+	{ key = "z", mods = "ALT", action = act.TogglePaneZoomState },
 	-- Manage Windows
 	{ key = "s", mods = "ALT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "v", mods = "ALT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	-- Move
 	{ key = "h", mods = "ALT", action = act.ActivatePaneDirection("Left") },
 	{ key = "l", mods = "ALT", action = act.ActivatePaneDirection("Right") },
 	{ key = "k", mods = "ALT", action = act.ActivatePaneDirection("Up") },
 	{ key = "j", mods = "ALT", action = act.ActivatePaneDirection("Down") },
+	-- Resize
+	{ key = "h", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Left", 1 }) },
+	{ key = "l", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Right", 1 }) },
+	{ key = "k", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Up", 1 }) },
+	{ key = "j", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Down", 1 }) },
 }
 
 config.key_tables = {
@@ -259,6 +267,7 @@ config.key_tables = {
 	-- 'resize_pane' here corresponds to the name="resize_pane" in
 	-- the key assignments above.
 	resize_pane = {
+
 		{ key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 1 }) },
 		{ key = "h", action = act.AdjustPaneSize({ "Left", 1 }) },
 
@@ -292,23 +301,24 @@ config.key_tables = {
 		{ key = "j", action = act.ActivatePaneDirection("Down") },
 	},
 
-	-- Seach mode
-	search_mode = {
-		{ key = "y", mods = "NONE", action = act.CopyMode("PriorMatch") },
-		{ key = "Escape", mods = "NONE", action = act.CopyMode("Close") },
-		{ key = "n", mods = "NONE", action = act.CopyMode("NextMatch") },
-		{ key = "N", mods = "NONE", action = act.CopyMode("PriorMatch") },
-		{ key = "n", mods = "SHIFT", action = act.CopyMode("PriorMatch") },
-		-- { key = "r", mods = "CTRL", action = act.CopyMode("CycleMatchType") },
-		-- { key = "u", mods = "CTRL", action = act.CopyMode("ClearPattern") },
-		-- { key = "PageUp", mods = "NONE", action = act.CopyMode("PriorMatchPage") },
-		-- { key = "PageDown", mods = "NONE", action = act.CopyMode("NextMatchPage") },
-		-- { key = "UpArrow", mods = "NONE", action = act.CopyMode("PriorMatch") },
-		-- { key = "DownArrow", mods = "NONE", action = act.CopyMode("NextMatch") },
-	},
+	-- -- Seach mode
+	-- search_mode = {
+	-- 	{ key = "y", mods = "NONE", action = act.CopyMode("PriorMatch") },
+	-- 	{ key = "Escape", mods = "NONE", action = act.CopyMode("Close") },
+	-- 	{ key = "n", mods = "NONE", action = act.CopyMode("NextMatch") },
+	-- 	{ key = "N", mods = "NONE", action = act.CopyMode("PriorMatch") },
+	-- 	{ key = "n", mods = "SHIFT", action = act.CopyMode("PriorMatch") },
+	-- 	-- { key = "r", mods = "CTRL", action = act.CopyMode("CycleMatchType") },
+	-- 	-- { key = "u", mods = "CTRL", action = act.CopyMode("ClearPattern") },
+	-- 	-- { key = "PageUp", mods = "NONE", action = act.CopyMode("PriorMatchPage") },
+	-- 	-- { key = "PageDown", mods = "NONE", action = act.CopyMode("NextMatchPage") },
+	-- 	-- { key = "UpArrow", mods = "NONE", action = act.CopyMode("PriorMatch") },
+	-- 	-- { key = "DownArrow", mods = "NONE", action = act.CopyMode("NextMatch") },
+	-- },
 }
 
 local unused = {
+
 	keys = {
 		{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
 		{ key = "Tab", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
