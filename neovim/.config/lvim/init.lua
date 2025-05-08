@@ -189,22 +189,34 @@ vim.keymap.set('n', '<leader>wt', ':ter<cr>', { desc = 'new terminal' })
 vim.keymap.set('v', '<S-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'Move Line Up' })
 vim.keymap.set('v', '<S-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'Move Line Down' })
 
+-- tabs
+vim.keymap.set('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
+vim.keymap.set('n', '<leader><tab>o', '<cmd>tabonly<cr>', { desc = 'Close Other Tabs' })
+vim.keymap.set('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
+vim.keymap.set('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
+vim.keymap.set('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
+vim.keymap.set('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
+vim.keymap.set('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+
 vim.keymap.set('n', ']q', '<cmd>cnext<cr>', { desc = 'Next Quickfix' })
 vim.keymap.set('n', ']Q', '<cmd>clast<cr>', { desc = 'Last Quickfix' })
 vim.keymap.set('n', '[q', '<cmd>cprev<cr>', { desc = 'Previous Quickfix' })
 vim.keymap.set('n', '[Q', '<cmd>cfisrt<cr>', { desc = 'First Quickfix' })
-vim.keymap.set('n', '[d', function()
-  vim.diagnostic.goto_prev()
-end, { desc = 'Previous Diagnostic' })
-vim.keymap.set('n', ']d', function()
-  vim.diagnostic.goto_next()
-end, { desc = 'Next Diagnostic' })
-vim.keymap.set('n', ']e', function()
-  vim.diagnostic.goto_next { severity = vim.diagnostic.severity.ERROR, wrap = true }
-end, { desc = 'Next Error' })
-vim.keymap.set('n', '[e', function()
-  vim.diagnostic.goto_prev { severity = vim.diagnostic.severity.ERROR, wrap = true }
-end, { desc = 'Previous Error' })
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go { severity = severity }
+  end
+end
+vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
+vim.keymap.set('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic' })
+vim.keymap.set('n', '[d', diagnostic_goto(false), { desc = 'Prev Diagnostic' })
+vim.keymap.set('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
+vim.keymap.set('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
+vim.keymap.set('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
+vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
 
 -- vim.keymap.set('v', '<C-d>', "<C-d>zz", { silent = true, desc = 'Move Up and center' })
 -- vim.keymap.set('v', '<C-u>', "<C-u>zz", { silent = true, desc = 'Move Down and center' })
@@ -1008,6 +1020,33 @@ require('lazy').setup(
 
     -- Highlight todo, notes, etc in comments
     { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+
+    -- {
+    --   'nvim-java/nvim-java',
+    --   dependencies = {
+    --     'williamboman/mason.nvim',
+    --     'williamboman/mason-lspconfig.nvim',
+    --     'neovim/nvim-lspconfig',
+    --     'mfussenegger/nvim-dap',
+    --   },
+    --   config = function()
+    --     require('java').setup {
+    --       jdtls = {
+    --         version = 'v1.43.0',
+    --       },
+    --       jdk = {
+    --         -- install jdk using mason.nvim
+    --         auto_install = true,
+    --         version = '21.0.7',
+    --       },
+    --     }
+    --     require('lspconfig').jdtls.setup {}
+    --   end,
+    --   keys = {
+    --     -- { "<leader>cjr", "<Cmd>JavaRunnerRunMain<Cr>", { desc = "Run Main" } },
+    --     -- { "<leader>cjs", "<Cmd>JavaRunnerStopMain<Cr>", { desc = "Stop Main" } },
+    --   },
+    -- },
 
     { -- Collection of various small independent plugins/modules
       'echasnovski/mini.nvim',
