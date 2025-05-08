@@ -1,9 +1,9 @@
-# If you come from bash you might have to change your $PATH.
+# I you come from bash you might have to change your $PATH.
 export XDG_CONFIG_HOME="$HOME/.config"
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin/$PATH
 export PATH=$PATH:$HOME/Scripts
-export PATH=$PATH:$HOME/.config/emacs/bin
+# export PATH=$PATH:$HOME/.config/emacs/bin
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -114,7 +114,7 @@ export EDITOR='nvim'
 # Example aliases
 alias zconf="$EDITOR ~/.zshrc"
 alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"'
-alias exa="exa --icons --git -l -G -h -a"
+alias exa="eza --icons --git -l -G -h -a"
 
 # emacs shit
 alias :em='emacsclient -c -a ""'
@@ -129,8 +129,8 @@ alias :v='nvim $(fzf)'
 # alias vi='nvim $(fzf)'
 alias :vf='zi && nvim'
 alias ni='zi && nvim'
-alias mi='SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION")'
-alias :s='SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION")'
+alias mi='SESSION=$(command zoxide query -s -l | fzf --preview "command eza -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION")'
+alias :s='SESSION=$(command zoxide query -s -l | fzf --preview "command eza -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION")'
 alias :sf="zi && tmux"
 alias ci="zi && tmux"
 alias :vl="tmux new-session nvim"
@@ -203,7 +203,7 @@ alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
     --color=scrollbar:#27a1b9 \
     --color=separator:#ff9e64 \
     --color=spinner:#ff007c \
-    --preview 'if [ -d {} ]; then exa -a -l --icons {}; else fzf-preview.sh {}; fi' \
+    --preview 'if [ -d {} ]; then eza --icons --git -l -G -h  -l --icons {}; else fzf-preview.sh {}; fi' \
     --multi  \
     --bind ctrl-q:toggle-all,alt-q:toggle-all \
     --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
@@ -233,7 +233,7 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 
 # Map Alt+o to create a new tmux session with zoxide directory picker
 SESSION_PRINT='{print $2}'
-bindkey -s '^[o' 'SESSION=$(command zoxide query -s -l | fzf --preview "command exa -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)\n'
+bindkey -s '^[o' 'SESSION=$(command zoxide query -s -l | fzf --preview "command eza -l {}") && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)\n'
 # Map Alt+u to picker open tmux session with fzf
 bindkey -s '^[u' 'SESSION=$(tmux list-sessions -F "#{session_name}" | fzf --no-preview) && [ -n "$SESSION" ] && tmux attach -t "$SESSION"\n'
 
