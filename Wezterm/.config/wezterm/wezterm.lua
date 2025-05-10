@@ -107,11 +107,11 @@ config.window_frame = {
 
 	-- The overall background color of the tab bar when
 	-- the window is focused
-	active_titlebar_bg = tokyonight_colors.bg_dark,
+	active_titlebar_bg = tokyonight_colors.bg,
 
 	-- The overall background color of the tab bar when
 	-- the window is not focused
-	inactive_titlebar_bg = tokyonight_colors.bg_dark,
+	inactive_titlebar_bg = tokyonight_colors.bg,
 	--TODO: make this darkers
 }
 
@@ -119,7 +119,7 @@ config.colors = {
 	tab_bar = {
 		-- The color of the strip that goes along the top of the window
 		-- (does not apply when fancy tab bar is in use)
-		background = tokyonight_colors.bg_dark,
+		background = tokyonight_colors.bg,
 
 		-- The active tab is the one that has focus in the window
 		active_tab = {
@@ -149,7 +149,7 @@ config.colors = {
 
 		-- Inactive tabs are the tabs that do not have focus
 		inactive_tab = {
-			bg_color = tokyonight_colors.bg_dark,
+			bg_color = tokyonight_colors.bg,
 			fg_color = tokyonight_colors.fg_sidebar,
 
 			-- The same options that were listed under the `active_tab` section above
