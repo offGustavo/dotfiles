@@ -29,4 +29,6 @@ return {
   { "ellisonleao/gruvbox.nvim", lazy = true },
 
   { "SomeCoder99/darkslate.nvim", lazy = true },
+
+  { "Mofiqul/adwaita.nvim", lazy = false, priority = 1000 },
 }
