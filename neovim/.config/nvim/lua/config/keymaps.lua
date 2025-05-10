@@ -12,7 +12,6 @@ vim.keymap.set("n", "<", "<gv", { silent = true, desc = "Half Scroll Up and Cent
 ---------------
 -- TERMINAL ---
 ---------------
-
 ---- Normal Mode to Terminal
 vim.keymap.set({ "n", "t", "i", "v" }, "<A-/>", function()
   Snacks.terminal()
@@ -150,6 +149,7 @@ end, { desc = "Commit All Changes" })
 ----------------------
 -- VS CODE CONFIG  ---
 ----------------------
+---
 if vim.g.vscode then
   vim.keymap.set("n", "<leader>,", "<Cmd>call VSCodeNotify('workbench.action.showAllEditors')<CR>")
   vim.keymap.set("n", "<leader>e", "<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>")
@@ -194,6 +194,12 @@ else
       hidden = true,
     })
   end, { desc = "Snacks Picker Grep" })
+  vim.keymap.set("n", "<leader>sP", function()
+    Snacks.picker.grep({
+      hidden = true,
+      cwd = "~/.config/nvim/lua/",
+    })
+  end, { desc = "Snacks Picker Grep in Config Files" })
   vim.keymap.set({ "n", "i" }, "<leader>,", function()
     Snacks.picker.buffers({
       -- I always want my buffers picker to start in normal mode
