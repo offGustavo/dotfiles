@@ -143,13 +143,18 @@ end, { desc = "Daily Note" })
 vim.keymap.set("n", "<leader>ooc", function()
   local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
   local commit_date = "vault backup: " .. current_date_and_time
-  vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '" && git push')
+  vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
+  print("Commit: " .. commit_date)
 end, { desc = "Commit All Changes" })
+
+vim.keymap.set("n", "<leader>oop", function()
+  vim.cmd("!git push")
+  print("Push Changes")
+end, { desc = "Push Changes" })
 
 ----------------------
 -- VS CODE CONFIG  ---
 ----------------------
----
 if vim.g.vscode then
   vim.keymap.set("n", "<leader>,", "<Cmd>call VSCodeNotify('workbench.action.showAllEditors')<CR>")
   vim.keymap.set("n", "<leader>e", "<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>")
