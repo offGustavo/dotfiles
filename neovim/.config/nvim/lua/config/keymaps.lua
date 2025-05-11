@@ -52,8 +52,9 @@ vim.keymap.set("v", "<S-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move L
 -- Emacs Keybinds in Insert Mode
 vim.keymap.set("i", "<C-a>", "<Home>")
 vim.keymap.set("i", "<C-f>", "<Right>")
-vim.keymap.set("i", "<C-p>", "<Up>")
-vim.keymap.set("i", "<C-n>", "<Down>")
+-- set this better
+-- vim.keymap.set("i", "<C-p>", "<Up>")
+-- vim.keymap.set("i", "<C-n>", "<Down>")
 vim.keymap.set("i", "<C-b>", "<Left>")
 vim.keymap.set("i", "<C-e>", "<End>")
 vim.keymap.set("i", "<A-b>", "<C-Left>")
