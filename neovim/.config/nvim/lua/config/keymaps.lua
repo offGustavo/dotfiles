@@ -50,19 +50,23 @@ vim.keymap.set("v", "<S-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move L
 vim.keymap.set("v", "<S-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move Line Down" })
 
 -- Emacs Keybinds in Insert Mode
-vim.keymap.set("i", "<C-a>", "<Home>")
-vim.keymap.set("i", "<C-f>", "<Right>")
 -- set this better
--- vim.keymap.set("i", "<C-p>", "<Up>")
--- vim.keymap.set("i", "<C-n>", "<Down>")
-vim.keymap.set("i", "<C-b>", "<Left>")
-vim.keymap.set("i", "<C-e>", "<End>")
-vim.keymap.set("i", "<A-b>", "<C-Left>")
-vim.keymap.set("i", "<A-f>", "<C-Right>")
-vim.keymap.set("i", "<A-d>", "<C-o>dw")
-vim.keymap.set("i", "<C-k>", "<Esc>lDa")
-vim.keymap.set("i", "<C-u>", "<Esc>d0xi")
-vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a")
+-- vim.keymap.set("i", "<C-p>", "<Up>", { silent = true } )
+-- vim.keymap.set("i", "<C-n>", "<Down>", { silent = true } )
+vim.keymap.set({ "i", "c" }, "<C-a>", "<Home>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-f>", "<Right>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-b>", "<Left>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-e>", "<End>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<A-b>", "<C-Left>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<A-f>", "<C-Right>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<A-d>", "<C-o>dw", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-d>", "<C-o>dl", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-k>", "<Esc>lDa", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-u>", "<Esc>d0xi", { silent = true })
+vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a", { silent = true })
+
+-- Normal mode in command line
+vim.keymap.set("c", "<C-o>", "<C-f>", { silent = true })
 
 -- -- Buffer Movement
 -- vim.keymap.set("n", "<C-w>p", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
