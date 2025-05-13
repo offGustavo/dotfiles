@@ -63,6 +63,8 @@ vim.keymap.set({ "i", "c" }, "<A-d>", "<C-o>dw", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-d>", "<C-o>dl", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-k>", "<Esc>lDa", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-u>", "<Esc>d0xi", { silent = true })
+vim.keymap.set("i", "<A-}>", "<C-o>}", { silent = true })
+vim.keymap.set("i", "<A-{>", "<C-o>{", { silent = true })
 vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a", { silent = true })
 
 -- Normal mode in command line
