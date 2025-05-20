@@ -121,7 +121,7 @@ mar (movemouse-right 1 1)
  _    1    2    3    4    5    6    7    8    9    0    -    =    grv
  _    @aPr @mVd @sVu @cNe caps lft  down up   rght del  bspc _
  _    mute pp   brdn brup menu ins  home end  pgup pgdn _
- _    _    _              _              _     _    _
+ _    _    _              lsft              _     _    _
  )
 
 	(deflayer symbols
