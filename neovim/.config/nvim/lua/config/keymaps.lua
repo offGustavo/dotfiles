@@ -13,9 +13,9 @@ vim.keymap.set("n", "<", "<gv", { silent = true, desc = "Half Scroll Up and Cent
 -- TERMINAL ---
 ---------------
 ---- Normal Mode to Terminal
-vim.keymap.set({ "n", "t", "i", "v" }, "<A-/>", function()
-  Snacks.terminal()
-end, { silent = true, desc = "Open Terminal" })
+-- vim.keymap.set({ "n", "t", "i", "v" }, "<A-/>", function()
+--   Snacks.terminal()
+-- end, { silent = true, desc = "Open Terminal" })
 
 vim.keymap.set("n", "<leader>tn", "<Cmd>terminal<Cr>", { silent = true, desc = "New Buffer Terminal" })
 vim.keymap.set("n", "<leader>tv", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
