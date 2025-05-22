@@ -15,6 +15,7 @@ set path=**
 set showcmd
 set nocompatible
 set noswapfile
+set incsearch
 
 " Let's save undo info!
 if !isdirectory($HOME."/.vim")
