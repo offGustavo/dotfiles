@@ -24,5 +24,5 @@
 #
 # echo "Setting Super+Alt+{1..9} To switch to Application"
 # for i in {1..9}; do gsettings set "org.gnome.shell.keybindings" "switch-to-application-$i" "['<Super><Alt>$i']"; done
-#
+
 printf "I use Arch btw"
