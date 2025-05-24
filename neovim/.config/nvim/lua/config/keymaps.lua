@@ -9,9 +9,16 @@ vim.keymap.set("n", "<C-u>", "<c-u>zz", { silent = true, desc = "Half Scroll Up 
 vim.keymap.set("n", ">", ">gv", { silent = true, desc = "Half Scroll Up and Center" })
 vim.keymap.set("n", "<", "<gv", { silent = true, desc = "Half Scroll Up and Center" })
 
----------------
--- TERMINAL ---
----------------
+-----------------
+--- DASHBOARD ---
+-----------------
+vim.keymap.set("n", "<leader>od", function()
+  Snacks.dashboard()
+end, { silent = true, desc = "Open Dashboard" })
+
+----------------
+--- TERMINAL ---
+----------------
 ---- Normal Mode to Terminal
 -- vim.keymap.set({ "n", "t", "i", "v" }, "<A-/>", function()
 --   Snacks.terminal()
