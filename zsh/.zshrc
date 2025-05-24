@@ -5,6 +5,10 @@ export PATH=$HOME/.cargo/bin/$PATH
 export PATH=$PATH:$HOME/scripts
 # export PATH=$PATH:$HOME/.config/emacs/bin
 
+# Fiz java lsp
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+export PATH=$JAVA_HOME/bin:$PATH
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
