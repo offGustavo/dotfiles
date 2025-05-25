@@ -65,7 +65,7 @@ mar (movemouse-accel-right 1 1000 1 5)
 )
 
 (deflayer qwerty
-  esc  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   bspc
+ esc  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    bspc
   @lec @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret 
   lsft @lmv  @lnv @lnm @lsy b    @rsy @rnm @rnv @rmv /    rsft 
@@ -82,8 +82,8 @@ mar (movemouse-accel-right 1 1000 1 5)
 
 (deflayer navgation
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
-  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
-  _    prev vold volu next _     lft  down up   rght del  bspc _  
+  XX   1    2     3   4    5    6    7    8    9    0    -    =    XX
+  _    prev vold volu next _     lft  down up   rght  del  bspc _  
   _    mute pp   _    _    _    ins  home pgup pgdn end  _   
   _    _    _              _              _    _    _   
 )
