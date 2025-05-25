@@ -62,7 +62,7 @@ cNe (tap-hold 100 200 next lctl)
 lsd (tap-hold 100 200 d lsft)
 rsk (tap-hold 100 200 k lsft)
 sVu (tap-hold 100 200 volu lsft)
-ssc (tap-hold-release 100 100 spc lsft)
+ssc (tap-hold-release 100 200 spc lsft)
 
 ;; Super/Windows
 lms (tap-hold 100 200 s lmet)   
