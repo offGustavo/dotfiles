@@ -5,7 +5,7 @@ export PATH=$HOME/.cargo/bin/$PATH
 export PATH=$PATH:$HOME/scripts
 # export PATH=$PATH:$HOME/.config/emacs/bin
 
-# Fiz java lsp
+# Fix java lsp
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
