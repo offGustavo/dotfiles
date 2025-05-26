@@ -18,17 +18,17 @@ return {
     },
   },
 
-  { "catppuccin/nvim", name = "catppuccin", lazy = true },
+  -- { "catppuccin/nvim", name = "catppuccin", lazy = true },
 
-  { "rebelot/kanagawa.nvim", name = "kanagawa", lazy = true },
+  -- { "rebelot/kanagawa.nvim", name = "kanagawa", lazy = true },
 
-  { "rose-pine/neovim", lazy = true },
+  -- { "rose-pine/neovim", lazy = true },
 
-  { "shaunsingh/nord.nvim", lazy = true },
+  -- { "shaunsingh/nord.nvim", lazy = true },
 
   { "ellisonleao/gruvbox.nvim", lazy = true },
 
-  { "SomeCoder99/darkslate.nvim", lazy = true },
+  -- { "SomeCoder99/darkslate.nvim", lazy = true },
 
-  { "Mofiqul/adwaita.nvim", lazy = false, priority = 1000 },
+  -- { "Mofiqul/adwaita.nvim", lazy = false, priority = 1000 },
 }
