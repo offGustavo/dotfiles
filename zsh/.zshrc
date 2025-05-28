@@ -243,3 +243,7 @@ bindkey -s '^[o' 'SESSION=$(command zoxide query -s -l | fzf --preview "command 
 # Map Alt+u to picker open tmux session with fzf
 bindkey -s '^[u' 'SESSION=$(tmux list-sessions -F "#{session_name}" | fzf --no-preview) && [ -n "$SESSION" ] && tmux attach -t "$SESSION"\n'
 
+# bindkey -s '^[c' 'FZF_CD_DIR=$(eza -A -D | fzf --preview "command eza -l --color --icons {}") && cd "${FZF_CD_DIR}"\n'
+
+bindkey -s '^[R' 'omz reload\n'
+
