@@ -188,6 +188,32 @@ if vim.g.vscode then
   vim.keymap.set("n", "<leader>8", "`8")
   vim.keymap.set("n", "<leader>9", "`9")
   vim.o.showmode = true
+  -- config from https://www.reddit.com/r/neovim/comments/1kspket/comment/mtslipm/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+  -- vim.keymap.set('n', "<leader>f", "<Cmd> call VSCodeNotify('editor.action.formatDocument') end, {})
+  -- vim.keymap.set('i', "<c-k>", "<Cmd> call VSCodeNotify('editor.action.triggerParameterHints') end, {})
+  vim.keymap.set("n", "<leader>bo", "<Cmd>call VSCodeNotify('workbench.action.closeOtherEditors')<Cr>")
+  -- vim.keymap.set('n', "<leader>se", "<Cmd> call VSCodeNotify('editor.action.showHover')", {})
+  vim.keymap.set("n", "<leader>ca", "<Cmd>call VSCodeNotify('editor.action.quickFix')<Cr>", {})
+  vim.keymap.set("n", "<leader>cr", "<Cmd>call VSCodeNotify('editor.action.rename')<Cr>", {})
+  -- vim.keymap.set('n', "<leader>h", "<Cmd> call VSCodeNotify('workbench.action.navigateLeft')<Cr>", {})
+  -- vim.keymap.set('n', "<leader>l", "<Cmd> call VSCodeNotify("workbench.action.navigateRight")", {})
+  vim.keymap.set("n", "K", "<Cmd> call VSCodeNotify('editor.action.showHover')<Cr>")
+  vim.keymap.set("n", "<leader>wq", "<Cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<Cr>", {})
+  vim.keymap.set("n", "gd", "<Cmd>call VSCodeNotify('editor.action.revealDefinition')<Cr>", {})
+  vim.keymap.set("n", "gr", "<Cmd>call VSCodeNotify('editor.action.goToReferences')<Cr>", {})
+  vim.keymap.set("n", "gi", "<Cmd>call VSCodeNotify('editor.action.goToImplementation')<Cr>", {})
+  vim.keymap.set("n", "zM", "<Cmd>call VSCodeNotify('editor.foldAll')<Cr>", { noremap = true, silent = true })
+  vim.keymap.set("n", "zR", "<Cmd>call VSCodeNotify('editor.unfoldAll')<Cr>", { noremap = true, silent = true })
+  vim.keymap.set("n", "zc", "<Cmd>call VSCodeNotify('editor.fold')<Cr>", { noremap = true, silent = true })
+  vim.keymap.set("n", "zC", "<Cmd>call VSCodeNotify('editor.foldRecursively')<Cr>", { noremap = true, silent = true })
+  vim.keymap.set("n", "zo", "<Cmd>call VSCodeNotify('editor.unfold')<Cr>", { noremap = true, silent = true })
+  vim.keymap.set(
+    "n",
+    "zO",
+    "<Cmd> call VSCodeNotify('editor.unfoldRecursively')<Cr>",
+    { noremap = true, silent = true }
+  )
+  vim.keymap.set("n", "za", "<Cmd> call VSCodeNotify('editor.toggleFold')<Cr>", { noremap = true, silent = true })
 else
   -----------------------------
   ---  REMAP DEFAULT PICKER ---
