@@ -1,6 +1,6 @@
 return {
   "CRAG666/betterTerm.nvim",
-  -- dir = "~/Projetos/betterTerm.nvim/",
+  -- dir = "~/Projects/betterTerm.nvim/",
   -- name = "betterTerm",
   -- "offGustavo/betterTerm.nvim",
   -- branch = "index_number",
@@ -29,5 +29,9 @@ return {
     vim.keymap.set({ "n", "t" }, "<A-/>", betterTerm.open, { desc = "Open terminal" })
     -- Select term focus
     vim.keymap.set({ "n" }, "<leader>tt", betterTerm.select, { desc = "Select terminal" })
+
+    vim.keymap.set({ "n", "t" }, "<A-\\>", function()
+      require("bettergerm").toggle_terminal()
+    end, { desc = "Toggle BetterTerm" })
   end,
 }
