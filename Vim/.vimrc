@@ -135,7 +135,7 @@ nmap k gk
 nmap n nzz 
 nmap N Nzz 
 
-" Insert Mode
+" Insert Mode - Emacs Readline
 imap <C-a> <Home>
 imap <C-f> <Right>
 " imap <C-p> <Up>
