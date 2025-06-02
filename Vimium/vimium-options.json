@@ -1,5 +1,5 @@
 {
-  "keyMappings": "unmap f\nunmap F\nunmap yf\n\nmap K nextTab\nmap J previousTab\n\nmap ; LinkHints.activateMode\nmap : LinkHints.activateModeToOpenInNewTab\nmap y; LinkHints.activateModeToCopyLinkUrl\nmap <a-;> LinkHints.activateModeToOpenIncognito\n\n\"omap aa LinkHints.activateModeToOpenImage\n\"map ay LinkHints.activateModeToDownloadImage\n\nmap M toggleMuteTab\n\nmap D scrollFullPageDown\nmap U scrollFullPageUp\nmap <c-d> scrollPageDown\nmap <c-u> scrollPageUp\nmap <c-f> scrollFullPageDown\nmap <c-b> scrollFullPageUp",
+  "keyMappings": "unmap f\nunmap F\nunmap yf\n\nmap K nextTab\nmap J previousTab\n\nmap ; LinkHints.activateMode\nmap : LinkHints.activateModeToOpenInNewTab\nmap y; LinkHints.activateModeToCopyLinkUrl\nmap <a-;> LinkHints.activateModeToOpenIncognito\n\n\" map aa LinkHints.activateModeToOpenImage\n\" map ay LinkHints.activateModeToDownloadImage\n\nmap M toggleMuteTab\n\n\" map <space>w Vomnibar.activateTabSelection\nmap D scrollFullPageDown\nmap U scrollFullPageUp\nmap <c-d> scrollPageDown\nmap <c-u> scrollPageUp\nmap <c-f> scrollFullPageDown\nmap <c-b> scrollFullPageUp\n\nunmap <a-p>\nmap <a-P> togglePinTab",
   "scrollStepSize": 20,
   "searchEngines": "w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\ng: https://www.google.com/search?q=%s Google\ny: https://www.youtube.com/results?search_query=%s Youtube\nb: https://www.bing.com/search?q=%s Bing\nd: https://duckduckgo.com/?q=%s DuckDuckGo\na: https://wiki.archlinux.org/index.php?search=%s&title=Special%3ASearch&wprov=acrw1_-1 ArchWiki\nvf: moz-extension://49e2af00-14f2-446c-aa68-852afefb1663/pages/options.html Vimium Firefox Config\nvc: extension://djmieaghokpkpjfbpelnlkfgfjapaopa/pages/options.html Vimium Chrome/Edge Config",
   "settingsVersion": "2.2.1",
@@ -24,6 +24,10 @@
     {
       "passKeys": "",
       "pattern": "https?://web.whatsapp.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://trello.com/*"
     }
   ]
 }
