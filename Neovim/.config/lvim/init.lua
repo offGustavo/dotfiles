@@ -189,14 +189,23 @@ vim.keymap.set('n', '<leader>wt', ':ter<cr>', { desc = 'new terminal' })
 vim.keymap.set('v', '<S-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'Move Line Up' })
 vim.keymap.set('v', '<S-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'Move Line Down' })
 
--- tabs
-vim.keymap.set('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
-vim.keymap.set('n', '<leader><tab>o', '<cmd>tabonly<cr>', { desc = 'Close Other Tabs' })
-vim.keymap.set('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
-vim.keymap.set('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
-vim.keymap.set('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
-vim.keymap.set('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
-vim.keymap.set('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+-- tabs/terminal
+vim.keymap.set('n', '<leader>tl', '<cmd>tablast<cr>', { desc = 'Last Tab' })
+vim.keymap.set('n', '<leader>to', '<cmd>tabonly<cr>', { desc = 'Close Other Tabs' })
+vim.keymap.set('n', '<leader>tf', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
+vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<cr>', { desc = 'New Tab' })
+vim.keymap.set('n', '<leader>t]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
+vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
+vim.keymap.set('n', '<leader>t[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+
+vim.keymap.set('n', '<leader>tm', '<Cmd>terminal<Cr>', { silent = true, desc = 'New Buffer Terminal' })
+vim.keymap.set('n', '<leader>tv', '<Cmd>vertical terminal<CR>', { silent = true, desc = 'Vertical Terminal' })
+vim.keymap.set('n', '<leader>ts', '<Cmd>horizontal terminal<CR>', { silent = true, desc = 'Horizontal Terminal' })
+
+vim.keymap.set('t', '<C-h>', '<C-\\><C-N><C-w>h:startinsert<Cr>')
+vim.keymap.set('t', '<C-j>', '<C-\\><C-N><C-w>j:startinsert<Cr>')
+vim.keymap.set('t', '<C-k>', '<C-\\><C-N><C-w>k:startinsert<Cr>')
+vim.keymap.set('t', '<C-l>', '<C-\\><C-N><C-w>l:startinsert<Cr>')
 
 vim.keymap.set('n', ']q', '<cmd>cnext<cr>', { desc = 'Next Quickfix' })
 vim.keymap.set('n', ']Q', '<cmd>clast<cr>', { desc = 'Last Quickfix' })
@@ -2637,29 +2646,30 @@ end
 
 vim.o.laststatus = 3
 
--- local function Winbar()
---   local normal_color = '%#Normal#'
---   local mode = '%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}'
---   local file_name = '%-.16t'
---   local buf_nr = '[%n]'
---   local modified = ' %-m'
---   local file_type = ' %y'
---   local right_align = '%='
---   local line_no = '%10([%l/%L%)]'
---   local pct_thru_file = '%5p%%'
---   return string.format('%s%s%s', normal_color, file_name, modified)
--- end
--- vim.opt.winbar = Winbar()
+local function Winbar()
+  local normal_color = '%#Normal#'
+  local mode = '%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}'
+  local file_name = '%-.16t'
+  local buf_nr = '[%n]'
+  local modified = ' %-m'
+  local file_type = ' %y'
+  local right_align = '%='
+  local line_no = '%10([%l/%L%)]'
+  local pct_thru_file = '%5p%%'
+  return string.format('%s%s%s', normal_color, file_name, modified)
+end
+vim.opt.winbar = Winbar()
 
 Statusline = {}
 
 -- '%#Statusline#',
 Statusline.active = function()
   return table.concat {
-    '%#Normal# ',
-    -- update_mode_colors(),
+    -- ' %#Normal# ',
+    update_mode_colors(),
+    ' ',
     mode(),
-    '%#Normal# ',
+    ' %#Normal# ',
     filepath(),
     filename(),
     '%m',
