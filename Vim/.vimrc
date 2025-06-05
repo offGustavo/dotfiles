@@ -74,7 +74,6 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 0
 
 " Better Marks
-nmap g<leader> `
 nmap <leader>1 `1
 nmap <leader>2 `2
 nmap <leader>3 `3
