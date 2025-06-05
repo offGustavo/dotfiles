@@ -58,8 +58,8 @@ vim.keymap.set("v", "<S-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move L
 
 -- Emacs Keybinds in Insert Mode
 -- set this better
--- vim.keymap.set("i", "<C-p>", "<Up>", { silent = true } )
--- vim.keymap.set("i", "<C-n>", "<Down>", { silent = true } )
+vim.keymap.set({ "i", "c" }, "<C-p>", "<Up>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-n>", "<Down>", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-a>", "<Home>", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-f>", "<Right>", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-b>", "<Left>", { silent = true })
@@ -72,7 +72,6 @@ vim.keymap.set({ "i", "c" }, "<C-k>", "<Esc>lDa", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-u>", "<Esc>d0xi", { silent = true })
 vim.keymap.set("i", "<A-}>", "<C-o>}", { silent = true })
 vim.keymap.set("i", "<A-{>", "<C-o>{", { silent = true })
--- FIXME: not working
 vim.keymap.set("i", "<A-<>", "<C-o>gg", { silent = true })
 vim.keymap.set("i", "<A->>", "<C-o>G", { silent = true })
 vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a", { silent = true })
