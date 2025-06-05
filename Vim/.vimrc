@@ -138,8 +138,8 @@ nmap N Nzz
 " Insert Mode - Emacs Readline
 imap <C-a> <Home>
 imap <C-f> <Right>
-" imap <C-p> <Up>
-" imap <C-n> <Down>
+imap <C-p> <Up>
+imap <C-n> <Down>
 imap <C-b> <Left>
 imap <C-e> <End>
 imap <C-d> <Del>
@@ -152,6 +152,18 @@ imap <M-char-98> <C-Left>
 " M-d
 execute "set <M-char-100>=\ed"
 imap <M-char-100> <C-o>dw
+" M-< → Vai para o início do arquivo
+execute "set <M-char-60>=\e<"
+imap <M-char-60> <C-o>gg
+" M-> → Vai para o final do arquivo
+execute "set <M-char-62>=\e>"
+imap <M-char-62> <C-o>G
+" M-} → Pular para a próxima chave }
+execute "set <M-char-125>=\e}"
+imap <M-char-125> <C-o>}
+" M-{ → Pular para a chave anterior {
+execute "set <M-char-123>=\e{"
+imap <M-char-123> <C-o>{
 
 " Vim Terminal
 nmap <leader>tn :ter<Cr><C-w>j:w<Cr><C-w>c
