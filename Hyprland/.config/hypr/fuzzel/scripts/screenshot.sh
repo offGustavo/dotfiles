@@ -10,9 +10,9 @@ case "$CHOOSE" in
   hyprshot -m region -o ~/Pictures/Screenshots/Hyprshot
   ;;
 "Monitor(Clipboard) Super+Alt+s")
-  hyprshot -m monitor --clipboard-only
+  hyprshot -m output --clipboard-only
   ;;
 "Monitor(Salvar) Super+Control+s")
-  hyprshot -m monitor -o ~/Pictures/Screenshots/Hyprshot
+  hyprshot -m output -o ~/Pictures/Screenshots/Hyprshot
   ;;
 esac
