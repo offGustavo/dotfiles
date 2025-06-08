@@ -55,12 +55,12 @@ ecc (tap-hold 100 300 esc caps)
 
 ;; Control
 lcf (tap-hold 100 300 f lctl)
-rcj (tap-hold 100 300 j lctl)
+rcj (tap-hold 100 300 j rctl)
 cNe (tap-hold 100 300 next lctl)
 
 ;; Shift
 lsd (tap-hold 100 300 d lsft)
-rsk (tap-hold 100 300 k lsft)
+rsk (tap-hold 100 300 k rsft)
 sVu (tap-hold 100 300 volu lsft)
 ssc (tap-hold-release 100 200 spc lsft)
 
