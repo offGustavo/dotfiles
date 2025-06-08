@@ -11,11 +11,12 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set path=**
-" set wildoptions=pum
+set wildoptions=pum
 set showcmd
 set nocompatible
 set noswapfile
 set incsearch
+set foldmethod=indent
 
 " Let's save undo info!
 if !isdirectory($HOME."/.vim")
@@ -27,47 +28,47 @@ endif
 set undodir=~/.vim/undo
 set undofile
 set undolevels=10000
+set clipboard+=unnamed,unnamedplus
 
-
-"set clipboard+=unnamedplus
 let mapleader="\ "  
 
-" " Set cursor to line in insert mode
-" let &t_SI = "\e[5 q"
-" " Set cursor to block in normal mode
-" let &t_EI = "\e[2 q"
+" Set cursor to line in insert mode
+let &t_SI = "\e[5 q"
+" Set cursor to block in normal mode
+let &t_EI = "\e[2 q"
 
-""STATUSLINE
-"set laststatus=2
-"set noshowmode
-""STATUSLINE MODE
-"let g:currentmode={
-"            \ 'n' : 'NORMAL ',
-"            \ 'v' : 'VISUAL ',
-"            \ 'V' : 'V-LINE ',
-"            \ '\' : 'V-BLOCK' ,
-"            \ 'i' : 'INSERT ',
-"            \ 'R' : 'REPLACE ',
-"            \ 'Rv' : 'V-REPLACE ',
-"            \ 'c' : 'COMMAND ',
-"            \}
-"set statusline=
-"set statusline+=%#Icon#
-"set statusline+=\ %#NormalC#%{(mode()=='n')?'\ NORMAL\ ':''}
-"set statusline+=%#InsertC#%{(mode()=='i')?'\ INSERT\ ':''}
-"set statusline+=%#VisualC#%{(mode()=='v')?'\ VISUAL\ ':''}
-"set statusline+=%#Filename#
-"set statusline+=\ %f
-"set statusline+=%#ReadOnly#
-"set statusline+=\ %r
-"set statusline+=%m
-"set statusline+=%=
-"set statusline+=%#Fileformat#
-"set statusline+=\ %y
-"set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-"set statusline+=\ [%{&fileformat}\]
-"set statusline+=%#Position#
-"set statusline+=\ [%l/%L]
+" "STATUSLINE
+" set laststatus=2
+" set noshowmode
+" "STATUSLINE MODE
+" let g:currentmode={
+"             \ 'n' : 'NORMAL ',
+"             \ 'v' : 'VISUAL ',
+"             \ 'V' : 'V-LINE ',
+"             \ '\' : 'V-BLOCK' ,
+"             \ 'i' : 'INSERT ',
+"             \ 'R' : 'REPLACE ',
+"             \ 'Rv' : 'V-REPLACE ',
+"             \ 'c' : 'COMMAND ',
+"             \}
+" set statusline=
+" set statusline+=%#Icon#
+" set statusline+=\ %#NormalC#%{(mode()=='n')?'\ NORMAL\ ':''}
+" set statusline+=%#InsertC#%{(mode()=='i')?'\ INSERT\ ':''}
+" set statusline+=%#VisualC#%{(mode()=='v')?'\ VISUAL\ ':''}
+" set statusline+=%#Filename#
+" set statusline+=\ %f
+" set statusline+=%#ReadOnly#
+" set statusline+=\ %r
+" set statusline+=%m
+" set statusline+=%=
+" set statusline+=%#Fileformat#
+"  set statusline+=\ %y
+" set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+" set statusline+=\ [%{&fileformat}\]
+" set statusline+=%#Position#
+" set statusline+=\ (%l/%L)
+" set statusline+=\ [vim]\  
 
 " Netrw Config
 let g:netrw_banner = 0
@@ -203,23 +204,24 @@ Plug 'ghifarit53/tokyonight-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " Plug 'tpope/vim-fugitive'
+Plug 'Donaldttt/fuzzyy'"
 call plug#end()
 
-" function! Search() abort
-" 	let l:tempname = tempname()
-" 	" fzf | awk '{ print $1":1:0" }' > file
-"    execute 'silent !fzf --style minimal --no-border --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-"    " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-" try
-" 		execute 'cfile ' . l:tempname
-" 		redraw!
-" 	finally
-" 		call delete(l:tempname)
-" 	endtry
-" endfunction
-" " :SearchFiles
-" command! SearchFiles call Search()
-" nnoremap <leader>ff :SearchFiles<cr>
+function! Search() abort
+	let l:tempname = tempname()
+	" fzf | awk '{ print $1":1:0" }' > file
+   execute 'silent !fzf --style minimal --no-border --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+   " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+try
+		execute 'cfile ' . l:tempname
+		redraw!
+	finally
+		call delete(l:tempname)
+	endtry
+endfunction
+" :SearchFiles
+command! SearchFiles call Search()
+nnoremap <leader>ff :SearchFiles<cr>
 
 " FZF config
 " " Initialize configuration dictionary
