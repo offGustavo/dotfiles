@@ -22,7 +22,7 @@ end, { silent = true, desc = "Open Dashboard" })
 ---- Normal Mode to Terminal
 ---- Remap default C-/ Lazyvim
 vim.keymap.set({ "n", "t", "i", "v" }, "<C-/>", function()
-  Snacks.terminal("tmux")
+  Snacks.terminal("zellij")
 end, { silent = true, desc = "Open Terminal" })
 
 vim.keymap.set("n", "<leader>tn", "<Cmd>terminal<Cr>", { silent = true, desc = "New Buffer Terminal" })
