@@ -282,8 +282,8 @@ output "HDMI-A-1" {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar -c ~/.config/niri/waybar/config.jsonc  -s ~/.config/niri/waybar/style.css"
-spawn-at-startup "/usr/bin/swaybg -i ~/Pictures/Wallpapers/dharmx-Walls/mountain/a_mountain_with_snow_on_top_01.jpg"
+spawn-at-startup "sh" "-c" "sleep 1 && waybar -c ~/.config/niri/waybar/config.jsonc  -s ~/.config/niri/waybar/style.css"
+spawn-at-startup "sh" "-c" "sleep 1 && /usr/bin/swaybg -i ~/Pictures/Wallpapers/dharmx-Walls/mountain/a_mountain_with_snow_on_top_01.jpg"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -633,8 +633,8 @@ binds {
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
-    Mod+Shift+E { quit; }
-    Ctrl+Alt+Delete { quit; }
+    Mod+Shift+Q { quit; }
+    // Ctrl+Alt+Delete { quit; }
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
