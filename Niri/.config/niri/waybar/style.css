@@ -17,7 +17,19 @@
 
 window#waybar {
   background: @bg;
+  margin-top: 5px;
+  margin-bottom: 5px;
  }
+
+.modules-right {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.modules-left {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
 /* #custom-logo { */
 /*   padding: 0 10px; */
@@ -128,7 +140,6 @@ window#waybar {
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #000000;
+        color: #ffffff;
     }
 }
