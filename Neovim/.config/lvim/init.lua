@@ -303,6 +303,26 @@ vim.keymap.set('n', '<C-A-k>', '<C-w>-', { desc = 'Move window to the upper' })
 
 vim.keymap.set('n', '<leader>m', '`', { desc = 'Go to Mark' })
 
+vim.keymap.set({ 'i', 'c' }, '<C-p>', '<Up>', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-n>', '<Down>', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-a>', '<Home>', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-f>', '<Right>', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-b>', '<Left>', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-e>', '<End>', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<A-d>', '<C-o>dw', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-d>', '<C-o>dl', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-k>', '<Esc>lDa', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-u>', '<Esc>d0xi', { silent = true })
+vim.keymap.set('i', '<A-f>', '<C-o>w', { silent = true })
+vim.keymap.set('i', '<A-b>', '<C-o>b', { silent = true })
+vim.keymap.set('i', '<A-}>', '<C-o>}', { silent = true })
+vim.keymap.set('i', '<A-{>', '<C-o>{', { silent = true })
+vim.keymap.set('i', '<A-<>', '<C-o>gg', { silent = true })
+vim.keymap.set('i', '<A->>', '<C-o>G', { silent = true })
+aaim.keymap.set('i', '<C-x><C-s>', '<C-o>:w<CR>a', { silent = true })
+vim.keymap.set('i', '<C-x>s', '<C-o>:wa<CR>a', { silent = false })
+vim.keymap.set('i', '<C-x>k', '<C-o>:bd!<CR>', { silent = false })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommnds`
 
