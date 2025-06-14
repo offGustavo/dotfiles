@@ -13,9 +13,9 @@ input {
             // For more information, see xkeyboard-config(7).
 
             // For example:
-            layout "us"
-            variant "intl"
-            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+            layout "us,br"
+            variant "intl,"
+            options "grp:win_space_toggle"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -357,26 +357,21 @@ window-rule {
     clip-to-geometry true
 }
 
-// overview {
-//     backdrop-color "#1A1B26"
-// }
 
 // Make the wallpaper stationary, rather than moving with workspaces.
 layer-rule {
     // This is for swaybg; change for other wallpaper tools.
-    // Find the right namespace by running niri msg layers.
     match namespace="^wallpaper$"
     place-within-backdrop true
 }
-
 
 // Optionally, disable the workspace shadows in the overview.
 overview {
     workspace-shadow {
         off
     }
+    // backdrop-color "#1A1B26"
 }
-
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -395,9 +390,11 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "kitty"; }
+
     // Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+Slash hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+D { spawn "cosmic-launcher"; }
+
+    // Mod+d { spawn "cosmic-launcher"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
@@ -416,9 +413,9 @@ binds {
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
-    Mod+O repeat=false { toggle-overview; }
+    Mod+o repeat=false { toggle-overview; }
 
-    Mod+Q { close-window; }
+    Mod+q { close-window; }
 
     Mod+Left  { focus-column-left; }
     Mod+Down  { focus-window-down; }
@@ -451,18 +448,22 @@ binds {
     Mod+Ctrl+End  { move-column-to-last; }
 
     Mod+Ctrl+Left  { focus-monitor-left; }
+    Mod+Comma  { focus-monitor-left; }
     Mod+Ctrl+Down  { focus-monitor-down; }
     Mod+Ctrl+Up    { focus-monitor-up; }
     Mod+Ctrl+Right { focus-monitor-right; }
+    Mod+Period { focus-monitor-right; }
     Mod+Ctrl+H     { focus-monitor-left; }
     Mod+Ctrl+J     { focus-monitor-down; }
     Mod+Ctrl+K     { focus-monitor-up; }
     Mod+Ctrl+L     { focus-monitor-right; }
 
     Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Comma  { move-column-to-monitor-left; }
     Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
     Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    Mod+Shift+Period { move-column-to-monitor-right; }
     Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
     Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
     Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
@@ -525,6 +526,13 @@ binds {
     // touchpads by default.
     Mod+Alt+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10+"; }
     Mod+Alt+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10-"; }
+    Mod+Alt+WheelScrollUp { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10+"; }
+    Mod+Alt+WheelScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10-"; }
+
+    Mod+Shift+Alt+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10+"; }
+    Mod+Shift+Alt+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10-"; }
+    Mod+Shift+Alt+WheelScrollUp { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10+"; }
+    Mod+Shift+Alt+WheelScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10-"; }
 
     // You can refer to workspaces by index. However, keep in mind that
     // niri is a dynamic workspace system, so these commands are kind of
@@ -567,20 +575,20 @@ binds {
     Mod+BracketRight { consume-or-expel-window-right; }
 
     // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma  { consume-window-into-column; }
+    // Mod+Comma  { consume-window-into-column; }
     // Expel the bottom window from the focused column to the right.
-    Mod+Period { expel-window-from-column; }
+    // Mod+Period { expel-window-from-column; }
 
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
     // TODO: change this keybmaps
-    Mod+F { maximize-column; }
-    Mod+Shift+F { fullscreen-window; }
+    Mod+Shift+f { maximize-column; }
+    Mod+f { fullscreen-window; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".
-    Mod+Ctrl+F { expand-column-to-available-width; }
+    Mod+Ctrl+f { expand-column-to-available-width; }
 
     Mod+C { center-column; }
 
@@ -603,8 +611,8 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+V       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+g       { toggle-window-floating; }
+    Mod+Shift+g { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
@@ -621,8 +629,8 @@ binds {
 
     Mod+Shift+s { screenshot; }
     // FIXME: not working
-    Mod+Alt+s { screenshot-screen; }
-    Mod+Ctrl+s { screenshot-window; }
+    // Mod+Alt+s { screenshot-screen; }
+    // Mod+Ctrl+s { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
@@ -640,5 +648,5 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Shift+P { power-off-monitors; }
+    Mod+Alt+P { power-off-monitors; }
 }
