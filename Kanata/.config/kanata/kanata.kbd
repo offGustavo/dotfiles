@@ -52,6 +52,7 @@ rmv (tap-hold 100 300 . @mov)
 
 ;; Caps
 ecc (tap-hold 100 300 esc caps)
+;; ecc (tap-hold 100 300 esc lctrl)
 
 ;; Control
 lcf (tap-hold 100 300 f lctl)
@@ -62,10 +63,10 @@ cNe (tap-hold 100 300 next lctl)
 lsd (tap-hold 100 300 d lsft)
 rsk (tap-hold 100 300 k rsft)
 sVu (tap-hold 100 300 volu lsft)
-;;ssc (tap-hold-release 100 300 spc lsft)
 
 ;; Space
-ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
+;; ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
+ssc (tap-hold-release 100 200 spc lsft)
 
 ;; Super/Windows
 lms (tap-hold 100 300 s lmet)   
