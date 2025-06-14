@@ -8,6 +8,8 @@
 # <http://www.gnu.org/licenses/gpl-3.0.html>
 #-#-#-#
 
+# https://github.com/raelgc/win_us_intl
+
 # Include the original Compose file to add all the assignments
 include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 
