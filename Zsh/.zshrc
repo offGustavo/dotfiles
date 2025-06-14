@@ -147,14 +147,19 @@ alias pi="tmux new-session nvim"
 alias :S='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
 alias ti='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
 
-# # # lunarvim config
-# LVIM='NVIM_APPNAME=lvim nvim'
-# alias lvim=$LVIM
-# alias :L=$LVIM
-# # clean tmux config
-# alias :S="tmux -f ~/.config/cmux/cmux.conf"
-# alias cmux="tmux -f ~/.config/cmux/cmux.conf"
-# alias :Lc="tmux -f ~/.config/cmux/cmux.conf new-session -s vim '$LVIM nvim'"
+# minimal nvim config
+MVIM='NVIM_APPNAME=mvim nvim'
+alias mvim=$MVIM
+
+# lunarvim config
+LVIM='NVIM_APPNAME=lvim nvim'
+alias lvim=$LVIM
+alias :L=$LVIM
+
+# minimal tmux config
+alias :c="tmux -f ~/.config/cmux/cmux.conf"
+alias cmux="tmux -f ~/.config/cmux/cmux.conf"
+alias :Lc="tmux -f ~/.config/cmux/cmux.conf new-session -s vim '$LVIM nvim'"
 
 # Gengar Fastfetch
 alias :g="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
