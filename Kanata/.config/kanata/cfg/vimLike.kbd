@@ -13,10 +13,10 @@
 )
 
 (deflayer command
-  XX  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
-  tab XX    XX    XX   ins  XX   C-c   C-z @ins   XX   C-v    XX    XX    XX
+  XX  XX    XX    XX   end  XX   XX    XX    XX   XX   home   XX    XX    XX
+  tab XX    C-lft XX   ins  XX   C-c   C-z @ins   XX   C-v    XX    XX    XX
   XX  XX    del  bspc XX    XX    left  down up  rght XX    XX    XX
-  lsft C-S-z    C-x  XX    XX    XX    XX    home end  pgdn pgup  rsft
+  lsft C-S-z    C-x  XX    C-rght    XX    XX    home end  pgdn pgup  rsft
   lctl lmet lalt           spc            ralt menu rctl 
 )
 
