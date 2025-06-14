@@ -319,7 +319,7 @@ vim.keymap.set('i', '<A-}>', '<C-o>}', { silent = true })
 vim.keymap.set('i', '<A-{>', '<C-o>{', { silent = true })
 vim.keymap.set('i', '<A-<>', '<C-o>gg', { silent = true })
 vim.keymap.set('i', '<A->>', '<C-o>G', { silent = true })
-aaim.keymap.set('i', '<C-x><C-s>', '<C-o>:w<CR>a', { silent = true })
+vim.keymap.set('i', '<C-x><C-s>', '<C-o>:w<CR>a', { silent = true })
 vim.keymap.set('i', '<C-x>s', '<C-o>:wa<CR>a', { silent = false })
 vim.keymap.set('i', '<C-x>k', '<C-o>:bd!<CR>', { silent = false })
 
@@ -2487,235 +2487,235 @@ require('lazy').setup(
     },
   }
 )
-
--- Neovide Font Resize
-if vim.g.neovide then
-  vim.g.neovide_padding_top = 8
-  vim.g.neovide_padding_bottom = 8
-  vim.g.neovide_padding_right = 8
-  vim.g.neovide_padding_left = 8
-  FontSize = 12
-  function SetFontSize(amount)
-    FontSize = FontSize + amount
-    vim.o.guifont = 'JetbrainsmonoNL NF:h' .. FontSize
-    -- print('Font Size: ' .. FontSize)
-  end
-
-  SetFontSize(0)
-  vim.keymap.set('n', '<C-=>', function()
-    SetFontSize(1)
-  end, { desc = 'Increase Font Size in neovide', silent = true })
-  vim.keymap.set('n', '<C-->', function()
-    SetFontSize(-1)
-  end, { desc = 'Decrease Font Size in neovide', silent = true })
-  vim.keymap.set('n', '<C-0>', function()
-    FontSize = 12
-    vim.o.guifont = 'JetbrainsmonoNL NF:h' .. FontSize
-    print('Font Size: ' .. FontSize)
-  end, { desc = 'Restore Font Size in neovide', silent = true })
-end
-
--- Statusline
-vim.o.updatetime = 50
-
-local modes = {
-  ['n'] = 'NORMAL',
-  ['no'] = 'NORMAL',
-  ['v'] = 'VISUAL',
-  ['V'] = 'VISUAL LINE',
-  [''] = 'VISUAL BLOCK',
-  ['s'] = 'SELECT',
-  ['S'] = 'SELECT LINE',
-  [''] = 'SELECT BLOCK',
-  ['i'] = 'INSERT',
-  ['ic'] = 'INSERT',
-  ['R'] = 'REPLACE',
-  ['Rv'] = 'VISUAL REPLACE',
-  ['c'] = 'COMMAND',
-  ['cv'] = 'VIM EX',
-  ['ce'] = 'EX',
-  ['r'] = 'PROMPT',
-  ['rm'] = 'MOAR',
-  ['r?'] = 'CONFIRM',
-  ['!'] = 'SHELL',
-  ['t'] = 'TERMINAL',
-}
-local function mode()
-  local current_mode = vim.api.nvim_get_mode().mode
-  return string.format('%s', modes[current_mode]):upper()
-end
-local function update_mode_colors()
-  local current_mode = vim.api.nvim_get_mode().mode
-  local mode_color = '%#StatusLineAccent#'
-  if current_mode == 'n' then
-    mode_color = '%#MiniStatuslineModeNormal#'
-    -- mode_color = '%#StatuslineAccent#'
-  elseif current_mode == 'i' or current_mode == 'ic' then
-    mode_color = '%#MiniStatuslineModeInsert#'
-    -- mode_color = '%#StatuslineInsertAccent#'
-  elseif current_mode == 'v' or current_mode == 'V' or current_mode == '' then
-    mode_color = '%#MiniStatuslineModeVisual#'
-    -- mode_color = '%#StatuslineVisualAccent#'
-  elseif current_mode == 'R' then
-    mode_color = '%#MiniStatuslineModeReplace#'
-    -- mode_color = '%#StatuslineReplaceAccent#'
-  elseif current_mode == 'c' then
-    mode_color = '%#MiniStatuslineModeCommand#'
-    -- mode_color = '%#StatuslineCmdLineAccent#'
-  elseif current_mode == 't' then
-    mode_color = '%#MiniStatuslineModeOther#'
-    -- mode_color = '%#StatuslineTerminalAccent#'
-  end
-  return mode_color
-end
-local function filepath()
-  local fpath = vim.fn.fnamemodify(vim.fn.expand '%', ':~:.:h')
-  if fpath == '' or fpath == '.' then
-    return ' '
-  end
-  return string.format(' %%<%s/', fpath)
-end
-local function filename()
-  local fname = vim.fn.expand '%:t'
-  if fname == '' then
-    return ''
-  end
-  return fname .. ' '
-end
-
-local function lsp()
-  local count = {}
-  local levels = {
-    errors = 'Error',
-    warnings = 'Warn',
-    info = 'Info',
-    hints = 'Hint',
-  }
-
-  for k, level in pairs(levels) do
-    count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
-  end
-
-  local errors = ''
-  local warnings = ''
-  local hints = ''
-  local info = ''
-
-  if count['errors'] ~= 0 then
-    errors = '  ' .. count['errors']
-    -- errors = ' %#LspDiagnosticsSignError# ' .. count['errors']
-  end
-  if count['warnings'] ~= 0 then
-    warnings = '  ' .. count['warnings']
-    -- warnings = ' %#LspDiagnosticsSignWarning# ' .. count['warnings']
-  end
-  if count['hints'] ~= 0 then
-    hints = '  ' .. count['hints']
-    -- hints = ' %#LspDiagnosticsSignHint# ' .. count['hints']
-  end
-  if count['info'] ~= 0 then
-    info = '  ' .. count['info']
-    -- info = ' %#LspDiagnosticsSignInformation# ' .. count['info']
-  end
-
-  return errors .. warnings .. hints .. info .. '%#Normal#'
-end
-local function filetype()
-  return string.format(' %s', vim.bo.filetype):upper()
-end
-local function lineinfo()
-  if vim.bo.filetype == 'alpha' then
-    return ''
-  end
-  return ' %P %l:%c '
-end
-local function git()
-  local git_info = vim.b.gitsigns_status_dict
-  if not git_info or git_info.head == '' then
-    return ''
-  end
-  local added = git_info.added and ('󰐙 ' .. git_info.added .. ' ') or ''
-  -- local added = git_info.added and ('+' .. git_info.added .. ' ') or ''
-  -- local added = git_info.added and ('%#GitSignsAdd#+' .. git_info.added .. ' ') or ''
-  local changed = git_info.changed and ('󰝶 ' .. git_info.changed .. ' ') or ''
-  -- local changed = git_info.changed and ('~' .. git_info.changed .. ' ') or ''
-  -- local changed = git_info.changed and ('%#GitSignsChange#~' .. git_info.changed .. ' ') or ''
-  local removed = git_info.removed and ('󰍷 ' .. git_info.removed .. ' ') or ''
-  -- local removed = git_info.removed and ('-' .. git_info.removed .. ' ') or ''
-  -- local removed = git_info.removed and ('%#GitSignsDelete#-' .. git_info.removed .. ' ') or ''
-  if git_info.added == 0 then
-    added = ''
-  end
-  if git_info.changed == 0 then
-    changed = ''
-  end
-  if git_info.removed == 0 then
-    removed = ''
-  end
-  return table.concat {
-    ' ',
-    added,
-    changed,
-    removed,
-    -- '%#GitSignsAdd# ',
-    ' ',
-    git_info.head,
-    '%#Normal#',
-  }
-end
-
-vim.o.laststatus = 3
-
-local function Winbar()
-  local normal_color = '%#Normal#'
-  local mode = '%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}'
-  local file_name = '%-.16t'
-  local buf_nr = '[%n]'
-  local modified = ' %-m'
-  local file_type = ' %y'
-  local right_align = '%='
-  local line_no = '%10([%l/%L%)]'
-  local pct_thru_file = '%5p%%'
-  return string.format('%s%s%s', normal_color, file_name, modified)
-end
-vim.opt.winbar = Winbar()
-
-Statusline = {}
-
--- '%#Statusline#',
-Statusline.active = function()
-  return table.concat {
-    -- ' %#Normal# ',
-    update_mode_colors(),
-    ' ',
-    mode(),
-    ' %#Normal# ',
-    filepath(),
-    filename(),
-    '%m',
-    '%=%#StatusLineExtra#',
-    '%#Normal#',
-    git(),
-    lsp(),
-    filetype(),
-    lineinfo(),
-  }
-end
-vim.api.nvim_exec(
-  [[
-  augroup Statusline
-  au!
-  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
-  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
-  au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
-  augroup END
-]],
-  false
-)
-function Statusline.inactive()
-  return '%#Normal#%f'
-end
-
-function Statusline.short()
-  return '%#StatusLineNC#   NvimTree'
-end
+--
+-- -- Neovide Font Resize
+-- if vim.g.neovide then
+--   vim.g.neovide_padding_top = 8
+--   vim.g.neovide_padding_bottom = 8
+--   vim.g.neovide_padding_right = 8
+--   vim.g.neovide_padding_left = 8
+--   FontSize = 12
+--   function SetFontSize(amount)
+--     FontSize = FontSize + amount
+--     vim.o.guifont = 'JetbrainsmonoNL NF:h' .. FontSize
+--     -- print('Font Size: ' .. FontSize)
+--   end
+--
+--   SetFontSize(0)
+--   vim.keymap.set('n', '<C-=>', function()
+--     SetFontSize(1)
+--   end, { desc = 'Increase Font Size in neovide', silent = true })
+--   vim.keymap.set('n', '<C-->', function()
+--     SetFontSize(-1)
+--   end, { desc = 'Decrease Font Size in neovide', silent = true })
+--   vim.keymap.set('n', '<C-0>', function()
+--     FontSize = 12
+--     vim.o.guifont = 'JetbrainsmonoNL NF:h' .. FontSize
+--     print('Font Size: ' .. FontSize)
+--   end, { desc = 'Restore Font Size in neovide', silent = true })
+-- end
+--
+-- -- Statusline
+-- vim.o.updatetime = 50
+--
+-- local modes = {
+--   ['n'] = 'NORMAL',
+--   ['no'] = 'NORMAL',
+--   ['v'] = 'VISUAL',
+--   ['V'] = 'VISUAL LINE',
+--   [''] = 'VISUAL BLOCK',
+--   ['s'] = 'SELECT',
+--   ['S'] = 'SELECT LINE',
+--   [''] = 'SELECT BLOCK',
+--   ['i'] = 'INSERT',
+--   ['ic'] = 'INSERT',
+--   ['R'] = 'REPLACE',
+--   ['Rv'] = 'VISUAL REPLACE',
+--   ['c'] = 'COMMAND',
+--   ['cv'] = 'VIM EX',
+--   ['ce'] = 'EX',
+--   ['r'] = 'PROMPT',
+--   ['rm'] = 'MOAR',
+--   ['r?'] = 'CONFIRM',
+--   ['!'] = 'SHELL',
+--   ['t'] = 'TERMINAL',
+-- }
+-- local function mode()
+--   local current_mode = vim.api.nvim_get_mode().mode
+--   return string.format('%s', modes[current_mode]):upper()
+-- end
+-- local function update_mode_colors()
+--   local current_mode = vim.api.nvim_get_mode().mode
+--   local mode_color = '%#StatusLineAccent#'
+--   if current_mode == 'n' then
+--     mode_color = '%#MiniStatuslineModeNormal#'
+--     -- mode_color = '%#StatuslineAccent#'
+--   elseif current_mode == 'i' or current_mode == 'ic' then
+--     mode_color = '%#MiniStatuslineModeInsert#'
+--     -- mode_color = '%#StatuslineInsertAccent#'
+--   elseif current_mode == 'v' or current_mode == 'V' or current_mode == '' then
+--     mode_color = '%#MiniStatuslineModeVisual#'
+--     -- mode_color = '%#StatuslineVisualAccent#'
+--   elseif current_mode == 'R' then
+--     mode_color = '%#MiniStatuslineModeReplace#'
+--     -- mode_color = '%#StatuslineReplaceAccent#'
+--   elseif current_mode == 'c' then
+--     mode_color = '%#MiniStatuslineModeCommand#'
+--     -- mode_color = '%#StatuslineCmdLineAccent#'
+--   elseif current_mode == 't' then
+--     mode_color = '%#MiniStatuslineModeOther#'
+--     -- mode_color = '%#StatuslineTerminalAccent#'
+--   end
+--   return mode_color
+-- end
+-- local function filepath()
+--   local fpath = vim.fn.fnamemodify(vim.fn.expand '%', ':~:.:h')
+--   if fpath == '' or fpath == '.' then
+--     return ' '
+--   end
+--   return string.format(' %%<%s/', fpath)
+-- end
+-- local function filename()
+--   local fname = vim.fn.expand '%:t'
+--   if fname == '' then
+--     return ''
+--   end
+--   return fname .. ' '
+-- end
+--
+-- local function lsp()
+--   local count = {}
+--   local levels = {
+--     errors = 'Error',
+--     warnings = 'Warn',
+--     info = 'Info',
+--     hints = 'Hint',
+--   }
+--
+--   for k, level in pairs(levels) do
+--     count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
+--   end
+--
+--   local errors = ''
+--   local warnings = ''
+--   local hints = ''
+--   local info = ''
+--
+--   if count['errors'] ~= 0 then
+--     errors = '  ' .. count['errors']
+--     -- errors = ' %#LspDiagnosticsSignError# ' .. count['errors']
+--   end
+--   if count['warnings'] ~= 0 then
+--     warnings = '  ' .. count['warnings']
+--     -- warnings = ' %#LspDiagnosticsSignWarning# ' .. count['warnings']
+--   end
+--   if count['hints'] ~= 0 then
+--     hints = '  ' .. count['hints']
+--     -- hints = ' %#LspDiagnosticsSignHint# ' .. count['hints']
+--   end
+--   if count['info'] ~= 0 then
+--     info = '  ' .. count['info']
+--     -- info = ' %#LspDiagnosticsSignInformation# ' .. count['info']
+--   end
+--
+--   return errors .. warnings .. hints .. info .. '%#Normal#'
+-- end
+-- local function filetype()
+--   return string.format(' %s', vim.bo.filetype):upper()
+-- end
+-- local function lineinfo()
+--   if vim.bo.filetype == 'alpha' then
+--     return ''
+--   end
+--   return ' %P %l:%c '
+-- end
+-- local function git()
+--   local git_info = vim.b.gitsigns_status_dict
+--   if not git_info or git_info.head == '' then
+--     return ''
+--   end
+--   local added = git_info.added and ('󰐙 ' .. git_info.added .. ' ') or ''
+--   -- local added = git_info.added and ('+' .. git_info.added .. ' ') or ''
+--   -- local added = git_info.added and ('%#GitSignsAdd#+' .. git_info.added .. ' ') or ''
+--   local changed = git_info.changed and ('󰝶 ' .. git_info.changed .. ' ') or ''
+--   -- local changed = git_info.changed and ('~' .. git_info.changed .. ' ') or ''
+--   -- local changed = git_info.changed and ('%#GitSignsChange#~' .. git_info.changed .. ' ') or ''
+--   local removed = git_info.removed and ('󰍷 ' .. git_info.removed .. ' ') or ''
+--   -- local removed = git_info.removed and ('-' .. git_info.removed .. ' ') or ''
+--   -- local removed = git_info.removed and ('%#GitSignsDelete#-' .. git_info.removed .. ' ') or ''
+--   if git_info.added == 0 then
+--     added = ''
+--   end
+--   if git_info.changed == 0 then
+--     changed = ''
+--   end
+--   if git_info.removed == 0 then
+--     removed = ''
+--   end
+--   return table.concat {
+--     ' ',
+--     added,
+--     changed,
+--     removed,
+--     -- '%#GitSignsAdd# ',
+--     ' ',
+--     git_info.head,
+--     '%#Normal#',
+--   }
+-- end
+--
+-- vim.o.laststatus = 3
+--
+-- local function Winbar()
+--   local normal_color = '%#Normal#'
+--   local mode = '%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}'
+--   local file_name = '%-.16t'
+--   local buf_nr = '[%n]'
+--   local modified = ' %-m'
+--   local file_type = ' %y'
+--   local right_align = '%='
+--   local line_no = '%10([%l/%L%)]'
+--   local pct_thru_file = '%5p%%'
+--   return string.format('%s%s%s', normal_color, file_name, modified)
+-- end
+-- vim.opt.winbar = Winbar()
+--
+-- Statusline = {}
+--
+-- -- '%#Statusline#',
+-- Statusline.active = function()
+--   return table.concat {
+--     -- ' %#Normal# ',
+--     update_mode_colors(),
+--     ' ',
+--     mode(),
+--     ' %#Normal# ',
+--     filepath(),
+--     filename(),
+--     '%m',
+--     '%=%#StatusLineExtra#',
+--     '%#Normal#',
+--     git(),
+--     lsp(),
+--     filetype(),
+--     lineinfo(),
+--   }
+-- end
+-- vim.api.nvim_exec(
+--   [[
+--   augroup Statusline
+--   au!
+--   au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
+--   au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
+--   au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
+--   augroup END
+-- ]],
+--   false
+-- )
+-- function Statusline.inactive()
+--   return '%#Normal#%f'
+-- end
+--
+-- function Statusline.short()
+--   return '%#StatusLineNC#   NvimTree'
+-- end
