@@ -203,3 +203,11 @@ bar {
 #     xkb_layout us
 #     xkb_variant intl
 # }
+
+# # Touchpad config /etc/X11/xorg.conf.d/30-touchpad.conf
+# Section "InputClass"
+#   Identifier "touchpad"
+#   MatchIsTouchpad "true"
+#   MatchDriver "libinput"
+#   Option "NaturalScrolling" "true"
+# EndSection
