@@ -89,10 +89,12 @@ mwu (mwheel-up 50 120)
 mwd (mwheel-down 50 120)
 mwl (mwheel-left 50 120)
 mwr (mwheel-right 50 120)
-mau (movemouse-up 1 1)
-mal (movemouse-left 1 1)
-mad (movemouse-down 1 1)
-mar (movemouse-right 1 1)
+mau (movemouse-up 2 1)
+mal (movemouse-left 2 1)
+mad (movemouse-down 2 1)
+mar (movemouse-right 2 1)
+fst (movemouse-speed 300)
+slw (movemouse-speed 5)
 
 )
 
@@ -138,9 +140,9 @@ _    _    _              _              _     _    _
 
 (deflayer mouse
 _    _    _    _    _    _    _    _    _    _    _    _    _    _
-_    _    _    _    _    _    _    mwu  @mau mwl  mfwd _    _    _
-_    ret  bspc tab  esc  _    mmid @mal mrgt @mar mlft _    _
-_    _    _    _    _    _    _    mwd  @mad mwr  mbck _
+_    _    _    _    _    _    fwd  mwu  @mau mwl  mfwd _    _    _
+_    _    _    bck  @fst fwd  mmid @mal mrgt @mar mlft _    _
+_    _    _    _    _    _    bck  mwd  @mad mwr  mbck _
 _    _    _              _              _     _    _
 )
 
