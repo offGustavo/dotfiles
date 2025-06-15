@@ -87,7 +87,7 @@
   a_editor M-2      ;; Neovim
   a_editor2 M-x     ;; VSCode
   a_firefox M-3
-  a_postman M-4
+  a_postman M-8
   a_slack M-q
   a_email M-w       ;; Thunderbird 
   a_filemanager M-e ;; File Manager
@@ -136,7 +136,7 @@
   d @L_d_alt_tog
 
   ;; right hand
-  ;; j @L_j_ctrl_tog
+  j @L_j_ctrl_tog
 )
 
 (deflayermap (leader)
@@ -216,6 +216,7 @@
   ;; keys from shift layer without the need to press shift (shift layer still works though)
   4 end   ;; go to the end of the line, same as $ in vim
   6 home  ;; go to the beginning of the line, same as ^ in vim
+  - (macro home home)  ;; go to the beginning of the line, same as ^ in vim
 
   ___ XX
 )

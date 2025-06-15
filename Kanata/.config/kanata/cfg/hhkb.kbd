@@ -21,16 +21,16 @@ lctl lmet lalt           spc            ralt  menu mctl
 
 (deflayer base
 grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-caps a    s    d    f    g    h    j    k    l    ;    '    ret
+caps q    w    e    r    t    y    u    i    o    p    [    ]    \
+lctl a    s    d    f    g    h    j    k    l    ;    '    ret
 lsft z    x    c    v    b    n    m    ,    .    /    rsft @hhkb
-lctrl  lmet lalt           spc            ralt  menu rctl
+lctl lmet lalt           spc            ralt  menu rctl
 )
 
 (deflayer hhkb-layer
 grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   bspc
 tab  q    w    e    r    t    y    u    i    o    p    up   ins  del
-caps a    s    d    f    g    h    j    home pgup lft    rght    ret
+lctl a    s    d    f    g    h    j    home pgup lft    rght    ret
 lsft z    x    c    v    b    n    m    end  pgdn down    rsft XX
 lctrl  lmet lalt           spc            ralt  menu rctl
 )
