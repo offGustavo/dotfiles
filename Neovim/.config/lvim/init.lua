@@ -303,8 +303,8 @@ vim.keymap.set('n', '<C-A-k>', '<C-w>-', { desc = 'Move window to the upper' })
 
 vim.keymap.set('n', '<leader>m', '`', { desc = 'Go to Mark' })
 
-vim.keymap.set({ 'i', 'c' }, '<C-p>', '<Up>', { silent = true })
-vim.keymap.set({ 'i', 'c' }, '<C-n>', '<Down>', { silent = true })
+-- vim.keymap.set({ 'i', 'c' }, '<C-p>', '<Up>', { silent = true })
+-- vim.keymap.set({ 'i', 'c' }, '<C-n>', '<Down>', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-a>', '<Home>', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-f>', '<Right>', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-b>', '<Left>', { silent = true })
@@ -374,14 +374,14 @@ require('lazy').setup(
 
     -- Alternatively, use `config = function() ... end` for full control over the configuration.
     -- If you prefer to call `setup` explicitly, use:
-    --    {
-    --        'lewis6991/gitsigns.nvim',
-    --        config = function()
-    --            require('gitsigns').setup({
-    --                -- Your gitsigns configuration here
-    --            })
-    --        end,
-    --    }
+    {
+      'lewis6991/gitsigns.nvim',
+      config = function()
+        require('gitsigns').setup {
+          -- Your gitsigns configuration here
+        }
+      end,
+    },
     --
     -- Here is a more advanced example where we pass configuration
     -- options to `gitsigns.nvim`.
@@ -2404,37 +2404,37 @@ require('lazy').setup(
       end,
     },
 
-    -- -- snaks image
-    -- {
-    --   'folke/snacks.nvim',
-    --   ---@type snacks.Config
-    --   opts = {
-    --     image = {
-    --       -- your image configuration comes here
-    --       -- or leave it empty to use the default settings
-    --       -- refer to the configuration section below
-    --     },
-    --   },
-    -- },
-    --
-    -- -- img-clip
-    -- {
-    --   'HakonHarnes/img-clip.nvim',
-    --   event = 'VeryLazy',
-    --   opts = {
-    --     -- add options here
-    --     -- or leave it empty to use the default settings
-    --     default = {
-    --       -- file and directory options
-    --       dir_path = 'assets', ---@type string | fun(): string
-    --       use_absolute_path = false, ---@type boolean | fun(): boolean
-    --     },
-    --   },
-    --   keys = {
-    --     -- suggested keymap
-    --     { '<leader>op', '<cmd>PasteImage<cr>', desc = 'Paste image from system clipboard' },
-    --   },
-    -- },
+    -- snaks image
+    {
+      'folke/snacks.nvim',
+      ---@type snacks.Config
+      opts = {
+        image = {
+          -- your image configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        },
+      },
+    },
+
+    -- img-clip
+    {
+      'HakonHarnes/img-clip.nvim',
+      event = 'VeryLazy',
+      opts = {
+        -- add options here
+        -- or leave it empty to use the default settings
+        default = {
+          -- file and directory options
+          dir_path = 'assets', ---@type string | fun(): string
+          use_absolute_path = false, ---@type boolean | fun(): boolean
+        },
+      },
+      keys = {
+        -- suggested keymap
+        { '<leader>op', '<cmd>PasteImage<cr>', desc = 'Paste image from system clipboard' },
+      },
+    },
 
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
     -- init.lua. If you want these files, they are in the repository, so you can just download them and
