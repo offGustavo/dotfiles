@@ -113,7 +113,6 @@ vim.keymap.set(
 -- vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { desc = "Close Quickfix List" })
 
 --- ThePrimeagen Keymaps
-
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set(
@@ -133,8 +132,6 @@ vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Execut
 
 vim.keymap.set("n", "<leader>fX", ":!%<Cr>", { desc = "Execute File" })
 vim.keymap.set("n", "<leader>fs", ":so %<Cr>", { desc = "Source File" })
-
--- vim.keymap.set("n", "g<leader>", "`", { desc = "Go to Marks" })
 
 -- Remove Lazyvim default keymap
 vim.keymap.del("n", "<S-h>")
@@ -163,7 +160,6 @@ Snacks.toggle
 ---------------
 -- OBSIDIAN ---
 ---------------
-
 -- Obsidian Daily Note
 vim.keymap.set("n", "<leader>ood", function()
   local current_date = os.date("%Y-%m-%d")
