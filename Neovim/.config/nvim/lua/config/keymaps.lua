@@ -80,6 +80,10 @@ vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a", { silent = true })
 -- Normal mode in command line
 vim.keymap.set("c", "<C-o>", "<C-f>", { silent = true })
 
+-- Visual Keymaps - Markdown Text
+--vim.keymap.set("v", "<C-i>", "sa*", { silent = true, desc = "Add Italic" })
+--vim.keymap.set("v", "<C-b>", "sa**", { silent = true, desc = "Add Bold" })
+
 -- -- Buffer Movement
 -- vim.keymap.set("n", "<C-w>p", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
 -- vim.keymap.set("n", "<leader>wp", vim.cmd.bp, { silent = false, desc = "Next Buffer" }i)
