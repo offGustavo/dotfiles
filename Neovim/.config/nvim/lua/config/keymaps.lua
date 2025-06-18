@@ -81,8 +81,18 @@ vim.keymap.set("i", "<C-x><C-s>", "<Esc>:w<CR>a", { silent = true })
 vim.keymap.set("c", "<C-o>", "<C-f>", { silent = true })
 
 -- Visual Keymaps - Markdown Text
---vim.keymap.set("v", "<C-i>", "sa*", { silent = true, desc = "Add Italic" })
---vim.keymap.set("v", "<C-b>", "sa**", { silent = true, desc = "Add Bold" })
+vim.keymap.set(
+  "v",
+  "<C-i>",
+  ":<Del><Del><Del><Del><Del>norm saiw*<Cr>gv",
+  { silent = true, desc = "Add Italic/Bold(*)" }
+)
+vim.keymap.set(
+  "v",
+  "<C-b>",
+  ":<Del><Del><Del><Del><Del>norm sd*<Cr>gv",
+  { silent = true, desc = "Remove Italic/Bold(*)" }
+)
 
 -- -- Buffer Movement
 -- vim.keymap.set("n", "<C-w>p", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
