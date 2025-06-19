@@ -85,16 +85,17 @@ lmq (tap-hold 100 300 q menu)
 rmp (tap-hold 100 300 p menu)
 
 ;; Mouse
-mwu (mwheel-up 50 120)
-mwd (mwheel-down 50 120)
-mwl (mwheel-left 50 120)
+mwu (mwheel-up    50 120)
+mwd (mwheel-down  50 120)
+mwl (mwheel-left  50 120)
 mwr (mwheel-right 50 120)
-mau (movemouse-up 2 1)
-mal (movemouse-left 2 1)
-mad (movemouse-down 2 1)
-mar (movemouse-right 2 1)
-fst (movemouse-speed 300)
-slw (movemouse-speed 5)
+mau (movemouse-up    3 1)
+mal (movemouse-left  3 1)
+mad (movemouse-down  3 1)
+mar (movemouse-right 3 1)
+fst (movemouse-speed 400)
+mid (movemouse-speed 200)
+slw (movemouse-speed 50)
 
 )
 
@@ -141,7 +142,7 @@ _    _    _              _              _     _    _
 (deflayer mouse
 _    _    _    _    _    _    _    _    _    _    _    _    _    _
 _    _    _    _    _    _    fwd  mwu  @mau mwl  mfwd _    _    _
-_    _    _    bck  @fst fwd  mmid @mal mrgt @mar mlft _    _
+_    @slw _    @mid @fst _    mmid @mal mrgt @mar mlft _    _
 _    _    _    _    _    _    bck  mwd  @mad mwr  mbck _
 _    _    _              _              _     _    _
 )
