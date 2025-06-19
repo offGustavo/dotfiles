@@ -1,0 +1,32 @@
+(defsrc
+grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+caps a    s    d    f    g    h    j    k    l    ;    '    ret
+lsft z    x    c    v    b    n    m    ,    .    /    rsft
+lctl lmet lalt           spc            ralt  menu mctl 
+)
+
+
+(deflayer base
+grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+caps (tap-hold 100 300 a (layer-toggle layer-alt))    s    d    (tap-hold 100 300 f (layer-toggle layer-ctrl))    g    h    (tap-hold 100 300 j (layer-toggle layer-ctrl))    k    l    (tap-hold 100 300 ; (layer-toggle layer-alt))    '    ret
+lsft z    x    c    v    b    n    m    ,    .    /    rsft
+lctl lmet lalt          spc            ralt  menu mctl 
+)
+
+(deflayer layer-ctrl
+grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+tab  q    w    end    r    t    y    u    i    o    up   [    ]    \
+XX   home s    d    right    g    h    j    k    l    ;    '    ret
+lsft z    x    c    v    left    down m    ,    .    /    rsft
+caps lmet lalt           spc            ralt  menu mctl 
+)
+
+(deflayer layer-alt
+grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+tab  q    C-c  e    r    t    C-v    u    i    o    p    [    ]    \
+caps a    s    d    C-left    g    h    j    k    l    ;    '    ret
+lsft z    x    c    v    C-left    n    m    ,    .    /    rsft
+lctl lmet lalt         spc            ralt  menu mctl 
+)
