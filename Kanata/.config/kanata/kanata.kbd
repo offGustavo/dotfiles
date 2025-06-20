@@ -96,7 +96,7 @@ mad (movemouse-down  3 1)
 mar (movemouse-right 3 1)
 fst (movemouse-speed 600)
 mid (movemouse-speed 300)
-slw (movemouse-speed 50)
+slw (movemouse-speed 100)
 
 )
 
