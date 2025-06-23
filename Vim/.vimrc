@@ -318,4 +318,4 @@ function! Find()
     endif
 endfunction
 
-nnoremap <silent> <space>of :call Find()<CR>
+nnoremap <silent> <leader>of :call Find()<CR>
