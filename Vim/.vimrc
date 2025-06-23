@@ -244,6 +244,10 @@ nmap <leader>, :Buffers<Cr>
 " Fzf Colors
 nmap <leader>uC :Colors<Cr>
 
+" Git 
+nmap <leader>gg :Git<Cr>
+nmap <leader>gG :!lazygit<Cr>
+
 " Theme Settings
 set termguicolors
 set background=dark
