@@ -307,7 +307,7 @@ function! Find()
     endfor
 
     call setqflist([], ' ', {
-        \ 'title': 'Find Results',
+        \ 'title': 'Find Results for "' .. input .. '"' ,
         \ 'items': qf_entries
         \ })
 
