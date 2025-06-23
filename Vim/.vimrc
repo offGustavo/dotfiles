@@ -203,7 +203,7 @@ call plug#begin()
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 Plug 'Donaldttt/fuzzyy'"
 call plug#end()
 
