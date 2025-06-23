@@ -7,6 +7,10 @@
 mctl 89
 )
 
+(deflocalkeys-win
+mctl 91
+)
+
 (defalias
   hhkb (layer-toggle hhkb-layer)
 )
@@ -27,11 +31,31 @@ lsft z    x    c    v    b    n    m    ,    .    /    rsft @hhkb
 lctl lmet lalt           spc            ralt  menu rctl
 )
 
-(deflayer hhkb-layer
-grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   bspc
-tab  q    w    e    r    t    y    u    i    o    p    up   ins  del
-lctl a    s    d    f    g    h    j    home pgup lft    rght    ret
-lsft z    x    c    v    b    n    m    end  pgdn down    rsft XX
-lctrl  lmet lalt           spc            ralt  menu rctl
-)
 
+(deflayermap hhkb-layer
+lctrl lctrl
+tab caps
+1 f1
+2 f1
+3 f2
+4 f3
+5 f4
+6 f5
+7 f6
+8 f7
+9 f8
+0 f9
+- f10
+= f11
+k home
+, end
+l pgup
+. pgdn
+[ up
+; left
+' rght
+/ down
+] del 
+\ ins
+___ _
+)
