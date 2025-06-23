@@ -258,7 +258,7 @@ colorscheme tokyonight
 " Turn Off Syntax
 " syntax off
 
-function! FzfLike()
+function! Find()
     " 1. Coletar arquivos
     let files = []
     let find_output = systemlist('find . -type f -not -path ''*/.git/*''')
@@ -314,4 +314,4 @@ function! FzfLike()
     endif
 endfunction
 
-nnoremap <silent> <space>of :call FzfLike()<CR>
+nnoremap <silent> <space>of :call Find()<CR>
