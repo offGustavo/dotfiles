@@ -11,7 +11,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]  ret   kp7  kp8  kp9  kp+
   caps a    s    d    f    g    h    j    k    l    ;    '    \        kp4  kp5  kp6
   lsft z    x    c    v    b    n    m    ,    .    /      rsft  up    kp1  kp2  kp3  kprt
-  lctl lmet lalt           spc             ralt  cmp   sp  left down rght   kp0  kp.
+  lctl lmet lalt           spc             ralt  cmp   rctl  left down rght   kp0  kp.
 )
 
 (defalias
