@@ -101,7 +101,7 @@ nmap <C-l> <C-w>l
 nmap <leader>w <C-w>
 
 " Grep
-nmap <leader>sg :grep -R  .<Left><Left>
+nmap <leader>sg :grep -r --exclude-dir=.git --exclude-dir=node_modules  .<Left><Left>
 nmap <leader>sG :grep
 
 "Buffers 
