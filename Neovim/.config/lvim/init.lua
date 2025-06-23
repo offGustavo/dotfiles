@@ -2719,3 +2719,26 @@ require('lazy').setup(
 -- function Statusline.short()
 --   return '%#StatusLineNC#   NvimTree'
 -- end
+--
+
+---------------
+-- OBSIDIAN ---
+---------------
+-- Obsidian Daily Note
+vim.keymap.set('n', '<leader>ood', function()
+  local current_date = os.date '%Y-%m-%d'
+  local daily_note_date = '~/Notes/DailyNotes/' .. current_date .. '.md'
+  vim.cmd('e ' .. daily_note_date)
+end, { desc = 'Daily Note' })
+
+vim.keymap.set('n', '<leader>ooc', function()
+  local current_date_and_time = os.date '%Y-%m-%d %H:%M:%S'
+  local commit_date = 'vault backup: ' .. current_date_and_time
+  vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
+  print('Commit: ' .. commit_date)
+end, { desc = 'Commit All Changes' })
+
+vim.keymap.set('n', '<leader>oop', function()
+  vim.cmd '!git push'
+  print 'Push Changes'
+end, { desc = 'Push Changes' })
