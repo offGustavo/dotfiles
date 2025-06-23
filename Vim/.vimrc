@@ -165,6 +165,18 @@ imap <M-char-125> <C-o>}
 execute "set <M-char-123>=\e{"
 imap <M-char-123> <C-o>{
 
+" Command Mode Emacs Readline
+cnoremap <C-h> <BS>
+cnoremap <C-j> <Down>
+cnoremap <C-k> <Up>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <Delete>
+cnoremap <C-o> <C-f>
+
+
 " Vim Terminal
 nmap <leader>tn :ter<Cr><C-w>j:w<Cr><C-w>c
 tmap <Esc><Esc> <C-\><C-n>
@@ -212,7 +224,7 @@ call plug#end()
 function! Search() abort
 	let l:tempname = tempname()
 	" fzf | awk '{ print $1":1:0" }' > file
-   execute 'silent !fzf --style minimal --no-border --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+   execute 'silent !fzf --style full --no-border --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
    " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
 try
 		execute 'cfile ' . l:tempname
@@ -244,7 +256,7 @@ nmap <leader><space> :Files<Cr>
 " Fzf Buffers
 nmap <leader>, :Buffers<Cr>
 " Fzf Colors
-nmap <leader>uC :Colors<Cr>
+nmap <leader>uC :FuzzyColors<Cr>
 
 " Git 
 nmap <leader>gg :Git<Cr>
