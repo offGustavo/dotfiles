@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(zoxide query -l -s | fzf --preview "exa --tree --level=1 \$(echo {} | awk '{print \$2}')")
+  selected=$(zoxide query -l -s | fzf --preview "eza --tree --level=1 \$(echo {} | awk '{print \$2}')")
 fi
 
 selected_path=$(echo $selected | awk '{print $2}')
