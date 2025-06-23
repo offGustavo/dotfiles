@@ -68,7 +68,8 @@ vim.keymap.set({ "i", "c" }, "<C-e>", "<End>", { silent = true })
 vim.keymap.set({ "i", "c" }, "<A-b>", "<C-Left>", { silent = true })
 vim.keymap.set({ "i", "c" }, "<A-f>", "<C-Right>", { silent = true })
 vim.keymap.set({ "i", "c" }, "<A-d>", "<C-o>dw", { silent = true })
-vim.keymap.set({ "i", "c" }, "<C-d>", "<C-o>dl", { silent = true })
+vim.keymap.set({ "i" }, "<C-d>", "<C-o>dl", { silent = true })
+vim.keymap.set({ "c" }, "<C-d>", "<Del>", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-k>", "<Esc>lDa", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-u>", "<Esc>d0xi", { silent = true })
 vim.keymap.set("i", "<A-}>", "<C-o>}", { silent = true })
@@ -130,8 +131,14 @@ vim.keymap.set(
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste Without Copy" })
 vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Executable" })
 
+-- File
+
 vim.keymap.set("n", "<leader>fX", ":!%<Cr>", { desc = "Execute File" })
 vim.keymap.set("n", "<leader>fs", ":so %<Cr>", { desc = "Source File" })
+
+vim.keymap.set("v", "<leader>fl", ":'<,'>lua<Cr>", { desc = "Execute Line" })
+
+vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
 
 -- Remove Lazyvim default keymap
 vim.keymap.del("n", "<S-h>")
@@ -366,3 +373,81 @@ end
 --   })
 --   vim.cmd("colorscheme tokyonight-night")
 -- end, { desc = "Turn off opacity" })
+--
+
+local function GrepSearch()
+  local input = vim.fn.input("Grep for > ")
+  if input == "" then
+    return
+  end
+
+  local cmd = string.format("grep -rnI --exclude-dir=.git --exclude-dir=node_modules --color=never '%s' .", input)
+
+  local tmp = vim.fn.tempname()
+  vim.fn.system(cmd .. " > " .. vim.fn.fnameescape(tmp))
+
+  vim.cmd("cfile " .. tmp)
+  vim.cmd("copen")
+  os.remove(tmp)
+end
+
+vim.api.nvim_create_user_command("Grep", GrepSearch, {})
+
+vim.keymap.set("n", "<space>o/", ":Grep<CR>", { noremap = true, silent = true, desc = "Grep (Quickfix)" })
+
+function FzfLike()
+  -- 1. Coletar arquivos
+  local handle = io.popen("find . -type f -not -path '*/.git/*'")
+  if not handle then
+    vim.notify("Erro ao executar 'find'", vim.log.levels.ERROR)
+    return
+  end
+
+  local files = {}
+  for file in handle:lines() do
+    table.insert(files, file)
+  end
+  handle:close()
+
+  -- 2. Entrada para filtro
+  vim.ui.input({ prompt = "Find for > " }, function(input)
+    if not input then
+      return
+    end
+    input = input:lower()
+
+    local filtered = {}
+    for _, file in ipairs(files) do
+      if file:lower():find(input, 1, true) then
+        table.insert(filtered, file)
+      end
+    end
+
+    local count = #filtered
+
+    if count == 0 then
+      vim.notify("No File Found.", vim.log.levels.INFO)
+      return
+    end
+
+    -- 3. Adicionar ao quickfix list
+    local qf_entries = {}
+    for _, file in ipairs(filtered) do
+      table.insert(qf_entries, { filename = file, lnum = 1, col = 1, text = file })
+    end
+    vim.fn.setqflist({}, " ", {
+      title = "FzfLike Results",
+      items = qf_entries,
+    })
+
+    -- 4. Abrir automaticamente se só tiver um arquivo
+    if count == 1 then
+      vim.cmd("edit " .. filtered[1])
+    else
+      -- 5. Mostrar quickfix list
+      vim.cmd("copen")
+    end
+  end)
+end
+vim.keymap.set("n", "<space>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
+--
