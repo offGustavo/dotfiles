@@ -178,6 +178,8 @@ nmap ]q :cnext<Cr>
 nmap ]Q :clast<Cr>
 nmap [q :cprev<Cr>
 nmap [Q :cfirst<Cr>
+nmap <leader>qo :copen<Cr>
+nmap <leader>qc :cclose<Cr>
 function! ToggleQuickFix()
     if empty(filter(getwininfo(), 'v:val.quickfix'))
         copen
@@ -305,7 +307,7 @@ function! Find()
     endfor
 
     call setqflist([], ' ', {
-        \ 'title': 'FzfLike Results',
+        \ 'title': 'Find Results',
         \ 'items': qf_entries
         \ })
 
