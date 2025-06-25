@@ -190,8 +190,8 @@ nmap ]q :cnext<Cr>
 nmap ]Q :clast<Cr>
 nmap [q :cprev<Cr>
 nmap [Q :cfirst<Cr>
-nmap <leader>qo :copen<Cr>
-nmap <leader>qc :cclose<Cr>
+nmap <leader>q :copen<Cr>
+nmap <leader>Q :cclose<Cr>
 function! ToggleQuickFix()
     if empty(filter(getwininfo(), 'v:val.quickfix'))
         copen
@@ -277,9 +277,16 @@ colorscheme tokyonight
 " syntax off
 
 function! Find()
-    " 1. Coletar arquivos
-    let files = []
-    let find_output = systemlist('find . -type f -not -path ''*/.git/*''')
+    " 1. Entrada para filtro
+    let input = input('Find for > ')
+    if empty(input)
+        return
+    endif
+
+    " 2. Executar o find com o nome desejado
+    let find_cmd = 'find . -type f -not -path ''*/.git/*'' -iname "*' . escape(input, '"\') . '*"'
+    let find_output = systemlist(find_cmd)
+
     if v:shell_error != 0
         echohl ErrorMsg
         echo "Erro ao executar 'find'"
@@ -287,23 +294,8 @@ function! Find()
         return
     endif
 
-    let files = find_output
-
-    " 2. Entrada para filtro
-    let input = input('Find for > ')
-    if empty(input)
-        return
-    endif
-    let input = tolower(input)
-
-    let filtered = []
-    for file in files
-        if tolower(file) =~ input
-            call add(filtered, file)
-        endif
-    endfor
-
-    let match_count = len(filtered)  " Changed from 'count' to 'match_count'
+    let filtered = find_output
+    let match_count = len(filtered)
 
     if match_count == 0
         echohl WarningMsg
@@ -324,9 +316,8 @@ function! Find()
         \ })
 
     " 4. Abrir automaticamente se só tiver um arquivo
-    if match_count == 1
-        execute 'edit ' . fnameescape(filtered[0])
-    else
+    execute 'edit ' . fnameescape(filtered[0])
+    if match_count != 1
         " 5. Mostrar quickfix list
         copen
     endif
