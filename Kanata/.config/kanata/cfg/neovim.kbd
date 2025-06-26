@@ -2,11 +2,11 @@
   process-unmapped-keys yes
   concurrent-tap-hold yes
 ;;   linux-dev /dev/input/by-id/usb-Kinesis_Kinesis_Adv360_360555127546-if01-event-kbd
-  ;; linux-dev /dev/input/event4
+;; linux-dev /dev/input/event4
 
   rapid-event-delay 0
   chords-v2-min-idle-experimental 5
-  log-layer-changes no
+  log-layer-changes yes
 )
 
 (defsrc
@@ -379,7 +379,7 @@
   esc @L_norm
   ' @L_norm
   w (multi @L_norm (macro C-right S-C-left C-c esc)) ;; yank word
-  g (multi @L_norm (macro pgup home S-pgdn C-c esc)) ;; Copy entire document
+  g (multi @L_norm (macro C-home C-S-end C-c esc)) ;; Copy entire document
   ___ XX
 )
 
@@ -421,7 +421,7 @@
   8 (multi @L_main M-8) ;; Move to workspace 8
   9 (multi @L_main M-9) ;; Move to workspace 9
   0 (multi @L_main M-0) ;; Move to workspace 10
-
+  
   ;; actions below do not move you back to the main layer
   h M-left  ;; Switch to Window to the Left
   j M-down  ;; Switch to Window Below

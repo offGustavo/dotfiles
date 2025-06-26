@@ -4,7 +4,8 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet rctl
+ lctl lmet lalt           spc            ralt rmet rctl
+ 
 )
 
 (defalias
@@ -32,7 +33,7 @@ rmv (tap-hold 100 300 . @mov)
 
 ;; Remap
 ;; Space Symbol Layer
-css (tap-hold 100 300 spc @syb)  
+css (tap-hold 100 300 spc @mov)  
 
 ;; Control
 rcj (tap-hold 100 300 j lctl)
