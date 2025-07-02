@@ -113,7 +113,7 @@ vim.opt.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
-vim.o.cmdheight = 0
+-- vim.o.cmdheight = 0
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -2823,4 +2823,6 @@ function FzfLike()
   end)
 end
 vim.keymap.set('n', '<space>of', FzfLike, { desc = 'Fuzzy Find (Quickfix)' })
+
+vim.keymap.set('n', '<leader>G', ':Git<Cr>')
 --
