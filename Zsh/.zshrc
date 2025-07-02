@@ -122,6 +122,8 @@ export EDITOR='nvim'
 # Example aliases
 alias zconf="$EDITOR ~/.zshrc"
 alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"'
+
+# Eza is hard to type
 alias exa="eza --icons --git -l -G -h -a"
 
 # emacs shit
