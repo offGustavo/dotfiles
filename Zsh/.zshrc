@@ -126,9 +126,10 @@ alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/oh
 # Eza is hard to type
 alias exa="eza --icons --git -l -G -h -a"
 
-# emacs shit
+# Emacs shit
 alias :em='emacsclient -c -a ""'
 alias :et='emacsclient -t -a ""'
+alias :en='emacs -nw ""'
 
 # Edit File with Sudo
 alias svim='sudoedit'
