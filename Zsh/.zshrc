@@ -147,13 +147,8 @@ alias pi="tmux new-session nvim"
 alias :S='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
 alias ti='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-preview )'
 
-# # minimal nvim config
-# MVIM='NVIM_APPNAME=mvim nvim'
-# alias mvim=$MVIM
-
-# lunarvim config
+# # lunarvim config
 LVIM='NVIM_APPNAME=lvim nvim'
-alias vim=$LVIM
 alias lvim=$LVIM
 alias :L=$LVIM
 
