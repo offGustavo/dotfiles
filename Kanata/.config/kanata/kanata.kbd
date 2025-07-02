@@ -139,19 +139,11 @@ _    _    _              lsft           @edt  _    _
 
 (deflayer edit
 _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
-@bas 1    2    3    4    5    6    7    8    9    0    -    =    grv
-lctl    lalt lmet lsft lctl caps lft  down up   rght del  bspc _
-_           z   x   c   v   y  ins  home end  pgup pgdn        _
+_    home up   end  pgup 5    6    7    8    9    0    -    =    grv
+@ebe  @eal @emd @ers @edf caps lft  down up   rght del  bspc @eee
+_           bspc del ins v   y  ins  home end  pgup pgdn        _
 _    _    _              lsft           _     _    _
 )
-
-;; (deflayer edit
-;; grv  1    2    3    end    5    6    7    8    9    home    -    =    bspc
-;; tab  q    C-rght    C-rght ins    t    C-c    C-z    @bas    o    C-v    [    ]    \
-;; caps    a    s    bspc f    g    lft    down   up     rght    ;    '    ret
-;; lsft        z    del    c    v    C-lft    n    m    ,    .    C-f    rsft
-;; lctl lmet lalt           spc            ralt  menu mctl 
-;; )
 
 (deflayer symbols
 _    S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S-9  S-0  S--  S-=  _
