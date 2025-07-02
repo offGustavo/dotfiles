@@ -133,6 +133,7 @@ alias :en='emacs -nw ""'
 
 # Edit File with Sudo
 alias svim='sudoedit'
+alias :se='sudoedit'
 
 # neovim fzf inegration
 
