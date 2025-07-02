@@ -17,6 +17,8 @@ set nocompatible
 set noswapfile
 set incsearch
 set foldmethod=indent
+set splitkeep=cursor
+
 
 " Let's save undo info!
 if !isdirectory($HOME."/.vim")
