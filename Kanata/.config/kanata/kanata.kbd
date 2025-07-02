@@ -30,9 +30,8 @@ syb (layer-toggle symbols)
 ;; Define a layer de movimento do mouse
 mov (layer-toggle mouse)
 
-;; Edit Layer
+;; Base Layer
 bas (layer-switch base)
-edt (layer-switch edit)
 
 ;; Navigation
 lnv (tap-hold 100 300 x @nav) 
@@ -102,6 +101,15 @@ fst (movemouse-speed 600)
 mid (movemouse-speed 300)
 slw (movemouse-speed 100)
 
+;; Edit Layer
+edt (layer-switch edit)
+eal ( tap-hold 100 300 left lalt  )
+emd ( tap-hold 100 300 down lmet  )
+ers ( tap-hold 100 300 rght lsft )
+edf ( tap-hold 100 300 pgdn lctrl )
+eee ( tap-hold 100 300 ret lctrl  )
+ebe ( tap-hold 100 300 @bas lctrl  )
+
 )
 
 ;;  (deflayer base
@@ -130,7 +138,7 @@ _    _    _              kp0            nlck  _    _
 )
 
 (deflayer navigation
-_    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
+lrld f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
 _    1    2    3    4    5    6    7    8    9    0    -    =    grv
 _    @aPr @mVd @sVu @cNe caps lft  down up   rght del  bspc _
 _    mute pp   brdn brup menu ins  home end  pgup pgdn _
