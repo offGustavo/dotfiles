@@ -21,9 +21,13 @@ end, { silent = true, desc = "Open Dashboard" })
 ----------------
 ---- Normal Mode to Terminal
 ---- Remap default C-/ Lazyvim
-vim.keymap.set({ "n", "t", "i", "v" }, "<C-/>", function()
+vim.keymap.set({ "n", "t", "i", "v" }, "<c-/>", function()
   Snacks.terminal("zellij")
-end, { silent = true, desc = "Open Terminal" })
+end, { silent = true, desc = "Open Float Terminal" })
+
+vim.keymap.set({ "n", "t", "i", "v" }, "<leader>tp", function()
+  Snacks.terminal("zellij")
+end, { silent = true, desc = "Open Float  Terminal" })
 
 vim.keymap.set("n", "<leader>tn", "<Cmd>terminal<Cr>", { silent = true, desc = "New Buffer Terminal" })
 vim.keymap.set("n", "<leader>tv", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
@@ -113,6 +117,8 @@ vim.keymap.set(
 -- vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { desc = "Open Quickfix List" })
 -- vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { desc = "Close Quickfix List" })
 
+vim.keymap.set("n", "<leader>q", ":copen<Cr>", { desc = "Quickfix Open" })
+vim.keymap.set("n", "<leader>Q", ":cclose<Cr>", { desc = "Quickfix Close" })
 --- ThePrimeagen Keymaps
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
@@ -143,6 +149,9 @@ vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" 
 -- Remove Lazyvim default keymap
 vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
+
+-- Git
+vim.keymap.set("n", "<leader><S-g>", ":Git<Cr>", { desc = "Git Fugitive" })
 
 Snacks.toggle
   .new({
@@ -190,6 +199,7 @@ end, { desc = "Push Changes" })
 -- VS CODE CONFIG  ---
 ----------------------
 if vim.g.vscode then
+  vim.keymap.set("n", "<leader><space>", "<Cmd>call VSCodeNotify('workbench.action.quickOpen')<CR>")
   vim.keymap.set("n", "<leader>,", "<Cmd>call VSCodeNotify('workbench.action.showAllEditors')<CR>")
   vim.keymap.set("n", "<leader>e", "<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>")
   vim.keymap.set("n", "<leader><Cr>", "<Cmd>call VSCodeNotify('oil-code.open')<CR>")
@@ -198,15 +208,19 @@ if vim.g.vscode then
   vim.keymap.set("n", "<leader>gg", "<Cmd>call VSCodeNotify('lazygit.openLazygit')<CR>")
   vim.keymap.set("n", "gd", "<Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>")
   vim.keymap.set("n", "gr", "<Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>")
-  vim.keymap.set("n", "<leader>1", "`1")
-  vim.keymap.set("n", "<leader>2", "`2")
-  vim.keymap.set("n", "<leader>3", "`3")
-  vim.keymap.set("n", "<leader>4", "`4")
-  vim.keymap.set("n", "<leader>5", "`5")
-  vim.keymap.set("n", "<leader>6", "`6")
-  vim.keymap.set("n", "<leader>7", "`7")
-  vim.keymap.set("n", "<leader>8", "`8")
-  vim.keymap.set("n", "<leader>9", "`9")
+  vim.keymap.set("n", "j", "gj")
+  vim.keymap.set("n", "k", "gk")
+  vim.keymap.set("n", "<leader>h", "<Cmd>call VSCodeNotify('vscode-harpoon.addEditor')<CR>")
+  vim.keymap.set("n", "<leader><s-h>", "<Cmd>call VSCodeNotify('vscode-harpoon.editEditors')<CR>")
+  vim.keymap.set("n", "<leader>1", "<Cmd>call VSCodeNotify('vscode-harpoon.gotoEditor1')<CR>")
+  vim.keymap.set("n", "<leader>2", "<Cmd>call VSCodeNotify('vscode-harpoon.gotoEditor2')<CR>")
+  vim.keymap.set("n", "<leader>3", "<Cmd>call VSCodeNotify('vscode-harpoon.gotoEditor3')<CR>")
+  vim.keymap.set("n", "<leader>4", "<Cmd>call VSCodeNotify('vscode-harpoon.gotoEditor4')<CR>")
+  vim.keymap.set("n", "<leader>5", "<Cmd>call VSCodeNotify('vscode-harpoon.gotoEditor5')<CR>")
+  vim.keymap.set("n", "<leader>6", "<Cmd>call VSCodeNotify('vscode-harpoon.gotoEditor6')<CR>")
+  vim.keymap.set("n", "<leader>7", "<Cmd>call VSCodeNotify('vscode-harpoon.gotoEditor7')<CR>")
+  vim.keymap.set("n", "<leader>8", "<Cmd>call VSCodeNotify('vscode-harpoon.gotoEditor8')<CR>")
+  vim.keymap.set("n", "<leader>9", "<Cmd>call VSCodeNotify('vscode-harpoon.gotoEditor9')<CR>")
   vim.o.showmode = true
   -- config from https://www.reddit.com/r/neovim/comments/1kspket/comment/mtslipm/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
   -- vim.keymap.set('n', "<leader>f", "<Cmd> call VSCodeNotify('editor.action.formatDocument') end, {})
@@ -450,4 +464,3 @@ function FzfLike()
   end)
 end
 vim.keymap.set("n", "<space>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
---
