@@ -73,6 +73,7 @@ return {
         ["gp"] = "actions.preview",
         ["<C-c>"] = { "actions.close", mode = "n" },
         ["<Esc><Esc>"] = { "actions.close", mode = "n" },
+        ["gq"] = { "actions.close", mode = "n" },
         ["<C-l>"] = "actions.refresh",
         ["-"] = { "actions.parent", mode = "n" },
         ["<Bs>"] = { "actions.parent", mode = "n" },
