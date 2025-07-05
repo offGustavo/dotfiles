@@ -277,51 +277,27 @@ colorscheme tokyonight
 " Turn Off Syntax
 " syntax off
 
-function! Find()
-    " 1. Entrada para filtro
-    let input = input('Find for > ')
-    if empty(input)
-        return
-    endif
+" FZF config
+let g:fzf_vim = {} 
 
-    " 2. Executar o find com o nome desejado
-    let find_cmd = 'find . -type f -not -path ''*/.git/*'' -iname "*' . escape(input, '"\') . '*"'
-    let find_output = systemlist(find_cmd)
+let g:fzf_vim.buffers_jump = 1
+" let g:fzf_vim.preview_window = ['right,50%', 'ctrl-o']
+" let g:fzf_layout = { 'window': 'enew' }
+" let g:fzf_vim.buffers_options = ['--style', 'default']
+" let g:fzf_vim.files_options =   ['--style', 'default']
+" let g:fzf_vim.rg_options =      ['--style', 'default']
+" let g:fzf_vim.colors_options =      ['--no-preview']
 
-    if v:shell_error != 0
-        echohl ErrorMsg
-        echo "Erro ao executar 'find'"
-        echohl None
-        return
-    endif
+let g:fzf_vim.command_prefix = 'Fzf'
 
-    let filtered = find_output
-    let match_count = len(filtered)
+" Fzf Find Word
+nmap <leader>sw :FzfRG <C-r><C-w><Cr>
+" Fzf Grep 
+nmap <leader>/ :FzfRG<Cr>
+" Ffz Find Files
+nmap <leader><space> :FzfFiles<Cr>
+" Fzf Buffers
+nmap <leader>, :FzfBuffers<Cr>
 
-    if match_count == 0
-        echohl WarningMsg
-        echo "No File Found."
-        echohl None
-        return
-    endif
-
-    " 3. Adicionar ao quickfix list
-    let qf_entries = []
-    for file in filtered
-        call add(qf_entries, {'filename': file, 'lnum': 1, 'col': 1, 'text': file})
-    endfor
-
-    call setqflist([], ' ', {
-        \ 'title': 'Find Results for "' .. input .. '"' ,
-        \ 'items': qf_entries
-        \ })
-
-    " 4. Abrir automaticamente se só tiver um arquivo
-    execute 'edit ' . fnameescape(filtered[0])
-    if match_count != 1
-        " 5. Mostrar quickfix list
-        copen
-    endif
-endfunction
-
-nnoremap <silent> <leader>of :call Find()<CR>
+" Git 
+nmap <leader>G :Git<Cr>
