@@ -93,10 +93,6 @@ bindsym $super+Shift+m exec --no-startup-id  $scripts/sway_monitors.sh
 
 for_window [class="alacritty-float|kitty-float|Music"] floating enable
 
-bindsym $super+r exec --no-startup-id  $scripts/combi.sh
-
-
-
 # change focus
 bindsym $super+h focus left
 bindsym $super+j focus down
