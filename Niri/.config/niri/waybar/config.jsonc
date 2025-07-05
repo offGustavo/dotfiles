@@ -216,7 +216,7 @@
   },
   "pulseaudio": {
     "format": "{icon}",
-    "format-muted": "  Muted",
+    "format-muted": "  ",
     // "tooltip-format": "{icon} {volume}%",
     "format-icons": {
       // "headphones": "",
