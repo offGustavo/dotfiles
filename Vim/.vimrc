@@ -262,7 +262,6 @@ nmap <leader>uC :FuzzyColors<Cr>
 
 " Git 
 nmap <leader>G :Git<Cr>
-nmap <leader>gg :!lazygit<Cr>
 
 " Theme Settings
 set termguicolors
