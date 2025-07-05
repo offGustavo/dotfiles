@@ -2061,7 +2061,7 @@ require('lazy').setup(
         {
           '<a-/>',
           function()
-            Snacks.terminal()
+            Snacks.terminal 'zellij'
           end,
           desc = 'Toggle Terminal',
           mode = { 'n', 't' },
