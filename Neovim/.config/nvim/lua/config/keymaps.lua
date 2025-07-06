@@ -151,7 +151,7 @@ vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
 
 -- Git
-vim.keymap.set("n", "<leader><S-g>", ":Git<Cr>", { desc = "Git Fugitive" })
+vim.keymap.set("n", "<leader><S-g>", ":tab Git<Cr>:Tabby rename_tab Git<Cr>", { desc = "Git Fugitive" })
 
 Snacks.toggle
   .new({
@@ -191,6 +191,11 @@ vim.keymap.set("n", "<leader>ooc", function()
 end, { desc = "Commit All Changes" })
 
 vim.keymap.set("n", "<leader>oop", function()
+  vim.cmd("!git pull")
+  print("Pull Changes")
+end, { desc = "Pull Changes" })
+
+vim.keymap.set("n", "<leader>ooP", function()
   vim.cmd("!git push")
   print("Push Changes")
 end, { desc = "Push Changes" })
