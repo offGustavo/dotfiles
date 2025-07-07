@@ -241,15 +241,10 @@ nmap <leader>G :Git<Cr>
 " Theme Settings
 set termguicolors
 set background=dark
-" Set Tokyo
 let g:tokyonight_style = 'night' " available: night, storm
-" Enable Italic
 let g:tokyonight_enable_italic = 1
-" Set colorscheme
 colorscheme tokyonight
 " colorscheme retrobox
-
-" Turn Off Syntax
 " syntax off
 
 " FZF Settings
