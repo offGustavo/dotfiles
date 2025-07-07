@@ -28,7 +28,7 @@ return {
         { "]", group = "next" },
         { "g", group = "goto" },
         { "z", group = "fold" },
-        { "<leader>t", group = "terminal" },
+        { "<leader>t", group = "terminal/tabs" },
         { "<leader>o", group = "options/custom", icon = "" },
         { "<leader>oo", group = "obsidian", icon = "" },
         { "<leader>om", group = "markdown", icon = "" },
