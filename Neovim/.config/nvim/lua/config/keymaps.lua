@@ -369,65 +369,6 @@ if vim.g.neovide then
   end, { desc = "Restore Font Size in neovide", silent = true })
 end
 
--- Tokyonight_night_transparency = false
--- vim.keymap.set("n", "<leader>ou", function()
---   if Tokyonight_night_transparency then
---     require("tokyonight").setup({
---       transparent = false,
---       styles = {
---         sidebars = "transparent",
---         floats = "transparent",
---       },
---       on_colors = function(colors)
---         colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
---       end,
---     })
---     vim.cmd("colorscheme default")
---     vim.cmd("colorscheme tokyonight-night")
---     Tokyonight_night_transparency = false
---   else
---     require("tokyonight").setup({
---       transparent = false,
---       styles = {
---         sidebars = "transparent",
---         floats = "transparent",
---       },
---       on_colors = function(colors)
---         colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
---       end,
---     })
---     vim.cmd("colorscheme default")
---     vim.cmd("colorscheme tokyonight-night")
---     Tokyonight_night_transparency = true
---   end
--- end, { desc = "Turn on opacity" })
-
--- vim.keymap.set("n", "<leader>ou", function()
---   require("tokyonight").setup({
---     transparent = true,
---     styles = {
---       sidebars = "transparent",
---       floats = "transparent",
---     },
---     on_colors = function(colors)
---       colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
---     end,
---   })
---   vim.cmd("colorscheme tokyonight-night")
--- end, { desc = "Turn on opacity" })
---
--- vim.keymap.set("n", "<leader>oU", function()
---   require("tokyonight").setup({
---     transparent = false,
---     styles = {
---       sidebars = "dark",
---       floats = "dark",
---     },
---   })
---   vim.cmd("colorscheme tokyonight-night")
--- end, { desc = "Turn off opacity" })
---
-
 local function GrepSearch()
   local input = vim.fn.input("Grep for > ")
   if input == "" then
