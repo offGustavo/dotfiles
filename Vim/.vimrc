@@ -34,11 +34,11 @@ set clipboard+=unnamed,unnamedplus
 
 let mapleader="\ "  
 
-" Set cursor to line in insert mode
-let &t_SI = "\e[5 q"
-" Set cursor to block in normal mode
-let &t_EI = "\e[2 q"
-
+" " Set cursor to line in insert mode
+" let &t_SI = "\e[5 q"
+" " Set cursor to block in normal mode
+" let &t_EI = "\e[2 q"
+" 
 " "STATUSLINE
 " set laststatus=2
 " set noshowmode
