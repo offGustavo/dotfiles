@@ -299,5 +299,5 @@ nmap <leader><space> :FzfFiles<Cr>
 " Fzf Buffers
 nmap <leader>, :FzfBuffers<Cr>
 
-" Git 
-nmap <leader>G :Git<Cr>
+" Fugitive Keymaps
+nmap <leader>G :tab Git<Cr>
