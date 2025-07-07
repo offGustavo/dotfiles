@@ -38,7 +38,7 @@ let mapleader="\ "
 " let &t_SI = "\e[5 q"
 " " Set cursor to block in normal mode
 " let &t_EI = "\e[2 q"
-" 
+"
 " "STATUSLINE
 " set laststatus=2
 " set noshowmode
@@ -114,7 +114,6 @@ nmap <leader>sb :ls<Cr> :b!
 " Vim File Explorer
 nmap <leader><Cr> :Ex<Cr>
 
-
 " Text Managment
 vmap <S-k> :m '<-2<CR>gv=gv
 vmap <S-j> :m '>+1<CR>gv=gv
@@ -166,16 +165,6 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-d> <Delete>
 cnoremap <C-o> <C-f>
-
-
-" Vim Terminal
-nmap <leader>tn :ter<Cr><C-w>j:w<Cr><C-w>c
-tmap <Esc><Esc> <C-\><C-n>
-tmap <C-h> <C-w>h
-tmap <C-j> <C-w>j
-tmap <C-k> <C-w>k
-tmap <C-l> <C-w>l
-
 " Quick Fix
 nmap ]q :cnext<Cr>
 nmap ]Q :clast<Cr>
@@ -210,7 +199,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 call plug#end()
-
 
 " Theme Settings
 set termguicolors
