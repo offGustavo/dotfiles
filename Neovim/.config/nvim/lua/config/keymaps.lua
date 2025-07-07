@@ -25,7 +25,7 @@ vim.keymap.set({ "n", "t", "i", "v" }, "<c-/>", function()
   Snacks.terminal("zellij")
 end, { silent = true, desc = "Open Float Terminal" })
 
-vim.keymap.set({ "n", "t", "i", "v" }, "<leader>tp", function()
+vim.keymap.set({ "n", "t", "i", "v" }, "<leader>tf", function()
   Snacks.terminal("zellij")
 end, { silent = true, desc = "Open Float  Terminal" })
 
@@ -172,6 +172,32 @@ Snacks.toggle
     end,
   })
   :map("<leader>on")
+
+--------------------
+---- TABBY/TABS ----
+--------------------
+vim.keymap.set("n", "<leader><Tab>{", "<Cmd>-tabmove<Cr>", { desc = "Move Tab Left" })
+vim.keymap.set("n", "<leader><Tab>}", "<Cmd>+tabmove<Cr>", { desc = "Move Tab Right" })
+vim.keymap.set("n", "<leader><Tab>p", "<Cmd>Tabby pick_window<Cr>", { desc = "Pick Windows" })
+vim.keymap.set("n", "<leader><Tab>r", ":TabRename ", { desc = "Rename Tab" })
+
+vim.keymap.set("n", "<leader>t{", "<Cmd>-tabmove<Cr>", { desc = "Move Tab Left" })
+vim.keymap.set("n", "<leader>t}", "<Cmd>+tabmove<Cr>", { desc = "Move Tab Right" })
+vim.keymap.set("n", "<leader>tp", "<Cmd>Tabby pick_window<Cr>", { desc = "Pick Windows" })
+vim.keymap.set("n", "<leader>tr", ":TabRename ", { desc = "Rename Tab" })
+vim.keymap.set("n", "<leader>tL", "<cmd>tablast<cr>", { desc = "Last Tab" })
+vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+vim.keymap.set("n", "<leader>tF", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+vim.keymap.set("n", "<leader>tt", "<cmd>tabnew<cr>", { desc = "New Tab" })
+vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+vim.keymap.set("n", "<leader>t]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+vim.keymap.set("n", "<leader>t[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+for i = 1, 9, 1 do
+  vim.keymap.set("n", "<leader>t" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
+end
 
 ---------------
 -- OBSIDIAN ---
