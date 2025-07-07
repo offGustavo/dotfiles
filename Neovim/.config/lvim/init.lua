@@ -2825,4 +2825,6 @@ end
 vim.keymap.set('n', '<space>of', FzfLike, { desc = 'Fuzzy Find (Quickfix)' })
 
 vim.keymap.set('n', '<leader>G', ':Git<Cr>')
+
+vim.cmd 'let g:netrw_banner = 0'
 --
