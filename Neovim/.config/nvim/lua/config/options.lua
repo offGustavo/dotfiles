@@ -17,6 +17,8 @@ vim.opt.spelllang = { "pt_br", "en_us", "es" }
 
 vim.cmd("let g:netrw_banner = 0")
 
+vim.g.lazyvim_picker = "snacks"
+
 -- local function Winbar()
 --   local normal_color = "%#Normal#"
 --   local mode = "%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}"
