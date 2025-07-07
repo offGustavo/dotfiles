@@ -497,6 +497,7 @@ function FzfLike()
       vim.cmd("edit " .. filtered[1])
     else
       -- 5. Mostrar quickfix list
+      vim.cmd("edit " .. filtered[1])
       vim.cmd("copen")
     end
   end)
