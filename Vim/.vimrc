@@ -154,18 +154,9 @@ imap <M-char-98> <C-Left>
 " M-d
 execute "set <M-char-100>=\ed"
 imap <M-char-100> <C-o>dw
-" M-< → Vai para o início do arquivo
-execute "set <M-char-60>=\e<"
-imap <M-char-60> <C-o>gg
-" M-> → Vai para o final do arquivo
-execute "set <M-char-62>=\e>"
-imap <M-char-62> <C-o>G
-" M-} → Pular para a próxima chave }
-execute "set <M-char-125>=\e}"
-imap <M-char-125> <C-o>}
-" M-{ → Pular para a chave anterior {
-execute "set <M-char-123>=\e{"
-imap <M-char-123> <C-o>{
+
+imap <C-/> <C-o>u
+imap <C-x><C-s> <C-o>:w<Cr>
 
 " Command Mode Emacs Readline
 cnoremap <C-h> <BS>
