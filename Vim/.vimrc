@@ -251,7 +251,6 @@ nmap <leader><space> :FzfFiles<Cr>
 nmap <leader>, :FzfBuffers<Cr>
 nmap <leader>uC :FzfColors<Cr>
 
-
-" Fugitive Keymaps
+" Git Keymaps
 nmap <leader>G :tab Git<Cr>
 nmap <leader>gg :!lazygit<Cr>
