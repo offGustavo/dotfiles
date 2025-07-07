@@ -158,6 +158,7 @@ vim.keymap.del("n", "<S-l>")
 
 -- Git
 vim.keymap.set("n", "<leader><S-g>", ":tab Git<Cr>:Tabby rename_tab Git<Cr>", { desc = "Git Fugitive" })
+vim.keymap.set("n", "<leader>gn", ":Neogit kind=floating<Cr>", { silent = true, desc = "Neogit" })
 
 Snacks.toggle
   .new({
