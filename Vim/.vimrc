@@ -214,27 +214,6 @@ Plug 'tpope/vim-fugitive'
 call plug#end()
 
 
-" FZF config
-" " Initialize configuration dictionary
-" let g:fzf_vim = {} 
-" " Set to jump to buffer
-" let g:fzf_vim.buffers_jump = 1
-" " Set to open in new window
-" let g:fzf_layout = { 'window': 'enew' }
-" " Change Style for buffers picker
-" let g:fzf_vim.buffers_options = ['--style', 'minimal', '--border-label', ' Open Buffers ']
-
-" Fzf Find Word
-nmap <leader>sw :RG <C-r><C-w><Cr>
-" Fzf Grep 
-nmap <leader>/ :RG<Cr>
-" Ffz Find Files
-nmap <leader><space> :Files<Cr>
-" Fzf Buffers
-nmap <leader>, :Buffers<Cr>
-" Fzf Colors
-nmap <leader>uC :FuzzyColors<Cr>
-
 " Theme Settings
 set termguicolors
 set background=dark
