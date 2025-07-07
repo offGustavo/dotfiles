@@ -114,8 +114,6 @@ nmap <leader>sb :ls<Cr> :b!
 " Vim File Explorer
 nmap <leader><Cr> :Ex<Cr>
 
-" Command Line in Vi-Mode
-" nmap <leader>; :<C-f>
 
 " Text Managment
 vmap <S-k> :m '<-2<CR>gv=gv
