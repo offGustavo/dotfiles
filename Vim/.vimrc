@@ -277,27 +277,51 @@ colorscheme tokyonight
 " Turn Off Syntax
 " syntax off
 
-" FZF config
+" FZF Settings
 let g:fzf_vim = {} 
+let g:fzf_colors =
+  \ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'query':   ['fg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Comment'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] } 
 
-let g:fzf_vim.buffers_jump = 1
-" let g:fzf_vim.preview_window = ['right,50%', 'ctrl-o']
+" let g:fzf_layout = { 'down': '30%' }
+" autocmd! FileType fzf
+" autocmd  FileType fzf set laststatus=0 noshowmode noruler
+"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" let g:fzf_layout = { 'down':  '40%'}
 " let g:fzf_layout = { 'window': 'enew' }
-" let g:fzf_vim.buffers_options = ['--style', 'default']
-" let g:fzf_vim.files_options =   ['--style', 'default']
-" let g:fzf_vim.rg_options =      ['--style', 'default']
-" let g:fzf_vim.colors_options =      ['--no-preview']
-
+let g:fzf_vim.buffers_jump = 1
+" let g:fzf_vim.preview_window = ['hidden,right,50%,<70(down,40%)', 'ctrl-o']
+let g:fzf_vim.preview_window = ['right,50%', 'ctrl-o']
+" let g:fzf_vim.preview_window = []
+" let g:fzf_vim.files_options =   '--style default --no-border'
+" let g:fzf_vim.buffers_options = '--style default'
+" let g:fzf_vim.rg_options =      '--style default'
+" let g:fzf_vim.files_options =   ['--style', 'minimal', '--no-border']
+" let g:fzf_vim.buffers_options = ['--style', 'minimal', '--no-border']
+" let g:fzf_vim.rg_options =      ['--style', 'minimal', '--no-border']
+let g:fzf_vim.colors_options =      ['--style', 'minimal', '--no-preview']
 let g:fzf_vim.command_prefix = 'Fzf'
 
-" Fzf Find Word
+" FZF Keymaps
 nmap <leader>sw :FzfRG <C-r><C-w><Cr>
-" Fzf Grep 
 nmap <leader>/ :FzfRG<Cr>
-" Ffz Find Files
 nmap <leader><space> :FzfFiles<Cr>
-" Fzf Buffers
 nmap <leader>, :FzfBuffers<Cr>
+nmap <leader>uC :FzfColors<Cr>
+
 
 " Fugitive Keymaps
 nmap <leader>G :tab Git<Cr>
