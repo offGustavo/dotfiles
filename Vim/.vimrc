@@ -254,3 +254,6 @@ nmap <leader>uC :FzfColors<Cr>
 " Git Keymaps
 nmap <leader>G :tab Git<Cr>
 nmap <leader>gg :!lazygit<Cr>
+nmap <leader>gp :!git pull<Cr>
+nmap <leader>gP :!git push<Cr>
+nmap <leader>gl :Git log<Cr>
