@@ -235,9 +235,6 @@ nmap <leader>, :Buffers<Cr>
 " Fzf Colors
 nmap <leader>uC :FuzzyColors<Cr>
 
-" Git 
-nmap <leader>G :Git<Cr>
-
 " Theme Settings
 set termguicolors
 set background=dark
@@ -295,3 +292,4 @@ nmap <leader>uC :FzfColors<Cr>
 
 " Fugitive Keymaps
 nmap <leader>G :tab Git<Cr>
+nmap <leader>gg :!lazygit<Cr>
