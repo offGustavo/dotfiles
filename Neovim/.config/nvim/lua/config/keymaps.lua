@@ -344,9 +344,9 @@ else
   end, { silent = true, desc = "Snacks Picker Buffers" })
 end
 
-----------------------
--- NEOVIDE          --
-----------------------
+-------------
+-- NEOVIDE --
+-------------
 -- Neovide Font Resize
 if vim.g.neovide then
   FontSize = 12
