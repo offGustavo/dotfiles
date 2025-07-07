@@ -211,24 +211,8 @@ Plug 'ghifarit53/tokyonight-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'Donaldttt/fuzzyy'"
 call plug#end()
 
-function! Search() abort
-	let l:tempname = tempname()
-	" fzf | awk '{ print $1":1:0" }' > file
-   execute 'silent !fzf --style full --no-border --margin 5 --preview "if [ -d {} ]; then tree {}; else cat {}; fi" --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-   " execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-try
-		execute 'cfile ' . l:tempname
-		redraw!
-	finally
-		call delete(l:tempname)
-	endtry
-endfunction
-" :SearchFiles
-command! SearchFiles call Search()
-nnoremap <leader>ff :SearchFiles<cr>
 
 " FZF config
 " " Initialize configuration dictionary
