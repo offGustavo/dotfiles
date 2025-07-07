@@ -1,4 +1,4 @@
-"My Simple config
+" My Simple config
 
 " Options 
 set nu
