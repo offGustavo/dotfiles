@@ -92,8 +92,7 @@ nmap <leader>0 `0
 nmap <leader>rr :so ~/.vimrc<Cr>
 nmap <leader>fc :e ~/.vimrc<Cr>
 
-" " Clean Search Highligth
-" nmap <Esc> :noh<Cr>
+ nmap <Esc> :noh<Cr>
 
 " Window Control 
 nmap <C-h> <C-w>h
