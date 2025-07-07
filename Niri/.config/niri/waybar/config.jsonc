@@ -202,10 +202,10 @@
     "on-click": "sleep 1 && ~/.config/waybar/scripts/colorpicker.sh",
   },
   "bluetooth": {
-    "format-on": "󰂯 ",
+    "format-on": "󰂯",
     "format-off": "",
     "format-disabled": "",
-    "format-connected": "󰂯 {device_alias}",
+    "format-connected": "󰂯",
     "format-connected-battery": "󰂯",
     // "format-connected-battery": "󰂯 {device_alias} {device_battery_percentage}%",
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
