@@ -70,7 +70,7 @@ let mapleader="\ "
 " set statusline+=\ [%{&fileformat}\]
 " set statusline+=%#Position#
 " set statusline+=\ (%l/%L)
-" set statusline+=\ [vim]\  
+" set statusline+=\ 
 
 " Netrw Config
 let g:netrw_banner = 0
