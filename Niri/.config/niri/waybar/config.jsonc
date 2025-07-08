@@ -216,7 +216,7 @@
   },
   "pulseaudio": {
     "format": "{icon}",
-    "format-muted": "  ",
+    "format-muted": " ",
     // "tooltip-format": "{icon} {volume}%",
     "format-icons": {
       // "headphones": "",
@@ -327,7 +327,7 @@
     "format": "{icon}",
     "format": "{icon}",
     "format-time": "{H}h {M}min",
-    "tooltip": "{time}",
+    "tooltip": "{icon} {capacity}% {time}",
     "format-charging": "{icon}",
     "format-plugged": "󰂄",
     "format-alt": "{time} {icon}",
