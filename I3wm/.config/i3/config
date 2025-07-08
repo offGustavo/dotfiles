@@ -5,7 +5,7 @@
 set $super Mod4
 set $alt Mod1
 
-set $scripts ~/.config/i3/scripts
+set $scripts ~/.config/rofi/scripts
 
 set $terminal kitty
 
