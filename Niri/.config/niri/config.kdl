@@ -639,7 +639,7 @@ binds {
     //
     // The allow-inhibiting=false property can be applied to other binds as well,
     // which ensures niri always processes them, even when an inhibitor is active.
-    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Mod+Shift+Q { quit; }
@@ -647,5 +647,13 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Alt+P { power-off-monitors; }
+    Mod+Shift+Alt+P { power-off-monitors; }
+
+    // Scripts
+    Mod+b { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/bluetooth.sh"; }
+    Mod+n { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/network.py"; }
+    Mod+v { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/sound.sh"; }
+    Mod+Alt+p { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/color.sh"; }
+    Mod+x { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/power.sh"; }
+    Mod+s { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/screenshot.sh"; }
 }
