@@ -151,9 +151,7 @@ bindsym $super+Shift+9 move container to workspace number 9
 bindsym $super+Shift+0 move container to workspace number 10
 
 # reload the configuration file
-bindsym $super+Shift+c swaymsg reload 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $super+Shift+r restart
+bindsym $super+Shift+c exec --no-startup-id swaymsg reload 
 # exit i3 (logs you out of your X session)
 bindsym $super+Shift+q exec i3-msg exit
 
