@@ -36,7 +36,7 @@ return {
       -- vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
 
       -- Git
-      vim.keymap.set("n", "<leader><S-g>", ":Git<Cr>", { desc = "Git Fugitive" })
+      vim.keymap.set("n", "<leader><S-g>", ":Git<Cr>", { silent = true, desc = "Git Fugitive" })
       -- vim.keymap.set("n", "<leader><S-g>", ":tab Git<Cr>:Tabby rename_tab Git<Cr>", { desc = "Git Fugitive" })
     end,
   },
@@ -47,8 +47,8 @@ return {
       "sindrets/diffview.nvim", -- optional - Diff integration
       "folke/snacks.nvim", -- optional
     },
-    keys = {
-      { "n", "<leader>gn", ":Neogit kind=floating<Cr>", silent = true, desc = "Neogit" },
-    },
+    config = function()
+      vim.keymap.set("n", "<leader>gn", ":Neogit kind=floating<Cr>", { silent = true, desc = "Neogit" })
+    end,
   },
 }
