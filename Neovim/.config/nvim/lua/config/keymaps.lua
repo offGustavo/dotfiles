@@ -427,3 +427,15 @@ function FzfLike()
   end)
 end
 vim.keymap.set("n", "<space>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
+---
+-----------
+-- Tmux ---
+-----------
+if vim.env.TMUX then
+  vim.keymap.set(
+    "n",
+    "<leader>gg",
+    ":! ~/scripts/tmux-scripts/tmux-open.sh lazygit<Cr>",
+    { silent = true, desc = "Open Lazygit in Tmux" }
+  )
+end
