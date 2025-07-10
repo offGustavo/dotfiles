@@ -381,7 +381,7 @@ local function GrepSearch()
   os.remove(tmp)
 end
 vim.api.nvim_create_user_command("Grep", GrepSearch, {})
-vim.keymap.set("n", "<space>o/", ":Grep<CR>", { noremap = true, silent = true, desc = "Grep (Quickfix)" })
+vim.keymap.set("n", "<leader>o/", ":Grep<CR>", { noremap = true, silent = true, desc = "Grep (Quickfix)" })
 
 function FzfLike()
   local handle = io.popen("find . -type f -not -path '*/.git/*'")
@@ -426,7 +426,7 @@ function FzfLike()
     end
   end)
 end
-vim.keymap.set("n", "<space>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
+vim.keymap.set("n", "<leader>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
 ---
 -----------
 -- Tmux ---
