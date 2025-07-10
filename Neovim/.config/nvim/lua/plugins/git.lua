@@ -36,7 +36,7 @@ return {
       -- vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
 
       -- Git
-      vim.keymap.set("n", "<leader><S-g>", ":Git<Cr>", { silent = true, desc = "Git Fugitive" })
+      vim.keymap.set("n", "<leader><S-g>", ":Git<Cr>:only<Cr>", { silent = true, desc = "Git Fugitive" })
       -- vim.keymap.set("n", "<leader><S-g>", ":tab Git<Cr>:Tabby rename_tab Git<Cr>", { desc = "Git Fugitive" })
     end,
   },

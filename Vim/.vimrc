@@ -202,8 +202,8 @@ nmap <leader>, :FzfBuffers<Cr>
 nmap <leader>uC :FzfColors<Cr>
 
 " Git Keymaps
-nmap <leader>G :Git<Cr>
 nmap <leader>gg :!lazygit<Cr>
+nmap <silent> <leader>G :Git<Cr>:only<Cr>
 nmap <leader>gp :!git pull<Cr>
 nmap <leader>gP :!git push<Cr>
 nmap <leader>gl :Git log<Cr>
