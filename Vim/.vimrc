@@ -49,7 +49,7 @@ nmap <leader>9 `9
 nmap <leader>0 `0
 
 " vimrc
-nmap <leader>rr :so ~/.vimrc<Cr> nmap
+nmap <leader>rr :so ~/.vimrc<Cr>
 nmap <leader>fc :e ~/.vimrc<Cr>
 
 " Window Control 
