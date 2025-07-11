@@ -117,14 +117,22 @@ vim.keymap.set(
 -- vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
 
 -- Diagnostic keymaps (quickstart keymaps)
--- vim.keymap.set("n", "<leader>qf", vim.diagnostic.setloclist, { desc = "Open Diagnostic Quickfix List" })
--- vim.keymap.set("n", "<leader>qn", "<Cmd>cnext<Cr>", { desc = "Open Next in Quickfix List" })
--- vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { desc = "Open Previous in Quickfix List" })
--- vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { desc = "Open Quickfix List" })
--- vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { desc = "Close Quickfix List" })
 
-vim.keymap.set("n", "<leader>q", ":copen<Cr>", { desc = "Quickfix Open" })
-vim.keymap.set("n", "<leader>Q", ":cclose<Cr>", { desc = "Quickfix Close" })
+----------------
+--- Quickfix ---
+----------------
+vim.keymap.set("n", "<leader>qf", vim.diagnostic.setqflist, { silent = true, desc = "Open Diagnostic Quickfix List" })
+vim.keymap.set("n", "<leader>qn", "<Cmd>cnext<Cr>", { silent = true, desc = "Open Next in Quickfix List" })
+vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { silent = true, desc = "Open Previous in Quickfix List" })
+vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { silent = true, desc = "Open Quickfix List" })
+vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { silent = true, desc = "Close Quickfix List" })
+
+------------
+--- Quit ---
+------------
+vim.keymap.set("n", "<leader>qq", ":q<cr>", { silent = true, desc = "Quit" })
+vim.keymap.set("n", "<leader>qQ", ":qa!<cr>", { silent = true, desc = "Quit All" })
+
 --- ThePrimeagen Keymaps
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
