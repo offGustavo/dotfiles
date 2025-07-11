@@ -182,28 +182,28 @@ let g:fzf_colors =
 " let g:fzf_layout = { 'down':  '40%'}
 " let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_vim.buffers_jump = 1
-" let g:fzf_vim.preview_window = ['hidden,right,50%,<70(down,40%)', 'ctrl-o']
-let g:fzf_vim.preview_window = ['right,50%', 'ctrl-o']
+let g:fzf_vim.preview_window = ['right,50%,<50(up,60%)', 'ctrl-o']
+" let g:fzf_vim.preview_window = ['up,60%', 'ctrl-o']
 " let g:fzf_vim.preview_window = []
-" let g:fzf_vim.files_options =   '--style default --no-border'
+" let g:fzf_vim.files_options =   '--style fu ll --no-border'
 " let g:fzf_vim.buffers_options = '--style default'
 " let g:fzf_vim.rg_options =      '--style default'
-" let g:fzf_vim.files_options =   ['--style', 'minimal', '--no-border']
+" let g:fzf_vim.fi les_options =   ['--style', 'minimal', '--no-border']
 " let g:fzf_vim.buffers_options = ['--style', 'minimal', '--no-border']
 " let g:fzf_vim.rg_options =      ['--style', 'minimal', '--no-border']
-let g:fzf_vim.colors_options =      ['--style', 'minimal', '--no-preview']
+" let g:fzf_vim.colors_options =      ['--style', 'minimal', '--no-preview']
 let g:fzf_vim.command_prefix = 'Fzf'
 
 " FZF Keymaps
-nmap <leader><space> :FzfFiles<Cr>
-nmap <leader>sw :FzfRG <C-r><C-w><Cr>
-nmap <leader>/ :FzfRG<Cr>
-nmap <leader>, :FzfBuffers<Cr>
-nmap <leader>uC :FzfColors<Cr>
+nmap <silent> <leader><space> :FzfFiles<Cr>
+nmap <silent> <leader>sw :FzfRG <C-r><C-w><Cr>
+nmap <silent> <leader>/ :FzfRG<Cr>
+nmap <silent> <leader>, :FzfBuffers<Cr>
+nmap <silent> <leader>uC :FzfColors<Cr>
 
 " Git Keymaps
-nmap <leader>gg :!lazygit<Cr>
 nmap <silent> <leader>G :Git<Cr>:only<Cr>
+nmap <silent> <leader>gg :!lazygit<Cr>
 nmap <leader>gp :!git pull<Cr>
 nmap <leader>gP :!git push<Cr>
-nmap <leader>gl :Git log<Cr>
+nmap <silent> <leader>gl :Git log<Cr>
