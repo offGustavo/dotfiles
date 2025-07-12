@@ -4,8 +4,8 @@ return {
   opts_extend = { "spec" },
   opts = {
     -- preset = "modern",
-    preset = "helix",
-    -- preset = "classic",
+    -- preset = "helix",
+    preset = "classic",
     defaults = {},
     spec = {
       {
@@ -14,6 +14,7 @@ return {
         { "<leader>c", group = "code" },
         { "<leader>d", group = "debug" },
         { "<leader>dp", group = "profiler" },
+        { "<leader>R", group = "kulala", icon = "󰏚" },
         { "<leader>f", group = "file/find" },
         { "<leader>g", group = "git" },
         { "<leader>gh", group = "hunks" },
