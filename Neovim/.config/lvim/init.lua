@@ -2440,6 +2440,21 @@ require('lazy').setup(
       },
     },
 
+    -- Neogit
+
+    {
+      'NeogitOrg/neogit',
+      dependencies = {
+        'nvim-lua/plenary.nvim', -- required
+        'sindrets/diffview.nvim', -- optional - Diff integration
+        'folke/snacks.nvim', -- optional
+      },
+      config = function()
+        vim.keymap.set('n', '<leader>gn', ':Neogit kind=floating<Cr>', { silent = true, desc = 'Neogit Float' })
+        vim.keymap.set('n', '<leader>gN', ':Neogit kind=replace<Cr>', { silent = true, desc = 'Neogit' })
+      end,
+    },
+
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
     -- init.lua. If you want these files, they are in the repository, so you can just download them and
     -- place them in the correct locations.
@@ -2827,4 +2842,3 @@ vim.keymap.set('n', '<space>of', FzfLike, { desc = 'Fuzzy Find (Quickfix)' })
 vim.keymap.set('n', '<leader>G', ':Git<Cr>')
 
 vim.cmd 'let g:netrw_banner = 0'
---
