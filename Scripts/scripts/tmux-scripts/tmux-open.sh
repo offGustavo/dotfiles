@@ -5,11 +5,9 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-programa="$1"
-
-if tmux list-windows -F "#{window_name}" | grep -q "$programa"; then
-  tmux select-window -t "$programa"
+if tmux list-windows -F "#{window_name}" | grep -q "$1"; then
+  tmux select-window -t "$1"
   exit 0
 fi
 
-tmux new-window -n "$programa" -c "#{pane_current_path}" "$programa"
+tmux new-window -n "$1" -c "#{pane_current_path}" "$1"
