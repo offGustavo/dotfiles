@@ -315,7 +315,7 @@ else
     Snacks.picker.smart({
       hidden = true,
     })
-  end, { desc = "Snacks Picker Files" })
+  end, { desc = "Snacks Smart Picker" })
   vim.keymap.set("n", "<leader>/", function()
     Snacks.picker.grep({
       hidden = true,
