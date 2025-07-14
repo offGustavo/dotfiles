@@ -311,7 +311,7 @@ else
     Snacks.picker.zoxide()
   end, { desc = "Snacks Picker Zoxide" })
   vim.keymap.set("n", "<leader><space>", function()
-    Snacks.picker.files({
+    Snacks.picker.smart({
       hidden = true,
     })
   end, { desc = "Snacks Picker Files" })
