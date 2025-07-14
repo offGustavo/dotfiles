@@ -14,6 +14,7 @@ return {
       },
       on_colors = function(colors)
         colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
+        colors.bg_statusline = colors.none
       end,
     },
   },
@@ -30,5 +31,11 @@ return {
 
   { "SomeCoder99/darkslate.nvim", lazy = true },
 
-  { "Mofiqul/adwaita.nvim", lazy = false, priority = 1000 },
+  { "Mofiqul/adwaita.nvim", lazy = true, priority = 1000 },
+
+  { "echasnovski/mini.base16", version = false, lazy = true },
+
+  { "sponkurtus2/angelic.nvim", lazy = true },
+
+  { "srt0/codescope.nvim", lazy = true },
 }
