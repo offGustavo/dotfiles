@@ -11,6 +11,10 @@ vim.keymap.set("n", "<", "<gv", { silent = true, desc = "Half Scroll Up and Cent
 vim.keymap.set("n", "gJ", "kJ_", { silent = true, desc = "Join Line Above" })
 vim.keymap.set("n", "J", "J_", { silent = true, desc = "Better Join Line" })
 
+vim.keymap.del({ "x", "n" }, "<Left>")
+vim.keymap.del({ "x", "n" }, "<Up>")
+vim.keymap.del({ "x", "n" }, "<Down>")
+vim.keymap.del({ "x", "n" }, "<Right>")
 -----------------
 --- DASHBOARD ---
 -----------------
