@@ -20,13 +20,26 @@ set foldmethod=indent
 set splitkeep=cursor
 
 " Let's save undo info!
-if !isdirectory($HOME."/.vim")
-    call mkdir($HOME."/.vim", "", 0770)
+if has('nvim')
+    " Neovim: use stdpath('state')/undo
+    let s:undodir = stdpath('state') . '/undo'
+else
+    " Vim: use ~/.vim/undo
+    let s:undodir = $HOME . '/.vim/undo'
 endif
-if !isdirectory($HOME."/.vim/undo")
-    call mkdir($HOME."/.vim/undo", "", 0700)
+
+" Create undo directory if it doesn't exist
+if !isdirectory(s:undodir)
+    call mkdir(s:undodir, "p", 0700)
 endif
-set undodir=~/.vim/undo
+
+" Set undodir with double slashes for Neovim (to enable multiple files)
+if has('nvim')
+    execute 'set undodir=' . fnameescape(s:undodir) . '//'
+else
+    execute 'set undodir=' . fnameescape(s:undodir)
+endif
+
 set undofile
 set undolevels=10000
 set clipboard+=unnamed,unnamedplus
