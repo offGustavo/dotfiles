@@ -4,8 +4,8 @@ return {
   opts_extend = { "spec" },
   opts = {
     -- preset = "modern",
-    -- preset = "helix",
-    preset = "classic",
+    preset = "helix",
+    -- preset = "classic",
     defaults = {},
     spec = {
       {
@@ -20,6 +20,7 @@ return {
         { "<leader>gh", group = "hunks" },
         { "<leader>q", group = "quit/session/quickfix" },
         { "<leader>s", group = "search" },
+        --TODO: terminar isso
         { "<leader>l", group = "lazy/location list" },
         { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
         { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
