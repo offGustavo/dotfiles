@@ -179,12 +179,9 @@ alias nala='sudo nala'
 alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
 
 # Fastfetch show on startup
-# eval 'colorscript -r'
-# distro_gengar=$(grep '^id=' /etc/os-release | cut -d'=' -f2)
-# # verifica se é arch linux e executa o comando
-# if [[ "$distro_gengar" == "arch" ]]; then
+if command -v fastfetch >/dev/null 2>&1; then
     eval gengar
-# fi
+fi
 
 ####################
 ### FZF defaults ###
