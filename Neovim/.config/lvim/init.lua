@@ -147,7 +147,6 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.o.spell = false
-vim.opt.spelllang = { 'pt_br', 'en_us', 'es' }
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -184,33 +183,11 @@ vim.o.showmode = true
 
 -- Keymaps
 vim.keymap.set('n', '<leader>w', '<C-w>')
-vim.keymap.set('n', '<leader>wt', ':ter<cr>', { desc = 'new terminal' })
+vim.keymap.set('n', '<leader><Cr>', ':Ex<Cr>')
 
 vim.keymap.set('v', '<S-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'Move Line Up' })
 vim.keymap.set('v', '<S-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'Move Line Down' })
 
--- tabs/terminal
-vim.keymap.set('n', '<leader>tl', '<cmd>tablast<cr>', { desc = 'Last Tab' })
-vim.keymap.set('n', '<leader>to', '<cmd>tabonly<cr>', { desc = 'Close Other Tabs' })
-vim.keymap.set('n', '<leader>tf', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
-vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<cr>', { desc = 'New Tab' })
-vim.keymap.set('n', '<leader>t]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
-vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
-vim.keymap.set('n', '<leader>t[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
-
-vim.keymap.set('n', '<leader>tm', '<Cmd>terminal<Cr>', { silent = true, desc = 'New Buffer Terminal' })
-vim.keymap.set('n', '<leader>tv', '<Cmd>vertical terminal<CR>', { silent = true, desc = 'Vertical Terminal' })
-vim.keymap.set('n', '<leader>ts', '<Cmd>horizontal terminal<CR>', { silent = true, desc = 'Horizontal Terminal' })
-
-vim.keymap.set('t', '<C-h>', '<C-\\><C-N><C-w>h:startinsert<Cr>')
-vim.keymap.set('t', '<C-j>', '<C-\\><C-N><C-w>j:startinsert<Cr>')
-vim.keymap.set('t', '<C-k>', '<C-\\><C-N><C-w>k:startinsert<Cr>')
-vim.keymap.set('t', '<C-l>', '<C-\\><C-N><C-w>l:startinsert<Cr>')
-
-vim.keymap.set('n', ']q', '<cmd>cnext<cr>', { desc = 'Next Quickfix' })
-vim.keymap.set('n', ']Q', '<cmd>clast<cr>', { desc = 'Last Quickfix' })
-vim.keymap.set('n', '[q', '<cmd>cprev<cr>', { desc = 'Previous Quickfix' })
-vim.keymap.set('n', '[Q', '<cmd>cfisrt<cr>', { desc = 'First Quickfix' })
 -- diagnostic
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
@@ -227,22 +204,6 @@ vim.keymap.set('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error'
 vim.keymap.set('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
 vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
 
--- vim.keymap.set('v', '<C-d>', "<C-d>zz", { silent = true, desc = 'Move Up and center' })
--- vim.keymap.set('v', '<C-u>', "<C-u>zz", { silent = true, desc = 'Move Down and center' })
-
--- vim.keymap.set('n', 'j', 'gj', { silent = true, desc = 'Down in Wrap' })
--- vim.keymap.set('n', 'k', 'gk', { silent = true, desc = 'Up in Wrap' })
--- vim.keymap.set('n', '$', 'g$', { silent = true, desc = '' })
--- vim.keymap.set('n', '0', 'g0', { silent = true, desc = '' })
-
-vim.keymap.set('n', '[b', '<Cmd>bp<Cr>', { silent = true })
-vim.keymap.set('n', ']b', '<Cmd>bn<Cr>', { silent = true })
-
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
-
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
@@ -290,21 +251,19 @@ vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move focus to the lower window'
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move focus to the upper window' })
 
 -- NOTE: Some terminals have coliding keymaps or are not able to send distinct keycodes
-vim.keymap.set('n', '<C-S-h>', '<C-w>H', { desc = 'Move window to the left' })
-vim.keymap.set('n', '<C-S-l>', '<C-w>L', { desc = 'Move window to the right' })
-vim.keymap.set('n', '<C-S-j>', '<C-w>J', { desc = 'Move window to the lower' })
-vim.keymap.set('n', '<C-S-k>', '<C-w>K', { desc = 'Move window to the upper' })
+-- vim.keymap.set('n', '<C-S-h>', '<C-w>H', { desc = 'Move window to the left' })
+-- vim.keymap.set('n', '<C-S-l>', '<C-w>L', { desc = 'Move window to the right' })
+-- vim.keymap.set('n', '<C-S-j>', '<C-w>J', { desc = 'Move window to the lower' })
+-- vim.keymap.set('n', '<C-S-k>', '<C-w>K', { desc = 'Move window to the upper' })
 
 -- resize window
-vim.keymap.set('n', '<C-A-h>', '<C-w><', { desc = 'Move window to the left' })
-vim.keymap.set('n', '<C-A-l>', '<C-w>>', { desc = 'Move window to the right' })
-vim.keymap.set('n', '<C-A-j>', '<C-w>+', { desc = 'Move window to the lower' })
-vim.keymap.set('n', '<C-A-k>', '<C-w>-', { desc = 'Move window to the upper' })
+-- vim.keymap.set('n', '<C-A-h>', '<C-w><', { desc = 'Move window to the left' })
+-- vim.keymap.set('n', '<C-A-l>', '<C-w>>', { desc = 'Move window to the right' })
+-- vim.keymap.set('n', '<C-A-j>', '<C-w>+', { desc = 'Move window to the lower' })
+-- vim.keymap.set('n', '<C-A-k>', '<C-w>-', { desc = 'Move window to the upper' })
 
-vim.keymap.set('n', '<leader>m', '`', { desc = 'Go to Mark' })
-
--- vim.keymap.set({ 'i', 'c' }, '<C-p>', '<Up>', { silent = true })
--- vim.keymap.set({ 'i', 'c' }, '<C-n>', '<Down>', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-p>', '<Up>', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-n>', '<Down>', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-a>', '<Home>', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-f>', '<Right>', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-b>', '<Left>', { silent = true })
@@ -398,10 +357,6 @@ require('lazy').setup(
           changedelete = { text = '~' },
         },
       },
-    },
-
-    {
-      'tpope/vim-fugitive',
     },
 
     -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -873,12 +828,12 @@ require('lazy').setup(
       cmd = { 'ConformInfo' },
       keys = {
         {
-          '<leader>f',
+          '<leader>cf',
           function()
             require('conform').format { async = true, lsp_format = 'fallback' }
           end,
           mode = '',
-          desc = '[F]ormat buffer',
+          desc = '[F]ormat',
         },
       },
       opts = {
@@ -1035,7 +990,7 @@ require('lazy').setup(
       --
       -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
       'folke/tokyonight.nvim',
-      priority = 1000, -- Make sure to load this before all the other start plugins.
+      priority = 1000, -- Make sure to load this before all the ot"Find Config File" her start plugins.
       config = function()
         ---@diagnostic disable-next-line: missing-fields
         require('tokyonight').setup {
@@ -1054,33 +1009,6 @@ require('lazy').setup(
     -- Highlight todo, notes, etc in comments
     { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
-    -- {
-    --   'nvim-java/nvim-java',
-    --   dependencies = {
-    --     'williamboman/mason.nvim',
-    --     'williamboman/mason-lspconfig.nvim',
-    --     'neovim/nvim-lspconfig',
-    --     'mfussenegger/nvim-dap',
-    --   },
-    --   config = function()
-    --     require('java').setup {
-    --       jdtls = {
-    --         version = 'v1.43.0',
-    --       },
-    --       jdk = {
-    --         -- install jdk using mason.nvim
-    --         auto_install = true,
-    --         version = '21.0.7',
-    --       },
-    --     }
-    --     require('lspconfig').jdtls.setup {}
-    --   end,
-    --   keys = {
-    --     -- { "<leader>cjr", "<Cmd>JavaRunnerRunMain<Cr>", { desc = "Run Main" } },
-    --     -- { "<leader>cjs", "<Cmd>JavaRunnerStopMain<Cr>", { desc = "Stop Main" } },
-    --   },
-    -- },
-
     { -- Collection of various small independent plugins/modules
       'echasnovski/mini.nvim',
       config = function()
@@ -1091,13 +1019,14 @@ require('lazy').setup(
         --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
         --  - ci'  - [C]hange [I]nside [']quote
         require('mini.ai').setup { n_lines = 500 }
+
         -- Add/delete/replace surroundings (brackets, quotes, etc.)
         --
         -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
         -- - sd'   - [S]urround [D]elete [']quotes
         -- - sr)'  - [S]urround [R]eplace [)] [']
         require('mini.surround').setup()
-        --
+
         -- -- Simple and easy statusline.
         -- --  You could remove this setup call if you don't like it,
         -- --  and try some other statusline plugin
@@ -1113,38 +1042,36 @@ require('lazy').setup(
         -- end
         -- -- ... and there is more!
         -- --  Check out: https://github.com/echasnovski/mini.nvim
-        -- Mini pairs
-        require('mini.pairs').setup {
-          -- In which modes mappings from this `config` should be created
-          modes = { insert = true, command = false, terminal = false },
 
-          -- Global mappings. Each right hand side should be a pair information, a
-          -- table with at least these fields (see more in |MiniPairs.map|):
-          -- - <action> - one of 'open', 'close', 'closeopen'.
-          -- - <pair> - two character string for pair to be used.
-          -- By default pair is not inserted after `\`, quotes are not recognized by
-          -- <CR>, `'` does not insert pair after a letter.
-          -- Only parts of tables can be tweaked (others will use these defaults).
-          mappings = {
-            ['('] = { action = 'open', pair = '()', neigh_pattern = '[^\\].' },
-            ['['] = { action = 'open', pair = '[]', neigh_pattern = '[^\\].' },
-            ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\].' },
-            ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
+        -- -- Mini pairs
+        -- require('mini.pairs').setup {
+        --   -- In which modes mappings from this `config` should be created
+        --   modes = { insert = true, command = false, terminal = false },
+        --   -- Global mappings. Each right hand side should be a pair information, a
+        --   -- table with at least these fields (see more in |MiniPairs.map|):
+        --   -- - <action> - one of 'open', 'close', 'closeopen'.
+        --   -- - <pair> - two character string for pair to be used.
+        --   -- By default pair is not inserted after `\`, quotes are not recognized by
+        --   -- <CR>, `'` does not insert pair after a letter.
+        --   -- Only parts of tables can be tweaked (others will use these defaults).
+        --   mappings = {
+        --     ['('] = { action = 'open', pair = '()', neigh_pattern = '[^\\].' },
+        --     ['['] = { action = 'open', pair = '[]', neigh_pattern = '[^\\].' },
+        --     ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\].' },
+        --     ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
+        --     [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
+        --     [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
+        --     ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+        --     ['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
+        --     ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^\\].', register = { cr = false } },
+        --     ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%a\\].', register = { cr = false } },
+        --     ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^\\].', register = { cr = false } },
+        --   },
+        -- }
 
-            [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
-            [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
-            ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
-            ['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
-
-            ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^\\].', register = { cr = false } },
-            ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%a\\].', register = { cr = false } },
-            ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^\\].', register = { cr = false } },
-          },
-        }
-        -- -- Mini tabline
         -- require('mini.tabline').setup()
-        -- -- Mini pick config
         -- require('mini.pick').setup()
+        -- require('mini.statusline').setup()
       end,
     },
 
@@ -1261,6 +1188,7 @@ require('lazy').setup(
     -- Oil Config
     {
       'stevearc/oil.nvim',
+      enabled = false,
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       keys = {
         { '<leader>oe', '<Cmd>Oil<Cr>', desc = 'Oil' },
@@ -1484,79 +1412,7 @@ require('lazy').setup(
       ---@type snacks.Config
       opts = {
         bigfile = { enabled = true },
-        dashboard = {
-          enabled = false,
-          ---@class snacks.dashboard.Config
-          ---@field enabled? boolean
-          ---@field sections snacks.dashboard.Section
-          ---@field formats table<string, snacks.dashboard.Text|fun(item:snacks.dashboard.Item, ctx:snacks.dashboard.Format.ctx):snacks.dashboard.Text>
-          width = 60,
-          row = nil, -- dashboard position. nil for center
-          col = nil, -- dashboard position. nil for center
-          pane_gap = 4, -- empty columns between vertical panes
-          autokeys = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', -- autokey sequence
-          -- These settings are used by some built-in sections
-          preset = {
-            -- Defaults to a picker that supports `fzf-lua`, `telescope.nvim` and `mini.pick`
-            ---@type fun(cmd:string, opts:table)|nil
-            pick = nil,
-            -- Used by the `keys` section to show keymaps.
-            -- Set your custom keymaps here.
-            -- When using a function, the `items` argument are the default keymaps.
-            ---@type snacks.dashboard.Item[]
-            keys = {
-              { icon = ' ', key = 'f', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files')" },
-              { icon = ' ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
-              { icon = ' ', key = 'g', desc = 'Find Text', action = ":lua Snacks.dashboard.pick('live_grep')" },
-              { icon = ' ', key = 'r', desc = 'Recent Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
-              { icon = ' ', key = 'z', desc = 'Change Directory', action = ":lua Snacks.dashboard.pick('zoxide')" },
-              { icon = ' ', key = 'c', desc = 'Config', action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
-              { icon = ' ', key = 's', desc = 'Restore Session', section = 'session' },
-              { icon = '󰒲 ', key = 'L', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
-              { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
-            },
-            -- Used by the `header` section
-            header = [[
-██       ██     ██ ██    ██    ███    ████████  ██     ██ ████ ██     ██ 
-██       ██     ██ ███   ██   ██ ██   ██     ██ ██     ██  ██  ███   ███ 
-██       ██     ██ ████  ██  ██   ██  ██     ██ ██     ██  ██  ████ ████ 
-██       ██     ██ ██ ██ ██ ██     ██ ████████  ██     ██  ██  ██ ███ ██ 
-██       ██     ██ ██  ████ █████████ ██   ██    ██   ██   ██  ██     ██ 
-██       ██     ██ ██   ███ ██     ██ ██    ██    ██ ██    ██  ██     ██ 
-████████  ███████  ██    ██ ██     ██ ██     ██    ███    ████ ██     ██ 
-]],
-          },
-          -- item field formatters
-          formats = {
-            icon = function(item)
-              if item.file and item.icon == 'file' or item.icon == 'directory' then
-                return M.icon(item.file, item.icon)
-              end
-              return { item.icon, width = 2, hl = 'icon' }
-            end,
-            footer = { '%s', align = 'center' },
-            header = { '%s', align = 'center' },
-            file = function(item, ctx)
-              local fname = vim.fn.fnamemodify(item.file, ':~')
-              fname = ctx.width and #fname > ctx.width and vim.fn.pathshorten(fname) or fname
-              if #fname > ctx.width then
-                local dir = vim.fn.fnamemodify(fname, ':h')
-                local file = vim.fn.fnamemodify(fname, ':t')
-                if dir and file then
-                  file = file:sub(-(ctx.width - #dir - 2))
-                  fname = dir .. '/…' .. file
-                end
-              end
-              local dir, file = fname:match '^(.*)/(.+)$'
-              return dir and { { dir .. '/', hl = 'dir' }, { file, hl = 'file' } } or { { fname, hl = 'file' } }
-            end,
-          },
-          sections = {
-            { section = 'header' },
-            { section = 'keys', gap = 1, padding = 1 },
-            { section = 'startup' },
-          },
-        },
+        dashboard = { enabled = false },
         explorer = { enabled = true },
         indent = { enabled = true },
         input = { enabled = false },
@@ -1585,17 +1441,15 @@ require('lazy').setup(
           end,
           desc = 'Open Dashboard',
         },
-
         {
           '<leader>l',
           '<Cmd>Lazy<Cr>',
           desc = 'Open Lazy',
         },
-
         {
           '<leader><space>',
           function()
-            Snacks.picker.files {
+            Snacks.picker.smart {
               hidden = true,
             }
           end,
@@ -1669,11 +1523,6 @@ require('lazy').setup(
         },
         {
           '<leader>fc',
-          '<Cmd>e ~/.config/lvim/init.lua<Cr>',
-          { desc = 'Find Config File', silent = true },
-        },
-        {
-          '<leader>fC',
           function()
             Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
           end,
@@ -2059,6 +1908,14 @@ require('lazy').setup(
           desc = 'Dismiss All Notifications',
         },
         {
+          '<c-/>',
+          function()
+            Snacks.terminal()
+          end,
+          desc = 'Toggle Terminal',
+          mode = { 'n', 't' },
+        },
+        {
           '<a-/>',
           function()
             Snacks.terminal 'zellij'
@@ -2137,157 +1994,6 @@ require('lazy').setup(
       end,
     },
 
-    -- Themes
-    {
-      'sponkurtus2/angelic.nvim',
-      lazy = false,
-    },
-    {
-      'srt0/codescope.nvim',
-      lazy = false,
-    },
-    {
-      'catppuccin/nvim',
-      name = 'catppuccin',
-    },
-    {
-      'rebelot/kanagawa.nvim',
-      name = 'kanagawa',
-    },
-    {
-      'rose-pine/neovim',
-    },
-    {
-      'shaunsingh/nord.nvim',
-    },
-    {
-      'ellisonleao/gruvbox.nvim',
-    },
-    {
-      'echasnovski/mini.base16',
-      version = false,
-    },
-
-    -- -- Colorizer
-    -- {
-    --   'brenoprata10/nvim-highlight-colors',
-    --   config = function()
-    --     require('nvim-highlight-colors').setup {
-    --       ---Render style
-    --       ---@usage 'background'|'foreground'|'virtual'
-    --       render = 'background',
-    --       ---Set virtual symbol (requires render to be set to 'virtual')
-    --       virtual_symbol = '■',
-    --       ---Set virtual symbol suffix (defaults to '')
-    --       virtual_symbol_prefix = '',
-    --       ---Set virtual symbol suffix (defaults to ' ')
-    --       virtual_symbol_suffix = ' ',
-    --       ---Set virtual symbol position()
-    --       ---@usage 'inline'|'eol'|'eow'
-    --       ---inline mimics VS Code style
-    --       ---eol stands for `end of column` - Recommended to set `virtual_symbol_suffix = ''` when used.
-    --       ---eow stands for `end of word` - Recommended to set `virtual_symbol_prefix = ' ' and virtual_symbol_suffix = ''` when used.
-    --       virtual_symbol_position = 'inline',
-    --       ---Highlight hex colors, e.g. '#FFFFFF'
-    --       enable_hex = true,
-    --       ---Highlight short hex colors e.g. '#fff'
-    --       enable_short_hex = true,
-    --       ---Highlight rgb colors, e.g. 'rgb(0 0 0)'
-    --       enable_rgb = true,
-    --       ---Highlight hsl colors, e.g. 'hsl(150deg 30% 40%)'
-    --       enable_hsl = true,
-    --       ---Highlight ansi colors, e.g '\033[0;34m'
-    --       enable_ansi = true,
-    --       -- Highlight hsl colors without function, e.g. '--foreground: 0 69% 69%;'
-    --       enable_hsl_without_function = true,
-    --       ---Highlight CSS variables, e.g. 'var(--testing-color)'
-    --       enable_var_usage = true,
-    --       ---Highlight named colors, e.g. 'green'
-    --       enable_named_colors = true,
-    --       ---Highlight tailwind colors, e.g. 'bg-blue-500'
-    --       enable_tailwind = false,
-    --       ---Set custom colors
-    --       ---Label must be properly escaped with '%' to adhere to `string.gmatch`
-    --       --- :help string.gmatch
-    --       -- custom_colors = {
-    --       --   { label = "%-%-theme%-primary%-color", color = "#0f1219" },
-    --       --   { label = "%-%-theme%-secondary%-color", color = "#5a5d64" },
-    --       -- },
-    --       -- Exclude filetypes or buftypes from highlighting e.g. 'exclude_buftypes = {'text'}'
-    --       exclude_filetypes = {},
-    --       exclude_buftypes = {},
-    --       -- Exclude buffer from highlighting e.g. 'exclude_buffer = function(bufnr) return vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > 1000000 end'
-    --       exclude_buffer = function(bufnr) end,
-    --     }
-    --     vim.keymap.set('n', '<leader>oca', function()
-    --       require('nvim-highlight-colors').turnOn()
-    --     end, { silent = true, desc = 'Colorizer Attach To Buffer' })
-    --     vim.keymap.set('n', '<leader>oct', function()
-    --       require('nvim-highlight-colors').toggle()
-    --     end, { silent = true, desc = 'Colorizer Toggle' })
-    --     vim.keymap.set('n', '<leader>ocr', function()
-    --       require('nvim-highlight-colors').turnOff()
-    --       require('nvim-highlight-colors').turnOn()
-    --     end, { silent = true, desc = 'Colorizer Reload All Buffers' })
-    --     vim.keymap.set('n', '<leader>ocd', function()
-    --       require('nvim-highlight-colors').turnOff()
-    --     end, { silent = true, desc = 'Colorizer Detach To Buffer' })
-    --   end,
-    -- },
-
-    -- -- Markview
-    -- {
-    --   'OXY2DEV/markview.nvim',
-    --   lazy = false,
-    --   opts = {
-    --     preview = {
-    --       modes = { 'n', 'no', 'c' },
-    --       hybrid_modes = { 'n' },
-    --       linewise_hybrid_mode = true,
-    --     },
-    --     -- list_items
-    --     markdown = {
-    --       list_items = {
-    --         enable = true,
-    --         wrap = false,
-    --         indent_size = 2,
-    --         shift_width = 4,
-    --         marker_minus = {
-    --           add_padding = true,
-    --           conceal_on_checkboxes = true,
-    --           text = '',
-    --           hl = 'MarkviewListItemMinus',
-    --         },
-    --         marker_plus = {
-    --           add_padding = true,
-    --           conceal_on_checkboxes = true,
-    --           text = '',
-    --           hl = 'MarkviewListItemPlus',
-    --         },
-    --         marker_star = {
-    --           add_padding = true,
-    --           conceal_on_checkboxes = true,
-    --           text = '',
-    --           hl = 'MarkviewListItemStar',
-    --         },
-    --         marker_dot = {
-    --           add_padding = true,
-    --           conceal_on_checkboxes = true,
-    --         },
-    --         marker_parenthesis = {
-    --           add_padding = true,
-    --           conceal_on_checkboxes = true,
-    --         },
-    --       },
-    --     },
-    --   },
-    --   keys = {
-    --     { '<leader>omm', '<Cmd>Markview Toggle<Cr>', { desc = 'Toggle Markview' } },
-    --     { '<leader>omh', '<Cmd>Markview hybridToggle<Cr>', { desc = 'Toggle Hybrid Mode' } },
-    --     { '<leader>omp', '<Cmd>Markview splitToggle<Cr>', { desc = 'Toggle Split View' } },
-    --   },
-    -- },
-
     --  Harpoon
     {
       'ThePrimeagen/harpoon',
@@ -2335,111 +2041,6 @@ require('lazy').setup(
       end,
     },
 
-    -- screenkey
-    {
-      'NStefan002/screenkey.nvim',
-      lazy = false,
-      version = '*', -- or branch = "main", to use the latest commit
-      config = function()
-        require('screenkey').setup {
-          win_opts = {
-            row = vim.o.lines - vim.o.cmdheight - 1,
-            col = vim.o.columns - 1,
-            relative = 'editor',
-            anchor = 'SE',
-            width = 40,
-            height = 3,
-            border = 'single',
-            title = 'Screenkey',
-            title_pos = 'center',
-            style = 'minimal',
-            focusable = true,
-            noautocmd = true,
-          },
-          compress_after = 3,
-          clear_after = 3,
-          disable = {
-            filetypes = {},
-            buftypes = {},
-            events = false,
-          },
-          show_leader = true,
-          group_mappings = true,
-          display_infront = {},
-          display_behind = {},
-          filter = function(keys)
-            return keys
-          end,
-          -- separator = ' ',
-          keys = {
-            ['<TAB>'] = '󰌒',
-            ['<CR>'] = '󰌑',
-            ['<ESC>'] = 'Esc',
-            ['<SPACE>'] = '␣',
-            ['<BS>'] = '󰌥',
-            ['<DEL>'] = 'Del',
-            ['<LEFT>'] = '',
-            ['<RIGHT>'] = '',
-            ['<UP>'] = '',
-            ['<DOWN>'] = '',
-            ['<HOME>'] = 'Home',
-            ['<END>'] = 'End',
-            ['<PAGEUP>'] = 'PgUp',
-            ['<PAGEDOWN>'] = 'PgDn',
-            ['<INSERT>'] = 'Ins',
-            ['<F1>'] = '󱊫',
-            ['<F2>'] = '󱊬',
-            ['<F3>'] = '󱊭',
-            ['<F4>'] = '󱊮',
-            ['<F5>'] = '󱊯',
-            ['<F6>'] = '󱊰',
-            ['<F7>'] = '󱊱',
-            ['<F8>'] = '󱊲',
-            ['<F9>'] = '󱊳',
-            ['<F10>'] = '󱊴',
-            ['<F11>'] = '󱊵',
-            ['<F12>'] = '󱊶',
-            ['CTRL'] = 'Ctrl',
-            ['ALT'] = 'Alt',
-            ['SUPER'] = '󰘳',
-            ['<leader>'] = '<leader>',
-          },
-        }
-      end,
-    },
-
-    -- snaks image
-    {
-      'folke/snacks.nvim',
-      ---@type snacks.Config
-      opts = {
-        image = {
-          -- your image configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-        },
-      },
-    },
-
-    -- img-clip
-    {
-      'HakonHarnes/img-clip.nvim',
-      event = 'VeryLazy',
-      opts = {
-        -- add options here
-        -- or leave it empty to use the default settings
-        default = {
-          -- file and directory options
-          dir_path = 'assets', ---@type string | fun(): string
-          use_absolute_path = false, ---@type boolean | fun(): boolean
-        },
-      },
-      keys = {
-        -- suggested keymap
-        { '<leader>op', '<cmd>PasteImage<cr>', desc = 'Paste image from system clipboard' },
-      },
-    },
-
     -- Neogit
 
     {
@@ -2450,8 +2051,7 @@ require('lazy').setup(
         'folke/snacks.nvim', -- optional
       },
       config = function()
-        vim.keymap.set('n', '<leader>gn', ':Neogit kind=floating<Cr>', { silent = true, desc = 'Neogit Float' })
-        vim.keymap.set('n', '<leader>gN', ':Neogit kind=replace<Cr>', { silent = true, desc = 'Neogit' })
+        vim.keymap.set('n', '<leader>G', ':Neogit kind=replace<Cr>', { silent = true, desc = 'Neogit' })
       end,
     },
 
@@ -2506,339 +2106,3 @@ require('lazy').setup(
     },
   }
 )
---
--- -- Neovide Font Resize
--- if vim.g.neovide then
---   vim.g.neovide_padding_top = 8
---   vim.g.neovide_padding_bottom = 8
---   vim.g.neovide_padding_right = 8
---   vim.g.neovide_padding_left = 8
---   FontSize = 12
---   function SetFontSize(amount)
---     FontSize = FontSize + amount
---     vim.o.guifont = 'JetbrainsmonoNL NF:h' .. FontSize
---     -- print('Font Size: ' .. FontSize)
---   end
---
---   SetFontSize(0)
---   vim.keymap.set('n', '<C-=>', function()
---     SetFontSize(1)
---   end, { desc = 'Increase Font Size in neovide', silent = true })
---   vim.keymap.set('n', '<C-->', function()
---     SetFontSize(-1)
---   end, { desc = 'Decrease Font Size in neovide', silent = true })
---   vim.keymap.set('n', '<C-0>', function()
---     FontSize = 12
---     vim.o.guifont = 'JetbrainsmonoNL NF:h' .. FontSize
---     print('Font Size: ' .. FontSize)
---   end, { desc = 'Restore Font Size in neovide', silent = true })
--- end
---
--- -- Statusline
--- vim.o.updatetime = 50
---
--- local modes = {
---   ['n'] = 'NORMAL',
---   ['no'] = 'NORMAL',
---   ['v'] = 'VISUAL',
---   ['V'] = 'VISUAL LINE',
---   [''] = 'VISUAL BLOCK',
---   ['s'] = 'SELECT',
---   ['S'] = 'SELECT LINE',
---   [''] = 'SELECT BLOCK',
---   ['i'] = 'INSERT',
---   ['ic'] = 'INSERT',
---   ['R'] = 'REPLACE',
---   ['Rv'] = 'VISUAL REPLACE',
---   ['c'] = 'COMMAND',
---   ['cv'] = 'VIM EX',
---   ['ce'] = 'EX',
---   ['r'] = 'PROMPT',
---   ['rm'] = 'MOAR',
---   ['r?'] = 'CONFIRM',
---   ['!'] = 'SHELL',
---   ['t'] = 'TERMINAL',
--- }
--- local function mode()
---   local current_mode = vim.api.nvim_get_mode().mode
---   return string.format('%s', modes[current_mode]):upper()
--- end
--- local function update_mode_colors()
---   local current_mode = vim.api.nvim_get_mode().mode
---   local mode_color = '%#StatusLineAccent#'
---   if current_mode == 'n' then
---     mode_color = '%#MiniStatuslineModeNormal#'
---     -- mode_color = '%#StatuslineAccent#'
---   elseif current_mode == 'i' or current_mode == 'ic' then
---     mode_color = '%#MiniStatuslineModeInsert#'
---     -- mode_color = '%#StatuslineInsertAccent#'
---   elseif current_mode == 'v' or current_mode == 'V' or current_mode == '' then
---     mode_color = '%#MiniStatuslineModeVisual#'
---     -- mode_color = '%#StatuslineVisualAccent#'
---   elseif current_mode == 'R' then
---     mode_color = '%#MiniStatuslineModeReplace#'
---     -- mode_color = '%#StatuslineReplaceAccent#'
---   elseif current_mode == 'c' then
---     mode_color = '%#MiniStatuslineModeCommand#'
---     -- mode_color = '%#StatuslineCmdLineAccent#'
---   elseif current_mode == 't' then
---     mode_color = '%#MiniStatuslineModeOther#'
---     -- mode_color = '%#StatuslineTerminalAccent#'
---   end
---   return mode_color
--- end
--- local function filepath()
---   local fpath = vim.fn.fnamemodify(vim.fn.expand '%', ':~:.:h')
---   if fpath == '' or fpath == '.' then
---     return ' '
---   end
---   return string.format(' %%<%s/', fpath)
--- end
--- local function filename()
---   local fname = vim.fn.expand '%:t'
---   if fname == '' then
---     return ''
---   end
---   return fname .. ' '
--- end
---
--- local function lsp()
---   local count = {}
---   local levels = {
---     errors = 'Error',
---     warnings = 'Warn',
---     info = 'Info',
---     hints = 'Hint',
---   }
---
---   for k, level in pairs(levels) do
---     count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
---   end
---
---   local errors = ''
---   local warnings = ''
---   local hints = ''
---   local info = ''
---
---   if count['errors'] ~= 0 then
---     errors = '  ' .. count['errors']
---     -- errors = ' %#LspDiagnosticsSignError# ' .. count['errors']
---   end
---   if count['warnings'] ~= 0 then
---     warnings = '  ' .. count['warnings']
---     -- warnings = ' %#LspDiagnosticsSignWarning# ' .. count['warnings']
---   end
---   if count['hints'] ~= 0 then
---     hints = '  ' .. count['hints']
---     -- hints = ' %#LspDiagnosticsSignHint# ' .. count['hints']
---   end
---   if count['info'] ~= 0 then
---     info = '  ' .. count['info']
---     -- info = ' %#LspDiagnosticsSignInformation# ' .. count['info']
---   end
---
---   return errors .. warnings .. hints .. info .. '%#Normal#'
--- end
--- local function filetype()
---   return string.format(' %s', vim.bo.filetype):upper()
--- end
--- local function lineinfo()
---   if vim.bo.filetype == 'alpha' then
---     return ''
---   end
---   return ' %P %l:%c '
--- end
--- local function git()
---   local git_info = vim.b.gitsigns_status_dict
---   if not git_info or git_info.head == '' then
---     return ''
---   end
---   local added = git_info.added and ('󰐙 ' .. git_info.added .. ' ') or ''
---   -- local added = git_info.added and ('+' .. git_info.added .. ' ') or ''
---   -- local added = git_info.added and ('%#GitSignsAdd#+' .. git_info.added .. ' ') or ''
---   local changed = git_info.changed and ('󰝶 ' .. git_info.changed .. ' ') or ''
---   -- local changed = git_info.changed and ('~' .. git_info.changed .. ' ') or ''
---   -- local changed = git_info.changed and ('%#GitSignsChange#~' .. git_info.changed .. ' ') or ''
---   local removed = git_info.removed and ('󰍷 ' .. git_info.removed .. ' ') or ''
---   -- local removed = git_info.removed and ('-' .. git_info.removed .. ' ') or ''
---   -- local removed = git_info.removed and ('%#GitSignsDelete#-' .. git_info.removed .. ' ') or ''
---   if git_info.added == 0 then
---     added = ''
---   end
---   if git_info.changed == 0 then
---     changed = ''
---   end
---   if git_info.removed == 0 then
---     removed = ''
---   end
---   return table.concat {
---     ' ',
---     added,
---     changed,
---     removed,
---     -- '%#GitSignsAdd# ',
---     ' ',
---     git_info.head,
---     '%#Normal#',
---   }
--- end
---
--- vim.o.laststatus = 3
---
--- local function Winbar()
---   local normal_color = '%#Normal#'
---   local mode = '%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}'
---   local file_name = '%-.16t'
---   local buf_nr = '[%n]'
---   local modified = ' %-m'
---   local file_type = ' %y'
---   local right_align = '%='
---   local line_no = '%10([%l/%L%)]'
---   local pct_thru_file = '%5p%%'
---   return string.format('%s%s%s', normal_color, file_name, modified)
--- end
--- vim.opt.winbar = Winbar()
---
--- Statusline = {}
---
--- -- '%#Statusline#',
--- Statusline.active = function()
---   return table.concat {
---     -- ' %#Normal# ',
---     update_mode_colors(),
---     ' ',
---     mode(),
---     ' %#Normal# ',
---     filepath(),
---     filename(),
---     '%m',
---     '%=%#StatusLineExtra#',
---     '%#Normal#',
---     git(),
---     lsp(),
---     filetype(),
---     lineinfo(),
---   }
--- end
--- vim.api.nvim_exec(
---   [[
---   augroup Statusline
---   au!
---   au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
---   au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
---   au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
---   augroup END
--- ]],
---   false
--- )
--- function Statusline.inactive()
---   return '%#Normal#%f'
--- end
---
--- function Statusline.short()
---   return '%#StatusLineNC#   NvimTree'
--- end
---
-
----------------
--- OBSIDIAN ---
----------------
--- Obsidian Daily Note
-vim.keymap.set('n', '<leader>ood', function()
-  local current_date = os.date '%Y-%m-%d'
-  local daily_note_date = '~/Notes/DailyNotes/' .. current_date .. '.md'
-  vim.cmd('e ' .. daily_note_date)
-end, { desc = 'Daily Note' })
-
-vim.keymap.set('n', '<leader>ooc', function()
-  local current_date_and_time = os.date '%Y-%m-%d %H:%M:%S'
-  local commit_date = 'vault backup: ' .. current_date_and_time
-  vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
-  print('Commit: ' .. commit_date)
-end, { desc = 'Commit All Changes' })
-
-vim.keymap.set('n', '<leader>oop', function()
-  vim.cmd '!git push'
-  print 'Push Changes'
-end, { desc = 'Push Changes' })
-
--- Minimal Search
-local function GrepSearch()
-  local input = vim.fn.input 'Grep for > '
-  if input == '' then
-    return
-  end
-
-  local cmd = string.format("grep -rnI --exclude-dir=.git --exclude-dir=node_modules --color=never '%s' .", input)
-
-  local tmp = vim.fn.tempname()
-  vim.fn.system(cmd .. ' > ' .. vim.fn.fnameescape(tmp))
-
-  vim.cmd('cfile ' .. tmp)
-  vim.cmd 'copen'
-  os.remove(tmp)
-end
-
-vim.api.nvim_create_user_command('Grep', GrepSearch, {})
-
-vim.keymap.set('n', '<space>o/', ':Grep<CR>', { noremap = true, silent = true, desc = 'Grep (Quickfix)' })
-
-function FzfLike()
-  -- 1. Coletar arquivos
-  local handle = io.popen "find . -type f -not -path '*/.git/*'"
-  if not handle then
-    vim.notify("Erro ao executar 'find'", vim.log.levels.ERROR)
-    return
-  end
-
-  local files = {}
-  for file in handle:lines() do
-    table.insert(files, file)
-  end
-  handle:close()
-
-  -- 2. Entrada para filtro
-  vim.ui.input({ prompt = 'Find for > ' }, function(input)
-    if not input then
-      return
-    end
-    input = input:lower()
-
-    local filtered = {}
-    for _, file in ipairs(files) do
-      if file:lower():find(input, 1, true) then
-        table.insert(filtered, file)
-      end
-    end
-
-    local count = #filtered
-
-    if count == 0 then
-      vim.notify('No File Found.', vim.log.levels.INFO)
-      return
-    end
-
-    -- 3. Adicionar ao quickfix list
-    local qf_entries = {}
-    for _, file in ipairs(filtered) do
-      table.insert(qf_entries, { filename = file, lnum = 1, col = 1, text = file })
-    end
-    vim.fn.setqflist({}, ' ', {
-      title = 'FzfLike Results',
-      items = qf_entries,
-    })
-
-    -- 4. Abrir automaticamente se só tiver um arquivo
-    if count == 1 then
-      vim.cmd('edit ' .. filtered[1])
-    else
-      -- 5. Mostrar quickfix list
-      vim.cmd 'copen'
-    end
-  end)
-end
-vim.keymap.set('n', '<space>of', FzfLike, { desc = 'Fuzzy Find (Quickfix)' })
-
-vim.keymap.set('n', '<leader>G', ':Git<Cr>')
-
-vim.cmd 'let g:netrw_banner = 0'
