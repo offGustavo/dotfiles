@@ -300,6 +300,12 @@ else
   -----------------------------
   ---  REMAP DEFAULT PICKER ---
   -----------------------------
+
+  vim.keymap.set("n", "<leader>gg", function()
+    Snacks.lazygit()
+    vim.keymap.set("t", "<Esc><Esc>", "<Nop>", { buffer = true })
+  end, { desc = "Open Lazygit" })
+
   vim.keymap.set("n", "<S-Esc>", function()
     Snacks.explorer({
       hidden = true,
@@ -444,11 +450,11 @@ vim.keymap.set("n", "<leader>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
 -----------
 -- Tmux ---
 -----------
-if vim.env.TMUX then
-  vim.keymap.set(
-    "n",
-    "<leader>gg",
-    ":! ~/scripts/tmux-scripts/tmux-open.sh lazygit<Cr>",
-    { silent = true, desc = "Open Lazygit in Tmux" }
-  )
-end
+-- if vim.env.TMUX then
+--   vim.keymap.set(
+--     "n",
+--     "<leader>gg",
+--     ":! ~/scripts/tmux-scripts/tmux-open.sh lazygit<Cr>",
+--     { silent = true, desc = "Open Lazygit in Tmux" }
+--   )
+-- end
