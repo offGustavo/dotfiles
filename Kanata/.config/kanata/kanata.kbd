@@ -1,4 +1,4 @@
-;;vim: set ft=lisp
+;; vim: ft=lisp
 (defcfg 
   movemouse-smooth-diagonals yes
   process-unmapped-keys yes
