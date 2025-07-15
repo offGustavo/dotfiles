@@ -110,15 +110,6 @@
   mid (movemouse-speed 300)
   slw (movemouse-speed 100)
 
-  ;; Edit Layer
-  edt (layer-switch edit)
-  eal ( tap-hold 100 300 left lalt  )
-  emd ( tap-hold 100 300 down lmet  )
-  ers ( tap-hold 100 300 rght lsft )
-  edf ( tap-hold 100 300 pgdn lctrl )
-  eee ( tap-hold 100 300 ret lctrl  )
-  ebe ( tap-hold 100 300 @bas lctrl  )
-
   )
 
 ;;  (deflayer base
@@ -164,20 +155,11 @@
 
 (deflayer navigation
           _   
-          @edt f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
+          _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
           _    1    2    3    4    5    6    7    8    9    0    -    =    grv
           _    @aPr @mVd @sVu @cNe caps lft  down up   rght del  bspc _
           _    mute pp   brdn brup menu ins  home end  pgup pgdn _
           _    _    _              lsft           _     _    _
-          )
-
-(deflayer edit
-          @ebe
-          _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
-          _    home up   end  pgup 5    6    7    8    9    0    -    =    grv
-          @ebe  @eal @emd @ers @edf caps lft  down up   rght del  bspc @eee
-          _           bspc del ins v   y  ins  home end  pgup pgdn        _
-          _    _    _              lsft           @ebe  _    _
           )
 
 (deflayer symbols
