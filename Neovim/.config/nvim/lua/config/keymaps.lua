@@ -254,6 +254,7 @@ if vim.g.vscode then
   vim.keymap.set("n", "<leader>/", "<Cmd>call VSCodeNotify('workbench.action.quickTextSearch')<CR>")
   vim.keymap.set("n", "<leader>gg", "<Cmd>call VSCodeNotify('lazygit.openLazygit')<CR>")
   vim.keymap.set("n", "<leader>G", "<Cmd>call VSCodeNotify('fugitive.open')<CR>")
+  vim.keymap.set("n", "<leader>gn", "<Cmd>call VSCodeNotify('magit.status')<CR>")
   vim.keymap.set("n", "gd", "<Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>")
   vim.keymap.set("n", "gr", "<Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>")
   vim.keymap.set("n", "j", "gj")
