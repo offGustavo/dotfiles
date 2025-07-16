@@ -1,5 +1,6 @@
 return {
   "CRAG666/betterTerm.nvim",
+  enabled = false,
   -- dir = "~/Projects/betterTerm.nvim/",
   -- name = "betterTerm",
   -- "offGustavo/betterTerm.nvim",
