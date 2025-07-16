@@ -2106,3 +2106,21 @@ require('lazy').setup(
     },
   }
 )
+
+require 'terminal_tabs'
+
+require('terminal_tabs').setup()
+
+vim.keymap.set({ 'n', 'i', 't' }, '<A-/>', function()
+  require('terminal_tabs').toggle_terminal_window()
+end)
+
+vim.keymap.set({ 'n', 'i', 't' }, '<A-x>', function()
+  require('terminal_tabs').close_terminal()
+end)
+
+for i = 1, 10, 1 do
+  vim.keymap.set({ 'n', 'i', 't' }, '<A-' .. i .. '>', function()
+    require('terminal_tabs').goto_terminal(i)
+  end, { desc = 'Go to Terminal ' .. i .. '' })
+end
