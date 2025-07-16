@@ -234,17 +234,59 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 # export _ZO_FZF_OPTS="$_ZO_FZF_OPTS --style=minimal --preview='tree $(echo {} | awk -F'\t' '{print $2}')'"
 
 
+##################
+### FUNCTIONS  ###
+##################
+
+tmux_open() {
+  # Optional program to run in tmux, default to a clean session
+  local prog="${1:-}"
+
+  # Ask for directory with zoxide + fzf
+  local session
+  session=$(zoxide query -s -l | fzf --no-preview) || return
+
+  # Extract base directory name for tmux session name
+  session_name=$(basename "$session")
+
+  # Change directory
+  __zoxide_cd "$session"
+
+  # Check if tmux session exists
+  if tmux has-session -t "$session_name" 2>/dev/null; then
+    # Attach to existing session
+    tmux attach-session -t "$session_name"
+  else
+    # Start a new tmux session with or without a program
+    if [[ -n "$prog" ]]; then
+      tmux new-session -s "$session_name" "$prog"
+    else
+      tmux new-session -s "$session_name"
+    fi
+  fi
+}
+
+tmux_attach() {
+  # Get a session name from fzf
+  local session
+  session=$(tmux list-sessions -F "#{session_name}" | fzf --no-preview) || return
+
+  # If a session was selected, attach to it
+  if [[ -n "$session" ]]; then
+    tmux attach -t "$session"
+  fi
+}
+
 ##############
 ### KEYMAP ###
 ##############
 
 # Map Alt+o to create a new tmux session with zoxide directory picker
-SESSION_PRINT='{print $2}'
-bindkey -s '^[o' 'SESSION=$(command zoxide query -s -l | fzf --no-preview) && SESSION=$(echo ${SESSION} | awk $SESSION_PRINT) && __zoxide_cd "$SESSION" && SESSION=$(basename "$SESSION") && (tmux has-session -t "$SESSION" 2>/dev/null && tmux attach-session -t "$SESSION" || tmux new-session -s "$SESSION" nvim)\n'
+bindkey -s '^[o' 'tmux_open nvim\n'
+
 # Map Alt+u to picker open tmux session with fzf
-bindkey -s '^[u' 'SESSION=$(tmux list-sessions -F "#{session_name}" | fzf --no-preview) && [ -n "$SESSION" ] && tmux attach -t "$SESSION"\n'
+bindkey -s '^[u' 'tmux_attach\n'
 
 # bindkey -s '^[c' 'FZF_CD_DIR=$(eza -A -D | fzf --preview "command eza -l --color --icons {}") && cd "${FZF_CD_DIR}"\n'
-
 bindkey -s '^[R' 'omz reload\n'
 
