@@ -206,7 +206,7 @@ let g:fzf_vim.preview_window = ['right,50%,<50(up,60%)', 'ctrl-o']
 " let g:fzf_vim.fi les_options =   ['--style', 'minimal', '--no-border']
 " let g:fzf_vim.buffers_options = ['--style', 'minimal', '--no-border']
 " let g:fzf_vim.rg_options =      ['--style', 'minimal', '--no-border']
-" let g:fzf_vim.colors_options =      ['--style', 'minimal', '--no-preview']
+let g:fzf_vim.colors_options =      ['--style', 'minimal', '--no-preview']
 let g:fzf_vim.command_prefix = 'Fzf'
 
 " FZF Keymaps
