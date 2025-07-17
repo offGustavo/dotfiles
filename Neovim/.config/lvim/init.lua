@@ -48,7 +48,7 @@ vim.o.spell = false
 vim.opt.list = false
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
-vim.opt.cursorline = true
+-- vim.opt.cursorline = true
 -- vim.opt.scrolloff = 10
 vim.opt.confirm = true
 vim.o.wrap = false
@@ -568,11 +568,22 @@ require('lazy').setup {
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
-
+      dim_inactive = false,
+      style = "night",
+      transparent = false,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+        -- functions = { bold = true },
+        -- keywords = { bold = true },
+      },
+      on_colors = function(colors)
+        colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
+        colors.bg_statusline = colors.none
+      end,
+    }
+      vim.api.nvim_set_hl(0, "Normal", { bg = "None"})
+      vim.api.nvim_set_hl(0, "NormalNR", { bg = "None"})
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
