@@ -282,7 +282,7 @@ tmux_attach() {
 ##############
 
 # Map Alt+o to create a new tmux session with zoxide directory picker
-bindkey -s '^[o' 'tmux_open nvim\n'
+bindkey -s '^[o' 'tmux-sessionizer.sh\n'
 
 # Map Alt+u to picker open tmux session with fzf
 bindkey -s '^[u' 'tmux_attach\n'
