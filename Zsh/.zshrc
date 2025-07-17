@@ -168,11 +168,11 @@ alias gengar="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/f
 # Exit terminal
 alias :q=exit
 
-# Edit File in Vim
-alias :e=vim
+# Edit File
+alias :e=$EDITOR
 
-# Edit File in Neovim
-alias :E=nvim
+# Edit File in Vim
+alias :E=vim
 
 # Nala aliases
 alias nala='sudo nala'
