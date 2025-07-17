@@ -1,6 +1,3 @@
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
-
 --[[
 
 =====================================================================
@@ -87,14 +84,9 @@ vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>xx', function()
+vim.keymap.set('n', '<leader>cq', function()
   vim.diagnostic.setqflist()
-end, { desc = 'Open diagnostic [Q]uickfix list' })
-
-vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move focus to the upper window' })
+end, { desc = 'Open diagnostic Quickfix list' })
 
 vim.keymap.set({ 'i', 'c' }, '<C-p>', '<Up>', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-n>', '<Down>', { silent = true })
@@ -102,19 +94,12 @@ vim.keymap.set({ 'i', 'c' }, '<C-a>', '<Home>', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-f>', '<Right>', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-b>', '<Left>', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-e>', '<End>', { silent = true })
-vim.keymap.set({ 'i', 'c' }, '<A-d>', '<C-o>dw', { silent = true })
+vim.keymap.set('i', '<A-d>', '<C-o>dw', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-d>', '<C-o>dl', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-k>', '<Esc>lDa', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-u>', '<Esc>d0xi', { silent = true })
 vim.keymap.set('i', '<A-f>', '<C-o>w', { silent = true })
 vim.keymap.set('i', '<A-b>', '<C-o>b', { silent = true })
-vim.keymap.set('i', '<A-}>', '<C-o>}', { silent = true })
-vim.keymap.set('i', '<A-{>', '<C-o>{', { silent = true })
-vim.keymap.set('i', '<A-<>', '<C-o>gg', { silent = true })
-vim.keymap.set('i', '<A->>', '<C-o>G', { silent = true })
-vim.keymap.set('i', '<C-x><C-s>', '<C-o>:w<CR>a', { silent = true })
-vim.keymap.set('i', '<C-x>s', '<C-o>:wa<CR>a', { silent = false })
-vim.keymap.set('i', '<C-x>k', '<C-o>:bd!<CR>', { silent = false })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -136,18 +121,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
--- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins you can run
---    :Lazy update
---
--- NOTE: Here is where you install your plugins.
--- Lazy.nvim start
 require('lazy').setup {
 
   { -- Useful plugin to show you pending keybinds.
@@ -155,58 +128,16 @@ require('lazy').setup {
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
       preset = 'helix',
-      -- delay between pressing a key and opening which-key (milliseconds)
-      -- this setting is independent of vim.opt.timeoutlen
       delay = 0,
-      icons = {
-        -- set icon mappings to true if you have a Nerd Font
-        mappings = vim.g.have_nerd_font,
-        -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
-        -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
-        keys = vim.g.have_nerd_font and {} or {
-          Up = '<Up> ',
-          Down = '<Down> ',
-          Left = '<Left> ',
-          Right = '<Right> ',
-          C = '<C-…> ',
-          M = '<M-…> ',
-          D = '<D-…> ',
-          S = '<S-…> ',
-          CR = '<CR> ',
-          Esc = '<Esc> ',
-          ScrollWheelDown = '<ScrollWheelDown> ',
-          ScrollWheelUp = '<ScrollWheelUp> ',
-          NL = '<NL> ',
-          BS = '<BS> ',
-          Space = '<Space> ',
-          Tab = '<Tab> ',
-          F1 = '<F1>',
-          F2 = '<F2>',
-          F3 = '<F3>',
-          F4 = '<F4>',
-          F5 = '<F5>',
-          F6 = '<F6>',
-          F7 = '<F7>',
-          F8 = '<F8>',
-          F9 = '<F9>',
-          F10 = '<F10>',
-          F11 = '<F11>',
-          F12 = '<F12>',
-        },
-      },
-
-      -- Document existing key chains
       spec = {
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
-        { '<leader>r', group = '[R]ename/[R]eference' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>f', group = '[F]ind' },
         { '<leader>u', group = '[U]i' },
         { '<leader>g', group = '[G]it' },
         { '<leader>b', group = '[B]uffer' },
         { '<leader>w', group = '[W]indow' },
-        { '<leader>t', group = '[T]oggle' },
         { '<leader>o', group = '[O]ptions/Custom', mode = { 'n' } },
       },
     },
@@ -313,17 +244,15 @@ require('lazy').setup {
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>cr', vim.lsp.buf.rename, 'Rename')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+          map('<leader>ca', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
-          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-
-          -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
+          map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method
           ---@param bufnr? integer some lsp support methods only in specific files
@@ -336,11 +265,6 @@ require('lazy').setup {
             end
           end
 
-          -- The following two autocommands are used to highlight references of the
-          -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
-          -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
@@ -363,16 +287,6 @@ require('lazy').setup {
                 vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
               end,
             })
-          end
-
-          -- The following code creates a keymap to toggle inlay hints in your
-          -- code, if the language server you are using supports them
-          --
-          -- This may be unwanted, since they displace some of your code
-          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            map('<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-            end, '[T]oggle Inlay [H]ints')
           end
         end,
       })
@@ -945,7 +859,7 @@ require('lazy').setup {
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
-    enabled = false,
+    enabled = true,
     ---@type snacks.Config
     opts = {
       bigfile = { enabled = true },
@@ -1543,5 +1457,4 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>G', ':Neogit kind=replace<Cr>', { silent = true, desc = 'Neogit' })
     end,
   },
-
 }
