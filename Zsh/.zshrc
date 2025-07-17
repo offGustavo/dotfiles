@@ -238,33 +238,33 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 ### FUNCTIONS  ###
 ##################
 
-tmux_open() {
-  # Optional program to run in tmux, default to a clean session
-  local prog="${1:-}"
-
-  # Ask for directory with zoxide + fzf
-  local session
-  session=$(zoxide query -s -l | fzf --no-preview) || return
-
-  # Extract base directory name for tmux session name
-  session_name=$(basename "$session")
-
-  # Change directory
-  __zoxide_cd "$session"
-
-  # Check if tmux session exists
-  if tmux has-session -t "$session_name" 2>/dev/null; then
-    # Attach to existing session
-    tmux attach-session -t "$session_name"
-  else
-    # Start a new tmux session with or without a program
-    if [[ -n "$prog" ]]; then
-      tmux new-session -s "$session_name" "$prog"
-    else
-      tmux new-session -s "$session_name"
-    fi
-  fi
-}
+# tmux_open() {
+#   # Optional program to run in tmux, default to a clean session
+#   local prog="${1:-}"
+#
+#   # Ask for directory with zoxide + fzf
+#   local session
+#   session=$(zoxide query -s -l | fzf --no-preview) || return
+#
+#   # Extract base directory name for tmux session name
+#   session_name=$(basename "$session")
+#
+#   # Change directory
+#   __zoxide_cd "$session"
+#
+#   # Check if tmux session exists
+#   if tmux has-session -t "$session_name" 2>/dev/null; then
+#     # Attach to existing session
+#     tmux attach-session -t "$session_name"
+#   else
+#     # Start a new tmux session with or without a program
+#     if [[ -n "$prog" ]]; then
+#       tmux new-session -s "$session_name" "$prog"
+#     else
+#       tmux new-session -s "$session_name"
+#     fi
+#   fi
+# }
 
 tmux_attach() {
   # Get a session name from fzf
