@@ -14,7 +14,7 @@ return {
 
     vim.keymap.set({ "n", "i", "t" }, "<A-m>c", function()
       require("TabTerm").new()
-    end, { desc = "Novo Terminal" })
+    end, { desc = "New Terminal" })
 
     vim.keymap.set({ "n", "i", "t" }, "<A-/>", function()
       require("TabTerm").toggle()
@@ -22,7 +22,7 @@ return {
 
     vim.keymap.set({ "n", "i", "t" }, "<A-m>d", function()
       require("TabTerm").toggle()
-    end)
+    end, { desc = "Detach/Atach TabTerm" })
 
     vim.keymap.set({ "n", "i", "t" }, "<A-x>", function()
       require("TabTerm").close()
@@ -30,15 +30,15 @@ return {
 
     vim.keymap.set({ "n", "i", "t" }, "<A-m>x", function()
       require("TabTerm").close()
-    end)
+    end, { desc = "Close Terminal" })
 
-    vim.keymap.set({ "n", "i", "t" }, "<A-m>,", ":TabTermRename<CR>")
+    vim.keymap.set({ "n", "i", "t" }, "<A-m>,", ":TabTermRename<CR>", {desc = "Rename Terminal"})
 
     vim.keymap.set({ "n", "i", "t" }, "<A-,>", function()
       require("TabTerm").rename()
     end)
 
-    for i = 1, 10, 1 do
+    for i = 1, 9, 1 do
       vim.keymap.set({ "n", "i", "t" }, "<A-m>" .. i, function()
         require("TabTerm").goto(i)
       end, { desc = "Go to Terminal " .. i .. "" })
