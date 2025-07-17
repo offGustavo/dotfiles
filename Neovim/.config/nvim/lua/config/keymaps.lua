@@ -370,9 +370,14 @@ else
   -----------------------------
 
   vim.keymap.set("n", "<leader>gg", function()
+    Snacks.lazygit({ cwd = LazyVim.root.git() })
+    vim.keymap.set("t", "<Esc><Esc>", "<Nop>", { buffer = true })
+  end, { desc = "Lazygit" })
+
+  vim.keymap.set("n", "<leader>gG", function()
     Snacks.lazygit()
     vim.keymap.set("t", "<Esc><Esc>", "<Nop>", { buffer = true })
-  end, { desc = "Open Lazygit" })
+  end, { desc = "Lazygit (cwd)" })
 
   vim.keymap.set("n", "<S-Esc>", function()
     Snacks.explorer({
