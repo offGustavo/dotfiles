@@ -45,7 +45,7 @@ vim.opt.splitbelow = true
 vim.o.spell = false
 vim.opt.list = false
 vim.opt.inccommand = 'split'
-vim.opt.cursorline = true
+-- vim.opt.cursorline = true
 -- vim.opt.scrolloff = 10
 vim.opt.confirm = true
 vim.o.wrap = false
@@ -82,7 +82,6 @@ vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
 vim.keymap.set('n', '<leader>cq', function()
   vim.diagnostic.setqflist()
 end, { desc = 'Open diagnostic Quickfix list' })
@@ -99,6 +98,8 @@ vim.keymap.set({ 'i', 'c' }, '<C-k>', '<Esc>lDa', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-u>', '<Esc>d0xi', { silent = true })
 vim.keymap.set('i', '<A-f>', '<C-o>w', { silent = true })
 vim.keymap.set('i', '<A-b>', '<C-o>b', { silent = true })
+
+vim.keymap.set('n', '<leader>G', ':term lazygit<Cr>:startinsert<Cr>', { desc = 'Lazygit' })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -640,6 +641,7 @@ require('lazy').setup {
   { -- FzfLua
     'ibhagwan/fzf-lua',
     keys = {
+      -- { '<leader><space>', '<Cmd>FzfLua combine pickers=buffers,oldfiles,files winopts.title=\\ Smart\\ <Cr>', desc = 'Smart' },
       { '<leader><space>', '<Cmd>FzfLua files<Cr>', desc = 'Find Files' },
       { '<leader>,', '<Cmd>FzfLua buffers<Cr>', desc = 'Buffers' },
       { '<leader>/', '<Cmd>FzfLua live_grep<Cr>', desc = 'Live Grep' },
@@ -649,27 +651,31 @@ require('lazy').setup {
       { '<leader>fc', '<Cmd>FzfLua files cwd=~/.config/lvim/<Cr>', desc = 'Find Config Files' },
       { '<leader>z', '<Cmd>FzfLua zoxide<Cr>', desc = 'Zoxide' },
     },
-    config = function()
-      require('fzf-lua').setup {
-        { 'border-fused', 'telescope' },
-        fzf_opts = { ['--style'] = 'full' },
-        fzf_colors = {
-          true,
-          ['fg'] = { 'fg', 'CursorLine' },
-          ['bg'] = { 'bg', 'Normal' },
-          ['hl'] = { 'fg', 'Comment' },
-          ['fg+'] = { 'fg', 'Normal'},
-          ['bg+'] = { 'bg', { 'CursorLine', 'Normal' } },
-          ['hl+'] = { 'fg', 'Statement' },
-          ['info'] = { 'fg', 'PreProc' },
-          ['prompt'] = { 'fg', 'Conditional' },
-          ['pointer'] = { 'fg', 'Exception' },
-          ['marker'] = { 'fg', 'Keyword' },
-          ['spinner'] = { 'fg', 'Label' },
-          ['header'] = { 'fg', 'Comment' },
-          ['gutter'] = '-1',
+    opts = {
+      { 'border-fused' },
+      winopts = {
+        preview = {
+          vertical = 'up:55%',
+          layout = 'vertical',
         },
-      }
-    end,
+      },
+      fzf_opts = { ['--style'] = 'full' },
+      fzf_colors = {
+        true,
+        ['fg'] = { 'fg', 'CursorLine' },
+        ['bg'] = { 'bg', 'Normal' },
+        ['hl'] = { 'fg', 'Comment' },
+        ['fg+'] = { 'fg', 'Normal' },
+        ['bg+'] = { 'bg', { 'CursorLine', 'Normal' } },
+        ['hl+'] = { 'fg', 'Statement' },
+        ['info'] = { 'fg', 'PreProc' },
+        ['prompt'] = { 'fg', 'Conditional' },
+        ['pointer'] = { 'fg', 'Exception' },
+        ['marker'] = { 'fg', 'Keyword' },
+        ['spinner'] = { 'fg', 'Label' },
+        ['header'] = { 'fg', 'Comment' },
+        ['gutter'] = '-1',
+      },
+    },
   },
 }
