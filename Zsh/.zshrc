@@ -211,6 +211,7 @@ fi
     --color=separator:#ff9e64 \
     --color=spinner:#ff007c \
     --preview 'if [ -d {} ]; then eza --icons --git -l -G -h  -l --icons {}; else fzf-preview.sh {}; fi' \
+    --preview-window up
     --multi  \
     --bind ctrl-q:toggle-all,alt-q:toggle-all \
     --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
