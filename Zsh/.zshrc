@@ -20,7 +20,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="smt" # set by `omz`
+ZSH_THEME="random" # set by `omz`
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -154,6 +154,7 @@ alias ti='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-pre
 # # lunarvim config
 LVIM='NVIM_APPNAME=lvim nvim'
 alias lvim=$LVIM
+alias vim=$LVIM
 alias :L=$LVIM
 
 # minimal tmux config
