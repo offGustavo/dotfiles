@@ -29,13 +29,13 @@ end, { silent = true, desc = "Open Dashboard" })
 ----------------
 ---- Normal Mode to Terminal
 ---- Remap default C-/ Lazyvim
-vim.keymap.set({ "n", "t", "i", "v" }, "<c-/>", function()
-  Snacks.terminal("zellij")
-end, { silent = true, desc = "Open Float Terminal" })
+-- vim.keymap.set({ "n", "t", "i", "v" }, "<c-/>", function()
+--   Snacks.terminal("zellij")
+-- end, { silent = true, desc = "Open Float Terminal" })
 
-vim.keymap.set({ "n", "t", "i", "v" }, "<leader>tf", function()
-  Snacks.terminal("zellij")
-end, { silent = true, desc = "Open Float  Terminal" })
+-- vim.keymap.set({ "n", "t", "i", "v" }, "<leader>tf", function()
+--   Snacks.terminal("zellij")
+-- end, { silent = true, desc = "Open Float  Terminal" })
 
 vim.keymap.set("n", "<leader>tn", "<Cmd>terminal<Cr>", { silent = true, desc = "New Buffer Terminal" })
 vim.keymap.set("n", "<leader>tv", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
@@ -59,11 +59,14 @@ vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 -- resize window
 vim.keymap.set("n", "<C-A-h>", "<C-w><", { desc = "Move window to the left" })
 vim.keymap.set("n", "<C-A-l>", "<C-w>>", { desc = "Move window to the right" })
-vim.keymap.set("n", "<C-A-j>", "<C-w>+", { desc = "Move window to the lower" })
 vim.keymap.set("n", "<C-A-k>", "<C-w>-", { desc = "Move window to the upper" })
-
+vim.keymap.set("n", "<C-A-j>", "<C-w>+", { desc = "Move window to the lower" })
 -- Close Window
 vim.keymap.set("n", "<leader>wc", "<Cmd>close<Cr>")
+
+-- Toggle Comment
+vim.keymap.set("n", "<C-/>", ":normal gcc<cr>", { desc = "Toggle Comment", silent = true })
+vim.keymap.set("v", "<C-/>", ":normal gc<cr>", { desc = "Toggle Comment", silent = true })
 
 -- Move Lines Up/Down
 vim.keymap.set("v", "<S-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move Line Up" })
@@ -123,6 +126,13 @@ vim.keymap.set(
 
 -- Diagnostic keymaps (quickstart keymaps)
 
+---------------
+--- LazyVim ---
+---------------
+vim.keymap.del("n", "<leader>l")
+vim.keymap.set("n", "<leader>ll", ":Lazy<Cr>", { desc = "Lazy", silent = true })
+vim.keymap.set("n", "<leader>lL", ":LazyExtras<Cr>", { desc = "LazyVim Extras", silent = true })
+
 ----------------
 --- Quickfix ---
 ----------------
@@ -169,6 +179,7 @@ vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" 
 vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
 
+-- Toggle Options
 Snacks.toggle
   .new({
     id = "toggle_sing_and_line_column",
@@ -188,6 +199,21 @@ Snacks.toggle
     end,
   })
   :map("<leader>on")
+
+Snacks.toggle
+  .new({
+    id = "toggle_snacks_animated",
+    name = "Snacks Animated",
+    get = function()
+      return vim.g.snacks_animate == true
+    end,
+    set = function(state)
+      vim.g.snacks_animate = state
+    end,
+  })
+  :map("<leader>oa")
+
+Snacks.toggle.option("cursorline", { off = false, on = true }):map("<leader>ol")
 
 --------------------
 ---- TABBY/TABS ----
