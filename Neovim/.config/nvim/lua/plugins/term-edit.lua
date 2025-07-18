@@ -1,0 +1,42 @@
+return {}
+-- return {
+--   "chomosuke/term-edit.nvim",
+--   event = "TermOpen",
+--   version = "1.*",
+--   config = function()
+--     require("term-edit").setup({
+--       -- Mandatory option:
+--       -- Set this to a lua pattern that would match the end of your prompt.
+--       -- Or a table of multiple lua patterns where at least one would match the
+--       -- end of your prompt at any given time.
+--       -- For most bash/zsh user this is '%$ '.
+--       -- For most powershell/fish user this is '> '.
+--       -- For most windows cmd user this is '>'.
+--       prompt_end = "%$ ",
+--       -- How to write lua patterns: https://www.lua.org/pil/20.2.html
+--     })
+--   end,
+-- }
+
+-- return {
+--   "xb-bx/editable-term.nvim",
+--   config = function()
+--     local editableterm = require("editable-term")
+--     editableterm.setup({
+--       promts = {
+--         ["^%(gdb%) "] = {}, -- gdb promt
+--         ["➜  ~ "] = {}, -- gdb promt
+--         ["^>>> "] = {}, -- python PS1
+--         ["^... "] = {}, -- python PS2
+--         ["some_other_prompt"] = {
+--           keybinds = {
+--             clear_current_line = "keys to clear the line",
+--             goto_line_start = "keys to goto line start",
+--             forward_char = "keys to move forward one character",
+--           },
+--         },
+--       },
+--       wait_for_keys_delay = 50, -- amount of miliseconds to wait for shell to process keys
+--     })
+--   end,
+-- }

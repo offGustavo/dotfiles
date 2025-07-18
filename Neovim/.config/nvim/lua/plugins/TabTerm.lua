@@ -1,12 +1,10 @@
-return {
+ return {
   dir = "~/Projects/TabTerm.nvim/",
   config = function()
-    require("TabTerm").setup()
-    -- require('tabterminal').setup({
-    --     separator = "",  -- Outro símbolo triangular
-    --     separator_highlight = "%#MyHighlightGroup#",  -- Grupo de highlight personalizado
-    --     default_highlight = "%#Normal#"  -- Cor para abas não selecionadas
-    -- })
+    -- require("TabTerm").setup()
+    require("TabTerm").setup({
+      -- separator = "",
+    })
 
     vim.keymap.set({ "n", "i", "t" }, "<A-n>", function()
       require("TabTerm").new()
