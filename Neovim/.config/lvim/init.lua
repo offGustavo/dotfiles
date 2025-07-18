@@ -25,13 +25,11 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
-vim.g.have_nerd_font = true
-
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.mouse = 'a'
 vim.opt.showmode = false
--- vim.o.cmdheight = 0
+vim.o.cmdheight = 0
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
@@ -46,9 +44,8 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.o.spell = false
 vim.opt.list = false
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
--- vim.opt.cursorline = true
+vim.opt.cursorline = true
 -- vim.opt.scrolloff = 10
 vim.opt.confirm = true
 vim.o.wrap = false
@@ -59,6 +56,8 @@ vim.o.shiftwidth = 2 -- Number of spaces inserted when indenting
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.showmode = true
+vim.o.showcmd = true
+vim.o.showcmdloc = 'statusline'
 vim.o.foldmethod = 'indent'
 
 -- Keymaps
@@ -122,29 +121,27 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
-      preset = 'helix',
-      delay = 0,
+      preset = 'classic',
+      delay = 200,
       spec = {
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
-        { '<leader>d', group = '[D]ocument' },
-        { '<leader>s', group = '[S]earch' },
+        -- { '<leader>d', group = '[D]ocument' },
+        -- { '<leader>s', group = '[S]earch' },
         { '<leader>f', group = '[F]ind' },
         { '<leader>u', group = '[U]i' },
-        { '<leader>g', group = '[G]it' },
-        { '<leader>b', group = '[B]uffer' },
+        -- { '<leader>g', group = '[G]it' },
+        -- { '<leader>b', group = '[B]uffer' },
         { '<leader>w', group = '[W]indow' },
-        { '<leader>o', group = '[O]ptions/Custom', mode = { 'n' } },
+        -- { '<leader>o', group = '[O]ptions/Custom', mode = { 'n' } },
       },
     },
   },
 
-  -- LSP Plugins
-  {
+  { -- LSP Plugins
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     'folke/lazydev.nvim',
@@ -157,7 +154,7 @@ require('lazy').setup {
     },
   },
 
-  {
+  { -- LSP Config
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -568,31 +565,28 @@ require('lazy').setup {
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require('tokyonight').setup {
-      dim_inactive = false,
-      style = "night",
-      transparent = false,
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
-        -- functions = { bold = true },
-        -- keywords = { bold = true },
-      },
-      on_colors = function(colors)
-        colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
-        colors.bg_statusline = colors.none
-      end,
-    }
-      vim.api.nvim_set_hl(0, "Normal", { bg = "None"})
-      vim.api.nvim_set_hl(0, "NormalNR", { bg = "None"})
+        dim_inactive = false,
+        style = 'night',
+        transparent = false,
+        styles = {
+          sidebars = 'transparent',
+          floats = 'transparent',
+          -- functions = { bold = true },
+          -- keywords = { bold = true },
+        },
+        on_colors = function(colors)
+          colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
+          colors.bg_statusline = colors.none
+        end,
+      }
+      vim.api.nvim_set_hl(0, 'Normal', { bg = 'None' })
+      vim.api.nvim_set_hl(0, 'NormalNR', { bg = 'None' })
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
-
-  -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -641,831 +635,41 @@ require('lazy').setup {
       },
       indent = { enable = true, disable = { 'ruby' } },
     },
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 
-  -- Oil Config
-  {
-    'stevearc/oil.nvim',
-    enabled = true,
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+  { -- FzfLua
+    'ibhagwan/fzf-lua',
     keys = {
-      { '<leader>oe', '<Cmd>Oil<Cr>', desc = 'Oil' },
-      { '<leader><Cr>', '<Cmd>Oil --float<Cr>', desc = 'Oil' },
+      { '<leader><space>', '<Cmd>FzfLua files<Cr>', desc = 'Find Files' },
+      { '<leader>,', '<Cmd>FzfLua buffers<Cr>', desc = 'Buffers' },
+      { '<leader>/', '<Cmd>FzfLua live_grep<Cr>', desc = 'Live Grep' },
+      { '<leader>uC', '<Cmd>FzfLua colorschemes<Cr>', desc = 'Colorschemes' },
+      { '<leader>fa', '<Cmd>FzfLua<Cr>', desc = 'FzfLua Pickers' },
+      { '<leader>fA', '<Cmd>FzfLua global<Cr>', desc = 'FzfLua Global Picker' },
+      { '<leader>fc', '<Cmd>FzfLua files cwd=~/.config/lvim/<Cr>', desc = 'Find Config Files' },
+      { '<leader>z', '<Cmd>FzfLua zoxide<Cr>', desc = 'Zoxide' },
     },
     config = function()
-      require('oil').setup {
-        -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
-        -- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
-        default_file_explorer = false,
-        -- Id is automatically added at the beginning, and name at the end
-        -- See :help oil-columns
-        columns = {
-          'icon',
-          -- "permissions",
-          -- "size",
-          -- "mtime",
-        },
-        -- Buffer-local options to use for oil buffers
-        buf_options = {
-          buflisted = false,
-          bufhidden = 'hide',
-        },
-        -- Window-local options to use for oil buffers
-        win_options = {
-          wrap = false,
-          signcolumn = 'no',
-          cursorcolumn = false,
-          foldcolumn = '0',
-          spell = false,
-          list = false,
-          conceallevel = 3,
-          concealcursor = 'nvic',
-        },
-        -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
-        delete_to_trash = true,
-        -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
-        skip_confirm_for_simple_edits = true,
-        -- Selecting a new/moved/renamed file or directory will prompt you to save changes first
-        -- (:help prompt_save_on_select_new_entry)
-        prompt_save_on_select_new_entry = true,
-        -- Oil will automatically delete hidden buffers after this delay
-        -- You can set the delay to false to disable cleanup entirely
-        -- Note that the cleanup process only starts when none of the oil buffers are currently displayed
-        cleanup_delay_ms = 2000,
-        lsp_file_methods = {
-          -- Enable or disable LSP file operations
-          enabled = true,
-          -- Time to wait for LSP file operations to complete before skipping
-          timeout_ms = 1000,
-          -- Set to true to autosave buffers that are updated with LSP willRenameFiles
-          -- Set to "unmodified" to only save unmodified buffers
-          autosave_changes = false,
-        },
-        -- Constrain the cursor to the editable parts of the oil buffer
-        -- Set to `false` to disable, or "name" to keep it on the file names
-        constrain_cursor = 'editable',
-        -- Set to true to watch the filesystem for changes and reload oil
-        watch_for_changes = false,
-        -- Keymaps in oil buffer. Can be any value that `vim.keymap.set` accepts OR a table of keymap
-        -- options with a `callback` (e.g. { callback = function() ... end, desc = "", mode = "n" })
-        -- Additionally, if it is a string that matches "actions.<name>",
-        -- it will use the mapping at require("oil.actions").<name>
-        -- Set to `false` to remove a keymap
-        -- See :help oil-actions for a list of all available actions
-        keymaps = {
-          ['g?'] = { 'actions.show_help', mode = 'n' },
-          ['<CR>'] = 'actions.select',
-          ['<C-h>'] = { 'actions.select', opts = { horizontal = true } },
-          ['<C-t>'] = { 'actions.select', opts = { tab = true } },
-          ['<C-p>'] = 'actions.preview',
-          ['<C-c>'] = { 'actions.close', mode = 'n' },
-          ['<Esc><Esc>'] = { 'actions.close', mode = 'n' },
-          ['<C-l>'] = 'actions.refresh',
-          ['-'] = { 'actions.parent', mode = 'n' },
-          ['<Bs>'] = { 'actions.parent', mode = 'n' },
-          ['_'] = { 'actions.open_cwd', mode = 'n' },
-          ['`'] = { 'actions.cd', mode = 'n' },
-          ['~'] = { 'actions.cd', opts = { scope = 'tab' }, mode = 'n' },
-          ['gs'] = { 'actions.change_sort', mode = 'n' },
-          ['gx'] = 'actions.open_external',
-          ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
-          ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
-        },
-        -- Set to false to disable all of the above keymaps
-        use_default_keymaps = true,
-        view_options = {
-          -- Show files and directories that start with "."
-          show_hidden = true,
-          -- This function defines what is considered a "hidden" file
-          is_hidden_file = function(name, bufnr)
-            local m = name:match '^%.'
-            return m ~= nil
-          end,
-          -- This function defines what will never be shown, even when `show_hidden` is set
-          is_always_hidden = function(name, bufnr)
-            return false
-          end,
-          -- Sort file names with numbers in a more intuitive order for humans.
-          -- Can be "fast", true, or false. "fast" will turn it off for large directories.
-          natural_order = 'fast',
-          -- Sort file and directory names case insensitive
-          case_insensitive = false,
-          sort = {
-            -- sort order can be "asc" or "desc"
-            -- see :help oil-columns to see which columns are sortable
-            { 'type', 'asc' },
-            { 'name', 'asc' },
-          },
-          -- Customize the highlight group for the file name
-          highlight_filename = function(entry, is_hidden, is_link_target, is_link_orphan)
-            return nil
-          end,
-        },
-        -- Extra arguments to pass to SCP when moving/copying files over SSH
-        extra_scp_args = {},
-        -- EXPERIMENTAL support for performing file operations with git
-        git = {
-          -- Return true to automatically git add/mv/rm files
-          add = function(path)
-            return false
-          end,
-          mv = function(src_path, dest_path)
-            return false
-          end,
-          rm = function(path)
-            return false
-          end,
-        },
-        -- Configuration for the floating window in oil.open_float
-        float = {
-          -- Padding around the floating window
-          padding = 5,
-          -- max_width and max_height can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-          max_width = 0.5,
-          max_height = 0.5,
-          border = 'rounded',
-          win_options = {
-            winblend = 0,
-          },
-          -- optionally override the oil buffers window title with custom function: fun(winid: integer): string
-          get_win_title = nil,
-          -- preview_split: Split direction: "auto", "left", "right", "above", "below".
-          preview_split = 'auto',
-          -- This is the config that will be passed to nvim_open_win.
-          -- Change values here to customize the layout
-          override = function(conf)
-            return conf
-          end,
-        },
-        -- Configuration for the file preview window
-        preview_win = {
-          -- Whether the preview window is automatically updated when the cursor is moved
-          update_on_cursor_moved = true,
-          -- How to open the preview window "load"|"scratch"|"fast_scratch"
-          preview_method = 'fast_scratch',
-          -- A function that returns true to disable preview on a file e.g. to avoid lag
-          disable_preview = function(filename)
-            return false
-          end,
-          -- Window-local options to use for preview window buffers
-          win_options = {},
-        },
-        -- Configuration for the floating action confirmation window
-        confirmation = {
-          -- Width dimensions can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-          -- min_width and max_width can be a single value or a list of mixed integer/float types.
-          -- max_width = {100, 0.8} means "the lesser of 100 columns or 80% of total"
-          max_width = 0.9,
-          -- min_width = {40, 0.4} means "the greater of 40 columns or 40% of total"
-          min_width = { 40, 0.4 },
-          -- optionally define an integer/float for the exact width of the preview window
-          width = nil,
-          -- Height dimensions can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-          -- min_height and max_height can be a single value or a list of mixed integer/float types.
-          -- max_height = {80, 0.9} means "the lesser of 80 columns or 90% of total"
-          max_height = 0.9,
-          -- min_height = {5, 0.1} means "the greater of 5 columns or 10% of total"
-          min_height = { 5, 0.1 },
-          -- optionally define an integer/float for the exact height of the preview window
-          height = nil,
-          border = 'rounded',
-          win_options = {
-            winblend = 0,
-          },
-        },
-        -- Configuration for the floating progress window
-        progress = {
-          max_width = 0.9,
-          min_width = { 40, 0.4 },
-          width = nil,
-          max_height = { 10, 0.9 },
-          min_height = { 5, 0.1 },
-          height = nil,
-          border = 'rounded',
-          minimized_border = 'none',
-          win_options = {
-            winblend = 0,
-          },
-        },
-        -- Configuration for the floating SSH window
-        ssh = {
-          border = 'rounded',
-        },
-        -- Configuration for the floating keymaps help window
-        keymaps_help = {
-          border = 'rounded',
+      require('fzf-lua').setup {
+        { 'border-fused', 'telescope' },
+        fzf_opts = { ['--style'] = 'full' },
+        fzf_colors = {
+          true,
+          ['fg'] = { 'fg', 'CursorLine' },
+          ['bg'] = { 'bg', 'Normal' },
+          ['hl'] = { 'fg', 'Comment' },
+          ['fg+'] = { 'fg', 'Normal'},
+          ['bg+'] = { 'bg', { 'CursorLine', 'Normal' } },
+          ['hl+'] = { 'fg', 'Statement' },
+          ['info'] = { 'fg', 'PreProc' },
+          ['prompt'] = { 'fg', 'Conditional' },
+          ['pointer'] = { 'fg', 'Exception' },
+          ['marker'] = { 'fg', 'Keyword' },
+          ['spinner'] = { 'fg', 'Label' },
+          ['header'] = { 'fg', 'Comment' },
+          ['gutter'] = '-1',
         },
       }
-    end,
-  },
-
-  -- Snakcs Pickers
-  {
-    'folke/snacks.nvim',
-    priority = 1000,
-    lazy = false,
-    enabled = true,
-    ---@type snacks.Config
-    opts = {
-      bigfile = { enabled = true },
-      dashboard = { enabled = false },
-      explorer = { enabled = true },
-      indent = { enabled = true },
-      input = { enabled = false },
-      notifier = {
-        enabled = false,
-        timeout = 3000,
-      },
-      picker = { enabled = true },
-      quickfile = { enabled = true },
-      scope = { enabled = false },
-      scroll = { enabled = false },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
-      styles = {
-        notification = {
-          -- wo = { wrap = true } -- Wrap notifications
-        },
-      },
-    },
-    keys = {
-      -- Top Pickers & Explorer
-      {
-        '<leader>L',
-        function()
-          Snacks.dashboard.open()
-        end,
-        desc = 'Open Dashboard',
-      },
-      {
-        '<leader>l',
-        '<Cmd>Lazy<Cr>',
-        desc = 'Open Lazy',
-      },
-      {
-        '<leader><space>',
-        function()
-          Snacks.picker.smart {
-            hidden = true,
-          }
-        end,
-        desc = 'Find Files',
-      },
-      {
-        '<leader>z',
-        function()
-          Snacks.picker.zoxide()
-        end,
-        desc = 'Zoxide Picker',
-      },
-      {
-        '<leader>,',
-        function()
-          Snacks.picker.buffers {
-            -- on_show = function()
-            --   vim.cmd.stopinsert()
-            -- end,
-            win = {
-              input = {
-                keys = {
-                  ['d'] = 'bufdelete',
-                },
-              },
-              list = { keys = { ['d'] = 'bufdelete' } },
-            },
-          }
-        end,
-        desc = 'Buffers',
-      },
-      {
-        '<leader>/',
-        function()
-          Snacks.picker.grep {
-            hidden = true,
-          }
-        end,
-        desc = 'Grep',
-      },
-      {
-        '<leader>:',
-        function()
-          Snacks.picker.command_history()
-        end,
-        desc = 'Command History',
-      },
-      {
-        '<leader>n',
-        function()
-          Snacks.picker.notifications()
-        end,
-        desc = 'Notification History',
-      },
-      {
-        '<leader>e',
-        function()
-          Snacks.explorer {
-            -- layout = 'default',
-          }
-        end,
-        desc = 'File Explorer',
-      },
-      -- find
-      {
-        '<leader>fb',
-        function()
-          Snacks.picker.buffers()
-        end,
-        desc = 'Buffers',
-      },
-      {
-        '<leader>fc',
-        function()
-          Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
-        end,
-        desc = 'Find Config File',
-      },
-      {
-        '<leader>ff',
-        function()
-          Snacks.picker.files()
-        end,
-        desc = 'Find Files',
-      },
-      {
-        '<leader>fg',
-        function()
-          Snacks.picker.git_files()
-        end,
-        desc = 'Find Git Files',
-      },
-      {
-        '<leader>fp',
-        function()
-          Snacks.picker.projects()
-        end,
-        desc = 'Projects',
-      },
-      {
-        '<leader>fr',
-        function()
-          Snacks.picker.recent()
-        end,
-        desc = 'Recent',
-      },
-      -- git
-      {
-        '<leader>gb',
-        function()
-          Snacks.picker.git_branches()
-        end,
-        desc = 'Git Branches',
-      },
-      {
-        '<leader>gl',
-        function()
-          Snacks.picker.git_log()
-        end,
-        desc = 'Git Log',
-      },
-      {
-        '<leader>gL',
-        function()
-          Snacks.picker.git_log_line()
-        end,
-        desc = 'Git Log Line',
-      },
-      {
-        '<leader>gs',
-        function()
-          Snacks.picker.git_status()
-        end,
-        desc = 'Git Status',
-      },
-      {
-        '<leader>gS',
-        function()
-          Snacks.picker.git_stash()
-        end,
-        desc = 'Git Stash',
-      },
-      {
-        '<leader>gd',
-        function()
-          Snacks.picker.git_diff()
-        end,
-        desc = 'Git Diff (Hunks)',
-      },
-      {
-        '<leader>gf',
-        function()
-          Snacks.picker.git_log_file()
-        end,
-        desc = 'Git Log File',
-      },
-      -- Grep
-      {
-        '<leader>sb',
-        function()
-          Snacks.picker.lines()
-        end,
-        desc = 'Buffer Lines',
-      },
-      {
-        '<leader>sB',
-        function()
-          Snacks.picker.grep_buffers()
-        end,
-        desc = 'Grep Open Buffers',
-      },
-      {
-        '<leader>sg',
-        function()
-          Snacks.picker.grep()
-        end,
-        desc = 'Grep',
-      },
-      {
-        '<leader>sw',
-        function()
-          Snacks.picker.grep_word()
-        end,
-        desc = 'Visual selection or word',
-        mode = { 'n', 'x' },
-      },
-      -- search
-      {
-        '<leader>s"',
-        function()
-          Snacks.picker.registers()
-        end,
-        desc = 'Registers',
-      },
-      {
-        '<leader>s/',
-        function()
-          Snacks.picker.search_history()
-        end,
-        desc = 'Search History',
-      },
-      {
-        '<leader>sa',
-        function()
-          Snacks.picker.autocmds()
-        end,
-        desc = 'Autocmds',
-      },
-      {
-        '<leader>sb',
-        function()
-          Snacks.picker.lines()
-        end,
-        desc = 'Buffer Lines',
-      },
-      {
-        '<leader>sc',
-        function()
-          Snacks.picker.command_history()
-        end,
-        desc = 'Command History',
-      },
-      {
-        '<leader>sC',
-        function()
-          Snacks.picker.commands()
-        end,
-        desc = 'Commands',
-      },
-      {
-        '<leader>sd',
-        function()
-          Snacks.picker.diagnostics()
-        end,
-        desc = 'Diagnostics',
-      },
-      {
-        '<leader>sD',
-        function()
-          Snacks.picker.diagnostics_buffer()
-        end,
-        desc = 'Buffer Diagnostics',
-      },
-      {
-        '<leader>sh',
-        function()
-          Snacks.picker.help()
-        end,
-        desc = 'Help Pages',
-      },
-      {
-        '<leader>sH',
-        function()
-          Snacks.picker.highlights()
-        end,
-        desc = 'Highlights',
-      },
-      {
-        '<leader>si',
-        function()
-          Snacks.picker.icons()
-        end,
-        desc = 'Icons',
-      },
-      {
-        '<leader>sj',
-        function()
-          Snacks.picker.jumps()
-        end,
-        desc = 'Jumps',
-      },
-      {
-        '<leader>sk',
-        function()
-          Snacks.picker.keymaps()
-        end,
-        desc = 'Keymaps',
-      },
-      {
-        '<leader>sl',
-        function()
-          Snacks.picker.loclist()
-        end,
-        desc = 'Location List',
-      },
-      {
-        '<leader>sm',
-        function()
-          Snacks.picker.marks()
-        end,
-        desc = 'Marks',
-      },
-      {
-        '<leader>sM',
-        function()
-          Snacks.picker.man()
-        end,
-        desc = 'Man Pages',
-      },
-      {
-        '<leader>sp',
-        function()
-          Snacks.picker.lazy()
-        end,
-        desc = 'Search for Plugin Spec',
-      },
-      {
-        '<leader>sq',
-        function()
-          Snacks.picker.qflist()
-        end,
-        desc = 'Quickfix List',
-      },
-      {
-        '<leader>sR',
-        function()
-          Snacks.picker.resume()
-        end,
-        desc = 'Resume',
-      },
-      {
-        '<leader>su',
-        function()
-          Snacks.picker.undo()
-        end,
-        desc = 'Undo History',
-      },
-      {
-        '<leader>uC',
-        function()
-          Snacks.picker.colorschemes()
-        end,
-        desc = 'Colorschemes',
-      },
-      -- LSP
-      {
-        'gd',
-        function()
-          Snacks.picker.lsp_definitions()
-        end,
-        desc = 'Goto Definition',
-      },
-      {
-        'gD',
-        function()
-          Snacks.picker.lsp_declarations()
-        end,
-        desc = 'Goto Declaration',
-      },
-      {
-        'gr',
-        function()
-          Snacks.picker.lsp_references()
-        end,
-        nowait = true,
-        desc = 'References',
-      },
-      {
-        'gI',
-        function()
-          Snacks.picker.lsp_implementations()
-        end,
-        desc = 'Goto Implementation',
-      },
-      {
-        'gy',
-        function()
-          Snacks.picker.lsp_type_definitions()
-        end,
-        desc = 'Goto T[y]pe Definition',
-      },
-      {
-        '<leader>ss',
-        function()
-          Snacks.picker.lsp_symbols()
-        end,
-        desc = 'LSP Symbols',
-      },
-      {
-        '<leader>sS',
-        function()
-          Snacks.picker.lsp_workspace_symbols()
-        end,
-        desc = 'LSP Workspace Symbols',
-      },
-      -- Other
-      {
-        '<leader>uz',
-        function()
-          Snacks.zen()
-        end,
-        desc = 'Toggle Zen Mode',
-      },
-      {
-        '<leader>uZ',
-        function()
-          Snacks.zen.zoom()
-        end,
-        desc = 'Toggle Zoom',
-      },
-      {
-        '<leader>.',
-        function()
-          Snacks.scratch()
-        end,
-        desc = 'Toggle Scratch Buffer',
-      },
-      {
-        '<leader>S',
-        function()
-          Snacks.scratch.select()
-        end,
-        desc = 'Select Scratch Buffer',
-      },
-      {
-        '<leader>n',
-        function()
-          Snacks.notifier.show_history()
-        end,
-        desc = 'Notification History',
-      },
-      {
-        '<leader>bd',
-        function()
-          Snacks.bufdelete()
-        end,
-        desc = 'Delete Buffer',
-      },
-      {
-        '<leader>cR',
-        function()
-          Snacks.rename.rename_file()
-        end,
-        desc = 'Rename File',
-      },
-      {
-        '<leader>gB',
-        function()
-          Snacks.gitbrowse()
-        end,
-        desc = 'Git Browse',
-        mode = { 'n', 'v' },
-      },
-      {
-        '<leader>gg',
-        function()
-          Snacks.lazygit()
-        end,
-        desc = 'Lazygit',
-      },
-      {
-        '<leader>un',
-        function()
-          Snacks.notifier.hide()
-        end,
-        desc = 'Dismiss All Notifications',
-      },
-      {
-        '<c-/>',
-        function()
-          Snacks.terminal()
-        end,
-        desc = 'Toggle Terminal',
-        mode = { 'n', 't' },
-      },
-      {
-        '<a-/>',
-        function()
-          Snacks.terminal 'zellij'
-        end,
-        desc = 'Toggle Terminal',
-        mode = { 'n', 't' },
-      },
-      {
-        '<c-_>',
-        function()
-          Snacks.terminal()
-        end,
-        desc = 'which_key_ignore',
-      },
-      {
-        ']]',
-        function()
-          Snacks.words.jump(vim.v.count1)
-        end,
-        desc = 'Next Reference',
-        mode = { 'n', 't' },
-      },
-      {
-        '[[',
-        function()
-          Snacks.words.jump(-vim.v.count1)
-        end,
-        desc = 'Prev Reference',
-        mode = { 'n', 't' },
-      },
-      {
-        '<leader>N',
-        desc = 'Neovim News',
-        function()
-          Snacks.win {
-            file = vim.api.nvim_get_runtime_file('doc/news.txt', false)[1],
-            width = 0.6,
-            height = 0.6,
-            wo = {
-              spell = false,
-              wrap = false,
-              signcolumn = 'yes',
-              statuscolumn = ' ',
-              conceallevel = 3,
-            },
-          }
-        end,
-      },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'VeryLazy',
-        callback = function()
-          -- Setup some globals for debugging (lazy-loaded)
-          _G.dd = function(...)
-            Snacks.debug.inspect(...)
-          end
-          _G.bt = function()
-            Snacks.debug.backtrace()
-          end
-          vim.print = _G.dd -- Override print to use snacks for `:=` command
-          -- Create some toggle mappings
-          Snacks.toggle.option('spell', { name = 'Spelling' }):map '<leader>us'
-          Snacks.toggle.option('wrap', { name = 'Wrap' }):map '<leader>uw'
-          Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map '<leader>uL'
-          Snacks.toggle.diagnostics():map '<leader>ud'
-          Snacks.toggle.line_number():map '<leader>ul'
-          Snacks.toggle.option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map '<leader>uc'
-          Snacks.toggle.treesitter():map '<leader>uT'
-          Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map '<leader>ub'
-          Snacks.toggle.inlay_hints():map '<leader>uh'
-          Snacks.toggle.indent():map '<leader>ug'
-          Snacks.toggle.dim():map '<leader>uD'
-        end,
-      })
-    end,
-  },
-
-  -- Neogit
-  {
-    'NeogitOrg/neogit',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'sindrets/diffview.nvim', -- optional - Diff integration
-      'folke/snacks.nvim', -- optional
-    },
-    config = function()
-      vim.keymap.set('n', '<leader>G', ':Neogit kind=replace<Cr>', { silent = true, desc = 'Neogit' })
     end,
   },
 }
