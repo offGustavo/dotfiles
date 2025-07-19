@@ -428,6 +428,29 @@ else
   vim.keymap.set("n", "<leader><space>", function()
     Snacks.picker.smart({
       hidden = true,
+      matcher = {
+        frequency = true,
+      },
+      win = {
+        input = {
+          keys = {
+            ["d"] = "bufdelete",
+            ["J"] = "preview_scroll_down",
+            ["K"] = "preview_scroll_up",
+            ["H"] = "preview_scroll_left",
+            ["L"] = "preview_scroll_right",
+          },
+        },
+        list = {
+          keys = {
+            ["d"] = "bufdelete",
+            ["J"] = "preview_scroll_down",
+            ["K"] = "preview_scroll_up",
+            ["H"] = "preview_scroll_left",
+            ["L"] = "preview_scroll_right",
+          },
+        },
+      },
     })
   end, { desc = "Snacks Smart Picker" })
 
