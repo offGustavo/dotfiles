@@ -99,8 +99,6 @@ vim.keymap.set({ 'i', 'c' }, '<C-u>', '<Esc>d0xi', { silent = true })
 vim.keymap.set('i', '<A-f>', '<C-o>w', { silent = true })
 vim.keymap.set('i', '<A-b>', '<C-o>b', { silent = true })
 
-vim.keymap.set('n', '<leader>G', ':term lazygit<Cr>:startinsert<Cr>', { desc = 'Lazygit' })
-
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -122,27 +120,8 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    opts = {
-      preset = 'classic',
-      delay = 200,
-      spec = {
-        { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
-        -- { '<leader>d', group = '[D]ocument' },
-        -- { '<leader>s', group = '[S]earch' },
-        { '<leader>f', group = '[F]ind' },
-        { '<leader>u', group = '[U]i' },
-        -- { '<leader>g', group = '[G]it' },
-        -- { '<leader>b', group = '[B]uffer' },
-        { '<leader>w', group = '[W]indow' },
-        -- { '<leader>o', group = '[O]ptions/Custom', mode = { 'n' } },
-      },
-    },
-  },
 
-  { -- LSP Plugins
+  { -- Lazydev
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     'folke/lazydev.nvim',
@@ -398,14 +377,7 @@ require('lazy').setup {
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {
-      {
-        '<leader>cf',
-        function()
-          require('conform').format { async = true, lsp_format = 'fallback' }
-        end,
-        mode = '',
-        desc = '[F]ormat',
-      },
+      { '<leader>cf', function() require('conform').format { async = true, lsp_format = 'fallback' } end, mode = '', desc = '[F]ormat', },
     },
     opts = {
       notify_on_error = false,
@@ -641,8 +613,8 @@ require('lazy').setup {
   { -- FzfLua
     'ibhagwan/fzf-lua',
     keys = {
-      -- { '<leader><space>', '<Cmd>FzfLua combine pickers=buffers,oldfiles,files winopts.title=\\ Smart\\ <Cr>', desc = 'Smart' },
-      { '<leader><space>', '<Cmd>FzfLua files<Cr>', desc = 'Find Files' },
+      { '<leader><space>', '<Cmd>FzfLua combine pickers=buffers,oldfiles,files winopts.title=\\ Smart\\ <Cr>', desc = 'Smart' },
+      { '<leader>ff', '<Cmd>FzfLua files<Cr>', desc = 'Find Files' },
       { '<leader>,', '<Cmd>FzfLua buffers<Cr>', desc = 'Buffers' },
       { '<leader>/', '<Cmd>FzfLua live_grep<Cr>', desc = 'Live Grep' },
       { '<leader>uC', '<Cmd>FzfLua colorschemes<Cr>', desc = 'Colorschemes' },
