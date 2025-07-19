@@ -1,7 +1,17 @@
 return {
   dir = "~/Projects/TabTerm.nvim/",
   -- 'offGustavo/TabTerm.nvim',
-  opts = {},
+  opts = {
+  separator_right = "",
+  separator_left = "",
+  -- separator_first = "",
+  separator_first = "█",
+  -- separator_first = "",
+  -- separator_first = " ",
+  -- separator_right = "",
+  -- separator_left = "",
+  -- separator_first = "",
+  },
   keys = function()
 
     local keys = {
@@ -80,6 +90,34 @@ return {
         end,
         desc = "Rename Terminal"
       },
+
+      {
+        mode ={ 'i', 'n', 't'},
+        "<A-m>!",
+        function ()
+          print("Test Legal Apenas")
+        end,
+        desc = "which_key_ignore"
+      },
+
+      {
+        mode ={ 'i', 'n', 't'},
+        "<A-m>%",
+        function ()
+          print("Test Legal Apenas")
+        end,
+        desc = "which_key_ignore"
+      },
+
+      {
+        mode ={ 'i', 'n', 't'},
+        "<A-m>\"",
+        function ()
+          print("Test Legal Apenas")
+        end,
+        desc = "which_key_ignore"
+      },
+
 
 
     }
