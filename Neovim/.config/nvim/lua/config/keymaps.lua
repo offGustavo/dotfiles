@@ -410,28 +410,34 @@ else
       hidden = true,
     })
   end, { silent = true, desc = "Toggle File Tree" })
+
   vim.keymap.set("n", "<leader>fa", function()
     Snacks.picker()
   end, { desc = "All Snacks Pickers" })
+
   vim.keymap.set("n", "<leader>z", function()
     Snacks.picker.zoxide()
   end, { desc = "Snacks Picker Zoxide" })
+
   vim.keymap.set("n", "<leader><space>", function()
     Snacks.picker.smart({
       hidden = true,
     })
   end, { desc = "Snacks Smart Picker" })
+
   vim.keymap.set("n", "<leader>/", function()
     Snacks.picker.grep({
       hidden = true,
     })
   end, { desc = "Snacks Picker Grep" })
+
   vim.keymap.set("n", "<leader>sP", function()
     Snacks.picker.grep({
       hidden = true,
       cwd = "~/.config/nvim/lua/",
     })
   end, { desc = "Snacks Picker Grep in Config Files" })
+
   vim.keymap.set({ "n", "i" }, "<leader>,", function()
     Snacks.picker.buffers({
       -- I always want my buffers picker to start in normal mode
