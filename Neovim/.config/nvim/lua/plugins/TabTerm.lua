@@ -1,48 +1,101 @@
- return {
+return {
   dir = "~/Projects/TabTerm.nvim/",
-  config = function()
-    -- require("TabTerm").setup()
-    require("TabTerm").setup({
-      -- separator = "",
-    })
+  -- 'offGustavo/TabTerm.nvim',
+  opts = {},
+  keys = function()
 
-    vim.keymap.set({ "n", "i", "t" }, "<A-n>", function()
-      require("TabTerm").new()
-    end, { desc = "Novo Terminal" })
+    local keys = {
 
-    vim.keymap.set({ "n", "i", "t" }, "<A-m>c", function()
-      require("TabTerm").new()
-    end, { desc = "New Terminal" })
+      {
+        mode ={ 'i', 'n', 't'},
+        "<A-m>c",
+        function ()
+          require('TabTerm').new()
+        end,
+        desc = "Create Terminal"
+      },
 
-    vim.keymap.set({ "n", "i", "t" }, "<A-/>", function()
-      require("TabTerm").toggle()
-    end)
+      {
+        mode ={ 'i', 'n', 't'},
+        "<A-m>x",
+        function ()
+          require('TabTerm').close()
+        end,
+        desc = "Close Terminal"
+      },
 
-    vim.keymap.set({ "n", "i", "t" }, "<A-m>d", function()
-      require("TabTerm").toggle()
-    end, { desc = "Detach/Atach TabTerm" })
+      {
+        mode ={ 'i', 'n', 't'},
+        "<A-m>d",
+        function ()
+          require('TabTerm').toggle()
+        end,
+        desc = "Toggle Terminal"
+      },
 
-    vim.keymap.set({ "n", "i", "t" }, "<A-x>", function()
-      require("TabTerm").close()
-    end)
+      {
+        mode ={ 'i', 'n', 't'},
+        "<A-m>,",
+        function ()
+          require('TabTerm').rename()
+        end,
+        desc = "Rename Terminal"
+      },
 
-    vim.keymap.set({ "n", "i", "t" }, "<A-m>x", function()
-      require("TabTerm").close()
-    end, { desc = "Close Terminal" })
 
-    vim.keymap.set({ "n", "i", "t" }, "<A-m>,", ":TabTermRename<CR>", {desc = "Rename Terminal"})
+      {
+        mode ={ 'i', 'n', 't'},
+        "<A-n>",
+        function ()
+          require('TabTerm').new()
+        end,
+        desc = "Create Terminal"
+      },
 
-    vim.keymap.set({ "n", "i", "t" }, "<A-,>", function()
-      require("TabTerm").rename()
-    end)
+      {
+        mode ={ 'i', 'n', 't'},
+        "<A-x>",
+        function ()
+          require('TabTerm').close()
+        end,
+        desc = "Close Terminal"
+      },
 
-    for i = 1, 9, 1 do
-      vim.keymap.set({ "n", "i", "t" }, "<A-m>" .. i, function()
-        require("TabTerm").goto(i)
-      end, { desc = "Go to Terminal " .. i .. "" })
-      vim.keymap.set({ "n", "i", "t" }, "<A-" .. i .. ">", function()
-        require("TabTerm").goto(i)
-      end, { desc = "Go to Terminal " .. i .. "" })
+      {
+        mode ={ 'i',
+          'n',
+          't'},
+        "<A-/>",
+        function ()
+          require('TabTerm').toggle()
+        end,
+        desc = "Toggle Terminal"
+      },
+
+      {
+        mode ={ 'i', 'n', 't'},
+        "<A-,>",
+        function ()
+          require('TabTerm').rename()
+        end,
+        desc = "Rename Terminal"
+      },
+
+
+    }
+
+    for i = 1, 9 do
+      table.insert(keys, {
+        mode ={ 'i', 'n', 't'},
+        "<A-m>" .. i,
+        function()
+          require('TabTerm').goto(i)
+        end,
+        desc = "Goto to Terminal [" .. i .. "]",
+      })
+
     end
+    return keys
+
   end,
 }
