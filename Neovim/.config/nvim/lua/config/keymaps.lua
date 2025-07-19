@@ -419,6 +419,12 @@ else
     Snacks.picker.zoxide()
   end, { desc = "Snacks Picker Zoxide" })
 
+  vim.keymap.set("n", "<leader>ff", function()
+    Snacks.picker.files({
+      hidden = true,
+    })
+  end, { desc = "Find Files (Root dir)" })
+
   vim.keymap.set("n", "<leader><space>", function()
     Snacks.picker.smart({
       hidden = true,
