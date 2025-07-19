@@ -61,8 +61,8 @@
   ;; Remap
 
   ;; Caps
-  ecc (tap-hold 100 300 esc caps)
-  ;; ecc (tap-hold 100 300 esc lctrl)
+  ;; ecc (tap-hold 100 300 esc caps)
+  ecc (tap-hold 100 300 esc lctrl)
 
   ;; Control
   lcf (tap-hold 100 300 f lctl)
