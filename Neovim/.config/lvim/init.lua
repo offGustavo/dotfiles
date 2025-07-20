@@ -82,22 +82,9 @@ vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
-vim.keymap.set('n', '<leader>cq', function()
+vim.keymap.set('n', '<leader>xx', function()
   vim.diagnostic.setqflist()
 end, { desc = 'Open diagnostic Quickfix list' })
-
-vim.keymap.set({ 'i', 'c' }, '<C-p>', '<Up>', { silent = true })
-vim.keymap.set({ 'i', 'c' }, '<C-n>', '<Down>', { silent = true })
-vim.keymap.set({ 'i', 'c' }, '<C-a>', '<Home>', { silent = true })
-vim.keymap.set({ 'i', 'c' }, '<C-f>', '<Right>', { silent = true })
-vim.keymap.set({ 'i', 'c' }, '<C-b>', '<Left>', { silent = true })
-vim.keymap.set({ 'i', 'c' }, '<C-e>', '<End>', { silent = true })
-vim.keymap.set('i', '<A-d>', '<C-o>dw', { silent = true })
-vim.keymap.set({ 'i', 'c' }, '<C-d>', '<C-o>dl', { silent = true })
-vim.keymap.set({ 'i', 'c' }, '<C-k>', '<Esc>lDa', { silent = true })
-vim.keymap.set({ 'i', 'c' }, '<C-u>', '<Esc>d0xi', { silent = true })
-vim.keymap.set('i', '<A-f>', '<C-o>w', { silent = true })
-vim.keymap.set('i', '<A-b>', '<C-o>b', { silent = true })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -120,6 +107,13 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
+
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+    }
+  },
 
   { -- Lazydev
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -189,7 +183,7 @@ require('lazy').setup {
           --
           -- In this case, we create a function that lets us more easily define mappings specific
           -- for LSP related items. It sets the mode, buffer and description for us each time.
-          local map = function(keys, func, desc, mode)
+          local lsp_map = function(keys, func, desc, mode)
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
@@ -198,9 +192,14 @@ require('lazy').setup {
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
           -- map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-
+          vim.keymap.set("n", 'gd', function ()
+            vim.lsp.buf.definition()
+          end, { desc = "Go to Definition"})
           -- Find references for the word under your cursor.
           -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          -- vim.keymap.set("n", 'gr', function ()
+          --   vim.lsp.buf.references()
+          -- end, { desc = "Go to Definition"})
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
@@ -221,15 +220,15 @@ require('lazy').setup {
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('<leader>cr', vim.lsp.buf.rename, 'Rename')
+          lsp_map('<leader>cr', vim.lsp.buf.rename, 'Rename')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
+          lsp_map('<leader>ca', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
-          map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+          lsp_map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method
           ---@param bufnr? integer some lsp support methods only in specific files
@@ -377,7 +376,14 @@ require('lazy').setup {
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {
-      { '<leader>cf', function() require('conform').format { async = true, lsp_format = 'fallback' } end, mode = '', desc = '[F]ormat', },
+      {
+        '<leader>cf',
+        function()
+          require('conform').format { async = true, lsp_format = 'fallback' }
+        end,
+        mode = '',
+        desc = '[F]ormat',
+      },
     },
     opts = {
       notify_on_error = false,
@@ -650,4 +656,223 @@ require('lazy').setup {
       },
     },
   },
+
+  { -- Harpoon
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      menu = {
+        width = vim.api.nvim_win_get_width(0) - 4,
+      },
+      settings = {
+        save_on_toggle = true,
+      },
+    },
+    keys = function()
+      local keys = {
+        {
+          '<leader>h',
+          function()
+            require('harpoon'):list():add()
+          end,
+          desc = 'Harpoon File',
+        },
+        {
+          '<leader><S-h>',
+          function()
+            local harpoon = require 'harpoon'
+            harpoon.ui:toggle_quick_menu(harpoon:list())
+          end,
+          desc = 'Harpoon Quick Menu',
+        },
+      }
+      for i = 1, 9 do
+        table.insert(keys, {
+          '<leader>' .. i,
+          function()
+            require('harpoon'):list():select(i)
+          end,
+          desc = 'which_key_ignore',
+        })
+      end
+      return keys
+    end,
+  },
+
+  { -- Oil
+    'stevearc/oil.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    keys = {
+      { '<leader><Cr>', '<Cmd>Oil<Cr>', desc = 'Oil' },
+    },
+    config = function()
+      require('oil').setup {
+        columns = {
+          'icon',
+        },
+        delete_to_trash = true,
+        skip_confirm_for_simple_edits = true,
+        prompt_save_on_select_new_entry = true,
+        cleanup_delay_ms = 2000,
+        constrain_cursor = 'editable',
+        watch_for_changes = false,
+        keymaps = {
+          ['g?'] = { 'actions.show_help', mode = 'n' },
+          ['<CR>'] = 'actions.select',
+          ['<C-h>'] = { 'actions.select', opts = { horizontal = true } },
+          ['<C-t>'] = { 'actions.select', opts = { tab = true } },
+          ['gp'] = 'actions.preview',
+          ['<C-c>'] = { 'actions.close', mode = 'n' },
+          ['<Esc><Esc>'] = { 'actions.close', mode = 'n' },
+          ['gq'] = { 'actions.close', mode = 'n' },
+          ['<C-l>'] = 'actions.refresh',
+          ['-'] = { 'actions.parent', mode = 'n' },
+          ['<Bs>'] = { 'actions.parent', mode = 'n' },
+          ['_'] = { 'actions.open_cwd', mode = 'n' },
+          ['`'] = { 'actions.cd', mode = 'n' },
+          ['~'] = { 'actions.cd', opts = { scope = 'tab' }, mode = 'n' },
+          ['gs'] = { 'actions.change_sort', mode = 'n' },
+          ['gx'] = 'actions.open_external',
+          ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
+          ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
+          ['gd'] = {
+            desc = 'Toggle file detail view',
+            callback = function()
+              detail = not detail
+              if detail then
+                require('oil').set_columns { 'icon', 'permissions', 'size', 'mtime' }
+              else
+                require('oil').set_columns { 'icon' }
+              end
+            end,
+          },
+        },
+        use_default_keymaps = true,
+      }
+    end,
+  },
+
 }
+
+if vim.g.vscode then
+  vim.o.showmode = true
+  vim.keymap.set("n", "<leader><space>", function()
+    require("vscode").call("workbench.action.quickOpen")
+  end)
+  vim.keymap.set("n", "<leader>,", function()
+    require("vscode").call("workbench.action.showAllEditors")
+  end)
+  vim.keymap.set("n", "<leader>e", function()
+    require("vscode").call("workbench.view.explorer")
+  end)
+  vim.keymap.set("n", "<leader><Cr>", function()
+    require("vscode").call("oil-code.open")
+  end)
+  vim.keymap.set("n", "<leader>tn", function()
+    require("vscode").call("workbench.action.createTerminalEditor")
+  end)
+  vim.keymap.set("n", "<leader>/", function()
+    require("vscode").call("workbench.action.quickTextSearch")
+  end)
+  vim.keymap.set("n", "<leader>gg", function()
+    require("vscode").call("lazygit.openLazygit")
+  end)
+  vim.keymap.set("n", "<leader>G", function()
+    require("vscode").call("fugitive.open")
+  end)
+  vim.keymap.set("n", "<leader>gn", function()
+    require("vscode").call("magit.status")
+  end)
+  vim.keymap.set("n", "gd", function()
+    require("vscode").call("editor.action.revealDefinition")
+  end)
+  vim.keymap.set("n", "gr", function()
+    require("vscode").call("editor.action.goToReferences")
+  end)
+  vim.keymap.set("n", "j", "gj")
+  vim.keymap.set("n", "k", "gk")
+  vim.keymap.set("n", "<leader>h", function()
+    require("vscode").call("vscode-harpoon.addEditor")
+  end)
+  vim.keymap.set("n", "<leader><s-h>", function()
+    require("vscode").call("vscode-harpoon.editEditors")
+  end)
+  vim.keymap.set("n", "<leader>1", function()
+    require("vscode").call("vscode-harpoon.gotoEditor1")
+  end)
+  vim.keymap.set("n", "<leader>2", function()
+    require("vscode").call("vscode-harpoon.gotoEditor2")
+  end)
+  vim.keymap.set("n", "<leader>3", function()
+    require("vscode").call("vscode-harpoon.gotoEditor3")
+  end)
+  vim.keymap.set("n", "<leader>4", function()
+    require("vscode").call("vscode-harpoon.gotoEditor4")
+  end)
+  vim.keymap.set("n", "<leader>5", function()
+    require("vscode").call("vscode-harpoon.gotoEditor5")
+  end)
+  vim.keymap.set("n", "<leader>6", function()
+    require("vscode").call("vscode-harpoon.gotoEditor6")
+  end)
+  vim.keymap.set("n", "<leader>7", function()
+    require("vscode").call("vscode-harpoon.gotoEditor7")
+  end)
+  vim.keymap.set("n", "<leader>8", function()
+    require("vscode").call("vscode-harpoon.gotoEditor8")
+  end)
+  vim.keymap.set("n", "<leader>9", function()
+    require("vscode").call("vscode-harpoon.gotoEditor9")
+  end)
+  -- config from https://www.reddit.com/r/neovim/comments/1kspket/comment/mtslipm/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+  vim.keymap.set("n", "<leader>cf", function()
+    require("vscode").call("editor.action.formatDocument")
+  end)
+  vim.keymap.set("n", "<leader>bo", function()
+    require("vscode").call("workbench.action.closeOtherEditors")
+  end)
+  vim.keymap.set("n", "<leader>ca", function()
+    require("vscode").call("editor.action.quickFix")
+  end, {})
+  vim.keymap.set("n", "<leader>cr", function()
+    require("vscode").call("editor.action.rename")
+  end, {})
+  vim.keymap.set("n", "K", function()
+    require("vscode").call("editor.action.showHover")
+  end)
+  vim.keymap.set("n", "<leader>wq", function()
+    require("vscode").call("workbench.action.closeActiveEditor")
+  end, {})
+  vim.keymap.set("n", "gd", function()
+    require("vscode").call("editor.action.revealDefinition")
+  end, {})
+  vim.keymap.set("n", "gr", function()
+    require("vscode").call("editor.action.goToReferences")
+  end, {})
+  vim.keymap.set("n", "gi", function()
+    require("vscode").call("editor.action.goToImplementation")
+  end, {})
+  vim.keymap.set("n", "zM", function()
+    require("vscode").call("editor.foldAll")
+  end, { noremap = true, silent = true })
+  vim.keymap.set("n", "zR", function()
+    require("vscode").call("editor.unfoldAll")
+  end, { noremap = true, silent = true })
+  vim.keymap.set("n", "zc", function()
+    require("vscode").call("editor.fold")
+  end, { noremap = true, silent = true })
+  vim.keymap.set("n", "zC", function()
+    require("vscode").call("editor.foldRecursively")
+  end, { noremap = true, silent = true })
+  vim.keymap.set("n", "zo", function()
+    require("vscode").call("editor.unfold")
+  end, { noremap = true, silent = true })
+  vim.keymap.set("n", "zO", function()
+    require("vscode").call("editor.unfoldRecursively")
+  end, { noremap = true, silent = true })
+  vim.keymap.set("n", "za", function()
+    require("vscode").call("editor.toggleFold")
+  end, { noremap = true, silent = true })
+end
+
