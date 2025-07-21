@@ -42,6 +42,7 @@
   ;; Navigation
   lnx (tap-hold 100 300 x @nav) 
   rn, (tap-hold 100 300 , @nav) 
+  rna (tap-dance 300 ( ralt @nav))
   ;; ssc (tap-hold 100 300 spc @nav)
 
   ;; Numbers
@@ -74,10 +75,23 @@
   lsd (tap-hold 100 300 d lsft)
   rsk (tap-hold 100 300 k rsft)
   sVu (tap-hold 100 300 volu lsft)
+  lsa (tap-dance 300 ( lalt lsft))
 
   ;; Space
-  ;; ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
-  ssc (tap-hold-release 100 200 spc lsft)
+  ;;ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
+  ssc (tap-dance 200 
+                 ( 
+                   (tap-hold 100 300 
+                             (macro spc) 
+                             lsft
+                             ) 
+                   (tap-hold 100 300 
+                             (macro spc spc) 
+                             @nav
+                             )
+                   )
+                 )
+  ;; ssc (tap-hold-release 100 200 spc lsft)
 
   ;; Super/Windows
   lms (tap-hold 100 300 s lmet)   
@@ -127,7 +141,7 @@
           tab  @lmq @law e    r    t    y    u    i    @rao @rmp [    ]    \
           @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret
           lsft @lmz @lnx @lnc @lsv b    @rsn @rnm @rn, @rm. /    rsft
-          lctl lmet lalt           @ssc           ralt  @rmm rctl
+          lctl lmet @lsa           @ssc           @rna  @rmm rctl
           )
 
 (deflayer game
