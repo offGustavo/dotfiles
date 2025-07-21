@@ -154,6 +154,7 @@ alias ti='tmux attach -t $(tmux list-session -F "#{session_name}" | fzf --no-pre
 # # lunarvim config
 LVIM='NVIM_APPNAME=lvim nvim'
 alias lvim=$LVIM
+alias vim=$LVIM
 alias :L=$LVIM
 
 # minimal tmux config
