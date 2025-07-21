@@ -125,7 +125,7 @@ bindsym $super+$alt+k resize shrink height 10 px or 10 ppt
 bindsym $super+$alt+l resize grow width 10 px or 10 ppt
 
 # enter fullscreen mode for the focused container
-bindsym $super+f fullscreen toggle
+bindsym $super+shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $super+y layout toggle
