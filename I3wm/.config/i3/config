@@ -53,7 +53,7 @@ font pango:Jetbrains Mono Nerd Font 8
 
 # Autostart
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id  xrandr --output HDMI-1-0 --mode 1920x1080 --left-of eDP-1
+exec --no-startup-id  xrandr --output HDMI-1-0 --mode 1920x1080 --right-of eDP-1
 exec --no-startup-id  nitrogen --restore
 
 # Audio
