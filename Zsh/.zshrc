@@ -3,12 +3,16 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin/$PATH
 export PATH=$PATH:$HOME/scripts
-# export PATH=$PATH:$HOME/.config/emacs/bin
+export PATH=$PATH:$HOME/.config/emacs/bin
 
 # Fix java lsp
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
+# Start Emacs daemon if it's not running
+if ! pgrep -x "emacs" >/dev/null; then
+    emacs --daemon
+fi
 
 # Use neovim as manpager
 export MANPAGER='nvim +Man!'
@@ -104,7 +108,8 @@ eval "$(zoxide init zsh)"
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-export EDITOR='nvim'
+# export EDITOR='nvim'
+export EDITOR='emacsclient -nw "'
 # fi
 
 # Compilation flags
@@ -130,11 +135,13 @@ alias exa="eza --icons --git -l -G -h -a"
 alias cd=z
 
 # Emacs shit
-alias :em='emacsclient -c -a ""'
-alias :et='emacsclient -t -a ""'
-alias :en='emacs -nw ""'
+alias :em='emacsclient -c -a '
+alias :et='emacsclient -t -a '
+alias :en='emacsclient -nw '
+alias emacs='emacsclient -nw '
 
 # Edit File with Sudo
+alias svim='sudoedit'
 alias svim='sudoedit'
 alias :se='sudoedit'
 
