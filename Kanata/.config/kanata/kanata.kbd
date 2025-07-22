@@ -8,7 +8,9 @@
 
 (defchordsv2
   (esc ret) @bas 100 all-released  ()
+  (caps ret) @bas 100 all-released  ()
   (tab \) @edt 100 all-released  ()
+  (tab ret) @edt 100 all-released  ()
   (grv bspc) @gam 100 all-released  ()
   (lsft rsft) caps 100 all-released  ()
   (lctrl rctrl) lrld 100 all-released  ()
