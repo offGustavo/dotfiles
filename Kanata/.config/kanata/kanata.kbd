@@ -3,10 +3,23 @@
   movemouse-smooth-diagonals yes
   process-unmapped-keys yes
   log-layer-changes yes
+  concurrent-tap-hold yes
+  )
+
+(defchordsv2
+  (esc ret) @bas 100 all-released  ()
+  (tab \) @edt 100 all-released  ()
+  (grv bspc) @gam 100 all-released  ()
+  (lsft rsft) caps 100 all-released  ()
+  (lctrl rctrl) lrld 100 all-released  ()
   )
 
 (deflocalkeys-linux
   mctl 89
+  )
+
+(deflocalkeys-win
+  mctl 193
   )
 
 (defsrc
@@ -26,6 +39,7 @@
 
   ;; Define a layer com as teclas de navegação e mídia
   nav (layer-toggle navigation)
+  edt (layer-switch navigation)
 
   ;; Define a layer com os simbolos
   syb (layer-toggle symbols)
@@ -79,19 +93,8 @@
 
   ;; Space
   ;;ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
-  ssc (tap-dance 200 
-                 ( 
-                   (tap-hold 100 300 
-                             (macro spc) 
-                             lsft
-                             ) 
-                   (tap-hold 100 300 
-                             (macro spc spc) 
-                             @nav
-                             )
-                   )
-                 )
-  ;; ssc (tap-hold-release 100 200 spc lsft)
+  ;; ssc (tap-dance 200 ( (tap-hold 100 300 (macro spc) lsft) (tap-hold 100 300 (macro spc spc) @nav)))
+  ssc (tap-hold-release 100 200 spc lsft)
 
   ;; Super/Windows
   lms (tap-hold 100 300 s lmet)   
@@ -150,7 +153,7 @@
           tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
           caps a    s    d    f    g    h    j    k    l    ;    '    ret
           lsft z    x    c    v    b    n    m    ,    .    /    rsft
-          lctl lmet lalt           spc            rmet  @bas rctl 
+          lctl lmet lalt           spc            rmet  menu mctl 
           )
 
 (deflayer numbers
