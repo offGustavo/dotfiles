@@ -201,19 +201,6 @@ Snacks.toggle
   })
   :map("<leader>on")
 
-Snacks.toggle
-  .new({
-    id = "toggle_snacks_animated",
-    name = "Snacks Animated",
-    get = function()
-      return vim.g.snacks_animate == true
-    end,
-    set = function(state)
-      vim.g.snacks_animate = state
-    end,
-  })
-  :map("<leader>oa")
-
 Snacks.toggle.option("cursorline", { off = false, on = true }):map("<leader>ol")
 
 --------------------

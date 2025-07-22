@@ -2,6 +2,7 @@ return {
   "folke/flash.nvim",
   event = "VeryLazy",
   vscode = true,
+  lazy = true,
   ---@type Flash.Config
   opts = {
     -- labels = "abcdefghijklmnopqrstuvwxyz",
