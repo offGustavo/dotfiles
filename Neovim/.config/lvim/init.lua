@@ -109,10 +109,9 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
 
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-    }
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    opts = {},
   },
 
   { -- Lazydev
@@ -192,9 +191,9 @@ require('lazy').setup {
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
           -- map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          vim.keymap.set("n", 'gd', function ()
+          vim.keymap.set('n', 'gd', function()
             vim.lsp.buf.definition()
-          end, { desc = "Go to Definition"})
+          end, { desc = 'Go to Definition' })
           -- Find references for the word under your cursor.
           -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           -- vim.keymap.set("n", 'gr', function ()
@@ -657,10 +656,11 @@ require('lazy').setup {
     },
   },
 
-  { -- Harpoon
+  {
     'ThePrimeagen/harpoon',
+    enabled = true,
     branch = 'harpoon2',
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       menu = {
         width = vim.api.nvim_win_get_width(0) - 4,
@@ -672,14 +672,14 @@ require('lazy').setup {
     keys = function()
       local keys = {
         {
-          '<leader>h',
+          '<leader>ha',
           function()
             require('harpoon'):list():add()
           end,
           desc = 'Harpoon File',
         },
         {
-          '<leader><S-h>',
+          '<leader>he',
           function()
             local harpoon = require 'harpoon'
             harpoon.ui:toggle_quick_menu(harpoon:list())
@@ -694,6 +694,13 @@ require('lazy').setup {
             require('harpoon'):list():select(i)
           end,
           desc = 'which_key_ignore',
+        })
+        table.insert(keys, {
+          '<leader>h' .. i,
+          function()
+            require('harpoon'):list():replace_at(1)
+          end,
+          desc = 'Add to ' .. i,
         })
       end
       return keys
@@ -752,127 +759,125 @@ require('lazy').setup {
       }
     end,
   },
-
 }
 
 if vim.g.vscode then
   vim.o.showmode = true
-  vim.keymap.set("n", "<leader><space>", function()
-    require("vscode").call("workbench.action.quickOpen")
+  vim.keymap.set('n', '<leader><space>', function()
+    require('vscode').call 'workbench.action.quickOpen'
   end)
-  vim.keymap.set("n", "<leader>,", function()
-    require("vscode").call("workbench.action.showAllEditors")
+  vim.keymap.set('n', '<leader>,', function()
+    require('vscode').call 'workbench.action.showAllEditors'
   end)
-  vim.keymap.set("n", "<leader>e", function()
-    require("vscode").call("workbench.view.explorer")
+  vim.keymap.set('n', '<leader>e', function()
+    require('vscode').call 'workbench.view.explorer'
   end)
-  vim.keymap.set("n", "<leader><Cr>", function()
-    require("vscode").call("oil-code.open")
+  vim.keymap.set('n', '<leader><Cr>', function()
+    require('vscode').call 'oil-code.open'
   end)
-  vim.keymap.set("n", "<leader>tn", function()
-    require("vscode").call("workbench.action.createTerminalEditor")
+  vim.keymap.set('n', '<leader>tn', function()
+    require('vscode').call 'workbench.action.createTerminalEditor'
   end)
-  vim.keymap.set("n", "<leader>/", function()
-    require("vscode").call("workbench.action.quickTextSearch")
+  vim.keymap.set('n', '<leader>/', function()
+    require('vscode').call 'workbench.action.quickTextSearch'
   end)
-  vim.keymap.set("n", "<leader>gg", function()
-    require("vscode").call("lazygit.openLazygit")
+  vim.keymap.set('n', '<leader>gg', function()
+    require('vscode').call 'lazygit.openLazygit'
   end)
-  vim.keymap.set("n", "<leader>G", function()
-    require("vscode").call("fugitive.open")
+  vim.keymap.set('n', '<leader>G', function()
+    require('vscode').call 'fugitive.open'
   end)
-  vim.keymap.set("n", "<leader>gn", function()
-    require("vscode").call("magit.status")
+  vim.keymap.set('n', '<leader>gn', function()
+    require('vscode').call 'magit.status'
   end)
-  vim.keymap.set("n", "gd", function()
-    require("vscode").call("editor.action.revealDefinition")
+  vim.keymap.set('n', 'gd', function()
+    require('vscode').call 'editor.action.revealDefinition'
   end)
-  vim.keymap.set("n", "gr", function()
-    require("vscode").call("editor.action.goToReferences")
+  vim.keymap.set('n', 'gr', function()
+    require('vscode').call 'editor.action.goToReferences'
   end)
-  vim.keymap.set("n", "j", "gj")
-  vim.keymap.set("n", "k", "gk")
-  vim.keymap.set("n", "<leader>h", function()
-    require("vscode").call("vscode-harpoon.addEditor")
+  vim.keymap.set('n', 'j', 'gj')
+  vim.keymap.set('n', 'k', 'gk')
+  vim.keymap.set('n', '<leader>h', function()
+    require('vscode').call 'vscode-harpoon.addEditor'
   end)
-  vim.keymap.set("n", "<leader><s-h>", function()
-    require("vscode").call("vscode-harpoon.editEditors")
+  vim.keymap.set('n', '<leader><s-h>', function()
+    require('vscode').call 'vscode-harpoon.editEditors'
   end)
-  vim.keymap.set("n", "<leader>1", function()
-    require("vscode").call("vscode-harpoon.gotoEditor1")
+  vim.keymap.set('n', '<leader>1', function()
+    require('vscode').call 'vscode-harpoon.gotoEditor1'
   end)
-  vim.keymap.set("n", "<leader>2", function()
-    require("vscode").call("vscode-harpoon.gotoEditor2")
+  vim.keymap.set('n', '<leader>2', function()
+    require('vscode').call 'vscode-harpoon.gotoEditor2'
   end)
-  vim.keymap.set("n", "<leader>3", function()
-    require("vscode").call("vscode-harpoon.gotoEditor3")
+  vim.keymap.set('n', '<leader>3', function()
+    require('vscode').call 'vscode-harpoon.gotoEditor3'
   end)
-  vim.keymap.set("n", "<leader>4", function()
-    require("vscode").call("vscode-harpoon.gotoEditor4")
+  vim.keymap.set('n', '<leader>4', function()
+    require('vscode').call 'vscode-harpoon.gotoEditor4'
   end)
-  vim.keymap.set("n", "<leader>5", function()
-    require("vscode").call("vscode-harpoon.gotoEditor5")
+  vim.keymap.set('n', '<leader>5', function()
+    require('vscode').call 'vscode-harpoon.gotoEditor5'
   end)
-  vim.keymap.set("n", "<leader>6", function()
-    require("vscode").call("vscode-harpoon.gotoEditor6")
+  vim.keymap.set('n', '<leader>6', function()
+    require('vscode').call 'vscode-harpoon.gotoEditor6'
   end)
-  vim.keymap.set("n", "<leader>7", function()
-    require("vscode").call("vscode-harpoon.gotoEditor7")
+  vim.keymap.set('n', '<leader>7', function()
+    require('vscode').call 'vscode-harpoon.gotoEditor7'
   end)
-  vim.keymap.set("n", "<leader>8", function()
-    require("vscode").call("vscode-harpoon.gotoEditor8")
+  vim.keymap.set('n', '<leader>8', function()
+    require('vscode').call 'vscode-harpoon.gotoEditor8'
   end)
-  vim.keymap.set("n", "<leader>9", function()
-    require("vscode").call("vscode-harpoon.gotoEditor9")
+  vim.keymap.set('n', '<leader>9', function()
+    require('vscode').call 'vscode-harpoon.gotoEditor9'
   end)
   -- config from https://www.reddit.com/r/neovim/comments/1kspket/comment/mtslipm/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-  vim.keymap.set("n", "<leader>cf", function()
-    require("vscode").call("editor.action.formatDocument")
+  vim.keymap.set('n', '<leader>cf', function()
+    require('vscode').call 'editor.action.formatDocument'
   end)
-  vim.keymap.set("n", "<leader>bo", function()
-    require("vscode").call("workbench.action.closeOtherEditors")
+  vim.keymap.set('n', '<leader>bo', function()
+    require('vscode').call 'workbench.action.closeOtherEditors'
   end)
-  vim.keymap.set("n", "<leader>ca", function()
-    require("vscode").call("editor.action.quickFix")
+  vim.keymap.set('n', '<leader>ca', function()
+    require('vscode').call 'editor.action.quickFix'
   end, {})
-  vim.keymap.set("n", "<leader>cr", function()
-    require("vscode").call("editor.action.rename")
+  vim.keymap.set('n', '<leader>cr', function()
+    require('vscode').call 'editor.action.rename'
   end, {})
-  vim.keymap.set("n", "K", function()
-    require("vscode").call("editor.action.showHover")
+  vim.keymap.set('n', 'K', function()
+    require('vscode').call 'editor.action.showHover'
   end)
-  vim.keymap.set("n", "<leader>wq", function()
-    require("vscode").call("workbench.action.closeActiveEditor")
+  vim.keymap.set('n', '<leader>wq', function()
+    require('vscode').call 'workbench.action.closeActiveEditor'
   end, {})
-  vim.keymap.set("n", "gd", function()
-    require("vscode").call("editor.action.revealDefinition")
+  vim.keymap.set('n', 'gd', function()
+    require('vscode').call 'editor.action.revealDefinition'
   end, {})
-  vim.keymap.set("n", "gr", function()
-    require("vscode").call("editor.action.goToReferences")
+  vim.keymap.set('n', 'gr', function()
+    require('vscode').call 'editor.action.goToReferences'
   end, {})
-  vim.keymap.set("n", "gi", function()
-    require("vscode").call("editor.action.goToImplementation")
+  vim.keymap.set('n', 'gi', function()
+    require('vscode').call 'editor.action.goToImplementation'
   end, {})
-  vim.keymap.set("n", "zM", function()
-    require("vscode").call("editor.foldAll")
+  vim.keymap.set('n', 'zM', function()
+    require('vscode').call 'editor.foldAll'
   end, { noremap = true, silent = true })
-  vim.keymap.set("n", "zR", function()
-    require("vscode").call("editor.unfoldAll")
+  vim.keymap.set('n', 'zR', function()
+    require('vscode').call 'editor.unfoldAll'
   end, { noremap = true, silent = true })
-  vim.keymap.set("n", "zc", function()
-    require("vscode").call("editor.fold")
+  vim.keymap.set('n', 'zc', function()
+    require('vscode').call 'editor.fold'
   end, { noremap = true, silent = true })
-  vim.keymap.set("n", "zC", function()
-    require("vscode").call("editor.foldRecursively")
+  vim.keymap.set('n', 'zC', function()
+    require('vscode').call 'editor.foldRecursively'
   end, { noremap = true, silent = true })
-  vim.keymap.set("n", "zo", function()
-    require("vscode").call("editor.unfold")
+  vim.keymap.set('n', 'zo', function()
+    require('vscode').call 'editor.unfold'
   end, { noremap = true, silent = true })
-  vim.keymap.set("n", "zO", function()
-    require("vscode").call("editor.unfoldRecursively")
+  vim.keymap.set('n', 'zO', function()
+    require('vscode').call 'editor.unfoldRecursively'
   end, { noremap = true, silent = true })
-  vim.keymap.set("n", "za", function()
-    require("vscode").call("editor.toggleFold")
+  vim.keymap.set('n', 'za', function()
+    require('vscode').call 'editor.toggleFold'
   end, { noremap = true, silent = true })
 end
-
