@@ -109,7 +109,7 @@ eval "$(zoxide init zsh)"
 #   export EDITOR='vim'
 # else
 # export EDITOR='nvim'
-export EDITOR='emacsclient -nw "'
+export EDITOR='emacsclient -nw ""'
 # fi
 
 # Compilation flags
