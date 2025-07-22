@@ -170,7 +170,7 @@
 (deflayer navigation
           _   
           _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
-          _    1    2    3    4    5    6    7    8    9    0    -    =    grv
+          @edt 1    2    3    4    5    6    7    8    9    0    -    =    grv
           _    @aPr @mVd @sVu @cNe caps lft  down up   rght del  bspc _
           _    mute pp   brdn brup menu ins  home end  pgup pgdn _
           _    _    _              lsft           _     _    _
