@@ -4,8 +4,11 @@ return {
   enabled = true,
   lazy = true,
   opts = {
+  -- separator_right = "",
   separator_right = "",
+  -- separator_left = "",
   separator_left = "",
+  -- separator_first = "",
   -- separator_first = "",
   separator_first = "█",
   -- separator_first = "",
@@ -13,6 +16,8 @@ return {
   -- separator_right = "",
   -- separator_left = "",
   -- separator_first = "",
+  -- tab_highlight = "%#Tabline#",
+  -- default_highlight = "%#TablineSel#",
   },
   keys = function()
 
@@ -131,7 +136,15 @@ return {
         function()
           require('TabTerm').goto(i)
         end,
-        desc = "Goto to Terminal [" .. i .. "]",
+        desc = "which_key_ignore"
+      })
+      table.insert(keys, {
+        mode ={ 'i', 'n', 't'},
+        "<A-" .. i .. ">",
+        function()
+          require('TabTerm').goto(i)
+        end,
+        desc = "which_key_ignore"
       })
 
     end
