@@ -3,7 +3,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin/$PATH
 export PATH=$PATH:$HOME/scripts
-# export PATH=$PATH:$HOME/.config/emacs/bin
+export PATH=$PATH:$HOME/.config/emacs/bin
 
 # Fix java lsp
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
@@ -130,7 +130,7 @@ alias exa="eza --icons --git -l -G -h -a"
 alias cd=z
 
 # Emacs shit
-alias emacs='emacs -nw '
+alias emacs='emacsclient -nw'
 
 # Edit File with Sudo
 alias svim='sudoedit'
