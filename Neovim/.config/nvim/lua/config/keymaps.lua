@@ -436,7 +436,7 @@ else
   vim.keymap.set("n", "<leader>sP", function()
     Snacks.picker.grep({
       hidden = true,
-      cwd = "~/.config/nvim/lua/",
+      cwd = vim.fn.stdpath("config"),
     })
   end, { desc = "Snacks Picker Grep in Config Files" })
 
