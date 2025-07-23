@@ -143,6 +143,9 @@ vim.keymap.set("n", "<leader>qn", "<Cmd>cnext<Cr>", { silent = true, desc = "Ope
 vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { silent = true, desc = "Open Previous in Quickfix List" })
 vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { silent = true, desc = "Open Quickfix List" })
 vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { silent = true, desc = "Close Quickfix List" })
+vim.keymap.set("n", "<leader>qd", function()
+  vim.diagnostic.setqflist()
+end, { desc = "Open diagnostic Quickfix list" })
 
 ------------
 --- Quit ---
