@@ -79,6 +79,13 @@ return {
       end,
       desc = "Window Hydra Mode (which-key)",
     },
+    {
+      "<leader>b<space>",
+      function()
+        require("which-key").show({ keys = "<leader>b", loop = true })
+      end,
+      desc = "Window Hydra Mode (which-key)",
+    },
   },
   config = function(_, opts)
     local wk = require("which-key")
