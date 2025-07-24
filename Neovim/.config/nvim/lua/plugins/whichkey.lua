@@ -84,7 +84,7 @@ return {
       function()
         require("which-key").show({ keys = "<leader>b", loop = true })
       end,
-      desc = "Window Hydra Mode (which-key)",
+      desc = "Buffer Hydra Mode (which-key)",
     },
   },
   config = function(_, opts)
