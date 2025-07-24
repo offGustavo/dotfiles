@@ -2,7 +2,7 @@
 (defcfg 
   movemouse-smooth-diagonals yes
   process-unmapped-keys yes
-  log-layer-changes yes
+  log-layer-changes no
   concurrent-tap-hold yes
   )
 
