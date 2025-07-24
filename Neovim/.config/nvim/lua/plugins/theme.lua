@@ -38,4 +38,7 @@ return {
   { "sponkurtus2/angelic.nvim", lazy = true },
 
   { "srt0/codescope.nvim", lazy = true },
+
+  { "RRethy/nvim-base16" },
+  { "kyazdani42/nvim-palenight.lua" },
 }
