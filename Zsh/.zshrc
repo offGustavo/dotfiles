@@ -178,7 +178,9 @@ alias :E=vim
 
 # Nala aliases
 alias nala='sudo nala'
+alias apt='sudo apt'
 alias 'nala autoupdate'='sudo nala update && sudo nala upgrade'
+alias 'apt autoupdate'='sudo apt update && sudo apt upgrade'
 
 # Fastfetch show on startup
 if command -v fastfetch >/dev/null 2>&1; then
