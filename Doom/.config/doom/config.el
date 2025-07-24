@@ -187,7 +187,8 @@
 ;; (blink-cursor-mode 1)
 
 ;; Send files to trash instead of fully deleting
-(setq delete-by-moving-to-trash t)
+(setq delete-by-moving-to-trash t
+      trash-directory "~/.local/share/Trash/files/")
 ;; Save automatically
 (setq auto-save-default t)
 
