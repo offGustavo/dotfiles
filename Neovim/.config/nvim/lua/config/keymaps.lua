@@ -160,23 +160,22 @@ vim.keymap.set(
   "n",
   "<leader>s/",
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Substitute Current Word Globally" }
+  { silent = true, desc = "Substitute Current Word Globally" }
 )
 vim.keymap.set(
   "n",
   "<leader>s.",
   [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Substitute Current Word" }
+  { silent = true, desc = "Substitute Current Word" }
 )
-vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste Without Copy" })
-vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { desc = "Make File Executable" })
+vim.keymap.set("x", "<leader>p", '"_dP', { silent = true, desc = "Paste Without Copy" })
+vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { silent = true, desc = "Make File Executable" })
 
 -- File
+vim.keymap.set("n", "<leader>fX", "<Cmd>!%<Cr>", { silent = true, desc = "Execute File" })
+vim.keymap.set("n", "<leader>fs", "<Cmd>source %<Cr>", { silent = true, desc = "Source File" })
 
-vim.keymap.set("n", "<leader>fX", ":!%<Cr>", { desc = "Execute File" })
-vim.keymap.set("n", "<leader>fs", ":so %<Cr>", { desc = "Source File" })
-
-vim.keymap.set("v", "<leader>fl", ":'<,'>lua<Cr>", { desc = "Execute Line" })
+vim.keymap.set("v", "<leader>fl", ":'<,'>lua<Cr>", { silent = true, desc = "Execute Line" })
 
 vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
 
