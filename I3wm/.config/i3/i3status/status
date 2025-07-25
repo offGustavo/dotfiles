@@ -23,7 +23,7 @@ order += "time"
 ## Module :: wireless 
 wireless _first_ {
 	# %quality | %essid | %bitrate | %frequency | %ip
-	format_up = "  %ip"
+	format_up = "  %essid"
 	format_down = "󱞐 "
 	format_bitrate = "%g %cb/s"
 	format_noise = "%03d%s"
