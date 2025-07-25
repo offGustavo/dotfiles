@@ -3,7 +3,7 @@ return {
   lazy = true,
   dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = {
-    { "<leader>oe", "<Cmd>Oil<Cr>", desc = "Oil" },
+    { "<leader>fd", "<Cmd>Oil<Cr>", desc = "Oil" },
     { "<leader><Cr>", "<Cmd>Oil --float<Cr>", desc = "Oil" },
   },
   config = function()
