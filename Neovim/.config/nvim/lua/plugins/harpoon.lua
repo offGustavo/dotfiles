@@ -43,7 +43,7 @@ return {
       table.insert(keys, {
         "<leader>h" .. i,
         function()
-          require("harpoon"):list():replace_at(1)
+          require("harpoon"):list():replace_at(i)
         end,
         desc = "Add to " .. i,
       })
