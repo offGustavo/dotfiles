@@ -14,3 +14,9 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.wrap = false
   end,
 })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    TmuxTheme.write_tmux_theme()
+  end,
+})
