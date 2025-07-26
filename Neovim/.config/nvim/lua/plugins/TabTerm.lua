@@ -1,7 +1,7 @@
 return {
   dir = "~/Projects/TabTerm.nvim/",
   -- 'offGustavo/TabTerm.nvim',
-  enabled = false,
+  -- enabled = false,
   lazy = true,
   opts = {
   -- separator_right = "",

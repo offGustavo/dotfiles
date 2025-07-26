@@ -23,6 +23,9 @@ vim.cmd([[
 
 vim.g.lazyvim_picker = "snacks"
 
+-- Disable autoformat
+vim.g.autoformat = false -- globally
+
 -- local function Winbar()
 --   local normal_color = "%#Normal#"
 --   local mode = "%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}"
