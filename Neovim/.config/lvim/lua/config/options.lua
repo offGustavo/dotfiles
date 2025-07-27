@@ -1,11 +1,12 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.mouse = 'a'
-vim.opt.showmode = false
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.mouse = 'a'
+vim.o.showmode = false
 vim.o.cmdheight = 0
+vim.o.laststatus = 3
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
@@ -44,3 +45,5 @@ vim.cmd([[
 ]])
 
 vim.g.snacks_animate = false
+
+-- vim.o.winborder = "rounded"

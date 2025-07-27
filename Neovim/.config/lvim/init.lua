@@ -24,8 +24,9 @@
 
 -- Config
 require('config.options')
-require('config.keymap')
+require('config.keymaps')
 require('config.autocmds')
+require('config.lsp')
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -47,7 +48,7 @@ require("lazy").setup({
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
+  install = { colorscheme = { "tokyonight", "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = false },
 })

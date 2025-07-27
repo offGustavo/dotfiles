@@ -1,4 +1,10 @@
 return {
+  { "tpope/vim-fugitive", 
+    config = function ()
+      vim.keymap.set("n", '<leader>G', ":Git<Cr>:only<Cr>", { desc = "Fugitive"})
+    end
+  },
+  {
   "NeogitOrg/neogit",
   dependencies = {
     "nvim-lua/plenary.nvim", -- required
@@ -9,4 +15,5 @@ return {
     vim.keymap.set("n", "<leader>gn", ":Neogit kind=floating cwd=%:h<Cr>", { silent = true, desc = "Neogit Float" })
     vim.keymap.set("n", "<leader>gN", ":Neogit kind=replace cwd=%:h<Cr>", { silent = true, desc = "Neogit" })
   end,
+  }
 }

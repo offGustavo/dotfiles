@@ -193,4 +193,4 @@
 (setq auto-save-default t)
 
 ;; Disable breadcrumb
-(add-hook 'lsp-mode-hook #'lsp-headerline-breadcrumb-mode)
+(add-hook 'lsp-mode-hook (lambda () (lsp-headerline-breadcrumb-mode -1)))

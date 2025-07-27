@@ -465,6 +465,12 @@ else
       -- layout = "ivy",
     })
   end, { silent = true, desc = "Snacks Picker Buffers" })
+
+  -- vim.keymap.set("n", "<leader>uC", function ()
+  --   Snacks.picker.colorschemes()
+  --   TmuxTheme.write_tmux_theme()
+  -- end, { desc =  "Neovim and Tmux Colorschemes"})
+
 end
 
 -------------
@@ -568,3 +574,6 @@ vim.keymap.set("n", "<leader>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
 --     { silent = true, desc = "Open Lazygit in Tmux" }
 --   )
 -- end
+
+vim.keymap.set("n", "<leader>oT", function() TmuxTheme.write_tmux_theme() end, { desc = "Update Tmux Theme"})
+
