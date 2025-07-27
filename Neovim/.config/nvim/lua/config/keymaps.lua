@@ -232,6 +232,7 @@ vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 for i = 1, 9, 1 do
   vim.keymap.set("n", "<leader>t" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
+  vim.keymap.set("n", "<leader><tab>" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
 end
 
 ---------------
@@ -569,5 +570,4 @@ vim.keymap.set("n", "<leader>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
 --   )
 -- end
 
-vim.keymap.set("n", "<leader>oT", function() TmuxTheme.write_tmux_theme() end, { desc = "Update Tmux Theme"})
-
+vim.keymap.set("n", "<leader>oT", function() TmuxTheme.UpdateTheme() end, { desc = "Update Tmux Theme"})
