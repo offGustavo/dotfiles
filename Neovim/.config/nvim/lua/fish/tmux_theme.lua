@@ -1,6 +1,6 @@
 local M = {}
 
-function M.get_theme_colors()
+local function get_theme_colors()
   -- Obtém os highlights do tema atual com fallback seguro
   local function get_hl(name, attr)
     local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name })
@@ -45,8 +45,8 @@ function M.get_theme_colors()
   }
 end
 
-function M.write_tmux_theme()
-  local colors = M.get_theme_colors()
+function M.UpdateTheme()
+  local colors = get_theme_colors()
 
   local lines = {
     string.format('set -g message-style "fg=%s,bg=%s"', colors.TMUX_HL, colors.TMUX_ABG),
