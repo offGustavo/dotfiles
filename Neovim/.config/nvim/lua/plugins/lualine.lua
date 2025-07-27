@@ -27,8 +27,9 @@ return {
         section_separators = { left = "", right = "" },
         theme = "auto",
         globalstatus = vim.o.laststatus == 3,
-        disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard", "snacks_picker_input" } },
-
+        disabled_filetypes = {
+          statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard", "snacks_picker_input" },
+        },
       },
       sections = {
         lualine_a = { "mode" },
@@ -91,6 +92,12 @@ return {
                   removed = gitsigns.removed,
                 }
               end
+            end,
+          },
+          {
+            "tabs",
+            cond = function()
+              return #vim.fn.gettabinfo() > 1
             end,
           },
         },
