@@ -1,6 +1,6 @@
 return {
-  dir = "~/Projects/TabTerm.nvim/",
-  -- 'offGustavo/TabTerm.nvim',
+  -- dir = "~/Projects/TabTerm.nvim/",
+  'offGustavo/TabTerm.nvim',
   -- enabled = false,
   lazy = true,
   opts = {
