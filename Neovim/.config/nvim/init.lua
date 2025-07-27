@@ -1,7 +1,6 @@
 
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
-
 -- Custom Things
 
 vim.keymap.set("n", "<leader>oT", function() require("fish.tmux_theme").write_tmux_theme() end, { desc = "Update Tmux Theme"})
@@ -23,3 +22,5 @@ if file then
 else
   vim.cmd("colorscheme default")
 end
+
+
