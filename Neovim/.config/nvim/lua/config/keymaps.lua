@@ -570,4 +570,10 @@ vim.keymap.set("n", "<leader>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
 --   )
 -- end
 
-vim.keymap.set("n", "<leader>oT", function() TmuxTheme.UpdateTheme() end, { desc = "Update Tmux Theme"})
+-- vim.keymap.set("n", "<leader>oT", function() TmuxTheme.write_tmux_theme() end, { desc = "Update Tmux Theme"})
+
+-- -- Bind to a key
+-- vim.keymap.set('n', '<leader>uC', function()
+--   require('fish.colorscheme-picker').show_colorscheme_picker()
+-- end, { desc = "Change colorscheme" })
+--

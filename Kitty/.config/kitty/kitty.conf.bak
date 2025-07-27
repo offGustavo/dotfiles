@@ -1061,7 +1061,7 @@ tab_bar_edge top
 #: The second number is the margin between the tab bar and the
 #: contents of the current tab.
 
-# tab_bar_style fade
+tab_bar_style powerline
 
 #: The tab bar style, can be one of:
 
@@ -1119,7 +1119,7 @@ tab_bar_edge top
 #: The separator between tabs in the tab bar when using separator as
 #: the tab_bar_style.
 
-# tab_powerline_style angled
+tab_powerline_style round
 
 #: The powerline separator style between tabs in the tab bar when
 #: using powerline as the tab_bar_style, can be one of: angled,
@@ -1218,7 +1218,7 @@ tab_bar_edge top
 
 #: Color scheme {{{
 
-include ~/.config/kitty/themes/gruvbox.conf
+# include ~/.config/kitty/themes/gruvbox.conf
 
 # foreground #dddddd
 # background #000000
@@ -2679,7 +2679,10 @@ map ctrl+shift+,       load_config_file
 
 #: }}}
 
+allow_remote_control socket-only
+listen_on unix:/tmp/mykitty  -- Or another suitable path
+
 # BEGIN_KITTY_THEME
-# Tokyo Night
+# Pro
 include current-theme.conf
 # END_KITTY_THEME
