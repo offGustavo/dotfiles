@@ -50,3 +50,7 @@ if vim.g.neovide then
   vim.g.neovide_padding_right = 8
   vim.g.neovide_padding_left = 8
 end
+
+if vim.loop.os_uname().sysname == "Windows_NT" then
+  vim.opt.shell = "pwsh.exe"
+end
