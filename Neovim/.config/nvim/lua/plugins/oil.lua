@@ -34,6 +34,7 @@ return {
         list = false,
         conceallevel = 3,
         concealcursor = "nvic",
+        relativenumber = false
       },
       -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
       delete_to_trash = true,
@@ -156,7 +157,7 @@ return {
         -- optionally override the oil buffers window title with custom function: fun(winid: integer): string
         get_win_title = nil,
         -- preview_split: Split direction: "auto", "left", "right", "above", "below".
-        preview_split = "auto",
+        preview_split = "bellow",
         -- This is the config that will be passed to nvim_open_win.
         -- Change values here to customize the layout
         override = function(conf)
@@ -201,7 +202,7 @@ return {
       },
       -- Configuration for the floating progress window
       progress = {
-        max_width = 0.9,
+        max_width = 0.6,
         min_width = { 40, 0.4 },
         width = nil,
         max_height = { 10, 0.9 },
