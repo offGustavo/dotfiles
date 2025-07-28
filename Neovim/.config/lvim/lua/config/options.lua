@@ -37,10 +37,10 @@ vim.o.showcmd = true
 vim.o.showcmdloc = 'statusline'
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldlevel = 99
 vim.o.swapfile = false
 vim.o.path = vim.o.path .. '**'
 vim.o.wildignore = vim.o.wildignore .. "**/node_modules/**"
 vim.g.netrw_banner = 0
 vim.g.snacks_animate = false
 vim.o.winborder = "rounded"
-
