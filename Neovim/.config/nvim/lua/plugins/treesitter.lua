@@ -23,7 +23,7 @@ return {
   ---@type TSConfig
   ---@diagnostic disable-next-line: missing-fields
   opts = {
-    highlight = { enable = true },
+    highlight = { enable = true, disable = { "tmux" } },
     indent = { enable = true },
     ensure_installed = {
       "java",
