@@ -43,7 +43,7 @@ local function is_dark_background()
 end
 
 local function get_contrast_cursor_color()
-  return is_dark_background() and "#ffffff" or "#000000"
+  return is_dark_background() and "#000000" or "#ffffff"
 end
 
 -- Kitty functions
@@ -190,7 +190,7 @@ end
 local function update_all_colors()
   -- Determine cursor colors based on background
   local cursor_fg = get_contrast_cursor_color()
-  local cursor_bg = is_dark_background() and "#000000" or "#ffffff"
+  local cursor_bg = is_dark_background() and "#ffffff" or "#000000"
 
   -- Update Kitty colors
   local kitty_colors = {
