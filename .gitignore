@@ -15,3 +15,4 @@ Neovim/.config/nvim/lazy-lock.json
 Neovim/.config/lvim/lazy-lock.json
 Tmux/.config/tmux/plugins/
 Tmux/.config/tmux/config/theme.conf
+Neovim/.config/nvim/theme
