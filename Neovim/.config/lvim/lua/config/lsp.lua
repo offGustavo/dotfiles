@@ -8,6 +8,7 @@
 -- so in ~.config/lsp/lua_ls.lua for lua_ls, for example.
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('marksman')
+vim.lsp.enable("typescript-language-server")
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
@@ -20,7 +21,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
       end)
       vim.keymap.set('n', '<leader>ca', function()
         vim.lsp.buf.code_action()
-      end)
+      end, { desc = "Code Action" })
+      vim.keymap.set('n', '<leader>cf', function()
+        vim.lsp.buf.format()
+      end, { desc = "Code Format" })
+      vim.keymap.set('n', '<leader>cq', function()
+        vim.diagnostic.setqflist()
+      end, { desc = 'Open Diagnostics Quickfix list' })
     end
   end,
 })
@@ -28,5 +35,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- Diagnostics
 vim.diagnostic.config({
   -- Use the default configuration
-  virtual_lines = true,
+  virtual_lines = true
 })
