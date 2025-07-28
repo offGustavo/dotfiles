@@ -34,6 +34,7 @@ return {
         list = false,
         conceallevel = 3,
         concealcursor = "nvic",
+        relativenumber = false
       },
       -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
       delete_to_trash = true,
