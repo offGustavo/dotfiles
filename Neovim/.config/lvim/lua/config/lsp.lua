@@ -37,5 +37,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- Diagnostics
 vim.diagnostic.config({
   -- Use the default configuration
-  virtual_lines = true
+  virtual_lines = true,
+
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+    }
+  }
 })
