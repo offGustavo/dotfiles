@@ -87,9 +87,9 @@ vim.keymap.set({ "i", "c" }, "<C-d>", "<Del>", { silent = true })
 vim.keymap.set("i", "<C-k>", "<Esc>lDa", { silent = true })
 vim.keymap.set("i", "<C-u>", "<Esc>d0xi", { silent = true })
 vim.keymap.set("i", "<A-}>", "<C-o>}", { silent = true })
-vim.keymap.set("i", "<A-a>", "<C-o>{", { silent = true })
-vim.keymap.set("i", "<A-e>", "<C-o>}", { silent = true })
 vim.keymap.set("i", "<A-{>", "<C-o>{", { silent = true })
+vim.keymap.set("i", "<A-a>", "<C-o>(", { silent = true })
+vim.keymap.set("i", "<A-e>", "<C-o>)", { silent = true })
 vim.keymap.set("i", "<A-<>", "<C-o>gg", { silent = true })
 vim.keymap.set("i", "<A->>", "<C-o>G", { silent = true })
 vim.keymap.set("i", "<C-/>", "<C-o>u", { silent = true })
@@ -97,6 +97,10 @@ vim.keymap.set("i", "<C-x><C-s>", "<C-o>:w<CR>", { silent = true })
 vim.keymap.set("i", "<C-x><C-c>", "<Esc>:wq<CR>", { silent = true })
 -- vim.keymap.set("i", "<C-t>", "<Esc>Xpa", { silent = true })
 -- vim.keymap.set("i", "<C-]>", "<C-t>", { silent = true })
+vim.keymap.set('n', '<A-x>', ":", { desc = "Emacs"})
+vim.keymap.set('i', '<A-x>', "<C-o>:", { desc = "Emacs"})
+vim.keymap.set('t', '<A-x>', "<C-\\><C-o>:", { desc = "Emacs"})
+
 
 -- Normal mode in command line
 vim.keymap.set("c", "<C-o>", "<C-f>", { silent = true })
@@ -559,6 +563,7 @@ function FzfLike()
 end
 
 vim.keymap.set("n", "<leader>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
+
 
 -----------
 -- Tmux ---
