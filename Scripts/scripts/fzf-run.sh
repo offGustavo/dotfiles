@@ -91,7 +91,7 @@ COMMAND_STR=$(
     tail -n +0 -f "$FZFPIPE" &
     echo $! >"$PIDFILE"
   ) |
-    fzf -x -d '\034' --nth ..3 --with-nth 3 \
+    fzf +s -x -d '\034' --nth ..3 --with-nth 3 \
       --preview "$0 describe {1} {2}" \
       --preview-window=down:3:wrap --ansi \
       --info=inline-right \
@@ -200,5 +200,14 @@ command)
 esac
 
 # Execute the command
-eval "$command" &
-disown
+if [[ -n "$command" && "$command" != "echo \"nope\"" ]]; then
+    if [[ "$command" == cd* ]]; then
+        # Handle commands that start with cd separately
+        eval "$command"
+    else
+        # Use eval to properly handle complex commands
+        eval "$command" &
+        disown
+    fi
+fi
+
