@@ -181,7 +181,7 @@
 
 ;; [My Literate Doom Emacs Configuration ·](https://joshblais.com/posts/my-literate-doom-emacs-config/)
 ;; remove top frame bar in emacs
-(add-to-list 'default-frame-alist '(undecorated . t))
+;; (add-to-list 'default-frame-alist '(undecorated . t))
 
 ;; Blink cursor
 ;; (blink-cursor-mode 1)
