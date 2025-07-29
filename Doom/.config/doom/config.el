@@ -18,12 +18,10 @@
 ;; - `doom-symbol-font' -- for symbols
 ;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
 
-(setq doom-font (font-spec :family "JetBrainsMonoNL NF" :size 16 :weight 'regular))
-      ;; doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 13)
-      ;; doom-symbol-font (font-spec :family "JuliaMono")
-      ;; doom-big-font (font-spec :family "JetBrainsMono" :size 24))
-
-
+(setq doom-font (font-spec :family "JetBrainsMonoNL NF" :size 16 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMonoNL NF" :size 16)
+      doom-symbol-font (font-spec :family "JetBrainsMonoNL NF")
+      doom-big-font (font-spec :family "JetBrainsMonoNL NF" :size 24))
 
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
