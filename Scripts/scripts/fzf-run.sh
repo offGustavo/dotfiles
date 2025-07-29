@@ -91,7 +91,7 @@ COMMAND_STR=$(
     tail -n +0 -f "$FZFPIPE" &
     echo $! >"$PIDFILE"
   ) |
-    fzf +s -x -d '\034' --nth ..3 --with-nth 3 \
+    fzf -x -d '\034' --nth ..3 --with-nth 3 \
       --preview "$0 describe {1} {2}" \
       --preview-window=down:3:wrap --ansi \
       --info=inline-right \
