@@ -97,10 +97,9 @@ vim.keymap.set("i", "<C-x><C-s>", "<C-o>:w<CR>", { silent = true })
 vim.keymap.set("i", "<C-x><C-c>", "<Esc>:wq<CR>", { silent = true })
 -- vim.keymap.set("i", "<C-t>", "<Esc>Xpa", { silent = true })
 -- vim.keymap.set("i", "<C-]>", "<C-t>", { silent = true })
-vim.keymap.set('n', '<A-x>', ":", { desc = "Emacs"})
-vim.keymap.set('i', '<A-x>', "<C-o>:", { desc = "Emacs"})
-vim.keymap.set('t', '<A-x>', "<C-\\><C-o>:", { desc = "Emacs"})
-
+vim.keymap.set("n", "<A-x>", ":", { desc = "Emacs" })
+vim.keymap.set("i", "<A-x>", "<C-o>:", { desc = "Emacs" })
+vim.keymap.set("t", "<A-x>", "<C-\\><C-o>:", { desc = "Emacs" })
 
 -- Normal mode in command line
 vim.keymap.set("c", "<C-o>", "<C-f>", { silent = true })
@@ -471,7 +470,6 @@ else
   --   Snacks.picker.colorschemes()
   --   TmuxTheme.write_tmux_theme()
   -- end, { desc =  "Neovim and Tmux Colorschemes"})
-
 end
 
 -------------
@@ -481,7 +479,11 @@ end
 if vim.g.neovide then
   FontSize = 12
   function SetFontSize(amount)
-    FontSize = FontSize + amount
+    if amount == 0 then
+      FontSize = 12
+    else
+      FontSize = FontSize + amount
+    end
     if vim.uv.os_uname().sysname == "Windows_NT" then
       vim.o.guifont = "JetbrainsMonoNL Nerd Font:h" .. FontSize
       print("Font Size: " .. FontSize)
@@ -490,95 +492,94 @@ if vim.g.neovide then
       print("Font Size: " .. FontSize)
     end
   end
-
+  SetFontSize(0)
+  vim.keymap.set("n", "<C-=>", function()
+    SetFontSize(1)
+  end, { desc = "Increase Font Size in neovide", silent = true })
+  vim.keymap.set("n", "<C-->", function()
+    SetFontSize(-1)
+  end, { desc = "Decrease Font Size in neovide", silent = true })
+  vim.keymap.set("n", "<C-0>", function()
     SetFontSize(0)
-    vim.keymap.set("n", "<C-=>", function()
-      SetFontSize(1)
-    end, { desc = "Increase Font Size in neovide", silent = true })
-    vim.keymap.set("n", "<C-->", function()
-      SetFontSize(-1)
-    end, { desc = "Decrease Font Size in neovide", silent = true })
-    vim.keymap.set("n", "<C-0>", function()
-      FontSize = 12
-      vim.o.guifont = "JetbrainsmonoNL NF:h" .. FontSize
-      print("Font Size: " .. FontSize)
-    end, { desc = "Restore Font Size in neovide", silent = true })
-  end
+  end, { desc = "Restore Font Size in neovide", silent = true })
+end
 
-  ----------------------------------
-  -- CUSTOM SEARCH FILES AND WORD --
-  ----------------------------------
-  local function GrepSearch()
-    local input = vim.fn.input("Grep for > ")
-    if input == "" then
+----------------------------------
+-- CUSTOM SEARCH FILES AND WORD --
+----------------------------------
+local function GrepSearch()
+  local input = vim.fn.input("Grep for > ")
+  if input == "" then
+    return
+  end
+  local cmd = string.format("grep -rnI --exclude-dir=.git --exclude-dir=node_modules --color=never '%s' .", input)
+  local tmp = vim.fn.tempname()
+  vim.fn.system(cmd .. " > " .. vim.fn.fnameescape(tmp))
+  vim.cmd("cfile " .. tmp)
+  vim.cmd("copen")
+  os.remove(tmp)
+end
+vim.api.nvim_create_user_command("Grep", GrepSearch, {})
+vim.keymap.set("n", "<leader>o/", ":Grep<CR>", { noremap = true, silent = true, desc = "Grep (Quickfix)" })
+
+function FzfLike()
+  local handle = io.popen("find . -type f -not -path '*/.git/*'")
+  if not handle then
+    vim.notify("Erro ao executar 'find'", vim.log.levels.ERROR)
+    return
+  end
+  local files = {}
+  for file in handle:lines() do
+    table.insert(files, file)
+  end
+  handle:close()
+  vim.ui.input({ prompt = "Find for > " }, function(input)
+    if not input then
       return
     end
-    local cmd = string.format("grep -rnI --exclude-dir=.git --exclude-dir=node_modules --color=never '%s' .", input)
-    local tmp = vim.fn.tempname()
-    vim.fn.system(cmd .. " > " .. vim.fn.fnameescape(tmp))
-    vim.cmd("cfile " .. tmp)
-    vim.cmd("copen")
-    os.remove(tmp)
-  end
-  vim.api.nvim_create_user_command("Grep", GrepSearch, {})
-  vim.keymap.set("n", "<leader>o/", ":Grep<CR>", { noremap = true, silent = true, desc = "Grep (Quickfix)" })
-
-  function FzfLike()
-    local handle = io.popen("find . -type f -not -path '*/.git/*'")
-    if not handle then
-      vim.notify("Erro ao executar 'find'", vim.log.levels.ERROR)
+    input = input:lower()
+    local filtered = {}
+    for _, file in ipairs(files) do
+      if file:lower():find(input, 1, true) then
+        table.insert(filtered, file)
+      end
+    end
+    local count = #filtered
+    if count == 0 then
+      vim.notify("No File Found.", vim.log.levels.INFO)
       return
     end
-    local files = {}
-    for file in handle:lines() do
-      table.insert(files, file)
+    local qf_entries = {}
+    for _, file in ipairs(filtered) do
+      table.insert(qf_entries, { filename = file, lnum = 1, col = 1, text = file })
     end
-    handle:close()
-    vim.ui.input({ prompt = "Find for > " }, function(input)
-      if not input then
-        return
-      end
-      input = input:lower()
-      local filtered = {}
-      for _, file in ipairs(files) do
-        if file:lower():find(input, 1, true) then
-          table.insert(filtered, file)
-        end
-      end
-      local count = #filtered
-      if count == 0 then
-        vim.notify("No File Found.", vim.log.levels.INFO)
-        return
-      end
-      local qf_entries = {}
-      for _, file in ipairs(filtered) do
-        table.insert(qf_entries, { filename = file, lnum = 1, col = 1, text = file })
-      end
-      vim.fn.setqflist({}, " ", {
-        title = "FzfLike Results",
-        items = qf_entries,
-      })
-      if count == 1 then
-        vim.cmd("edit " .. filtered[1])
-      else
-        vim.cmd("edit " .. filtered[1])
-        vim.cmd("copen")
-      end
-    end)
-  end
+    vim.fn.setqflist({}, " ", {
+      title = "FzfLike Results",
+      items = qf_entries,
+    })
+    if count == 1 then
+      vim.cmd("edit " .. filtered[1])
+    else
+      vim.cmd("edit " .. filtered[1])
+      vim.cmd("copen")
+    end
+  end)
+end
 
-  vim.keymap.set("n", "<leader>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
+vim.keymap.set("n", "<leader>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
 
-  -----------
-  -- Tmux ---
-  -----------
-  -- if vim.env.TMUX then
-  --   vim.keymap.set(
-  --     "n",
-  --     "<leader>gg",
-  --     ":! ~/scripts/tmux-scripts/tmux-open.sh lazygit<Cr>",
-  --     { silent = true, desc = "Open Lazygit in Tmux" }
-  --   )
-  -- end
+-----------
+-- Tmux ---
+-----------
+-- if vim.env.TMUX then
+--   vim.keymap.set(
+--     "n",
+--     "<leader>gg",
+--     ":! ~/scripts/tmux-scripts/tmux-open.sh lazygit<Cr>",
+--     { silent = true, desc = "Open Lazygit in Tmux" }
+--   )
+-- end
 
-  vim.keymap.set("n", "<leader>oT", function() TmuxTheme.UpdateTheme() end, { desc = "Update Tmux Theme"})
+vim.keymap.set("n", "<leader>oT", function()
+  TmuxTheme.UpdateTheme()
+end, { desc = "Update Tmux Theme" })
