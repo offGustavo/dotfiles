@@ -105,24 +105,24 @@
 ;; (define-key evil-normal-state-map (kbd "gz") 'zoxide-travel)
 (map! :leader "z" 'zoxide-travel)
 
-;; You can use this hydra menu that have all the commands
-(map! :leader "o h h" 'harpoon-quick-menu-hydra)
-(map! :leader "o h t" 'harpoon-toggle-quick-menu)
-(map! :leader "h a" 'harpoon-add-file)
+;; ;; You can use this hydra menu that have all the commands
+;; (map! :leader "o h h" 'harpoon-quick-menu-hydra)
+;; (map! :leader "o h t" 'harpoon-toggle-quick-menu)
+;; (map! :leader "h a" 'harpoon-add-file)
 
-;; And the vanilla commands
-(map! :leader "o h c" 'harpoon-clear)
-(map! :leader "h e" 'harpoon-toggle-file)
+;; ;; And the vanilla commands
+;; (map! :leader "o h c" 'harpoon-clear)
+;; (map! :leader "h e" 'harpoon-toggle-file)
 
-(map! :leader "1" 'harpoon-go-to-1)
-(map! :leader "2" 'harpoon-go-to-2)
-(map! :leader "3" 'harpoon-go-to-3)
-(map! :leader "4" 'harpoon-go-to-4)
-(map! :leader "5" 'harpoon-go-to-5)
-(map! :leader "6" 'harpoon-go-to-6)
-(map! :leader "7" 'harpoon-go-to-7)
-(map! :leader "8" 'harpoon-go-to-8)
-(map! :leader "9" 'harpoon-go-to-9)
+;; (map! :leader "1" 'harpoon-go-to-1)
+;; (map! :leader "2" 'harpoon-go-to-2)
+;; (map! :leader "3" 'harpoon-go-to-3)
+;; (map! :leader "4" 'harpoon-go-to-4)
+;; (map! :leader "5" 'harpoon-go-to-5)
+;; (map! :leader "6" 'harpoon-go-to-6)
+;; (map! :leader "7" 'harpoon-go-to-7)
+;; (map! :leader "8" 'harpoon-go-to-8)
+;; (map! :leader "9" 'harpoon-go-to-9)
 
 
 (custom-set-faces!
@@ -164,24 +164,24 @@
 ;;   (global-evil-surround-mode 1))
 
 
-(use-package! multi-vterm
-  :config
-  ;; Bind a key to create new vterm buffers easily
-  ;; (define-key evil-normal-state-map (kbd "M-/") 'multi-vterm)
-  ;; (define-key vterm-mode-map (kbd "C-c C-t") 'multi-vterm)
-  )
+;; (use-package! multi-vterm
+;;   :config
+;;   ;; Bind a key to create new vterm buffers easily
+;;   ;; (define-key evil-normal-state-map (kbd "M-/") 'multi-vterm)
+;;   ;; (define-key vterm-mode-map (kbd "C-c C-t") 'multi-vterm)
+;;   )
 
-;; Mult Vterm
-;; (map! :nvi "M-p P" #'multi-v
-(map! :nvi "M-m c" #'multi-vterm-dedicated-open)
-(map! :nvi "M-n" #'multi-vterm)
-(map! :nvi "M-m x" #'multi-vterm-dedicated-close)
-(map! :nvi "M-m p" #'multi-vterm-prev)
-(map! :nvi "M-m n" #'multi-vterm-next)
-(map! :nvi "M-m ," #'multi-vterm-rename-buffer)
-(map! :nvi "M-m s" #'multi-vterm-dedicated-select)
-(map! :nvi "M-m d" #'multi-vterm-dedicated-toggle)
-(map! :nvi "M-/" #'multi-vterm-dedicated-toggle)
+;; ;; Mult Vterm
+;; ;; (map! :nvi "M-p P" #'multi-v
+;; (map! :nvi "M-m c" #'multi-vterm-dedicated-open)
+;; (map! :nvi "M-n" #'multi-vterm)
+;; (map! :nvi "M-m x" #'multi-vterm-dedicated-close)
+;; (map! :nvi "M-m p" #'multi-vterm-prev)
+;; (map! :nvi "M-m n" #'multi-vterm-next)
+;; (map! :nvi "M-m ," #'multi-vterm-rename-buffer)
+;; (map! :nvi "M-m s" #'multi-vterm-dedicated-select)
+;; (map! :nvi "M-m d" #'multi-vterm-dedicated-toggle)
+;; (map! :nvi "M-/" #'multi-vterm-dedicated-toggle)
 
 ;; [My Literate Doom Emacs Configuration ·](https://joshblais.com/posts/my-literate-doom-emacs-config/)
 ;; remove top frame bar in emacs

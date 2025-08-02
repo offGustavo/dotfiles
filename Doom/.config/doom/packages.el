@@ -49,17 +49,14 @@
 ;; (unpin! t)
 
 ;; Harpoon
-(package! harpoon)
+;; (package! harpoon)
 
-(package! fzf)
+;; (package! fzf)
 
-(package! multi-vterm)
+;; (package! multi-vterm)
 
 (package! zoxide)
 
 (package! drag-stuff)
 
-(package! todoist)
-
-(package! evil-surround)
-
+;; (package! todoist)
