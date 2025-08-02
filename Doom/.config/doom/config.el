@@ -93,6 +93,12 @@
 (define-key evil-visual-state-map (kbd "K") 'drag-stuff-up)
 (define-key evil-visual-state-map (kbd "J") 'drag-stuff-down)
 
+;; C-c
+;; In Insert Mode
+(define-key evil-insert-state-map (kbd "C-c") 'evil-normal-state)
+;; In Visual Mode
+(define-key evil-visual-state-map (kbd "C-c") 'evil-normal-state)
+
 ;;
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 
