@@ -99,6 +99,9 @@
 ;; In Visual Mode
 (define-key evil-visual-state-map (kbd "C-c") 'evil-normal-state)
 
+;; Save Buffer
+(define-key evil-normal-state-map (kbd "C-s") 'save-buffer)
+
 ;;
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 
