@@ -65,9 +65,8 @@ vim.keymap.set("n", "<C-A-j>", "<C-w>+", { desc = "Move window to the lower" })
 vim.keymap.set("n", "<leader>wc", "<Cmd>close<Cr>")
 
 -- Toggle Comment
-vim.keymap.set("n", "<C-/>", ":normal gcc<cr>", { desc = "Toggle Comment", silent = true })
-vim.keymap.set("v", "<C-/>", ":normal gc<cr>", { desc = "Toggle Comment", silent = true })
-
+vim.keymap.set("n", "<C-/>", ":normal gcc<Cr>", { desc = "Toggle Comment", silent = true })
+vim.keymap.set("v", "<C-/>", ":'<,'>normal gcc<Cr>", { desc = "Toggle Comment", silent = true })
 -- Move Lines Up/Down
 vim.keymap.set("v", "<S-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move Line Up" })
 vim.keymap.set("v", "<S-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move Line Down" })
