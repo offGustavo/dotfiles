@@ -82,15 +82,15 @@
   ecc (tap-hold 100 300 esc lctrl)
 
   ;; Control
-  lcf (tap-hold-release 100 300 f lctl)
-  rcj (tap-hold-release 100 300 j rctl)
-  cNe (tap-hold-release 100 300 next lctl)
-  lce (tap-hold-release 100 300 esc lctrl)
+  lcf (tap-hold 100 300 f lctl)
+  rcj (tap-hold 100 300 j rctl)
+  cNe (tap-hold 100 300 next lctl)
+  lce (tap-hold 100 300 esc lctrl)
 
   ;; Shift
-  lsd (tap-hold-release 100 300 d lsft)
-  rsk (tap-hold-release 100 300 k rsft)
-  sVu (tap-hold-release 100 300 volu lsft)
+  lsd (tap-hold 100 300 d lsft)
+  rsk (tap-hold 100 300 k rsft)
+  sVu (tap-hold 100 300 volu lsft)
   lsa (tap-dance 300 ( lalt lsft))
 
   ;; Space
@@ -99,18 +99,18 @@
   ssc (tap-hold 100 200 spc lsft)
 
   ;; Super/Windows
-  lms (tap-hold-release 100 300 s lmet)   
-  rml (tap-hold-release 100 300 l lmet)
-  rmm (tap-hold-release 100 300 menu lmet)
-  mVd (tap-hold-release 100 300 vold lmet)
+  lms (tap-hold 100 300 s lmet)   
+  rml (tap-hold 100 300 l lmet)
+  rmm (tap-hold 100 300 menu lmet)
+  mVd (tap-hold 100 300 vold lmet)
 
   ;; Alt
-  laa (tap-hold-release 100 300 a lalt) 
+  laa (tap-hold 100 300 a lalt) 
   ;;NOTE: `︔` != `;`
-  ras (tap-hold-release 100 300 ︔ lalt) 
-  law (tap-hold-release 100 300 w ralt) 
-  rao (tap-hold-release 100 300 o ralt) 
-  aPr (tap-hold-release 100 300 prev lalt)
+  ras (tap-hold 100 300 ︔ lalt) 
+  law (tap-hold 100 300 w ralt) 
+  rao (tap-hold 100 300 o ralt) 
+  aPr (tap-hold 100 300 prev lalt)
 
   ;; Menu
   lmq (tap-hold 100 300 q menu)
@@ -232,6 +232,6 @@
           _    _    _    _    _    _    _    _    _    _    _    _    _    _
           lrld 🖰1  🖰2  🖰3  🖰4  🖰5  fwd  mwu  @mau mwl  mfwd _    _    _
           _    @slw _    @mid @fst _    mmid @mal mrgt @mar mlft _    _
-          _    _    _    _    _    _    bck  mwd  @mad mwr  mbck _
+          _    _    bck  fwd  _    _    bck  mwd  @mad mwr  mbck _
           _    _    _              _              _     _    _
           )
