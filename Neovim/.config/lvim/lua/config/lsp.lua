@@ -8,7 +8,6 @@
 -- so in ~.config/lsp/lua_ls.lua for lua_ls, for example.
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('marksman')
-vim.lsp.enable('bashls')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable("ts_ls")
 

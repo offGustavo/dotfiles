@@ -43,4 +43,4 @@ vim.o.path = vim.o.path .. '**'
 vim.o.wildignore = vim.o.wildignore .. "**/node_modules/**"
 vim.g.netrw_banner = 0
 vim.g.snacks_animate = false
-vim.o.winborder = "rounded"
+-- vim.o.winborder = "rounded"
