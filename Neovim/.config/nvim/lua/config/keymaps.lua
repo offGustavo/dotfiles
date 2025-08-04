@@ -166,13 +166,13 @@ vim.keymap.set(
   "n",
   "<leader>s/",
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { silent = true, desc = "Substitute Current Word Globally" }
+  { desc = "Substitute Current Word Globally" }
 )
 vim.keymap.set(
   "n",
   "<leader>s.",
   [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { silent = true, desc = "Substitute Current Word" }
+  { desc = "Substitute Current Word" }
 )
 vim.keymap.set("x", "<leader>p", '"_dP', { silent = true, desc = "Paste Without Copy" })
 vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { silent = true, desc = "Make File Executable" })
