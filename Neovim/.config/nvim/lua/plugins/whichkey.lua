@@ -13,6 +13,7 @@ return {
         { "<leader><tab>", group = "tabs" },
         { "<leader>c", group = "code" },
         { "<leader>d", group = "debug" },
+        { "<A-m>", group = "TabTerm", icon = "" },
         { "<leader>dp", group = "profiler" },
         { "<leader>R", group = "kulala", icon = "󰏚" },
         { "<leader>f", group = "file/find" },
