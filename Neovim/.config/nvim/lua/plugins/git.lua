@@ -10,6 +10,6 @@ return {
   },
   keys = {
     { "<leader>gn", "<Cmd>Neogit kind=floating cwd=%:h<Cr>", silent = true, desc = "Neogit Float" },
-    { "<leader>gN", "<Cmd>Neogit kind=replace cwd=%:h<Cr>", silent = true, desc = "Neogit" },
+    { "<leader>gg", "<Cmd>Neogit kind=replace cwd=%:h<Cr>", silent = true, desc = "Neogit" },
   },
 }
