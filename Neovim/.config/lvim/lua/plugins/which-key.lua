@@ -8,8 +8,8 @@ return {
     -- preset = "classic",
     defaults = {},
     win = {
-      border = 'none',
-      padding = { 1, 1 },
+      -- border = 'none',
+      -- padding = { 1, 2 },
     },
     spec = {
       {

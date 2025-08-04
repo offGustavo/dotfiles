@@ -3,8 +3,8 @@ return {
   lazy = true,
   dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = {
-    { "<leader>fd", "<Cmd>Oil<Cr>", desc = "Oil" },
-    { "<leader><Cr>", "<Cmd>Oil --float<Cr>", desc = "Oil" },
+    { "<leader>fd", "<Cmd>Oil<Cr>", desc = "Directory Editor" },
+    { "<leader><Cr>", "<Cmd>Oil --float<Cr>", desc = "which_key_ignore" },
   },
   config = function()
     require("oil").setup({
