@@ -1,7 +1,7 @@
 if vim.g.neovide then
   return {
     "akinsho/bufferline.nvim",
-    enabled = true,
+    enabled = false,
     event = "VeryLazy",
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<Cr>", desc = "Toggle Pin" },
