@@ -494,13 +494,13 @@ if vim.g.neovide then
     end
   end
   SetFontSize(0)
-  vim.keymap.set("n", "<C-=>", function()
+  vim.keymap.set({ "i", "v", "n", "c" }, "<C-=>", function()
     SetFontSize(1)
   end, { desc = "Increase Font Size in neovide", silent = true })
-  vim.keymap.set("n", "<C-->", function()
+  vim.keymap.set({ "i", "v", "n", "c" }, "<C-->", function()
     SetFontSize(-1)
   end, { desc = "Decrease Font Size in neovide", silent = true })
-  vim.keymap.set("n", "<C-0>", function()
+  vim.keymap.set({ "i", "v", "n", "c" }, "<C-0>", function()
     SetFontSize(0)
   end, { desc = "Restore Font Size in neovide", silent = true })
 end
