@@ -140,6 +140,7 @@ vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diag
 vim.keymap.del("n", "<leader>l")
 vim.keymap.set("n", "<leader>ll", ":Lazy<Cr>", { desc = "Lazy", silent = true })
 vim.keymap.set("n", "<leader>lL", ":LazyExtras<Cr>", { desc = "LazyVim Extras", silent = true })
+vim.keymap.set("n", "<leader>lm", ":Mason<Cr>", { desc = "Mason", silent = true })
 
 ----------------
 --- Quickfix ---
