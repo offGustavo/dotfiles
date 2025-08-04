@@ -181,7 +181,9 @@ vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { silent = true, desc = "M
 vim.keymap.set("n", "<leader>fX", "<Cmd>!%<Cr>", { silent = true, desc = "Execute File" })
 vim.keymap.set("n", "<leader>fs", "<Cmd>source %<Cr>", { silent = true, desc = "Source File" })
 
-vim.keymap.set("v", "<leader>fl", ":'<,'>lua<Cr>", { silent = true, desc = "Execute Line" })
+-- https://www.youtube.com/watch?v=UE6XQTAxwE0
+vim.keymap.set("n", "<leader>fl", ":.lua<Cr>", { silent = true, desc = "Execute Line in Lua" })
+vim.keymap.set("v", "<leader>fl", ":'<,'>lua<Cr>", { silent = true, desc = "Execute Selection in Lua" })
 
 vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
 
