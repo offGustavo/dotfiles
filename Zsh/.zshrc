@@ -171,6 +171,7 @@ alias :q=exit
 
 # Edit File
 alias vim=nvim
+alias vi=nvim
 alias :e=$EDITOR
 
 # Edit File in Vim
