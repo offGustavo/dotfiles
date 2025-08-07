@@ -1,8 +1,10 @@
 return {
-  -- dir = "~/Projects/TabTerm.nvim/",
+  dir = "~/Projects/TabTerm.nvim/",
+  dev = true,
   'offGustavo/TabTerm.nvim',
   -- enabled = false,
-  lazy = false,
+  lazy = true,
+  cmd = {"TabTermNew","TabTermToggle"},
   opts = {
   -- separator_right = "",
   separator_right = "",
@@ -71,7 +73,7 @@ return {
 
       {
         mode ={ 'i', 'n', 't'},
-        "<A-c>",
+        "<A-x>",
         function ()
           require('TabTerm').close()
         end,
