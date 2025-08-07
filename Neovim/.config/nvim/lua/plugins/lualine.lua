@@ -2,6 +2,20 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
   init = function()
+
+function Lualine_custom_filename()
+  local filename = vim.fn.expand('%:t')
+  if filename == '' then
+    filename = '[No Name]'
+  end
+
+  if vim.bo.modified then
+    return '%#MatchParen#' .. filename .. '%*'
+  else
+    return filename
+  end
+end
+
     vim.g.lualine_laststatus = vim.o.laststatus
     if vim.fn.argc(-1) > 0 then
       -- set an empty statusline till lualine loads
@@ -36,7 +50,6 @@ return {
         lualine_b = { "branch" },
 
         lualine_c = {
-          LazyVim.lualine.root_dir(),
           {
             "diagnostics",
             symbols = {
@@ -46,9 +59,13 @@ return {
               hint = icons.diagnostics.Hint,
             },
           },
+          LazyVim.lualine.root_dir(),
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          { LazyVim.lualine.pretty_path() },
+          -- { LazyVim.lualine.pretty_path() },
           -- { "filename" },
+          {
+            Lualine_custom_filename,
+          },
         },
         lualine_x = {
           Snacks.profiler.status(),
