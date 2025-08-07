@@ -4,6 +4,9 @@ return {
   opts = {
     ---@class snacks.animate.Config
     ---@field easing? snacks.animate.easing|snacks.animate.easing.Fn
+    explorer = {
+      replace_netrw = false,
+    },
     animate = {
       ---@type snacks.animate.Duration|number
       duration = 10, -- ms per step
