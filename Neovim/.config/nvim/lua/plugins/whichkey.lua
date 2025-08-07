@@ -87,6 +87,22 @@ return {
       end,
       desc = "Buffer Hydra Mode (which-key)",
     },
+    {
+      "<A-m>?",
+      mode = "c",
+      function()
+        require("which-key").show({ keys = "", mode = 'c', loop = true })
+      end,
+      desc = "which_key_ignore",
+    },
+    {
+      "<A-m>?",
+      mode = "i",
+      function()
+        require("which-key").show({ keys = "", mode = 'i', loop = true })
+      end,
+      desc = "Insert Mode Hydra Mode (which-key)",
+    },
   },
   config = function(_, opts)
     local wk = require("which-key")
