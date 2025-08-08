@@ -3,4 +3,5 @@ require("config.lazy")
 
 -- Custom Things
 require("fish.tmux_theme")
+require("fish.filetypes")
 
