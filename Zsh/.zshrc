@@ -130,7 +130,7 @@ alias exa="eza --icons --git -l -G -h -a"
 alias cd=z
 
 # Emacs shit
-alias emacs='emacsclient -nw'
+alias emacs='emacs -nw'
 
 # Edit File with Sudo
 alias svim='sudoedit'
