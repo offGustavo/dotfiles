@@ -100,8 +100,8 @@ bindsym $super+k focus up
 bindsym $super+l focus right
 
 # move focused window
-bindsym $super+Shift+h move left
 bindsym $super+Shift+j move down
+bindsym $super+Shift+h move left
 bindsym $super+Shift+k move up
 bindsym $super+Shift+l move right
 
@@ -176,13 +176,16 @@ bindsym $super+Shift+q exec i3-msg exit
 # Sway Config
 
 # Background 
-output eDP-1 mode 1920x1080 pos 0 0 
+# output eDP-1 mode 1920x1080 pos 0 0 
 
-output HDMI-A-1 mode 1920x1080 pos 0 -1920 
+output eDP-1 mode 1920x1080 pos 0 0 bg ~/Pictures/Wallpaper_windows/pexels-marek-piwnicki-3907296-17858727.jpg stretch
+
+# output HDMI-A-1 mode 1920x1080 pos 0 1920 
+
+output HDMI-A-1 mode 1920x1080 pos 0 1920 bg ~/Pictures/Wallpaper_windows/pexels-marek-piwnicki-3907296-17858727.jpg stretch
 
 # output HDMI-A-1 mode 1920x1080 pos -1080 0
-
-exec --no-startup-id swaybg -i ~/Pictures/Wallpapers/dharmx-Walls/nature/a_forest_of_trees_with_fog.jpg
+# exec --no-startup-id swaybg -i ~/Pictures/Wallpapers/dharmx-Walls/nature/a_forest_of_trees_with_fog.jpg
 exec --no-startup-id waybar -c ~/.config/sway/waybar/config.jsonc -s ~/.config/sway/waybar/style.css
 
 # Touchpad config
