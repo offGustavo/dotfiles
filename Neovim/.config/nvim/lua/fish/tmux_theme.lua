@@ -88,7 +88,7 @@ function M.UpdateTheme()
     'setw -g window-status-separator ""',
     string.format('setw -g window-status-style "NONE,fg=%s,bg=%s"', colors.TMUX_FG, colors.TMUX_BG),
     string.format(
-      'setw -g window-status-format "#[fg=%s,bg=%s,nobold,nounderscore,noitalics]#[default] #I #W #[fg=%s,bg=%s,nobold,nounderscore,noitalics]"',
+      'setw -g window-status-format "#[fg=%s,bg=%s,nobold,nounderscore,noitalics] #[default] #I #W #[fg=%s,bg=%s,nobold,nounderscore,noitalics] "',
       colors.TMUX_BG,
       colors.TMUX_BG,
       colors.TMUX_BG,
