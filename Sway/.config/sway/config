@@ -191,6 +191,10 @@ input "type:touchpad" {
     natural_scroll enabled
 }
 
+input "type:pointer" {
+  pointer_accel -1
+}
+
 input "type:keyboard" {
     xkb_layout us,br
     xkb_variant intl,
