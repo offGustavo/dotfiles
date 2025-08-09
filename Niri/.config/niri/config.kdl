@@ -2,6 +2,10 @@
 // "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
+workspace "temp"
+workspace "chrome"
+workspace "term"
+workspace "zen"
 
 // Input device configuration.
 // Find the full list of options on the wiki:
