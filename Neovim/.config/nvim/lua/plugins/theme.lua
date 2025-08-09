@@ -19,7 +19,17 @@ return {
     },
   },
 
-  { "catppuccin/nvim", name = "catppuccin", lazy = true },
+  { "catppuccin/nvim", 
+    opts = {
+    transparent_background = true, -- disables setting the background color.
+    float = {
+        transparent = true, -- enable transparent floating windows
+        solid = true, -- use solid styling for floating windows, see |winborder|
+    },
+    },
+    name = "catppuccin",
+    lazy = true
+  },
 
   { "rebelot/kanagawa.nvim", name = "kanagawa", lazy = true },
 
