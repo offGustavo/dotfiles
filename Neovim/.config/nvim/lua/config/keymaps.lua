@@ -614,3 +614,7 @@ vim.keymap.set("n", "<leader>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
 vim.keymap.set("n", "<leader>oT", function()
   TmuxTheme.UpdateTheme()
 end, { desc = "Update Tmux Theme" })
+
+-- Make
+vim.keymap.set("n", "<leader>cm", ":make ", { desc = "Make" })
+vim.keymap.set("n", "<leader>cM", "<Cmd>make<CR>", { desc = "Run Make" })
