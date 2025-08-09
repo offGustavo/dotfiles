@@ -45,10 +45,10 @@ vim.keymap.set("n", "<leader>ts", "<Cmd>horizontal terminal<CR>", { silent = tru
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal" })
 
 ---- Move in windows on Terminal Mode
-vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h")
-vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j")
-vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k")
-vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l")
+-- vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h")
+-- vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j")
+-- vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k")
+-- vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l")
 
 -- Move Window
 vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
@@ -73,16 +73,16 @@ vim.keymap.set("v", "<S-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move L
 
 -- Emacs Keybinds in Insert Mode
 -- set this better
-vim.keymap.set({ "i", "c", "t" }, "<C-p>", "<Up>", { silent = true })
-vim.keymap.set({ "i", "c", "t" }, "<C-n>", "<Down>", { silent = true })
-vim.keymap.set({ "i", "c", "t" }, "<C-a>", "<Home>", { silent = true })
-vim.keymap.set({ "i", "c", "t" }, "<C-f>", "<Right>", { silent = true })
-vim.keymap.set({ "i", "c", "t" }, "<C-b>", "<Left>", { silent = true })
-vim.keymap.set({ "i", "c", "t" }, "<C-e>", "<End>", { silent = true })
-vim.keymap.set({ "i", "c", "t" }, "<A-b>", "<C-Left>", { silent = true })
-vim.keymap.set({ "i", "c", "t" }, "<A-f>", "<C-Right>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-p>", "<Up>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-a>", "<Home>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-n>", "<Down>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-f>", "<Right>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-b>", "<Left>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-e>", "<End>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<A-b>", "<C-Left>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<A-f>", "<C-Right>", { silent = true })
 vim.keymap.set("i", "<A-d>", "<C-o>dw", { silent = true })
-vim.keymap.set({ "i", "c", "t" }, "<C-d>", "<Del>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-d>", "<Del>", { silent = true })
 vim.keymap.set("i", "<C-k>", "<Esc>lDa", { silent = true })
 vim.keymap.set("i", "<C-u>", "<Esc>d0xi", { silent = true })
 vim.keymap.set("i", "<A-}>", "<C-o>}", { silent = true })
@@ -616,5 +616,5 @@ vim.keymap.set("n", "<leader>oT", function()
 end, { desc = "Update Tmux Theme" })
 
 -- Make
-vim.keymap.set("n", "<leader>cm", ":make ", { desc = "Make" })
+vim.keymap.set("n", "<leader>cm", ":make ", { desc = "Make", remap = true })
 vim.keymap.set("n", "<leader>cM", "<Cmd>make<CR>", { desc = "Run Make" })
