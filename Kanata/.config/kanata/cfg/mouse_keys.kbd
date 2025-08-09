@@ -1,0 +1,64 @@
+(defcfg
+  movemouse-smooth-diagonals yes
+  process-unmapped-keys yes
+  log-layer-changes yes
+  concurrent-tap-hold yes
+  linux-device-detect-mode any
+  linux-dev-names-exclude (
+    "SYNA7DB5:01 06CB:CD41 Touchpad" 
+    "SYNA7DB5:01 06CB:CD41 Mouse"    
+    )
+  )
+
+;;Define a layer base
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet menu rctl
+  🖰1
+  🖰2
+  🖰3
+  🖰4
+  🖰5
+)
+
+(deflayer base
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet menu rctl
+  🖰1
+  ( tap-hold 100 300 🖰2 lctrl)
+  🖰3
+  (tap-hold 100 200 fwd lsft)
+  (tap-hold 100 200 bck (layer-toggle layer))
+)
+
+(deflayermap layer
+  w up
+  a left
+  s down
+  d rght
+  q home
+  e end
+  r pgup
+  f pgdn
+  x del
+  c bspc
+  z ins
+  1 f1 
+  2 f2 
+  3 f3 
+  4 f4 
+  5 f5 
+  6 f6 
+  7 f7 
+  8 f8 
+  9 f9 
+  0 f10 
+  - f11 
+  = f12 
+  )
