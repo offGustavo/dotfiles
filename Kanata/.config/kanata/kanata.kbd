@@ -111,8 +111,9 @@ mVd (tap-hold 100 300 vold lmet)
 
   ;; Alt
 laa (tap-hold 100 300 a lalt) 
-  -  ;;NOTE: `︔` != `;`
-  -  ras (tap-hold 100 300 ︔ lalt) 
+  ;;NOTE: `︔` != `;`
+  ;; This isen't require now, but i'll keeping it
+  ras (tap-hold 100 300 ︔ lalt) 
   law (tap-hold 100 300 w ralt) 
   rao (tap-hold 100 300 o ralt) 
 aPr (tap-hold 100 300 prev lalt)
@@ -134,6 +135,10 @@ rmp (tap-hold 100 300 p menu)
   mid (movemouse-speed 300)
 slw (movemouse-speed 100)
 
+  mrc (tap-hold 100 300 🖰2 lctrl)
+  mfs (tap-hold 100 200 fwd lsft)
+mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
+
   )
 
   ;;  (deflayer base
@@ -152,7 +157,7 @@ slw (movemouse-speed 100)
    @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret
    lsft @lmz @lnx @lnc @lsv b    @rsn @rnm @rn, @rm. /    rsft
    lctl lmet @lsa           @ssc           @rna  @rmm rctl
-   🖰1 ( tap-hold 100 300 🖰2 lctrl) 🖰3 (tap-hold 100 200 fwd lsft) (tap-hold 100 200 bck (layer-toggle onehand-nav))
+   🖰1 @mrc 🖰3 @mfs @mbn
   )
 
   (deflayermap onehand-nav
