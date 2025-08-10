@@ -157,7 +157,7 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
    @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret
    lsft @lmz @lnx @lnc @lsv b    @rsn @rnm @rn, @rm. /    rsft
    lctl lmet @lsa           @ssc           @rna  @rmm rctl
-   🖰1 @mrc 🖰3 @mfs @mbn
+   🖰1 @mrc 🖰3 @mbn @mfs
   )
 
   (deflayermap onehand-nav
