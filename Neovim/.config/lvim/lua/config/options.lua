@@ -41,3 +41,4 @@ vim.o.swapfile = false
 vim.g.netrw_banner = 0
 vim.g.snacks_animate = false
 -- vim.o.winborder = "rounded"
+vim.o.grepprg = "rg --vimgrep -. --smart-case -g '!.git'"
