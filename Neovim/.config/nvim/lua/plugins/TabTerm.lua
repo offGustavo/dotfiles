@@ -6,13 +6,13 @@ return {
   lazy = true,
   cmd = {"TabTermNew","TabTermToggle"},
   opts = {
+    separator_first = "█",
+    separator_right = "",
+    separator_left = "",
   -- separator_right = "",
-  separator_right = "",
   -- separator_left = "",
-  separator_left = "",
   -- separator_first = "",
   -- separator_first = "",
-  separator_first = "█",
   -- separator_first = "",
   -- separator_first = " ",
   -- separator_right = "",
@@ -136,7 +136,7 @@ return {
         mode ={ 'i', 'n', 't'},
         "<A-m>" .. i,
         function()
-          require('TabTerm').goto(i)
+          require('TabTerm').go(i)
         end,
         desc = "which_key_ignore"
       })
@@ -144,7 +144,7 @@ return {
         mode ={ 'i', 'n', 't'},
         "<A-" .. i .. ">",
         function()
-          require('TabTerm').goto(i)
+          require('TabTerm').go(i)
         end,
         desc = "which_key_ignore"
       })

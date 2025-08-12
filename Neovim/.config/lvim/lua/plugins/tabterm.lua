@@ -1,6 +1,7 @@
 return {
   dir = "~/Projects/TabTerm.nvim/",
-  -- 'offGustavo/TabTerm.nvim',
+  dev = true,
+  'offGustavo/TabTerm.nvim',
   -- enabled = false,
   lazy = true,
   opts = {
@@ -134,7 +135,7 @@ return {
         mode ={ 'i', 'n', 't'},
         "<A-m>" .. i,
         function()
-          require('TabTerm').goto(i)
+          require('TabTerm').go(i)
         end,
         desc = "which_key_ignore"
       })
@@ -142,7 +143,7 @@ return {
         mode ={ 'i', 'n', 't'},
         "<A-" .. i .. ">",
         function()
-          require('TabTerm').goto(i)
+          require('TabTerm').go(i)
         end,
         desc = "which_key_ignore"
       })
