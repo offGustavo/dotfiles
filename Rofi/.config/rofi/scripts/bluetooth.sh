@@ -17,8 +17,8 @@
 #   Arch repositories: rofi, bluez-utils (contains bluetoothctl)
 
 # Import Current Theme
-DIR="$HOME/.config/i3"
-RASI="$DIR/rofi/config.rasi"
+DIR="$HOME/.config/rofi"
+RASI="$DIR/config.rasi"
 
 # Constants
 goback="Back"
@@ -308,8 +308,8 @@ show_menu() {
 }
 
 # Rofi command to pipe into, can add any options here
-rofi_command="rofi -theme ${RASI} -dmenu $* -p"
-# rofi_command="rofi  -dmenu $* -p"
+# rofi_command="rofi -theme ${RASI} -dmenu $* -p"
+rofi_command="rofi  -dmenu $* -p"
 
 case "$1" in
 --status)
