@@ -135,21 +135,20 @@ rmp (tap-hold 100 300 p menu)
   mid (movemouse-speed 300)
 slw (movemouse-speed 100)
 
-  mrc (tap-hold 100 300 🖰2 lctrl)
+  mrc (tap-hold 100 200 🖰2 lctrl )
   mfs (tap-hold 100 200 fwd lsft)
+  mmn (tap-hold 100 200 mmid (layer-toggle onehand-num))
 mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
-
   )
 
   ;;  (deflayer base
       ;;            Control/Esc
       ;;            grv      1              2                  3               4
       ;;            tab      q              w                  e               r
-      ;;            Caps/Esc Alt/a          Super/s            Shift/d         Control/f 
+      ;;            Caps/Esc Alt/a          Super/s            Shift/d         Control/f
       ;;            Shift    Mouse Layer/z  Navigation Layer/x Numbers Layer/c Symbols Layer/v 
-      ;;            Control  Super/Win      Alt               Shift/Space      AltGr Super/Meta    
+      ;;            Control  Super      r     Alt               Shift/Space      AltGr Super
       ;;            )
-
   (deflayer base
    @lce
    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -157,7 +156,7 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
    @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret
    lsft @lmz @lnx @lnc @lsv b    @rsn @rnm @rn, @rm. /    rsft
    lctl lmet @lsa           @ssc           @rna  @rmm rctl
-   🖰1 @mrc 🖰3 @mbn @mfs
+   🖰1 @mrc @mmn @mbn @mfs
   )
 
   (deflayermap onehand-nav
@@ -187,21 +186,25 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
   = f12 
   )
 
-  ;; (deflayermap onehand-num
-      ;;  caps kp0 
-      ;;  z kp1 
-      ;;  x kp2
-      ;;  c kp3 
-      ;;  a kp4 
-      ;;  s kp5 
-      ;;  f kp6
-      ;;  q kp7 
-      ;;  w kp8 
-      ;;  e kp9
-      ;;  r kp/
-      ;;  f kp*
-      ;;  v kp-
-      ;; )
+  (deflayermap onehand-num
+   spc kp0 
+   z kp1 
+   x kp2
+   c kp3 
+   a kp4 
+   s kp5 
+   d kp6
+   q kp7 
+   w kp8 
+   e kp9
+   r kp-
+   f kp+
+   4 kp*
+   3 kp/
+   2 ,
+   1 kp.
+   tab nlck
+  )
 
   (deflayer game
    esc
