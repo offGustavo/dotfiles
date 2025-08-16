@@ -107,7 +107,8 @@ for_window [class="alacritty-float|kitty-float|Music"] floating enable
 
 bindsym $super+r exec --no-startup-id  $scripts/combi.sh
 
-
+# Toggle focus on Floating Windows
+bindsym $super+Shift+space focus mode_toggle
 
 # change focus
 bindsym $super+h focus left
