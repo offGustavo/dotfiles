@@ -45,6 +45,23 @@ map <leader>cr <Action>(RenameElement)
 
 nnoremap gd <Action>(k)
 
+" set showmode
+" set nu
+" set rnu
+" set nowrap
+" set insearch
+" set hlsearch
+" nmap == <Action>(ReformatCode)
+
+" Go to code
+nmap gd <Action>(GotoDeclaration)
+nmap gy <Action>(GotoTypeDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gu <Action>(ShowUsages)
+nmap gt <Action>(GotoTest)
+nmap gf <Action>(Back)
+nmap gb <Action>(Forward)
+
 nmap ]e <Action>(GotoNextError)
 nmap [e <Action>(GotoPreviousError)
 
