@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rofi -show window 
+rofi -show window -kb-accept-entry '!Alt-Tab' -kb-row-down Alt-Tab 

@@ -84,6 +84,8 @@ bindsym $super+slash exec --no-startup-id $scripts/launcher.sh
 
 # run rofi window 
 bindsym $super+w exec --no-startup-id $scripts/windows.sh
+# I want to make it work with all windows
+bindsym $alt+Tab exec --no-startup-id $scripts/windows.sh
 
 # run rofi network script
 bindsym $super+n exec --no-startup-id  $scripts/network.py
