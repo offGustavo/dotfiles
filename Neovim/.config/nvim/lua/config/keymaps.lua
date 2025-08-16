@@ -169,6 +169,7 @@ end, { desc = "Open diagnostic Quickfix list" })
 ------------
 vim.keymap.set("n", "<leader>qq", ":q<cr>", { silent = true, desc = "Quit" })
 vim.keymap.set("n", "<leader>qQ", ":qa!<cr>", { silent = true, desc = "Quit All" })
+vim.keymap.set("n", "<leader>qr", vim.cmd.restart, { desc = "Restart Vim" })
 
 --- ThePrimeagen Keymaps
 vim.keymap.set("i", "<C-c>", "<Esc>")
