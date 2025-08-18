@@ -4,8 +4,8 @@ vim.g.maplocalleader = '\\'
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.mouse = 'a'
-vim.o.showmode = false
-vim.o.cmdheight = 0
+vim.o.showmode = true
+-- vim.o.cmdheight = 0
 vim.o.laststatus = 3
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
@@ -15,7 +15,7 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.signcolumn = 'yes'
-vim.o.updatetime = 250
+vim.o.updatetime = 50
 vim.o.timeoutlen = 400
 vim.o.splitright = true
 vim.o.splitbelow = true
@@ -34,11 +34,19 @@ vim.o.smartcase = true
 vim.o.showmode = true
 vim.o.showcmd = true
 vim.o.showcmdloc = 'statusline'
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldmethod = "indent"
 vim.o.foldlevel = 99
 vim.o.swapfile = false
+vim.o.path = vim.o.path .. "**"
+vim.o.wildignore =  vim.o.wildignore .. "**/node_modules/**"
+vim.o.winborder = "rounded"
+
+if vim.fn.executable('your_command_name')  then
+    vim.o.grepprg = "rg --vimgrep -. --smart-case -g '!.git'"
+-- else
+--     vim.o.grepprg = "grep -R --exclude-dir=.git --exclude-dir=node_modules"
+end
+
 vim.g.netrw_banner = 0
 vim.g.snacks_animate = false
--- vim.o.winborder = "rounded"
-vim.o.grepprg = "rg --vimgrep -. --smart-case -g '!.git'"
+
