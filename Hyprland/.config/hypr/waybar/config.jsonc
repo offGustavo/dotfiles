@@ -11,6 +11,7 @@
     // "custom/powerDraw",
     // "custom/weather",
     "hyprland/workspaces",
+    "hyprland/submap",
     "mpd",
     "tray",
   ],
@@ -45,6 +46,11 @@
     "format-calendar": "<span color='#aeaeae'><b>{}</b></span>",
     "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
     "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>"
+  },
+  "hyprland/submap": {
+    "format": "({})",
+    // "max-length": 8,
+    "tooltip": false
   },
   "hyprland/language": {
     "format": "{}",
