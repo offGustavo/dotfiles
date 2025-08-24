@@ -177,7 +177,7 @@ bindsym $super+Shift+q exec i3-msg exit
 bar {
   status_command i3status -c ~/.config/i3/i3status/status
     position top
-    font pango:Jetbrains Mono Nerd Font 8
+    font pango:Jetbrains Mono Nerd Font 10
     tray_output none
     colors {
       background $bg
