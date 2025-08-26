@@ -1,13 +1,16 @@
 return {
   "OXY2DEV/markview.nvim",
   lazy = false,
+  priority = 49,
   opts = {
     preview = {
       modes = { "n", "no", "c" },
       hybrid_modes = { "n" },
       linewise_hybrid_mode = true,
     },
-
+    latex = {
+      enable = false,
+    },
     -- list_items
     markdown = {
       list_items = {
