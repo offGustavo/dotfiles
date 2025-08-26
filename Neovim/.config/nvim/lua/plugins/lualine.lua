@@ -117,6 +117,13 @@ end
               return #vim.fn.gettabinfo() > 1
             end,
           },
+          function ()
+            if vim.bo.filetype == "markdown" then
+              return vim.fn.wordcount().words .. " words"
+            else 
+              return ""
+            end
+          end,
         },
         lualine_y = {
           { "progress", separator = " ", padding = { left = 1, right = 1 } },
