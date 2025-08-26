@@ -98,6 +98,8 @@ bindsym $super+x exec --no-startup-id  $scripts/power.sh
 # run rofi output script
 bindsym $super+v exec --no-startup-id  $scripts/output.sh
 
+# Screenshot
+bindsym $super+Shift+s exec --no-startup-id  flameshot gui
 
 # run rofi monitors script
 bindsym $super+Shift+m exec --no-startup-id  $scripts/monitors.sh
