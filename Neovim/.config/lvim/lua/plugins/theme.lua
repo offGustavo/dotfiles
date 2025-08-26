@@ -9,4 +9,6 @@ require('tokyonight').setup {
   end,
 }
 
+vim.pack.add { "https://github.com/RRethy/nvim-base16"}
+
 vim.cmd.colorscheme 'tokyonight-night'

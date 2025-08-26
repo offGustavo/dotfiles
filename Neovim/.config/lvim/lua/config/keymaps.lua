@@ -15,9 +15,10 @@ vim.keymap.set('n', '<leader>qq', vim.cmd.quit, { desc = 'Quit', silent = true }
 vim.keymap.set('n', '<leader>qQ', ":qa!<Cr>", { desc = 'Force Quit All', silent = true })
 vim.keymap.set('n', '<leader>qr', vim.cmd.restart, { desc = 'Restart', silent = true })
 
+vim.keymap.set("n", "<leader>fc", ":e $MYVIMRC<Cr>")
+
 vim.keymap.set('n', '<leader>bb', ':b #<Cr>', { desc = 'Alternative Buffer', silent = true })
 vim.keymap.set("n", "<leader>bd", ":bd!<Cr>")
-
 vim.keymap.set('n', '<leader>,', ':ls<Cr>:b! ')
 vim.keymap.set('n', '<leader>z', ':cd ')
 

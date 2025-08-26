@@ -5,7 +5,6 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.mouse = 'a'
 vim.o.showmode = true
--- vim.o.cmdheight = 0
 vim.o.laststatus = 3
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
@@ -39,9 +38,9 @@ vim.o.foldlevel = 99
 vim.o.swapfile = false
 vim.o.path = vim.o.path .. "**"
 vim.o.wildignore =  vim.o.wildignore .. "**/node_modules/**"
-vim.o.winborder = "rounded"
+-- vim.o.winborder = "rounded"
 
-if vim.fn.executable('your_command_name')  then
+if vim.fn.executable('rg')  then
     vim.o.grepprg = "rg --vimgrep -. --smart-case -g '!.git'"
 -- else
 --     vim.o.grepprg = "grep -R --exclude-dir=.git --exclude-dir=node_modules"
@@ -50,3 +49,14 @@ end
 vim.g.netrw_banner = 0
 vim.g.snacks_animate = false
 
+-- Experimental
+vim.o.cmdheight = 1
+require('vim._extui').enable({
+  enable = flase, -- Whether to enable or disable the UI.
+  msg = { -- Options related to the message module.
+    ---@type 'cmd'|'msg' Where to place regular messages, either in the
+    ---cmdline or in a separate ephemeral message window.
+    target = 'msg',
+    timeout = 1000, -- Time a message is visible in the message window.
+  },
+})
