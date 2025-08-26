@@ -9,6 +9,11 @@ export PATH=$PATH:$HOME/scripts
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
+# KDE
+  # gsettings reset org.gnome.desktop.interface icon-theme
+
+# Browser
+# export BROWSER="flatpak run app.zen_browser.zen"
 
 # Use neovim as manpager
 export MANPAGER='nvim -c "nmap <silent> q :q!<Cr>" +Man!'
@@ -127,7 +132,7 @@ alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/oh
 alias exa="eza --icons --git -l -G -h -a"
 
 # Zoxide
-alias cd=z
+# alias cd=z
 
 # Emacs shit
 alias emacs='emacs -nw'
@@ -157,10 +162,10 @@ LVIM='NVIM_APPNAME=lvim nvim'
 alias lvim=$LVIM
 alias :L=$LVIM
 
-# # minimal tmux config
-# alias :c="tmux -f ~/.config/cmux/cmux.conf"
-# alias cmux="tmux -f ~/.config/cmux/cmux.conf"
-# alias :Lc="tmux -f ~/.config/cmux/cmux.conf new-session -s vim '$LVIM nvim'"
+# minimal tmux config
+alias :c="tmux -f ~/.config/cmux/cmux.conf"
+alias cmux="tmux -f ~/.config/cmux/cmux.conf"
+alias :Lc="tmux -f ~/.config/cmux/cmux.conf new-session -s vim '$LVIM nvim'"
 
 # Gengar Fastfetch
 alias :g="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
@@ -170,12 +175,14 @@ alias gengar="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/f
 alias :q=exit
 
 # Edit File
-alias vim=nvim
-alias vi=nvim
-alias :e=$EDITOR
+if ! command -v vim >/dev/null 2>&1; then
+    alias vim=nvim
+fi
+if ! command -v nvim >/dev/null 2>&1; then
+    alias nvim=vim
+fi
 
-# Edit File in Vim
-alias :E=vim
+alias :e=$EDITOR
 
 # Nala aliases
 alias nala='sudo nala'
@@ -232,7 +239,8 @@ fi
 # --preview='bat --color=always {}'
 # --preview='exa -a -T {}'
 
-export FZF_DEFAULT_COMMAND='fd --hidden'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*" --glob "!node_modules/"'
+# export FZF_DEFAULT_COMMAND='fd --hidden'
 # export FZF_DEFAULT_COMMAND='find .'
 # export FZF_DEFAULT_COMMAND='find . -printf "%P\\n"'
 # export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS --preview='tree {}'"
