@@ -18,6 +18,8 @@ set noswapfile
 set incsearch
 set foldmethod=indent
 set splitkeep=cursor
+set path+=**
+set wildignore+=*/node_modules/*,_site,*/__pycache__/,*/venv/*,*/target/*,*/.vim$,\~$,*/.log,*/.aux,*/.cls,*/.aux,*/.bbl,*/.blg,*/.fls,*/.fdb*/,*/.toc,*/.out,*/.glo,*/.log,*/.ist,*/.fdb_latexmk,*/.git
 
 " Let's save undo info!
 if has('nvim')
@@ -49,6 +51,9 @@ let mapleader="\ "
 " Netrw Config
 let g:netrw_banner = 0
 
+nmap <C-s> :w<Cr>
+imap <C-s> <C-o>:w<Cr>
+
 " Better Marks
 nmap <leader>1 `1
 nmap <leader>2 `2
@@ -61,9 +66,12 @@ nmap <leader>8 `8
 nmap <leader>9 `9
 nmap <leader>0 `0
 
-" vimrc
-nmap <leader>rr :so ~/.vimrc<Cr>
-nmap <leader>fc :e ~/.vimrc<Cr>
+" Close
+nmap <leader>qq :q<Cr>
+nmap <leader>qQ :qa!<Cr>
+" Vimr
+nmap <leader>qr :so $MYVIMRC<Cr>
+nmap <leader>fc :e $MYVIMRC<Cr>
 
 " Window Control 
 nmap <C-h> <C-w>h
@@ -72,6 +80,9 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 nmap <leader>w <C-w>
 
+" Find
+nmap <leader>ff :find 
+
 " Grep
 nmap <leader>sg :grep -r --exclude-dir=.git --exclude-dir=node_modules  .<Left><Left>
 
@@ -79,6 +90,7 @@ nmap <leader>sg :grep -r --exclude-dir=.git --exclude-dir=node_modules  .<Left><
 nmap [b :bp!<Cr>
 nmap ]b :bn!<Cr>
 nmap <leader>sb :b! 
+nmap <leader>bd :bd!<Cr>
 
 " Vim File Explorer
 nmap <leader><Cr> :Ex<Cr>
@@ -134,13 +146,14 @@ cnoremap <C-e> <End>
 cnoremap <C-d> <Delete>
 cnoremap <C-o> <C-f>
 
+
 " Quick Fix
 nmap ]q :cnext<Cr>
 nmap ]Q :clast<Cr>
 nmap [q :cprev<Cr>
 nmap [Q :cfirst<Cr>
-nmap <leader>q :copen<Cr>
-nmap <leader>Q :cclose<Cr>
+nmap <leader>qo :copen<Cr>
+nmap <leader>qc :cclose<Cr>
 
 " Install vim-plug if not found
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -165,11 +178,9 @@ call plug#end()
 " Theme Settings
 set termguicolors
 set background=dark
-let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_style = 'night' 
 let g:tokyonight_enable_italic = 1
 colorscheme tokyonight
-" colorscheme retrobox
-" syntax off
 
 " FZF Settings
 let g:fzf_vim = {} 
@@ -209,16 +220,17 @@ let g:fzf_vim.preview_window = ['right,50%,<50(up,60%)', 'ctrl-o']
 let g:fzf_vim.colors_options =      ['--style', 'minimal', '--no-preview']
 let g:fzf_vim.command_prefix = 'Fzf'
 
+command! -nargs=* FzfRG call fzf#vim#grep(
+  \   'rg --hidden --glob "!.git/*" --glob "!node_modules/" --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>),
+  \   1,
+  \   fzf#vim#with_preview(),
+  \   <bang>0
+\ )
+
 " FZF Keymaps
 nmap <silent> <leader><space> :FzfFiles<Cr>
-nmap <silent> <leader>sw :FzfRG <C-r><C-w><Cr>
 nmap <silent> <leader>/ :FzfRG<Cr>
 nmap <silent> <leader>, :FzfBuffers<Cr>
-nmap <silent> <leader>uC :FzfColors<Cr>
 
 " Git Keymaps
-nmap <silent> <leader>G :Git<Cr>:only<Cr>
-nmap <silent> <leader>gg :!lazygit<Cr>
-nmap <leader>gp :!git pull<Cr>
-nmap <leader>gP :!git push<Cr>
-nmap <silent> <leader>gl :Git log<Cr>
+nmap <silent> <leader>gg :Git<Cr>:only<Cr>
