@@ -10,16 +10,6 @@
    )
  )
 
-  (defchordsv2
-   (esc ret) @bas 100 all-released  ()
-   (caps ret) @bas 100 all-released  ()
-   (tab \) @edt 100 all-released  ()
-    (tab ret) @edt 100 all-released  ()
-    (grv bspc) @gam 100 all-released  ()
-    (lsft rsft) caps 100 all-released  ()
-    (lctl rctl) lrld 100 all-released  ()
-   )
-
    (deflocalkeys-linux
     mctl 89
    )
@@ -36,6 +26,17 @@
     lsft z    x    c    v    b    n    m    ,    .    /    rsft
     lctl lmet lalt           spc            ralt  menu mctl 
     🖰1 🖰2 🖰3 🖰4 🖰5
+   )
+
+  (defchordsv2
+   (esc ret) @bas 100 all-released  ()
+   (caps ret) @bas 100 all-released  ()
+   (tab \) @edt 100 all-released  ()
+    (tab ret) @edt 100 all-released  ()
+    (grv bspc) @gam 100 all-released  ()
+    (lsft rsft) caps 100 all-released  ()
+    (lctl rctl) lrld 100 all-released  ()
+    (lctl mctl) lrld 100 all-released  ()
    )
 
    (defalias
