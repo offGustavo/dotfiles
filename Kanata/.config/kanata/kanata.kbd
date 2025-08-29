@@ -84,14 +84,15 @@ rm. (tap-hold 100 300 . @mov)
   ;; Remap
 
   ;; Caps
-  ;; ecc (tap-hold 100 300 esc caps)
-ecc (tap-hold 100 300 esc lctrl)
+  ecc (tap-hold 100 300 esc caps)
+  lce (tap-hold 100 300 esc caps)
 
   ;; Control
   lcf (tap-hold 100 300 f lctl)
   rcj (tap-hold 100 300 j rctl)
   cNe (tap-hold 100 300 next lctl)
-lce (tap-hold 100 300 esc lctrl)
+;; lce (tap-hold 100 300 esc lctrl)
+;; ecc (tap-hold 100 300 esc lctrl)
 
   ;; Shift
   lsd (tap-hold 100 300 d lsft)
