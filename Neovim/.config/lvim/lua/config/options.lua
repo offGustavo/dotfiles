@@ -43,9 +43,9 @@ vim.o.wildignore =  vim.o.wildignore .. "**/node_modules/**"
 vim.cmd.colorscheme 'retrobox'
 
 if vim.fn.executable('rg')  then
-    vim.o.grepprg = "rg --vimgrep -. --smart-case -g '!.git'"
--- else
---     vim.o.grepprg = "grep -R --exclude-dir=.git --exclude-dir=node_modules"
+  vim.o.grepprg = "rg --vimgrep -. --smart-case -g '!.git' -g '!node_modules/'"
+  -- else
+  --     vim.o.grepprg = "grep -R --exclude-dir=.git --exclude-dir=node_modules"
 end
 
 vim.g.netrw_banner = 0
@@ -62,3 +62,26 @@ require('vim._extui').enable({
   },
 })
 
+if vim.fn.executable("zoxide") == 1 then
+  vim.api.nvim_create_user_command("Cd", function(opts)
+    local target = opts.args
+    if target == "" then
+      vim.cmd("cd ~")
+      return
+    end
+    local handle = io.popen("zoxide query " .. vim.fn.shellescape(target))
+    if handle then
+      local result = handle:read("*l")
+      handle:close()
+      if result and #result > 0 then
+        vim.cmd("cd " .. vim.fn.fnameescape(result))
+        print("Changed directory to: " .. result)
+      else
+        print("zoxide: no match for '" .. target .. "'")
+      end
+    else
+      print("Failed to run zoxide")
+    end
+  end, { nargs = "?" })
+  vim.keymap.set("n", "<leader>z", ":Cd ")
+end
