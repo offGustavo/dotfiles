@@ -190,23 +190,22 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
   )
 
   (deflayermap onehand-num
-   spc kp0 
-   z kp1 
-   x kp2
-   c kp3 
-   a kp4 
-   s kp5 
-   d kp6
-   q kp7 
-   w kp8 
-   e kp9
-   r kp-
-   f kp+
-   4 kp*
-   3 kp/
+   spc 0 
+   z 1 
+   x 2
+   c 3 
+   a 4 
+   s 5 
+   d 6
+   q 7 
+   w 8 
+   e 9
+   r -
+   f +
+   4 *
+   3 /
    2 ,
-   1 kp.
-   tab nlck
+   1 .
   )
 
   (deflayer game

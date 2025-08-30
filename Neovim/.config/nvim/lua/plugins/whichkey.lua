@@ -35,7 +35,7 @@ return {
         { "z", group = "fold" },
         { "<leader>t", group = "terminal/tabs" },
         { "<leader>o", group = "options/custom", icon = "" },
-        { "<leader>m", group = "agenda", icon = "" },
+        { "<leader>oa", group = "agenda", icon = "" },
         { "<leader>oo", group = "obsidian", icon = "" },
         { "<leader>om", group = "markdown", icon = "" },
         { "<leader>oc", group = "colorizer", icon = "󰌁" },
