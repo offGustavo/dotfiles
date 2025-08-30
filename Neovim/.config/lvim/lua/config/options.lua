@@ -10,6 +10,7 @@ vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
 vim.o.breakindent = true
+vim.o.linebreak = true
 vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -39,6 +40,7 @@ vim.o.swapfile = false
 vim.o.path = vim.o.path .. "**"
 vim.o.wildignore =  vim.o.wildignore .. "**/node_modules/**"
 -- vim.o.winborder = "rounded"
+vim.cmd.colorscheme 'retrobox'
 
 if vim.fn.executable('rg')  then
     vim.o.grepprg = "rg --vimgrep -. --smart-case -g '!.git'"
@@ -50,7 +52,6 @@ vim.g.netrw_banner = 0
 vim.g.snacks_animate = false
 
 -- Experimental
-vim.o.cmdheight = 1
 require('vim._extui').enable({
   enable = true, -- Whether to enable or disable the UI.
   msg = { -- Options related to the message module.
@@ -60,3 +61,4 @@ require('vim._extui').enable({
     timeout = 2000, -- Time a message is visible in the message window.
   },
 })
+

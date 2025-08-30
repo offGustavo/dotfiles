@@ -1,6 +1,6 @@
 vim.keymap.set({'n', "v", "i" }, '<C-s>', vim.cmd.write)
 
-vim.keymap.set("n", "<leader>w", "<C-w")
+vim.keymap.set("n", "<leader>w", "<C-w>")
 
 vim.keymap.set('v', '<S-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'Move Line Up' })
 vim.keymap.set('v', '<S-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'Move Line Down' })
@@ -15,7 +15,7 @@ vim.keymap.set('n', '<leader>qq', vim.cmd.quit, { desc = 'Quit', silent = true }
 vim.keymap.set('n', '<leader>qQ', ":qa!<Cr>", { desc = 'Force Quit All', silent = true })
 vim.keymap.set('n', '<leader>qr', vim.cmd.restart, { desc = 'Restart', silent = true })
 
-vim.keymap.set("n", "<leader>fc", ":e $MYVIMRC<Cr>")
+vim.keymap.set("n", "<leader>fc", ":cd ~/.config/lvim<Cr>:find ")
 
 vim.keymap.set('n', '<leader>bb', ':b #<Cr>', { desc = 'Alternative Buffer', silent = true })
 vim.keymap.set("n", "<leader>bd", ":bd!<Cr>")
