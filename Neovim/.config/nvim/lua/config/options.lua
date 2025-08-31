@@ -59,12 +59,54 @@ end
 
 vim.o.makeprg = "make"
 
+-- -- Experimental
 -- require('vim._extui').enable({
 --   enable = true, -- Whether to enable or disable the UI.
---   msg = { -- Options related to the message module.
+--   msg = {        -- Options related to the message module.
 --     ---@type 'cmd'|'msg' Where to place regular messages, either in the
 --     ---cmdline or in a separate ephemeral message window.
 --     target = 'msg',
---     timeout = 1000, -- Time a message is visible in the message window.
+--     timeout = 2000, -- Time a message is visible in the message window.
 --   },
 -- })
+
+-- Better Grep and Find with ripgrep
+if vim.fn.executable('rg') then
+  vim.o.grepprg = "rg --vimgrep -. --smart-case -g '!.git' -g '!node_modules/'"
+
+  function _G.RgFindFiles(cmdarg, _cmdcomplete)
+    local fnames = vim.fn.systemlist('rg --files --hidden --color=never --glob="!.git" --glob="!node_modules/"')
+    if #cmdarg == 0 then
+      return fnames
+    else
+      return vim.fn.matchfuzzy(fnames, cmdarg)
+    end
+  end
+
+  vim.o.findfunc = 'v:lua.RgFindFiles'
+end
+
+-- Better Cd with Zoxide
+if vim.fn.executable("zoxide") == 1 then
+  vim.api.nvim_create_user_command("Cd", function(opts)
+    local target = opts.args
+    if target == "" then
+      vim.cmd("cd ~")
+      return
+    end
+    local handle = io.popen("zoxide query " .. vim.fn.shellescape(target))
+    if handle then
+      local result = handle:read("*l")
+      handle:close()
+      if result and #result > 0 then
+        vim.cmd("cd " .. vim.fn.fnameescape(result))
+        print("Changed directory to: " .. result)
+      else
+        print("zoxide: no match for '" .. target .. "'")
+      end
+    else
+      print("Failed to run zoxide")
+    end
+  end, { nargs = "?" })
+end
+

@@ -546,69 +546,71 @@ if vim.g.neovide then
   end, { desc = "Restore Font Size in neovide", silent = true })
 end
 
-----------------------------------
--- CUSTOM SEARCH FILES AND WORD --
-----------------------------------
-local function GrepSearch()
-  local input = vim.fn.input("Grep for > ")
-  if input == "" then
-    return
-  end
-  local cmd = string.format("grep -rnI --exclude-dir=.git --exclude-dir=node_modules --color=never '%s' .", input)
-  local tmp = vim.fn.tempname()
-  vim.fn.system(cmd .. " > " .. vim.fn.fnameescape(tmp))
-  vim.cmd("cfile " .. tmp)
-  vim.cmd("copen")
-  os.remove(tmp)
-end
-vim.api.nvim_create_user_command("Grep", GrepSearch, {})
-vim.keymap.set("n", "<leader>o/", ":Grep<CR>", { noremap = true, silent = true, desc = "Grep (Quickfix)" })
+-------------------------------------
+----- CUSTOM SEARCH FILES AND WORD --
+-------------------------------------
+---local function GrepSearch()
+---  local input = vim.fn.input("Grep for > ")
+---  if input == "" then
+---    return
+---  end
+---  local cmd = string.format("grep -rnI --exclude-dir=.git --exclude-dir=node_modules --color=never '%s' .", input)
+---  local tmp = vim.fn.tempname()
+---  vim.fn.system(cmd .. " > " .. vim.fn.fnameescape(tmp))
+---  vim.cmd("cfile " .. tmp)
+---  vim.cmd("copen")
+---  os.remove(tmp)
+---end
+---vim.api.nvim_create_user_command("Grep", GrepSearch, {})
+---vim.keymap.set("n", "<leader>o/", ":Grep<CR>", { noremap = true, silent = true, desc = "Grep (Quickfix)" })
 
-function FzfLike()
-  local handle = io.popen("find . -type f -not -path '*/.git/*'")
-  if not handle then
-    vim.notify("Erro ao executar 'find'", vim.log.levels.ERROR)
-    return
-  end
-  local files = {}
-  for file in handle:lines() do
-    table.insert(files, file)
-  end
-  handle:close()
-  vim.ui.input({ prompt = "Find for > " }, function(input)
-    if not input then
-      return
-    end
-    input = input:lower()
-    local filtered = {}
-    for _, file in ipairs(files) do
-      if file:lower():find(input, 1, true) then
-        table.insert(filtered, file)
-      end
-    end
-    local count = #filtered
-    if count == 0 then
-      vim.notify("No File Found.", vim.log.levels.INFO)
-      return
-    end
-    local qf_entries = {}
-    for _, file in ipairs(filtered) do
-      table.insert(qf_entries, { filename = file, lnum = 1, col = 1, text = file })
-    end
-    vim.fn.setqflist({}, " ", {
-      title = "FzfLike Results",
-      items = qf_entries,
-    })
-    if count == 1 then
-      vim.cmd("edit " .. filtered[1])
-    else
-      vim.cmd("edit " .. filtered[1])
-      vim.cmd("copen")
-    end
-  end)
-end
+-- function FzfLike()
+--   local handle = io.popen("find . -type f -not -path '*/.git/*'")
+--   if not handle then
+--     vim.notify("Erro ao executar 'find'", vim.log.levels.ERROR)
+--     return
+--   end
+--   local files = {}
+--   for file in handle:lines() do
+--     table.insert(files, file)
+--   end
+--   handle:close()
+--   vim.ui.input({ prompt = "Find for > " }, function(input)
+--     if not input then
+--       return
+--     end
+--     input = input:lower()
+--     local filtered = {}
+--     for _, file in ipairs(files) do
+--       if file:lower():find(input, 1, true) then
+--         table.insert(filtered, file)
+--       end
+--     end
+--     local count = #filtered
+--     if count == 0 then
+--       vim.notify("No File Found.", vim.log.levels.INFO)
+--       return
+--     end
+--     local qf_entries = {}
+--     for _, file in ipairs(filtered) do
+--       table.insert(qf_entries, { filename = file, lnum = 1, col = 1, text = file })
+--     end
+--     vim.fn.setqflist({}, " ", {
+--       title = "FzfLike Results",
+--       items = qf_entries,
+--     })
+--     if count == 1 then
+--       vim.cmd("edit " .. filtered[1])
+--     else
+--       vim.cmd("edit " .. filtered[1])
+--       vim.cmd("copen")
+--     end
+--   end)
+-- end
+-- vim.keymap.set("n", "<leader>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
 
-vim.keymap.set("n", "<leader>of", FzfLike, { desc = "Fuzzy Find (Quickfix)" })
+vim.keymap.set("n", "<leader>of", ":find ", { desc = "Find" })
+vim.keymap.set("n", "<leader>og", ":grep ", { desc = "Grep" })
 
 -----------
 -- Tmux ---
