@@ -25,10 +25,10 @@ vim.o.inccommand = 'split'
 vim.o.cursorline = true
 vim.o.confirm = true
 vim.o.wrap = false
-vim.o.tabstop = 2 -- A TAB character looks like 4 spaces
+vim.o.tabstop = 2      -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.o.softtabstop = 2 -- Number of spaces inserted instead of a TAB character
-vim.o.shiftwidth = 2 -- Number of spaces inserted when indenting
+vim.o.softtabstop = 2  -- Number of spaces inserted instead of a TAB character
+vim.o.shiftwidth = 2   -- Number of spaces inserted when indenting
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.showmode = true
@@ -38,15 +38,10 @@ vim.o.foldmethod = "indent"
 vim.o.foldlevel = 99
 vim.o.swapfile = false
 vim.o.path = vim.o.path .. "**"
-vim.o.wildignore =  vim.o.wildignore .. "**/node_modules/**"
+vim.o.wildignore = vim.o.wildignore .. "**/node_modules/**"
 -- vim.o.winborder = "rounded"
 vim.cmd.colorscheme 'retrobox'
 
-if vim.fn.executable('rg')  then
-  vim.o.grepprg = "rg --vimgrep -. --smart-case -g '!.git' -g '!node_modules/'"
-  -- else
-  --     vim.o.grepprg = "grep -R --exclude-dir=.git --exclude-dir=node_modules"
-end
 
 vim.g.netrw_banner = 0
 vim.g.snacks_animate = false
@@ -54,7 +49,7 @@ vim.g.snacks_animate = false
 -- Experimental
 require('vim._extui').enable({
   enable = true, -- Whether to enable or disable the UI.
-  msg = { -- Options related to the message module.
+  msg = {        -- Options related to the message module.
     ---@type 'cmd'|'msg' Where to place regular messages, either in the
     ---cmdline or in a separate ephemeral message window.
     target = 'msg',
@@ -62,6 +57,23 @@ require('vim._extui').enable({
   },
 })
 
+-- Better Grep and Find with ripgrep
+if vim.fn.executable('rg') then
+  vim.o.grepprg = "rg --vimgrep -. --smart-case -g '!.git' -g '!node_modules/'"
+
+  function _G.RgFindFiles(cmdarg, _cmdcomplete)
+    local fnames = vim.fn.systemlist('rg --files --hidden --color=never --glob="!.git" --glob="!node_modules/"')
+    if #cmdarg == 0 then
+      return fnames
+    else
+      return vim.fn.matchfuzzy(fnames, cmdarg)
+    end
+  end
+
+  vim.o.findfunc = 'v:lua.RgFindFiles'
+end
+
+-- Better Cd with Zoxide
 if vim.fn.executable("zoxide") == 1 then
   vim.api.nvim_create_user_command("Cd", function(opts)
     local target = opts.args
@@ -83,5 +95,5 @@ if vim.fn.executable("zoxide") == 1 then
       print("Failed to run zoxide")
     end
   end, { nargs = "?" })
-  vim.keymap.set("n", "<leader>z", ":Cd ")
 end
+

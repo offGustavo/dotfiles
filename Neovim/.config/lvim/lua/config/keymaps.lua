@@ -20,23 +20,16 @@ vim.keymap.set("n", "<leader>fc", ":cd ~/.config/lvim<Cr>:find ")
 vim.keymap.set('n', '<leader>bb', ':b #<Cr>', { desc = 'Alternative Buffer', silent = true })
 vim.keymap.set("n", "<leader>bd", ":bd!<Cr>")
 vim.keymap.set('n', '<leader>,', ':ls<Cr>:b! ')
-vim.keymap.set('n', '<leader>z', ':cd ')
 
 vim.keymap.set('n', '<leader><Cr>', ':Ex<Cr>')
 vim.keymap.set('n', '<leader><space>', ':find ')
+vim.keymap.set("n", "<leader>/", ":grep ")
 
-
-vim.keymap.set("n", "<leader>he", ":marks<Cr>")
-vim.keymap.set("n", "<leader>h1", "m1")
-vim.keymap.set("n", "<leader>h2", "m2")
-vim.keymap.set("n", "<leader>h3", "m3")
-vim.keymap.set("n", "<leader>h4", "m4")
-vim.keymap.set("n", "<leader>h5", "m5")
-vim.keymap.set("n", "<leader>h6", "m6")
-vim.keymap.set("n", "<leader>h7", "m7")
-vim.keymap.set("n", "<leader>h8", "m8")
-vim.keymap.set("n", "<leader>h9", "m9")
-vim.keymap.set("n", "<leader>h0", "m0")
+if vim.fn.executable("zoxide") then
+  vim.keymap.set("n", "<leader>z", ":Cd ")
+else
+  vim.keymap.set('n', '<leader>z', ':cd ')
+end
 
 vim.keymap.set("n", "<leader>1", " `1")
 vim.keymap.set("n", "<leader>2", " `2")

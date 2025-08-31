@@ -7,20 +7,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- [Native Fuzzy Finder in Neovim With Lua and Cool Bindings :: Cherry's Blog](https://cherryramatis.xyz/posts/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings/)
-
-if vim.fn.executable "rg" == 1 then
-    function _G.RgFindFiles(cmdarg, _cmdcomplete)
-        local fnames = vim.fn.systemlist('rg --files --hidden --color=never --glob="!.git" --glob="!node_modules/"')
-        if #cmdarg == 0 then
-            return fnames
-        else
-            return vim.fn.matchfuzzy(fnames, cmdarg)
-        end
-    end
-
-    vim.o.findfunc = 'v:lua.RgFindFiles'
-end
-
 local function is_cmdline_type_find()
     local cmdline_cmd = vim.fn.split(vim.fn.getcmdline(), ' ')[1]
 
@@ -51,4 +37,18 @@ vim.api.nvim_create_autocmd({ 'CmdlineChanged', 'CmdlineLeave' }, {
             vim.opt.wildmode = 'full'
         end
     end
+})
+-- [:grep with live updating quickfix list : r/neovim](https://www.reddit.com/r/neovim/comments/1n2ln9w/grep_with_live_updating_quickfix_list/)
+vim.api.nvim_create_autocmd("CmdlineChanged", {
+    callback = function()
+        local cmdline = vim.fn.getcmdline()
+        local words = vim.split(cmdline, " ", { trimempty = true })
+
+        if words[1] == "LiveGrep" and #words > 1 then
+            vim.cmd("silent grep! " .. vim.fn.escape(words[2], " "))
+            vim.cmd("cwindow")
+            vim.cmd.redraw()
+        end
+    end,
+    pattern = ":",
 })
