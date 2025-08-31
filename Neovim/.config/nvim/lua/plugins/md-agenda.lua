@@ -75,15 +75,13 @@ return {
     })
 
     -- Optional: Set keymaps for commands
-    vim.keymap.set("n", "<leader>mc", ":CheckTask<CR>")
-    vim.keymap.set("n", "<leader>mC", ":CancelTask<CR>")
-
-    vim.keymap.set("n", "<leader>mh", ":HabitView<CR>")
-    vim.keymap.set("n", "<leader>md", ":AgendaDashboard<CR>")
-    vim.keymap.set("n", "<leader>ma", ":AgendaView<CR>")
-
-    vim.keymap.set("n", "<leader>mS", ":TaskScheduled<CR>")
-    vim.keymap.set("n", "<leader>mD", ":TaskDeadline<CR>")
+    vim.keymap.set("n", "<leader>oac", "<Cmd>CheckTask<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>oaC", "<Cmd>CancelTask<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>oah", "<Cmd>HabitView<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>oad", "<Cmd>AgendaDashboard<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>oaa", "<Cmd>AgendaView<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>oaS", "<Cmd>TaskScheduled<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>oaD", "<Cmd>TaskDeadline<CR>", { silent = true })
 
     -- Optional: Create a custom agenda view command to only show the tasks with specific tags
     vim.api.nvim_create_user_command("WorkAgenda", function()
