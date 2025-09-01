@@ -187,6 +187,8 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
   0 f10 
   - f11 
   = f12 
+   🖰1 (tap-hold 100 300 🖰1 lsft)
+   🖰2 (tap-hold 100 300 🖰2 lctrl)
   )
 
   (deflayermap onehand-num
