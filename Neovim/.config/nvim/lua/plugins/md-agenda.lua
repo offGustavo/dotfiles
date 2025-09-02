@@ -51,7 +51,7 @@ return {
       },
 
       -- Optional: Change agenda colors.
-      tagColor = "blue",
+      tagColor = "white",
       titleColor = "yellow",
 
       todoTypeColor = "cyan",
@@ -83,9 +83,9 @@ return {
     vim.keymap.set("n", "<leader>oaS", "<Cmd>TaskScheduled<CR>", { silent = true })
     vim.keymap.set("n", "<leader>oaD", "<Cmd>TaskDeadline<CR>", { silent = true })
 
-    -- Optional: Create a custom agenda view command to only show the tasks with specific tags
-    vim.api.nvim_create_user_command("WorkAgenda", function()
-      vim.cmd("AgendaViewWTF work companyA") -- Run the agenda view with tag filters
-    end, {})
+    -- -- Optional: Create a custom agenda view command to only show the tasks with specific tags
+    -- vim.api.nvim_create_user_command("WorkAgenda", function()
+    --   vim.cmd("AgendaViewWTF work companyA") -- Run the agenda view with tag filters
+    -- end, {})
   end,
 }
