@@ -3,6 +3,7 @@
 --{{{ -- Options --
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
+local plugin_enabled = true
 
 vim.o.number = true
 vim.o.relativenumber = true
@@ -261,21 +262,20 @@ vim.api.nvim_create_autocmd("CmdlineChanged", {
 --}}}
 
 --{{{ -- Plugins --
-local plugin_enabled = true
 if plugin_enabled then
   --{{{ Themes
   vim.pack.add {
-    "https://github.com/folke/tokyonight.nvim"
+         "https://github.com/folke/tokyonight.nvim" ,
+         "https://github.com/echasnovski/mini.base16"
   }
 
   require('tokyonight').setup {
     on_colors = function(colors)
-      colors.bg_statusline = colors.none   -- To check if its working try something like "#ff00ff" instead of colors.none
+      colors.bg_statusline = colors
+      .none                              -- To check if its working try something like "#ff00ff" instead of colors.none
       colors.bg_statusline = colors.none
     end,
   }
-
-  vim.pack.add { "https://github.com/RRethy/nvim-base16" }
 
   vim.cmd.colorscheme 'tokyonight-night'
   --}}}
@@ -373,8 +373,8 @@ if plugin_enabled then
 
   --{{{ Neogit
   vim.pack.add {
-    "https://github.com/nvim-lua/plenary.nvim",    -- required
-    "https://github.com/sindrets/diffview.nvim",   -- optional - Diff integration
+    "https://github.com/nvim-lua/plenary.nvim",  -- required
+    "https://github.com/sindrets/diffview.nvim", -- optional - Diff integration
     "https://github.com/NeogitOrg/neogit"
   }
 
@@ -637,9 +637,9 @@ if plugin_enabled then
     statuscolumn = { enabled = true },
     words = { enabled = true },
     animate = {
-      duration = 5,   -- ms per step
+      duration = 5, -- ms per step
       easing = 'linear',
-      fps = 120,      -- frames per second. Global setting for all animations
+      fps = 120,    -- frames per second. Global setting for all animations
     },
     styles = {
       notification = {
