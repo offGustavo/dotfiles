@@ -91,7 +91,7 @@ bindsym $alt+Tab exec --no-startup-id $scripts/windows.sh
 bindsym $super+n exec --no-startup-id  $scripts/network.py
 
 # run rofi bluetooth script
-bindsym $super+b exec --no-startup-id  $scripts/bluetooth.s
+bindsym $super+b exec --no-startup-id  $scripts/bluetooth.sh
 
 bindsym $super+x exec --no-startup-id  $scripts/power.sh
 
