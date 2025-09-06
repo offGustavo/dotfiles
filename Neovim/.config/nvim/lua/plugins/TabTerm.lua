@@ -71,14 +71,14 @@ return {
         desc = "Create Terminal"
       },
 
-      {
-        mode ={ 'i', 'n', 't'},
-        "<A-x>",
-        function ()
-          require('TabTerm').close()
-        end,
-        desc = "Close Terminal"
-      },
+      -- {
+      --   mode ={ 'i', 'n', 't'},
+      --   "<A-x>",
+      --   function ()
+      --     require('TabTerm').close()
+      --   end,
+      --   desc = "Close Terminal"
+      -- },
 
       {
         mode ={ 'i',

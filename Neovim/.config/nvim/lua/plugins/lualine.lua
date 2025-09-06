@@ -50,6 +50,9 @@ end
         lualine_b = { "branch" },
 
         lualine_c = {
+          function ()
+            return " " .. require("nvim-sessionizer").get_current_session()
+          end,
           {
             "diagnostics",
             symbols = {
