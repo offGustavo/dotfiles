@@ -7,6 +7,9 @@ return {
     explorer = {
       replace_netrw = false,
     },
+    picker = {
+      layout = "ivy",
+    },
     animate = {
       ---@type snacks.animate.Duration|number
       duration = 10, -- ms per step
