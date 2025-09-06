@@ -1,4 +1,5 @@
 -- vim: foldmethod=marker foldlevel=0
+--
 
 --{{{ -- Options --
 vim.g.mapleader = ' '
@@ -56,7 +57,7 @@ require('vim._extui').enable({
   msg = {        -- Options related to the message module.
     ---@type 'cmd'|'msg' Where to place regular messages, either in the
     ---cmdline or in a separate ephemeral message window.
-    target = 'cmd',
+    target = 'msg',
     timeout = 2000, -- Time a message is visible in the message window.
   },
 })
@@ -1609,7 +1610,7 @@ for i = 1, 9, 1 do
 end
 --}}}
 
----{{{
+---{{{ TabTerm
 vim.pack.add({
   "https://github.com/offGustavo/TabTerm.nvim"
 })
