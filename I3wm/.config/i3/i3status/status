@@ -51,7 +51,7 @@ battery all {
 
 ## Module :: time 
 time {
-	format = "󰥔 %H:%M  %d/%m/%y "
+	format = "󰥔 %H:%M  %d/%m/%Y "
 }
 
 ## Module :: volume 
