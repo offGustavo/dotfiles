@@ -7,7 +7,7 @@ require("nvim-sessionizer").setup({
     -- Set this to true if:
     --   1. You don't have Zoxide installed, or
     --   2. You prefer not to use Zoxide for project selection.
-    no_zoxide = false,
+    no_zoxide = true,
 
     -- A list of directories where Sessionizer will search for projects.
     -- Each entry should be an absolute path or use ~ for the home directory.
@@ -40,7 +40,7 @@ require("nvim-sessionizer").setup({
       require("nvim-sessionizer").remove_session()
     end, { silent = true })
     vim.keymap.set("n", "<A-s>", function()
-      require("nvim-sessionizer").list_sessions()
+      require("nvim-sessionizer").get_sessions()
     end, { silent = true, desc = "List sessions" })
     vim.keymap.set("n", "<A-d>", ":detach<CR>", { silent = true, desc = "Detach current session" })
     for i = 1, 9, 1 do
