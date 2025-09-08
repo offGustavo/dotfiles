@@ -7,13 +7,14 @@ require("nvim-sessionizer").setup({
     -- Set this to true if:
     --   1. You don't have Zoxide installed, or
     --   2. You prefer not to use Zoxide for project selection.
-    no_zoxide = false,
+    no_zoxide = true,
 
     -- A list of directories where Sessionizer will search for projects.
     -- Each entry should be an absolute path or use ~ for the home directory.
     -- Example:
     --   { "~/Projects", "~/Work" }
-    search_dirs = { "~/Projects", "~/TMP", "~/dotfiles" },
+    -- search_dirs = { "~/Projects", "~/TMP", "~/dotfiles" },
+      search_dirs = { "~/Projects" },
 
     -- Maximum search depth for fd or find when listing projects.
     -- This controls how many directory levels are scanned.
@@ -48,36 +49,5 @@ require("nvim-sessionizer").setup({
         require("nvim-sessionizer").attach_session(i)
       end, { silent = true, desc = "Go to " .. i .. "session" })
     end
-
-    -- require("which-key").add{ "<leader>v", group = "Session" }
-    vim.keymap.set("n", "<leader>vv", function()
-      require("nvim-sessionizer").sessionizer()
-    end, { silent = true, desc = "Create an new session wiht zoxide" })
-    vim.keymap.set("n", "<leader>vn", function()
-      require("nvim-sessionizer").new_session()
-    end, { silent = true, desc = "Create an new session in the current dir" })
-    vim.keymap.set("n", "<leader>va", function()
-      require("nvim-sessionizer").attach_session()
-    end, { silent = true, desc = "Attach to and sessins with vim.ui.select" })
-    vim.keymap.set("n", "<leader>v0", function()
-      require("nvim-sessionizer").attach_session("+1")
-    end, { silent = true, desc = "Go to next session" })
-    vim.keymap.set("n", "<leader>v9", function()
-      require("nvim-sessionizer").attach_session("-1")
-    end, { silent = true, desc = "Go to previous session" })
-    vim.keymap.set("n", "<leader>vr", function()
-      require("nvim-sessionizer").remove_session()
-    end, { silent = true })
-    vim.keymap.set("n", "<leader>vs", function()
-      require("nvim-sessionizer").get_sessions()
-    end, { silent = true, desc = "List sessions" })
-    vim.keymap.set("n", "<leader>vd", ":detach<CR>", { silent = true, desc = "Detach current session" })
-    for i = 1, 9, 1 do
-      vim.keymap.set("n", "<leader>v" .. i , function()
-        require("nvim-sessionizer").attach_session(i)
-      end, { silent = true, desc = "Go to " .. i .. "session" })
-    end
-
-
   end,
 }

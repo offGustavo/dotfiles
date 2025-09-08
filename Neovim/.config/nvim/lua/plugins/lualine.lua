@@ -42,7 +42,8 @@ end
         theme = "auto",
         globalstatus = vim.o.laststatus == 3,
         disabled_filetypes = {
-          statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard", "snacks_picker_input" },
+          statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" },
+          -- statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard", "snacks_picker_input" },
         },
       },
       sections = {

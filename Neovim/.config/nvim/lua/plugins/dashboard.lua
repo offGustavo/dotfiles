@@ -12,6 +12,7 @@ else
     "snacks.nvim",
     opts = {
       dashboard = {
+        enabled = false,
         preset = {
           pick = function(cmd, opts)
             return LazyVim.pick(cmd, opts)()
