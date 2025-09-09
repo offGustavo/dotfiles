@@ -85,7 +85,7 @@ bindsym $super+slash exec --no-startup-id $scripts/launcher.sh
 # run rofi window 
 bindsym $super+w exec --no-startup-id $scripts/windows.sh
 # I want to make it work with all windows
-bindsym $alt+Tab exec --no-startup-id $scripts/windows.sh
+bindsym $alt+Tab exec --no-startup-id $scripts/windows.sh --alt-tab
 
 # run rofi network script
 bindsym $super+n exec --no-startup-id  $scripts/network.py
@@ -179,8 +179,8 @@ bindsym $super+Shift+q exec i3-msg exit
 bar {
   status_command i3status -c ~/.config/i3/i3status/status
     position top
-    font pango:Jetbrains Mono Nerd Font 10
-    tray_output none
+    font pango:Jetbrains Mono Nerd Font 12
+    tray_output primary
     colors {
       background $bg
         statusline $fg
