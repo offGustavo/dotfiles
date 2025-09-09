@@ -51,9 +51,6 @@ end
         lualine_b = { "branch" },
 
         lualine_c = {
-          function ()
-            return " " .. require("nvim-sessionizer").get_current_session()
-          end,
           {
             "diagnostics",
             symbols = {
@@ -131,9 +128,12 @@ end
         },
         lualine_y = {
           { "progress", separator = " ", padding = { left = 1, right = 1 } },
+          { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
-          { "location", padding = { left = 0, right = 1 } },
+          function ()
+            return " " .. require("nvim-sessionizer").get_current_session()
+          end,
           -- function()
           --   return " " .. os.date("%R")
           -- end,

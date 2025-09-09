@@ -7,14 +7,14 @@ require("nvim-sessionizer").setup({
     -- Set this to true if:
     --   1. You don't have Zoxide installed, or
     --   2. You prefer not to use Zoxide for project selection.
-    no_zoxide = true,
+    no_zoxide = false,
 
     -- A list of directories where Sessionizer will search for projects.
     -- Each entry should be an absolute path or use ~ for the home directory.
     -- Example:
     --   { "~/Projects", "~/Work" }
     -- search_dirs = { "~/Projects", "~/TMP", "~/dotfiles" },
-      search_dirs = { "~/Projects" },
+      search_dirs = { "~/Projects", "~/TMP", "~/dotfiles" },
 
     -- Maximum search depth for fd or find when listing projects.
     -- This controls how many directory levels are scanned.
