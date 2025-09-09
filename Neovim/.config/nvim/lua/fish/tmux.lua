@@ -1,4 +1,6 @@
-local M = {}
+-----------
+-- Tmux ---
+-----------
 
 local function get_theme_colors()
   -- Obtém os highlights do tema atual com fallback seguro
@@ -48,7 +50,7 @@ local function get_theme_colors()
   }
 end
 
-function M.UpdateTheme()
+function UpdateTheme()
   local colors = get_theme_colors()
 
   local lines = {
@@ -122,6 +124,13 @@ function M.UpdateTheme()
   os.execute("tmux source-file ~/.config/tmux/config/theme.conf")
 end
 
-_G.TmuxTheme = M
+vim.keymap.set("n", "<leader>oT", function() UpdateTheme() end, { desc = "Update Tmux Theme" })
 
-return M
+-- if vim.env.TMUX then
+--   vim.keymap.set(
+--     "n",
+--     "<leader>gg",
+--     ":! ~/scripts/tmux-scripts/tmux-open.sh lazygit<Cr>",
+--     { silent = true, desc = "Open Lazygit in Tmux" }
+--   )
+-- end

@@ -256,7 +256,6 @@ end
 ---------------
 -- OBSIDIAN ---
 ---------------
---
 vim.keymap.set("n", "<leader>ood", function()
   local current_date = os.date("%Y-%m-%d")
   local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
@@ -280,110 +279,6 @@ vim.keymap.set("n", "<leader>gP", function()
   print("Push Changes")
 end, { desc = "Push Changes" })
 
-----------------------
--- VS CODE CONFIG  ---
-----------------------
-if vim.g.vscode then
-  vim.o.showmode = true
-  vim.keymap.set("n", "<leader><space>", function()
-    require("vscode").call("workbench.action.quickOpen")
-  end)
-  vim.keymap.set("n", "<leader>,", function()
-    require("vscode").call("workbench.action.showAllEditors")
-  end)
-  vim.keymap.set("n", "<leader>e", function()
-    require("vscode").call("workbench.view.explorer")
-  end)
-  vim.keymap.set("n", "<leader><Cr>", function()
-    require("vscode").call("oil-code.open")
-  end)
-  vim.keymap.set("n", "<leader>tn", function()
-    require("vscode").call("workbench.action.createTerminalEditor")
-  end)
-  vim.keymap.set("n", "<leader>/", function()
-    require("vscode").call("workbench.action.quickTextSearch")
-  end)
-  -- vim.keymap.set("n", "<leader>gg", function()
-  --   require("vscode").call("lazygit.openLazygit")
-  -- end)
-  -- vim.keymap.set("n", "<leader>G", function()
-  --   require("vscode").call("fugitive.open")
-  -- end)
-  vim.keymap.set("n", "<leader>gg", function()
-    require("vscode").call("magit.status")
-  end)
-  vim.keymap.set("n", "gd", function()
-    require("vscode").call("editor.action.revealDefinition")
-  end)
-  vim.keymap.set("n", "gr", function()
-    require("vscode").call("editor.action.goToReferences")
-  end)
-  vim.keymap.set("n", "j", "gj")
-  vim.keymap.set("n", "k", "gk")
-  vim.keymap.set("n", "<leader>ha", function()
-    require("vscode").call("vscode-harpoon.addEditor")
-  end)
-  vim.keymap.set("n", "<leader>he", function()
-    require("vscode").call("vscode-harpoon.editEditors")
-  end)
-  for i = 1, 9 do
-    vim.keymap.set("n", "<leader>" .. i, function()
-      require("vscode").call("vscode-harpoon.gotoEditor" .. i)
-    end)
-    vim.keymap.set("n", "<leader>h" .. i, function()
-      require("vscode").call("vscode-harpoon.addGlobalEditor" .. i)
-    end)
-  end
-  -- config from https://www.reddit.com/r/neovim/comments/1kspket/comment/mtslipm/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-  vim.keymap.set("n", "<leader>cf", function()
-    require("vscode").call("editor.action.formatDocument")
-  end)
-  vim.keymap.set("n", "<leader>bo", function()
-    require("vscode").call("workbench.action.closeOtherEditors")
-  end)
-  vim.keymap.set("n", "<leader>ca", function()
-    require("vscode").call("editor.action.quickFix")
-  end, {})
-  vim.keymap.set("n", "<leader>cr", function()
-    require("vscode").call("editor.action.rename")
-  end, {})
-  vim.keymap.set("n", "K", function()
-    require("vscode").call("editor.action.showHover")
-  end)
-  vim.keymap.set("n", "<leader>wq", function()
-    require("vscode").call("workbench.action.closeActiveEditor")
-  end, {})
-  vim.keymap.set("n", "gd", function()
-    require("vscode").call("editor.action.revealDefinition")
-  end, {})
-  vim.keymap.set("n", "gr", function()
-    require("vscode").call("editor.action.goToReferences")
-  end, {})
-  vim.keymap.set("n", "gi", function()
-    require("vscode").call("editor.action.goToImplementation")
-  end, {})
-  vim.keymap.set("n", "zM", function()
-    require("vscode").call("editor.foldAll")
-  end, { noremap = true, silent = true })
-  vim.keymap.set("n", "zR", function()
-    require("vscode").call("editor.unfoldAll")
-  end, { noremap = true, silent = true })
-  vim.keymap.set("n", "zc", function()
-    require("vscode").call("editor.fold")
-  end, { noremap = true, silent = true })
-  vim.keymap.set("n", "zC", function()
-    require("vscode").call("editor.foldRecursively")
-  end, { noremap = true, silent = true })
-  vim.keymap.set("n", "zo", function()
-    require("vscode").call("editor.unfold")
-  end, { noremap = true, silent = true })
-  vim.keymap.set("n", "zO", function()
-    require("vscode").call("editor.unfoldRecursively")
-  end, { noremap = true, silent = true })
-  vim.keymap.set("n", "za", function()
-    require("vscode").call("editor.toggleFold")
-  end, { noremap = true, silent = true })
-else
   -----------------------------
   ---  REMAP DEFAULT PICKER ---
   -----------------------------
@@ -512,39 +407,6 @@ else
   --   Snacks.picker.colorschemes()
   --   TmuxTheme.write_tmux_theme()
   -- end, { desc =  "Neovim and Tmux Colorschemes"})
-end
-
--------------
--- NEOVIDE --
--------------
--- Neovide Font Resize
-if vim.g.neovide then
-  FontSize = 12
-  function SetFontSize(amount)
-    if amount == 0 then
-      FontSize = 12
-    else
-      FontSize = FontSize + amount
-    end
-    if vim.uv.os_uname().sysname == "Windows_NT" then
-      vim.o.guifont = "JetbrainsMonoNL Nerd Font:h" .. FontSize
-      print("Font Size: " .. FontSize)
-    else
-      vim.o.guifont = "JetbrainsmonoNL NF:h" .. FontSize
-      print("Font Size: " .. FontSize)
-    end
-  end
-  SetFontSize(0)
-  vim.keymap.set({ "i", "v", "n", "c" }, "<C-=>", function()
-    SetFontSize(1)
-  end, { desc = "Increase Font Size in neovide", silent = true })
-  vim.keymap.set({ "i", "v", "n", "c" }, "<C-->", function()
-    SetFontSize(-1)
-  end, { desc = "Decrease Font Size in neovide", silent = true })
-  vim.keymap.set({ "i", "v", "n", "c" }, "<C-0>", function()
-    SetFontSize(0)
-  end, { desc = "Restore Font Size in neovide", silent = true })
-end
 
 -------------------------------------
 ----- CUSTOM SEARCH FILES AND WORD --
@@ -612,22 +474,8 @@ end
 vim.keymap.set("n", "<leader>of", ":find ", { desc = "Find" })
 vim.keymap.set("n", "<leader>og", ":grep ", { desc = "Grep" })
 
------------
--- Tmux ---
------------
--- if vim.env.TMUX then
---   vim.keymap.set(
---     "n",
---     "<leader>gg",
---     ":! ~/scripts/tmux-scripts/tmux-open.sh lazygit<Cr>",
---     { silent = true, desc = "Open Lazygit in Tmux" }
---   )
--- end
-
-vim.keymap.set("n", "<leader>oT", function()
-  TmuxTheme.UpdateTheme()
-end, { desc = "Update Tmux Theme" })
-
--- Make
+----------
+-- Make --
+----------
 vim.keymap.set("n", "<leader>cm", ":make ", { desc = "Make", remap = true })
 vim.keymap.set("n", "<leader>cM", "<Cmd>make<CR>", { desc = "Run Make" })

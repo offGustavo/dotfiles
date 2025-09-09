@@ -2,6 +2,8 @@
 require("config.lazy")
 
 -- Custom Things
-require("fish.tmux_theme")
 require("fish.filetypes")
+require("fish.tmux")
+require("fish.neovide")
+require("fish.vscode")
 
