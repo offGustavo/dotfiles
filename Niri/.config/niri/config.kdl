@@ -537,8 +537,8 @@ binds {
     Mod+Alt+WheelScrollUp { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10+"; }
     Mod+Alt+WheelScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10-"; }
 
-    Mod+Shift+Alt+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10+"; }
-    Mod+Shift+Alt+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10-"; }
+    Mod+Shift+Alt+TouchpadScrollDown { spawn "brightnessctl" "set" "10%+"; }
+    Mod+Shift+Alt+TouchpadScrollUp { spawn "brightnessctl" "set" "10%-"; }
     Mod+Shift+Alt+WheelScrollUp { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10+"; }
     Mod+Shift+Alt+WheelScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.10-"; }
 
