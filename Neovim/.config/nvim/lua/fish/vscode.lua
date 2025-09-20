@@ -101,4 +101,8 @@ if vim.g.vscode then
   vim.keymap.set("n", "za", function()
     require("vscode").call("editor.toggleFold")
   end, { noremap = true, silent = true })
+  vim.keymap.set("n", "<leader>qr", function()
+    require("vscode").call("workbench.action.reloadWindow")
+  end, { noremap = true, silent = true })
+
 end

@@ -63,6 +63,7 @@ end
 
 vim.o.makeprg = "make"
 
+if not vim.g.vscode then
 vim.o.cmdheight = 0
 -- Experimental
 require('vim._extui').enable({
@@ -74,6 +75,7 @@ require('vim._extui').enable({
     timeout = 2000, -- Time a message is visible in the message window.
   },
 })
+end
 
 -- Better Grep and Find with ripgrep
 if vim.fn.executable('rg') then
