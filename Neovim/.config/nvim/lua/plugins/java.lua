@@ -1,10 +1,10 @@
 return {
   "nvim-java/nvim-java",
   dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
-    "mfussenegger/nvim-dap",
+    -- "williamboman/mason.nvim",
+    -- "williamboman/mason-lspconfig.nvim",
+    -- "neovim/nvim-lspconfig",
+    -- "mfussenegger/nvim-dap",
   },
   config = function()
     require("java").setup({

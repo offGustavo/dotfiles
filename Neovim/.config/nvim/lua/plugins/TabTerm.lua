@@ -73,7 +73,7 @@ return {
 
       {
         mode ={ 'i', 'n', 't'},
-        "<A-.>",
+        "<A-x>",
         function ()
           require('TabTerm').close()
         end,

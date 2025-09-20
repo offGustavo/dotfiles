@@ -2,10 +2,10 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-vim.keymap.set({ "n", "v" }, "n", "nzz", { silent = true, desc = "Next Search Result" })
-vim.keymap.set("n", "N", "Nzz", { silent = true, desc = "Previous Search Result" })
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "Half Scroll Down and Center" })
-vim.keymap.set("n", "<C-u>", "<c-u>zz", { silent = true, desc = "Half Scroll Up and Center" })
+-- vim.keymap.set({ "n", "v" }, "n", "nzz", { silent = true, desc = "Next Search Result" })
+-- vim.keymap.set("n", "N", "Nzz", { silent = true, desc = "Previous Search Result" })
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "Half Scroll Down and Center" })
+-- vim.keymap.set("n", "<C-u>", "<c-u>zz", { silent = true, desc = "Half Scroll Up and Center" })
 vim.keymap.set("v", ">", ">gv", { silent = true, desc = "Better Indent" })
 vim.keymap.set("v", "<", "<gv", { silent = true, desc = "Better Indent" })
 vim.keymap.set("n", "gJ", "kJ_", { silent = true, desc = "Join Line Above" })
@@ -68,37 +68,37 @@ vim.keymap.set("n", "<leader>wc", "<Cmd>close<Cr>")
 vim.keymap.set("n", "<C-/>", ":normal gcc<Cr>", { desc = "Toggle Comment", silent = true })
 vim.keymap.set("v", "<C-/>", ":'<,'>normal gcc<Cr>", { desc = "Toggle Comment", silent = true })
 -- Move Lines Up/Down
-vim.keymap.set("v", "<S-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move Line Up" })
-vim.keymap.set("v", "<S-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move Line Down" })
+-- vim.keymap.set("v", "<S-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move Line Up" })
+-- vim.keymap.set("v", "<S-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move Line Down" })
 
--- -- Emacs Keybinds in Insert Mode
--- -- set this better
--- vim.keymap.set({ "i", "c" }, "<C-p>", "<Up>", { silent = true })
--- vim.keymap.set({ "i", "c" }, "<C-a>", "<Home>", { silent = true })
--- vim.keymap.set({ "i", "c" }, "<C-n>", "<Down>", { silent = true })
--- vim.keymap.set({ "i", "c" }, "<C-f>", "<Right>", { silent = true })
--- vim.keymap.set({ "i", "c" }, "<C-b>", "<Left>", { silent = true })
--- vim.keymap.set({ "i", "c" }, "<C-e>", "<End>", { silent = true })
--- vim.keymap.set({ "i", "c" }, "<A-b>", "<C-Left>", { silent = true })
--- vim.keymap.set({ "i", "c" }, "<A-f>", "<C-Right>", { silent = true })
--- vim.keymap.set("i", "<A-d>", "<C-o>dw", { silent = true })
--- vim.keymap.set({ "i", "c" }, "<C-d>", "<Del>", { silent = true })
--- vim.keymap.set("i", "<C-k>", "<Esc>lDa", { silent = true })
--- vim.keymap.set("i", "<C-u>", "<Esc>d0xi", { silent = true })
--- vim.keymap.set("i", "<A-}>", "<C-o>}", { silent = true })
--- vim.keymap.set("i", "<A-{>", "<C-o>{", { silent = true })
--- vim.keymap.set("i", "<A-a>", "<C-o>(", { silent = true })
--- vim.keymap.set("i", "<A-e>", "<C-o>)", { silent = true })
--- vim.keymap.set("i", "<A-<>", "<C-o>gg", { silent = true })
--- vim.keymap.set("i", "<A->>", "<C-o>G", { silent = true })
--- vim.keymap.set("i", "<C-/>", "<C-o>u", { silent = true })
--- vim.keymap.set("i", "<C-x><C-s>", "<C-o>:w<CR>", { silent = true })
--- vim.keymap.set("i", "<C-x><C-c>", "<Esc>:wq<CR>", { silent = true })
--- -- vim.keymap.set("i", "<C-t>", "<Esc>Xpa", { silent = true })
--- -- vim.keymap.set("i", "<C-]>", "<C-t>", { silent = true })
--- vim.keymap.set("n", "<A-x>", ":", { desc = "Emacs" })
--- vim.keymap.set("i", "<A-x>", "<C-o>:", { desc = "Emacs" })
--- vim.keymap.set("t", "<A-x>", "<C-\\><C-o>:", { desc = "Emacs" })
+-- Emacs Keybinds in Insert Mode
+-- set this better
+vim.keymap.set({ "i", "c" }, "<C-p>", "<Up>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-a>", "<Home>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-n>", "<Down>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-f>", "<Right>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-b>", "<Left>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-e>", "<End>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<A-b>", "<C-Left>", { silent = true })
+vim.keymap.set({ "i", "c" }, "<A-f>", "<C-Right>", { silent = true })
+vim.keymap.set("i", "<A-d>", "<C-o>dw", { silent = true })
+vim.keymap.set({ "i", "c" }, "<C-d>", "<Del>", { silent = true })
+vim.keymap.set("i", "<C-k>", "<Esc>lDa", { silent = true })
+vim.keymap.set("i", "<C-u>", "<Esc>d0xi", { silent = true })
+vim.keymap.set("i", "<A-}>", "<C-o>}", { silent = true })
+vim.keymap.set("i", "<A-{>", "<C-o>{", { silent = true })
+vim.keymap.set("i", "<A-a>", "<C-o>(", { silent = true })
+vim.keymap.set("i", "<A-e>", "<C-o>)", { silent = true })
+vim.keymap.set("i", "<A-<>", "<C-o>gg", { silent = true })
+vim.keymap.set("i", "<A->>", "<C-o>G", { silent = true })
+vim.keymap.set("i", "<C-/>", "<C-o>u", { silent = true })
+vim.keymap.set("i", "<C-x><C-s>", "<C-o>:w<CR>", { silent = true })
+vim.keymap.set("i", "<C-x><C-c>", "<Esc>:wq<CR>", { silent = true })
+-- vim.keymap.set("i", "<C-t>", "<Esc>Xpa", { silent = true })
+-- vim.keymap.set("i", "<C-]>", "<C-t>", { silent = true })
+vim.keymap.set("n", "<A-x>", ":", { desc = "Emacs" })
+vim.keymap.set("i", "<A-x>", "<C-o>:", { desc = "Emacs" })
+vim.keymap.set("t", "<A-x>", "<C-\\><C-o>:", { desc = "Emacs" })
 
 -- Emacs Keybinds in Command Mode
 vim.keymap.set({ "c" }, "<C-p>", "<Up>")
@@ -151,6 +151,7 @@ vim.keymap.del("n", "<leader>l")
 vim.keymap.set("n", "<leader>ll", ":Lazy<Cr>", { desc = "Lazy", silent = true })
 vim.keymap.set("n", "<leader>lL", ":LazyExtras<Cr>", { desc = "LazyVim Extras", silent = true })
 vim.keymap.set("n", "<leader>lm", ":Mason<Cr>", { desc = "Mason", silent = true })
+
 
 ----------------
 --- Quickfix ---
@@ -279,31 +280,43 @@ vim.keymap.set("n", "<leader>gP", function()
   print("Push Changes")
 end, { desc = "Push Changes" })
 
+vim.keymap.set("v", "<leader>oof", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', { desc = "Format Table in Markdown" })
+
+
   -----------------------------
   ---  REMAP DEFAULT PICKER ---
   -----------------------------
 
-  -- vim.keymap.set("n", "<leader>gg", function()
-  --   Snacks.lazygit({ cwd = LazyVim.root.git() })
-  --   vim.keymap.set("t", "<Esc><Esc>", "<Nop>", { buffer = true })
-  -- end, { desc = "Lazygit" })
-  --
-  -- vim.keymap.set("n", "<leader>gG", function()
-  --   Snacks.lazygit()
-  --   vim.keymap.set("t", "<Esc><Esc>", "<Nop>", { buffer = true })
-  -- end, { desc = "Lazygit (cwd)" })
+---------------
+--- Lazygit ---
+---------------
+vim.keymap.set("n", "<leader>lg", function()
+  Snacks.lazygit({ cwd = LazyVim.root.git() })
+  vim.keymap.set("t", "<Esc><Esc>", "<Esc><Esc>", { buffer = 0 })
+  vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = 0 })
+end, { desc = "Lazygit (cwd)" })
+vim.keymap.set("n", "<A-p>g", function()
+  Snacks.lazygit({ cwd = LazyVim.root.git() })
+  vim.keymap.set("t", "<Esc><Esc>", "<Esc><Esc>", { buffer = 0 })
+  vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = 0 })
+end, { desc = "Lazygit (cwd)" })
+vim.keymap.set("n", "<leader>gG", function()
+  Snacks.lazygit({ cwd = LazyVim.root.git() })
+  vim.keymap.set("t", "<Esc><Esc>", "<Esc><Esc>", { buffer = 0 })
+  vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = 0 })
+end, { desc = "Lazygit (cwd)" })
 
-  -- vim.keymap.set("n", "<S-Esc>", function()
-  --   Snacks.explorer({
-  --     hidden = true,
-  --   })
-  -- end, { silent = true, desc = "Toggle File Tree" })
+vim.keymap.set("n", "<S-Esc>", function()
+  Snacks.explorer({
+    hidden = true,
+  })
+end, { silent = true, desc = "Toggle File Tree" })
 
-  vim.keymap.set("n", "<leader>fa", function()
-    Snacks.picker()
-  end, { desc = "All Snacks Pickers" })
+vim.keymap.set("n", "<leader>fa", function()
+  Snacks.picker()
+end, { desc = "All Snacks Pickers" })
 
-  vim.keymap.set("n", "<leader>z", function()
+vim.keymap.set("n", "<leader>z", function()
     Snacks.picker.zoxide()
   end, { desc = "Snacks Picker Zoxide" })
 
@@ -378,6 +391,32 @@ end, { desc = "Push Changes" })
     })
   end, { desc = "Snacks Picker Grep in Config Files" })
 
+  -- vim.keymap.set("n", "<leader>ow", function()
+  --   Snacks.picker.grep({
+  --     hidden = true,
+  --     on_show = function()
+  --     vim.api.nvim_feedkeys(
+  --       vim.api.nvim_replace_termcodes("<C-r><C-a>", true, false, true),
+  --       "i",
+  --       true
+  --     )
+  --     end,
+  --   })
+  -- end, { desc = "Grep cWord (root)" })
+  -- vim.keymap.set("n", "<leader>oW", function()
+  --   Snacks.picker.grep({
+  --     hidden = true,
+  --     cwd = ".",
+  --     on_show = function()
+  --     vim.api.nvim_feedkeys(
+  --       vim.api.nvim_replace_termcodes("<C-r><C-a>", true, false, true),
+  --       "i",
+  --       true
+  --     )
+  --     end,
+  --   })
+  -- end, { desc = "Grep cWord (cwd)" })
+
   vim.keymap.set({ "n", "i" }, "<leader>,", function()
     Snacks.picker.buffers({
       -- I always want my buffers picker to start in normal mode
@@ -403,10 +442,6 @@ end, { desc = "Push Changes" })
     })
   end, { silent = true, desc = "Snacks Picker Buffers" })
 
-  -- vim.keymap.set("n", "<leader>uC", function ()
-  --   Snacks.picker.colorschemes()
-  --   TmuxTheme.write_tmux_theme()
-  -- end, { desc =  "Neovim and Tmux Colorschemes"})
 
 -------------------------------------
 ----- CUSTOM SEARCH FILES AND WORD --

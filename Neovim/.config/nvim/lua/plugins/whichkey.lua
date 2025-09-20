@@ -23,7 +23,7 @@ return {
         { "<leader>s", group = "search/replace" },
         --TODO: terminar isso
         { "<leader>l", group = "lazy/location list" },
-        { "<leader>h", group = "harpoon", icon = "󱡀" },
+        { "<leader>h", group = "harpoon", icon = "⇁" },
         { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
         { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
         -- { "<leader>p", group = "Snacks Pickers", icon = { icon = "💤", color = "green" } },

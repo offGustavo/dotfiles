@@ -1,11 +1,18 @@
 return {
-  "zenarvus/md-agenda.nvim",
+  -- "zenarvus/md-agenda.nvim",
+  dir = "~/Projects/md-agenda.nvim/",
+  -- lazy = true,
+  -- ft = { "markdown", "md" },
   config = function()
     require("md-agenda").setup({
       --- REQUIRED ---
       agendaFiles = {
         -- "~/notes/agenda.md", "~/notes/habits.md", -- Single Files
         "~/Notes/", -- Folders
+      },
+      habit = {
+        "~/Notes/habits/",
+        "habits.md",
       },
 
       --- OPTIONAL ---
@@ -76,6 +83,7 @@ return {
 
     -- Optional: Set keymaps for commands
     vim.keymap.set("n", "<leader>oac", "<Cmd>CheckTask<CR>", { silent = true })
+    -- vim.keymap.set("n", "<CR>", "<Cmd>CheckTask<CR>", { silent = true })
     vim.keymap.set("n", "<leader>oaC", "<Cmd>CancelTask<CR>", { silent = true })
     vim.keymap.set("n", "<leader>oah", "<Cmd>HabitView<CR>", { silent = true })
     vim.keymap.set("n", "<leader>oad", "<Cmd>AgendaDashboard<CR>", { silent = true })

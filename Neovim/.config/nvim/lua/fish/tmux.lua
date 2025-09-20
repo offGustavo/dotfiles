@@ -1,6 +1,7 @@
 -----------
 -- Tmux ---
 -----------
+if os.getenv("TMUX") then
 
 local function get_theme_colors()
   -- Obtém os highlights do tema atual com fallback seguro
@@ -124,13 +125,34 @@ function UpdateTheme()
   os.execute("tmux source-file ~/.config/tmux/config/theme.conf")
 end
 
-vim.keymap.set("n", "<leader>oT", function() UpdateTheme() end, { desc = "Update Tmux Theme" })
+  -- Cria o autocommand group para evitar duplicações
+  local tmux_theme_group = vim.api.nvim_create_augroup("TmuxTheme", { clear = true })
 
--- if vim.env.TMUX then
---   vim.keymap.set(
---     "n",
---     "<leader>gg",
---     ":! ~/scripts/tmux-scripts/tmux-open.sh lazygit<Cr>",
---     { silent = true, desc = "Open Lazygit in Tmux" }
---   )
--- end
+  -- Autocommand para detectar mudanças de tema e background
+  vim.api.nvim_create_autocmd({"OptionSet", "ColorScheme"}, {
+    group = tmux_theme_group,
+    pattern = {"background", "*"},
+    callback = function(args)
+      -- Pequeno delay para garantir que as cores já foram carregadas
+      vim.defer_fn(function()
+        UpdateTheme()
+      end, 50)
+    end,
+    desc = "Atualiza tema do Tmux quando cores mudam"
+  })
+
+  -- Também executa uma vez ao carregar o Neovim dentro do tmux
+  vim.defer_fn(function()
+    UpdateTheme()
+  end, 100)
+
+  vim.keymap.set("n", "<leader>oT", function() UpdateTheme() end, { desc = "Update Tmux Theme" })
+
+  -- vim.keymap.set(
+  --   "n",
+  --   "<leader>gg",
+  --   ":! ~/scripts/tmux-open.sh lazygit<Cr>",
+  --   { silent = true, desc = "Open Lazygit in Tmux" }
+  -- )
+
+end

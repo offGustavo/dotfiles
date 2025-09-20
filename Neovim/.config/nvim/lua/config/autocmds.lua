@@ -28,31 +28,27 @@ local function is_cmdline_type_find()
     return cmdline_cmd == 'find' or cmdline_cmd == 'fin'
 end
 
-vim.api.nvim_create_autocmd({ 'CmdlineChanged', 'CmdlineLeave' }, {
-    pattern = { '*' },
-    group = vim.api.nvim_create_augroup('CmdlineAutocompletion', { clear = true }),
-    callback = function(ev)
-
-        vim.opt.wildmenu = true
-        vim.opt.wildmode = 'noselect:lastused,full'
-        local function should_enable_autocomplete()
-            local cmdline_cmd = vim.fn.split(vim.fn.getcmdline(), ' ')[1]
-
-            return is_cmdline_type_find() or cmdline_cmd == 'help' or cmdline_cmd == 'h'
-        end
-
-        if ev.event == 'CmdlineChanged' and should_enable_autocomplete() then
-          vim.opt.wildmode = 'noselect:lastused,full'
-          vim.schedule(function()
-            vim.fn.wildtrigger()
-          end)
-        end
-
-        if ev.event == 'CmdlineLeave' then
-            vim.opt.wildmode = 'full'
-        end
-    end
-})
+-- vim.api.nvim_create_autocmd({ 'CmdlineChanged', 'CmdlineLeave' }, {
+--     pattern = { '*' },
+--     group = vim.api.nvim_create_augroup('CmdlineAutocompletion', { clear = true }),
+--     callback = function(ev)
+--         vim.opt.wildmenu = true
+--         vim.opt.wildmode = 'noselect:lastused,full'
+--         local function should_enable_autocomplete()
+--             local cmdline_cmd = vim.fn.split(vim.fn.getcmdline(), ' ')[1]
+--             return is_cmdline_type_find() or cmdline_cmd == 'help' or cmdline_cmd == 'h'
+--         end
+--         if ev.event == 'CmdlineChanged' and should_enable_autocomplete() then
+--           vim.opt.wildmode = 'noselect:lastused,full'
+--           vim.schedule(function()
+--             vim.fn.wildtrigger()
+--           end)
+--         end
+--         if ev.event == 'CmdlineLeave' then
+--             vim.opt.wildmode = 'full'
+--         end
+--     end
+-- })
 
 -- -- [:grep with live updating quickfix list : r/neovim](https://www.reddit.com/r/neovim/comments/1n2ln9w/grep_with_live_updating_quickfix_list/)
 -- vim.api.nvim_create_autocmd("CmdlineChanged", {
@@ -67,3 +63,20 @@ vim.api.nvim_create_autocmd({ 'CmdlineChanged', 'CmdlineLeave' }, {
 --     end,
 --     pattern = ":",
 -- })
+
+-- https://stackoverflow.com/questions/42905008/quickfix-list-how-to-add-and-remove-entries
+vim.cmd[[
+" When using `dd` in the quickfix list, remove the item from the quickfix list.
+function! RemoveQFItem()
+let curqfidx = line('.') - 1
+let qfall = getqflist()
+call remove(qfall, curqfidx)
+call setqflist(qfall, 'r')
+execute curqfidx + 1 . "cfirst"
+:copen
+endfunction
+:command! RemoveQFItem :call RemoveQFItem()
+" Use map <buffer> to only map dd in the quickfix window. Requires +localmap
+autocmd FileType qf map <buffer> dd :RemoveQFItem<cr>
+]]
+

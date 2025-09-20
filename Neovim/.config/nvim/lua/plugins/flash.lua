@@ -165,9 +165,9 @@ return {
           -- disable jump labels when not enabled, when using a count,
           -- or when recording/executing registers
           opts.jump_labels = opts.jump_labels
-            and vim.v.count == 0
-            and vim.fn.reg_executing() == ""
-            and vim.fn.reg_recording() == ""
+          and vim.v.count == 0
+          and vim.fn.reg_executing() == ""
+          and vim.fn.reg_recording() == ""
 
           -- Show jump labels only in operator-pending mode
           -- opts.jump_labels = vim.v.count == 0 and vim.fn.mode(true):find("o")
@@ -269,7 +269,7 @@ return {
   end,
   keys = {
     {
-      "ss",
+      "<localleader>f",
       mode = { "n", "x", "o" },
       function()
         require("flash").jump()
@@ -277,7 +277,7 @@ return {
       desc = "Flash",
     },
     {
-      "st",
+      "<localleader>F",
       mode = { "n", "o", "x" },
       function()
         require("flash").treesitter()

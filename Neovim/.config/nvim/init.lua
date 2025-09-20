@@ -7,3 +7,4 @@ require("fish.tmux")
 require("fish.neovide")
 require("fish.vscode")
 
+vim.cmd.colorscheme("catppuccin")
