@@ -1,3 +1,9 @@
+--- REFs
+--- [How to change color schemes across neovim, tmux, and other tools/TUIs? : r/neovim](https://www.reddit.com/r/neovim/comments/18jxa8d/how_to_change_color_schemes_across_neovim_tmux/)
+--- [cultab/themr: A program to set a global theme by replacing strings in config files](https://github.com/cultab/themr?tab=BSD-2-Clause-1-ov-file)
+--- [How to change color schemes across neovim, tmux, and other tools/TUIs? : r/neovim](https://www.reddit.com/r/neovim/comments/18jxa8d/how_to_change_color_schemes_across_neovim_tmux/)
+--- [shaun-mathew/Chameleon.nvim: A plugin to sync Kitty's background colour with your Neovim colorscheme](https://github.com/shaun-mathew/Chameleon.nvim)
+
 -----------
 -- Tmux ---
 -----------
@@ -146,7 +152,7 @@ end
     UpdateTheme()
   end, 100)
 
-  vim.keymap.set("n", "<leader>oT", function() UpdateTheme() end, { desc = "Update Tmux Theme" })
+  -- vim.keymap.set("n", "<leader>oT", function() UpdateTheme() end, { desc = "Update Tmux Theme" })
 
   -- vim.keymap.set(
   --   "n",

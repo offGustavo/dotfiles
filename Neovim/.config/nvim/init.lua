@@ -3,7 +3,10 @@ require("config.lazy")
 
 -- Custom Things
 require("fish.filetypes")
+require("fish.theme")
+require("fish.kitty")
 require("fish.tmux")
+-- require("fish.multi_marks")
 require("fish.neovide")
 require("fish.vscode")
 
