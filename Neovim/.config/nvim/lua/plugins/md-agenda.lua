@@ -1,6 +1,6 @@
 return {
-  -- "zenarvus/md-agenda.nvim",
-  dir = "~/Projects/md-agenda.nvim/",
+  "zenarvus/md-agenda.nvim",
+  -- dir = "~/Projects/md-agenda.nvim/",
   -- lazy = true,
   -- ft = { "markdown", "md" },
   config = function()
