@@ -1,11 +1,32 @@
+//  vim:  foldmethod=indent
 // This config is in the KDL format: https://kdl.dev
 // "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
-// workspace "temp"
-// workspace "chrome"
-// workspace "term"
-// workspace "zen"
+
+workspace "note" {
+  open-on-output "eDP-1"
+}
+workspace "spotify" {
+  open-on-output "eDP-1"
+}
+workspace "clock" {
+  open-on-output "eDP-1"
+}
+
+workspace "temp" {
+  open-on-output "HDMI-A-1"
+}
+workspace "chrome" {
+  open-on-output "HDMI-A-1"
+}
+workspace "term" {
+  open-on-output "HDMI-A-1"
+}
+workspace "zen" {
+  open-on-output "HDMI-A-1"
+}
+
 
 // Input device configuration.
 // Find the full list of options on the wiki:
@@ -24,6 +45,7 @@ input {
 
         // Enable numlock on startup, omitting this setting disables it.
         numlock
+
     }
 
     // Next sections include libinput settings.
@@ -45,7 +67,7 @@ input {
     mouse {
         // off
         // natural-scroll
-        // accel-speed 0.2
+        accel-speed -0.6
         accel-profile "flat"
         // scroll-method "no-scroll"
     }
