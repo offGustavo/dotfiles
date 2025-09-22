@@ -134,16 +134,21 @@ bindsym $super+$alt+l resize grow width 10 px or 10 ppt
 bindsym $super+shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $super+y layout toggle
+bindsym $super+shift+y layout stacked
+bindsym $super+y layout tabbed
+bindsym $super+o layout toggle split
+
+# toggle split direction
+bindsym $super+shift+o split toggle
 
 # toggle tiling / floating
 bindsym $super+g floating toggle
 
 # focus the parent container
-bindsym $super+a focus parent
+bindsym $super+z focus parent
 
 # focus the child container
-bindsym $super+z focus child
+bindsym $super+shift+z focus child
 
 # switch to workspace
 bindsym $super+1 workspace number 1
@@ -179,7 +184,7 @@ bindsym $super+Shift+q exec i3-msg exit
 bar {
   status_command i3status -c ~/.config/i3/i3status/status
     position top
-    font pango:Jetbrains Mono Nerd Font 12
+    font pango:Jetbrains Mono Nerd Font 8
     tray_output primary
     colors {
       background $bg
