@@ -2,7 +2,6 @@ return {
   "folke/flash.nvim",
   event = "VeryLazy",
   vscode = true,
-  lazy = true,
   ---@type Flash.Config
   opts = {
     -- labels = "abcdefghijklmnopqrstuvwxyz",
@@ -165,9 +164,9 @@ return {
           -- disable jump labels when not enabled, when using a count,
           -- or when recording/executing registers
           opts.jump_labels = opts.jump_labels
-          and vim.v.count == 0
-          and vim.fn.reg_executing() == ""
-          and vim.fn.reg_recording() == ""
+            and vim.v.count == 0
+            and vim.fn.reg_executing() == ""
+            and vim.fn.reg_recording() == ""
 
           -- Show jump labels only in operator-pending mode
           -- opts.jump_labels = vim.v.count == 0 and vim.fn.mode(true):find("o")
@@ -269,7 +268,7 @@ return {
   end,
   keys = {
     {
-      "<localleader>f",
+      "ss",
       mode = { "n", "x", "o" },
       function()
         require("flash").jump()
@@ -277,7 +276,7 @@ return {
       desc = "Flash",
     },
     {
-      "<localleader>F",
+      "st",
       mode = { "n", "o", "x" },
       function()
         require("flash").treesitter()

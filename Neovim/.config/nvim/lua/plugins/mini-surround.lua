@@ -21,13 +21,13 @@ return {
   opts = {
     -- Module mappings. Use `''` (empty string) to disable one.
     mappings = {
-      add = "<localleader>sa", -- Add surrounding in Normal and Visual modes
-      delete = "<localleader>sd", -- Delete surrounding
-      find = "<localleader>sf", -- Find surrounding (to the right)
-      find_left = "<localleader>sF", -- Find surrounding (to the left)
-      highlight = "<localleader>sh", -- Highlight surrounding
-      replace = "<localleader>sr", -- Replace surrounding
-      update_n_lines = "<localleader>sn", -- Update `n_lines`
+      add = "sa", -- Add surrounding in Normal and Visual modes
+      delete = "sd", -- Delete surrounding
+      find = "sf", -- Find surrounding (to the right)
+      find_left = "sF", -- Find surrounding (to the left)
+      highlight = "sh", -- Highlight surrounding
+      replace = "sr", -- Replace surrounding
+      update_n_lines = "sn", -- Update `n_lines`
       suffix_last = "p", -- Suffix to search with "prev" method
       suffix_next = "n", -- Suffix to search with "next" method
     },
