@@ -1,6 +1,7 @@
 [Unit]
 Description=Kanata keyboard Remapper
 Documentation=https://github.com/jtroo/kanata
+After=multi-user.target
 
 [Service]
 Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin
@@ -9,13 +10,13 @@ Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin
 #   WARNING: doing so will require the service to run as an elevated user such as root.
 #   Implementing least privilege access is an exercise left to the reader.
 #
-# CPUSchedulingPolicy=rr
-# CPUSchedulingPriority=99
-# IOSchedulingClass=realtime
-# Nice=-20
+CPUSchedulingPolicy=rr
+CPUSchedulingPriority=99
+IOSchedulingClass=realtime
+Nice=-20
 Type=simple
 ExecStart=/usr/bin/sh -c 'exec $$(which kanata) --cfg $${HOME}/.config/kanata/kanata.kbd'
 Restart=no
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
