@@ -21,13 +21,13 @@
 --   end,
 -- })
 
--- [Native Fuzzy Finder in Neovim With Lua and Cool Bindings :: Cherry's Blog](https://cherryramatis.xyz/posts/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings/)
-local function is_cmdline_type_find()
-    local cmdline_cmd = vim.fn.split(vim.fn.getcmdline(), ' ')[1]
-
-    return cmdline_cmd == 'find' or cmdline_cmd == 'fin'
-end
-
+-- -- [Native Fuzzy Finder in Neovim With Lua and Cool Bindings :: Cherry's Blog](https://cherryramatis.xyz/posts/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings/)
+-- local function is_cmdline_type_find()
+--     local cmdline_cmd = vim.fn.split(vim.fn.getcmdline(), ' ')[1]
+--
+--     return cmdline_cmd == 'find' or cmdline_cmd == 'fin'
+-- end
+--
 -- vim.api.nvim_create_autocmd({ 'CmdlineChanged', 'CmdlineLeave' }, {
 --     pattern = { '*' },
 --     group = vim.api.nvim_create_augroup('CmdlineAutocompletion', { clear = true }),
@@ -62,6 +62,20 @@ end
 --         end
 --     end,
 --     pattern = ":",
+-- })
+
+-- vim.api.nvim_create_autocmd({ 'CmdlineChanged', 'CmdlineLeave' }, {
+--         pattern = { '*' },
+--         group = vim.api.nvim_create_augroup('FuzzyCmdlineCompletion', { clear = true }),
+--         callback = function(ev)
+--                 if ev.event == 'CmdlineChanged' then
+--                         vim.opt.wildmode = 'noselect:lastused,full'
+--                         vim.fn.wildtrigger()
+--                 end
+--                 if ev.event == 'CmdlineLeave' then
+--                         vim.opt.wildmode = 'full'
+--                 end
+--         end
 -- })
 
 -- https://stackoverflow.com/questions/42905008/quickfix-list-how-to-add-and-remove-entries
