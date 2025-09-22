@@ -3,29 +3,51 @@ return {
   dir = "~/Projects/nvim-sessionizer/",
   config = function()
     require("nvim-sessionizer").setup({
-      -- Disable Zoxide integration.
-      -- Set this to true if:
-      --   1. You don't have Zoxide installed, or
-      --   2. You prefer not to use Zoxide for project selection.
       no_zoxide = false,
-
-      -- A list of directories where Sessionizer will search for projects.
-      -- Each entry should be an absolute path or use ~ for the home directory.
-      -- Example:
-      --   { "~/Projects", "~/Work" }
-      -- search_dirs = { "~/Projects", "~/TMP", "~/dotfiles" },
-      search_dirs = { "~/Projects", "~/TMP", "~/dotfiles" },
-
-      -- Maximum search depth for fd or find when listing projects.
-      -- This controls how many directory levels are scanned.
-      -- Example:
-      --   max_depth = 3 means: search up to 3 subdirectory levels deep.
-      max_depth = 1,
+      search_dirs = { "~/projects", "~/work" },
+      max_depth = 3,
+      ui = {
+        keymap = {
+          quit = "q",
+          attach = "<CR>",
+          delete = "<S-d>",
+          move_up = "<C-k>",
+          move_down = "<C-j>",
+        },
+        win = {
+          width = 0.6,
+          height = 0.4,
+          winbar = {
+            hl_left = "Title", -- highlight group para a parte esquerda
+            hl_right = "Comment", -- highlight group para a parte direita
+            hl_separator = "Comment", -- highlight group para a parte direita
+            sep_left = "/", -- separador entre ações
+            sep_mid = "%=", -- separador para alinhar
+            sep_right = "│",
+            format = function(config) -- agora recebe o config
+              return {
+                left = {
+                  " " .. config.ui.keymap.quit .. " close",
+                  config.ui.keymap.delete .. " delete session",
+                },
+                right = {
+                  config.ui.keymap.attach .. " attach session",
+                  config.ui.keymap.move_up .. "/" .. config.ui.keymap.move_down .. " move session ",
+                },
+              }
+            end,
+          },
+        },
+        current = {
+          mark = ">",
+          hl = "MatchParen",
+        },
+      },
     })
     vim.keymap.set({ "n", "v", "i", "t" }, "<A-o>", function()
       require("nvim-sessionizer").sessionizer()
     end, { silent = true, desc = "Create an new session wiht zoxide" })
-    vim.keymap.set({ "n", "v", "i", "t" }, "<A-w>", function()
+    vim.keymap.set({ "n", "v", "i", "t" }, "<A-S-W>", function()
       require("nvim-sessionizer").new_session()
     end, { silent = true, desc = "Create an new session in the current dir" })
     vim.keymap.set({ "n", "v", "i", "t" }, "<A-u>", function()
