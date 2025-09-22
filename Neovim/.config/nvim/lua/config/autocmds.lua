@@ -94,3 +94,45 @@ endfunction
 autocmd FileType qf map <buffer> dd :RemoveQFItem<cr>
 ]]
 
+-- Função para remover item atual da Location List
+local function remove_loc_item()
+  local curidx = vim.fn.line(".") - 1
+  local winid = vim.fn.win_getid()
+
+  -- Pega a lista local da janela
+  local loclist = vim.fn.getloclist(winid)
+
+  if #loclist == 0 then
+    vim.notify("Location List vazia", vim.log.levels.WARN)
+    return
+  end
+
+  -- Remove o item atual
+  table.remove(loclist, curidx + 1)
+
+  -- Atualiza a loclist com a nova lista
+  vim.fn.setloclist(winid, loclist, "r")
+
+  -- Reabre para atualizar a janela
+  vim.cmd.lwindow()
+end
+
+-- Cria comando para remover
+vim.api.nvim_create_user_command("RemoveLocItem", remove_loc_item, {})
+
+-- Autocmd: quando abrir uma janela de loclist, mapear `dd`
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function(args)
+    local wininfo = vim.fn.getwininfo(vim.fn.win_getid())[1]
+    if wininfo and wininfo.loclist == 1 then
+      vim.api.nvim_buf_set_keymap(
+        args.buf,
+        "n",
+        "dd",
+        ":RemoveLocItem<CR>",
+        { noremap = true, silent = true }
+      )
+    end
+  end,
+})

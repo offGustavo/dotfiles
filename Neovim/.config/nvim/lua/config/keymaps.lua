@@ -148,10 +148,36 @@ vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diag
 --- LazyVim ---
 ---------------
 vim.keymap.del("n", "<leader>l")
-vim.keymap.set("n", "<leader>ll", ":Lazy<Cr>", { desc = "Lazy", silent = true })
-vim.keymap.set("n", "<leader>lL", ":LazyExtras<Cr>", { desc = "LazyVim Extras", silent = true })
+vim.keymap.set("n", "<leader>lz", ":Lazy<Cr>", { desc = "Lazy", silent = true })
+vim.keymap.set("n", "<leader>lx", ":LazyExtras<Cr>", { desc = "LazyVim Extras", silent = true })
+
+-------------
+--- Mason ---
+-------------
 vim.keymap.set("n", "<leader>lm", ":Mason<Cr>", { desc = "Mason", silent = true })
 
+---------------
+--- LocList ---
+---------------
+vim.keymap.set("n", "<leader>ll", ":lwindow<Cr>", { desc = "Location List", silent = true })
+vim.keymap.set("n", "<leader>lp", ":lprev<Cr>", { desc = "Location List", silent = true })
+vim.keymap.set("n", "<leader>ln", ":lnext<Cr>", { desc = "Location List", silent = true })
+vim.keymap.set("n", "<leader>la", function()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  local item = {
+    bufnr = vim.api.nvim_get_current_buf(),
+    lnum = pos[1],
+    col = pos[2] + 1,
+    text = vim.fn.getline("."),
+  }
+  vim.fn.setloclist(0, { item }, "a") -- "a" = append
+  vim.notify("Adicionado à Location List")
+end, { desc = "Adicionar item à Location List" })
+
+vim.keymap.set("n", "<leader>lr", function()
+  vim.fn.setloclist(0, {}, "r") -- "r" = replace (aqui com vazio)
+  vim.notify("Location List resetada")
+end, { desc = "Resetar Location List" })
 
 ----------------
 --- Quickfix ---
