@@ -308,10 +308,9 @@ end, { desc = "Push Changes" })
 
 vim.keymap.set("v", "<leader>oof", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', { desc = "Format Table in Markdown" })
 
-
-  -----------------------------
-  ---  REMAP DEFAULT PICKER ---
-  -----------------------------
+-----------------------------
+---  REMAP DEFAULT PICKER ---
+-----------------------------
 
 ---------------
 --- Lazygit ---
@@ -343,131 +342,131 @@ vim.keymap.set("n", "<leader>fa", function()
 end, { desc = "All Snacks Pickers" })
 
 vim.keymap.set("n", "<leader>z", function()
-    Snacks.picker.zoxide()
-  end, { desc = "Snacks Picker Zoxide" })
+  Snacks.picker.zoxide()
+end, { desc = "Snacks Picker Zoxide" })
 
-  vim.keymap.set("n", "<leader><space>", function()
-    Snacks.picker.smart({
-      -- finder = "explorer",
-      hidden = true,
-      matcher = {
-        frequency = true,
-      },
-      win = {
-        input = {
-          keys = {
-            ["d"] = "bufdelete",
-            ["J"] = "preview_scroll_down",
-            ["K"] = "preview_scroll_up",
-            ["H"] = "preview_scroll_left",
-            ["L"] = "preview_scroll_right",
-            ["<BS>"] = "explorer_up",
-            ["l"] = "confirm",
-            ["h"] = "explorer_close", -- close directory
-            ["a"] = "explorer_add",
-            ["D"] = "explorer_del",
-            ["r"] = "explorer_rename",
-            ["c"] = "explorer_copy",
-            ["m"] = "explorer_move",
-            ["o"] = "explorer_open", -- open with system application
-            ["P"] = "toggle_preview",
-            ["y"] = { "explorer_yank", mode = { "n", "x" } },
-            ["p"] = "explorer_paste",
-            ["u"] = "explorer_update",
-            ["<c-c>"] = "tcd",
-            ["<leader>/"] = "picker_grep",
-            ["<c-t>"] = "terminal",
-            ["."] = "explorer_focus",
-            ["I"] = "toggle_ignored",
-            -- ["H"] = "toggle_hidden",
-            -- ["Z"] = "explorer_close_all",
-            ["]g"] = "explorer_git_next",
-            ["[g"] = "explorer_git_prev",
-            ["]d"] = "explorer_diagnostic_next",
-            ["[d"] = "explorer_diagnostic_prev",
-            ["]w"] = "explorer_warn_next",
-            ["[w"] = "explorer_warn_prev",
-            ["]e"] = "explorer_error_next",
-            ["[e"] = "explorer_error_prev",
-          },
-        },
-        list = {
-          keys = {
-            ["d"] = "bufdelete",
-            ["J"] = "preview_scroll_down",
-            ["K"] = "preview_scroll_up",
-            ["H"] = "preview_scroll_left",
-            ["L"] = "preview_scroll_right",
-          },
+vim.keymap.set("n", "<leader><space>", function()
+  Snacks.picker.smart({
+    -- finder = "explorer",
+    -- tree = true,
+    hidden = true,
+    matcher = {
+      frequency = true,
+    },
+    win = {
+      input = {
+        keys = {
+          ["d"] = "bufdelete",
+          ["J"] = "preview_scroll_down",
+          ["K"] = "preview_scroll_up",
+          ["H"] = "preview_scroll_left",
+          ["L"] = "preview_scroll_right",
+          ["<BS>"] = "explorer_up",
+          ["l"] = "confirm",
+          ["h"] = "explorer_close", -- close directory
+          ["a"] = "explorer_add",
+          ["D"] = "explorer_del",
+          ["r"] = "explorer_rename",
+          ["c"] = "explorer_copy",
+          ["m"] = "explorer_move",
+          ["o"] = "explorer_open", -- open with system application
+          ["P"] = "toggle_preview",
+          ["y"] = { "explorer_yank", mode = { "n", "x" } },
+          ["p"] = "explorer_paste",
+          ["u"] = "explorer_update",
+          ["<c-c>"] = "tcd",
+          ["<leader>/"] = "picker_grep",
+          ["<c-t>"] = "terminal",
+          ["."] = "explorer_focus",
+          ["I"] = "toggle_ignored",
+          -- ["H"] = "toggle_hidden",
+          -- ["Z"] = "explorer_close_all",
+          ["]g"] = "explorer_git_next",
+          ["[g"] = "explorer_git_prev",
+          ["]d"] = "explorer_diagnostic_next",
+          ["[d"] = "explorer_diagnostic_prev",
+          ["]w"] = "explorer_warn_next",
+          ["[w"] = "explorer_warn_prev",
+          ["]e"] = "explorer_error_next",
+          ["[e"] = "explorer_error_prev",
         },
       },
-    })
-  end, { desc = "Snacks Smart Picker" })
-
-  vim.keymap.set("n", "<leader>/", function()
-    Snacks.picker.grep({
-      hidden = true,
-    })
-  end, { desc = "Snacks Picker Grep" })
-
-  vim.keymap.set("n", "<leader>sP", function()
-    Snacks.picker.grep({
-      hidden = true,
-      cwd = vim.fn.stdpath("config"),
-    })
-  end, { desc = "Snacks Picker Grep in Config Files" })
-
-  -- vim.keymap.set("n", "<leader>ow", function()
-  --   Snacks.picker.grep({
-  --     hidden = true,
-  --     on_show = function()
-  --     vim.api.nvim_feedkeys(
-  --       vim.api.nvim_replace_termcodes("<C-r><C-a>", true, false, true),
-  --       "i",
-  --       true
-  --     )
-  --     end,
-  --   })
-  -- end, { desc = "Grep cWord (root)" })
-  -- vim.keymap.set("n", "<leader>oW", function()
-  --   Snacks.picker.grep({
-  --     hidden = true,
-  --     cwd = ".",
-  --     on_show = function()
-  --     vim.api.nvim_feedkeys(
-  --       vim.api.nvim_replace_termcodes("<C-r><C-a>", true, false, true),
-  --       "i",
-  --       true
-  --     )
-  --     end,
-  --   })
-  -- end, { desc = "Grep cWord (cwd)" })
-
-  vim.keymap.set({ "n", "i" }, "<leader>,", function()
-    Snacks.picker.buffers({
-      -- I always want my buffers picker to start in normal mode
-      -- on_show = function()
-      --   vim.cmd.stopinsert()
-      -- end,
-      finder = "buffers",
-      format = "buffer",
-      hidden = false,
-      unloaded = true,
-      current = true,
-      sort_lastused = true,
-      win = {
-        input = {
-          keys = {
-            ["d"] = "bufdelete",
-          },
+      list = {
+        keys = {
+          ["d"] = "bufdelete",
+          ["J"] = "preview_scroll_down",
+          ["K"] = "preview_scroll_up",
+          ["H"] = "preview_scroll_left",
+          ["L"] = "preview_scroll_right",
         },
-        list = { keys = { ["d"] = "bufdelete" } },
       },
-      -- In case you want to override the layout for this keymap
-      -- layout = "ivy",
-    })
-  end, { silent = true, desc = "Snacks Picker Buffers" })
+    },
+  })
+end, { desc = "Snacks Smart Picker" })
 
+vim.keymap.set("n", "<leader>/", function()
+  Snacks.picker.grep({
+    hidden = true,
+  })
+end, { desc = "Snacks Picker Grep" })
+
+vim.keymap.set("n", "<leader>sP", function()
+  Snacks.picker.grep({
+    hidden = true,
+    cwd = vim.fn.stdpath("config"),
+  })
+end, { desc = "Snacks Picker Grep in Config Files" })
+
+-- vim.keymap.set("n", "<leader>ow", function()
+--   Snacks.picker.grep({
+--     hidden = true,
+--     on_show = function()
+--     vim.api.nvim_feedkeys(
+--       vim.api.nvim_replace_termcodes("<C-r><C-a>", true, false, true),
+--       "i",
+--       true
+--     )
+--     end,
+--   })
+-- end, { desc = "Grep cWord (root)" })
+-- vim.keymap.set("n", "<leader>oW", function()
+--   Snacks.picker.grep({
+--     hidden = true,
+--     cwd = ".",
+--     on_show = function()
+--     vim.api.nvim_feedkeys(
+--       vim.api.nvim_replace_termcodes("<C-r><C-a>", true, false, true),
+--       "i",
+--       true
+--     )
+--     end,
+--   })
+-- end, { desc = "Grep cWord (cwd)" })
+
+vim.keymap.set({ "n", "i" }, "<leader>,", function()
+  Snacks.picker.buffers({
+    -- I always want my buffers picker to start in normal mode
+    -- on_show = function()
+    --   vim.cmd.stopinsert()
+    -- end,
+    finder = "buffers",
+    format = "buffer",
+    hidden = false,
+    unloaded = true,
+    current = true,
+    sort_lastused = true,
+    win = {
+      input = {
+        keys = {
+          ["d"] = "bufdelete",
+        },
+      },
+      list = { keys = { ["d"] = "bufdelete" } },
+    },
+    -- In case you want to override the layout for this keymap
+    -- layout = "ivy",
+  })
+end, { silent = true, desc = "Snacks Picker Buffers" })
 
 -------------------------------------
 ----- CUSTOM SEARCH FILES AND WORD --
