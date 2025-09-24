@@ -17,13 +17,13 @@ selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
 if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
-    tmux new-session -s "$selected_name" -c "$selected" -e "NVIM_IN_TMUX=1" "nvim; exec $SHELL"
+  tmux new-session -s "$selected_name" -c "$selected" -e "NVIM_IN_TMUX=1" "nvim"
     exit 0
 fi
 
 if [[ -n "$tmux_running" ]]; then
     if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-        tmux new-session -ds "$selected_name" -c "$selected" -e "NVIM_IN_TMUX=1" "nvim; exec $SHELL"
+        tmux new-session -ds "$selected_name" -c "$selected" -e "NVIM_IN_TMUX=1" "nvim"
     fi
 
     if [[ -n "$TMUX" ]]; then
