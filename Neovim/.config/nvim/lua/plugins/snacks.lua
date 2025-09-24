@@ -11,11 +11,16 @@ return {
       -- layout = "ivy",
       -- layout = "telescope",
       -- layout = "ivy_split",
-        -- layout = {
-        --   preset = "ivy_split",
-        -- preview = "main", -- Garante que o preview vai para a main window
-        --   hidden = { "preview" }, -- Isso esconde o preview inicialmente
-        -- },
+      -- layout = {
+      --   preset = "ivy_split",
+      -- preview = "main", -- Garante que o preview vai para a main window
+      --   hidden = { "preview" }, -- Isso esconde o preview inicialmente
+      -- },
+      -- layout = {
+      --   preset = "ivy",
+      -- -- preview = "main", -- Garante que o preview vai para a main window
+      --   hidden = { "preview" }, -- Isso esconde o preview inicialmente
+      -- },
       layout = {
         hidden = { "preview" },
         preview = false,
