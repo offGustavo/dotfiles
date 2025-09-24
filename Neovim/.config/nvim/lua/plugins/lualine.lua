@@ -113,12 +113,12 @@ end
               end
             end,
           },
-          {
-            "tabs",
-            cond = function()
-              return #vim.fn.gettabinfo() > 1
-            end,
-          },
+          -- {
+          -- "tabs",
+          --   cond = function()
+          --     return #vim.fn.gettabinfo() > 1
+          --   end,
+          -- },
           function ()
             if vim.bo.filetype == "markdown" then
               return vim.fn.wordcount().words .. " words"
