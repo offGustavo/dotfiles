@@ -11,30 +11,31 @@ return {
       -- layout = "ivy",
       -- layout = "telescope",
       -- layout = "ivy_split",
+        -- layout = {
+        --   preset = "ivy_split",
+        -- preview = "main", -- Garante que o preview vai para a main window
+        --   hidden = { "preview" }, -- Isso esconde o preview inicialmente
+        -- },
+      layout = {
+        hidden = { "preview" },
+        preview = false,
         layout = {
-          preset = "ivy_split",
-          hidden = { "preview" }, -- Isso esconde o preview inicialmente
+          box = "vertical",
+          backdrop = false,
+          width = 0,
+          height = 0.4,
+          position = "bottom",
+          border = "top",
+          title = " {title} {live} {flags}",
+          title_pos = "left",
+          { win = "input", height = 1, border = "none" },
+          {
+            box = "horizontal",
+            { win = "list", border = "none" },
+            { win = "preview", title = "{preview}", width = 0.6, border = "rounded" },
+          },
         },
-        preview = "main", -- Garante que o preview vai para a main window
-      -- layout = {
-      --   preview = false,
-      --   layout = {
-      --     box = "vertical",
-      --     backdrop = false,
-      --     width = 0,
-      --     height = 0.4,
-      --     position = "bottom",
-      --     border = "top",
-      --     title = " {title} {live} {flags}",
-      --     title_pos = "left",
-      --     { win = "input", height = 1, border = "none" },
-      --     {
-      --       box = "horizontal",
-      --       { win = "list", border = "none" },
-      --       { win = "preview", title = "{preview}", width = 0.6, border = "rounded" },
-      --     },
-      --   },
-      -- },
+      },
       -- ui_select = false,
     },
     animate = {
