@@ -4,7 +4,7 @@ return {
   config = function()
     require("nvim-sessionizer").setup({
       no_zoxide = false,
-      search_dirs = { "~/projects", "~/work" },
+      search_dirs = { "~/Projects" },
       max_depth = 3,
       ui = {
         keymap = {
@@ -46,9 +46,9 @@ return {
     })
     vim.keymap.set({ "n", "v", "i", "t" }, "<A-o>", function()
       require("nvim-sessionizer").sessionizer()
-    end, { silent = true, desc = "Create an new session wiht zoxide" })
-    vim.keymap.set({ "n", "v", "i", "t" }, "<A-S-W>", function()
-      require("nvim-sessionizer").new_session()
+    -- end, { silent = true, desc = "Create an new session wiht zoxide" })
+    -- vim.keymap.set({ "n", "v", "i", "t" }, "<A-S-W>", function()
+    --   require("nvim-sessionizer").new_session()
     end, { silent = true, desc = "Create an new session in the current dir" })
     vim.keymap.set({ "n", "v", "i", "t" }, "<A-u>", function()
       require("nvim-sessionizer").attach_session()
