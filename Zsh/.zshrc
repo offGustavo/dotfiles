@@ -3,7 +3,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin/$PATH
 export PATH=$PATH:$HOME/scripts
-# export PATH=$PATH:$HOME/.config/emacs/bin
+
+# Nix
+export PATH=$PATH:$HOME/.nix-profile/bin
+export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
 
 # Fix java lsp
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
@@ -103,7 +106,9 @@ bindkey -M viins "^F" forward-char
 source $ZSH/oh-my-zsh.sh
 
 # Init Zoxide/Z
-eval "$(zoxide init zsh)"
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+fi
 
 # Init Fzf
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -115,12 +120,24 @@ eval "$(zoxide init zsh)"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
+# # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-export EDITOR='nvim'
+#   export EDITOR='nvim'
 # fi
+
+# Edit File
+if ! command -v vim >/dev/null 2>&1; then
+    export EDITOR='nvim'
+    alias vim=nvim
+fi
+if ! command -v nvim >/dev/null 2>&1; then
+    export EDITOR='vim'
+    alias nvim=vim
+fi
+
+alias :e=$EDITOR
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -183,15 +200,6 @@ alias gengar="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/f
 # Exit terminal
 alias :q=exit
 
-# Edit File
-if ! command -v vim >/dev/null 2>&1; then
-    alias vim=nvim
-fi
-if ! command -v nvim >/dev/null 2>&1; then
-    alias nvim=vim
-fi
-
-alias :e=$EDITOR
 
 # Nala aliases
 alias nala='sudo nala'
