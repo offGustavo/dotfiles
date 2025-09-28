@@ -144,6 +144,12 @@ bindsym $super+shift+o split toggle
 # toggle tiling / floating
 bindsym $super+g floating toggle
 
+# Enviar a janela atual para o scratchpad
+bindsym $super+comma move scratchpad
+
+# Mostrar/ocultar a janela do scratchpad
+bindsym $super+shift+g scratchpad show
+
 # focus the parent container
 bindsym $super+z focus parent
 
@@ -180,6 +186,7 @@ bindsym $super+Shift+c reload
 bindsym $super+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $super+Shift+q exec i3-msg exit
+
 
 bar {
   status_command i3status -c ~/.config/i3/i3status/status
