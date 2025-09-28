@@ -439,7 +439,7 @@ binds {
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
-    Mod+o repeat=false { toggle-overview; }
+    Mod+w repeat=false { toggle-overview; }
 
     Mod+q { close-window; }
 
@@ -615,6 +615,7 @@ binds {
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
     Mod+f { maximize-column; }
+    Mod+m { maximize-column; }
     Mod+Shift+f { fullscreen-window; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
@@ -648,7 +649,7 @@ binds {
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
     // rather than stacked on top of each other.
-    Mod+W { toggle-column-tabbed-display; }
+    Mod+y { toggle-column-tabbed-display; }
 
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
