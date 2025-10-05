@@ -53,7 +53,8 @@ font pango:Jetbrains Mono Nerd Font 8
 
 # Autostart
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id  xrandr --output HDMI-1-0 --mode 1920x1080 --right-of eDP-1
+exec --no-startup-id systemctl --user start gnome-keyring-daemon.service
+exec --no-startup-id xrandr --output HDMI-1-0 --mode 1920x1080 --right-of eDP-1
 # exec --no-startup-id  nitrogen --restore
 exec --no-startup-id  feh --bg-scale ~/Pictures/Wallpapers/archcraft/default.jpg
 
@@ -129,6 +130,9 @@ bindsym $super+$alt+h resize shrink width 10 px or 10 ppt
 bindsym $super+$alt+j resize grow height 10 px or 10 ppt
 bindsym $super+$alt+k resize shrink height 10 px or 10 ppt
 bindsym $super+$alt+l resize grow width 10 px or 10 ppt
+
+bindsym $super+$alt+bracketleft move workspace to output left
+bindsym $super+$alt+bracketright move workspace to output right
 
 # enter fullscreen mode for the focused container
 bindsym $super+shift+f fullscreen toggle
