@@ -1,6 +1,6 @@
 #!/bin/bash
 
-chosen=$(echo -e "Poweroff\nReboot\nSuspend\nLog out\nPower Profile" | fuzzel -d -p "Power Management:")
+chosen=$(echo -e "Poweroff\nReboot\nSuspend\nLog out\nProfile" | fuzzel -d -p "Power Management:")
 
 case "$chosen" in
 "Poweroff")
@@ -18,7 +18,7 @@ case "$chosen" in
 "Logout")
   hyprctl dispatch exit
   ;;
-"Power Profile")
+"Profile")
   chosen2=$(echo -e "Power Saver\nBalanced\nPerformance" | fuzzel -d -p "Power Profile ($(powerprofilesctl get)):")
   case "$chosen2" in
   "Power Saver")
