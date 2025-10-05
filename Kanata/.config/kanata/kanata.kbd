@@ -18,7 +18,6 @@
     ;;   )
 
 (defsrc
- esc
  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
  caps a    s    d    f    g    h    j    k    l    ;    '    ret
@@ -152,7 +151,6 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
       ;;            Control  Super      r     Alt               Shift/Space      AltGr Super
       ;;            )
   (deflayer base
-   @lce
    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
    tab  @lmq @law e    r    t    y    u    i    @rao @rmp [    ]    \
    @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret
@@ -210,7 +208,6 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
   )
 
   (deflayer game
-   esc
    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
    tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
    caps a    s    d    f    g    h    j    k    l    ;    '    ret
@@ -220,7 +217,6 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
   )
 
   (deflayer numbers
-   _
    _    _    _    _    _    _    _    nlck S-8  .    ,    _    _    _
    @gam f1   f2   f3   f4   _    .    7    8    9    -    _    _    _
    _    f5   f6   f7   f8   _    S-8  4    5    6    +    =    ret
@@ -230,7 +226,6 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
   )
 
   (deflayer navigation
-   _
    _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
    _    1    2    3    4    5    6    7    8    9    0    -    =    grv
    _    @aPr @mVd @sVu @cNe caps lft  down up   rght del  bspc _
@@ -240,7 +235,6 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
   )
 
   (deflayer symbols
-   _
    _    _    _    _    _    _    _    _    _    _    _    _    _    _
    @edt S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S-9  S-0  S--  S-=  _
    _    [    S-[  S-]  ]    S-\  \    =    S-=  '    S-6  S-grv _
@@ -250,7 +244,6 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
   )
 
   (deflayer mouse
-   _
    _    _    _    _    _    _    _    _    _    _    _    _    _    _
    lrld 🖰1   🖰2   🖰3   🖰4   🖰5   fwd  mwu  @mau mwl  mfwd _    _    _
    _    @slw _    @mid @fst _    mmid @mal mrgt @mar mlft _    _
