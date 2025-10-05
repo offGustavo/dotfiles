@@ -164,6 +164,12 @@ vim.keymap.set("n", "<leader>lg", ":term lazygit<Cr>:start<Cr>")
 vim.keymap.set("n", "<leader>fl", ":.lua<Cr>", { silent = true, desc = "Execute Line in Lua" })
 vim.keymap.set("v", "<leader>fl", ":'<,'>lua<Cr>", { silent = true, desc = "Execute Selection in Lua" })
 
+-- Poor man harpoon
+for i = 1, 9 do
+  vim.keymap.set("n", "<leader>" .. i, "`" .. i )
+  vim.keymap.set("n", "<leader>m" .. i, "m" .. i)
+end
+
 --}}}
 
 --{{{ -- Autocmds
