@@ -21,7 +21,7 @@ vim.cmd([[
   set wildignore+=**/node_modules/**
 ]])
 
-vim.g.lazyvim_picker = "snacks"
+-- vim.g.lazyvim_picker = "snacks"
 -- vim.g.lazyvim_picker = "telescope"
 -- vim.g.lazyvim_picker = "fzf-lua"
 
