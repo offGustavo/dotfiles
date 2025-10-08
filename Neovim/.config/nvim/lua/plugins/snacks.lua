@@ -7,29 +7,20 @@ return {
       replace_netrw = false,
     },
     input = { enabled = false },
-    picker = {
-      -- layout = "ivy",
-      -- layout = "telescope",
-      -- layout = "ivy_split",
-      -- layout = {
-      --   preset = "ivy_split",
-      -- preview = "main", -- Garante que o preview vai para a main window
-      --   hidden = { "preview" }, -- Isso esconde o preview inicialmente
-      -- },
-      -- layout = {
-      --   preset = "ivy",
-      -- -- preview = "main", -- Garante que o preview vai para a main window
-      --   hidden = { "preview" }, -- Isso esconde o preview inicialmente
-      -- },
+      picker = {
+        sources = {
+          files = { hidden = true },
+          grep = { hidden = true },
+          explorer = { hidden = true },
+        },
       layout = {
-        hidden = { "preview" },
         preview = false,
         layout = {
           box = "vertical",
           backdrop = false,
+          row = -1,
           width = 0,
           height = 0.4,
-          position = "bottom",
           border = "top",
           title = " {title} {live} {flags}",
           title_pos = "left",
@@ -37,11 +28,10 @@ return {
           {
             box = "horizontal",
             { win = "list", border = "none" },
-            { win = "preview", title = "{preview}", width = 0.6, border = "rounded" },
+            { win = "preview", width = 0.6, border = "rounded" },
           },
         },
       },
-      -- ui_select = false,
     },
     animate = {
       duration = 10, -- ms per step
