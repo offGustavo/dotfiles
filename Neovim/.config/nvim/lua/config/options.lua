@@ -64,7 +64,7 @@ end
 vim.o.makeprg = "make"
 
 if not vim.g.vscode then
-vim.o.cmdheight = 1
+vim.o.cmdheight = 0
 -- Experimental
 require('vim._extui').enable({
   enable = true, -- Whether to enable or disable the UI.
