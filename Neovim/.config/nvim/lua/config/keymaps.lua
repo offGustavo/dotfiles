@@ -309,6 +309,57 @@ end, { desc = "Push Changes" })
 
 vim.keymap.set("v", "<leader>oof", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', { desc = "Format Table in Markdown" })
 
+vim.keymap.set("v", "<leader>a", ":AlignRegexp<CR>", { desc = "Align by regex", silent = true })
+
+vim.keymap.set("v", "<leader>a", function()
+  -- Pede o separador ao usuário
+  local sep = vim.fn.input("Separador: ")
+  if sep == "" then
+    sep = "|" -- padrão
+  end
+
+  -- Pega início e fim da seleção visual
+  local start_pos = vim.fn.getpos("'<")
+  local end_pos = vim.fn.getpos("'>")
+
+  local start_line = start_pos[2]
+  local end_line = end_pos[2]
+
+  -- Captura o texto selecionado
+  local lines = vim.fn.getline(start_line, end_line)
+  local input_text = table.concat(lines, "\n")
+
+  -- Executa o comando column
+  local cmd = string.format('tr -s " " | column -t -s "%s" -o "%s"', sep, sep)
+  local handle = io.popen(cmd, "w")
+  if not handle then
+    vim.notify("Erro ao executar comando column", vim.log.levels.ERROR)
+    return
+  end
+
+  -- Envia o texto para o processo
+  handle:write(input_text)
+  handle:close()
+
+  -- Lê o resultado processado
+  local output = io.popen(cmd, "r")
+  if not output then
+    vim.notify("Erro ao ler saída do comando", vim.log.levels.ERROR)
+    return
+  end
+
+  local result = output:read("*a")
+  output:close()
+
+  -- Divide o resultado em linhas
+  local new_lines = vim.split(vim.trim(result), "\n")
+
+  -- Substitui o conteúdo no buffer
+  vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, new_lines)
+
+  vim.notify("Texto alinhado com separador '" .. sep .. "'", vim.log.levels.INFO)
+end, { desc = "Align text using column command", silent = true })
+
 -----------------------------
 ---  REMAP DEFAULT PICKER ---
 -----------------------------
