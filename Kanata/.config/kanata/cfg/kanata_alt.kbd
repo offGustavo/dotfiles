@@ -1,0 +1,257 @@
+(defcfg
+ movemouse-smooth-diagonals yes
+ log-layer-changes no
+ process-unmapped-keys yes
+ concurrent-tap-hold yes
+ linux-device-detect-mode any
+ linux-dev-names-exclude (
+   "SYNA7DB5:01 06CB:CD41 Touchpad"
+   "SYNA7DB5:01 06CB:CD41 Mouse"
+   ))
+
+(deflocalkeys-linux
+ mctl 89
+ )
+
+;; (deflocalkeys-win
+    ;;   mctl 193
+    ;;   )
+
+(defsrc
+ grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+ tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+ caps a    s    d    f    g    h    j    k    l    ;    '    ret
+ lsft z    x    c    v    b    n    m    ,    .    /    rsft
+ lctl lmet lalt           spc            ralt  menu mctl
+ 🖰1 🖰2 🖰3 🖰4 🖰5
+ )
+
+  (defchordsv2
+   (esc ret) @bas 100 all-released  ()
+   (caps ret) @bas 100 all-released  ()
+   (tab \) @edt 100 all-released  ()
+    (tab ret) @edt 100 all-released  ()
+    (spc ralt) @nav 100 all-released  ()
+    (lalt ralt) @nav 100 all-released  ()
+    (grv bspc) @gam 100 all-released  ()
+    (lsft rsft) caps 100 all-released  ()
+    (lctl rctl) lrld 100 all-released  ()
+    (lctl mctl) lrld 100 all-released  ()
+   )
+
+   (defalias
+    ;; Definer as layer
+
+    ;; Define a layer dos números e teclas F1 a F12
+    num (layer-toggle numbers)
+
+    ;; Define a layer com as teclas de navegação e mídia
+    nav (layer-toggle navigation)
+    edt (layer-switch navigation)
+
+    ;; Define a layer com os simbolos
+    syb (layer-toggle symbols)
+
+    ;; Define a layer de movimento do mouse
+    mov (layer-toggle mouse)
+
+    ;; Base Layer
+    bas (layer-switch base)
+
+    ;; Gaming Layer
+    gam (layer-switch game)
+
+  ;; Navigation
+  lnx (tap-hold 100 300 x @nav)
+  rn, (tap-hold 100 300 , @nav)
+;; rna (tap-dance 300 ( ralt @nav))
+  ;; ssc (tap-hold 100 300 spc @nav)
+
+  ;; Numbers
+  lnc (tap-hold 100 300 c @num)
+rnm (tap-hold 100 300 m @num)
+  ;; ssc (tap-hold 100 300 spc @num)
+
+  ;; Symbols
+  lsv (tap-hold 100 300 v @syb)
+  rsn (tap-hold 100 300 n @syb)
+  lsr (tap-hold 100 300 r @syb)
+rsu (tap-hold 100 300 u @syb)
+
+  ;; ssc (tap-hold 100 300 spc @syb)
+
+  ;; Mouse
+  lmz (tap-hold 100 300 z @mov)
+rm. (tap-hold 100 300 . @mov)
+
+  ;; Remap
+
+  ;; Caps
+  ecc (tap-hold 100 300 esc caps)
+lce (tap-hold 100 300 esc caps)
+
+  ;; Control
+  lcf (tap-hold 100 300 f lctl)
+  rcj (tap-hold 100 300 j rctl)
+cNe (tap-hold 100 300 next lctl)
+  ;; lce (tap-hold 100 300 esc lctrl)
+  ;; ecc (tap-hold 100 300 esc lctrl)
+
+  ;; Shift
+  lsd (tap-hold 100 300 d lsft)
+  rsk (tap-hold 100 300 k rsft)
+  sVu (tap-hold 100 300 volu lsft)
+;; lsa (tap-dance 300 ( lalt lsft))
+
+  ;; Space
+  ;;ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
+  ;; ssc (tap-dance 300 ( (tap-hold 100 200 (macro spc) lsft) (tap-hold 100 300 (macro spc spc) @nav)))
+;; ssc (tap-hold-release 100 300 spc lsft)
+ssc (tap-hold-release 100 300 spc @nav)
+  ;; Super/Windows
+  lms (tap-hold 100 300 s lmet)
+  rml (tap-hold 100 300 l lmet)
+  rmm (tap-hold 100 300 menu lmet)
+mVd (tap-hold 100 300 vold lmet)
+
+  ;; Alt
+laa (tap-hold 100 300 a lalt)
+  ;;NOTE: `︔` != `;`
+  ;; This isen't require now, but i'll keeping it
+  ras (tap-hold 100 300 ︔ lalt)
+  law (tap-hold 100 300 w ralt)
+  rao (tap-hold 100 300 o ralt)
+aPr (tap-hold 100 300 prev lalt)
+
+  ;; Menu
+  lmq (tap-hold 100 300 q menu)
+rmp (tap-hold 100 300 p menu)
+
+  ;; Mouse Keys
+  mwu (mwheel-up    50 120)
+  mwd (mwheel-down  50 120)
+  mwl (mwheel-left  50 120)
+  mwr (mwheel-right 50 120)
+  mau (movemouse-up    3 1)
+  mal (movemouse-left  3 1)
+  mad (movemouse-down  3 1)
+  mar (movemouse-right 3 1)
+  fst (movemouse-speed 600)
+  mid (movemouse-speed 300)
+slw (movemouse-speed 100)
+
+  ;; Mouse Input
+  ;; mrc (tap-hold 100 200 🖰2 lctrl )
+  mfs (tap-hold 100 200 fwd lctrl)
+  mmn (tap-hold 100 200 mmid (layer-toggle onehand-num))
+mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
+  )
+
+  ;;  (deflayer base
+      ;;            grv      1              2                  3               4
+      ;;            tab      Menu/q         AltGr/w            e               Symbols Layer/r
+      ;;            Caps/Esc Alt/a          Super/s            Shift/d         Control/f
+      ;;            Shift    Mouse Layer/z  Navigation Layer/x Numbers Layer/c Symbols Layer/v
+      ;;            Control  Super      r     Alt               Shift/Space      AltGr Super
+      ;;            )
+  (deflayer base
+   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+   tab  @lmq @law e    @lsr t    y    @rsu i    @rao @rmp XX   XX   XX
+   @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    XX
+   lsft @lmz @lnx @lnc @lsv b    @rsn @rnm @rn, @rm. /    rsft
+   lctl lmet (tap-hold-press 100 200 bspc lalt)           @ssc           (tap-hold-press 100 200 ret @nav) @rmm         lctl
+   🖰1 🖰2 @mmn @mbn @mfs
+  )
+
+  (deflayermap onehand-nav
+   w up
+   a left
+   s down
+   d rght
+   q home
+   e end
+   r pgup
+   f pgdn
+   x del
+   c bspc
+   z ins
+   spc lsft
+   1 f1
+   2 f2
+   3 f3
+   4 f4
+   5 f5
+   6 f6
+   7 f7
+   8 f8
+  9 f9
+  0 f10
+  - f11
+  = f12
+  🖰1 (tap-hold 100 300 🖰1 lsft)
+🖰2 (tap-hold 100 300 🖰2 lctrl)
+  )
+
+  (deflayermap onehand-num
+   spc 0
+   z 1
+   x 2
+   c 3
+   a 4
+   s 5
+   d 6
+   q 7
+   w 8
+   e 9
+   r -
+   f +
+   4 S-8
+   3 /
+   2 ,
+   1 .
+  )
+
+  (deflayer game
+   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+   caps a    s    d    f    g    h    j    k    l    ;    '    ret
+   lsft z    x    c    v    b    n    m    ,    .    /    rsft
+   lctl lmet lalt           spc            rmet  menu rctl
+   _  _  _  _  _
+  )
+
+  (deflayer numbers
+   _    _    _    _    _    _    _    nlck S-8  .    ,    _    _    _
+   @gam f1   f2   f3   f4   _    .    7    8    9    -    _    _    _
+   _    f5   f6   f7   f8   _    S-8  4    5    6    +    =    ret
+   _    f9   f10  f11  f12  _    ,    1    2    3    /    _
+   _    _    _              0              nlck  _    _
+   _  _  _  _  _
+  )
+
+  (deflayer navigation
+   _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
+   _    1    2    3    4    5    6    7    8    9    0    -    =    grv
+   _    @aPr @mVd @sVu @cNe caps left (tap-hold 100 200  down lctl) (tap-hold 100 200  up lsft)  (tap-hold 100 200 left lmet )    (tap-hold 100 300 del lalt )   bspc _
+   _    mute pp   brdn brup menu ins  home end  pgup pgdn _
+   _    _    _              _              _     _    _
+   _  _  _  _  _
+  )
+
+  (deflayer symbols
+   _    _    _    _    _    _    _    _    _    _    _    _    _    _
+   @edt [    S-[  S-9  S-,  S-5  S-6  S-.  S-0  S-]  ]    S--  S-=  _
+   _    [    S-[  S-9  ]    S-\  \    =    -    S-=  S--  S-grv _
+   _    S-,  S-.  S-9  S-0  _    _    S--  _    S-'  grv  _
+   _    _    _              _              _     _    _
+   _  _  _  _  _
+  )
+
+  (deflayer mouse
+   _    _    _    _    _    _    _    _    _    _    _    _    _    _
+   lrld 🖰1   🖰2   🖰3   🖰4   🖰5   fwd  mwu  @mau mwl  mfwd _    _    _
+   _    @slw _    @mid @fst _    mmid @mal mrgt @mar mlft _    _
+   _    _    bck  fwd  _    _    bck  mwd  @mad mwr  mbck _
+   _    _    _              _              _     _    _
+   _  _  _  _  _
+)
