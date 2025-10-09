@@ -31,6 +31,8 @@
    (caps ret) @bas 100 all-released  ()
    (tab \) @edt 100 all-released  ()
     (tab ret) @edt 100 all-released  ()
+    (spc ralt) @nav 100 all-released  ()
+    (lalt ralt) @nav 100 all-released  ()
     (grv bspc) @gam 100 all-released  ()
     (lsft rsft) caps 100 all-released  ()
     (lctl rctl) lrld 100 all-released  ()
