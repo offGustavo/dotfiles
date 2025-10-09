@@ -27,6 +27,15 @@ set $red #f7768e
 set $green #98c379
 set $purple #c678dd
 
+# # Tokyo Night Day Theme
+# set $fg #3760bf
+# set $bg #e1e2e7
+# set $bg_alt #c4c8da
+# set $blue #2e7de9
+# set $red #f52a65
+# set $green #587539
+# set $purple #7847bd
+
 ## Print all window titles in format of 'class | title'
 title_align center
 for_window [class=".*"] title_format "%class | %title"
