@@ -74,7 +74,9 @@ rnm (tap-hold 100 300 m @num)
 
   ;; Symbols
   lsv (tap-hold 100 300 v @syb)  
-rsn (tap-hold 100 300 n @syb)  
+  rsn (tap-hold 100 300 n @syb)  
+  lsr (tap-hold 100 300 r @syb)
+rsu (tap-hold 100 300 u @syb)
   ;; ssc (tap-hold 100 300 spc @syb)
 
   ;; Mouse
@@ -154,7 +156,7 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
       ;;            )
   (deflayer base
    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-   tab  @lmq @law e    r    t    y    u    i    @rao @rmp [    ]    \
+   tab  @lmq @law e    @lsr t    y    @rsu i    @rao @rmp [    ]    \
    @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret
    lsft @lmz @lnx @lnc @lsv b    @rsn @rnm @rn, @rm. /    rsft
    lctl lmet @lsa           @ssc           @rna  @rmm rctl
@@ -238,8 +240,8 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
 
   (deflayer symbols
    _    _    _    _    _    _    _    _    _    _    _    _    _    _
-   @edt S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S-9  S-0  S--  S-=  _
-   _    [    S-[  S-]  ]    S-\  \    =    S-=  '    S-6  S-grv _
+   @edt [    S-[  S-9  S-,  S-5  S-6  S-.  S-0  S-]  ]    S--  S-=  _
+   _    S-1  S-2  S-3  S-4  S-\  \    =    -    S-=  S--  S-grv _
    _    S-,  S-.  S-9  S-0  _    _    S--  _    S-'  grv  _
    _    _    _              _              _     _    _
    _  _  _  _  _
