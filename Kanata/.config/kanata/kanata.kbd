@@ -61,7 +61,6 @@
   ;; Navigation
   lnx (tap-hold 100 200 x @nav) 
   rn, (tap-hold 100 200 , @nav) 
-rna (tap-dance 300 ( ralt @nav))
   ;; ssc (tap-hold 100 300 spc @nav)
 
   ;; Numbers
@@ -97,7 +96,6 @@ cNe (tap-hold 100 300 next lctl)
   lsd (tap-hold 100 300 d lsft)
   rsk (tap-hold 100 300 k rsft)
   sVu (tap-hold 100 300 volu lsft)
-lsa (tap-dance 300 ( lalt lsft))
 
   ;; Space
   ;;ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
@@ -118,6 +116,11 @@ laa (tap-hold 100 300 a lalt)
   law (tap-hold 100 300 w ralt) 
   rao (tap-hold 100 300 o ralt) 
 aPr (tap-hold 100 300 prev lalt)
+
+  lab (tap-hold-press 100 300 bspc lalt) 
+  rar (tap-hold-press 100 300 ret ralt) 
+  rna (tap-dance 300 ( @rar @nav))
+lsa (tap-dance 300 ( @lab lsft))
 
   ;; Menu
   lmq (tap-hold 100 300 q menu)
@@ -147,7 +150,7 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav)))
   ;;            tab      Menu/q         AltGr/w            e               Symbols Layer/r
   ;;            Caps/Esc Alt/a          Super/s            Shift/d         Control/f
   ;;            Shift    Mouse Layer/z  Navigation Layer/x Numbers Layer/c Symbols Layer/v
-  ;;            Control  Super      r     Alt               Shift/Space      AltGr Super)
+  ;;            Control  Super      r     Alt/Backspace                              Shift/Space       AltGr/Return)
   (deflayer base
    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
    tab  @lmq @law e    @lsr t    y    @rsu i    @rao @rmp [    ]    \
