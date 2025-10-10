@@ -54,8 +54,6 @@ if vim.g.neovide then
 end
 
 if vim.uv.os_uname().sysname == "Windows_NT" then
-
-  vim.g.lazyvim_picker = "telescope"
   vim.opt.shell = "pwsh.exe"
   vim.opt.shellcmdflag =
     "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
