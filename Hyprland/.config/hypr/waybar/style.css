@@ -9,11 +9,13 @@
 
 * {
     border: none;
-    font-size: 11px;
+    font-size: 10px;
     font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
     /*height: 10px;*/
     color: @fg;
+    padding: 0;
 }
+
 
 window#waybar {
   background: @bg;
@@ -130,4 +132,10 @@ window#waybar {
         background-color: #ffffff;
         color: #000000;
     }
+}
+
+#taskbar {
+  font-size: 20px;
+  padding: 0px;
+  margin: 0px;
 }
