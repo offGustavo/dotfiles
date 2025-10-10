@@ -232,12 +232,12 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav)))
    _  _  _  _  _)
 
   (deflayer symbols
-   _    _       _         _    _    _    _    _    _    _    _    _    _    _
-   @edt [       S-[       S-9  S-,  S-5  S-6  S-.  S-0  S-]  ]    S--  S-=  _
-   _    RA-grv  S-RA-grv  S-3  S-4  S-\  \    =    -    S-=  S--  S-grv _
-   _    '       S-'       S-2  S-1  _    _    S--  _    S-'  grv  _
+   _    _       _         _       _    _    _    _    _    _    _    _    _    _
+   @edt [       S-[       S-9     S-,  S-5  S-6  S-.  S-0  S-]  ]    S-7  _    _
+   _    RA-grv  S-RA-grv  RA-S-6  S-4  S-\  \    =    -    S-=  S--  S-grv _
+   _    RA-'    S-RA-'    S-2     S-1  S-3  S-8  S--  '    S-'  grv  _
    _    _          _              _              _     _    _
-   _  _  _  _  _)
+   _  _  _  _  _ )
 
   (deflayer mouse
    _    _    _    _    _    _    _    _    _    _    _    _    _    _
