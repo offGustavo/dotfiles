@@ -6,8 +6,8 @@
  linux-device-detect-mode any
  linux-dev-names-exclude (
    "SYNA7DB5:01 06CB:CD41 Touchpad" 
-   "SYNA7DB5:01 06CB:CD41 Mouse"    
-   ))
+   "SYNA7DB5:01 06CB:CD41 Mouse")  
+  windows-altgr add-lctl-release)
 
 (deflocalkeys-linux
  mctl 89)
