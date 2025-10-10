@@ -2,11 +2,16 @@
 require("config.lazy")
 
 -- Custom Things
-require("fish.filetypes")
-require("fish.theme")
-require("fish.kitty")
-require("fish.tmux")
 require("fish.multi_marks")
+require("fish.commads")
+
 require("fish.neovide")
 require("fish.vscode")
-require("fish.commads")
+require("fish.filetypes")
+
+if not vim.uv.os_uname().sysname == "Windows_NT" then
+  require("fish.theme")
+  require("fish.kitty")
+  require("fish.tmux")
+end
+
