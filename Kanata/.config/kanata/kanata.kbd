@@ -1,6 +1,6 @@
 (defcfg
  movemouse-smooth-diagonals yes
- log-layer-changes no
+ log-layer-changes yes
  process-unmapped-keys yes
  concurrent-tap-hold yes
  linux-device-detect-mode any
