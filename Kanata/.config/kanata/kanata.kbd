@@ -154,7 +154,7 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav)))
   (deflayer base
    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
    tab  @lmq @law e    @lsr t    y    @rsu i    @rao @rmp [    ]    \
-   @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret
+   @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    @rar
    lsft @lmz @lnx @lnc @lsv b    @rsn @rnm @rn, @rm. /    rsft
    lctl lmet @lab           @ssc           @rar  @rmn rctl
    🖰1 🖰2 @mmn @mbn @mfs)
