@@ -61,6 +61,7 @@
   ;; Navigation
   lnx (tap-hold 100 200 x @nav) 
   rn, (tap-hold 100 200 , @nav) 
+  rmn (tap-hold 100 300 menu @nav)
   ;; ssc (tap-hold 100 300 spc @nav)
 
   ;; Numbers
@@ -105,8 +106,7 @@ ssc (tap-hold-release 100 200 spc lsft)
   ;; Super/Windows
   lms (tap-hold 100 300 s lmet)   
   rml (tap-hold 100 300 l lmet)
-  rmm (tap-hold 100 300 menu lmet)
-mVd (tap-hold 100 300 vold lmet)
+  mVd (tap-hold 100 300 vold lmet)
 
   ;; Alt
 laa (tap-hold 100 300 a lalt) 
@@ -156,7 +156,7 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav)))
    tab  @lmq @law e    @lsr t    y    @rsu i    @rao @rmp [    ]    \
    @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret
    lsft @lmz @lnx @lnc @lsv b    @rsn @rnm @rn, @rm. /    rsft
-   lctl lmet @lab           @ssc           @rar  @rmm rctl
+   lctl lmet @lab           @ssc           @rar  @rmn rctl
    🖰1 🖰2 @mmn @mbn @mfs)
 
   (deflayermap onehand-nav
