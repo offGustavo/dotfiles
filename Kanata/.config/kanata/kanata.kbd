@@ -104,18 +104,18 @@ cNe (tap-hold 100 300 next lctl)
 ssc (tap-hold-release 100 200 spc lsft)
 
   ;; Super/Windows
-  lms (tap-hold 100 300 s lmet)   
-  rml (tap-hold 100 300 l lmet)
-  mVd (tap-hold 100 300 vold lmet)
+  lma (tap-hold-release 100 300 a lmet)
+  rm; (tap-hold-release 100 300 ; lmet)
+mPr (tap-hold-release 100 300 prev lmet)
 
   ;; Alt
-laa (tap-hold 100 300 a lalt) 
+las (tap-hold-release 100 300 s lalt)
   ;;NOTE: `︔` != `;`
   ;; This isen't require now, but i'll keeping it
-  ras (tap-hold 100 300 ︔ lalt) 
-  law (tap-hold 100 300 w ralt) 
-  rao (tap-hold 100 300 o ralt) 
-aPr (tap-hold 100 300 prev lalt)
+  ral (tap-hold-release 100 300 l lalt)
+  law (tap-hold-release 100 300 w ralt)
+  rao (tap-hold-release 100 300 o ralt)
+aVd (tap-hold-release 100 300 vold lalt)
 
   lab (tap-hold-press 100 300 bspc lalt)
   rar (tap-hold-press 100 300 ret ralt)
@@ -154,7 +154,7 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav)))
   (deflayer base
    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
    tab  @lmq @law @lse r    t    y    u    @rsi @rao @rmp [    ]    \
-   @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    @rar
+   @ecc @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @rar
    lsft @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft
    lctl lmet @lab           @ssc           @rar  @rmn rctl 
    🖰1 🖰2 @mmn @mbn @mfs)
