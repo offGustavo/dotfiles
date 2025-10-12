@@ -71,8 +71,8 @@ rn, (tap-hold 100 300 , @num)
   ;; Symbols
   lsv (tap-hold 100 300 v @syb)
   rsn (tap-hold 100 300 n @syb)
-  lse (tap-hold-release 100 300 e @syb)
-rsi (tap-hold-release 100 300 i @syb)
+  lse (tap-hold 100 300 e @syb)
+rsi (tap-hold 100 300 i @syb)
   ;; ssc (tap-hold 100 300 spc @syb)
 
   ;; Mouse
@@ -100,21 +100,21 @@ cNe (tap-hold 100 300 next lctl)
   ;; Space
   ;;ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
   ;; ssc (tap-dance 200 ( (tap-hold 100 300 (macro spc) lsft) (tap-hold 100 300 (macro spc spc) @nav)))
-ssc (tap-hold-release 100 200 spc lsft)
+ssc (tap-hold 100 200 spc lsft)
 
   ;; Super/Windows
-  lma (tap-hold-release 100 300 a lmet)
-  rm; (tap-hold-release 100 300 ; lmet)
-mPr (tap-hold-release 100 300 prev lmet)
+  lma (tap-hold 100 300 a lmet)
+  rm; (tap-hold 100 300 ; lmet)
+mPr (tap-hold 100 300 prev lmet)
 
   ;; Alt
-las (tap-hold-release 100 300 s lalt)
+las (tap-hold 100 300 s lalt)
   ;;NOTE: `︔` != `;`
   ;; This isen't require now, but i'll keeping it
-  ral (tap-hold-release 100 300 l lalt)
-  law (tap-hold-release 100 300 w ralt)
-  rao (tap-hold-release 100 300 o ralt)
-aVd (tap-hold-release 100 300 vold lalt)
+  ral (tap-hold 100 300 l lalt)
+  law (tap-hold 100 300 w ralt)
+  rao (tap-hold 100 300 o ralt)
+aVd (tap-hold 100 300 vold lalt)
 
   lab (tap-hold-press 100 300 bspc lalt)
   rar (tap-hold-press 100 300 ret ralt)
