@@ -44,7 +44,11 @@ vim.o.foldlevel = 99
 vim.o.swapfile = false
 vim.o.path = vim.o.path .. "**"
 vim.o.wildignore = vim.o.wildignore .. "**/node_modules/**"
-vim.o.termguicolors = false
+-- vim.o.termguicolors = false
+vim.o.autocomplete = true
+--[Neovim native, built-in, LSP autocomplete · Tomas Vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
+-- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
+vim.opt.completeopt = { "menuone", "noselect", "popup" }
 
 -- -- Experimental
 -- require('vim._extui').enable({
@@ -217,172 +221,172 @@ vim.api.nvim_create_autocmd("CmdlineChanged", {
 
 --}}}
 
--- --{{{ -- LSP Config
--- -- lsp
--- --------------------------------------------------------------------------------
--- -- See https://gpanders.com/blog/whats-new-in-neovim-0-11/ for a nice overview
--- -- of how the lsp setup works in neovim 0.11+.
--- -- This actually just enables the lsp servers.
--- -- The configuration is found in the lsp folder inside the nvim config folder,
--- -- so in ~.config/lsp/lua_ls.lua for lua_ls, for example.
--- vim.lsp.enable('lua_ls')
--- vim.lsp.enable('marksman')
--- vim.lsp.enable('rust_analyzer')
--- vim.lsp.enable("ts_ls")
--- vim.api.nvim_create_autocmd('LspAttach', {
---   callback = function(ev)
---     local client = vim.lsp.get_client_by_id(ev.data.client_id)
---     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
---       vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
---       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
---       vim.keymap.set('i', '<C-Space>', function()
---         vim.lsp.completion.get()
---       end)
---       vim.keymap.set('n', '<leader>ca', function()
---         vim.lsp.buf.code_action()
---       end, { desc = "Code Action" })
---       vim.keymap.set('n', '<leader>cr', function()
---         vim.lsp.buf.rename()
---       end, { desc = "Code Action" })
---       vim.keymap.set('n', '<leader>cf', function()
---         vim.lsp.buf.format()
---       end, { desc = "Code Format" })
---       vim.keymap.set('n', '<leader>qd', function()
---         vim.diagnostic.setqflist()
---       end, { desc = 'Open Diagnostics Quickfix list' })
---     end
---   end,
--- })
--- -- Diagnostics
--- vim.diagnostic.config({
---   -- Use the default configuration
---   virtual_lines = false,
---   virtual_text = true,
---   -- signs = {
---   --   text = {
---   --     [vim.diagnostic.severity.ERROR] = "󰐼",
---   --     [vim.diagnostic.severity.WARN] = "",
---   --     [vim.diagnostic.severity.INFO] = "",
---   --     [vim.diagnostic.severity.HINT] = "",
---   --   }
---   -- }
--- })
--- --}}}
---
--- --{{{ -- Themes
--- vim.pack.add {
---   "https://github.com/folke/tokyonight.nvim",
--- }
---
--- require('tokyonight').setup {
---   dim_inactive = false,
---   style = "night",
---   transparent = false,
---   styles = {
---     -- sidebars = "transparent",
---     -- floats = "transparent",
---     -- functions = { bold = true },
---     -- keywords = { bold = true },
---   },
---   on_colors = function(colors)
---     colors.bg_statusline = colors
---         .none -- To check if its working try something like "#ff00ff" instead of colors.none
---     colors.bg_statusline = colors.none
---   end,
--- }
---
--- vim.cmd.colorscheme 'tokyonight-night'
--- --}}}
---
--- --{{{ -- Mason LSP
--- vim.pack.add { "https://github.com/williamboman/mason.nvim" }
--- require("mason").setup()
---
--- vim.pack.add { "https://github.com/neovim/nvim-lspconfig" }
---
--- vim.pack.add { "https://github.com/mason-org/mason-lspconfig.nvim", }
--- require("mason-lspconfig").setup({
---   ensure_installed = { "lua_ls", "rust_analyzer", "marksman" },
--- })
--- --}}}
---
--- --{{{ -- Treesitter
--- vim.pack.add({
---   {
---     src = 'https://github.com/nvim-treesitter/nvim-treesitter',
---     -- Git branch, tag, or commit hash
---     version = 'main',
---   },
--- })
---
--- require("nvim-treesitter").setup({
---   folds = {
---     enable = true,
---   },
---   ensure_installed = {
---     'java',
---     'javadoc',
---     'bash',
---     'c',
---     'diff',
---     'html',
---     'css',
---     'javascript',
---     'jsdoc',
---     'json',
---     'jsonc',
---     'lua',
---     'luadoc',
---     'luap',
---     'markdown',
---     'markdown_inline',
---     'printf',
---     'python',
---     'query',
---     'regex',
---     'toml',
---     'tsx',
---     'typescript',
---     'vim',
---     'vimdoc',
---     'xml',
---     'yaml',
---     'rust',
---   },
---   -- Autoinstall languages that are not installed
---   auto_install = true,
---   highlight = {
---     enable = true,
---     -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
---     --  If you are experiencing weird indenting issues, add the language to
---     --  the list of additional_vim_regex_highlighting and disabled languages for indent.
---     additional_vim_regex_highlighting = { 'ruby' },
---   },
---   indent = { enable = true, disable = { 'ruby' } },
---   incremental_selection = {
---     enable = true,
---     keymaps = {
---       init_selection = "<C-space>",
---       node_incremental = "<C-space>",
---       scope_incremental = false,
---       node_decremental = "<BS>",
---     },
---   },
---   textobjects = {
---     move = {
---       enable = true,
---       goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
---       goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
---       goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
---       goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
---     },
---   },
--- })
---
--- vim.o.foldmethod = "expr"
--- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
--- --}}}
---
+--{{{ -- LSP Config
+-- lsp
+--------------------------------------------------------------------------------
+-- See https://gpanders.com/blog/whats-new-in-neovim-0-11/ for a nice overview
+-- of how the lsp setup works in neovim 0.11+.
+-- This actually just enables the lsp servers.
+-- The configuration is found in the lsp folder inside the nvim config folder,
+-- so in ~.config/lsp/lua_ls.lua for lua_ls, for example.
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('marksman')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable("ts_ls")
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
+      vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+      vim.keymap.set('i', '<C-Space>', function()
+        vim.lsp.completion.get()
+      end)
+      vim.keymap.set('n', '<leader>ca', function()
+        vim.lsp.buf.code_action()
+      end, { desc = "Code Action" })
+      vim.keymap.set('n', '<leader>cr', function()
+        vim.lsp.buf.rename()
+      end, { desc = "Code Action" })
+      vim.keymap.set('n', '<leader>cf', function()
+        vim.lsp.buf.format()
+      end, { desc = "Code Format" })
+      vim.keymap.set('n', '<leader>qd', function()
+        vim.diagnostic.setqflist()
+      end, { desc = 'Open Diagnostics Quickfix list' })
+    end
+  end,
+})
+-- Diagnostics
+vim.diagnostic.config({
+  -- Use the default configuration
+  virtual_lines = false,
+  virtual_text = true,
+  -- signs = {
+  --   text = {
+  --     [vim.diagnostic.severity.ERROR] = "󰐼",
+  --     [vim.diagnostic.severity.WARN] = "",
+  --     [vim.diagnostic.severity.INFO] = "",
+  --     [vim.diagnostic.severity.HINT] = "",
+  --   }
+  -- }
+})
+--}}}
+
+--{{{ -- Themes
+vim.pack.add {
+  "https://github.com/folke/tokyonight.nvim",
+}
+
+require('tokyonight').setup {
+  dim_inactive = false,
+  style = "night",
+  transparent = false,
+  styles = {
+    -- sidebars = "transparent",
+    -- floats = "transparent",
+    -- functions = { bold = true },
+    -- keywords = { bold = true },
+  },
+  on_colors = function(colors)
+    colors.bg_statusline = colors
+        .none -- To check if its working try something like "#ff00ff" instead of colors.none
+    colors.bg_statusline = colors.none
+  end,
+}
+
+vim.cmd.colorscheme 'tokyonight-night'
+--}}}
+
+--{{{ -- Mason LSP
+vim.pack.add { "https://github.com/williamboman/mason.nvim" }
+require("mason").setup()
+
+vim.pack.add { "https://github.com/neovim/nvim-lspconfig" }
+
+vim.pack.add { "https://github.com/mason-org/mason-lspconfig.nvim", }
+require("mason-lspconfig").setup({
+  ensure_installed = { "lua_ls", "rust_analyzer", "marksman" },
+})
+--}}}
+
+--{{{ -- Treesitter
+vim.pack.add({
+  {
+    src = 'https://github.com/nvim-treesitter/nvim-treesitter',
+    -- Git branch, tag, or commit hash
+    version = 'main',
+  },
+})
+
+require("nvim-treesitter").setup({
+  folds = {
+    enable = true,
+  },
+  ensure_installed = {
+    'java',
+    'javadoc',
+    'bash',
+    'c',
+    'diff',
+    'html',
+    'css',
+    'javascript',
+    'jsdoc',
+    'json',
+    'jsonc',
+    'lua',
+    'luadoc',
+    'luap',
+    'markdown',
+    'markdown_inline',
+    'printf',
+    'python',
+    'query',
+    'regex',
+    'toml',
+    'tsx',
+    'typescript',
+    'vim',
+    'vimdoc',
+    'xml',
+    'yaml',
+    'rust',
+  },
+  -- Autoinstall languages that are not installed
+  auto_install = true,
+  highlight = {
+    enable = true,
+    -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
+    --  If you are experiencing weird indenting issues, add the language to
+    --  the list of additional_vim_regex_highlighting and disabled languages for indent.
+    additional_vim_regex_highlighting = { 'ruby' },
+  },
+  indent = { enable = true, disable = { 'ruby' } },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<C-space>",
+      node_incremental = "<C-space>",
+      scope_incremental = false,
+      node_decremental = "<BS>",
+    },
+  },
+  textobjects = {
+    move = {
+      enable = true,
+      goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
+      goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+      goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
+      goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+    },
+  },
+})
+
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+--}}}
+
 -- --{{{ -- Neogit
 -- vim.pack.add {
 --   "https://github.com/nvim-lua/plenary.nvim",  -- required
