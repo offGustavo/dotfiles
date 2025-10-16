@@ -93,14 +93,14 @@ cNe (tap-hold 100 300 next lctl)
   ecc (tap-hold 100 300 esc lctrl)
 
   ;; Shift
-  lsd (tap-hold 100 300 d lsft)
-  rsk (tap-hold 100 300 k rsft)
+  lss (tap-hold 100 300 s lsft)
+  rsl (tap-hold 100 300 l rsft)
   sVu (tap-hold 100 300 volu lsft)
 
   ;; Space
   ;;ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
   ;; ssc (tap-dance 200 ( (tap-hold 100 300 (macro spc) lsft) (tap-hold 100 300 (macro spc spc) @nav)))
-ssc (tap-hold 100 200 spc lsft)
+ssc (tap-hold-press 100 200 spc lsft)
 
   ;; Super/Windows
   lma (tap-hold 100 300 a lmet)
@@ -108,10 +108,10 @@ ssc (tap-hold 100 200 spc lsft)
 mPr (tap-hold 100 300 prev lmet)
 
   ;; Alt
-las (tap-hold 100 300 s lalt)
+lad (tap-hold 100 300 d lalt)
   ;;NOTE: `︔` != `;`
   ;; This isen't require now, but i'll keeping it
-  ral (tap-hold 100 300 l lalt)
+  rak (tap-hold 100 300 k lalt)
   law (tap-hold 100 300 w ralt)
   rao (tap-hold 100 300 o ralt)
 aVd (tap-hold 100 300 vold lalt)
@@ -152,7 +152,7 @@ mbn (tap-hold 100 200 bck (layer-toggle onehand-nav)))
   (deflayer base
    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
    tab  @lmq @law @lse r    t    y    u    @rsi @rao @rmp [    ]    \
-   @ecc @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @rar
+   @ecc @lma @lss @lad @lcf g    h    @rcj @rak @rsl @rm; '    @rar
    lsft @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft
    lctl lmet @lab           @ssc           @rar  @rmn rctl 
    🖰1 🖰2 🖰3 @mbn @mfs)
@@ -221,7 +221,7 @@ _    [    S-[  S-9  S-,  S-5  S-6  S-.  S-0  S-]  ]    S--  S-=  _
   (deflayer mouse
    _    _    _    _    _    _    _    _    _    _    _    _    _    _
    lrld 🖰1   🖰2   🖰3   🖰4   🖰5   fwd  mwu  @mau mwl  mfwd _    _    _
-   _    @slw _    @mid @fst _    mmid @mal mrgt @mar mlft _    _
-   _    _    bck  fwd  _    _    bck  mwd  @mad mwr  mbck _
+   _    _    @slw  @mid @fst _    mmid @mal mrgt @mar mlft _    _
+   _    _    _     bck  fwd  _    bck  mwd  @mad mwr  mbck _
    _    _    _              _              _     _    _
    _  _  _  _  _)
