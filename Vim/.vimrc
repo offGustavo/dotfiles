@@ -200,23 +200,23 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] } 
 
-" let g:fzf_layout = { 'down': '30%' }
-" autocmd! FileType fzf
-" autocmd  FileType fzf set laststatus=0 noshowmode noruler
-"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+let g:fzf_layout = { 'down': '30%' }
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " let g:fzf_layout = { 'down':  '40%'}
 " let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_vim.buffers_jump = 1
-let g:fzf_vim.preview_window = ['right,50%,<50(up,60%)', 'ctrl-o']
-" let g:fzf_vim.preview_window = ['up,60%', 'ctrl-o']
+" let g:fzf_vim.buffers_jump = 1
+    let g:fzf_vim.preview_window = ['hidden,right,50%', 'ð']
+"let g:fzf_vim.preview_window = ['up,60%', 'ctrl-o']
 " let g:fzf_vim.preview_window = []
 " let g:fzf_vim.files_options =   '--style fu ll --no-border'
 " let g:fzf_vim.buffers_options = '--style default'
 " let g:fzf_vim.rg_options =      '--style default'
-" let g:fzf_vim.fi les_options =   ['--style', 'minimal', '--no-border']
-" let g:fzf_vim.buffers_options = ['--style', 'minimal', '--no-border']
-" let g:fzf_vim.rg_options =      ['--style', 'minimal', '--no-border']
+let g:fzf_vim.files_options =   ['--style', 'minimal', '--no-border']
+let g:fzf_vim.buffers_options = ['--style', 'minimal', '--no-border']
+let g:fzf_vim.rg_options =      ['--style', 'minimal', '--no-border']
 let g:fzf_vim.colors_options =      ['--style', 'minimal', '--no-preview']
 let g:fzf_vim.command_prefix = 'Fzf'
 
