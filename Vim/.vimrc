@@ -20,6 +20,8 @@ set foldmethod=indent
 set splitkeep=cursor
 set path+=**
 set wildignore+=*/node_modules/*,_site,*/__pycache__/,*/venv/*,*/target/*,*/.vim$,\~$,*/.log,*/.aux,*/.cls,*/.aux,*/.bbl,*/.blg,*/.fls,*/.fdb*/,*/.toc,*/.out,*/.glo,*/.log,*/.ist,*/.fdb_latexmk,*/.git
+" set clipboard=unnamed,unnamedplus
+set wlsteal
 
 " Let's save undo info!
 if has('nvim')
@@ -44,7 +46,6 @@ endif
 
 set undofile
 set undolevels=10000
-set clipboard+=unnamed,unnamedplus
 
 let mapleader="\ "  
 
@@ -234,3 +235,6 @@ nmap <silent> <leader>, :FzfBuffers<Cr>
 
 " Git Keymaps
 nmap <silent> <leader>gg :Git<Cr>:only<Cr>
+
+vmap y y:call system("wl-copy", @")<cr>
+
