@@ -100,7 +100,7 @@ cNe (tap-hold 100 300 next lctl)
   ;; Space
   ;;ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
   ;; ssc (tap-dance 200 ( (tap-hold 100 300 (macro spc) lsft) (tap-hold 100 300 (macro spc spc) @nav)))
-ssc (tap-hold 100 200 spc lsft)
+ssc (tap-hold-release 100 200 spc lsft)
 
   ;; Super/Windows
   lma (tap-hold 100 300 a lmet)
