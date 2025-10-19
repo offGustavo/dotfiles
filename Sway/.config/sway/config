@@ -199,7 +199,7 @@ input "type:pointer" {
 }
 
 input "type:keyboard" {
-    xkb_layout us,br
-    xkb_variant intl,
+    xkb_layout us,br,us
+    xkb_variant intl,,dvorak-alt-intl
     xkb_options grp:win_space_toggle 
 }
