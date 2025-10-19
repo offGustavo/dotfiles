@@ -141,7 +141,11 @@ slw (movemouse-speed 100)
   ;; Mouse Input
   ;; mrc (tap-hold 100 200 🖰2 lctrl )
   mfs (tap-hold 100 200 fwd lctrl)
-mbn (tap-hold 100 200 bck (layer-toggle onehand-nav)))
+mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
+
+;; Devorak
+ldg (tap-hold 100 300 grv (layer-switch dvorak))
+
 ;; Function keys
 l1f(tap-hold 100 300 1 f1)
 l2f(tap-hold 100 300 2 f2)
@@ -169,6 +173,14 @@ lef(tap-hold 100 300 = f12))
    lsft @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft
    lctl lmet @lab           @ssc           @rar  @rmn rctl 
    🖰1 🖰2 🖰3 @mbn @mfs)
+
+  (deflayer dvorak
+   (tap-hold 100 300 grv (layer-switch base)) 1    2    3    4    5    6    7    8    9    0    [    ]    bspc
+   tab  '    ,    .    p    y    f    g    c    r    l    /    =    \
+   caps a    o    e    u    i    d    h    t    n    s    -    ret
+   lsft ;    q    j    k    x    b    m    w    v    z    rsft
+   lctl lmet lalt           spc            @ral rmet rctl
+   _  _  _  _  _)
 
   (deflayermap onehand-nav
    w up
