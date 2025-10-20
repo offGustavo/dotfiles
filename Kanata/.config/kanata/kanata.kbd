@@ -141,7 +141,7 @@ slw (movemouse-speed 100)
   ;; Mouse Input
   ;; mrc (tap-hold 100 200 🖰2 lctrl )
   mfs (tap-hold 100 200 fwd lctrl)
-mbn (tap-hold 100 200 bck (layer-toggle onehand-nav))
+mbn (tap-hold 100 200 bck (layer-toggle alt-nav))
 
 ;; Devorak
 ldg (tap-hold 100 300 grv (layer-switch dvorak))
@@ -181,21 +181,36 @@ lef(tap-hold 100 300 = f12))
    tab  '    ,    .    p    y    f    g    c    r    l    /    =    \
    caps a    o    e    u    i    d    h    t    n    s    -    ret
    lsft ;    q    j    k    x    b    m    w    v    z    rsft
-   lctl lmet lalt (tap-hold 100 300 spc @nav) ralt rmet rctl
-   _  _  _  _  _)
+   lctl lmet lalt (tap-hold 100 300 spc (layer-toggle alt-nav)) ralt rmet rctl
+   _  _  _  _  _ )
 
-  (deflayermap onehand-nav
+  (deflayermap alt-nav
+  ;; Left Hand
    w up
    a left
    s down
    d rght
    q home
    e end
-   r pgup
-   f pgdn
+   f pgup
+   v pgdn
    x del
    c bspc
    z ins
+   ;; Right Hnad
+   h left
+   k up
+   j down
+   l rght
+   m home
+   , end
+   . pgup
+   / pgdn
+   ; del
+   ' bspc
+   n ins
+
+   ;; Others Keys
    spc lsft
    1 f1 
    2 f2 
@@ -209,6 +224,11 @@ lef(tap-hold 100 300 = f12))
   0 f10 
   - f11 
   = f12 
+  y vold
+  i pp
+  u prev
+  o next
+  p volu
   🖰1 (tap-hold 100 300 🖰1 lsft)
 🖰2 (tap-hold 100 300 🖰2 lctrl))
 
