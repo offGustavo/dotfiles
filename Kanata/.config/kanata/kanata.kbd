@@ -24,16 +24,16 @@
  lctl lmet lalt           spc            ralt  menu rctl
  🖰1 🖰2 🖰3 🖰4 🖰5)
 
-  (defchordsv2
-   (esc ret) @bas 100 all-released  ()
-   (caps ret) @bas 100 all-released  ()
-   (tab \) @edt 100 all-released  ()
-    (tab ret) @edt 100 all-released  ()
-    (spc ralt) @nav 100 all-released  ()
-    (lalt ralt) @nav 100 all-released  ()
-    (grv bspc) @gam 100 all-released  ()
-    ;; (lsft rsft) caps 100 all-released  ()
-    (lctl rctl) lrld 100 all-released  ())
+  ;; (defchordsv2
+  ;;  (esc ret) @bas 100 all-released  ()
+  ;;  (caps ret) @bas 100 all-released  ()
+  ;;  (tab \) @edt 100 all-released  ()
+  ;;   (tab ret) @edt 100 all-released  ()
+  ;;   (spc ralt) @nav 100 all-released  ()
+  ;;   (lalt ralt) @nav 100 all-released  ()
+  ;;   (grv bspc) @gam 100 all-released  ()
+  ;;   ;; (lsft rsft) caps 100 all-released  ()
+  ;;   (lctl rctl) lrld 100 all-released  ())
 
    (defalias
     ;; Definer as layer
@@ -177,9 +177,9 @@ lef(tap-hold 100 300 = f12))
    🖰1 🖰2 🖰3 @mbn @mfs)
 
   (deflayer dvorak
-   @lqg 1    2    3    4    5    6    7    8    9    0    [    ]    bspc
-   tab  '    ,    .    p    y    f    g    c    r    l    /    =    \
-   @ecc a    o    e    u    i    d    h    t    n    s    -    ret
+   @lqg 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+   tab  [    ,    .    p    y    f    g    c    r    l    grv  ]    \
+   @ecc a    o    e    u    i    d    h    t    n    s    /    ret
    lsft ;    q    j    k    x    b    m    w    v    z    rsft
    lctl lmet lalt (tap-hold 100 300 spc (layer-toggle alt-nav)) ralt rmet rctl
    _  _  _  _  _ )
@@ -199,12 +199,12 @@ lef(tap-hold 100 300 = f12))
    z ins
 
    ;; Right Hnad
-   h left
-   k up
-   j down
+   j left
+   i up
+   k down
    l rght
-   m home
-   , end
+   u home
+   o end
    . pgup
    / pgdn
    ; del
@@ -225,11 +225,11 @@ lef(tap-hold 100 300 = f12))
   0 f10 
   - f11 
   = f12 
-  y vold
-  i pp
-  u prev
-  o next
-  p volu
+  ;; y vold
+  ;; i pp
+  ;; u prev
+  ;; o next
+  ;; p volu
   🖰1 (tap-hold 100 300 🖰1 lsft)
 🖰2 (tap-hold 100 300 🖰2 lctrl))
 
@@ -237,8 +237,7 @@ lef(tap-hold 100 300 = f12))
    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
    tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
    caps a    s    d    f    g    h    j    k    l    ;    '    ret
-   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-   lctl lmet lalt           spc            rmet  menu rctl
+   lsft z    x    c    v    b    n    m    ,    .    /    rsft lctl lmet lalt           spc            rmet  menu rctl
    _  _  _  _  _)
 
   (deflayer numbers
