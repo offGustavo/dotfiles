@@ -96,6 +96,8 @@ cNe (tap-hold 100 300 next lctl)
   lsd (tap-hold 100 300 d lsft)
   rsk (tap-hold 100 300 k rsft)
   sVu (tap-hold 100 300 volu lsft)
+  res (tap-hold 100 300 end lsft)
+
 
   ;; Space
   ;;ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
@@ -105,7 +107,8 @@ ssc (tap-hold-release 100 200 spc lsft)
   ;; Super/Windows
   lma (tap-hold 100 300 a lmet)
   rm; (tap-hold 100 300 ; lmet)
-mPr (tap-hold 100 300 prev lmet)
+  mPr (tap-hold 100 300 prev lmet)
+rdm (tap-hold 100 200 pgdn lmet)
 
   ;; Alt
 las (tap-hold 100 300 s lalt)
@@ -114,10 +117,10 @@ las (tap-hold 100 300 s lalt)
   ral (tap-hold 100 300 l lalt)
   law (tap-hold 100 300 w ralt)
   rao (tap-hold 100 300 o ralt)
-aVd (tap-hold 100 300 vold lalt)
-
+  aVd (tap-hold 100 300 vold lalt)
+  rua (tap-hold 100 200 pgup lalt)
   lab (tap-hold-press 100 300 bspc lalt)
-  rar (tap-hold-press 100 300 ret ralt)
+rar (tap-hold-press 100 300 ret ralt)
   ;; rna (tap-dance 300 ( @rar @nav))
   ;; lsa (tap-dance 300 ( @lab lsft))
 
@@ -141,7 +144,8 @@ slw (movemouse-speed 100)
   ;; Mouse Input
   ;; mrc (tap-hold 100 200 🖰2 lctrl )
   mfs (tap-hold 100 200 fwd lctrl)
-mbn (tap-hold 100 200 bck (layer-toggle alt-nav))
+  mbn (tap-hold 100 200 bck (layer-toggle alt-nav))
+rhc (tap-hold 100 200 home lctrl)
 
 ;; Devorak
 ldg (tap-hold 100 300 grv (layer-switch dvorak))
@@ -249,11 +253,14 @@ lef(tap-hold 100 300 = f12))
    _    _    _              0              nlck  _    _
    _  _  _  _  _)
 
+  (defalias  
+  )
+
   (deflayer navigation
    _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
    [    1    2    3    4    5    6    7    8    9    0    -    =    grv
    ]    @mPr @aVd @sVu @cNe _    lft  down up   rght del  bspc _
-   _    mute pp   brdn brup menu ins  home end  pgup pgdn _
+   _    mute pp   brdn brup menu ins  @rhc @res @rua @rdm _
    _    _    _              _              _     _    _
    _  _  _  _  _ )
 
