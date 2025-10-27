@@ -61,6 +61,8 @@
   lnx (tap-hold 100 200 x @nav)
   rn. (tap-hold 100 200 . @nav)
   rmn (tap-hold 100 300 menu @nav)
+  lnr (tap-hold 100 300 r @nav)
+  rnu (tap-hold 100 300 u @nav)
   ;; ssc (tap-hold 100 300 spc @nav)
 
   ;; Numbers
@@ -174,7 +176,7 @@ lef(tap-hold 100 300 = f12))
   ;;            Control  Super      r     Alt/Backspace                              Shift/Space       AltGr/Return)
   (deflayer base
    @ldg @l1f @l2f @l3f @l4f @l5f @l6f @l7f @l8f @l9f @l0f @lmf @lef bspc
-   tab  @lmq @law @lse r    t    y    u    @rsi @rao @rmp [    ]    \
+   tab  @lmq @law @lse @lnr t    y    @rnu @rsi @rao @rmp [    ]    \
    @ecc @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @rar
    lsft @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft
    lctl lmet @lab           @ssc           @rar  @rmn rctl 
