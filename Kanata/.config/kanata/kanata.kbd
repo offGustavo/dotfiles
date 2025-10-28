@@ -60,7 +60,6 @@
   ;; Navigation
   lnx (tap-hold 100 200 x @nav)
   rn. (tap-hold 100 200 . @nav)
-  rmn (tap-hold 100 300 menu @nav)
   lnr (tap-hold 100 300 r @nav)
   rnu (tap-hold 100 300 u @nav)
   ;; ssc (tap-hold 100 300 spc @nav)
@@ -121,14 +120,16 @@ las (tap-hold 100 300 s lalt)
   rao (tap-hold 100 300 o ralt)
   aVd (tap-hold 100 300 vold lalt)
   rua (tap-hold 100 200 pgup lalt)
-  lab (tap-hold-press 100 300 bspc lalt)
-rar (tap-hold-press 100 300 ret ralt)
+  ;; lab (tap-hold-press 100 300 bspc lalt)
+  rar (tap-hold-press 100 300 ret ralt)
+rab (tap-hold-press 100 300 bspc ralt)
   ;; rna (tap-dance 300 ( @rar @nav))
   ;; lsa (tap-dance 300 ( @lab lsft))
 
   ;; Menu
   lmq (tap-hold 100 300 q menu)
 rmp (tap-hold 100 300 p menu)
+rmr (tap-hold 100 300 ret menu)
 
   ;; Mouse Keys
   mwu (mwheel-up    50 120)
@@ -179,7 +180,7 @@ lef(tap-hold 100 300 = f12))
    tab  @lmq @law @lse @lnr t    y    @rnu @rsi @rao @rmp [    ]    \
    @ecc @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @rar
    lsft @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft
-   lctl lmet @lab           @ssc           @rar  @rmn rctl 
+   lctl lmet lalt           @ssc           @rab  @rmr rctl 
    🖰1 🖰2 🖰3 @mbn @mfs)
 
   (deflayer dvorak
