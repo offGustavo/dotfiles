@@ -231,9 +231,12 @@ vim.keymap.set("v", "<leader>fl", ":'<,'>lua<Cr>", { silent = true, desc = "Exec
 
 vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
 
+--- Buffers
 -- Remove Lazyvim default keymap
 vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
+vim.keymap.set("n", "<C-PageUp>", vim.cmd.bnext)
+vim.keymap.set("n", "<C-PageDown>", vim.cmd.bprev)
 
 -- Toggle Options
 Snacks.toggle
