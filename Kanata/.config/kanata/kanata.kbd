@@ -249,10 +249,10 @@ lef(tap-hold 100 300 = f12))
   (deflayer numbers
    ;; _    [    ]     S-9 S-0  S-5  S-6  S-,  S-.  S-[  S-]  S-7  _    _
    _    _    _    _    _    _    esc  nlck kp/  kp*  kp-  bspc _    _
-   @gam f1   f2   f3   f4   _    tab  kp7  kp8  kp9  kp+  krrt    _    _
-   _    f5   f6   f7   f8   _    del  kp4  kp5  kp6  kp.  =    ret
-   _    f9   f10  f11  f12  _    caps kp1  kp2  kp3  ,    _  
-   _    _    _              0              nlck  _    _
+   @gam f1   f2   f3   f4   _    tab  kp7  kp8  kp9  kp+  kprt    _    _
+   _    f5   f6   f7   f8   _    del  kp4  kp5  kp6  ,    =    ret
+   _    f9   f10  f11  f12  _    caps kp1  kp2  kp3  kp.  _  
+   _    _    _              kp0           lalt  _    _
    _  _  _  _  _)
 
   (defalias  
