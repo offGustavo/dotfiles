@@ -74,8 +74,8 @@ rn, (tap-hold 100 300 , @num)
   ;; Symbols
   lsv (tap-hold 100 300 v @syb)
   rsn (tap-hold 100 300 n @syb)
-  lsr (tap-hold 100 300 r @syb)
-rsu (tap-hold 100 300 u @syb)
+  lsr (tap-hold-release 100 300 r @syb)
+rsu (tap-hold-release 100 300 u @syb)
   ;; ssc (tap-hold 100 300 spc @syb)
 
   ;; Mouse
