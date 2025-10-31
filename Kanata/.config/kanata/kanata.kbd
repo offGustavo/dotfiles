@@ -272,9 +272,9 @@ lef(tap-hold 100 300 = f12))
   (deflayer symbols
    _    _       _         _       _    _    _    _    _    _    _    _    _    
    _    _       _         _       _    _    _    _    _    _    _    _    _    _
-   @edt [       ]         S-9     S-0  S-5  S-6  S-[  S-]  S-,  S-.  _    _    _
-   _    RA-grv  S-RA-grv  RA-S-6  S-4  S-\  \    =    -    S-=  S--  S-grv _
-   _    RA-'    S-RA-'    S-2     S-1  S-3  S-8  S--  '    S-'  grv  _
+   @edt [       ]         S-9     S-0  S-5  S-6  S-[  S-]  S-,  S-.  S-1  _    _
+   _    RA-grv  S-RA-grv  0    RA-S-6  S-4  \    =    -    S-= S-grv S-6  _
+   _    RA-'    S-RA-'    S-3     S-8  S-1  S-\  S--  '    S-' grv   _
    _    _          _              _              _     _    _
    _  _  _  _  _ )
 
