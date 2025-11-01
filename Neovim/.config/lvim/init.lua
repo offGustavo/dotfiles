@@ -50,16 +50,16 @@ vim.o.autocomplete = true
 -- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
 vim.opt.completeopt = { "menuone", "noselect", "popup" }
 
--- -- Experimental
--- require('vim._extui').enable({
---   enable = true, -- Whether to enable or disable the UI.
---   msg = {        -- Options related to the message module.
---     ---@type 'cmd'|'msg' Where to place regular messages, either in the
---     ---cmdline or in a separate ephemeral message window.
---     target = 'cmd',
---     timeout = 2000, -- Time a message is visible in the message window.
---   },
--- })
+-- Experimental
+require('vim._extui').enable({
+  enable = true, -- Whether to enable or disable the UI.
+  msg = {        -- Options related to the message module.
+    ---@type 'cmd'|'msg' Where to place regular messages, either in the
+    ---cmdline or in a separate ephemeral message window.
+    target = 'cmd',
+    timeout = 2000, -- Time a message is visible in the message window.
+  },
+})
 
 -- Better Grep and Find with ripgrep
 if vim.fn.executable('rg') then
@@ -169,10 +169,40 @@ vim.keymap.set("n", "<leader>fl", ":.lua<Cr>", { silent = true, desc = "Execute 
 vim.keymap.set("v", "<leader>fl", ":'<,'>lua<Cr>", { silent = true, desc = "Execute Selection in Lua" })
 
 -- Poor man harpoon
+vim.keymap.set("n", "<leader>ha", function ()
+  vim.cmd("argadd %")
+  vim.cmd("argdedup")
+end)
+vim.keymap.set("n", "<leader>he", function ()
+  vim.cmd.args()
+end)
+vim.keymap.set("n", "<leader>hd", function ()
+  vim.cmd("argd %")
+end)
+
+-- assign arg to each number
 for i = 1, 9 do
-  vim.keymap.set("n", "<leader>" .. i, "`" .. i )
-  vim.keymap.set("n", "<leader>m" .. i, "m" .. i)
+  vim.keymap.set('n', '<leader>' .. i, "<CMD>argu " .. i .. "<CR>", { silent = true, desc = "Go to arg " .. i })
+  vim.keymap.set('n', '<leader>h' .. i, "<CMD>" .. i - 1 .. "arga<CR>", { silent = true, desc = "Add current to arg " .. i })
+  vim.keymap.set('n', '<leader>d' .. i, "<CMD>" .. i .. "argd<CR>", { silent = true, desc = "Delete current arg" })
 end
+
+-- to qf
+vim.keymap.set('n', '<leader>hq', function()
+  local list = vim.fn.argv()
+  if #list > 0 then
+    local qf_items = {}
+    for _, filename in ipairs(list) do
+      table.insert(qf_items, {
+        filename = filename,
+        lnum = 1,
+        text = filename
+      })
+    end
+    vim.fn.setqflist(qf_items, 'r')
+    vim.cmd.copen()
+  end
+end, { silent = true, desc = "Show args in qf" })
 
 --}}}
 
