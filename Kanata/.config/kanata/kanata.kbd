@@ -64,7 +64,7 @@
   rmn (tap-hold 100 300 menu @nav)
   lne (tap-hold 100 300 e @nav)
   rni (tap-hold 100 300 i @nav)
-  ;; ssc (tap-hold 100 300 spc @nav)
+  lsn (tap-hold 100 300 spc @nav)
 
   ;; Numbers
   lnc (tap-hold 100 300 c @num)
@@ -181,7 +181,7 @@ lef(tap-hold 100 300 = f12))
    tab  @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [    ]    \
    @ecc @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @rar
    lsft @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft
-   lctl lmet @lab           @ssc           @rar  @rmn rctl 
+   lctl lmet @lab           @lsn           @rar  @rmn rctl 
    🖰1 🖰2 🖰3 @mbn @mfs)
 
   (deflayer dvorak
