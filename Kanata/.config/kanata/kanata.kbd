@@ -245,9 +245,9 @@ lef(tap-hold 100 300 = f12))
   (deflayer game
    esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-   caps a    s    d    f    g    h    j    k    l    ;    '    ret
-   lsft z    x    c    v    b    n    m    ,    .    /    rsft 
+   tab  r    q    w    e    t    y    u    i    o    p    [    ]    \
+   lctl f    a    s    d    g    h    j    k    l    ;    '    ret
+   lsft v    z    x    c    b    n    m    ,    .    /    rsft 
    lctl lmet lalt           spc            rmet  menu rctl
    _  _  _  _  _ )
 
