@@ -358,9 +358,9 @@
     ch8 (chord binary 8)
 )
 
-(defzippy
-    zippy.txt
-    output-character-mappings (
-        @ S-2
-    )
-)
+;; (defzippy
+;;     zippy.txt
+;;     output-character-mappings (
+;;         @ S-2
+;;     )
+;; )
