@@ -5,11 +5,12 @@
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lmet lalt           spc            ralt menu rctl 
 )
+
 (defalias
   ins(layer-switch insert)
   com(layer-switch command)
   eob(tap-hold 100 300 esc @com)
-
+  norm_ctrl_motion (layertoggle normal_ctrl_motion)
 )
 
 (deflayer command
@@ -28,4 +29,9 @@
   lctl lmet lalt           spc            ralt menu rctl 
 )
 
-
+(defmaplayer normal_ctrl_motion
+    d pgdown
+    f pgdown
+    u pgup
+    b pgup
+    s (macro C-s))
