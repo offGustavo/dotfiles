@@ -163,6 +163,7 @@ vim.keymap.set("n", "<leader>ow", ":grep <cWORD><Cr>")
 vim.keymap.set("n", "<leader>oW", ":grep <cWORD> %:h<Cr>")
 
 vim.keymap.set("n", "<leader>lg", ":term lazygit<Cr>:start<Cr>")
+vim.keymap.set("n", "<leader>lu", function () vim.pack.update() end)
 
 -- [How to Use vim.pack - NeoVim's built-in Plugin Manager in Neovim 0.12+ - YouTube](https://www.youtube.com/watch?v=UE6XQTAxwE0)
 vim.keymap.set("n", "<leader>fl", ":.lua<Cr>", { silent = true, desc = "Execute Line in Lua" })
