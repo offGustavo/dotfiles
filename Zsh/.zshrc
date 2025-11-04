@@ -164,6 +164,9 @@ alias exa="eza --icons --git -l -G -h -a"
 # Emacs shit
 alias emacs='emacs -nw'
 
+# Helix Shit
+alias hx=helix
+
 # Edit File with Sudo
 alias svim='sudoedit'
 alias :se='sudoedit'
@@ -199,7 +202,6 @@ alias gengar="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/f
 
 # Exit terminal
 alias :q=exit
-
 
 # Nala aliases
 alias nala='sudo nala'
