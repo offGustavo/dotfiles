@@ -1,0 +1,20 @@
+{
+  "plugins": {
+    "mason-lspconfig.nvim": {
+      "rev": "d7b5feb"
+    },
+    "mason.nvim": {
+      "rev": "ad7146a"
+    },
+    "nvim-lspconfig": {
+      "rev": "2010fc6"
+    },
+    "nvim-treesitter": {
+      "rev": "65a266bf",
+      "version": "'main'"
+    },
+    "tokyonight.nvim": {
+      "rev": "b13cfc1"
+    }
+  }
+}
