@@ -146,9 +146,13 @@ bindsym $super+Shift+$alt+l resize grow width 1 px or 1 ppt
 
 bindsym $super+$alt+bracketleft move workspace to output left
 bindsym $super+$alt+bracketright move workspace to output right
+bindsym $super+$alt+comma move workspace to output left
+bindsym $super+$alt+period move workspace to output right
 
 bindsym $super+bracketleft focus output left
 bindsym $super+bracketright focus output right
+bindsym $super+comma focus output left
+bindsym $super+period focus output right
 
 # enter fullscreen mode for the focused container
 bindsym $super+shift+f fullscreen toggle
@@ -165,7 +169,7 @@ bindsym $super+shift+o split toggle
 bindsym $super+g floating toggle
 
 # Enviar a janela atual para o scratchpad
-bindsym $super+comma move scratchpad
+bindsym $super+m move scratchpad
 
 # Mostrar/ocultar a janela do scratchpad
 bindsym $super+shift+g scratchpad show
