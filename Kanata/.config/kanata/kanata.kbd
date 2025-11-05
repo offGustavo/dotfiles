@@ -16,6 +16,7 @@
     ;;   mctl 193
     ;;   )
 
+
 (defsrc
  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -25,16 +26,9 @@
  lctl lmet lalt           spc            ralt  menu rctl
  🖰1 🖰2 🖰3 🖰4 🖰5)
 
-  ;; (defchordsv2
-  ;;  (esc ret) @bas 100 all-released  ()
-  ;;  (caps ret) @bas 100 all-released  ()
-  ;;  (tab \) @edt 100 all-released  ()
-  ;;   (tab ret) @edt 100 all-released  ()
-  ;;   (spc ralt) @nav 100 all-released  ()
-  ;;   (lalt ralt) @nav 100 all-released  ()
-  ;;   (grv bspc) @gam 100 all-released  ()
-  ;;   ;; (lsft rsft) caps 100 all-released  ()
-  ;;   (lctl rctl) lrld 100 all-released  ())
+  (defchordsv2
+   (esc ret) @bas 100 all-released  ()
+    (esc spc) @gam 100 all-released  ())
 
    (defalias
     ;; Definer as layer
@@ -151,9 +145,9 @@ slw (movemouse-speed 100)
 rhc (tap-hold 100 200 home lctrl)
 
 ;; Devorak
-ldg (tap-hold 100 300 grv (layer-switch dvorak))
+;; ldg (tap-hold 100 300 grv (layer-switch dvorak))
 ;; Qwerty
-lqg (tap-hold 100 300 grv (layer-switch base))
+;; lqg (tap-hold 100 300 grv (layer-switch base))
 
 ;; Function keys
 l1f(tap-hold 100 300 1 f1)
@@ -181,17 +175,17 @@ lef(tap-hold 100 300 = f12))
    tab  @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [    ]    \
    @ecc @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @rar
    lsft @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft
-   lctl lmet @lab           @lsn           @rar  @rmn rctl 
+   lctl lmet @lab           @ssc           @rar  @rmn rctl 
    🖰1 🖰2 🖰3 @mbn @mfs)
 
-  (deflayer dvorak
-   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-   @lqg 1    2    3    4    5    6    7    8    9    0    -    =    bspc
-   tab  [    ,    .    p    y    f    g    c    r    l    grv  ]    \
-   @ecc a    o    e    u    i    d    h    t    n    s    /    ret
-   lsft ;    q    j    k    x    b    m    w    v    z    rsft
-   lctl lmet lalt (tap-hold 100 300 spc (layer-toggle alt-nav)) ralt rmet rctl
-   _  _  _  _  _ )
+  ;; (deflayer dvorak
+  ;;  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  ;;  @lqg 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  ;;  tab  [    ,    .    p    y    f    g    c    r    l    grv  ]    \
+  ;;  @ecc a    o    e    u    i    d    h    t    n    s    /    ret
+  ;;  lsft ;    q    j    k    x    b    m    w    v    z    rsft
+  ;;  lctl lmet lalt (tap-hold 100 300 spc (layer-toggle alt-nav)) ralt rmet rctl
+  ;;  _  _  _  _  _ )
 
   (deflayermap alt-nav
   ;; Left Hand
@@ -214,10 +208,10 @@ lef(tap-hold 100 300 = f12))
    l rght
    u home
    o end
-   . pgup
-   / pgdn
+   m pgup
+   , pgdn
    ; del
-   ' bspc
+   '  bspc
    n ins
 
    ;; Others Keys
