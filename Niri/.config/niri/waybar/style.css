@@ -53,6 +53,16 @@ window#waybar {
 /*  margin-top: 2px;*/
 /*}*/
 
+
+#workspaces button.active {
+  background-color: @blue;
+}
+
+#workspaces button.active label {
+  background-color: @blue;
+  color: @bg;
+}
+
 #workspaces button {
   padding: 5px 10px;
 }
@@ -66,6 +76,7 @@ window#waybar {
 /*}*/
 /*#workspaces button.special{*/
 /*}*/
+
 #workspaces button.visible{
   background: @blue;
 }
@@ -143,3 +154,4 @@ window#waybar {
         color: #ffffff;
     }
 }
+
