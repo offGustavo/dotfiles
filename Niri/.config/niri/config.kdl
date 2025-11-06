@@ -308,8 +308,10 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // spawn-at-startup "sh" "-c" "cosmic-ext-alternative-startup"
+// Start
 spawn-at-startup "sh" "-c" "sleep 1 && waybar -c ~/.config/niri/waybar/config.jsonc  -s ~/.config/niri/waybar/style.css"
 spawn-at-startup "sh" "-c" "sleep 1 && /usr/bin/swaybg -i ~/Pictures/Wallpapers/my/The-Path-of-Giants.png"
+spawn-at-startup "sh" "-c" "systemctl --user start gnome-keyring-daemon.service"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
