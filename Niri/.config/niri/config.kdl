@@ -474,12 +474,18 @@ binds {
 
     Mod+BracketLeft  { focus-monitor-left; }
     Mod+BracketRight { focus-monitor-right; }
+    Mod+comma  { focus-monitor-left; }
+    Mod+period { focus-monitor-right; }
 
     Mod+Shift+BracketLeft     { move-window-to-monitor-left; }
     Mod+Shift+BracketRight     { move-window-to-monitor-right; }
+    Mod+Shift+comma     { move-window-to-monitor-left; }
+    Mod+Shift+period     { move-window-to-monitor-right; }
 
     Mod+Alt+BracketLeft     { move-workspace-to-monitor-left; }
     Mod+Alt+BracketRight     { move-workspace-to-monitor-right; }
+    Mod+Alt+comma     { move-workspace-to-monitor-left; }
+    Mod+Alt+period     { move-workspace-to-monitor-right; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
