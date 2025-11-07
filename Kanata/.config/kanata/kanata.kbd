@@ -250,7 +250,7 @@ lef(tap-hold 100 300 = f12))
    _    _    _    _    _    _    esc  nlck kp/  kp*  kp-  bspc _    _
    @gam f1   f2   f3   f4   _    tab  kp7  kp8  kp9  kp+  kprt _    _
    _    f5   f6   f7   f8   _    del  kp4  kp5  kp6  ,    =    ret
-   _    f9   f10  f11  f12  _    caps kp1  kp2  kp3  kp.  _  
+   _    f9   f10  f11  f12  _    _    kp1  kp2  kp3  kp.  _  
    _    _    _              kp0           lalt  _    _
    _  _  _  _  _ )
 
@@ -258,7 +258,7 @@ lef(tap-hold 100 300 = f12))
    ]    _    _    _    _    _    _    _    _    _    _    _    _    
    \    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
    [    1    2    3    4    5    6    7    8    9    0    -    =    grv
-   ]    @mPr @aVd @sVu @cNe _    lft  down up   rght del  bspc _
+   ]    @mPr @aVd @sVu @cNe caps lft  down up   rght del  bspc _
    _    mute pp   brdn brup menu ins  @rhc @res @rua @rdm _
    _    _    _              _              _     _    _
    _  _  _  _  _ )
