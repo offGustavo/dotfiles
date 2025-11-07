@@ -144,6 +144,11 @@ bindsym $super+Shift+$alt+j resize grow height 1 px or 1 ppt
 bindsym $super+Shift+$alt+k resize shrink height 1 px or 1 ppt
 bindsym $super+Shift+$alt+l resize grow width 1 px or 1 ppt
 
+bindsym $super+shift+bracketleft move window to output left
+bindsym $super+shift+bracketright move window to output right
+bindsym $super+shift+comma move window to output left
+bindsym $super+shift+period move window to output right
+
 bindsym $super+$alt+bracketleft move workspace to output left
 bindsym $super+$alt+bracketright move workspace to output right
 bindsym $super+$alt+comma move workspace to output left
