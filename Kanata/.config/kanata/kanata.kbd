@@ -170,12 +170,12 @@ lef(tap-hold 100 300 = f12))
   ;;            Shift    Mouse Layer/z  Navigation Layer/x Numbers Layer/c Symbols Layer/v
   ;;            Control  Super      r     Alt/Backspace                              Shift/Space       AltGr/Return)
   (deflayer base
-   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+   @ecc f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
    tab  @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [    ]    \
    @ecc @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @rar
    lsft @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft
-   lctl lmet @lab           @lsn           @rar  @rmn rctl 
+   @ecc lmet @lab           @lsn           @rar  @rmn rctl 
    🖰1 🖰2 🖰3 @mbn @mfs)
 
   ;; (deflayer dvorak
