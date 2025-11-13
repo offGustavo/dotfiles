@@ -1,20 +1,51 @@
 {
   "plugins": {
+    "TabTerm.nvim": [],
+    "diffview.nvim": [],
+    "harpoon": {
+      "rev": "87b1a35",
+      "version": "'harpoon2'"
+    },
+    "markview.nvim": {
+      "rev": "fb1f847"
+    },
     "mason-lspconfig.nvim": {
-      "rev": "d7b5feb"
+      "rev": "b1d9a91"
     },
     "mason.nvim": {
       "rev": "ad7146a"
     },
+    "md-agenda.nvim": {
+      "rev": "d1b6bfb"
+    },
+    "mini.nvim": {
+      "rev": "f43357b"
+    },
+    "neogit": {
+      "rev": "614a6348"
+    },
     "nvim-lspconfig": {
-      "rev": "2010fc6"
+      "rev": "b34fbdf"
+    },
+    "nvim-sessionizer": {
+      "rev": "7d8cafd"
     },
     "nvim-treesitter": {
-      "rev": "65a266bf",
+      "rev": "b5077407",
       "version": "'main'"
     },
+    "oil.nvim": {
+      "rev": "7e1cd77"
+    },
+    "picker.nvim": {
+      "rev": "6c359c3"
+    },
+    "plenary.nvim": [],
     "tokyonight.nvim": {
-      "rev": "b13cfc1"
+      "rev": "5da1b76"
+    },
+    "which-key.nvim": {
+      "rev": "3aab214"
     }
   }
 }
