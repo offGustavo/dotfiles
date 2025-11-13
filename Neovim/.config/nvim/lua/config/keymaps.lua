@@ -237,8 +237,8 @@ vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" 
 --- Buffers
 -- Remove Lazyvim default keymap
 pcall(function()
-vim.keymap.del("n", "<S-h>")
-vim.keymap.del("n", "<S-l>")
+  vim.keymap.del("n", "<S-h>")
+  vim.keymap.del("n", "<S-l>")
 end)
 vim.keymap.set("n", "<C-PageUp>", vim.cmd.bnext)
 vim.keymap.set("n", "<C-PageDown>", vim.cmd.bprev)
