@@ -117,7 +117,7 @@ las (tap-hold 100 300 s lalt)
   aVd (tap-hold 100 300 vold lalt)
   rua (tap-hold 100 200 pgup lalt)
   lab (tap-hold-press 100 300 bspc lalt)
-rar (tap-hold-press 100 300 ret ralt)
+rar (tap-hold-release 100 300 ret ralt)
   ;; rna (tap-dance 300 ( @rar @nav))
   ;; lsa (tap-dance 300 ( @lab lsft))
 
