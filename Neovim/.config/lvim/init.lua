@@ -77,48 +77,6 @@ if vim.fn.executable('rg') then
 
   vim.o.findfunc = 'v:lua.RgFindFiles'
 
-else
-
-  -- Better Grep and Find with default Windows tools
-  if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
-    -- Use native Windows `findstr` for grep
-    -- /S = recurse subdirs, /N = print line numbers, /I = case-insensitive
-    -- /P skips files with non-printable chars (binary)
-    vim.o.grepprg = 'findstr /S /N /I'
-
-    -- File finder using `dir`
-    function _G.WinFindFiles(cmdarg, _cmdcomplete)
-      -- Get all files recursively
-      local fnames = vim.fn.systemlist('dir /s /b * 2>nul')
-
-      -- Filter out .git and node_modules folders
-      local filtered = {}
-      for _, fname in ipairs(fnames) do
-        if not string.find(fname, '\\.git\\') and not string.find(fname, '\\node_modules\\') then
-          table.insert(filtered, fname)
-        end
-      end
-
-      -- Fuzzy match
-      if #cmdarg == 0 then
-        return filtered
-      else
-        return vim.fn.matchfuzzy(filtered, cmdarg)
-      end
-    end
-
-    vim.o.findfunc = 'v:lua.WinFindFiles'
-  else
-    function _G.FindFindFiles(cmdarg, _cmdcomplete)
-      local fnames = vim.fn.systemlist('find -type f -not -path "*/.git/*" -not -path "*/node_modules/*"')
-      if #cmdarg == 0 then
-        return fnames
-      else
-        return vim.fn.matchfuzzy(fnames, cmdarg)
-      end
-    end
-    vim.o.findfunc = 'v:lua.FindFindFiles'
-  end
 end
 
 --}}}
