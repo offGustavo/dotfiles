@@ -1,13 +1,21 @@
 {
   "plugins": {
-    "TabTerm.nvim": [],
-    "diffview.nvim": [],
+    "TabTerm.nvim": {
+      "rev": "ed1b454",
+      "src": "https://github.com/offGustavo/TabTerm.nvim"
+    },
+    "diffview.nvim": {
+      "rev": "4516612",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
     "harpoon": {
       "rev": "87b1a35",
+      "src": "https://github.com/ThePrimeagen/harpoon",
       "version": "'harpoon2'"
     },
     "markview.nvim": {
-      "rev": "fb1f847"
+      "rev": "fb1f847",
+      "src": "https://github.com/OXY2DEV/markview.nvim"
     },
     "mason-lspconfig.nvim": {
       "rev": "b1d9a91",
@@ -18,20 +26,24 @@
       "src": "https://github.com/williamboman/mason.nvim"
     },
     "md-agenda.nvim": {
-      "rev": "d1b6bfb"
+      "rev": "d1b6bfb",
+      "src": "https://github.com/zenarvus/md-agenda.nvim"
     },
     "mini.nvim": {
-      "rev": "f43357b"
+      "rev": "f43357b",
+      "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neogit": {
-      "rev": "614a6348"
+      "rev": "614a6348",
+      "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-lspconfig": {
       "rev": "b34fbdf",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-sessionizer": {
-      "rev": "7d8cafd"
+      "rev": "7d8cafd",
+      "src": "https://github.com/offGustavo/nvim-sessionizer"
     },
     "nvim-treesitter": {
       "rev": "b5077407",
@@ -39,18 +51,24 @@
       "version": "'main'"
     },
     "oil.nvim": {
-      "rev": "7e1cd77"
+      "rev": "7e1cd77",
+      "src": "https://github.com/stevearc/oil.nvim"
     },
     "picker.nvim": {
-      "rev": "6c359c3"
+      "rev": "6c359c3",
+      "src": "https://github.com/santhosh-tekuri/picker.nvim"
     },
-    "plenary.nvim": [],
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
     "tokyonight.nvim": {
       "rev": "5da1b76",
       "src": "https://github.com/folke/tokyonight.nvim"
     },
     "which-key.nvim": {
-      "rev": "3aab214"
+      "rev": "3aab214",
+      "src": "https://github.com/folke/which-key.nvim"
     }
   }
 }
