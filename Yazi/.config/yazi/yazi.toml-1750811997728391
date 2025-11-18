@@ -1,0 +1,7 @@
+[manager]
+
+# ratio = [0, 4, 4]
+
+show_hidden = true
+
+show_symlink = true

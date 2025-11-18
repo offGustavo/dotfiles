@@ -1,0 +1,8 @@
+[mgr]
+
+ratio = [0, 5, 3]
+
+show_hidden = true
+
+show_symlink = true
+
