@@ -453,7 +453,14 @@ binds {
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
-    Mod+w repeat=false { toggle-overview; }
+    Mod+W repeat=false { toggle-overview; }
+    Mod+Shift+W repeat=false { spawn "~/.config/niri/scripts/windows.sh"; }
+
+    // Switches focus between the current and the previous workspace.
+    // Mod+Tab { focus-workspace-previous; }
+    Alt+Tab repeat=true { spawn "~/.config/niri/scripts/alt_tab.sh"; }
+    Alt+Shift+Tab repeat=true { spawn "sh" "-c" "~/.config/niri/scripts/alt_tab.sh prev"; }
+
 
     Mod+q { close-window; }
 
@@ -560,10 +567,6 @@ binds {
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
-
-    // Switches focus between the current and the previous workspace.
-    // Mod+Tab { focus-workspace-previous; }
-    Alt+Tab { focus-window-previous; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
