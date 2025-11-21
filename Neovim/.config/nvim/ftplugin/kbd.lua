@@ -18,7 +18,7 @@ vim.cmd([[
   syntax match kanataFunc /\v\(@<=[A-Za-z0-9_-]+/ containedin=lispExpr,lispList
 
   " Aplica highlight
-  highlight def link kanataFunc Function
+  highlight def link kanataFunc LispFunc
 
   " ============
   " Aliases Kanata
@@ -29,7 +29,7 @@ vim.cmd([[
   syntax match kanataAlias /@[A-Za-z0-9_\-;.,/]\+/ containedin=ALLBUT,lispComment
 
   " Aplica highlight para aliases
-  highlight def link kanataAlias Constant
+  highlight def link kanataAlias Define
 
   " ===============
   " Kanata Comments
