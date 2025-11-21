@@ -126,7 +126,7 @@ _switch() {
 
     $sedi "s|^$name=.*|$name=$dirpath:$tmux_base_index.$tmux_pane_base_index|" "$cachefile"
 
-    tmux new-session -ds "$name" -c "$dirpath" "nvim"
+    tmux new-session -ds "$name" -c "$dirpath" "nvim; exec zsh"
   fi
 
   exec tmux switch-client -t "$name:${pane:-$tmux_base_index.$tmux_pane_base_index}"
@@ -143,8 +143,7 @@ switch() {
   done <"$cachefile"
 }
 
-edit_file() { exec tmux popup -w 70% -h 70% -E "$EDITOR -c 'set nornu' -c 'nmap <silent> <Esc><Esc> :wq!<CR>' -c 'nmap <silent> q :q!<CR>' $cachefile"; }
-     
+edit_file() { exec tmux popup -E "$EDITOR -c 'set nornu' -c 'nmap <silent> <Esc><Esc> :wq!<CR>' -c 'nmap <silent> q :q!<CR>' $cachefile"; }
 
 sessions_has_match() { list_sessions | grep -wq "^$1"; }
 
