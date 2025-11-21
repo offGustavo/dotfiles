@@ -62,21 +62,21 @@ end
 vim.o.makeprg = "make"
 
 if not vim.g.vscode then
-vim.o.cmdheight = 1
--- Experimental
-require('vim._extui').enable({
-  enable = true, -- Whether to enable or disable the UI.
-  msg = {        -- Options related to the message module.
-    ---@type 'cmd'|'msg' Where to place regular messages, either in the
-    ---cmdline or in a separate ephemeral message window.
-    target = 'cmd',
-    timeout = 2000, -- Time a message is visible in the message window.
-  },
-})
+  vim.o.cmdheight = 1
+  -- Experimental
+  require("vim._extui").enable({
+    enable = true, -- Whether to enable or disable the UI.
+    msg = { -- Options related to the message module.
+      ---@type 'cmd'|'msg' Where to place regular messages, either in the
+      ---cmdline or in a separate ephemeral message window.
+      target = "cmd",
+      timeout = 2000, -- Time a message is visible in the message window.
+    },
+  })
 end
 
 -- Better Grep and Find with ripgrep
-if vim.fn.executable('rg') then
+if vim.fn.executable("rg") then
   vim.o.grepprg = "rg --vimgrep -. --smart-case -g '!.git' -g '!node_modules/'"
   function _G.RgFindFiles(cmdarg, _cmdcomplete)
     local fnames = vim.fn.systemlist('rg --files --hidden --color=never --glob="!.git" --glob="!node_modules/"')
@@ -87,7 +87,7 @@ if vim.fn.executable('rg') then
     end
   end
 
-  vim.o.findfunc = 'v:lua.RgFindFiles'
+  vim.o.findfunc = "v:lua.RgFindFiles"
 end
 
 -- -- Better Cd with Zoxide
@@ -114,3 +114,4 @@ end
 --   end, { nargs = "?" })
 -- end
 
+vim.o.winborder = "rounded"
