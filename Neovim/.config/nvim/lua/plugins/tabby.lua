@@ -1,8 +1,8 @@
 return {
   "nanozuki/tabby.nvim",
-  enabled = false,
+  -- enabled = false,
   config = function()
-    vim.o.showtabline = 2
+    -- vim.o.showtabline = 2
     local theme = {
       bg = "NormalNC",
       bg_alt = "lualine_b_normal",
@@ -29,7 +29,7 @@ return {
       line = function(line)
         return {
           line.tabs().foreach(function(tab)
-            local hl = tab.is_current() and theme.current_tab or theme.bg_alt
+            local hl = tab.is_current() and theme.current_tab or theme.bg
             return {
               line.sep("", hl, theme.bg),
               tab.number(),
@@ -56,7 +56,9 @@ return {
       -- option = {}, -- setup modules' option,
     })
 
-    vim.api.nvim_set_keymap("n", "<leader><Tab>{", ":-tabmove<CR>", { desc = "Move Tab Left", noremap = true })
-    vim.api.nvim_set_keymap("n", "<leader><Tab>}", ":+tabmove<CR>", { desc = "Move Tab Right ", noremap = true })
+    vim.keymap.set("n", "<leader><Tab>r", ":TabRename ", { desc = "Rename Tab" })
+    vim.keymap.set("n", "<leader><Tab>{", "<Cmd>-tabmove<Cr>", { desc = "Move Tab Left" })
+    vim.keymap.set("n", "<leader><Tab>}", "<Cmd>+tabmove<Cr>", { desc = "Move Tab Right" })
+    vim.keymap.set("n", "<leader><Tab>p", "<Cmd>Tabby pick_window<Cr>", { desc = "Pick Windows" })
   end,
 }
