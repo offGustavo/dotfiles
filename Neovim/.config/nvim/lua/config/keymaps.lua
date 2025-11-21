@@ -38,9 +38,9 @@ end, { silent = true, desc = "Open Dashboard" })
 --   Snacks.terminal("zellij")
 -- end, { silent = true, desc = "Open Float  Terminal" })
 
-vim.keymap.set("n", "<leader>tn", "<Cmd>terminal<Cr>", { silent = true, desc = "New Buffer Terminal" })
-vim.keymap.set("n", "<leader>tv", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
-vim.keymap.set("n", "<leader>ts", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
+-- vim.keymap.set("n", "<leader>tn", "<Cmd>terminal<Cr>", { silent = true, desc = "New Buffer Terminal" })
+-- vim.keymap.set("n", "<leader>tv", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
+-- vim.keymap.set("n", "<leader>ts", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
 
 ---- Terminal Mode to Normal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal" })
@@ -269,24 +269,19 @@ Snacks.toggle.option("cursorline", { off = false, on = true }):map("<leader>ol")
 --------------------
 ---- TABBY/TABS ----
 --------------------
-vim.keymap.set("n", "<leader><Tab>{", "<Cmd>-tabmove<Cr>", { desc = "Move Tab Left" })
-vim.keymap.set("n", "<leader><Tab>}", "<Cmd>+tabmove<Cr>", { desc = "Move Tab Right" })
-vim.keymap.set("n", "<leader><Tab>p", "<Cmd>Tabby pick_window<Cr>", { desc = "Pick Windows" })
-vim.keymap.set("n", "<leader><Tab>r", ":TabRename ", { desc = "Rename Tab" })
-
-vim.keymap.set("n", "<leader>t{", "<Cmd>-tabmove<Cr>", { desc = "Move Tab Left" })
-vim.keymap.set("n", "<leader>t}", "<Cmd>+tabmove<Cr>", { desc = "Move Tab Right" })
-vim.keymap.set("n", "<leader>tp", "<Cmd>Tabby pick_window<Cr>", { desc = "Pick Windows" })
-vim.keymap.set("n", "<leader>tr", ":TabRename ", { desc = "Rename Tab" })
-vim.keymap.set("n", "<leader>tL", "<cmd>tablast<cr>", { desc = "Last Tab" })
-vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
-vim.keymap.set("n", "<leader>tF", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-vim.keymap.set("n", "<leader>tt", "<cmd>tabnew<cr>", { desc = "New Tab" })
-vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-vim.keymap.set("n", "<leader>t]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-vim.keymap.set("n", "<leader>t[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+vim.keymap.set("n", "<leader><Tab>z", ":tcd ", { desc = "Tab Cd" })
+vim.keymap.set("n", "<leader><Tab>n", "<cmd>tabnew<cr>", { desc = "New Tab" })
+vim.keymap.set("n", "<leader><Tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+-- vim.keymap.set("n", "<leader>tL", "<cmd>tablast<cr>", { desc = "Last Tab" })
+-- vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+-- vim.keymap.set("n", "<leader>tF", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+-- vim.keymap.set("n", "<leader>tt", "<cmd>tabnew<cr>", { desc = "New Tab" })
+-- vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+-- vim.keymap.set("n", "<leader>t]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+-- vim.keymap.set("n", "<leader>t[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 for i = 1, 9, 1 do
   vim.keymap.set("n", "<leader>t" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
@@ -548,6 +543,7 @@ end, { silent = true, desc = "Snacks Picker Buffers" })
 
 vim.keymap.set("n", "<leader>of", ":find ", { desc = "Find" })
 vim.keymap.set("n", "<leader>og", ":grep ", { desc = "Grep" })
+vim.keymap.set('n', '<leader>o/', ':LiveGrep  %:h<left><left><left><left>') -- Custom Autocmd
 
 ----------
 -- Make --
