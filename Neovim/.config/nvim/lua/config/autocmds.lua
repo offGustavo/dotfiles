@@ -50,19 +50,19 @@ vim.api.nvim_create_autocmd("FileType", {
 --     end
 -- })
 
--- -- [:grep with live updating quickfix list : r/neovim](https://www.reddit.com/r/neovim/comments/1n2ln9w/grep_with_live_updating_quickfix_list/)
--- vim.api.nvim_create_autocmd("CmdlineChanged", {
---     callback = function()
---         local cmdline = vim.fn.getcmdline()
---         local words = vim.split(cmdline, " ", { trimempty = true })
---         if words[1] == "LiveGrep" and #words > 1 then
---             vim.cmd("silent grep! " .. vim.fn.escape(words[2], " "))
---             vim.cmd("cwindow")
---             vim.cmd.redraw()
---         end
---     end,
---     pattern = ":",
--- })
+-- [:grep with live updating quickfix list : r/neovim](https://www.reddit.com/r/neovim/comments/1n2ln9w/grep_with_live_updating_quickfix_list/)
+vim.api.nvim_create_autocmd("CmdlineChanged", {
+    callback = function()
+        local cmdline = vim.fn.getcmdline()
+        local words = vim.split(cmdline, " ", { trimempty = true })
+        if words[1] == "LiveGrep" and #words > 1 then
+            vim.cmd("silent grep! " .. vim.fn.escape(words[2], " "))
+            vim.cmd("cwindow")
+            vim.cmd.redraw()
+        end
+    end,
+    pattern = ":",
+})
 
 -- vim.api.nvim_create_autocmd({ 'CmdlineChanged', 'CmdlineLeave' }, {
 --         pattern = { '*' },
