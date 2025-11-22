@@ -161,8 +161,11 @@ alias exa="eza --icons --git -l -G -h -a"
 # Zoxide
 # alias cd=z
 
-# Emacs shit
+# Emacs Shit
 alias emacs='emacs -nw'
+
+# Zed Shit
+alias zed='zeditor'
 
 # Helix Shit
 alias hx=helix
