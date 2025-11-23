@@ -94,13 +94,15 @@ vim.keymap.set("i", "<A-e>", "<C-o>)", { silent = true })
 vim.keymap.set("i", "<A-<>", "<C-o>gg", { silent = true })
 vim.keymap.set("i", "<A->>", "<C-o>G", { silent = true })
 vim.keymap.set("i", "<C-/>", "<C-o>u", { silent = true })
-vim.keymap.set("i", "<C-x><C-s>", "<C-o>:w<CR>", { silent = true })
-vim.keymap.set("i", "<C-x><C-c>", "<Esc>:wq<CR>", { silent = true })
+-- vim.keymap.set("i", "<C-x><C-s>", "<Cmod>update<CR>", { silent = true })
+vim.keymap.set("i", "<C-x><C-c>", "<Esc>:x<CR>", { silent = true })
 -- vim.keymap.set("i", "<C-t>", "<Esc>Xpa", { silent = true })
 -- vim.keymap.set("i", "<C-]>", "<C-t>", { silent = true })
 vim.keymap.set("n", "<A-x>", ":", { desc = "Emacs" })
 vim.keymap.set("i", "<A-x>", "<C-o>:", { desc = "Emacs" })
 vim.keymap.set("t", "<A-x>", "<C-\\><C-o>:", { desc = "Emacs" })
+
+vim.keymap.set({ "i", "v", "x", "n" }, "<C-s>", "<Cmd>update<CR>", { silent = true })
 
 -- Indent with tab
 vim.keymap.set("i", "<Tab>", "<C-t>")
