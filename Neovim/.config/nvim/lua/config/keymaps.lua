@@ -545,7 +545,7 @@ end, { silent = true, desc = "Snacks Picker Buffers" })
 
 vim.keymap.set("n", "<leader>of", ":find ", { desc = "Find" })
 vim.keymap.set("n", "<leader>og", ":grep ", { desc = "Grep" })
-vim.keymap.set('n', '<leader>o/', ':LiveGrep  %:h<left><left><left><left>') -- Custom Autocmd
+vim.keymap.set("n", "<leader>o/", ":LiveGrep  %:h<left><left><left><left>") -- Custom Autocmd
 
 ----------
 -- Make --
