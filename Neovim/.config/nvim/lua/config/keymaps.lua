@@ -552,3 +552,13 @@ vim.keymap.set("n", "<leader>o/", ":LiveGrep  %:h<left><left><left><left>") -- C
 ----------
 vim.keymap.set("n", "<leader>cm", ":make ", { desc = "Make", remap = true })
 vim.keymap.set("n", "<leader>cM", "<Cmd>make<CR>", { desc = "Run Make" })
+
+
+vim.keymap.set('n', 'gX', function()
+  local file = vim.fn.expand("%:p")
+  if file ~= "" then
+    vim.ui.open(file)
+  else
+    vim.notify("No file to open", vim.log.levels.WARN)
+  end
+end, { desc = "Open current file" })
