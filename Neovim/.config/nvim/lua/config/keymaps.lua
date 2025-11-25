@@ -6,23 +6,23 @@
 -- vim.keymap.set("n", "N", "Nzz", { silent = true, desc = "Previous Search Result" })
 -- vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "Half Scroll Down and Center" })
 -- vim.keymap.set("n", "<C-u>", "<c-u>zz", { silent = true, desc = "Half Scroll Up and Center" })
-vim.keymap.set("v", ">", ">gv", { silent = true, desc = "Better Indent" })
-vim.keymap.set("v", "<", "<gv", { silent = true, desc = "Better Indent" })
+vim.keymap.set("x", ">", ">gv", { silent = true, desc = "Better Indent" })
+vim.keymap.set("x", "<", "<gv", { silent = true, desc = "Better Indent" })
 vim.keymap.set("n", "gJ", "kJ_", { silent = true, desc = "Join Line Above" })
 vim.keymap.set("n", "J", "J_", { silent = true, desc = "Better Join Line" })
 
 pcall(function()
-  -- Del LazyVim Keymaps
-  vim.keymap.set({ "x", "n" }, "<Left>", "<Left>")
-  vim.keymap.set({ "x", "n" }, "<Up>", "<Up>")
-  vim.keymap.set({ "x", "n" }, "<Down>", "<Down>")
-  vim.keymap.set({ "x", "n" }, "<Right>", "<Right>")
+    -- Del LazyVim Keymaps
+    vim.keymap.set({ "x", "n" }, "<Left>", "<Left>")
+    vim.keymap.set({ "x", "n" }, "<Up>", "<Up>")
+    vim.keymap.set({ "x", "n" }, "<Down>", "<Down>")
+    vim.keymap.set({ "x", "n" }, "<Right>", "<Right>")
 end)
 -----------------
 --- DASHBOARD ---
 -----------------
 vim.keymap.set("n", "<leader>od", function()
-  Snacks.dashboard()
+    Snacks.dashboard()
 end, { silent = true, desc = "Open Dashboard" })
 
 ----------------
@@ -67,11 +67,11 @@ vim.keymap.set("n", "<leader>wc", "<Cmd>close<Cr>")
 
 -- Toggle Comment
 -- vim.keymap.set("n", "<C-/>", ":normal gcc<Cr>", { desc = "Toggle Comment", silent = true })
--- vim.keymap.set("v", "<C-/>", ":'<,'>normal gcc<Cr>", { desc = "Toggle Comment", silent = true })
+-- vim.keymap.set("x", "<C-/>", ":'<,'>normal gcc<Cr>", { desc = "Toggle Comment", silent = true })
 
 -- Move Lines Up/Down
--- vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move Line Up" })
--- vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move Line Down" })
+-- vim.keymap.set("x", "<C-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move Line Up" })
+-- vim.keymap.set("x", "<C-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move Line Down" })
 
 -- Emacs Keybinds in Insert Mode
 -- set this better
@@ -102,7 +102,7 @@ vim.keymap.set("n", "<A-x>", ":", { desc = "Emacs" })
 vim.keymap.set("i", "<A-x>", "<C-o>:", { desc = "Emacs" })
 vim.keymap.set("t", "<A-x>", "<C-\\><C-o>:", { desc = "Emacs" })
 
-vim.keymap.set({ "i", "v", "x", "n" }, "<C-s>", "<Cmd>update<CR>", { silent = true })
+vim.keymap.set({ "i", "x", "n" }, "<C-s>", "<Cmd>update<CR>", { silent = true })
 
 -- Indent with tab
 vim.keymap.set("i", "<Tab>", "<C-t>")
@@ -123,16 +123,16 @@ vim.keymap.set("i", "<S-Tab>", "<C-d>")
 
 -- Visual Keymaps - Markdown Text
 vim.keymap.set(
-  "v",
-  "<C-i>",
-  ":<Del><Del><Del><Del><Del>norm saiw*<Cr>gv",
-  { silent = true, desc = "Add Italic/Bold(*)" }
+    "x",
+    "<C-i>",
+    ":<Del><Del><Del><Del><Del>norm saiw*<Cr>gv",
+    { silent = true, desc = "Add Italic/Bold(*)" }
 )
 vim.keymap.set(
-  "v",
-  "<C-b>",
-  ":<Del><Del><Del><Del><Del>norm sd*<Cr>gv",
-  { silent = true, desc = "Remove Italic/Bold(*)" }
+    "x",
+    "<C-b>",
+    ":<Del><Del><Del><Del><Del>norm sd*<Cr>gv",
+    { silent = true, desc = "Remove Italic/Bold(*)" }
 )
 
 -- -- Buffer Movement
@@ -156,7 +156,7 @@ vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diag
 --- LazyVim ---
 ---------------
 pcall(function()
-  vim.keymap.del("n", "<leader>l")
+    vim.keymap.del("n", "<leader>l")
 end)
 vim.keymap.set("n", "<leader>lz", ":Lazy<Cr>", { desc = "Lazy", silent = true })
 vim.keymap.set("n", "<leader>lx", ":LazyExtras<Cr>", { desc = "LazyVim Extras", silent = true })
@@ -173,20 +173,20 @@ vim.keymap.set("n", "<leader>ll", ":lwindow<Cr>", { desc = "Location List", sile
 vim.keymap.set("n", "<leader>lp", ":lprev<Cr>", { desc = "Location List", silent = true })
 vim.keymap.set("n", "<leader>ln", ":lnext<Cr>", { desc = "Location List", silent = true })
 vim.keymap.set("n", "<leader>la", function()
-  local pos = vim.api.nvim_win_get_cursor(0)
-  local item = {
-    bufnr = vim.api.nvim_get_current_buf(),
-    lnum = pos[1],
-    col = pos[2] + 1,
-    text = vim.fn.getline("."),
-  }
-  vim.fn.setloclist(0, { item }, "a") -- "a" = append
-  vim.notify("Adicionado à Location List")
+    local pos = vim.api.nvim_win_get_cursor(0)
+    local item = {
+        bufnr = vim.api.nvim_get_current_buf(),
+        lnum = pos[1],
+        col = pos[2] + 1,
+        text = vim.fn.getline("."),
+    }
+    vim.fn.setloclist(0, { item }, "a") -- "a" = append
+    vim.notify("Adicionado à Location List")
 end, { desc = "Adicionar item à Location List" })
 
 vim.keymap.set("n", "<leader>lr", function()
-  vim.fn.setloclist(0, {}, "r") -- "r" = replace (aqui com vazio)
-  vim.notify("Location List resetada")
+    vim.fn.setloclist(0, {}, "r") -- "r" = replace (aqui com vazio)
+    vim.notify("Location List resetada")
 end, { desc = "Resetar Location List" })
 
 ----------------
@@ -198,7 +198,7 @@ vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { silent = true, desc = "Ope
 vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { silent = true, desc = "Open Quickfix List" })
 vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { silent = true, desc = "Close Quickfix List" })
 vim.keymap.set("n", "<leader>qd", function()
-  vim.diagnostic.setqflist()
+    vim.diagnostic.setqflist()
 end, { desc = "Open diagnostic Quickfix list" })
 
 ------------
@@ -212,16 +212,16 @@ vim.keymap.set("n", "<leader>qr", vim.cmd.restart, { desc = "Restart Vim" })
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set(
-  "n",
-  "<leader>s/",
-  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Substitute Current Word Globally" }
+    "n",
+    "<leader>s/",
+    [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = "Substitute Current Word Globally" }
 )
 vim.keymap.set(
-  "n",
-  "<leader>s.",
-  [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Substitute Current Word" }
+    "n",
+    "<leader>s.",
+    [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = "Substitute Current Word" }
 )
 vim.keymap.set("x", "<leader>p", '"_dP', { silent = true, desc = "Paste Without Copy" })
 vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { silent = true, desc = "Make File Executable" })
@@ -232,39 +232,39 @@ vim.keymap.set("n", "<leader>fs", "<Cmd>source %<Cr>", { silent = true, desc = "
 
 -- https://www.youtube.com/watch?v=UE6XQTAxwE0
 vim.keymap.set("n", "<leader>fl", ":.lua<Cr>", { silent = true, desc = "Execute Line in Lua" })
-vim.keymap.set("v", "<leader>fl", ":'<,'>lua<Cr>", { silent = true, desc = "Execute Selection in Lua" })
+vim.keymap.set("x", "<leader>fl", ":'<,'>lua<Cr>", { silent = true, desc = "Execute Selection in Lua" })
 
 vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
 
 --- Buffers
 -- Remove Lazyvim default keymap
 pcall(function()
-  vim.keymap.del("n", "<S-h>")
-  vim.keymap.del("n", "<S-l>")
+    vim.keymap.del("n", "<S-h>")
+    vim.keymap.del("n", "<S-l>")
 end)
 vim.keymap.set("n", "<C-PageUp>", vim.cmd.bnext, { desc = "Next Buffer" })
 vim.keymap.set("n", "<C-PageDown>", vim.cmd.bprev, { desc = "Previous Buffer" })
 
 -- Toggle Options
 Snacks.toggle
-  .new({
-    id = "toggle_sing_and_line_column",
-    name = "Relative Line Number and Sign Column",
-    get = function()
-      return vim.o.relativenumber
-    end,
-    set = function(state)
-      if state then
-        vim.o.signcolumn = "no"
-        vim.opt.number = false
-        vim.opt.relativenumber = false
-      end
-      vim.o.signcolumn = "yes"
-      vim.opt.number = state
-      vim.opt.relativenumber = state
-    end,
-  })
-  :map("<leader>on")
+    .new({
+        id = "toggle_sing_and_line_column",
+        name = "Relative Line Number and Sign Column",
+        get = function()
+            return vim.o.relativenumber
+        end,
+        set = function(state)
+            if state then
+                vim.o.signcolumn = "no"
+                vim.opt.number = false
+                vim.opt.relativenumber = false
+            end
+            vim.o.signcolumn = "yes"
+            vim.opt.number = state
+            vim.opt.relativenumber = state
+        end,
+    })
+    :map("<leader>on")
 
 Snacks.toggle.option("cursorline", { off = false, on = true }):map("<leader>ol")
 
@@ -286,39 +286,39 @@ vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- vim.keymap.set("n", "<leader>t[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 for i = 1, 9, 1 do
-  vim.keymap.set("n", "<leader>t" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
-  vim.keymap.set("n", "<leader><tab>" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
+    vim.keymap.set("n", "<leader>t" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
+    vim.keymap.set("n", "<leader><tab>" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
 end
 
 ---------------
 -- OBSIDIAN ---
 ---------------
 vim.keymap.set("n", "<leader>ood", function()
-  local current_date = os.date("%Y-%m-%d")
-  local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
-  vim.cmd("e " .. daily_note_date)
+    local current_date = os.date("%Y-%m-%d")
+    local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
+    vim.cmd("e " .. daily_note_date)
 end, { desc = "Daily Note" })
 
 vim.keymap.set("n", "<leader>ooc", function()
-  local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
-  local commit_date = "vault backup: " .. current_date_and_time
-  vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
-  print("Commit: " .. commit_date)
+    local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
+    local commit_date = "vault backup: " .. current_date_and_time
+    vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
+    print("Commit: " .. commit_date)
 end, { desc = "Commit All Changes" })
 
 vim.keymap.set("n", "<leader>oop", function()
-  vim.cmd("!git pull")
-  print("Pull Changes")
+    vim.cmd("!git pull")
+    print("Pull Changes")
 end, { desc = "Pull Changes" })
 
 vim.keymap.set("n", "<leader>ooP", function()
-  vim.cmd("!git push")
-  print("Push Changes")
+    vim.cmd("!git push")
+    print("Push Changes")
 end, { desc = "Push Changes" })
 
-vim.keymap.set("v", "<leader>oof", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', { desc = "Format Table in Markdown" })
+vim.keymap.set("x", "<leader>oof", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', { desc = "Format Table in Markdown" })
 
-vim.keymap.set("v", "<leader>a", ":AlignRegexp<CR>", { desc = "Align by regex", silent = true })
+vim.keymap.set("x", "<leader>a", ":AlignRegexp<CR>", { desc = "Align by regex", silent = true })
 
 -----------------------------
 ---  REMAP DEFAULT PICKER ---
@@ -328,92 +328,92 @@ vim.keymap.set("v", "<leader>a", ":AlignRegexp<CR>", { desc = "Align by regex", 
 --- Lazygit ---
 ---------------
 vim.keymap.set("n", "<leader>lg", function()
-  Snacks.lazygit({ cwd = LazyVim.root.git() })
-  vim.keymap.set("t", "<Esc><Esc>", "<Esc><Esc>", { buffer = 0 })
-  vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = 0 })
+    Snacks.lazygit({ cwd = LazyVim.root.git() })
+    vim.keymap.set("t", "<Esc><Esc>", "<Esc><Esc>", { buffer = 0 })
+    vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = 0 })
 end, { desc = "Lazygit (cwd)" })
 vim.keymap.set("n", "<A-p>g", function()
-  Snacks.lazygit({ cwd = LazyVim.root.git() })
-  vim.keymap.set("t", "<Esc><Esc>", "<Esc><Esc>", { buffer = 0 })
-  vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = 0 })
+    Snacks.lazygit({ cwd = LazyVim.root.git() })
+    vim.keymap.set("t", "<Esc><Esc>", "<Esc><Esc>", { buffer = 0 })
+    vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = 0 })
 end, { desc = "Lazygit (cwd)" })
 vim.keymap.set("n", "<leader>gG", function()
-  Snacks.lazygit({ cwd = LazyVim.root.git() })
-  vim.keymap.set("t", "<Esc><Esc>", "<Esc><Esc>", { buffer = 0 })
-  vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = 0 })
+    Snacks.lazygit({ cwd = LazyVim.root.git() })
+    vim.keymap.set("t", "<Esc><Esc>", "<Esc><Esc>", { buffer = 0 })
+    vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = 0 })
 end, { desc = "Lazygit (cwd)" })
 
 vim.keymap.set("n", "<S-Esc>", function()
-  Snacks.explorer({
-    hidden = true,
-  })
+    Snacks.explorer({
+        hidden = true,
+    })
 end, { silent = true, desc = "Toggle File Tree" })
 
 vim.keymap.set("n", "<leader>fa", function()
-  Snacks.picker()
+    Snacks.picker()
 end, { desc = "All Snacks Pickers" })
 
 vim.keymap.set("n", "<leader>z", function()
-  Snacks.picker.zoxide()
+    Snacks.picker.zoxide()
 end, { desc = "Snacks Picker Zoxide" })
 
 vim.keymap.set("n", "<leader><space>", function()
-  Snacks.picker.smart({
-    -- finder = "explorer",
-    -- tree = true,
-    hidden = true,
-    matcher = {
-      frequency = true,
-    },
-    win = {
-      input = {
-        keys = {
-          ["d"] = "bufdelete",
-          ["J"] = "preview_scroll_down",
-          ["K"] = "preview_scroll_up",
-          ["H"] = "preview_scroll_left",
-          ["L"] = "preview_scroll_right",
-          ["<BS>"] = "explorer_up",
-          ["l"] = "confirm",
-          ["h"] = "explorer_close", -- close directory
-          ["a"] = "explorer_add",
-          ["D"] = "explorer_del",
-          ["r"] = "explorer_rename",
-          ["c"] = "explorer_copy",
-          ["m"] = "explorer_move",
-          ["o"] = "explorer_open", -- open with system application
-          ["P"] = "toggle_preview",
-          ["y"] = { "explorer_yank", mode = { "n", "x" } },
-          ["p"] = "explorer_paste",
-          ["u"] = "explorer_update",
-          ["<c-c>"] = "tcd",
-          ["<leader>/"] = "picker_grep",
-          ["<c-t>"] = "terminal",
-          ["."] = "explorer_focus",
-          ["I"] = "toggle_ignored",
-          -- ["H"] = "toggle_hidden",
-          -- ["Z"] = "explorer_close_all",
-          ["]g"] = "explorer_git_next",
-          ["[g"] = "explorer_git_prev",
-          ["]d"] = "explorer_diagnostic_next",
-          ["[d"] = "explorer_diagnostic_prev",
-          ["]w"] = "explorer_warn_next",
-          ["[w"] = "explorer_warn_prev",
-          ["]e"] = "explorer_error_next",
-          ["[e"] = "explorer_error_prev",
+    Snacks.picker.smart({
+        -- finder = "explorer",
+        -- tree = true,
+        hidden = true,
+        matcher = {
+            frequency = true,
         },
-      },
-      list = {
-        keys = {
-          ["d"] = "bufdelete",
-          ["J"] = "preview_scroll_down",
-          ["K"] = "preview_scroll_up",
-          ["H"] = "preview_scroll_left",
-          ["L"] = "preview_scroll_right",
+        win = {
+            input = {
+                keys = {
+                    ["d"] = "bufdelete",
+                    ["J"] = "preview_scroll_down",
+                    ["K"] = "preview_scroll_up",
+                    ["H"] = "preview_scroll_left",
+                    ["L"] = "preview_scroll_right",
+                    ["<BS>"] = "explorer_up",
+                    ["l"] = "confirm",
+                    ["h"] = "explorer_close", -- close directory
+                    ["a"] = "explorer_add",
+                    ["D"] = "explorer_del",
+                    ["r"] = "explorer_rename",
+                    ["c"] = "explorer_copy",
+                    ["m"] = "explorer_move",
+                    ["o"] = "explorer_open", -- open with system application
+                    ["P"] = "toggle_preview",
+                    ["y"] = { "explorer_yank", mode = { "n", "x" } },
+                    ["p"] = "explorer_paste",
+                    ["u"] = "explorer_update",
+                    ["<c-c>"] = "tcd",
+                    ["<leader>/"] = "picker_grep",
+                    ["<c-t>"] = "terminal",
+                    ["."] = "explorer_focus",
+                    ["I"] = "toggle_ignored",
+                    -- ["H"] = "toggle_hidden",
+                    -- ["Z"] = "explorer_close_all",
+                    ["]g"] = "explorer_git_next",
+                    ["[g"] = "explorer_git_prev",
+                    ["]d"] = "explorer_diagnostic_next",
+                    ["[d"] = "explorer_diagnostic_prev",
+                    ["]w"] = "explorer_warn_next",
+                    ["[w"] = "explorer_warn_prev",
+                    ["]e"] = "explorer_error_next",
+                    ["[e"] = "explorer_error_prev",
+                },
+            },
+            list = {
+                keys = {
+                    ["d"] = "bufdelete",
+                    ["J"] = "preview_scroll_down",
+                    ["K"] = "preview_scroll_up",
+                    ["H"] = "preview_scroll_left",
+                    ["L"] = "preview_scroll_right",
+                },
+            },
         },
-      },
-    },
-  })
+    })
 end, { desc = "Snacks Smart Picker" })
 
 vim.keymap.set("n", "<leader>fe", function()
@@ -457,16 +457,16 @@ vim.keymap.set("n", "<leader>fe", function()
 end)
 
 vim.keymap.set("n", "<leader>/", function()
-  Snacks.picker.grep({
-    hidden = true,
-  })
+    Snacks.picker.grep({
+        hidden = true,
+    })
 end, { desc = "Snacks Picker Grep" })
 
 vim.keymap.set("n", "<leader>sP", function()
-  Snacks.picker.grep({
-    hidden = true,
-    cwd = vim.fn.stdpath("config"),
-  })
+    Snacks.picker.grep({
+        hidden = true,
+        cwd = vim.fn.stdpath("config"),
+    })
 end, { desc = "Snacks Picker Grep in Config Files" })
 
 -- vim.keymap.set("n", "<leader>ow", function()
@@ -496,29 +496,28 @@ end, { desc = "Snacks Picker Grep in Config Files" })
 -- end, { desc = "Grep cWord (cwd)" })
 
 vim.keymap.set({ "n", "i" }, "<leader>,", function()
-  Snacks.picker.buffers({
-    -- I always want my buffers picker to start in normal mode
-    -- on_show = function()
-    --   vim.cmd.stopinsert()
-    -- end,
-    finder = "buffers",
-    format = "buffer",
-    hidden = false,
-    unloaded = true,
-    current = true,
-    sort_lastused = true,
-    win = {
-      input = {
-        keys = {
-          ["d"] = "bufdelete",
-          ["<S-d>"] = "bufdelete",
+    Snacks.picker.buffers({
+        -- I always want my buffers picker to start in normal mode
+        -- on_show = function()
+        --   vim.cmd.stopinsert()
+        -- end,
+        finder = "buffers",
+        format = "buffer",
+        hidden = false,
+        unloaded = true,
+        current = true,
+        sort_lastused = true,
+        win = {
+            input = {
+                keys = {
+                    ["d"] = "bufdelete",
+                },
+            },
+            list = { keys = { ["d"] = "bufdelete" } },
         },
-      },
-      list = { keys = { ["d"] = "bufdelete", ["<S-d>"] = "bufdelete" } },
-    },
-    -- In case you want to override the layout for this keymap
-    -- layout = "ivy",
-  })
+        -- In case you want to override the layout for this keymap
+        -- layout = "ivy",
+    })
 end, { silent = true, desc = "Snacks Picker Buffers" })
 
 -------------------------------------
@@ -594,11 +593,12 @@ vim.keymap.set("n", "<leader>o/", ":LiveGrep  %:h<left><left><left><left>") -- C
 vim.keymap.set("n", "<leader>cm", ":make ", { desc = "Make", remap = true })
 vim.keymap.set("n", "<leader>cM", "<Cmd>make<CR>", { desc = "Run Make" })
 
-vim.keymap.set("n", "gX", function()
-  local file = vim.fn.expand("%:p")
-  if file ~= "" then
-    vim.ui.open(file)
-  else
-    vim.notify("No file to open", vim.log.levels.WARN)
-  end
+
+vim.keymap.set('n', 'gX', function()
+    local file = vim.fn.expand("%:p")
+    if file ~= "" then
+        vim.ui.open(file)
+    else
+        vim.notify("No file to open", vim.log.levels.WARN)
+    end
 end, { desc = "Open current file" })
