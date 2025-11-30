@@ -83,27 +83,31 @@
 
 (put 'scroll-left 'disabled nil)
 
-;; C-a/C-x vim
-(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
-(define-key evil-visual-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
-(define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
-(define-key evil-visual-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
+(after! evil
+  ;; C-a/C-x increment/decrement numbers
+  (define-key evil-normal-state-map (kbd "C-a") #'evil-numbers/inc-at-pt)
+  (define-key evil-visual-state-map (kbd "C-a") #'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-x") #'evil-numbers/dec-at-pt)
+  (define-key evil-visual-state-map (kbd "C-x") #'evil-numbers/dec-at-pt)
 
-;; Move selected lines up and down
-(define-key evil-visual-state-map (kbd "K") 'drag-stuff-up)
-(define-key evil-visual-state-map (kbd "J") 'drag-stuff-down)
+  ;; Move selected lines up/down
+  (define-key evil-visual-state-map (kbd "C-j") #'drag-stuff-down)
+  (define-key evil-visual-state-map (kbd "C-k") #'drag-stuff-up)
 
+  ;; Save buffer
+  (define-key evil-normal-state-map (kbd "C-s") #'save-buffer))
 ;; C-c
 ;; In Insert Mode
-(define-key evil-insert-state-map (kbd "C-c") 'evil-normal-state)
+;; (define-key evil-insert-state-map (kbd "C-c") 'evil-normal-state)
 ;; In Visual Mode
-(define-key evil-visual-state-map (kbd "C-c") 'evil-normal-state)
+;; (define-key evil-visual-state-map (kbd "C-c") 'evil-normal-state)
 
 ;; Save Buffer
 (define-key evil-normal-state-map (kbd "C-s") 'save-buffer)
 
 ;; (define-key evil-normal-state-map (kbd "gz") 'zoxide-travel)
-(map! :leader "z" 'zoxide-travel)
+;; (define-key evil-normal-state-map (kbd "gz") 'zoxide-travel)
+(map! :leader "z" #'zoxide-travel)
 
 ;; ;; You can use this hydra menu that have all the commands
 ;; (map! :leader "o h h" 'harpoon-quick-menu-hydra)
@@ -168,7 +172,7 @@
 ;;   :config
 ;;   ;; Bind a key to create new vterm buffers easily
 ;;   ;; (define-key evil-normal-state-map (kbd "M-/") 'multi-vterm)
-;;   ;; (define-key vterm-mode-map (kbd "C-c C-t") 'multi-vterm)
+;;   ;; (define-key vterm-ode-map (kbd "C-c C-t") 'multi-vterm)
 ;;   )
 
 ;; ;; Mult Vterm
