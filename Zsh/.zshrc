@@ -3,6 +3,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin/$PATH
 export PATH=$PATH:$HOME/scripts
+export PATH=$PATH:$HOME/.config/emacs/bin/
 
 # Nix
 export PATH=$PATH:$HOME/.nix-profile/bin
