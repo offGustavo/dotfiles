@@ -12,6 +12,10 @@ require("fish.vscode")
 
 -- Theme
 require("fish.theme")
-require("fish.kitty")
-require("fish.tmux")
 
+if vim.uv.os_uname().sysname == "Windows_NT" then
+else
+  require("fish.kitty")
+  require("fish.tmux")
+  require("fish.lazygit")
+end
