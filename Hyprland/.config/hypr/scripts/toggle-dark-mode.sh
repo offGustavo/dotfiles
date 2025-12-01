@@ -4,13 +4,19 @@ current_scheme=$(gsettings get org.gnome.desktop.interface color-scheme)
 if [ "$current_scheme" = "'prefer-light'" ] || [ "$current_scheme" = "'default'" ]; then
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
     killall waybar
+    ln -sf ~/.config/hypr/waybar/dark.css ~/.config/hypr/waybar/colors.css
     waybar -c ~/.config/hypr/waybar/config.jsonc -s ~/.config/hypr/waybar/style.css
-    ln -sf ~/.config/fuzzel/light.ini ~/.config/fuzzel/fuzzel.ini
+    killall swaybg
+    swaybg -i /home/gustavo/Pictures/Wallpapers/dharmx-Walls/mountain/a_rocky_cliff_with_trees_and_fog.jpg -m fill
+    ln -sf ~/.config/fuzzel/dark.ini ~/.config/fuzzel/fuzzel.ini
     # notify-send "Dark Mode" "Switched to dark mode"
 else
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
     killall waybar
-    waybar -c ~/.config/hypr/waybar/config.jsonc -s ~/.config/hypr/waybar/light.css
-    ln -sf ~/.config/fuzzel/dark.ini ~/.config/fuzzel/fuzzel.ini
+    ln -sf ~/.config/hypr/waybar/light.css ~/.config/hypr/waybar/colors.css
+    waybar -c ~/.config/hypr/waybar/config.jsonc -s ~/.config/hypr/waybar/style.css
+    killall swaybg
+    swaybg -i /home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/a_cartoon_of_a_girl_standing_under_a_tree_with_purple_flowers.png -m fill
+    ln -sf ~/.config/fuzzel/light.ini ~/.config/fuzzel/fuzzel.ini
     # notify-send "Light Mode" "Switched to light mode"
 fi

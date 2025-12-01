@@ -1,12 +1,4 @@
-@define-color bg #1a1b26;
-@define-color bg-highlight #292e42;
-@define-color blue #7aa2f7;
-@define-color fg #c0caf5;
-@define-color fg-dark #a9b1d6;
-@define-color green #9ece6a;
-@define-color orange #ff9e64;
-@define-color red #f7768e;
-
+@import "./colors.css";
 * {
     border: none;
     font-size: 10px;
@@ -46,6 +38,11 @@ window#waybar {
 #workspaces button {
   padding: 5px 10px;
 }
+
+#workspaces button label{
+  font-size: 14px;
+}
+
 /*#workspaces button.active {*/
 /*}*/
 /*#workspaces{*/

@@ -16,9 +16,10 @@
     // "hyprland/window",
     "hyprland/submap",
   ],
-  // "modules-center": [
-  //   "wlr/taskbar",
-  // ],
+  "modules-center": [
+    "privacy"
+    // "wlr/taskbar"
+  ],
   "modules-right": [
     "hyprland/language",
     // "custom/updates",
@@ -377,5 +378,38 @@
     },
     "tooltip-format": "MPD (connected)",
     "tooltip-format-disconnected": "MPD (disconnected)"
-  }
+  },
+  "privacy": {
+    "icon-spacing": 5,
+    "icon-size": 12,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      }
+    ],
+    "ignore-monitor": true
+    // "ignore": [
+    //   {
+    //     "type": "audio-in",
+    //     "name": "cava"
+    //   },
+    //   {
+    //     "type": "screenshare",
+    //     "name": "obs"
+    //   }
+    // ]
+  },
 }
