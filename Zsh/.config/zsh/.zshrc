@@ -2,6 +2,8 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin/$PATH
+
+# Custom Path
 export PATH=$PATH:$HOME/scripts
 export PATH=$PATH:$HOME/.config/emacs/bin/
 
@@ -23,7 +25,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 export MANPAGER='nvim -c "nmap <silent> q :q!<Cr>" +Man!'
 
 # Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$XDG_CONFIG_HOME/zsh/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -141,7 +143,7 @@ fi
 alias :e=$EDITOR
 
 # Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
+export ARCHFLAGS="-arch $(uname -m)"
 
 # Set personal aliases, overriding those provided by Oh My Zsh libs,
 # plugins, and themes. Aliases can be placed here, though Oh My Zsh
@@ -153,7 +155,7 @@ alias :e=$EDITOR
 
 #
 # Example aliases
-alias zconf="$EDITOR ~/.zshrc"
+alias zconf="$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc"
 alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"'
 
 # Eza is hard to type
