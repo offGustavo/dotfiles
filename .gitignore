@@ -12,3 +12,6 @@ Tmux/.config/tmux/plugins/
 Doom/.config/emacs/.github
 Hyprland/.config/hypr/plugins/HyprMode/
 Fuzzel/.config/fuzzel/fuzzel.ini
+Vim/.config/vim/plugged
+Vim/.config/vim/.netrwhist
+Vim/.config/vim/after/autoload/plug.vim
