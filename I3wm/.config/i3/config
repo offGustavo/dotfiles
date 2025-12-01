@@ -91,6 +91,7 @@ bindsym $super+q kill
 
 # run rofi (a program launcher)
 bindsym $super+slash exec --no-startup-id $scripts/launcher.sh
+bindsym $alt+space exec --no-startup-id $scripts/launcher.sh
 
 # run rofi window 
 bindsym $super+w exec --no-startup-id $scripts/windows.sh
