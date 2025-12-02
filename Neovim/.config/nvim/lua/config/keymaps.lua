@@ -471,9 +471,10 @@ vim.keymap.set({ "n", "i" }, "<leader>,", function()
       input = {
         keys = {
           ["d"] = "bufdelete",
+          ["<S-d>"] = "bufdelete",
         },
       },
-      list = { keys = { ["d"] = "bufdelete" } },
+      list = { keys = { ["d"] = "bufdelete", ["<S-d>"] = "bufdelete" } },
     },
     -- In case you want to override the layout for this keymap
     -- layout = "ivy",
@@ -553,8 +554,7 @@ vim.keymap.set("n", "<leader>o/", ":LiveGrep  %:h<left><left><left><left>") -- C
 vim.keymap.set("n", "<leader>cm", ":make ", { desc = "Make", remap = true })
 vim.keymap.set("n", "<leader>cM", "<Cmd>make<CR>", { desc = "Run Make" })
 
-
-vim.keymap.set('n', 'gX', function()
+vim.keymap.set("n", "gX", function()
   local file = vim.fn.expand("%:p")
   if file ~= "" then
     vim.ui.open(file)
