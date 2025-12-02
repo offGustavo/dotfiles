@@ -1,4 +1,5 @@
 @import "./colors.css";
+
 * {
     border: none;
     font-size: 10px;
@@ -6,6 +7,7 @@
     /*height: 10px;*/
     color: @fg;
     padding: 0;
+    font-size: 12px;
 }
 
 
@@ -39,9 +41,9 @@ window#waybar {
   padding: 5px 10px;
 }
 
-#workspaces button label{
-  font-size: 14px;
-}
+/* #workspaces button label{ */
+/*   font-size: 12px; */
+/* } */
 
 /*#workspaces button.active {*/
 /*}*/
