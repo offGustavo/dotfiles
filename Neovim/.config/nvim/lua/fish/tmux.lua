@@ -128,7 +128,7 @@ function UpdateTheme()
   end
 
   -- Recarrega o tmux.conf
-  os.execute("tmux source-file" .. tmux_theme_path)
+  os.execute("tmux source-file " .. tmux_theme_path)
 end
 
   -- Cria o autocommand group para evitar duplicações
