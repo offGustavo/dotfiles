@@ -15,6 +15,14 @@ export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
+# Android variables
+export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+
 # KDE
   # gsettings reset org.gnome.desktop.interface icon-theme
 
