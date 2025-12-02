@@ -116,8 +116,8 @@ function UpdateTheme()
     string.format('set -g popup-style "bg=%s,fg=default"', colors.TMUX_BG),
   }
 
-  local path = os.getenv("HOME") .. "/.config/tmux/config/theme.conf"
-  local file = io.open(path, "w")
+  local tmux_theme_path = "/tmp/tmux/theme.conf"
+  local file = io.open(tmux_theme_path, "w")
   if file then
     for _, line in ipairs(lines) do
       file:write(line .. "\n")
@@ -128,7 +128,7 @@ function UpdateTheme()
   end
 
   -- Recarrega o tmux.conf
-  os.execute("tmux source-file ~/.config/tmux/config/theme.conf")
+  os.execute("tmux source-file" .. tmux_theme_path)
 end
 
   -- Cria o autocommand group para evitar duplicações

@@ -16,3 +16,6 @@ Vim/.config/vim/plugged
 Vim/.config/vim/.netrwhist
 Vim/.config/vim/after/autoload/plug.vim
 Hyprland/.config/hypr/waybar/colors.css
+Fuzzel/.config/fuzzel/colors.ini
+Lazygit/.config/lazygit/config.yml
+Neovim/.config/nvim/.theme
