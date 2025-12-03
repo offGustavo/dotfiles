@@ -242,8 +242,8 @@ pcall(function()
   vim.keymap.del("n", "<S-h>")
   vim.keymap.del("n", "<S-l>")
 end)
-vim.keymap.set("n", "<C-PageUp>", vim.cmd.bnext)
-vim.keymap.set("n", "<C-PageDown>", vim.cmd.bprev)
+vim.keymap.set("n", "<C-PageUp>", vim.cmd.bnext, { desc = "Next Buffer"})
+vim.keymap.set("n", "<C-PageDown>", vim.cmd.bprev, { desc = "Previous Buffer"})
 
 -- Toggle Options
 Snacks.toggle
