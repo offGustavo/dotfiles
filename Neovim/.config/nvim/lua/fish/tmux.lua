@@ -116,16 +116,22 @@ function UpdateTheme()
     string.format('set -g popup-style "bg=%s,fg=default"', colors.TMUX_BG),
   }
 
-  local tmux_theme_path = "/tmp/tmux/theme.conf"
-  local file = io.open(tmux_theme_path, "w")
-  if file then
-    for _, line in ipairs(lines) do
-      file:write(line .. "\n")
-    end
-    file:close()
-  else
-    vim.notify("Failed to write tmux theme", vim.log.levels.ERROR)
+local tmux_theme_path = "/tmp/tmux/theme.conf"
+
+-- garante que o diretório existe
+vim.fn.mkdir(vim.fn.fnamemodify(tmux_theme_path, ":h"), "p")
+
+-- abre/cria o arquivo
+local file = io.open(tmux_theme_path, "w")
+
+if file then
+  for _, line in ipairs(lines) do
+    file:write(line .. "\n")
   end
+  file:close()
+else
+  vim.notify("Failed to write tmux theme", vim.log.levels.ERROR)
+end
 
   -- Recarrega o tmux.conf
   os.execute("tmux source-file " .. tmux_theme_path)
