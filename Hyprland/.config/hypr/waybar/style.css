@@ -95,7 +95,7 @@ window#waybar {
 
 #pulseaudio.muted {
   padding-top: 0;
-  color: @fg-dark ;
+  color: @red ;
 }
 #temperature.critical{
   padding-top: 0;
