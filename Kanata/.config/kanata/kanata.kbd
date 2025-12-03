@@ -6,8 +6,13 @@
  linux-device-detect-mode any
  linux-dev-names-exclude (
    "SYNA7DB5:01 06CB:CD41 Touchpad" 
-   "SYNA7DB5:01 06CB:CD41 Mouse")  
+   "SYNA7DB5:01 06CB:CD41 Mouse"
+   "8BitDo Ultimate 2 Wireless"
+   "8BitDo 8BitDo Ultimate 2 Wireless Controller for PC Mouse"
+   "8BitDo 8BitDo Ultimate 2 Wireless Controller for PC Keyboard"
+   "8BitDo Ultimate 2 Wireless Controller")  
   windows-altgr add-lctl-release)
+
 
 ;; (deflocalkeys-linux
 ;;  mctl 89)
@@ -26,9 +31,11 @@
  lctl lmet lalt           spc            ralt  menu rctl
  🖰1 🖰2 🖰3 🖰4 🖰5)
 
-  ;; (defchordsv2
-  ;;  (esc ret) @bas 100 all-released  ()
-  ;;   (esc spc) @gam 100 all-released  ())
+;; (defchordsv2
+;;  ;; (esc ret) @bas 100 all-released  ()
+;;  ;;  (esc bspc) @gam 100 all-released  ()
+;;  (, .) [ 100 all-released ()
+;;  (. /) ] 100 all-released ())
 
    (defalias
     ;; Definer as layer
