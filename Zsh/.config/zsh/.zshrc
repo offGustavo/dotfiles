@@ -169,6 +169,11 @@ alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/oh
 # Eza is hard to type
 alias exa="eza --icons --git -l -G -h -a"
 
+
+# Keyboard
+alias kboff="sudo echo 1 | sudo tee /sys/class/input/event4/device/inhibited"
+alias kbon="sudo echo 0 | sudo tee /sys/class/input/event4/device/inhibited"
+
 # Zoxide
 # alias cd=z
 
