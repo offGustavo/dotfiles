@@ -6,8 +6,12 @@ kill_if_running() {
 }
 
 start_sway() {
-  # kill_if_running  swaybg
-  ~/.config/hypr/scripts/start_swaybg.lua
+  local wallpaper_name="$1"
+  if [[ -n "$wallpaper_name" ]]; then
+    ~/.config/hypr/scripts/start_swaybg.lua -n "$wallpaper_name"
+  else
+    ~/.config/hypr/scripts/start_swaybg.lua
+  fi
 }
 
 start_waybar() {
@@ -22,15 +26,18 @@ start_waybar() {
 
 if [ "$current_scheme" = "'prefer-light'" ] || [ "$current_scheme" = "'default'" ]; then
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-  ln -sf ~/.config/fuzzel/dark.ini ~/.config/fuzzel/colors.ini
 
+  ln -sf ~/.config/fuzzel/dark.ini ~/.config/fuzzel/colors.ini
   start_waybar
   start_sway
+
   notify-send "Dark Mode" "Switched to dark mode"
 else
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+
   ln -sf ~/.config/fuzzel/light.ini ~/.config/fuzzel/colors.ini
-  start_waybar 
-  start_sway
+  start_waybar
+  start_sway 
+
   notify-send "Light Mode" "Switched to light mode"
 fi
