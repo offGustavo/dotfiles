@@ -1,5 +1,4 @@
 #!/bin/bash
-# Enhanced Alt+Tab with same-type window switching for Hyprland
 
 STATE_DIR="/tmp/hypr-alt-tab"
 STATE_FILE="$STATE_DIR/state"
@@ -16,11 +15,13 @@ mkdir -p "$STATE_DIR"
 # Parse arguments
 same_type=false
 reverse=false
+visible_only=false
 
 for arg in "$@"; do
     case $arg in
         --same) same_type=true ;;
         --reverse) reverse=true ;;
+        --visible) visible_only=true ;;
     esac
 done
 
@@ -36,9 +37,44 @@ get_window_title() {
     hyprctl clients -j | jq -r --arg addr "$window" '.[] | select(.address == $addr) | .title'
 }
 
-# Function to get all windows sorted by focus history
+# Function to get window workspace ID
+get_window_workspace() {
+    local window="$1"
+    hyprctl clients -j | jq -r --arg addr "$window" '.[] | select(.address == $addr) | .workspace.id'
+}
+
+# Function to get active workspaces (visible on monitors)
+get_active_workspaces() {
+    hyprctl monitors -j | jq -r '.[].activeWorkspace.id'
+}
+
+# Function to get all windows sorted by focus history (most recent first)
 get_windows_by_focus() {
     hyprctl clients -j | jq -r 'sort_by(-.focusHistoryID) | .[].address'
+}
+
+# Function to get visible windows (on active workspaces)
+get_visible_windows() {
+    # Get all active workspace IDs
+    mapfile -t active_workspaces < <(get_active_workspaces)
+    
+    if [[ ${#active_workspaces[@]} -eq 0 ]]; then
+        return
+    fi
+    
+    # Convert active workspaces to JSON array for jq query
+    local workspaces_json="["
+    for ws in "${active_workspaces[@]}"; do
+        workspaces_json+="$ws,"
+    done
+    workspaces_json="${workspaces_json%,}]"
+    
+    # Get windows in active workspaces, sorted by focus history
+    hyprctl clients -j | jq -r --argjson workspaces "$workspaces_json" '
+        [.[] | select(.workspace.id as $ws | $workspaces | index($ws))] 
+        | sort_by(-.focusHistoryID) 
+        | .[].address
+    '
 }
 
 # Function to get windows filtered by type (same class or title pattern)
@@ -50,21 +86,6 @@ get_same_type_windows() {
     # Get all windows with same class
     hyprctl clients -j | jq -r --arg class "$current_class" \
         '.[] | select(.class == $class) | .address'
-    
-    # Alternatively, you could use title patterns for specific apps
-    # For example, for terminals or code editors with similar titles
-    # Uncomment below if you want to filter by title pattern instead
-    
-    # if [[ "$current_class" == "Alacritty" ]] || [[ "$current_class" == "kitty" ]]; then
-    #     # For terminals, use class instead of title
-    #     hyprctl clients -j | jq -r --arg class "$current_class" \
-    #         '.[] | select(.class == $class) | .address'
-    # else
-    #     # For other apps, extract base title (remove paths, etc.)
-    #     local base_title=$(echo "$current_title" | sed 's/ -.*//' | sed 's/ [|•].*//')
-    #     hyprctl clients -j | jq -r --arg title "$base_title" \
-    #         '.[] | select(.title | startswith($title)) | .address'
-    # fi
 }
 
 # Function to get currently focused window
@@ -96,8 +117,42 @@ validate_window_list() {
 current_focused=$(get_focused_window)
 
 # Get appropriate window list based on mode
-if [[ "$same_type" == "true" ]] && [[ -n "$current_focused" ]]; then
-    # Get windows of the same type as current
+if [[ "$visible_only" == "true" ]]; then
+    # Get only windows in active workspaces (visible on monitors)
+    echo "Switching between visible windows only" >&2
+    mapfile -t windows < <(get_visible_windows)
+    
+    # If no visible windows, fall back to all windows
+    if [[ ${#windows[@]} -eq 0 ]]; then
+        echo "No visible windows found, falling back to all windows" >&2
+        mapfile -t windows < <(get_windows_by_focus)
+    fi
+    
+    # Apply same-type filter if requested
+    if [[ "$same_type" == "true" ]] && [[ -n "$current_focused" ]]; then
+        # Get windows of the same type as current (from visible windows)
+        mapfile -t same_type_windows < <(get_same_type_windows "$current_focused")
+        
+        # Filter visible windows to only include same-type windows
+        local filtered_windows=()
+        for visible_window in "${windows[@]}"; do
+            for same_window in "${same_type_windows[@]}"; do
+                if [[ "$visible_window" == "$same_window" ]]; then
+                    filtered_windows+=("$visible_window")
+                    break
+                fi
+            done
+        done
+        
+        # If filtered list has windows, use it
+        if [[ ${#filtered_windows[@]} -gt 0 ]]; then
+            windows=("${filtered_windows[@]}")
+        else
+            echo "No visible windows of same type, using all visible windows" >&2
+        fi
+    fi
+elif [[ "$same_type" == "true" ]] && [[ -n "$current_focused" ]]; then
+    # Get windows of the same type as current (from all windows)
     mapfile -t windows < <(get_same_type_windows "$current_focused")
     
     # If no same-type windows or only current window, fall back to all windows
@@ -199,7 +254,7 @@ printf '%s\n' "${windows[@]}" > "$WINDOW_LIST_FILE"
 # Focus the target window
 target_window="${windows[$target_index]}"
 if window_exists "$target_window"; then
-    echo "Switching to window: $target_window (Class: $(get_window_class "$target_window"))" >&2
+    echo "Switching to window: $target_window (Class: $(get_window_class "$target_window"), Workspace: $(get_window_workspace "$target_window"))" >&2
     hyprctl dispatch focuswindow "address:$target_window"
     hyprctl dispatch bringactivetotop
 fi
