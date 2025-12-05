@@ -80,7 +80,7 @@ end
 --}}}
 
 --{{{ -- Keymaps
-vim.keymap.set({ 'n', 'v', 'i' }, '<C-s>', vim.cmd.write)
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-s>', vim.cmd.update)
 
 vim.keymap.set('n', '<leader>w', '<C-w>')
 
@@ -406,6 +406,8 @@ vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 
 --{{{ -- Mini
 require("mini.pick").setup()
+vim.keymap.set("n", "<leader>ff", ":Pick files<Cr>")
+vim.keymap.set("n", "<leader>f/", ":Pick grep_live<Cr>")
 require("mini.ai").setup()
 require("mini.surround").setup()
 require("mini.icons").setup()
