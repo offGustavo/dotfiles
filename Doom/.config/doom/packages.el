@@ -53,7 +53,7 @@
 
 ;; (package! fzf)
 
-;; (package! multi-vterm)
+(package! multi-vterm)
 
 (package! zoxide)
 

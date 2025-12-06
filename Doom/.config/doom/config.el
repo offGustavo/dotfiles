@@ -88,6 +88,23 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(after! evil
+        (map! 
+          ;; C-a/C-x increment/decrement numbers
+          :n "C-a" #'evil-numbers/inc-at-pt
+          :v "C-a" #'evil-numbers/inc-at-pt
+          :v "C-x" #'evil-numbers/dec-at-pt
+          :n "C-x" #'evil-numbers/dec-at-pt
+
+          :v "C-j" #'drag-stuff-down
+          :v "C-k" #'drag-stuff-up
+
+          ;; Leader key: z → zoxide
+          :leader "z" #'zoxide-travel
+
+          ;; Save buffer
+          :n "C-s" #'save-buffer)
+
 
 ;; Send files to trash instead of fully deleting
 (setq delete-by-moving-to-trash t
@@ -96,3 +113,4 @@
 (setq auto-save-default t)
 
 ;; Disable breadcrumb
+(add-hook 'lsp-mode-hook (lambda () (lsp-headerline-breadcrumb-mode -1)))
