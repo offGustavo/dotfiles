@@ -3,16 +3,24 @@ return {
   opts = {
     -- indent = { enabled = false },
     -- scope = { enabled = false },
+    lazygit = {
+      config = {
+       -- https://github.com/folke/snacks.nvim/discussions/87 
+        os = {
+          edit = '[ -z ""$NVIM"" ] && (nvim -- {{filename}}) || (nvim --server ""$NVIM"" --remote-send ""q"" && nvim --server ""$NVIM"" --remote {{filename}})',
+        },
+      },
+    },
     explorer = {
       replace_netrw = false,
     },
     input = { enabled = false },
-      picker = {
-        sources = {
-          files = { hidden = true },
-          grep = { hidden = true },
-          explorer = { hidden = true },
-        },
+    picker = {
+      sources = {
+        files = { hidden = true },
+        grep = { hidden = true },
+        explorer = { hidden = true },
+      },
       layout = {
         preview = false,
         layout = {
