@@ -103,7 +103,7 @@
           :leader "z" #'zoxide-travel
 
           ;; Save buffer
-          :n "C-s" #'save-buffer)
+          :n "C-s" #'save-buffer))
 
 
 ;; Send files to trash instead of fully deleting
