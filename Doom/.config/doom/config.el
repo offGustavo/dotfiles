@@ -90,6 +90,13 @@
 ;; they are implemented.
 (after! evil
         (map! 
+
+          ;; Windows
+          :nv "C-w O" #'doom/window-enlargen
+          :nv "C-w o" #'doom/window-maximize-buffer
+          :leader "C-w O" #'doom/window-enlargen
+          :leader "C-w o" #'doom/window-maximize-buffer
+
           ;; C-a/C-x increment/decrement numbers
           :n "C-a" #'evil-numbers/inc-at-pt
           :v "C-a" #'evil-numbers/inc-at-pt
