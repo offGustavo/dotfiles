@@ -48,10 +48,9 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
-;; Harpoon
-;; (package! harpoon)
+(package! harpoon)
 
-;; (package! fzf)
+(package! fzf)
 
 (package! multi-vterm)
 
@@ -59,4 +58,6 @@
 
 (package! drag-stuff)
 
-;; (package! todoist)
+(package! rg)
+(package! deadgrep)
+
