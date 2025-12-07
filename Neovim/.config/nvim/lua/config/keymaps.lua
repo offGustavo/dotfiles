@@ -242,8 +242,8 @@ pcall(function()
   vim.keymap.del("n", "<S-h>")
   vim.keymap.del("n", "<S-l>")
 end)
-vim.keymap.set("n", "<C-PageUp>", vim.cmd.bnext, { desc = "Next Buffer"})
-vim.keymap.set("n", "<C-PageDown>", vim.cmd.bprev, { desc = "Previous Buffer"})
+vim.keymap.set("n", "<C-PageUp>", vim.cmd.bnext, { desc = "Next Buffer" })
+vim.keymap.set("n", "<C-PageDown>", vim.cmd.bprev, { desc = "Previous Buffer" })
 
 -- Toggle Options
 Snacks.toggle
@@ -415,6 +415,46 @@ vim.keymap.set("n", "<leader><space>", function()
     },
   })
 end, { desc = "Snacks Smart Picker" })
+
+vim.keymap.set("n", "<leader>fe", function()
+  Snacks.picker.explorer({
+    follow_file = true,
+    auto_close = true,
+    actions = {
+      explorer_up_and_collapse = function(picker)
+        picker:set_cwd(vim.fs.dirname(picker:cwd()))
+        picker:find()
+        require("snacks.explorer.tree"):close_all(picker:cwd())
+      end,
+      explorer_focus_or_confirm = function(picker, item, action)
+        if item.dir then
+          picker:set_cwd(item._path)
+          picker:find()
+        else
+          require("snacks.explorer.actions").actions.confirm(picker, item, action)
+        end
+      end,
+      explorer_collapse_and_close = function(picker)
+        require("snacks.explorer.tree"):close_all(picker:cwd())
+        picker:norm(function()
+          picker:close()
+        end)
+      end,
+    },
+    win = {
+      list = {
+        keys = {
+      --    ["h"] = "explorer_up_and_collapse",
+          ["<BS>"] = "explorer_up_and_collapse",
+          ["-"] = "explorer_up_and_collapse",
+       --   ["l"] = "explorer_focus_or_confirm",
+          ["<CR>"] = "explorer_focus_or_confirm",
+        --  ["q"] = "explorer_collapse_and_close",
+        },
+      },
+    },
+  })
+end)
 
 vim.keymap.set("n", "<leader>/", function()
   Snacks.picker.grep({
