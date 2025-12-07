@@ -114,4 +114,4 @@ end
 --   end, { nargs = "?" })
 -- end
 
-vim.o.winborder = "rounded"
+-- vim.o.winborder = "rounded"
