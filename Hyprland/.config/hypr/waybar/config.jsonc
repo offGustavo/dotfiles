@@ -17,7 +17,7 @@
     "hyprland/submap",
   ],
   "modules-center": [
-    "privacy"
+    "custom/privacydots"
     // "wlr/taskbar"
   ],
   "modules-right": [
@@ -379,7 +379,16 @@
     "tooltip-format": "MPD (connected)",
     "tooltip-format-disconnected": "MPD (disconnected)"
   },
-  "privacy": {
+  "custom/privacydots": {
+    "exec": "~/.config/hypr/waybar/scripts/privacydots.sh",
+    "return-type": "json",
+    "interval": 3,
+    "format": "{text}",
+    "tooltip": true,
+    "escape": false,
+    "markup": "pango"
+  },
+"privacy": {
     "icon-spacing": 5,
     "icon-size": 12,
     "transition-duration": 250,
