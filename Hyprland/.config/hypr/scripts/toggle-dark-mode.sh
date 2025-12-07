@@ -28,6 +28,7 @@ if [ "$current_scheme" = "'prefer-light'" ] || [ "$current_scheme" = "'default'"
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
   ln -sf ~/.config/fuzzel/dark.ini ~/.config/fuzzel/colors.ini
+  ln -sf ~/.config/hypr/config/theme/dark.conf ~/.config/hypr/config/theme.conf
   start_waybar
   start_sway
 
@@ -36,6 +37,7 @@ else
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
 
   ln -sf ~/.config/fuzzel/light.ini ~/.config/fuzzel/colors.ini
+  ln -sf ~/.config/hypr/config/theme/light.conf ~/.config/hypr/config/theme.conf
   start_waybar
   start_sway 
 
