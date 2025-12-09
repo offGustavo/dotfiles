@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 CHOICE=$(echo -e "Poweroff\nReboot\nSuspend\nLog out\nPower Profile" | fzf --no-multi --no-preview --header "Power Management:")
 case "$CHOICE" in

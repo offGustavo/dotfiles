@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 OPTIONS=(
   "Monitor Acima (HDMI-A-1): HDMI-A-1, 1920x1080@179.96Hz, 0x-1080, 1.0"

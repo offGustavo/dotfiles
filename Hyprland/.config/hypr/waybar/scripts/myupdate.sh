@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 pkgmgr="pacman"
 hash paru 2>/dev/null && pkgmgr="paru"

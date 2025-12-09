@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Arquivo com a lista de conflitos
 ARQUIVO="conflitos.txt"

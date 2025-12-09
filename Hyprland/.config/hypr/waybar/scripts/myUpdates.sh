@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 format() {
     if [ "$1" -eq 0 ]; then
         echo '-'

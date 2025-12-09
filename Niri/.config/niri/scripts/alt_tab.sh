@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 # Obtém o JSON completo
 JSON=$(niri msg --json windows)

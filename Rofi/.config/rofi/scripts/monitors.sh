@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 chosen=$(echo -e "Ativar Externo Direita\nAtivar Externo Acima\nDesativar Externo\nAtivar Interno\nDesativar Interno\nEspelhar\nApenas Externo\nApenas Interno" | rofi -dmenu -p "Escolha uma opção:")
 

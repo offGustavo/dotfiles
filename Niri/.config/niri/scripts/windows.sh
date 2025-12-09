@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 WINDOW=$(niri msg --json windows | jq -r '.[] | "[\(.workspace_id)] [\(.app_id)] \(.title) -> id: \(.id)"' | sort | fuzzel -d | awk '{print $NF}')
 if [ "$WINDOW" = "" ]; then
   exit

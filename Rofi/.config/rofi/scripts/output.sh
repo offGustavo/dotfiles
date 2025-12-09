@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 # Obtém a lista de dispositivos de saída de áudio
 sinks=$(pactl list sinks | awk ' /^\s*Name:/ { name = substr($0, index($0, $2)) } /^\s*Description:/ { desc = substr($0, index($0, $2)); print desc " [" name "]"; } ')

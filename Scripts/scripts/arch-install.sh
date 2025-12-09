@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # sudo pacman -S --noconfirm gnome kitty zsh neovim fzf tmux git stow zen-browser ttf-jetbrains-mono
 #

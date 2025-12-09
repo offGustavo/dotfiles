@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 # Check the current state of the speaker
 state=$(amixer -D pulse sget Master | awk '/\[on\]/{print "unmute"; exit} /\[off\]/{print "mute"; exit}')

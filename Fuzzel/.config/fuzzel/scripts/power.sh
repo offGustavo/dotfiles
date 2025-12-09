@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 chosen=$(echo -e "Poweroff\nReboot\nSuspend\nLog out\nProfile" | fuzzel -d -p "Power Management:")
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -z "$1" ]; then
   echo "Uso: $0 [--float] <nome_do_programa> [args...]"

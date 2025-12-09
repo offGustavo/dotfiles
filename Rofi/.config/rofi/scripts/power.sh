@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 CHOICE=$(echo -e "Poweroff\nReboot\nSuspend\nLog out\nPower Profile" | rofi -dmenu -p "Power Management:")
 case "$CHOICE" in
