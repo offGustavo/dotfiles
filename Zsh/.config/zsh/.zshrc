@@ -5,11 +5,12 @@ export PATH=$HOME/.cargo/bin/$PATH
 
 # Custom Path
 export PATH=$PATH:$HOME/scripts
-export PATH=$PATH:$HOME/.config/emacs/bin/
 
-# Nix
-export PATH=$PATH:$HOME/.nix-profile/bin
-export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
+# export PATH=$PATH:$HOME/.config/emacs/bin/
+
+# # Nix
+# export PATH=$PATH:$HOME/.nix-profile/bin
+# export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
 
 # Fix java lsp
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
@@ -34,6 +35,7 @@ export MANPAGER='nvim -c "nmap <silent> q :q!<Cr>" +Man!'
 
 # Path to your Oh My Zsh installation.
 export ZSH="$XDG_CONFIG_HOME/zsh/.oh-my-zsh"
+export HISTFILE="$HOME/.config/zsh/.zsh_history"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -48,7 +50,7 @@ ZSH_THEME="smt" # set by `omz`
 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "josh" "smt" "example")
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -139,14 +141,7 @@ fi
 # fi
 
 # Edit File
-if ! command -v vim >/dev/null 2>&1; then
-    export EDITOR='nvim'
-    alias vim=nvim
-fi
-if ! command -v nvim >/dev/null 2>&1; then
-    export EDITOR='vim'
-    alias nvim=vim
-fi
+export EDITOR='nvim'
 
 alias :e=$EDITOR
 
@@ -168,7 +163,6 @@ alias ohmyzshinstall='sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/oh
 
 # Eza is hard to type
 alias exa="eza --icons --git -l -G -h -a"
-
 
 # Keyboard
 alias kboff="sudo echo 1 | sudo tee /sys/class/input/event4/device/inhibited"
@@ -260,7 +254,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=scrollbar:#27a1b9 \
   --color=separator:#ff9e64 \
   --color=spinner:#ff007c \
-  --preview 'if [ -d {} ]; then eza --icons --git -l -G -h -l --icons {}; else ~/.fzf/bin/fzf-preview.sh {}; fi' \
+  --preview 'if [ -d {} ]; then eza --icons --git -l -G -h -l --icons {}; else ~/scripts/fzf-preview.sh {}; fi' \
   --preview-window 'up,border-rounded,<15(hidden,,)'
   --multi \
   --bind ctrl-q:toggle-all,alt-q:toggle-all \
