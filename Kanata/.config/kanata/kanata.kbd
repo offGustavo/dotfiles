@@ -86,8 +86,8 @@ rm/ (tap-hold 100 300 / @mov)
 
   ;; Remap
 
-;;   ;; Caps
-;;   ecc (tap-hold 100 300 esc caps)
+  ;; Caps
+   ecc (tap-hold 100 300 esc caps)
 ;; lce (tap-hold 100 300 esc caps)
 
   ;; Control
@@ -95,8 +95,7 @@ rm/ (tap-hold 100 300 / @mov)
   rcj (tap-hold 100 300 j rctl)
 cNe (tap-hold 100 300 next lctl)
   ;; lce (tap-hold 100 300 esc lctrl)
-  ecc (tap-hold-press 100 300 esc lctrl)
-
+  ;; ecc (tap-hold-press 100 300 esc lctrl)
   ;; Shift
   lsd (tap-hold 100 300 d lsft)
   rsk (tap-hold 100 300 k rsft)
@@ -183,7 +182,7 @@ lef(tap-hold 100 300 = f12))
    tab  @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [    ]    \
    @ecc @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @rar
    lsft @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft
-   @ecc lmet @lab           @ssc           @rar  @rmn rctl 
+   lctl lmet @lab           @ssc           @rar  @rmn rctl 
    🖰1 🖰2 🖰3 @mbn @mfs)
 
   ;; (deflayer dvorak
