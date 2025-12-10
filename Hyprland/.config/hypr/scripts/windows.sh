@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # hypr-windows.sh
 # Lists all windows in Hyprland, shows them in fuzzel, and focuses the selected one.
 

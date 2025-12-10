@@ -1,11 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 current_scheme=$(gsettings get org.gnome.desktop.interface color-scheme)
 
 kill_if_running() {
-  pgrep -x "$1" >/dev/null && killall "$1"
+  pids=$(pgrep "$1")
+  if [ -n "$pids" ]; then
+    echo "Found PIDs for $1: $pids"
+    kill $pids
+  else
+    echo "No running process named $1"
+  fi
 }
 
 start_sway() {
+  kill_if_running swaybg 
   local wallpaper_name="$1"
   if [[ -n "$wallpaper_name" ]]; then
     ~/.config/hypr/scripts/start_swaybg.lua -n "$wallpaper_name"
