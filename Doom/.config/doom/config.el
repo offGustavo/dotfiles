@@ -88,29 +88,39 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-(after! evil
-        (map! 
+(setq! evil-disable-insert-state-bindings t)
+;; Windows
+(map!
+ :nv "C-w O" #'doom/window-enlargen
+ :nv "C-w o" #'doom/window-maximize-buffer
+ :leader
+ "w O" #'doom/window-enlargen
+ "w o" #'doom/window-maximize-buffer)
 
-          ;; Windows
-          :nv "C-w O" #'doom/window-enlargen
-          :nv "C-w o" #'doom/window-maximize-buffer
-          :leader "w O" #'doom/window-enlargen
-          :leader "w o" #'doom/window-maximize-buffer
+;; Number increment/decrement
+(after! evil-numbers
+  (map!
+   :n "C-a" #'evil-numbers/inc-at-pt
+   :v "C-a" #'evil-numbers/inc-at-pt
+   :n "C-x" #'evil-numbers/dec-at-pt
+   :v "C-x" #'evil-numbers/dec-at-pt))
 
-          ;; C-a/C-x increment/decrement numbers
-          :n "C-a" #'evil-numbers/inc-at-pt
-          :v "C-a" #'evil-numbers/inc-at-pt
-          :v "C-x" #'evil-numbers/dec-at-pt
-          :n "C-x" #'evil-numbers/dec-at-pt
+;; Drag stuff
+(after! drag-stuff
+  (map!
+   :v "C-h" #'drag-stuff-left
+   :v "C-j" #'drag-stuff-down
+   :v "C-k" #'drag-stuff-up
+   :v "C-l" #'drag-stuff-right))
 
-          :v "C-j" #'drag-stuff-down
-          :v "C-k" #'drag-stuff-up
+;; Leader keys
+(map!
+ :leader
+ "z" #'zoxide-travel)
 
-          ;; Leader key: z → zoxide
-          :leader "z" #'zoxide-travel
-
-          ;; Save buffer
-          :n "C-s" #'save-buffer))
+;; Save buffer
+(map!
+ :n "C-s" #'save-buffer)
 
 
 ;; Send files to trash instead of fully deleting
@@ -121,3 +131,29 @@
 
 ;; Disable breadcrumb
 (add-hook 'lsp-mode-hook (lambda () (lsp-headerline-breadcrumb-mode -1)))
+
+
+;; (require 'exwm)
+;; ;; Set the initial workspace number.
+;; (setq exwm-workspace-number 4)
+;; ;; Make class name the buffer name.
+;; (add-hook 'exwm-update-class-hook
+;;   (lambda () (exwm-workspace-rename-buffer exwm-class-name)))
+;; ;; Global keybindings.
+;; (setq exwm-input-global-keys
+;;       `(([?\s-r] . exwm-reset) ;; s-r: Reset (to line-mode).
+;;         ([?\s-w] . exwm-workspace-switch) ;; s-w: Switch workspace.
+;;         ([?\s-&] . (lambda (cmd) ;; s-&: Launch application.
+;;                      (interactive (list (read-shell-command "$ ")))
+;;                      (start-process-shell-command cmd nil cmd)))
+;;         ;; s-N: Switch to certain workspace.
+;;         ,@(mapcar (lambda (i)
+;;                     `(,(kbd (format "s-%d" i)) .
+;;                       (lambda ()
+;;                         (interactive)
+;;                         (exwm-workspace-switch-create ,i))))
+;;                   (number-sequence 0 9))))
+;; ;; Enable EXWM
+;; (exwm-wm-mode)
+
+
