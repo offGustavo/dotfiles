@@ -3,22 +3,14 @@
 local wallpapers = {
     Light = {
         {
-            name = "White mountain",
-            path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/mountain/a_rocky_cliff_with_trees_and_fog.jpg",
-        },
-        {
-            name = "Beach sunset",
-            path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/cold/a_mountain_with_snow_and_clouds.jpg",
+            name = "Lauds",
+            path = "/home/gustavo/Pictures/Wallpapers/my/lauds.png",
         },
     },
     Dark = {
         {
-            name = "Girl under tree",
-            path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/a_cartoon_of_a_girl_standing_under_a_tree_with_purple_flowers.png",
-        },
-        {
-            name = "Night city",
-            path = "/home/gustavo/Pictures/Wallpapers/tokyo-nigth-wallpapers/night/os/arch_01_1920x1080.png",
+            name = "Compline",
+            path = "/home/gustavo/Pictures/Wallpapers/my/compline.png",
         },
     },
 }
@@ -142,8 +134,8 @@ local function start_swaybg(wallpaper_path)
     end
     file:close()
     
-    -- Mata o swaybg se estiver rodando
-    kill_swaybg_if_running()
+    -- -- Mata o swaybg se estiver rodando
+    -- kill_swaybg_if_running()
     
     -- Inicia o swaybg com o wallpaper
     local cmd = "swaybg -i '" .. wallpaper_path .. "' -m fill &"
