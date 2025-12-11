@@ -1,7 +1,7 @@
 return {
   "nvim-mini/mini.pairs",
   event = "VeryLazy",
-  enabled = false,
+  enabled = true,
   opts = {
     modes = { insert = true, command = true, terminal = false },
     -- skip autopair when next character is one of these
@@ -17,12 +17,12 @@ return {
       ["("] = { action = "open", pair = "()", neigh_pattern = "[^\\]." },
       ["["] = { action = "open", pair = "[]", neigh_pattern = "[^\\]." },
       ["{"] = { action = "open", pair = "{}", neigh_pattern = "[^\\]." },
-      ["<"] = { action = "open", pair = "<>", neigh_pattern = "[^\\]." },
+      -- ["<"] = { action = "open", pair = "<>", neigh_pattern = "[^\\]." },
 
       [")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
       ["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
       ["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
-      [">"] = { action = "close", pair = "<>", neigh_pattern = "[^\\]." },
+      -- [">"] = { action = "close", pair = "<>", neigh_pattern = "[^\\]." },
 
       ['"'] = { action = "closeopen", pair = '""', neigh_pattern = "[^\\].", register = { cr = false } },
       ["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%a\\].", register = { cr = false } },
