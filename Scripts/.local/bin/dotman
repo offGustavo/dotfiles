@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ -z "$1" ]]; then
+    echo "Uso: $0 <diretorio>"
+    exit 1
+fi
+
+PKG="$1"
+PKG="${PKG%/}"  # remove barra final
+SRC_DIR="$(realpath "$PKG")"
+HOME_DIR="$HOME"
+
+link_file() {
+    src="$1"
+    rel="${src#$SRC_DIR/}"             # caminho relativo do arquivo dentro do pacote
+    dest="$HOME_DIR/$rel"              # caminho final do symlink
+
+    dest_dir="$(dirname "$dest")"
+    mkdir -p "$dest_dir"
+
+    # Se já existe um link apontando para o lugar certo, ignore
+    if [[ -L "$dest" && "$(readlink "$dest")" == "$src" ]]; then
+        echo "OK (já linkado): $dest"
+        return
+    fi
+
+    # Se existe arquivo normal, avisa e pula
+    if [[ -e "$dest" && ! -L "$dest" ]]; then
+        echo "Ignorando (arquivo existe): $dest"
+        return
+    fi
+
+    ln -sfn "$src" "$dest"
+    echo "Link: $dest → $src"
+}
+
+export -f link_file
+export SRC_DIR HOME_DIR
+
+# Encontra todos arquivos dentro do diretório do pacote
+find "$SRC_DIR" -type f | while read -r file; do
+    link_file "$file"
+done
+
