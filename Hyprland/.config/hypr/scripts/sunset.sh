@@ -1,7 +1,8 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 if pgrep -x hyprsunset >/dev/null; then
-  killall hyprsunset
+  PID=$(pgrep hyprsunset)
+  kill $PID
   exit 0
 fi
 
