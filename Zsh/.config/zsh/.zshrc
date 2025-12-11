@@ -254,7 +254,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=scrollbar:#27a1b9 \
   --color=separator:#ff9e64 \
   --color=spinner:#ff007c \
-  --preview 'if [ -d {} ]; then eza --icons --git -l -G -h -l --icons {}; else ~/scripts/fzf-preview.sh {}; fi' \
+  --preview 'if [ -d {} ]; then eza --icons --git -l -G -h -l --icons {}; else fzf-preview.sh {}; fi' \
   --preview-window 'up,border-rounded,<15(hidden,,)'
   --multi \
   --bind ctrl-q:toggle-all,alt-q:toggle-all \
