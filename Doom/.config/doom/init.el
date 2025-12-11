@@ -110,6 +110,8 @@
        :os
        (:if (featurep :system 'macos) macos)  ; improve compatibility with macOS
        tty               ; improve the terminal Emacs experience
+       (exwm +desktop +tray +sound)
+
 
        :lang
        ;;agda              ; types of types of types of types...

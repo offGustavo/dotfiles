@@ -61,3 +61,9 @@
 (package! rg)
 (package! deadgrep)
 
+(package! exwm-evil :recipe
+  (:host github :repo "LemonBreezes/exwm-evil"))
+
+;; (package! universal-launcher
+;;   :recipe (:host github
+;;            :repo "jblais493/universal-launcher.el"))
