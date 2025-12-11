@@ -34,7 +34,7 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export MANPAGER='nvim -c "nmap <silent> q :q!<Cr>" +Man!'
 
 # Path to your Oh My Zsh installation.
-export ZSH="$XDG_CONFIG_HOME/zsh/.oh-my-zsh"
+# export ZSH="$XDG_CONFIG_HOME/zsh/.oh-my-zsh"
 export HISTFILE="$HOME/.config/zsh/.zsh_history"
 
 # Set name of the theme to load --- if set to "random", it will
@@ -116,7 +116,7 @@ bindkey -M viins "^B" backward-char
 bindkey -M viins "^F" forward-char
 
 # Init Oh My Zsh
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # Init Zoxide/Z
 if command -v zoxide >/dev/null 2>&1; then
