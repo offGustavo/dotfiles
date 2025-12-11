@@ -50,4 +50,8 @@ return {
     -- enabled = false,
     -- },
   },
+  keys = {
+    { "<leader>.", function() Snacks.picker.files() end,  desc = "Snacks Picker Files" },
+    { "<leader>>", function() Snacks.scratch() end,  desc = "Snacks Picker Files" }
+  }
 }
