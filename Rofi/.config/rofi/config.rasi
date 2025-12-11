@@ -24,23 +24,11 @@ configuration {
   window-format:              "{w} · {c} · {t}";
 }
 
+@import                          "shared/colors.rasi"
+
 * {
 
   font: "Jetbrains Mono Nerd Font 12";
-
-  /*background:     #000000;*/
-  /*background-alt: #010101;*/
-  /*foreground:     #ffffff;*/
-  /*selected:       #ffffff;*/
-  /*active:         #ffffff;*/
-  /*urgent:         #ffffff;*/
-
-  background:     #1a1b26;
-  background-alt: #292e42;
-  foreground:     #c0caf5;
-  selected:       #7aa2f7;
-  active:         #9ece6a;
-  urgent:         #f7768e;
 
   border-colour:               var(background);
   handle-colour:               var(selected);

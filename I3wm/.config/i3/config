@@ -5,36 +5,10 @@
 set $super Mod4
 set $alt Mod1
 
+
 set $scripts ~/.config/rofi/scripts
 
 set $terminal kitty
-
-# # Minimal Theme
-# set $fg #ffffff
-# set $bg #000000
-# set $bg_alt #000000
-# set $blue #ffffff
-# set $red #ffffff
-# set $green #ffffff
-# set $purple #ffffff
-
-# Tokyo Night Theme
-set $fg #c0caf5
-set $bg #1a1b26
-set $bg_alt #292e39
-set $blue #7aa2f7
-set $red #f7768e
-set $green #98c379
-set $purple #c678dd
-
-# # Tokyo Night Day Theme
-# set $fg #3760bf
-# set $bg #e1e2e7
-# set $bg_alt #c4c8da
-# set $blue #2e7de9
-# set $red #f52a65
-# set $green #587539
-# set $purple #7847bd
 
 ## Print all window titles in format of 'class | title'
 title_align center
@@ -43,7 +17,7 @@ for_window [class=".*"] border pixel 1
 for_window [all] title_window_icon off
 hide_edge_borders none
 
-# COLORS
+# Colors
 # class                  border backgr. text  indicator child_border
 client.focused           $bg    $blue   $bg   $blue     $blue
 client.focused_inactive  $bg    $bg     $bg   $bg       $bg
@@ -103,6 +77,10 @@ bindsym $super+n exec --no-startup-id  $scripts/network.py
 
 # run rofi bluetooth script
 bindsym $super+b exec --no-startup-id  $scripts/bluetooth.sh
+
+# run rofi bluetooth script
+bindsym $super+$alt+b exec --no-startup-id  ~/.config/i3/scripts/toggle-dark-mode.sh
+
 
 bindsym $super+x exec --no-startup-id  $scripts/power.sh
 
@@ -259,3 +237,12 @@ bar {
 #   MatchDriver "libinput"
 #   Option "NaturalScrolling" "true"
 # EndSection
+
+# Tokyo Night Day Theme
+set $fg #3760bf
+set $bg #e1e2e7
+set $bg_alt #c4c8da
+set $blue #2e7de9
+set $red #f52a65
+set $green #587539
+set $purple #7847bd
