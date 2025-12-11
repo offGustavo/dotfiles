@@ -98,20 +98,18 @@
  "w o" #'doom/window-maximize-buffer)
 
 ;; Number increment/decrement
-(after! evil-numbers
   (map!
    :n "C-a" #'evil-numbers/inc-at-pt
    :v "C-a" #'evil-numbers/inc-at-pt
    :n "C-x" #'evil-numbers/dec-at-pt
-   :v "C-x" #'evil-numbers/dec-at-pt))
+   :v "C-x" #'evil-numbers/dec-at-pt)
 
 ;; Drag stuff
-(after! drag-stuff
   (map!
    :v "C-h" #'drag-stuff-left
    :v "C-j" #'drag-stuff-down
    :v "C-k" #'drag-stuff-up
-   :v "C-l" #'drag-stuff-right))
+   :v "C-l" #'drag-stuff-right)
 
 ;; Leader keys
 (map!
