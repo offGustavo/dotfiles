@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
 
-chosen=$(echo -e "Poweroff\nReboot\nSuspend\nLog out\nProfile" | fuzzel -d -p "Power Management:")
+chosen=$(echo -e "Poweroff\nReboot\nSuspend\nLog out\nProfile\nExit" | fuzzel -d -p "Power Management:")
 
 case "$chosen" in
+"Exit")
+    exit 0
+    ;;
 "Poweroff")
   systemctl poweroff
   ;;
@@ -20,7 +23,7 @@ case "$chosen" in
   hyprctl dispatch exit
   ;;
 "Profile")
-  chosen2=$(echo -e "Power Saver\nBalanced\nPerformance" | fuzzel -d -p "Power Profile ($(powerprofilesctl get)):")
+  chosen2=$(echo -e "Power Saver\nBalanced\nPerformance\nExit" | fuzzel -d -p "Power Profile ($(powerprofilesctl get)):")
   case "$chosen2" in
   "Power Saver")
     powerprofilesctl set power-saver
@@ -30,6 +33,9 @@ case "$chosen" in
     ;;
   "Performance")
     powerprofilesctl set performance
+    ;;
+"Exit")
+    exit 0
     ;;
   esac
   ;;
