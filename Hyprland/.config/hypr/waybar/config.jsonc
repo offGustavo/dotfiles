@@ -192,6 +192,7 @@
     ],
     "on-scroll-down": "brightnessctl set 10%+",
     "on-scroll-up": "brightnessctl set 10%-",
+    "on-click": "~/.config/hypr/scripts/toggle-dark-mode.sh",
     "smooth-scrolling-threshold": 1
   },
   "backlight/slider": {
@@ -224,7 +225,7 @@
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-    "on-click": "~/.config/hypr/fuzzel/scripts/bluetooth.sh",
+    "on-click": "~/.config/fuzzel/scripts/bluetooth.sh",
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
@@ -246,8 +247,8 @@
     },
     "scroll-step": 5,
     "justify": "center",
-    "on-click": "amixer sset Master toggle",
-    "on-click-right": "~/.config/hypr/fuzzel/scripts/sound.sh",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-right": "~/.config/fuzzel/scripts/sound.sh",
     "tooltip-format": "{volume}%  {icon}",
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
@@ -298,7 +299,7 @@
     "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
     "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
     "tooltip-format-ethernet": "{bandwidthTotalBytes}",
-    "on-click": "networkmanager_dmenu"
+    "on-click": "~/.config/fuzzel/scripts/network.py",
   },
   "network#speed": {
     "format": "{bandwidthDownBits}",
@@ -337,11 +338,9 @@
     },
     "tooltip": true,
     "format": "{capacity}% {icon}",
-    "format-time": "{H}h {M}min",
-    "tooltip": "{time}",
+    "tooltip": "{capacity}% {icon} {time}",
     "format-charging": "{capacity}% {icon}",
     "format-plugged": "{capacity}% 󰂄",
-    "format-alt": "{time} {icon}",
     "format-icons": [
       "󰁺",
       "󰁻",
@@ -352,7 +351,7 @@
       "󰂁",
       "󰁹"
     ],
-    "on-click": "~/.config/rofi/scripts/powermenu.sh"
+    "on-click": "~/.config/fuzzel/scripts/power.sh",
   },
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) <U+F001>",
