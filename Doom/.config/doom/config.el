@@ -45,7 +45,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Documents/Notes/Org/")
 
 (custom-set-faces!
  '(markdown-header-delimiter-face :foreground "#565f89" :height 0.9) ;; darker gray
@@ -88,37 +88,38 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-;; (setq! evil-disable-insert-state-bindings t)
-;; Windows
-;; (map!
-;;  :nv "C-w O" #'doom/window-enlargen
-;;  :nv "C-w o" #'doom/window-maximize-buffer
-;;  :leader
-;;  "w O" #'doom/window-enlargen
-;;  "w o" #'doom/window-maximize-buffer)
+(after! evil
+(setq! evil-disable-insert-state-bindings t)
+;;Windows
+(map!
+ :nv "C-w O" #'doom/window-enlargen
+ :nv "C-w o" #'doom/window-maximize-buffer
+ :leader
+ "w O" #'doom/window-enlargen
+ "w o" #'doom/window-maximize-buffer)
 
-;; ;; Number increment/decrement
-;;   (map!
-;;    :n "C-a" #'evil-numbers/inc-at-pt
-;;    :v "C-a" #'evil-numbers/inc-at-pt
-;;    :n "C-x" #'evil-numbers/dec-at-pt
-;;    :v "C-x" #'evil-numbers/dec-at-pt)
+;; Number increment/decrement
+  (map!
+   :n "C-a" #'evil-numbers/inc-at-pt
+   :v "C-a" #'evil-numbers/inc-at-pt
+   :n "C-x" #'evil-numbers/dec-at-pt
+   :v "C-x" #'evil-numbers/dec-at-pt)
 
-;; ;; Drag stuff
-;;   (map!
-;;    :v "C-h" #'drag-stuff-left
-;;    :v "C-j" #'drag-stuff-down
-;;    :v "C-k" #'drag-stuff-up
-;;    :v "C-l" #'drag-stuff-right)
+;; Drag stuff
+  (map!
+   :v "C-h" #'drag-stuff-left
+   :v "C-j" #'drag-stuff-down
+   :v "C-k" #'drag-stuff-up
+   :v "C-l" #'drag-stuff-right)
 
-;; ;; Leader keys
-;; (map!
-;;  :leader
-;;  "z" #'zoxide-travel)
+;; Leader keys
+(map!
+ :leader
+ "z" #'zoxide-travel)
 
-;; ;; Save buffer
-;; (map!
-;;  :n "C-s" #'save-buffer)
+;; Save buffer
+(map!
+ :n "C-s" #'save-buffer))
 
 
 ;; Send files to trash instead of fully deleting
@@ -157,8 +158,8 @@
                         (exwm-workspace-switch-create ,i))))
                   (number-sequence 0 9))))
 
-;; Enable EXWM
-(exwm-wm-mode)
+;; ;; Enable EXWM
+;; (exwm-wm-mode)
 
 (use-package! exwm-evil
   :after exwm
