@@ -57,27 +57,25 @@ return {
                      },
         },
       },
-
-        layout = "ivy_split",
-      -- layout = {
-      --   preview = false,
-        -- layout = {
-          -- box = "vertical",
-          -- backdrop = false,
-          -- row = -1,
-          -- width = 0,
-          -- height = 0.4,
-          -- border = "top",
-          -- title = " {title} {live} {flags}",
-          -- title_pos = "left",
-          -- { win = "input", height = 1, border = "none" },
-          -- {
-          --   box = "horizontal",
-          --   { win = "list", border = "none" },
-          --   { win = "preview", width = 0.6, border = "rounded" },
-          -- },
-        -- },
-      -- },
+      layout = {
+        preview = false,
+        layout = {
+          box = "vertical",
+          backdrop = false,
+          row = -1,
+          width = 0,
+          height = 0.4,
+          border = "top",
+          title = " {title} {live} {flags}",
+          title_pos = "left",
+          { win = "input", height = 1, border = "none" },
+          {
+            box = "horizontal",
+            { win = "list", border = "none" },
+            { win = "preview", width = 0.6, border = "rounded" },
+          },
+        },
+      },
     },
     animate = {
       duration = 10, -- ms per step
