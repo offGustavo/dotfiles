@@ -196,33 +196,32 @@ lef(tap-hold 100 300 = f12))
 
   (deflayermap alt-nav
   ;; Left Hand
-   w up
-   a left
-   s down
-   d rght
-   q home
-   e end
-   f pgup
-   v pgdn
-   x del
-   c bspc
+   e up
+   s left
+   d down
+   f rght
+   w home
+   r end
+   t pgup
+   g pgdn
+   c del
+   x bspc
    z ins
 
-   ;; Right Hnad
-   j left
-   i up
-   k down
-   l rght
-   u home
-   o end
-   m pgup
-   , pgdn
-   ; del
-   '  bspc
-   n ins
+   bspc lmet
+   tab [
+   esc ]
+   caps ]
+
+  q vold
+  a volu
+  v prev
+  b next
+  🖰3 pp
+  mwu volu
+  mwd vold
 
    ;; Others Keys
-   spc lsft
    1 f1 
    2 f2 
    3 f3 
@@ -235,11 +234,6 @@ lef(tap-hold 100 300 = f12))
   0 f10 
   - f11 
   = f12 
-  ;; y vold
-  ;; i pp
-  ;; u prev
-  ;; o next
-  ;; p volu
   🖰1 (tap-hold 100 300 🖰1 lsft)
 🖰2 (tap-hold 100 300 🖰2 lctrl))
 
