@@ -5,6 +5,7 @@ export PATH=$HOME/.cargo/bin/$PATH
 
 # Custom Path
 export PATH=$PATH:$HOME/scripts
+export PATH=$PATH:$HOME/.local/share/bob/nvim-bin/
 
 # export PATH=$PATH:$HOME/.config/emacs/bin/
 
