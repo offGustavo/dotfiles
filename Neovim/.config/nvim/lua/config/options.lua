@@ -20,7 +20,7 @@ vim.o.swapfile = false
 vim.opt.spelllang = { "pt_br", "en_us", "es" }
 
 vim.cmd([[
-  let g:netrw_banner = 0
+  " let g:netrw_banner = 0
   set path+=**
   set wildignore+=**/node_modules/**
 ]])
