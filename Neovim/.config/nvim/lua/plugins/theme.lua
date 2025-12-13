@@ -60,4 +60,10 @@ return {
     lazy = false,
     priority = 1000,
   },
+
+  {
+    "tiagovla/tokyodark.nvim",
+  },
+
+  { "EdenEast/nightfox.nvim" } -- lazy
 }
