@@ -212,8 +212,7 @@ alias cmux="tmux -f ~/.config/cmux/cmux.conf"
 alias :Lc="tmux -f ~/.config/cmux/cmux.conf new-session -s vim '$LVIM nvim'"
 
 # Gengar Fastfetch
-alias :g="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
-alias gengar="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
+alias gengar="pokeget --hide-name glalie | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
 
 # Exit terminal
 alias :q=exit
