@@ -1,2 +1,2 @@
 
-require('plugins.lauds.theme').setup()
+require('themes.lauds').setup()
