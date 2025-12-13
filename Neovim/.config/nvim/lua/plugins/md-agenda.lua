@@ -8,11 +8,11 @@ return {
       --- REQUIRED ---
       agendaFiles = {
         -- "~/notes/agenda.md", "~/notes/habits.md", -- Single Files
-        "~/Notes/", -- Folders
+        "~/Documents/Notes/", -- Folders
       },
       habit = {
-        "~/Notes/habits/",
-        "habits.md",
+        "~/Documents/Notes/habits/",
+        "~/Documents/Notes/habits/habits.md",
       },
 
       --- OPTIONAL ---
