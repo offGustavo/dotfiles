@@ -3,7 +3,7 @@
 --{{{ -- Options
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
-vim.g.netrw_banner = 0
+-- vim.g.netrw_banner = 0
 vim.g.snacks_animate = false
 
 vim.o.number = true
@@ -141,9 +141,7 @@ vim.keymap.set('n', '<leader>ha', function()
   vim.cmd 'argadd %'
   vim.cmd 'argdedup'
 end)
-vim.keymap.set('n', '<leader>he', function()
-  vim.cmd.args()
-end)
+
 vim.keymap.set('n', '<leader>hd', function()
   vim.cmd 'argd %'
 end)
@@ -156,7 +154,7 @@ for i = 1, 9 do
 end
 
 -- to qf
-vim.keymap.set('n', '<leader>hq', function()
+vim.keymap.set('n', '<leader>he', function()
   local list = vim.fn.argv()
   if #list > 0 then
     local qf_items = {}
@@ -171,6 +169,39 @@ vim.keymap.set('n', '<leader>hq', function()
     vim.cmd.copen()
   end
 end, { silent = true, desc = 'Show args in qf' })
+
+-- Convert quickfix list to argument list
+vim.keymap.set('n', '<leader>hq', function()
+  local qf_list = vim.fn.getqflist()
+  if #qf_list == 0 then
+    vim.notify("Quickfix list is empty", vim.log.levels.WARN)
+    return
+  end
+  
+  -- Clear current argument list
+  vim.cmd '%argdelete'
+  
+  -- Add each quickfix item to argument list
+  for _, item in ipairs(qf_list) do
+    if item.filename and item.filename ~= '' then
+      -- Use absolute path to avoid issues
+      local filename = vim.fn.fnamemodify(item.filename, ':p')
+      vim.cmd('argadd ' .. vim.fn.fnameescape(filename))
+    elseif item.bufnr and vim.fn.bufexists(item.bufnr) > 0 then
+      -- If we have a buffer number but no filename, use buffer name
+      local bufname = vim.fn.bufname(item.bufnr)
+      if bufname and bufname ~= '' then
+        local filename = vim.fn.fnamemodify(bufname, ':p')
+        vim.cmd('argadd ' .. vim.fn.fnameescape(filename))
+      end
+    end
+  end
+  
+  -- Remove duplicates
+  vim.cmd 'argdedup'
+  
+  vim.notify(string.format("Added %d files from quickfix to argument list", #qf_list))
+end, { silent = true, desc = 'Quickfix to args' })
 
 --}}}
 
@@ -215,6 +246,65 @@ vim.api.nvim_create_autocmd('CmdlineChanged', {
     end
   end,
   pattern = ':',
+})
+
+-- https://stackoverflow.com/questions/42905008/quickfix-list-how-to-add-and-remove-entries
+vim.cmd[[
+" When using `dd` in the quickfix list, remove the item from the quickfix list.
+function! RemoveQFItem()
+let curqfidx = line('.') - 1
+let qfall = getqflist()
+call remove(qfall, curqfidx)
+call setqflist(qfall, 'r')
+execute curqfidx + 1 . "cfirst"
+:copen
+endfunction
+:command! RemoveQFItem :call RemoveQFItem()
+" Use map <buffer> to only map dd in the quickfix window. Requires +localmap
+autocmd FileType qf map <buffer> dd :RemoveQFItem<cr>
+]]
+
+-- Função para remover item atual da Location List
+local function remove_loc_item()
+  local curidx = vim.fn.line(".") - 1
+  local winid = vim.fn.win_getid()
+
+  -- Pega a lista local da janela
+  local loclist = vim.fn.getloclist(winid)
+
+  if #loclist == 0 then
+    vim.notify("Location List vazia", vim.log.levels.WARN)
+    return
+  end
+
+  -- Remove o item atual
+  table.remove(loclist, curidx + 1)
+
+  -- Atualiza a loclist com a nova lista
+  vim.fn.setloclist(winid, loclist, "r")
+
+  -- Reabre para atualizar a janela
+  vim.cmd.lwindow()
+end
+
+-- Cria comando para remover
+vim.api.nvim_create_user_command("RemoveLocItem", remove_loc_item, {})
+
+-- Autocmd: quando abrir uma janela de loclist, mapear `dd`
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function(args)
+    local wininfo = vim.fn.getwininfo(vim.fn.win_getid())[1]
+    if wininfo and wininfo.loclist == 1 then
+      vim.api.nvim_buf_set_keymap(
+        args.buf,
+        "n",
+        "dd",
+        ":RemoveLocItem<CR>",
+        { noremap = true, silent = true }
+      )
+    end
+  end,
 })
 
 --}}}
@@ -667,7 +757,7 @@ end
 -- --{{{ -- Neogit
 -- vim.keymap.set("n", "<leader>gg", ":Neogit kind=replace<Cr>", { silent = true, desc = "Neogit" })
 -- --}}}
---
+
 -- --{{{ -- Oil
 -- require("oil").setup(
 --   {
@@ -887,11 +977,10 @@ end
 --     },
 --   }
 -- )
---
--- vim.keymap.set("n", "<leader><Cr>", "<Cmd>Oil --float<Cr>", { desc = "Oil Float" })
 -- vim.keymap.set("n", "<leader>fd", vim.cmd.Oil, { desc = "Dired(Oil)" })
+-- vim.keymap.set("n", "<leader>.", vim.cmd.Oil, { desc = "Oil" })
 -- --}}}
---
+
 -- --{{{ -- Harpoon
 -- local harpoon = require("harpoon")
 --
