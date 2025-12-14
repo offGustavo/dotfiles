@@ -35,9 +35,9 @@
   ],
   "reload_style_on_change": true,
   "custom/logo": {
-    "format": "󰊠",
-    "tooltip": false,
-    "on-click": "~/.config/rofi/scripts/powermenu.sh"
+    "format": "",
+    "tooltip": true,
+    "on-click": "fuzzel -a top-left -w 20 -l 10"
   },
     "wlr/taskbar": {
       "format": "{icon}",
@@ -225,7 +225,7 @@
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-    "on-click": "~/.config/fuzzel/scripts/bluetooth.sh",
+    "on-click": "~/.config/fuzzel/scripts/bluetooth.sh --waybar",
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
@@ -248,7 +248,7 @@
     "scroll-step": 5,
     "justify": "center",
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-    "on-click-right": "~/.config/fuzzel/scripts/sound.sh",
+    "on-click-right": "~/.config/fuzzel/scripts/sound.sh --waybar",
     "tooltip-format": "{volume}%  {icon}",
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
@@ -351,7 +351,7 @@
       "󰂁",
       "󰁹"
     ],
-    "on-click": "~/.config/fuzzel/scripts/power.sh",
+    "on-click": "~/.config/fuzzel/scripts/power.sh --waybar",
   },
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) <U+F001>",

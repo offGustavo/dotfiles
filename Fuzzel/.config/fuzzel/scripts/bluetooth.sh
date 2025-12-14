@@ -1,6 +1,28 @@
 #!/usr/bin/env bash
 # Constants
 goback="Back"
+waybar_mode=false
+
+# Parse command line arguments
+for arg in "$@"; do
+  case $arg in
+    --waybar)
+      waybar_mode=true
+      shift
+      ;;
+    --status)
+      print_status
+      exit 0
+      ;;
+  esac
+done
+
+# Set fuzzel command based on waybar mode
+if [ "$waybar_mode" = true ]; then
+  rofi_command="fuzzel -d -p Bluetooth: -a top-right -w 20 -l 10 --x-margin 30"
+else
+  rofi_command="fuzzel -d -p Bluetooth:"
+fi
 
 # Checks if bluetooth controller is powered on
 power_on() {
@@ -213,8 +235,8 @@ device_menu() {
   trusted=$(device_trusted "$mac")
   options="$connected\n$paired\n$trusted\n$goback\nExit"
 
-  # Open rofi menu, read chosen option
-  chosen="$(echo -e "$options" | $rofi_command "$device_name")"
+  # Open fuzzel menu, read chosen option
+  chosen="$(echo -e "$options" | $rofi_command)"
 
   # Match chosen option to command
   case "$chosen" in
@@ -236,7 +258,7 @@ device_menu() {
   esac
 }
 
-# Opens a rofi menu with current bluetooth status and options to connect
+# Opens a fuzzel menu with current bluetooth status and options to connect
 show_menu() {
   # Get menu options
   if power_on; then
@@ -251,15 +273,15 @@ show_menu() {
     pairable=$(pairable_on)
     discoverable=$(discoverable_on)
 
-    # Options passed to rofi
+    # Options passed to fuzzel
     options="$devices\n$power\n$scan\n$pairable\n$discoverable\nExit"
   else
     power="Power: off"
     options="$power\nExit"
   fi
 
-  # Open rofi menu, read chosen option
-  chosen="$(echo -e "$options" | $rofi_command "Bluetooth")"
+  # Open fuzzel menu, read chosen option
+  chosen="$(echo -e "$options" | $rofi_command)"
 
   # Match chosen option to command
   case "$chosen" in
@@ -286,14 +308,5 @@ show_menu() {
   esac
 }
 
-# Rofi command to pipe into, can add any options here
-rofi_command="fuzzel -d -p Bluetooth:"
-
-case "$1" in
---status)
-  print_status
-  ;;
-*)
-  show_menu
-  ;;
-esac
+# Main execution
+show_menu
