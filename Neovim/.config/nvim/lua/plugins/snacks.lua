@@ -220,14 +220,6 @@ return {
       end,
       desc = "Snacks Buffers Picker"
     },
-    {
-      "<leader>/",
-      function()
-        Snacks.picker.grep({
-            hidden = true,
-        })
-      end
-    },
     { "<leader>ow", function()
         Snacks.picker.grep({
             hidden = true,
