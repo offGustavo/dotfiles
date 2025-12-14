@@ -4,6 +4,10 @@
       "rev": "ed1b454",
       "src": "https://github.com/offGustavo/TabTerm.nvim"
     },
+    "compile-mode.nvim": {
+      "rev": "0b2a059baa734da932913f555eb157637dab5cdd",
+      "src": "https://github.com/ej-shafran/compile-mode.nvim"
+    },
     "diffview.nvim": {
       "rev": "4516612",
       "src": "https://github.com/sindrets/diffview.nvim"
