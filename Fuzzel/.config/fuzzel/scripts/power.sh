@@ -14,7 +14,7 @@ done
 
 # Set fuzzel command based on waybar mode
 if [ "$waybar_mode" = true ]; then
-  fuzzel_command="fuzzel -a top-right -w 20 -l 10 -d -p "
+  fuzzel_command="fuzzel -a top-right -w 20 -l 10 --x-margin 10 -d -p "
 else
   fuzzel_command="fuzzel -d -p "
 fi

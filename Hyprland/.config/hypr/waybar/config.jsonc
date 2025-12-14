@@ -9,7 +9,7 @@
     "temperature",
     "disk",
     // "custom/powerDraw",
-    // "custom/weather",
+    "custom/weather",
     "hyprland/workspaces",
     // "mpd",
     "tray",
@@ -299,7 +299,7 @@
     "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
     "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
     "tooltip-format-ethernet": "{bandwidthTotalBytes}",
-    "on-click": "~/.config/fuzzel/scripts/network.py",
+    "on-click": "~/.config/fuzzel/scripts/network.lua --waybar",
   },
   "network#speed": {
     "format": "{bandwidthDownBits}",
@@ -309,7 +309,7 @@
     "tooltip-format-ethernet": "{ifname} 󰈀 \n{ipaddr} | {frequency} MHz{icon} ",
     "tooltip-format-disconnected": "Not Connected to any type of Network",
     "tooltip": true,
-    "on-click": "pgrep -x rofi &>/dev/null && notify-send rofi || networkmanager_dmenu"
+    "on-click": "~/.config/fuzzel/scripts/network.lua --waybar",
   },
   "group/networking": {
     "orientation": "horizontal",
@@ -327,6 +327,7 @@
     "tooltip": true,
     "interval": 3600,
     "exec": "~/.config/hypr/waybar/scripts/weather.sh",
+    "on-click": "xdg-open https://wttr.in/Guaratingueta",
     "return-type": "json"
   },
   "battery": {
