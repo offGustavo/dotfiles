@@ -3,8 +3,8 @@
 -------------
 -- Neovide Font Resize
 if vim.g.neovide then
-  FontSize = 12
-  function SetFontSize(amount)
+  local FontSize = 12
+  local function SetFontSize(amount)
     if amount == 0 then
       FontSize = 12
     else
