@@ -2,9 +2,10 @@ return {
   'offGustavo/TabTerm.nvim',
   lazy = true,
   opts = {
-    separator_first = "█",
-    separator_right = "",
-    separator_left = "",
+    center = false,
+    separator_first = "",
+    separator_right = "",
+    separator_left = "",
     -- separator_right = "",
     -- separator_left = "",
     -- separator_first = "",
@@ -14,8 +15,8 @@ return {
     -- separator_right = "",
     -- separator_left = "",
     -- separator_first = "",
-    -- tab_highlight = "%#Tabline#",
-    -- default_highlight = "%#TablineSel#",
+    tab_highlight = "%#lualine_a_normal#",
+    default_highlight = "%#lualine_c_normal#",
   },
   keys = function()
     local keys = {

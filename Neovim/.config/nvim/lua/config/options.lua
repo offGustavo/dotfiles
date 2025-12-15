@@ -121,3 +121,22 @@ end
 -- end
 
 -- vim.o.winborder = "rounded"
+-- vim.o.acd = true
+
+
+-- Diagnostics
+vim.diagnostic.config {
+  -- Use the default configuration
+  virtual_lines = false,
+  virtual_text = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "E",
+      [vim.diagnostic.severity.WARN] = "W",
+      [vim.diagnostic.severity.INFO] = "I",
+      [vim.diagnostic.severity.HINT] = "H",
+    }
+  }
+}
+
+-- vim.o.showtabline = 0
