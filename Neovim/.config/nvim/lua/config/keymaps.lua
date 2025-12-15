@@ -38,9 +38,13 @@ end, { silent = true, desc = "Open Dashboard" })
 --   Snacks.terminal("zellij")
 -- end, { silent = true, desc = "Open Float  Terminal" })
 
--- vim.keymap.set("n", "<leader>tn", "<Cmd>terminal<Cr>", { silent = true, desc = "New Buffer Terminal" })
--- vim.keymap.set("n", "<leader>tv", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
--- vim.keymap.set("n", "<leader>ts", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
+vim.keymap.set("n", "<leader>tn", ":terminal ", { silent = true, desc = "New Buffer Terminal With Command" } )
+vim.keymap.set("n", "<leader>tv", ":vertical terminal ", { silent = true, desc = "Vertical Terminal With Command" } )
+vim.keymap.set("n", "<leader>ts", ":horizontal terminal ", { silent = true, desc = "Horizontal Terminal With Command" } )
+
+vim.keymap.set("n", "<leader>tN", "<Cmd>terminal<Cr>", { silent = true, desc = "New Buffer Terminal" })
+vim.keymap.set("n", "<leader>tV", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
+vim.keymap.set("n", "<leader>tS", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
 
 ---- Terminal Mode to Normal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal" })
@@ -94,8 +98,11 @@ vim.keymap.set("i", "<A-e>", "<C-o>)", { silent = true })
 vim.keymap.set("i", "<A-<>", "<C-o>gg", { silent = true })
 vim.keymap.set("i", "<A->>", "<C-o>G", { silent = true })
 vim.keymap.set("i", "<C-/>", "<C-o>u", { silent = true })
+vim.cmd([[
+  imap <C-BS> <C-w>
+]])
 -- vim.keymap.set("i", "<C-x><C-s>", "<Cmod>update<CR>", { silent = true })
-vim.keymap.set("i", "<C-x><C-c>", "<Esc>:x<CR>", { silent = true })
+-- vim.keymap.set("i", "<C-x><C-x>", "<Esc>:x<CR>", { silent = true })
 -- vim.keymap.set("i", "<C-t>", "<Esc>Xpa", { silent = true })
 -- vim.keymap.set("i", "<C-]>", "<C-t>", { silent = true })
 vim.keymap.set("n", "<A-x>", ":", { desc = "Emacs" })
@@ -224,10 +231,6 @@ vim.keymap.set(
     { desc = "Substitute Current Word" }
 )
 vim.keymap.set("x", "<leader>p", '"_dP', { silent = true, desc = "Paste Without Copy" })
-
-
-vim.keymap.set("n", "<leader>fx", ":!chmod +x %<Cr>", { silent = true, desc = "Make File Executable" })
-vim.keymap.set("n", "<leader>fX", "<Cmd>!%<Cr>", { silent = true, desc = "Execute File" })
 
 vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
 
