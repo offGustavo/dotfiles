@@ -198,3 +198,5 @@
   (kbd "<escape>")
   (lambda () (interactive)
     (exwm-input--fake-key 'escape)))
+
+(setq doom-localleader-key "<backspace>")
