@@ -22,13 +22,12 @@ start_sway() {
 }
 
 start_waybar() {
-  kill_if_running waybar
   if [ "$current_scheme" = "'prefer-light'" ] || [ "$current_scheme" = "'default'" ]; then
     ln -sf ~/.config/waybar/dark.css ~/.config/waybar/colors.css
   else
     ln -sf ~/.config/waybar/light.css ~/.config/waybar/colors.css
   fi
-  waybar 
+   ~/.config/hypr/scripts/toggle-waybar.sh --restart
 }
 
 if [ "$current_scheme" = "'prefer-light'" ] || [ "$current_scheme" = "'default'" ]; then
