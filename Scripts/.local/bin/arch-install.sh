@@ -27,4 +27,5 @@
 
 ## Harppon for tmux
 # git clone https://github.com/Chaitanyabsprip/tmux-harpoon.git
-printf "I use Arch btw"
+printf "I use Arch Linux btw"
+printf "I use NixOs btw"
