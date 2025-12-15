@@ -24,11 +24,11 @@ start_sway() {
 start_waybar() {
   kill_if_running waybar
   if [ "$current_scheme" = "'prefer-light'" ] || [ "$current_scheme" = "'default'" ]; then
-    ln -sf ~/.config/hypr/waybar/dark.css ~/.config/hypr/waybar/colors.css
+    ln -sf ~/.config/waybar/dark.css ~/.config/waybar/colors.css
   else
-    ln -sf ~/.config/hypr/waybar/light.css ~/.config/hypr/waybar/colors.css
+    ln -sf ~/.config/waybar/light.css ~/.config/waybar/colors.css
   fi
-  waybar -c ~/.config/hypr/waybar/config.jsonc -s ~/.config/hypr/waybar/style.css
+  waybar 
 }
 
 if [ "$current_scheme" = "'prefer-light'" ] || [ "$current_scheme" = "'default'" ]; then

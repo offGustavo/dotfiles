@@ -326,7 +326,7 @@
     "format": "{}",
     "tooltip": true,
     "interval": 3600,
-    "exec": "~/.config/hypr/waybar/scripts/weather.sh",
+    "exec": "~/.config/waybar/scripts/weather.sh",
     "on-click": "xdg-open https://wttr.in/Guaratingueta",
     "return-type": "json"
   },
@@ -380,7 +380,7 @@
     "tooltip-format-disconnected": "MPD (disconnected)"
   },
   "custom/privacydots": {
-    "exec": "~/.config/hypr/waybar/scripts/privacydots.sh",
+    "exec": "~/.config/waybar/scripts/privacydots.sh",
     "return-type": "json",
     "interval": 3,
     "format": "{text}",
