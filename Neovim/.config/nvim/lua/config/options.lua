@@ -121,8 +121,12 @@ end
 -- end
 
 -- vim.o.winborder = "rounded"
--- vim.o.acd = true
 
+vim.o.acd = true
+vim.cmd([[
+let g:netrw_dirkeep = 0
+let g:netrw_keepdir = 0
+]])
 
 -- Diagnostics
 vim.diagnostic.config {

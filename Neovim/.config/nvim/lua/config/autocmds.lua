@@ -136,3 +136,14 @@ vim.api.nvim_create_autocmd("FileType", {
     end
   end,
 })
+
+-- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+--   callback = function(args)
+--     local name = vim.api.nvim_buf_get_name(args.buf)
+--     if name == "" then
+--       return
+--     end
+--     local dir = vim.fn.fnamemodify(name, ":p:h")
+--     vim.cmd.lcd(dir)
+--   end,
+-- })
