@@ -75,6 +75,8 @@
   "hyprland/language": {
     "format": "{}",
     "keyboard-name": "at-translated-set-2-keyboard",
+    "format-en": "English (us) ",
+    "format-pt": "Portuguese (abnt) ",
     "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
   },
   "disk": {
