@@ -224,19 +224,19 @@ return {
       },
     })
 
-    -- Autochangedir
-    vim.api.nvim_create_autocmd("BufEnter", {
-      callback = function(args)
-        local buf = args.buf
-        -- Check if this is an oil buffer
-        if vim.bo[buf].filetype == "oil" then
-          local dir = require("oil").get_current_dir()
-          if dir then
-            vim.fn.chdir(dir)
-          end
-        end
-      end,
-    })
+    -- -- Autochangedir
+    -- vim.api.nvim_create_autocmd("BufEnter", {
+    --   callback = function(args)
+    --     local buf = args.buf
+    --     -- Check if this is an oil buffer
+    --     if vim.bo[buf].filetype == "oil" then
+    --       local dir = require("oil").get_current_dir()
+    --       if dir then
+    --         vim.fn.chdir(dir)
+    --       end
+    --     end
+    --   end,
+    -- })
 
   --   vim.api.nvim_create_autocmd("BufEnter", {
   --     callback = function(args)
