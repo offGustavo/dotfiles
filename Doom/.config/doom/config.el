@@ -113,14 +113,35 @@
    :v "C-l" #'drag-stuff-right)
 
 ;; Leader keys
-(map!
+(keymap!
  :leader
  "z" #'zoxide-travel)
 
 ;; Save buffer
-(map!
- :n "C-s" #'save-buffer))
+(keymap!
+ :n "C-s" #'save-buffer)
 
+(keymap! 
+ :n
+ ;; Edit lines (like mc/edit-lines)
+ "C-S-c C-S-c" #'evil-mc-make-all-cursors
+
+ ;; Mark next / previous occurrence
+ "C->"         #'evil-mc-make-and-goto-next-match
+ "C-<"         #'evil-mc-make-and-goto-prev-match
+ "C-M-,"         #'evil-mc-make-and-goto-next-match
+ "C-M-."         #'evil-mc-make-and-goto-prev-match
+
+ ;; Mark all occurrences
+ "C-S-d"     #'evil-mc-make-all-cursors
+ "C-M-d"     #'evil-mc-make-all-cursors
+
+ ;; Skip next / previous occurrence
+ "C-?"        #'evil-mc-skip-and-goto-next-match
+ "C-M-/"        #'evil-mc-skip-and-goto-next-match
+ "C-:"         #'evil-mc-skip-and-goto-prev-match)
+ "C-M-;"         #'evil-mc-skip-and-goto-prev-match)
+)
 
 ;; Send files to trash instead of fully deleting
 (setq delete-by-moving-to-trash t
@@ -173,7 +194,7 @@
   ;; We will disable `C-c' in insert state.
   (define-key exwm-mode-map (kbd "C-c") nil)
 
-  (map! :map exwm-mode-map
+  (keymap! :map exwm-mode-map
         :localleader
         (:prefix ("d" . "debug")
          :desc "Clear debug buffer" "l" #'xcb-debug:clear
@@ -200,3 +221,4 @@
     (exwm-input--fake-key 'escape)))
 
 (setq doom-localleader-key "<backspace>")
+
