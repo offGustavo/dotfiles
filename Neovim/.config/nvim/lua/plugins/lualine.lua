@@ -104,6 +104,12 @@ return {
         },
         lualine_x = {
           {
+            "branch",
+            -- icon = "",
+            icon = "",
+          },
+          "diff",
+          {
             function()
               local msg = ""
               -- local msg = "No Active Lsp"
@@ -132,11 +138,6 @@ return {
               mac = 'MAC',  -- e711
             }
             },
-          {
-            "branch",
-            icon = "",
-          },
-          "diff",
         },
         lualine_y = {
         },
@@ -158,10 +159,19 @@ return {
         lualine_y = {},
         lualine_z = {},
       },
-      tabline = {},
-      winbar = {},
+      tabline = {
+        lualine_a = {
+          "tabs"
+        },
+        lualine_y = {
+          "windows"
+        }
+      },
+      winbar = {
+      },
       inactive_winbar = {},
       extensions = {},
     })
+    vim.cmd("set showtabline=1")
   end,
 }
