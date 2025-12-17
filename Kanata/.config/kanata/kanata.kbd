@@ -32,11 +32,12 @@
  lctl lmet lalt           spc            ralt  menu rctl
  🖰1 🖰2 🖰3 🖰4 🖰5)
 
-;; (defchordsv2
-;;  (grv ret) @bas 100 all-released  ()
-;;  (grv spc) @gam 100 all-released  ()
-;;  (, .) [ 100 all-released ()
-;;  (. /) ] 100 all-released ())
+(defchordsv2
+ (grv ret) @bas 100 all-released  ()
+ (grv spc) @gam 100 all-released  ()
+ (' c) RA-, 100 all-released  ()
+ (, .) [ 100 all-released ()
+ (. /) ] 100 all-released ())
 
    (defalias
     ;; Definer as layer
@@ -249,9 +250,9 @@ lef(tap-hold 100 300 = f12))
   (deflayer numbers
    _    _    _    _    _    _    _    _    _    _    _    _    _    
    _    _    _    _    _    _    esc  nlck kp/  kp*  kp-  bspc _    _
-   _    f1   f2   f3   f4   _    tab  kp7  kp8  kp9  kp+  kprt _    _
-   _    f5   f6   f7   f8   _    del  kp4  kp5  kp6  ,    =    ret
-   _    f9   f10  f11  f12  _    _    kp1  kp2  kp3  kp.  _  
+   _    f1   f2   f3   f4   esc  tab  kp7  kp8  kp9  kp+  kprt _    _
+   _    f5   f6   f7   f8   tab  del  kp4  kp5  kp6  ,    =    ret
+   _    f9   f10  f11  f12  RA-, _    kp1  kp2  kp3  kp.  _  
    _    _    _              kp0           lalt  _    _
    _  _  _  _  _ )
 
