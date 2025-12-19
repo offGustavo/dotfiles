@@ -170,7 +170,7 @@ function M.setup()
   })
 
   -- Atualiza quando o background muda
-  vim.api.nvim_create_autocmd("OptionSet", {
+  vim.api.nvim_create_autocmd("ColorScheme", {
     group = lazygit_group,
     pattern = "background",
     callback = function()

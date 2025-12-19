@@ -58,6 +58,7 @@ local function get_theme_colors()
 end
 
 function UpdateTheme()
+    -- vim.notify("Update Tmux Theme")
   local colors = get_theme_colors()
 
   local lines = {
@@ -141,7 +142,7 @@ end
   local tmux_theme_group = vim.api.nvim_create_augroup("TmuxTheme", { clear = true })
 
   -- Autocommand para detectar mudanças de tema e background
-  vim.api.nvim_create_autocmd({"OptionSet", "ColorScheme"}, {
+  vim.api.nvim_create_autocmd({"ColorScheme"}, {
     group = tmux_theme_group,
     pattern = {"background", "*"},
     callback = function(args)
