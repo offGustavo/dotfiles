@@ -15,7 +15,7 @@ local function align_regexp(opts)
 
   for _, line in ipairs(lines) do
     -- usa regex se aplicável
-    local parts = vim.split(line, sep, { plain = false, trimempty = false })
+    local parts = vim.split(line, sep, { plain = true, trimempty = false })
     table.insert(split_lines, parts)
     for i, part in ipairs(parts) do
       local len = vim.fn.strdisplaywidth(vim.trim(part))
