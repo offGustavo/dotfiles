@@ -236,32 +236,33 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --info=inline-right \
   --ansi \
   --layout=reverse \
-  --border=rounded \
-  --style=full \
+  --border=none \
+  --style=default \
   --margin=3% \
-  --color=bg+:#1a1b26 \
-  --color=bg:#16161e \
-  --color=border:#27a1b9 \
-  --color=fg:#c0caf5 \
-  --color=gutter:#16161e \
-  --color=header:#ff9e64 \
-  --color=hl+:#2ac3de \
-  --color=hl:#2ac3de \
-  --color=info:#545c7e \
-  --color=marker:#ff007c \
-  --color=pointer:#ff007c \
-  --color=prompt:#2ac3de \
-  --color=query:#c0caf5:regular \
-  --color=scrollbar:#27a1b9 \
-  --color=separator:#ff9e64 \
-  --color=spinner:#ff007c \
   --preview 'if [ -d {} ]; then eza --icons --git -l -G -h -l --icons {}; else fzf-preview.sh {}; fi' \
+  --color=base16 \
   --preview-window 'up,border-rounded,<15(hidden,,)'
   --multi \
   --bind ctrl-q:toggle-all,alt-q:toggle-all \
   --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up "
   # --bind 'resize:transform:[[ $(tput lines) -lt 20 ]] && echo change-preview-window:hidden || echo change-preview-window:down,80%'"
 
+  # --color=bg+:#1a1b26 \
+  # --color=bg:#16161e \
+  # --color=border:#27a1b9 \
+  # --color=fg:#c0caf5 \
+  # --color=gutter:#16161e \
+  # --color=header:#ff9e64 \
+  # --color=hl+:#2ac3de \
+  # --color=hl:#2ac3de \
+  # --color=info:#545c7e \
+  # --color=marker:#ff007c \
+  # --color=pointer:#ff007c \
+  # --color=prompt:#2ac3de \
+  # --color=query:#c0caf5:regular \
+  # --color=scrollbar:#27a1b9 \
+  # --color=separator:#ff9e64 \
+  # --color=spinner:#ff007c \
 
 # --border=none \
 # --border=rounded \
