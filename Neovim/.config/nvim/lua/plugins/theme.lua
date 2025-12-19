@@ -40,21 +40,22 @@ return {
 
   { "ellisonleao/gruvbox.nvim", lazy = true },
 
-  { "SomeCoder99/darkslate.nvim", lazy = true },
+  -- { "SomeCoder99/darkslate.nvim", lazy = true },
 
   { "Mofiqul/adwaita.nvim", lazy = true, priority = 1000 },
 
-  { "nvim-mini/mini.base16", version = false, lazy = true },
+  -- { "nvim-mini/mini.base16", version = false, lazy = true },
 
-  { "sponkurtus2/angelic.nvim", lazy = true },
+  -- { "sponkurtus2/angelic.nvim", lazy = true },
 
-  { "srt0/codescope.nvim", lazy = true },
+  -- { "srt0/codescope.nvim", lazy = true },
 
   { "RRethy/nvim-base16", lazy = true },
 
-  { "kyazdani42/nvim-palenight.lua", lazy = true },
+  -- { "kyazdani42/nvim-palenight.lua", lazy = true },
 
   { "NTBBloodbath/doom-one.nvim", lazy = true },
+
   {
     "nendix/zen.nvim",
     lazy = false,
@@ -65,5 +66,5 @@ return {
     "tiagovla/tokyodark.nvim",
   },
 
-  { "EdenEast/nightfox.nvim" } -- lazy
+  --   { "EdenEast/nightfox.nvim" } -- lazy
 }
