@@ -35,6 +35,7 @@ return {
         { "g", group = "goto" },
         { "z", group = "fold" },
         { "<leader>t", group = "terminal/tabs" },
+        { "<leader>i", group = "insert", icon = ""},
         { "<leader>o", group = "options/custom", icon = "" },
         { "<leader>oa", group = "agenda", icon = "" },
         { "<leader>oo", group = "obsidian", icon = "" },
