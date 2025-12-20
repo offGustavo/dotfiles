@@ -179,8 +179,8 @@ alias emacs='emacs -nw'
 # Zed Shit
 alias zed='zeditor'
 
-# Helix Shit
-alias hx=helix
+# # Helix Shit
+# alias hx=helix
 
 # Edit File with Sudo
 alias svim='sudoedit'
@@ -238,12 +238,13 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --layout=reverse \
   --border=none \
   --style=default \
-  --margin=3% \
+  --margin=0% \
+  --height=40% \
   --preview 'if [ -d {} ]; then eza --icons --git -l -G -h -l --icons {}; else fzf-preview.sh {}; fi' \
   --color=base16 \
-  --preview-window 'up,border-rounded,<15(hidden,,)'
+  --preview-window 'right,border-rounded,hidden'
   --multi \
-  --bind ctrl-q:toggle-all,alt-q:toggle-all \
+  --bind ctrl-q:toggle-all,alt-q:toggle-all,ctrl-o:toggle-preview \
   --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up "
   # --bind 'resize:transform:[[ $(tput lines) -lt 20 ]] && echo change-preview-window:hidden || echo change-preview-window:down,80%'"
 
