@@ -11,10 +11,15 @@ if [ "$HYPRGAMEMODE" = 1 ]; then
         keyword general:gaps_out 0;\
         keyword general:border_size 1;\
         keyword decoration:rounding 0"
-  hyprctl notify 1 5000 "rgb(40a02b)" "Gamemode [ON]"
+  # hyprctl notify 1 5000 "rgb(40a02b)" "Gamemode [ON]"
+  notify-send "Gamemode[ON]" "Power Profile: Performance"
+
+  powerprofilesctl performance
   exit 0
 else
-  hyprctl notify 1 5000 "rgb(d20f39)" "Gamemode [OFF]"
+  notify-send "Gamemode[OFF]" "Power Profile: Power-Saver"
+  # hyprctl notify 1 5000 "rgb(d20f39)" "Gamemode [OFF]"
   hyprctl reload
+  powerprofilesctl power-saver
   exit 0
 fi
