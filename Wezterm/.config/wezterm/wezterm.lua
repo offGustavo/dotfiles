@@ -21,17 +21,19 @@ config = {
 		font_size = 12.0,
 	},
 
-  tab_bar_at_bottom = false,
-  hide_tab_bar_if_only_one_tab = true,
-  use_fancy_tab_bar = false,
+	tab_bar_at_bottom = false,
+	hide_tab_bar_if_only_one_tab = true,
+	use_fancy_tab_bar = false,
 
 	-- Window padding
 	window_padding = {
-		left = 0,
-		right = 0,
+		left = 5,
+		right = 5,
 		top = 0,
 		bottom = 0,
 	},
+
+  font = wezterm.font('JetBrainsMonoNL Nerd Font')
 }
 
 config.colors = require("theme")
@@ -44,6 +46,7 @@ local find_sessions = {
 }
 
 local current_sessions = {
+	sessionizer.DefaultWorkspace({}),
 	sessionizer.AllActiveWorkspaces({}),
 }
 
