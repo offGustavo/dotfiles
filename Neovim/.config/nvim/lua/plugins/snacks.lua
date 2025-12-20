@@ -117,6 +117,7 @@ return {
                   ["c"] = "explorer_copy",
                   ["m"] = "explorer_move",
                   ["o"] = "explorer_open", -- open with system application
+                  ["<c-o>"] = { "toggle_preview", mode = { "i", "n" } },
                   ["P"] = "toggle_preview",
                   ["y"] = { "explorer_yank", mode = { "n", "x" } },
                   ["p"] = "explorer_paste",
@@ -126,7 +127,7 @@ return {
                   ["Z"] = "tcd",
                   ["<leader>/"] = "picker_grep",
                   ["t"] = "terminal",
-                  ["."] = "explorer_focus",
+                  -- ["."] = "explorer_focus",
                   ["I"] = "toggle_ignored",
                   ["."] = "toggle_hidden",
                   ["M"] = "explorer_close_all",
@@ -158,6 +159,7 @@ return {
               },
               list = {
                 keys = {
+                ["<C-o>"] = "toggle_preview",
                   ["d"] = "bufdelete",
                   ["J"] = "preview_scroll_down",
                   ["K"] = "preview_scroll_up",
