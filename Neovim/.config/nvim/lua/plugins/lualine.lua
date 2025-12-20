@@ -12,7 +12,7 @@ return {
 
     lualine.setup({
       options = {
-        theme = "auto", -- This is the key change - uses auto-detected theme
+        theme = "auto",
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         disabled_filetypes = {
@@ -70,8 +70,7 @@ return {
             padding = { right = 1 },
           },
         },
-        lualine_b = {
-        },
+        lualine_b = {},
         lualine_c = {
           {
             "filename",
@@ -131,16 +130,15 @@ return {
           },
           "encoding",
           {
-            'fileformat',
+            "fileformat",
             symbols = {
-              unix = 'UNIX', -- e712
-              dos = 'DOS',  -- e70f
-              mac = 'MAC',  -- e711
-            }
+              unix = "UNIX", -- e712
+              dos = "DOS", -- e70f
+              mac = "MAC", -- e711
             },
+          },
         },
-        lualine_y = {
-        },
+        lualine_y = {},
         lualine_z = {
           {
             function()
@@ -160,18 +158,18 @@ return {
         lualine_z = {},
       },
       tabline = {
-        lualine_a = {
-          "tabs"
-        },
-        lualine_y = {
-          "windows"
-        }
+        -- lualine_a = {
+        --   "tabs"
+        -- },
+        -- lualine_y = {
+        --   "windows"
+        -- }
       },
-      winbar = {
-      },
+      winbar = {},
       inactive_winbar = {},
       extensions = {},
     })
+
     vim.cmd("set showtabline=1")
   end,
 }
