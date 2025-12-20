@@ -25,7 +25,7 @@ return {
       -- the command (and behave more like `:!`), add:
       bang_expansion = true,
     }
-    vim.keymap.set("n", "<leader>cc", ":Compile<Cr>")
-    vim.keymap.set("n", "<leader>cC", ":Recompile<Cr>")
+    vim.keymap.set("n", "<leader>cc", function() require("compile-mode").compile({}) end, { desc = "Compile" })
+    vim.keymap.set("n", "<leader>cC", function() require("compile-mode").recompile({}) end, { desc = "Recompile" })
   end
 }
