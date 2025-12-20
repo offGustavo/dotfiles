@@ -1,7 +1,7 @@
 return {
   "nvim-mini/mini.pairs",
   event = "VeryLazy",
-  enabled = true,
+  enabled = false,
   opts = {
     modes = { insert = true, command = true, terminal = false },
     -- skip autopair when next character is one of these
@@ -33,3 +33,4 @@ return {
     LazyVim.mini.pairs(opts)
   end,
 }
+
