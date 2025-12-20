@@ -35,7 +35,7 @@
   ],
   "reload_style_on_change": true,
   "custom/logo": {
-    "format": "",
+    "format": "  ",
     "tooltip": true,
     "on-click": "fuzzel -a top-left -w 20 -l 10"
   },
@@ -228,6 +228,7 @@
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
     "on-click": "~/.config/fuzzel/scripts/bluetooth.sh --waybar",
+    "on-click-middle": "adw-bluetooth",
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
@@ -251,6 +252,7 @@
     "justify": "center",
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-right": "~/.config/fuzzel/scripts/sound.sh --waybar",
+    "on-click-middle": "pavucontrol",
     "tooltip-format": "{volume}%  {icon}",
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"

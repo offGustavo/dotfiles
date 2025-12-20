@@ -1,23 +1,26 @@
 @import "./colors.css";
 
 * {
-    border: none;
-    font-size: 10px;
-    font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
-    /*height: 10px;*/
-    color: @fg;
-    padding: 0;
-    font-size: 12px;
+  border: none;
+  font-size: 10px;
+  font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
+  /*height: 10px;*/
+  color: @fg;
+  padding: 0;
+  font-size: 12px;
 }
 
 
 window#waybar {
   background: @bg;
- }
+}
 
 #custom-logo {
-  padding: 0 10px;
-  font-size: 15px;
+  /* padding: 10px; */
+  /* padding: 0px; */
+  font-size: 20px;
+  background-color: @blue;
+  color: @bg;
 }
 
 /*.modules-right {*/
@@ -40,6 +43,7 @@ window#waybar {
 
 #workspaces button {
   padding: 5px 10px;
+  border-radius: 0;
 }
 
 /* #workspaces button label{ */
@@ -64,7 +68,7 @@ window#waybar {
 }
 #workspaces button.visible label,
 #workspaces button.urgent label{
-    color: @bg;
+  color: @bg;
 }
 
 #custom-logo,
@@ -108,30 +112,30 @@ window#waybar {
 /*}*/
 
 #battery.charging {
-    color: @bg;
-    background-color: @green;
+  color: @bg;
+  background-color: @green;
 }
 
 #battery.warning:not(.charging) {
   color: @bg;
-    background-color: @orange;
+  background-color: @orange;
 }
 
 #battery.critical:not(.charging) {
   color: @fg;
-    background-color: @red;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: @red;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
 }
 
 #taskbar {

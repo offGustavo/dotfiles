@@ -22,3 +22,4 @@ Neovim/.config/nvim/.theme
 Hyprland/.config/hypr/plugins/hyprland-alt-tab
 Hyprland/.config/hypr/config/theme.conf
 Rofi/.config/rofi/shared/colors.rasi
+Waybar/.config/waybar/colors.css
