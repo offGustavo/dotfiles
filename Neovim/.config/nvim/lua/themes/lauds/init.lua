@@ -28,6 +28,8 @@ M.palette = {
 }
 
 function M.setup()
+  vim.cmd("colorscheme retrobox")
+  vim.cmd("set bg=light")
   local p = M.palette
   local set = vim.api.nvim_set_hl
 
