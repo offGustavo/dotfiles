@@ -97,7 +97,7 @@ local function get_theme_colors()
 
   -- Tab bar colors
   colors.tab_bar = {
-    background = to_hex(get_hl("TabLine", "bg")) or "#292e42",
+    background = to_hex(get_hl("Normal", "bg")) or "#292e42",
 
     active_tab = {
       bg_color = to_hex(get_hl("TabLineSel", "bg")) or "#7aa2f7",
@@ -109,24 +109,24 @@ local function get_theme_colors()
     },
 
     inactive_tab = {
-      bg_color = to_hex(get_hl("TabLine", "bg")) or "#292e42",
-      fg_color = to_hex(get_hl("TabLine", "fg")) or "#545c7e",
+      bg_color = to_hex(get_hl("Normal", "bg")) or "#292e42",
+      fg_color = to_hex(get_hl("Normal", "fg")) or "#545c7e",
     },
 
     inactive_tab_hover = {
       bg_color = to_hex(get_hl("TabLineFill", "bg")) or "#363b54",
-      fg_color = to_hex(get_hl("TabLine", "fg")) or "#737aa2",
-      italic = true,
+      fg_color = to_hex(get_hl("Normal", "fg")) or "#737aa2",
+      underline = "Single",
     },
 
     new_tab = {
-      bg_color = to_hex(get_hl("TabLine", "bg")) or "#292e42",
-      fg_color = to_hex(get_hl("TabLine", "fg")) or "#545c7e",
+      bg_color = to_hex(get_hl("Normal", "bg")) or "#292e42",
+      fg_color = to_hex(get_hl("Normal", "fg")) or "#545c7e",
     },
 
     new_tab_hover = {
       bg_color = to_hex(get_hl("TabLineFill", "bg")) or "#363b54",
-      fg_color = to_hex(get_hl("TabLine", "fg")) or "#737aa2",
+      fg_color = to_hex(get_hl("Normal", "fg")) or "#737aa2",
       italic = false,
     },
   }
