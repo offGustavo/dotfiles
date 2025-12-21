@@ -1,13 +1,14 @@
 # Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
+# your system.  Help is available in the configuration.nix(4) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, nix-flatpak, inputs, ... }:
 
 {
 	imports =
 		[ # Include the results of the hardware scan.
-		./hardware-configuration.nix
+			./hardware-configuration.nix
+			./modules/hyprland.nix
 		];
 
 # Bootloader.
@@ -17,7 +18,7 @@
 # Use latest kernel.
 	boot.kernelPackages = pkgs.linuxPackages_latest;
 
-	networking.hostName = "nixos"; # Define your hostname.
+	networking.hostName = "FrankenNix"; # Define your hostname.
 # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
 # Configure network proxy if necessary
@@ -25,7 +26,7 @@
 # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
 # Enable networking
-		networking.networkmanager.enable = true;
+  networking.networkmanager.enable = true;
 
 # Set your time zone.
 	time.timeZone = "America/Sao_Paulo";
@@ -34,7 +35,7 @@
 	i18n.defaultLocale = "en_US.UTF-8";
 
 	i18n.extraLocaleSettings = {
-		LC_ADDRESS = "pt_BR.UTF-8";
+    LC_ADDRESS = "pt_BR.UTF-8";
 		LC_IDENTIFICATION = "pt_BR.UTF-8";
 		LC_MEASUREMENT = "pt_BR.UTF-8";
 		LC_MONETARY = "pt_BR.UTF-8";
@@ -45,68 +46,73 @@
 		LC_TIME = "pt_BR.UTF-8";
 	};
 
+# environment.variables = {
+#   GTK_IM_MODULE = "cedilla";
+#   QT_IM_MODULE = "cedilla";
+# };
+
 # Enable the X11 windowing system.
 services.xserver = {
   enable = true;
-
-  windowManager.session = [{
-    name = "exwm";
-    start = ''
-      # IMPORTANTE: iniciar o Emacs como *daemon* antes de abrir a GUI
-      emacs --daemon
-
-      # Agora iniciar o EXWM de verdade
-      exec emacsclient -c -a "" \
-        --eval "(progn (require 'exwm) (exwm-enable))"
-    '';
-  }];
+  # desktopManager.xfce.enable = true;
+  # windowManager.i3.enable = true;
+  windowManager.oxwm.enable = true;
+  # windowManager.session = [{
+  #   name = "exwm";
+  #   start = ''
+  #     # IMPORTANTE: iniciar o Emacs como *daemon* antes de abrir a GUI
+  #     emacs --daemon
+  #
+  #     # Agora iniciar o EXWM de verdade
+  #     exec emacsclient -c -a "" \
+  #       --eval "(progn (require 'exwm) (exwm-wm-mode))"
+  #   '';
+  # }];
+  excludePackages = [ pkgs.xterm ];
 };
 
-# Enable OpenGL
-	hardware.graphics = {
-		enable = true;
-	};
+hardware.opengl = {
+  enable = true;
+  # driSupport = true;
+  # driSupport32Bit = true;
+  # extraPackages = with pkgs; [
+  #   intel-compute-runtime
+  #   intel-media-driver
+  #   intel-vaapi-driver
+  #   libvdpau-va-gl
+  # ];
+  # extraPackages32 = with pkgs; [
+  #   driversi686Linux.vaapiIntel
+  # ];
+};
 
 # Load nvidia driver for Xorg and Wayland
-	services.xserver.videoDrivers = ["nvidia"];
+services.xserver.videoDrivers = [ "nvidia" ];
 
-	hardware.nvidia = {
+hardware.nvidia = {
+  modesetting.enable = true;
+  powerManagement.enable = false;
+  powerManagement.finegrained = false;
+  open = false;
+  nvidiaSettings = false;
+  package = config.boot.kernelPackages.nvidiaPackages.stable;
+  
+  prime = {
+    offload = {
+      enable = true;
+      enableOffloadCmd = true;
+    };
+    # Bus IDs - you may need to adjust these
+    intelBusId = "PCI:0:0:0";
+    nvidiaBusId = "PCI:1:0:0";
+  };
+};
 
-# Modesetting is required.
-		modesetting.enable = true;
-
-# Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-# Enable this if you have graphical corruption issues or application crashes after waking
-# up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
-# of just the bare essentials.
-		powerManagement.enable = false;
-
-# Fine-grained power management. Turns off GPU when not in use.
-# Experimental and only works on modern Nvidia GPUs (Turing or newer).
-		powerManagement.finegrained = false;
-
-# Use the NVidia open source kernel module (not to be confused with the
-# independent third-party "nouveau" open source driver).
-# Support is limited to the Turing and later architectures. Full list of 
-# supported GPUs is at: 
-# https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
-# Only available from driver 515.43.04+
-		open = false;
-
-# Enable the Nvidia settings menu,
-# accessible via `nvidia-settings`.
-		nvidiaSettings = true;
-
-# Optionally, you may need to select the appropriate driver version for your specific GPU.
-		package = config.boot.kernelPackages.nvidiaPackages.stable;
-	};
-
-  services.xserver.windowManager.i3.enable = true;
   # Enable the GNOME Desktop Environment.
 	services.displayManager.gdm.enable = true;
 	services.desktopManager.gnome.enable = true;
-  # envirioment.gnome.games.enable = false;
-  # envirioment.gnome.excludePackages = with pkgs; [ totem epiphany gnome-software geary gnome-music gnome-tour gnome-user-docs ];
+  # environment.gnome.games.enable = false;
+  environment.gnome.excludePackages = with pkgs; [ epiphany geary  gnome-tour gnome-user-docs ];
 
   # services.displayManager = {
   #   sddm = {
@@ -115,18 +121,28 @@ services.xserver = {
   #   };
   # };
   # services.desktopManager.plasma6.enable = true;
+  # programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
+
+  # Enable the COSMIC login manager
+  # services.displayManager.cosmic-greeter.enable = true;
+
+  # Enable the COSMIC desktop environment
+  # services.desktopManager.cosmic.enable = true;
+
+  # Fix the liked 
+  programs.nix-ld.enable = true;
 
 # Configure keymap in X11
 	services.xserver.xkb = {
 		layout = "us";
-		variant = "intl";
+		variant = "altgr-intl";
 	};
 
 # Configure console keymap
-# console.keyMap = "us-acentos";
+console.keyMap = "us";
 
 # Enable CUPS to print documents.
-	services.printing.enable = true;
+  services.printing.enable = true;
 
 # Enable sound with pipewire.
 	services.pulseaudio.enable = false;
@@ -152,85 +168,108 @@ services.xserver = {
 		isNormalUser = true;
 		description = "gustavo";
 		shell = pkgs.zsh; 
-		extraGroups = [ "networkmanager" "wheel" ];
+		extraGroups = [ "networkmanager" "wheel" "podman" ];
 		packages = with pkgs; [
 			zsh
       kitty
+      wezterm
       jq
       lazygit
-      # flatpak
-      # gnome-software
+      stow
+      fastfetch
+      zed-editor
+      helix
+      emacs
+      pokeget-rs
+      ripgrep
+      fd
+      eza
+      bat
+      tree-sitter
+      lua-language-server
+      nil
+      bash-language-server
+      marksman
+      rust-analyzer
+      typescript-language-server
+      zip
+      unzip
+      fzf
+      tmux 
+      zoxide
+      distrobox
+      # TODO: remove this
+      gnome-tweaks
 		];
 	};
 
-
-  # # enable flathub (psygreg)
-  # systemd.services.flatpak-repo = {
-  #   wantedBy = [ "multi-user.target" ];
-  #   path = [ pkgs.flatpak ];
-  #   script = ''
-  #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  #   '';
-  # };
+   # enable flathub (psygreg)
+   systemd.services.flatpak-repo = {
+     wantedBy = [ "multi-user.target" ];
+     path = [ pkgs.flatpak ];
+     script = ''
+       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+     '';
+   };
 
   services = {
     # enable nix-flatpak declarative flatpaks
     flatpak = {
       enable = true;
-    #   packages = [
-    #   "com.mattjakeman.ExtensionManager"
-    #   "app.zen_browser.zen"
-    #   "com.google.Chrome"
-    #   "io.github.kolunmi.Bazzar"
-    #   "io.github.flattool.Warehouse"
-    #   ];
-    #   update.auto = {
-    #     enable = true;
-    #     onCalendar = "daily";
-    #   };
+      packages = [
+      # "com.mattjakeman.extensionmanager"
+      # "app.zen_browser.zen"
+      # "com.google.chrome"
+      # "io.github.kolunmi.bazzar"
+      # "io.github.flattool.warehouse"
+      # "com.obsproject.Studio"
+      # "com.valvesoftware.Steam"
+      # "com.vivaldi.Vivaldi"
+      ];
     };
   };
 
   environment.etc."usr/bin/flatpak".source = "/run/current-system/sw/bin/flatpak";
 
-
-  # enable nix-flatpak declarative flatpaks(psygreg)
-  # services.flatpak.enable = true;
-  #   enable = true;
-  #   packages = [
-  #     "com.mattjakeman.ExtensionManager"
-  #     "app.zen_browser.zen"
-  #     "com.google.Chrome"
-  #     "io.github.kolunmi.Bazzar"
-  #     "io.github.flattool.Warehouse"
-  #     "org."
-  #   ];
-  #   update.auto = {
-  #     enable = true;
-  #     onCalendar = "daily";
-  #   };
-  # };
-
+  programs = {
 # Install firefox.
-	programs.firefox.enable = true;
+    firefox.enable = true;
 
-	programs.zsh = {
-		enable = true;
-	};
+#  Zsh+ohMyZsh
+    zsh = {
+      enable = true;
+      ohMyZsh = {
+        enable = true;
+        theme = "smt";
+        plugins = [
+          "vi-mode"
+          "git"
+        ];
+      };
+    };
+
+# steam setup
+    # steam = {
+    #   enable = true;
+    #   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    #     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    # };
+# gamescope setup
+    gamescope = {
+      enable = true;
+      capSysNice = false;
+    };
+  };
 
 	environment.variables = {
 		XDG_CONFIG_HOME="$HOME/.config";
 		ZDOTDIR="$XDG_CONFIG_HOME/zsh";
-    HISTFILE="$XDG_CONFIG_HOEM/zsh/.zsh_history";
+    HISTFILE="$XDG_CONFIG_HOME/zsh/.zsh_history";
+    EDITOR="nvim";
 	};
 
 # Allow unfree packages
 	nixpkgs.config.allowUnfree = true;
-
-	programs.hyprland = {
-		enable = true;
-		xwayland.enable = true;
-	};
 
 systemd.services.kanata-custom = {
   enable = true;
@@ -278,33 +317,16 @@ systemd.services.kanata-custom = {
     gcc
     rustc
     rustup
+    lua
+    python315
     cmake
     gnumake
     git
-    emacs
-    fzf
-    tmux 
-    zoxide
-    neovim
+    libtool
+    vim
     kanata
-    ripgrep
-    fd
-    eza
-    bat
-    zip
-    unzip
-    lua
-    fastfetch
-    pokeget-rs
-    swaybg
-    hyprshot
-    waybar
-    fuzzel
-    hyprsunset
-    hyprpicker
-    swaynotificationcenter  # swaync
     pulseaudio
-    rofi
+    gparted
 	];
 
   # (psygreg)
@@ -326,6 +348,26 @@ systemd.services.kanata-custom = {
 #   enable = true;
 #   enableSSHSupport = true;
 # };
+#
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true; # Required for cont>
+    };
+  };
+
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [ "nix-command" "flakes" ];
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 5d";
+  };
 
 # List services that you want to enable:
 
@@ -333,8 +375,11 @@ systemd.services.kanata-custom = {
 # services.openssh.enable = true;
 
 # Open ports in the firewall.
-# networking.firewall.allowedTCPPorts = [ ... ];
-# networking.firewall.allowedUDPPorts = [ ... ];
+networking.firewall = {
+  enable = true;
+  allowedTCPPorts = [];
+  allowedUDPPorts = [];
+};
 # Or disable the firewall altogether.
 # networking.firewall.enable = false;
 
@@ -346,17 +391,3 @@ systemd.services.kanata-custom = {
 # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 	system.stateVersion = "25.11"; # Did you read the comment?
 }
-
-  # swapDevices = [
-  #   {
-  #     device = "/var/swap";   # caminho do swapfile
-  #     size = 4096;            # 4 GB de fallback
-  #     priority = 10;          # usado só depois do ZRAM
-  #   }
-  # ];
-  #
-  # zramSwap = {
-  #   enable = true;
-  #   memoryPercent = 50; # 100% da RAM = 16GB zram
-  #   priority = 100;      # ZRAM recebe prioridade absoluta
-  # };
