@@ -2,7 +2,9 @@
 
 --{{{ -- Options
 vim.g.mapleader = ' '
-vim.g.maplocalleader = '\\'
+vim.cmd([[
+let g:maplocalleader = "\<BS>"
+]])
 -- vim.g.netrw_banner = 0
 vim.g.snacks_animate = false
 
@@ -107,7 +109,8 @@ vim.keymap.set('n', '<leader>fc', ':e $MYVIMRC<Cr>', { silent = true })
 vim.keymap.set('n', '<leader>hdc', ':e $MYVIMRC<Cr>', { silent = true })
 
 vim.keymap.set('n', '<leader>bb', ':b #<Cr>')
-vim.keymap.set('n', '<leader>bd', ':bd!<Cr>')
+vim.keymap.set('n', '<leader>bd', ':bd<Cr>')
+vim.keymap.set('n', '<leader>bD', ':bufdo bd<Cr>')
 vim.keymap.set('n', '<leader>,', ':b! ')
 
 vim.keymap.set('n', '<leader>fd', ':Ex<Cr>')
@@ -123,6 +126,7 @@ vim.keymap.set('n', '<leader>og', ':grep ')
 vim.keymap.set('n', '<leader>sG', ':grep  %:h<left><left><left><left>')
 vim.keymap.set('n', '<leader>/', ':LiveGrep  %:h<left><left><left><left>') -- Custom Autocmd
 vim.keymap.set('n', '<leader>o/', ':LiveGrep  %:h<left><left><left><left>') -- Custom Autocmd
+vim.keymap.set('n','<leader>?', ':hor term rg --vimgrep ') -- Custom Autocmd
 
 vim.keymap.set('n', '<leader>sw', ':grep <cword><Cr>')
 vim.keymap.set('n', '<leader>sW', ':grep <cword> %:h<Cr>')
@@ -146,8 +150,8 @@ vim.keymap.set('n', '<leader>le', function()
 end)
 
 -- [How to Use vim.pack - NeoVim's built-in Plugin Manager in Neovim 0.12+ - YouTube](https://www.youtube.com/watch?v=UE6XQTAxwE0)
-vim.keymap.set('n', '<leader>fl', ':.lua<Cr>', { silent = true, desc = 'Execute Line in Lua' })
-vim.keymap.set('v', '<leader>fl', ":'<,'>lua<Cr>", { silent = true, desc = 'Execute Selection in Lua' })
+vim.keymap.set('n', '<localleader>l', ':.lua<Cr>', { silent = true, desc = 'Execute Line in Lua' })
+vim.keymap.set('v', '<localleader>l', ":'<,'>lua<Cr>", { silent = true, desc = 'Execute Selection in Lua' })
 
 -- Poor man harpoon
 vim.keymap.set('n', '<leader>ha', function()
