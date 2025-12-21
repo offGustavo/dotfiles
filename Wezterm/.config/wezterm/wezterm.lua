@@ -8,10 +8,13 @@ local config = wezterm.config_builder()
 -- Show which key table is active in the status area
 wezterm.on("update-right-status", function(window, pane)
 	local name = window:active_key_table()
-	if name then
-		name = " " .. name .. " "
+	if name == "copy_mode" then
+		name = "  "
 	end
-	window:set_right_status(name or "")
+	if window:leader_is_active() then
+		name = "  "
+	end
+window:set_right_status(name or "󰯉  ")
 end)
 
 config = {
@@ -33,7 +36,7 @@ config = {
 		bottom = 0,
 	},
 
-  font = wezterm.font('JetBrainsMonoNL Nerd Font')
+	font = wezterm.font("JetBrainsMonoNL Nerd Font"),
 }
 
 config.colors = require("theme")
@@ -42,7 +45,7 @@ config.colors = require("theme")
 local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
 
 local find_sessions = {
-	wezterm.plugin.require("https://github.com/mikkasendke/sessionizer-zoxide.git").Zoxide({}),
+  wezterm.plugin.require("https://github.com/mikkasendke/sessionizer-zoxide.git").Zoxide({}),
 }
 
 local current_sessions = {
