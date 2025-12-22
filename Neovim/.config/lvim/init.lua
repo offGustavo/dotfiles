@@ -126,7 +126,9 @@ vim.keymap.set('n', '<leader>og', ':grep ')
 vim.keymap.set('n', '<leader>sG', ':grep  %:h<left><left><left><left>')
 vim.keymap.set('n', '<leader>/', ':LiveGrep  %:h<left><left><left><left>') -- Custom Autocmd
 vim.keymap.set('n', '<leader>o/', ':LiveGrep  %:h<left><left><left><left>') -- Custom Autocmd
-vim.keymap.set('n','<leader>?', ':hor term rg --vimgrep ') -- Custom Autocmd
+vim.keymap.set('n','<leader>?', ':hor term rg --vimgrep ') 
+vim.keymap.set('n','<leader>sf', ':hor term rg . --max-count 1 -n -c<CR>')
+
 
 vim.keymap.set('n', '<leader>sw', ':grep <cword><Cr>')
 vim.keymap.set('n', '<leader>sW', ':grep <cword> %:h<Cr>')
