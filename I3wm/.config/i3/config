@@ -8,7 +8,8 @@ set $alt Mod1
 
 set $scripts ~/.config/rofi/scripts
 
-set $terminal kitty
+set $terminal wezterm start  --always-new-process
+set $terminal-float kitty --class='terminal-float'
 
 ## Print all window titles in format of 'class | title'
 title_align center
@@ -39,11 +40,13 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id systemctl --user start gnome-keyring-daemon.service
 exec --no-startup-id xrandr --output HDMI-1-0 --mode 1920x1080 --right-of eDP-1
 # exec --no-startup-id  nitrogen --restore
-exec --no-startup-id  feh --bg-scale ~/Pictures/Wallpapers/archcraft/default.jpg
+exec --no-startup-id  xwallpaper --zoom ~/Pictures/Wallpapers/tokyo-nigth-wallpapers/night/os/arch_01_1920x1080.png
 
 # Audio
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% && $refresh_i3status
+bindsym Shift+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 bindsym XF86AudioNext  exec --no-startup-id playerctl next
@@ -62,9 +65,11 @@ bindsym $super+Return exec $terminal
 
 # kill focused window
 bindsym $super+q kill
+bindsym $super+Delete kill
 
 # run rofi (a program launcher)
 bindsym $super+slash exec --no-startup-id $scripts/launcher.sh
+bindsym $super+d exec --no-startup-id $scripts/launcher.sh
 bindsym $alt+space exec --no-startup-id $scripts/launcher.sh
 
 # run rofi window 
@@ -94,7 +99,7 @@ bindsym $super+Shift+s exec --no-startup-id  flameshot gui
 bindsym $super+Shift+m exec --no-startup-id  $scripts/monitors.sh
 
 # alacritty floating
-for_window [class="alacritty-float|kitty-float|Music"] floating enable
+for_window [class="alacritty-float|kitty-float|terminal-float|Music"] floating enable
 
 bindsym $super+r exec --no-startup-id  $scripts/combi.sh
 
@@ -107,11 +112,21 @@ bindsym $super+j focus down
 bindsym $super+k focus up
 bindsym $super+l focus right
 
+bindsym $super+Left focus left
+bindsym $super+Down focus down
+bindsym $super+Up focus up
+bindsym $super+Right focus right
+
 # move focused window
 bindsym $super+Shift+h move left
 bindsym $super+Shift+j move down
 bindsym $super+Shift+k move up
 bindsym $super+Shift+l move right
+
+bindsym $super+Shift+Left move left
+bindsym $super+Shift+Down move down
+bindsym $super+Shift+Up move up
+bindsym $super+Shift+Right move right
 
 # resize focused window
 bindsym $super+$alt+h resize shrink width 10 px or 10 ppt
@@ -127,19 +142,34 @@ bindsym $super+shift+bracketleft move window to output left
 bindsym $super+shift+bracketright move window to output right
 bindsym $super+shift+comma move window to output left
 bindsym $super+shift+period move window to output right
+bindsym $super+shift+Home move window to output left
+bindsym $super+shift+End move window to output right
 
 bindsym $super+$alt+bracketleft move workspace to output left
 bindsym $super+$alt+bracketright move workspace to output right
 bindsym $super+$alt+comma move workspace to output left
 bindsym $super+$alt+period move workspace to output right
+bindsym $super+$alt+Home move workspace to output left
+bindsym $super+$alt+End move workspace to output right
+
+bindsym $super+Control+bracketleft move workspace to output left
+bindsym $super+Control+bracketright move workspace to output right
+bindsym $super+Control+comma move workspace to output left
+bindsym $super+Control+period move workspace to output right
+bindsym $super+Control+Home move workspace to output left
+bindsym $super+Control+End move workspace to output right
 
 bindsym $super+bracketleft focus output left
 bindsym $super+bracketright focus output right
 bindsym $super+comma focus output left
 bindsym $super+period focus output right
 
+bindsym $super+Home focus output left
+bindsym $super+End focus output right
+
 # enter fullscreen mode for the focused container
 bindsym $super+shift+f fullscreen toggle
+bindsym $super+shift+Insert fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $super+shift+y layout stacked
@@ -238,11 +268,11 @@ bar {
 #   Option "NaturalScrolling" "true"
 # EndSection
 
-# Tokyo Night Day Theme
-set $fg #3760bf
-set $bg #e1e2e7
-set $bg_alt #c4c8da
-set $blue #2e7de9
-set $red #f52a65
-set $green #587539
-set $purple #7847bd
+# Tokyo Night Theme
+set $fg #c0caf5
+set $bg #1a1b26
+set $bg_alt #292e39
+set $blue #7aa2f7
+set $red #f7768e
+set $green #98c379
+set $purple #c678dd
