@@ -7,10 +7,11 @@
     "cpu",
     "memory",
     "temperature",
-    "disk",
+    // "disk",
     // "custom/powerDraw",
     "custom/weather",
     "hyprland/workspaces",
+    "niri/workspaces",
     // "mpd",
     "tray",
     // "hyprland/window",
@@ -82,7 +83,7 @@
   "disk": {
     "interval": 30,
     "format": " {percentage_used}%",
-    "path": "/"
+    "path": "/home"
   },
   "memory": {
     "format": " {percentage}%"
@@ -114,6 +115,22 @@
     "exec": "~/.config/waybar/scripts/powerdraw.sh",
     "return-type": "json"
   },
+  "niri/workspaces": {
+	"format": "{index}",
+	"format-icons": {
+		// Named workspaces
+		// (you need to configure them in niri)
+		// "zen": "<b>󰖟</b>",
+		// "term": "",
+		// "note": "",
+		// "temp": "",
+		// // Icons by state
+		// "active": "{name}",
+		// "default": "{index}"
+		// "active": "",
+		// "default": ""
+	}
+},
   "hyprland/workspaces": {
     // "format": "<span font='18px'>{icon}</span>",
     "format": "{icon}",

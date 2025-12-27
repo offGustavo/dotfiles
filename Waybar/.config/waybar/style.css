@@ -46,13 +46,25 @@ window#waybar {
   border-radius: 0;
 }
 
+       /* #workspaces button */
+       /* #workspaces button.focused: The single focused workspace. */
+       /* #workspaces  button.active:  The workspace is active (visi‐ */
+       /* ble) on its output. */
+       /* #workspaces button.urgent: The workspace has  one  or  more */
+       /* urgent windows. */
+       /* #workspaces button.empty: The workspace is empty. */
+       /* #workspaces  button.current_output:  The  workspace is from */
+       /* the same output as the bar that it is displayed on. */
+       /* #workspaces button#niri-workspace-<name>: Workspaces  named */
+       /* this, or index for unnamed workspaces. */
+
 /* #workspaces button label{ */
 /*   font-size: 12px; */
 /* } */
 
 /*#workspaces button.active {*/
 /*}*/
-/*#workspaces{*/
+/*workspaces{*/
 /*}*/
 /*#workspaces button.empty{*/
 /*}*/
@@ -60,8 +72,11 @@ window#waybar {
 /*}*/
 /*#workspaces button.special{*/
 /*}*/
+#workspaces button.focused,
+#workspaces  button.active,
 #workspaces button.visible{
   background: @blue;
+  color: @bg;
 }
 #workspaces button.urgent{
   background: @red;
