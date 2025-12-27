@@ -90,6 +90,8 @@
 ;; they are implemented.
 ; (after! evil
   ;; (setq! evil-disable-insert-state-bindings t)
+
+(setq doom-localleader-key "<backspace>")
   (map!
    ;;Windows
    :nv "C-w O" #'doom/window-enlargen
@@ -121,7 +123,7 @@
 
 (map!
    ;; Save buffer
-   :N "C-s" #'save-buffer)
+   :n "C-s" #'save-buffer)
   ; )
 
 ;; (keymap! 
@@ -147,6 +149,11 @@
 
 ;; Send files to trash instead of fully deleting
 
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+
+;; ... your existing font, theme, and other settings ...
+
+;; Send files to trash instead of fully deleting
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
 ;; Save automatically
@@ -155,89 +162,119 @@
 ;; Disable breadcrumb
 (add-hook 'lsp-mode-hook (lambda () (lsp-headerline-breadcrumb-mode -1)))
 
-; (require 'exwm)
-; ;; Set the initial workspace number.
-; (setq exwm-workspace-number 4)
-; ;; Make class name the buffer name.
-; (add-hook 'exwm-update-class-hook
-;   (lambda () (exwm-workspace-rename-buffer exwm-class-name)))
-; ;; Global keybindings.
-; (setq exwm-input-global-keys
-;       `(([?\s-r] . exwm-reset) ;; s-r: Reset (to line-mode).
-;         ([?\s-w] . exwm-workspace-switch) ;; s-w: Switch workspace.
-;         ([?\s-&] . (lambda (cmd) ;; s-&: Launch application.
-;                      (interactive (list (read-shell-command "$ ")))
-;                      (start-process-shell-command cmd nil cmd)))
-;         ([?\s-d] . (lambda (cmd) ;; s-&: Launch application.
-;                      (interactive (list (read-shell-command "$ ")))
-;                      (start-process-shell-command cmd nil cmd)))
-;         ([?\s-/] . (lambda (cmd) ;; s-&: Launch application.
-;                      (interactive 
-;                      (start-process-shell-command "rofi-drun" nil "rofi -show drun"))))
-;         ;; s-N: Switch to certain workspace.
-;         ,@(mapcar (lambda (i)
-;                     `(,(kbd (format "s-%d" i)) .
-;                       (lambda ()
-;                         (interactive)
-;                         (exwm-workspace-switch-create ,i))))
-;                   (number-sequence 0 9))))
-;
-; ;; ;; Enable EXWM
-; ;; (exwm-wm-mode)
-;
-; (require 'exwm-randr)
-;
-; (setq exwm-randr-workspace-monitor-plist
-;       '(0 "eDP-1"
-;         1 "HDMI-1-0"))
-;
-; (add-hook 'exwm-randr-screen-change-hook
-;           (lambda ()
-;             (start-process-shell-command
-;              "xrandr" nil
-;              "xrandr --output eDP-1 --mode 1920x1080 \
-;                      --output HDMI-1-0 --mode 1920x1080 --right-of eDP-1")))
-;
-; (exwm-randr-enable)
-;
-;
-; (use-package! exwm-evil
-;   :after exwm
-;   :config
-;   (add-hook 'exwm-manage-finish-hook #'enable-exwm-evil-mode)
-;   (cl-pushnew 'escape exwm-input-prefix-keys)
-;
-;   ;; If you want to force enable exwm-evil-mode in any buffer, use:
-;   ;; (exwm-evil-enable-unconditionally)
-;
-;   ;; We will disable `C-c' in insert state.
-;   (define-key exwm-mode-map (kbd "C-c") nil)
-;
-;   (keymap! :map exwm-mode-map
-;         :localleader
-;         (:prefix ("d" . "debug")
-;          :desc "Clear debug buffer" "l" #'xcb-debug:clear
-;          :desc "Insert mark into the debug buffer" "m" #'xcb-debug:mark
-;          :desc "Enable debug logging" "t" #'exwm-debug)
-;         :desc "Toggle fullscreen" "f" #'exwm-layout-toggle-fullscreen
-;         :desc "Hide floating window" "h" #'exwm-floating-hide
-;         :desc "Send next key" "q" #'exwm-input-send-next-key
-;         :desc "Toggle floating" "SPC" #'exwm-floating-toggle-floating
-;         :desc "Send escape" "e" (cmd! (exwm-evil-send-key 1 'escape))
-;         :desc "Toggle modeline" "m" #'exwm-layout-toggle-mode-line))
-;
-; ;; Super+Escape → return to evil-normal-state in EXWM
-; (defun my/exwm-super-esc ()
-;   (interactive)
-;   (exwm-evil-normal-state))
-;
-; (exwm-input-set-key (kbd "s-<escape>") #'my/exwm-super-esc)
-;
-; ;; Escape inside EXWM insert mode: send ESC to app
-; (evil-define-key 'insert exwm-evil-mode-map
-;   (kbd "<escape>")
-;   (lambda () (interactive)
-;     (exwm-input--fake-key 'escape)))
+(require 'exwm)
+;; Set the initial workspace number.
+(setq exwm-workspace-number 4)
+;; Make class name the buffer name.
+(add-hook 'exwm-update-class-hook
+  (lambda () (exwm-workspace-rename-buffer exwm-class-name)))
 
-(setq doom-localleader-key "<backspace>")
+;; Global keybindings.
+(setq exwm-input-global-keys
+      `(([?\s-r] . exwm-reset) ;; s-r: Reset (to line-mode).
+        ([?\s-w] . exwm-workspace-switch) ;; s-w: Switch workspace.
+        ([?\s-&] . (lambda (cmd) ;; s-&: Launch application.
+                     (interactive (list (read-shell-command "$ ")))
+                     (start-process-shell-command cmd nil cmd)))
+        ([?\s-d] . (lambda (cmd) ;; s-&: Launch application.
+                     (interactive (list (read-shell-command "$ ")))
+                     (start-process-shell-command cmd nil cmd)))
 
+        ;; ([?\s-D] . (lambda (cmd) ;; s-&: Launch application.
+        ;;              (interactive (list (read-shell-command "$ ")))
+        ;;              (start-process-shell-command cmd nil cmd)))
+        ;; (exwm-input-set-key (kbd "s-r") (lambda () (start-process "rofi" nil "rofi" "-show" "run")))
+        ;; ([?\s-D]
+        ;;  . (lambda ()
+        ;;      ;; s-d: Launch application via rofi
+        ;;      (interactive)
+        ;;      (let ((cmd (string-trim
+        ;;                  (shell-command-to-string
+        ;;                   "rofi -show drun -run-shell-command '{cmd}'"))))
+        ;;        (when (and cmd (not (string-empty-p cmd)))
+        ;;          (start-process-shell-command cmd nil cmd)))))
+        ;; s-N: Switch to certain workspace.
+        ,@(mapcar (lambda (i)
+                    `(,(kbd (format "s-%d" i)) .
+                      (lambda ()
+                        (interactive)
+                        (exwm-workspace-switch-create ,i))))
+                  (number-sequence 0 9))))
+
+(defun exwm-change-screen-hook ()
+  (let ((xrandr-output-regexp "\n\\([^ ]+\\) connected ")
+        default-output)
+    (with-temp-buffer
+      (call-process "xrandr" nil t nil)
+      (goto-char (point-min))
+      (re-search-forward xrandr-output-regexp nil 'noerror)
+      (setq default-output (match-string 1))
+      (forward-line)
+      (if (not (re-search-forward xrandr-output-regexp nil 'noerror))
+          (call-process "xrandr" nil nil nil "--output" default-output "--auto")
+        (call-process
+         "xrandr" nil nil nil
+         "--output" (match-string 1) "--primary" "--auto"
+         "--output" default-output "--off")
+        (setq exwm-randr-workspace-monitor-plist (list 0 (match-string 1)))))))
+
+(use-package! exwm-evil
+  :after exwm
+  :config
+  (add-hook 'exwm-manage-finish-hook #'enable-exwm-evil-mode)
+  (cl-pushnew 'escape exwm-input-prefix-keys)
+
+  ;; If you want to force enable exwm-evil-mode in any buffer, use:
+  ;; (exwm-evil-enable-unconditionally)
+
+  ;; We will disable `C-c' in insert state.
+ (define-key exwm-mode-map (kbd "C-c") nil)
+
+  (map! :map exwm-mode-map
+        :localleader
+        (:prefix ("d" . "debug")
+         :desc "Clear debug buffer" "l" #'xcb-debug:clear
+         :desc "Insert mark into the debug buffer" "m" #'xcb-debug:mark
+         :desc "Enable debug logging" "t" #'exwm-debug)
+        :desc "Toggle fullscreen" "f" #'exwm-layout-toggle-fullscreen
+        :desc "Hide floating window" "h" #'exwm-floating-hide
+        :desc "Send next key" "q" #'exwm-input-send-next-key
+        :desc "Toggle floating" "SPC" #'exwm-floating-toggle-floating
+        :desc "Send escape" "e" (cmd! (exwm-evil-send-key 1 'escape))
+        :desc "Toggle modeline" "m" #'exwm-layout-toggle-mode-line))
+
+;; Super+Escape → return to evil-normal-state in EXWM
+(defun my/exwm-super-esc ()
+  (interactive)
+  (exwm-evil-normal-state))
+
+;; ;; This is the correct way to set EXWM-specific keys
+;; (exwm-input-set-key (kbd "s-<escape>") #'my/exwm-super-esc)
+
+;; Escape inside EXWM insert mode: send ESC to app
+;; (evil-define-key 'insert exwm-evil-mode-map
+;;   (kbd "<escape>")
+;;   (lambda () (interactive)
+;;     (exwm-input--fake-key 'escape)))
+
+(evil-define-key 'normal exwm-evil-mode-map
+  (kbd "<escape>")
+  (lambda () (interactive)
+    (exwm-input--fake-key 'escape)
+    (exwm-evil-insert)))
+
+(use-package! exwm-randr
+  :after exwm
+  :config
+  (setq exwm-randr-workspace-monitor-plist
+        '(0 "eDP-1"
+          1 "HDMI-1-0"))
+
+  (add-hook 'exwm-randr-screen-change-hook
+            (lambda ()
+              (start-process-shell-command
+               "xrandr" nil
+               "xrandr --output eDP-1 --mode 1920x1080 \
+                       --output HDMI-1-0 --mode 1920x1080 --right-of eDP-1")))
+
+  (exwm-randr-enable))
