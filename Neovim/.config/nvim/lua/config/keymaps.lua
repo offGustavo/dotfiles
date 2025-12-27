@@ -46,6 +46,10 @@ vim.keymap.set("n", "<leader>tN", "<Cmd>terminal<Cr>", { silent = true, desc = "
 vim.keymap.set("n", "<leader>tV", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
 vim.keymap.set("n", "<leader>tS", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
 
+vim.keymap.set("n", "<leader>occ", ":hor term ", { desc = "Compile Mode" })
+vim.keymap.set("n", "<leader>olg", "<Cmd>term lazygit<CR><Cmd>start<Cr>", { desc = "Lazygit" })
+vim.keymap.set("n", "<leader>o?", ":hor term rg --vimgrep ", { desc = "Grep" })
+
 ---- Terminal Mode to Normal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal" })
 
@@ -55,17 +59,17 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To 
 -- vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k")
 -- vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l")
 
--- Move Window
-vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
-vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
-vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
-vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+-- -- Move Window
+-- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
+-- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
+-- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
+-- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 -- resize window
-vim.keymap.set("n", "<C-A-h>", "<C-w><", { desc = "Move window to the left" })
-vim.keymap.set("n", "<C-A-l>", "<C-w>>", { desc = "Move window to the right" })
-vim.keymap.set("n", "<C-A-k>", "<C-w>-", { desc = "Move window to the upper" })
-vim.keymap.set("n", "<C-A-j>", "<C-w>+", { desc = "Move window to the lower" })
+-- vim.keymap.set("n", "<C-A-h>", "<C-w><", { desc = "Move window to the left" })
+-- vim.keymap.set("n", "<C-A-l>", "<C-w>>", { desc = "Move window to the right" })
+-- vim.keymap.set("n", "<C-A-k>", "<C-w>-", { desc = "Move window to the upper" })
+-- vim.keymap.set("n", "<C-A-j>", "<C-w>+", { desc = "Move window to the lower" })
 -- Close Window
 vim.keymap.set("n", "<leader>wc", "<Cmd>close<Cr>")
 
@@ -204,9 +208,10 @@ vim.keymap.set("n", "<leader>qn", "<Cmd>cnext<Cr>", { silent = true, desc = "Ope
 vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { silent = true, desc = "Open Previous in Quickfix List" })
 vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { silent = true, desc = "Open Quickfix List" })
 vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { silent = true, desc = "Close Quickfix List" })
-vim.keymap.set("n", "<leader>qd", function()
-    vim.diagnostic.setqflist()
-end, { desc = "Open diagnostic Quickfix list" })
+vim.keymap.set("n", "<leader>qh", "<Cmd>chistory<Cr>", { silent = true, desc = "List Quick Fix History" })
+for i = 1, 9 do
+  vim.keymap.set("n", "<leader>q" .. i, "<Cmd>chistory " .. i .. "<Cr>", { silent = true, desc = "Go to " .. i .. " Quickfix" })
+end
 
 ------------
 --- Quit ---
@@ -220,17 +225,20 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set(
     "n",
-    "<leader>s/",
+    "<leader>rg",
     [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { desc = "Substitute Current Word Globally" }
 )
 vim.keymap.set(
     "n",
-    "<leader>s.",
+    "<leader>rw",
     [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { desc = "Substitute Current Word" }
 )
-vim.keymap.set("x", "<leader>p", '"_dP', { silent = true, desc = "Paste Without Copy" })
+vim.keymap.set({ "x", "n" }, "<leader>rr", ":s/", { desc = "Search and Replace" })
+vim.keymap.set("x", "S", ":s/", { desc = "Substitute in line(or selection)" })
+
+vim.keymap.set("x", "<leader>rp", '"_dP', { silent = true, desc = "Paste Without Copy" })
 
 vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
 
@@ -287,6 +295,11 @@ for i = 1, 9, 1 do
     vim.keymap.set("n", "<leader>t" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
     vim.keymap.set("n", "<leader><tab>" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
 end
+
+vim.cmd([[
+ nmap  <S-ScrollWheelUp> zh
+ nmap  <S-ScrollWheelDown> zl
+ ]])
 
 ---------------
 -- OBSIDIAN ---
