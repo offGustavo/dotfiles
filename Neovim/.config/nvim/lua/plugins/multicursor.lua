@@ -9,7 +9,7 @@ return {
     -- (global-set-key (kbd "C-:")         'mc/skip-to-previous-like-this)
 
     "brenton-leighton/multiple-cursors.nvim",
-    lazy = true,
+    -- lazy = true,
     -- cond = not not vim.g.vscode,
     version = "*", -- Use the latest tagged version
     opts = {}, -- This causes the plugin setup function to be called
@@ -23,6 +23,9 @@ return {
       -- { "<C-A-Down>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "i", "x" }, desc = "Add cursor and move down" },
       { "<C-A-S-k>", "<Cmd>MultipleCursorsAddUp<CR>", mode = { "n", "i", "x" }, desc = "Add cursor and move up" },
       { "<C-A-S-j>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "i", "x" }, desc = "Add cursor and move down" },
+
+      { "<C-A-k>", "<Cmd>MultipleCursorsAddUp<CR>", mode = { "n", "i", "x" }, desc = "Add cursor and move up" },
+      { "<C-A-j>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "i", "x" }, desc = "Add cursor and move down" },
 
       { "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = { "n", "i" }, desc = "Add or remove cursor" },
 
@@ -43,14 +46,14 @@ return {
         mode = { "n", "x" },
         desc = "Add cursor and jump to next cword",
       },
-      { "<C-A-,>", "<Cmd>MultipleCursorsJumpNextMatch<CR>", mode = { "n", "x" }, desc = "Jump to next cword" },
       {
-        "<C->>",
+        "<C-S-.>",
         "<Cmd>MultipleCursorsAddJumpNextMatch<CR>",
         mode = { "n", "x" },
         desc = "Add cursor and jump to next cword",
       },
-      { "<C-<>", "<Cmd>MultipleCursorsJumpNextMatch<CR>", mode = { "n", "x" }, desc = "Jump to next cword" },
+      { "<C-A-,>", "<Cmd>MultipleCursorsJumpNextMatch<CR>", mode = { "n", "x" }, desc = "Jump to next cword" },
+      { "<C-S-,>", "<Cmd>MultipleCursorsJumpNextMatch<CR>", mode = { "n", "x" }, desc = "Jump to next cword" },
 
       { "<C-:>", "<Cmd>MultipleCursorsLock<CR>", mode = { "n", "x" }, desc = "Lock virtual cursors" },
     },

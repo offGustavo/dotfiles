@@ -63,7 +63,7 @@ if vim.uv.os_uname().sysname == "Windows_NT" then
     "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
 end
 
-vim.o.makeprg = "make"
+-- vim.o.makeprg = "make"
 
 if vim.fn.has("nvim-0.12") == 1 then
   if not vim.g.vscode then

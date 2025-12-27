@@ -21,7 +21,8 @@ return {
         { "<leader>g", group = "git" },
         { "<leader>gh", group = "hunks" },
         { "<leader>q", group = "quit/session/quickfix" },
-        { "<leader>s", group = "search/replace" },
+        { "<leader>s", group = "search" },
+        { "<leader>r", group = "search/replace" },
         --TODO: terminar isso
         { "<leader>l", group = "lazy/location list" },
         { "<leader>h", group = "harpoon", icon = "⇁" },

@@ -13,7 +13,8 @@ return {
       -- For most powershell/fish user this is '> '.
       -- For most windows cmd user this is '>'.
       -- prompt_end = "%$ ",
-      prompt_end = '%d+ ± : $'
+      prompt_end = '❯',
+      -- prompt_end = '%d+ ± : $'
       -- How to write lua patterns: https://www.lua.org/pil/20.2.html
     })
   end,

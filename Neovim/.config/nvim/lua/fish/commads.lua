@@ -2,7 +2,9 @@
 local function align_regexp(opts)
   -- pede separador (regex)
   local sep = vim.fn.input("Separador (regex ou texto): ")
-  if sep == "" then return end
+  if sep == "" then
+    return
+  end
 
   -- obtém range
   local start_line = opts.line1
@@ -40,3 +42,4 @@ end
 
 -- cria comando
 vim.api.nvim_create_user_command("AlignRegexp", align_regexp, { range = true })
+

@@ -250,7 +250,7 @@ local function apply_wezterm_theme()
   if file then
     file:write(theme_str)
     file:close()
-    vim.notify("[WezTerm] Theme updated successfully!", vim.log.levels.INFO)
+    -- vim.notify("[WezTerm] Theme updated successfully!", vim.log.levels.INFO)
   else
     vim.notify("[WezTerm] Error: Could not open file for writing", vim.log.levels.ERROR)
   end
