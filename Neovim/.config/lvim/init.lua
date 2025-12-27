@@ -411,8 +411,8 @@ M.setup = function()
   vim.o.termguicolors = true
 
   -- Basic UI
-  set(0, 'Normal', { fg = p.fg, bg = "none" })
-  set(0, 'NormalNC', { fg = p.fg, bg = "none" })
+  set(0, 'Normal', { fg = p.fg, bg = p.bg })
+  set(0, 'NormalNC', { fg = p.fg, bg = p.bg })
   set(0, 'NormalFloat', { fg = p.fg, bg = p.color0 })
   set(0, 'FloatBorder', { fg = p.color8, bg = p.color0 })
 
