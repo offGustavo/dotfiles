@@ -1,23 +1,77 @@
 //  vim:  foldmethod=indent
-// This config is in the KDL format: https://kdl.dev
+// This config is in the KDL format: htth jjjps://kdl.dev
 // "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
+// Use server side decorations
+prefer-no-csd
 
-workspace "note" {
-  open-on-output "HDMI-A-1"
-}
-workspace "temp" {
-  open-on-output "HDMI-A-1"
+hotkey-overlay {
+    skip-at-startup
 }
 
-workspace "term" {
-  open-on-output "HDMI-A-1"
+workspace "6"  {
+  open-on-output "eDP-1"
 }
-workspace "zen" {
-  open-on-output "HDMI-A-1"
+workspace "7" {
+  open-on-output "eDP-1"
 }
+workspace "8" {
+  open-on-output "eDP-1"
+}
+workspace "9" {
+  open-on-output "eDP-1"
+}
+workspace "0" {
+  open-on-output "eDP-1"
+}
+workspace "1" {
+  open-on-output "HDMI-A-2"
+}
+workspace "2" {
+  open-on-output "HDMI-A-2"
+}
+workspace "3" {
+  open-on-output "HDMI-A-2"
+}
+workspace "4" {
+  open-on-output "HDMI-A-2"
+}
+workspace "5" {
+  open-on-output "HDMI-A-2"
+}
+
+// workspace "note" {
+//   open-on-output "HDMI-A-1"
+// }
+// workspace "temp" {
+//   open-on-output "HDMI-A-1"
+// }
+// workspace "term" {
+//   open-on-output "HDMI-A-1"
+// }
+// workspace "zen" {
+//   open-on-output "HDMI-A-1"
+// }
+// workspace "spotify" {
+//   open-on-output "HDMI-A-1"
+// }
+// workspace "trash" {
+//   open-on-output "HDMI-A-1"
+// }
+// workspace "minimize" {
+//   open-on-output "HDMI-A-1"
+// }
+// // workspace "obs" {
+// //   open-on-output "HDMI-A-1"
+// // }
+// // workspace "ten" {
+// //   open-on-output "HDMI-A-1"
+// // }
+// // workspace "oi" {
+// //   open-on-output "HDMI-A-1"
+// // }
 
 
 // Input device configuration.
@@ -30,15 +84,18 @@ input {
             // For more information, see xkeyboard-config(7).
 
             // For example:
-            layout "us,br"
-            variant "intl,"
-            options "grp:win_space_toggle"
+            layout "us"
+            variant "intl" 
+            // layout "us,br"
+            // variant "intl-altgr,"
+            // options "grp:win_space_toggle"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
         numlock
 
     }
+        // workspace-auto-back-and-forth
 
     // Next sections include libinput settings.
     // Omitting settings disables them, or leaves them at their default values.
@@ -118,7 +175,7 @@ output "eDP-1" {
     // position x=0 y=1080
 }
 
-output "HDMI-A-1" {
+output "HDMI-A-2" {
     // Uncomment this line to disable this output.
     // off
     // Resolution and, optionally, refresh rate of the output.
@@ -150,6 +207,8 @@ output "HDMI-A-1" {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
+
+
     // Set gaps around windows in logical pixels.
     gaps 10
 
@@ -162,7 +221,7 @@ layout {
     // - "always", the focused column will always be centered.
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
-    center-focused-column "never"
+    center-focused-column "on-overflow"
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
@@ -210,7 +269,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 1
+        width 2
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -218,7 +277,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#B4BCC4"
+        active-color "#7aa2f7"
 
         // Color of the ring on inactive monitors.
         inactive-color "#00000000"
@@ -314,9 +373,11 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // spawn-at-startup "sh" "-c" "cosmic-ext-alternative-startup"
 // Start
-spawn-at-startup "sh" "-c" "sleep 1 && waybar -c ~/.config/niri/waybar/config.jsonc  -s ~/.config/niri/waybar/style.css"
-spawn-at-startup "sh" "-c" "sleep 1 && /usr/bin/swaybg -i ~/Pictures/Wallpapers/my/The-Path-of-Giants.png"
 spawn-at-startup "sh" "-c" "systemctl --user start gnome-keyring-daemon.service"
+// spawn-at-startup "sh" "-c" "sleep 1 && waybar -c ~/.config/niri/waybar/config.jsonc  -s ~/.config/niri/waybar/style.css"
+// spawn-at-startup "sh" "-c" "sleep 1 && /usr/bin/swaybg -i ~/Pictures/Wallpapers/my/The-Path-of-Giants.png"
+spawn-at-startup "sh" "-c" "sleep 1 && ~/.config/hypr/scripts/toggle-waybar.sh"
+spawn-at-startup "sh" "-c" "sleep 1 && ~/.config/hypr/scripts/start_swaybg.lua"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -482,30 +543,62 @@ binds {
     Mod+q { close-window; }
     Mod+Delete { close-window; }
 
-    Mod+H     { focus-column-left; }
+    Mod+H     { focus-column-or-monitor-left; }
     Mod+J     { focus-window-or-workspace-down; }
     Mod+K     { focus-window-or-workspace-up; }
-    Mod+L     { focus-column-right; }
+    Mod+L     { focus-column-or-monitor-right; }
+
+    Mod+Left     { focus-column-or-monitor-left; }
+    Mod+Down     { focus-window-or-workspace-down; }
+    Mod+Up     { focus-window-or-workspace-up; }
+    Mod+Right     { focus-column-or-monitor-right; }
+
+    Mod+o     { focus-workspace-down; }
+    Mod+i     { focus-workspace-up; }  
+    Mod+Next  { focus-workspace-down; }
+    Mod+Prior { focus-workspace-up; }  
 
     Mod+Shift+H { consume-or-expel-window-left; }         
     Mod+Shift+J { move-window-down-or-to-workspace-down; }
     Mod+Shift+L { consume-or-expel-window-right; }        
     Mod+Shift+K { move-window-up-or-to-workspace-up; }    
 
+    Mod+Shift+Left { consume-or-expel-window-left; }         
+    Mod+Shift+Down { move-window-down-or-to-workspace-down; }
+    Mod+Shift+Right { consume-or-expel-window-right; }        
+    Mod+Shift+Up { move-window-up-or-to-workspace-up; }    
+
     Mod+BracketLeft  { focus-monitor-left; }
     Mod+BracketRight { focus-monitor-right; }
     Mod+comma  { focus-monitor-left; }
     Mod+period { focus-monitor-right; }
+    Mod+Home  { focus-monitor-left; }
+    Mod+End { focus-monitor-right; }
 
     Mod+Shift+BracketLeft     { move-window-to-monitor-left; }
     Mod+Shift+BracketRight     { move-window-to-monitor-right; }
     Mod+Shift+comma     { move-window-to-monitor-left; }
     Mod+Shift+period     { move-window-to-monitor-right; }
+    Mod+Shift+Home     { move-window-to-monitor-left; }
+    Mod+Shift+End     { move-window-to-monitor-right; }
 
     Mod+Alt+BracketLeft     { move-workspace-to-monitor-left; }
     Mod+Alt+BracketRight     { move-workspace-to-monitor-right; }
     Mod+Alt+comma     { move-workspace-to-monitor-left; }
     Mod+Alt+period     { move-workspace-to-monitor-right; }
+    Mod+Alt+Home     { move-workspace-to-monitor-left; }
+    Mod+Alt+End     { move-workspace-to-monitor-right; }
+    Mod+Ctrl+BracketLeft     { move-workspace-to-monitor-left; }
+    Mod+Ctrl+BracketRight     { move-workspace-to-monitor-right; }
+    Mod+Ctrl+comma     { move-workspace-to-monitor-left; }
+    Mod+Ctrl+period     { move-workspace-to-monitor-right; }
+    Mod+Ctrl+Home     { move-workspace-to-monitor-left; }
+    Mod+Ctrl+End     { move-workspace-to-monitor-right; }
+
+    Mod+Alt+i        { move-workspace-up; }  
+    Mod+Alt+o       { move-workspace-down; }
+    Mod+Alt+Prior  { move-workspace-up; }  
+    Mod+Alt+Next { move-workspace-down; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -546,43 +639,74 @@ binds {
     Mod+Shift+Alt+WheelScrollUp { spawn "brightnessctl" "set" "10%+"; }
     Mod+Shift+Alt+WheelScrollDown { spawn "brightnessctl" "set" "10%-"; }
 
-    Mod+1 { focus-workspace "note"; }
-    Mod+2 { focus-workspace "temp"; }
-    Mod+3 { focus-workspace "term"; }
-    Mod+4 { focus-workspace "zen"; }
+    // Mod+1 { focus-workspace "note"; }
+    // Mod+2 { focus-workspace "temp"; }
+    // Mod+3 { focus-workspace "term"; }
+    // Mod+4 { focus-workspace "zen"; }
+    // Mod+5 { focus-workspace "spotify"; }
+    // Mod+6 { focus-workspace "trash"; }
+    // Mod+7 { focus-workspace "minimize"; }
+    // // Mod+8 { focus-workspace "obs"; }
+    // // Mod+9 { focus-workspace "ten"; }
+    // Mod+Shift+1 { move-window-to-workspace "note"; }
+    // Mod+Shift+2 { move-window-to-workspace "temp"; }
+    // Mod+Shift+3 { move-window-to-workspace "term"; }
+    // Mod+Shift+4 { move-window-to-workspace "zen"; }
+    // Mod+Shift+5 { move-window-to-workspace "spotify"; }
+    // Mod+Shift+6 { move-window-to-workspace "trash"; }
+    // Mod+Shift+7 { move-window-to-workspace "minimize"; }
+    // // Mod+Shift+8 { move-window-to-workspace "obs"; }
+    // // Mod+Shift+9 { move-window-to-workspace "ten"; }
 
-    Mod+Shift+1 { move-window-to-workspace "note"; }
-    Mod+Shift+2 { move-window-to-workspace "temp"; }
-    Mod+Shift+3 { move-window-to-workspace "term"; }
-    Mod+Shift+4 { move-window-to-workspace "zen"; }
-
-    // You can refer to workspaces by index. However, keep in mind that
-    // niri is a dynamic workspace system, so these commands are kind of
-    // "best effort". Trying to refer to a workspace index bigger than
-    // the current workspace count will instead refer to the bottommost
-    // (empty) workspace.
-    //
-    // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
-    // will all refer to the 3rd workspace.
+    // // You can refer to workspaces by index. However, keep in mind that
+    // // niri is a dynamic workspace system, so these commands are kind of
+    // // "best effort". Trying to refer to a workspace index bigger than
+    // // the current workspace count will instead refer to the bottommost
+    // // (empty) workspace.
+    // //
+    // // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
+    // // will all refer to the 3rd workspace.
     // Mod+1 { focus-workspace 1; }
     // Mod+2 { focus-workspace 2; }
     // Mod+3 { focus-workspace 3; }
     // Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-
+    // Mod+5 { focus-workspace 5; }
+    // Mod+6 { focus-workspace 6; }
+    // Mod+7 { focus-workspace 7; }
+    // Mod+8 { focus-workspace 8; }
+    // Mod+9 { focus-workspace 9; }
     // Mod+Shift+1 { move-window-to-workspace 1; }
     // Mod+Shift+2 { move-window-to-workspace 2; }
     // Mod+Shift+3 { move-window-to-workspace 3; }
     // Mod+Shift+4 { move-window-to-workspace 4; }
-    Mod+Shift+5 { move-window-to-workspace 5; }
-    Mod+Shift+6 { move-window-to-workspace 6; }
-    Mod+Shift+7 { move-window-to-workspace 7; }
-    Mod+Shift+8 { move-window-to-workspace 8; }
-    Mod+Shift+9 { move-window-to-workspace 9; }
+    // Mod+Shift+5 { move-window-to-workspace 5; }
+    // Mod+Shift+6 { move-window-to-workspace 6; }
+    // Mod+Shift+7 { move-window-to-workspace 7; }
+    // Mod+Shift+8 { move-window-to-workspace 8; }
+    // Mod+Shift+9 { move-window-to-workspace 9; }
+
+    Mod+1 { focus-workspace "1"; }
+    Mod+2 { focus-workspace "2"; }
+    Mod+3 { focus-workspace "3"; }
+    Mod+4 { focus-workspace "4"; }
+    Mod+5 { focus-workspace "5"; }
+    Mod+6 { focus-workspace "6"; }
+    Mod+Shift+g { focus-workspace "6"; }
+    Mod+7 { focus-workspace "7"; }
+    Mod+8 { focus-workspace "8"; }
+    Mod+9 { focus-workspace "9"; }
+    Mod+0 { focus-workspace "0"; }
+    Mod+Shift+1 { move-window-to-workspace "1"; }
+    Mod+Shift+2 { move-window-to-workspace "2"; }
+    Mod+Shift+3 { move-window-to-workspace "3"; }
+    Mod+Shift+4 { move-window-to-workspace "4"; }
+    Mod+Shift+5 { move-window-to-workspace "5"; }
+    Mod+Shift+6 { move-window-to-workspace "6"; }
+    Mod+M { move-window-to-workspace "6"; }
+    Mod+Shift+7 { move-window-to-workspace "7"; }
+    Mod+Shift+8 { move-window-to-workspace "8"; }
+    Mod+Shift+9 { move-window-to-workspace "9"; }
+    Mod+Shift+0 { move-window-to-workspace "0"; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -599,9 +723,9 @@ binds {
     // Mod+Period { expel-window-from-column; }
 
     Mod+R { switch-preset-column-width; }
-    Mod+E { switch-preset-column-width; }
+    Mod+E { switch-preset-column-width-back; }
     Mod+Shift+R { switch-preset-window-height; }
-    Mod+Shift+E { switch-preset-window-height; }
+    Mod+Shift+E { switch-preset-window-height-back; }
     Mod+Ctrl+R { reset-window-height; }
     Mod+f { maximize-column; }
     Mod+Shift+f { fullscreen-window; }
@@ -636,8 +760,8 @@ binds {
     Mod+Shift+Alt+Equal { set-window-height "+1%"; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+g       { toggle-window-floating; }
-    Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
+  Mod+g           { toggle-window-floating; }                  
+  Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
@@ -653,7 +777,6 @@ binds {
     // Mod+Shift+Space { switch-layout "prev"; }
 
     Mod+Shift+s { screenshot; }
-    // FIXME: not working
     Mod+Alt+s { screenshot-screen; }
     Mod+Ctrl+s { screenshot-window; }
 
@@ -678,11 +801,45 @@ binds {
     // Scripts
     Mod+b { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/bluetooth.sh"; }
     Mod+Ctrl+b { spawn "sh" "-c" "$HOME/.config/hypr/scripts/toggle-waybar.sh"; }
-    Mod+Shift+b { spawn "sh" "-c" "$HOME/.config/hypr/scripts/toggle-dark-mode.sh"; }
+    Mod+Alt+b { spawn "sh" "-c" "$HOME/.config/hypr/scripts/toggle-dark-mode.sh"; }
     Mod+n { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/network.py"; }
     Mod+v { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/sound.sh"; }
     Mod+Alt+p { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/color.sh"; }
     Mod+x { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/power.sh"; }
     Mod+s { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/screenshot.sh"; }
 
+}
+
+recent-windows {
+    // off
+    debounce-ms 750
+
+    open-delay-ms 150
+
+    highlight {
+        active-color "#B4BCC4"
+        urgent-color "#ff9999ff"
+        padding 5
+        corner-radius 12
+    }
+
+    previews {
+        max-height 480
+        max-scale 0.5
+    }
+
+    binds {
+
+        Alt+Tab         { next-window scope="all"; }
+        Alt+Shift+Tab   { previous-window scope="all"; }
+        Alt+grave       { next-window     filter="app-id"; }
+        Alt+Shift+grave { previous-window filter="app-id"; }
+        Alt+escape       { next-window     scope="workspace"; }
+        Alt+Shift+escape { previous-window scope="workspace"; }
+
+        // Mod+Tab         { next-window; }
+        // Mod+Shift+Tab   { previous-window; }
+        // Mod+grave       { next-window     filter="app-id"; }
+        // Mod+Shift+grave { previous-window filter="app-id"; }
+    }
 }

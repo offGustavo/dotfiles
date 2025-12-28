@@ -3,14 +3,23 @@
 local wallpapers = {
 	Light = {
 		{
-			name = "Lauds",
-			path = "/home/gustavo/Pictures/Wallpapers/my/lauds.png",
+			name = "Tokyo Night (day)",
+			path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/vinland-saga-manga-5120x2880-14832.jpg",
 		},
 	},
 	Dark = {
+		-- {
+		-- 	name = "Compline",
+		-- 	path = "/home/gustavo/Pictures/Wallpapers/my/compline.png",
+		-- },
 		{
-			name = "Compline",
-			path = "/home/gustavo/Pictures/Wallpapers/my/compline.png",
+			name = "A Girl with Purple Flowers",
+      path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/a_cartoon_of_a_girl_standing_under_a_tree_with_purple_flowers.png",
+		},
+
+		{
+			name = "Tokyo Night",
+			path = "/home/gustavo/Pictures/Wallpapers/tokyo-nigth-wallpapers/night/os/arch_01_1920x1080.png",
 		},
 	},
 }

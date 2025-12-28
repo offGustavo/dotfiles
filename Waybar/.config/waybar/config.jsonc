@@ -13,7 +13,6 @@
     "hyprland/workspaces",
     "niri/workspaces",
     // "mpd",
-    "tray",
     // "hyprland/window",
     "hyprland/submap",
   ],
@@ -22,12 +21,13 @@
     // "wlr/taskbar"
   ],
   "modules-right": [
+    "tray",
     "hyprland/language",
     // "custom/updates",
     // "custom/clipboard",
     "backlight",
     // "idle_inhibitor",
-    "custom/colorpicker",
+    // "custom/colorpicker",
     "pulseaudio",
     "bluetooth",
     // "custom/hotspot",
@@ -116,7 +116,7 @@
     "return-type": "json"
   },
   "niri/workspaces": {
-	"format": "{index}",
+	"format": "{name}",
 	"format-icons": {
 		// Named workspaces
 		// (you need to configure them in niri)
