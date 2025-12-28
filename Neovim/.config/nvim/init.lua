@@ -10,16 +10,16 @@ require("fish.filetypes")
 require("fish.neovide")
 require("fish.vscode")
 
--- if os.getenv("DISPLAY") then
+if os.getenv("DISPLAY") then
   -- Theme
-  -- require("fish.theme")
-  require("themes.compline").setup()
--- else
---   vim.cmd([[
---       colorscheme default
---       set notermguicolors
---     ]])
--- end
+  require("fish.theme")
+  -- require("themes.compline").setup()
+else
+  vim.cmd([[
+      colorscheme default
+      set notermguicolors
+    ]])
+end
 
 if vim.uv.os_uname().sysname == "Windows_NT" then
 else
