@@ -44,10 +44,18 @@ fish_default_key_bindings
 # bind -M normal \cz undo
 # bind -M normal \cZ redo
 
-# Export nvim as manpager
-export MANPAGER='nvim -c "nmap <silent> q :q!<Cr>" +Man!'
-export PAGER='nvim -c "nmap <silent> q :q!<Cr>" -R'
+function zoxide_cd_fuzzel
+    set -l dir (zoxide query -l | fuzzel --dmenu)
+    if test -n "$dir"
+        commandline "cd '$dir'"
+        commandline -f execute
+    end
+end
 
+bind -a alt-z zoxide_cd_fuzzel
+
+# Export nvim as manpager
+export MANPAGER='nvim -c "nmap <silent> q :q!<Cr>" +Man!' export PAGER='nvim -c "nmap <silent> q :q!<Cr>" -R'
 # Export nvim as editor
 export EDITOR='nvim'
 
@@ -59,7 +67,7 @@ alias gengar="pokeget --hide-name glalie | fastfetch --file-raw - -c ~/.config/f
 
 # overwrite greeting
 function fish_greeting
-   gengar
+    gengar
 end
 
 # Keyboard
@@ -84,12 +92,10 @@ alias untar='tar -zxvf '
 ## Useful aliases
 # Replace ls with eza
 alias ls='eza -al --color=always --group-directories-first --icons=always' # preferred listing
-alias la='eza -a --color=always --group-directories-first --icons=always'  # all files and dirs
-alias ll='eza -l --color=always --group-directories-first --icons=always'  # long format
+alias la='eza -a --color=always --group-directories-first --icons=always' # all files and dirs
+alias ll='eza -l --color=always --group-directories-first --icons=always' # long format
 alias lt='eza -aT --color=always --group-directories-first --icons=always' # tree listing
-alias l.="eza -a | grep -e '^\.'"                                     # show only dotfiles
+alias l.="eza -a | grep -e '^\.'" # show only dotfiles
 
 # Append common directories for executable files to $PATH
 fish_add_path ~/.local/bin ~/.cargo/bin ~/Applications/depot_tools
-
-
