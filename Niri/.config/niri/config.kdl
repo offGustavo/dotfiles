@@ -11,21 +11,6 @@ hotkey-overlay {
     skip-at-startup
 }
 
-workspace "6"  {
-  open-on-output "eDP-1"
-}
-workspace "7" {
-  open-on-output "eDP-1"
-}
-workspace "8" {
-  open-on-output "eDP-1"
-}
-workspace "9" {
-  open-on-output "eDP-1"
-}
-workspace "0" {
-  open-on-output "eDP-1"
-}
 workspace "1" {
   open-on-output "HDMI-A-2"
 }
@@ -40,6 +25,21 @@ workspace "4" {
 }
 workspace "5" {
   open-on-output "HDMI-A-2"
+}
+workspace "6"  {
+  open-on-output "eDP-1"
+}
+workspace "7" {
+  open-on-output "eDP-1"
+}
+workspace "8" {
+  open-on-output "eDP-1"
+}
+workspace "9" {
+  open-on-output "eDP-1"
+}
+workspace "0" {
+  open-on-output "eDP-1"
 }
 
 // workspace "note" {
@@ -231,8 +231,8 @@ layout {
         proportion 0.33333
         proportion 0.25
         proportion 0.5
-        proportion 0.75
         proportion 0.66667
+        proportion 0.75
         proportion 1.0
 
         // Fixed sets the width in logical pixels exactly.
@@ -503,6 +503,7 @@ binds {
 
     // Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+Slash hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Alt+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
 
     // Mod+d { spawn "cosmic-launcher"; }
@@ -801,8 +802,9 @@ binds {
     Mod+b { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/bluetooth.sh"; }
     Mod+Ctrl+b { spawn "sh" "-c" "$HOME/.config/hypr/scripts/toggle-waybar.sh"; }
     Mod+Alt+b { spawn "sh" "-c" "$HOME/.config/hypr/scripts/toggle-dark-mode.sh"; }
-    Mod+n { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/network.py"; }
+    Mod+n { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/network.lua"; }
     Mod+v { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/sound.sh"; }
+    Mod+p { spawn "sh" "-c" "/home/gustavo/.config/niri/scripts/monitors.sh"; }
     Mod+Alt+p { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/color.sh"; }
     Mod+x { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/power.sh"; }
     Mod+s { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/screenshot.sh"; }
