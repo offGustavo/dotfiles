@@ -21,6 +21,7 @@ window#waybar {
   font-size: 20px;
   background-color: @blue;
   color: @bg;
+  border-radius: 0px 5px 5px 0px;
 }
 
 /*.modules-right {*/
@@ -41,9 +42,10 @@ window#waybar {
 /*  margin-top: 2px;*/
 /*}*/
 
+
 #workspaces button {
   padding: 5px 10px;
-  border-radius: 0;
+  border-radius: 5px;
 }
 
        /* #workspaces button */
@@ -72,6 +74,7 @@ window#waybar {
 /*}*/
 /*#workspaces button.special{*/
 /*}*/
+
 #workspaces button.focused,
 #workspaces  button.active,
 #workspaces button.visible{
@@ -80,6 +83,7 @@ window#waybar {
 }
 #workspaces button.urgent{
   background: @red;
+  color: @bg;
 }
 #workspaces button.visible label,
 #workspaces button.urgent label{
@@ -126,6 +130,9 @@ window#waybar {
 /*  color: #5fd1fa;*/
 /*}*/
 
+#battery {
+  border-radius: 5px 0px 0px 5px;
+}
 #battery.charging {
   color: @bg;
   background-color: @green;

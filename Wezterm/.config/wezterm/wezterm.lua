@@ -57,7 +57,17 @@ config.leader = { key = "p", mods = "ALT" }
 
 config.keys = {
 	{ key = "o", mods = "ALT", action = sessionizer.show(find_sessions) },
+  {
+    key = "o",
+    mods = "LEADER|ALT",
+    action = wezterm.action.SendKey { key = 'o', mods = 'ALT' },
+  },
 	{ key = "u", mods = "ALT", action = sessionizer.show(current_sessions) },
+  {
+    key = "u",
+    mods = "LEADER|ALT",
+    action = wezterm.action.SendKey { key = 'u', mods = 'ALT' },
+  },
 
 	--LEADER
 	{ key = "r", mods = "LEADER", action = act.ReloadConfiguration },
@@ -76,6 +86,17 @@ config.keys = {
 	{ key = "8", mods = "ALT", action = act.ActivateTab(7) },
 	{ key = "9", mods = "ALT", action = act.ActivateTab(8) },
 	{ key = "0", mods = "ALT", action = act.ActivateTab(9) },
+	-- Move to window
+	{ key = "1", mods = "LEADER", action = act.ActivateTab(0) },
+	{ key = "2", mods = "LEADER", action = act.ActivateTab(1) },
+	{ key = "3", mods = "LEADER", action = act.ActivateTab(2) },
+	{ key = "4", mods = "LEADER", action = act.ActivateTab(3) },
+	{ key = "5", mods = "LEADER", action = act.ActivateTab(4) },
+	{ key = "6", mods = "LEADER", action = act.ActivateTab(5) },
+	{ key = "7", mods = "LEADER", action = act.ActivateTab(6) },
+	{ key = "8", mods = "LEADER", action = act.ActivateTab(7) },
+	{ key = "9", mods = "LEADER", action = act.ActivateTab(8) },
+	{ key = "0", mods = "LEADER", action = act.ActivateTab(9) },
 
 	-- Manage Tabs
 	{ key = "n", mods = "ALT", action = act.SpawnTab("CurrentPaneDomain") },
@@ -89,17 +110,40 @@ config.keys = {
 	{ key = "z", mods = "ALT", action = act.TogglePaneZoomState },
 	-- Manage Windows
 	{ key = "s", mods = "ALT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+  {
+    key = "s",
+    mods = "LEADER|ALT",
+    action = wezterm.action.SendKey { key = 's', mods = 'ALT' },
+  },
 	{ key = "v", mods = "ALT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  {
+    key = "v",
+    mods = "LEADER|ALT",
+    action = wezterm.action.SendKey { key = 'v', mods = 'ALT' },
+  },
 	-- Move
 	{ key = "h", mods = "ALT", action = act.ActivatePaneDirection("Left") },
 	{ key = "l", mods = "ALT", action = act.ActivatePaneDirection("Right") },
 	{ key = "k", mods = "ALT", action = act.ActivatePaneDirection("Up") },
 	{ key = "j", mods = "ALT", action = act.ActivatePaneDirection("Down") },
+	{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+	{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+	{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+	{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
 	-- Resize
 	{ key = "h", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Left", 1 }) },
 	{ key = "l", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Right", 1 }) },
 	{ key = "k", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Up", 1 }) },
 	{ key = "j", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Down", 1 }) },
+	{ key = "h", mods = "LEADER|SHIFT", action = act.AdjustPaneSize({ "Left", 1 }) },
+	{ key = "l", mods = "LEADER|SHIFT", action = act.AdjustPaneSize({ "Right", 1 }) },
+	{ key = "k", mods = "LEADER|SHIFT", action = act.AdjustPaneSize({ "Up", 1 }) },
+	{ key = "j", mods = "LEADER|SHIFT", action = act.AdjustPaneSize({ "Down", 1 }) },
+  {
+    key = 'z',
+    mods = 'ALT',
+    action = wezterm.action.SendKey { key = 'z', mods = 'ALT' },
+  },
 }
 
 -- and finally, return the configuration to wezterm

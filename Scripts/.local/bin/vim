@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 # nvim --clean "$@"
-NVIM_APPNAME=vim nvim "$@"
+NVIM_APPNAME=lvim nvim "$@"
 # nvim
