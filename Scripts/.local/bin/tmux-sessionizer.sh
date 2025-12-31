@@ -3,8 +3,8 @@
 if [[ $# -eq 1 ]]; then
   selected=$(zoxide query "$1")
 else
-  selected=$(zoxide query -l -s | tv)
-  selected=$(echo "$selected" | awk '{print $2}')
+  selected=$(zoxide query -l -s | fzf)
+  selected=$(echo "$selected" | cut -d' ' -f3)
 fi
 
 if [[ -z "$selected" ]]; then

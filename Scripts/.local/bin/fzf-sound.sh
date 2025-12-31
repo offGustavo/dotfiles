@@ -4,7 +4,7 @@
 sinks=$(pactl list sinks | awk ' /^\s*Name:/ { name = substr($0, index($0, $2)) } /^\s*Description:/ { desc = substr($0, index($0, $2)); print desc " [" name "]"; } ')
 
 # Usa o fuzzel no modo dmenu para selecionar a saída de som
-selected_sink=$(echo "$sinks" | fzf --no-preview | awk -F'[][]' '{ print $2 }')
+selected_sink=$(echo "$sinks" | fzf --no-preview | awk -F'[]./fzf-sound../fzf-sound.[]' '{ print $2 }')
 
 # Se um dispositivo foi selecionado, define como saída padrão
 if [ -n "$selected_sink" ]; then

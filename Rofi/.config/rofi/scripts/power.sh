@@ -19,7 +19,7 @@ case "$CHOICE" in
   hyprctl dispatch exit
   ;;
 "Power Profile")
-  CHOICE2=$(echo -e "Power Saver\nBalenced\nPerformance" | rofi -dmenu -p "Current Mode: $(powerprofilesctl get)")
+  CHOICE2=$(echo -e "Power Saver\nBalenced\nPerformance" | rofi -dmenu -p "Current Mode == [$(powerprofilesctl get)]: ")
   case "$CHOICE2" in
   "Power Saver")
     powerprofilesctl set power-saver
