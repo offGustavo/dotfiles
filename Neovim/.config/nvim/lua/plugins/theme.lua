@@ -66,5 +66,9 @@ return {
     "tiagovla/tokyodark.nvim",
   },
 
+  {
+    dir = "~/Temp/themery.nvim/"
+  }
+
   --   { "EdenEast/nightfox.nvim" } -- lazy
 }

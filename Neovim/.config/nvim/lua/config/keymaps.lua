@@ -46,7 +46,8 @@ vim.keymap.set("n", "<leader>tN", "<Cmd>terminal<Cr>", { silent = true, desc = "
 vim.keymap.set("n", "<leader>tV", "<Cmd>vertical terminal<CR>", { silent = true, desc = "Vertical Terminal" })
 vim.keymap.set("n", "<leader>tS", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
 
-vim.keymap.set("n", "<leader>occ", ":hor term ", { desc = "Compile Mode" })
+-- vim.keymap.set("n", "<leader>occ", ":hor term ", { desc = "Compile Mode" })
+vim.keymap.set("n", "<leader>cc", ":hor term ", { desc = "Compile Mode" })
 vim.keymap.set("n", "<leader>olg", "<Cmd>term lazygit<CR><Cmd>start<Cr>", { desc = "Lazygit" })
 vim.keymap.set("n", "<leader>o?", ":hor term rg --vimgrep ", { desc = "Grep" })
 
@@ -119,18 +120,18 @@ vim.keymap.set({ "i", "x", "n" }, "<C-s>", "<Cmd>update<CR>", { silent = true })
 vim.keymap.set("i", "<Tab>", "<C-t>")
 vim.keymap.set("i", "<S-Tab>", "<C-d>")
 
--- -- Emacs Keybinds in Command Mode
--- vim.keymap.set({ "c" }, "<C-p>", "<Up>")
--- vim.keymap.set({ "c" }, "<C-n>", "<Down>")
--- vim.keymap.set({ "c" }, "<C-a>", "<Home>")
--- vim.keymap.set({ "c" }, "<C-f>", "<Right>")
--- vim.keymap.set({ "c" }, "<C-b>", "<Left>")
--- vim.keymap.set({ "c" }, "<C-e>", "<End>")
--- vim.keymap.set({ "c" }, "<A-b>", "<S-Left>")
--- vim.keymap.set({ "c" }, "<A-f>", "<S-Right>")
+-- Emacs Keybinds in Command Mode
+vim.keymap.set({ "c" }, "<C-p>", "<Up>")
+vim.keymap.set({ "c" }, "<C-n>", "<Down>")
+vim.keymap.set({ "c" }, "<C-a>", "<Home>")
+vim.keymap.set({ "c" }, "<C-f>", "<Right>")
+vim.keymap.set({ "c" }, "<C-b>", "<Left>")
+vim.keymap.set({ "c" }, "<C-e>", "<End>")
+vim.keymap.set({ "c" }, "<A-b>", "<S-Left>")
+vim.keymap.set({ "c" }, "<A-f>", "<S-Right>")
 
--- -- Normal mode in command line
--- vim.keymap.set("c", "<C-o>", "<C-f>")
+-- Normal mode in command line
+vim.keymap.set("c", "<C-o>", "<C-f>")
 
 -- Visual Keymaps - Markdown Text
 vim.keymap.set(
@@ -141,7 +142,7 @@ vim.keymap.set(
 )
 vim.keymap.set(
     "x",
-    "<C-b>",
+    "<C-o>",
     ":<Del><Del><Del><Del><Del>norm sd*<Cr>gv",
     { silent = true, desc = "Remove Italic/Bold(*)" }
 )
@@ -209,6 +210,8 @@ vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { silent = true, desc = "Ope
 vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { silent = true, desc = "Open Quickfix List" })
 vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { silent = true, desc = "Close Quickfix List" })
 vim.keymap.set("n", "<leader>qh", "<Cmd>chistory<Cr>", { silent = true, desc = "List Quick Fix History" })
+vim.keymap.set("n", "<leader>qn", "<Cmd>cnewer<Cr>", { silent = true, desc = "Next Quickfix List" })
+vim.keymap.set("n", "<leader>qN", "<Cmd>colder<Cr>", { silent = true, desc = "Previous Quickfix List" })
 for i = 1, 9 do
   vim.keymap.set("n", "<leader>q" .. i, "<Cmd>chistory " .. i .. "<Cr>", { silent = true, desc = "Go to " .. i .. " Quickfix" })
 end

@@ -2,7 +2,8 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
   init = function()
-    vim.o.laststatus = 1
+    -- vim.o.laststatus = 1
+    vim.o.laststatus = 3
   end,
   config = function()
     local lualine = require("lualine")
@@ -170,6 +171,7 @@ return {
       extensions = {},
     })
 
-    vim.cmd("set showtabline=1")
+    -- vim.cmd("set showtabline=1")
+    vim.o.laststatus = 3
   end,
 }

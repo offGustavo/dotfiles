@@ -143,4 +143,4 @@ vim.diagnostic.config {
   }
 }
 
--- vim.o.showtabline = 0
+vim.o.laststatus = 3

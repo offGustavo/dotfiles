@@ -8,11 +8,11 @@ return {
       --- REQUIRED ---
       agendaFiles = {
         -- "~/notes/agenda.md", "~/notes/habits.md", -- Single Files
-        "~/Documents/Notes/", -- Folders
+        "~/Notes/", -- Folders
       },
       habit = {
-        "~/Documents/Notes/habits/",
-        "~/Documents/Notes/habits/habits.md",
+        "~/Notes/habits/",
+        "~/Notes/habits/habits.md",
       },
 
       --- OPTIONAL ---
@@ -81,15 +81,28 @@ return {
       habitDeadlineColor = "gray",
     })
 
-    -- Optional: Set keymaps for commands
-    vim.keymap.set("n", "<leader>oac", "<Cmd>CheckTask<CR>", { silent = true })
-    -- vim.keymap.set("n", "<CR>", "<Cmd>CheckTask<CR>", { silent = true })
-    vim.keymap.set("n", "<leader>oaC", "<Cmd>CancelTask<CR>", { silent = true })
-    vim.keymap.set("n", "<leader>oah", "<Cmd>HabitView<CR>", { silent = true })
-    vim.keymap.set("n", "<leader>oad", "<Cmd>AgendaDashboard<CR>", { silent = true })
-    vim.keymap.set("n", "<leader>oaa", "<Cmd>AgendaView<CR>", { silent = true })
-    vim.keymap.set("n", "<leader>oaS", "<Cmd>TaskScheduled<CR>", { silent = true })
-    vim.keymap.set("n", "<leader>oaD", "<Cmd>TaskDeadline<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>a", "<Cmd>AgendaView<CR>", { silent = true, desc = "Md Agenda" })
+
+    local notes_dir = vim.fn.expand("~/Notes")
+
+    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+      callback = function(args)
+        local buf = args.buf
+        local file = vim.api.nvim_buf_get_name(buf)
+
+        -- Ensure the file is inside ~/Notes
+        if not vim.startswith(file, notes_dir) then
+          return
+        end
+
+        vim.keymap.set("n", "<Cr>", "<Cmd>CheckTask<CR>", { silent = true, buffer = buf, desc = "Check Tesk" })
+        vim.keymap.set("n", "<localleader>c", "<Cmd>CancelTask<CR>", { silent = true, buffer = buf, desc = "Cancel Tesk" })
+        vim.keymap.set("n", "<localleader>h", "<Cmd>HabitView<CR>", { silent = true, buffer = buf, desc = "Habits" })
+        vim.keymap.set("n", "<localleader>D", "<Cmd>AgendaDashboard<CR>", { silent = true, buffer = buf, desc = "Check Tesk" })
+        vim.keymap.set("n", "<localleader>s", "<Cmd>TaskScheduled<CR>", { silent = true, buffer = buf, desc = "Check Tesk" })
+        vim.keymap.set("n", "<localleader>d", "<Cmd>TaskDeadline<CR>", { silent = true, buffer = buf, desc = "Check Tesk" })
+      end,
+    })
 
     -- -- Optional: Create a custom agenda view command to only show the tasks with specific tags
     -- vim.api.nvim_create_user_command("WorkAgenda", function()

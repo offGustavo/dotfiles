@@ -6,9 +6,9 @@ return {
     lazygit = {
       config = {
         -- https://github.com/folke/snacks.nvim/discussions/87 
-        os = {
-          edit = '[ -z ""$NVIM"" ] && (nvim -- {{filename}}) || (nvim --server ""$NVIM"" --remote-send ""q"" && nvim --server ""$NVIM"" --remote {{filename}})',
-        },
+        -- os = {
+        --   edit = '[ -z ""$NVIM"" ] && (nvim -- {{filename}}) || (nvim --server ""$NVIM"" --remote-send ""q"" && nvim --server ""$NVIM"" --remote {{filename}})',
+        -- },
       },
     },
     explorer = {

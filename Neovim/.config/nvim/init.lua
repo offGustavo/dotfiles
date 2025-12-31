@@ -12,7 +12,7 @@ require("fish.vscode")
 
 if os.getenv("DISPLAY") then
   -- Theme
-  require("fish.theme")
+  -- require("fish.theme")
   -- require("themes.compline").setup()
 else
   vim.cmd([[
@@ -24,7 +24,7 @@ end
 if vim.uv.os_uname().sysname == "Windows_NT" then
 else
   require("fish.wezterm")
-  -- require("fish.kitty")
-  -- require("fish.tmux")
+  require("fish.kitty")
+  require("fish.tmux")
   -- require("fish.lazygit")
 end
