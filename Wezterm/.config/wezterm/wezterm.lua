@@ -37,6 +37,7 @@ config = {
 	},
 
 	font = wezterm.font("JetBrainsMonoNL Nerd Font"),
+  enable_wayland = true,
 }
 
 config.colors = require("theme")
