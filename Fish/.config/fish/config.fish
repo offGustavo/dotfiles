@@ -2,6 +2,29 @@
 
 zoxide init fish | source
 
+function zoxide_cd
+    set -l use_fuzzel 0
+
+    # if string match -qi "*Hyprland*" "$XDG_CURRENT_DESKTOP"
+    #     set use_fuzzel 1
+    # end
+    #
+    # if test $use_fuzzel -eq 1
+        set -l dir (zoxide query -l | fuzzel --dmenu)
+    # else
+        # set -l dir (zoxide query -l | fzf)
+    # end
+
+    if test -n "$dir"
+        commandline "cd '$dir'"
+        commandline -f execute
+    end
+end
+
+bind -a alt-z zoxide_cd
+
+# bind -a alt-z zi
+
 # # Set and configure VI Mode
 # fish_vi_key_bindings
 fish_default_key_bindings
@@ -43,16 +66,6 @@ fish_default_key_bindings
 # bind -M insert \cZ redo
 # bind -M normal \cz undo
 # bind -M normal \cZ redo
-
-function zoxide_cd_fuzzel
-    set -l dir (zoxide query -l | fuzzel --dmenu)
-    if test -n "$dir"
-        commandline "cd '$dir'"
-        commandline -f execute
-    end
-end
-
-bind -a alt-z zoxide_cd_fuzzel
 
 # Export nvim as manpager
 export MANPAGER='nvim -c "nmap <silent> q :q!<Cr>" +Man!' export PAGER='nvim -c "nmap <silent> q :q!<Cr>" -R'
