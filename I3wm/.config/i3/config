@@ -96,7 +96,7 @@ bindsym $super+v exec --no-startup-id  $scripts/output.sh
 bindsym $super+Shift+s exec --no-startup-id  flameshot gui
 
 # run rofi monitors script
-bindsym $super+Shift+m exec --no-startup-id  $scripts/monitors.sh
+bindsym $super+p exec --no-startup-id  $scripts/monitors.sh
 
 # alacritty floating
 for_window [class="alacritty-float|kitty-float|terminal-float|Music"] floating enable
@@ -229,7 +229,7 @@ bindsym $super+Shift+q exec i3-msg exit
 bar {
   status_command i3status -c ~/.config/i3/i3status/status
     position top
-    font pango:Jetbrains Mono Nerd Font 8
+    font pango:Jetbrains Mono Nerd Font 10
     tray_output primary
     colors {
       background $bg
