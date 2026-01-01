@@ -70,14 +70,14 @@ if vim.fn.has("nvim-0.12") == 1 then
     vim.o.cmdheight = 1
     -- Experimental
     require("vim._extui").enable({
-        enable = true, -- Whether to enable or disable the UI.
-        msg = { -- Options related to the message module.
-          ---@type 'cmd'|'msg' Where to place regular messages, either in the
-          ---cmdline or in a separate ephemeral message window.
-          target = "cmd",
-          timeout = 2000, -- Time a message is visible in the message window.
-        },
-                                })
+      enable = true, -- Whether to enable or disable the UI.
+      msg = { -- Options related to the message module.
+        ---@type 'cmd'|'msg' Where to place regular messages, either in the
+        ---cmdline or in a separate ephemeral message window.
+        target = "cmd",
+        timeout = 2000, -- Time a message is visible in the message window.
+      },
+    })
   end
 end
 
@@ -92,33 +92,32 @@ if vim.fn.executable("rg") then
       return vim.fn.matchfuzzy(fnames, cmdarg)
     end
   end
-
   vim.o.findfunc = "v:lua.RgFindFiles"
 end
 
--- -- Better Cd with Zoxide
--- if vim.fn.executable("zoxide") == 1 then
---   vim.api.nvim_create_user_command("Cd", function(opts)
---     local target = opts.args
---     if target == "" then
---       vim.cmd("cd ~")
---       return
---     end
---     local handle = io.popen("zoxide query " .. vim.fn.shellescape(target))
---     if handle then
---       local result = handle:read("*l")
---       handle:close()
---       if result and #result > 0 then
---         vim.cmd("cd " .. vim.fn.fnameescape(result))
---         print("Changed directory to: " .. result)
---       else
---         print("zoxide: no match for '" .. target .. "'")
---       end
---     else
---       print("Failed to run zoxide")
---     end
---   end, { nargs = "?" })
--- end
+-- Better Cd with Zoxide
+if vim.fn.executable("zoxide") == 1 then
+  vim.api.nvim_create_user_command("Cd", function(opts)
+    local target = opts.args
+    if target == "" then
+      vim.cmd("cd ~")
+      return
+    end
+    local handle = io.popen("zoxide query " .. vim.fn.shellescape(target))
+    if handle then
+      local result = handle:read("*l")
+      handle:close()
+      if result and #result > 0 then
+        vim.cmd("cd " .. vim.fn.fnameescape(result))
+        print("Changed directory to: " .. result)
+      else
+        print("zoxide: no match for '" .. target .. "'")
+      end
+    else
+      print("Failed to run zoxide")
+    end
+  end, { nargs = "?" })
+end
 
 -- vim.o.winborder = "rounded"
 
@@ -128,19 +127,19 @@ end
 -- let g:netrw_keepdir = 0
 -- ]])
 
--- Diagnostics
-vim.diagnostic.config {
-  -- Use the default configuration
-  virtual_lines = false,
-  virtual_text = true,
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "E",
-      [vim.diagnostic.severity.WARN] = "W",
-      [vim.diagnostic.severity.INFO] = "I",
-      [vim.diagnostic.severity.HINT] = "H",
-    }
-  }
-}
+-- -- Diagnostics
+-- vim.diagnostic.config {
+--   -- Use the default configuration
+--   virtual_lines = false,
+--   virtual_text = true,
+--   signs = {
+--     text = {
+--       [vim.diagnostic.severity.ERROR] = "E",
+--       [vim.diagnostic.severity.WARN] = "W",
+--       [vim.diagnostic.severity.INFO] = "I",
+--       [vim.diagnostic.severity.HINT] = "H",
+--     }
+--   }
+-- }
 
 vim.o.laststatus = 3

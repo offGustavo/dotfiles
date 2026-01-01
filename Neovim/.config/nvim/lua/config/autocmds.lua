@@ -227,54 +227,54 @@ local function jump_to_error()
   end
 end
 
--- Set up keymaps in terminal buffers only
-vim.api.nvim_create_autocmd({ "BufEnter", "TermOpen" }, {
-  pattern = "*",
-  callback = function(args)
-    local buf = args.buf
-    local buftype = vim.api.nvim_buf_get_option(buf, "buftype")
+-- -- Set up keymaps in terminal buffers only
+-- vim.api.nvim_create_autocmd({ "BufEnter", "TermOpen" }, {
+--   pattern = "*",
+--   callback = function(args)
+--     local buf = args.buf
+--     local buftype = vim.api.nvim_buf_get_option(buf, "buftype")
+--
+--     if buftype == "terminal" then
+--       -- Navigate to next error in terminal buffer
+--       vim.keymap.set("n", "<A-g>n", function()
+--         find_error_line("next")
+--       end, { buffer = buf, desc = "Next error in terminal" })
+--
+--       -- Navigate to previous error in terminal buffer
+--       vim.keymap.set("n", "<A-g>p", function()
+--         find_error_line("prev")
+--       end, { buffer = buf, desc = "Previous error in terminal" })
+--
+--       -- Jump to error at cursor line
+--       vim.keymap.set("n", "<Cr>", jump_to_error, {
+--         buffer = buf,
+--         desc = "Jump to file:line from grep results",
+--       })
+--
+--       -- Jump to error at cursor line
+--       vim.keymap.set("n", "q", ":close<Cr>", {
+--         buffer = buf,
+--         desc = "Quit buffer",
+--       })
+--     end
+--   end,
+-- })
 
-    if buftype == "terminal" then
-      -- Navigate to next error in terminal buffer
-      vim.keymap.set("n", "<A-g>n", function()
-        find_error_line("next")
-      end, { buffer = buf, desc = "Next error in terminal" })
-
-      -- Navigate to previous error in terminal buffer
-      vim.keymap.set("n", "<A-g>p", function()
-        find_error_line("prev")
-      end, { buffer = buf, desc = "Previous error in terminal" })
-
-      -- Jump to error at cursor line
-      vim.keymap.set("n", "<Cr>", jump_to_error, {
-        buffer = buf,
-        desc = "Jump to file:line from grep results",
-      })
-
-      -- Jump to error at cursor line
-      vim.keymap.set("n", "q", ":close<Cr>", {
-        buffer = buf,
-        desc = "Quit buffer",
-      })
-    end
-  end,
-})
-
--- Optional: Also add a global command to jump to errors from any buffer
-vim.api.nvim_create_user_command("GotoError", function(opts)
-  -- Get the line from args or visual selection
-  local line
-  if opts.args and opts.args ~= "" then
-    line = opts.args
-  else
-    line = vim.api.nvim_get_current_line()
-  end
-
-  -- Parse and jump (simplified parsing)
-  local file, line_num = line:match("([^:]+):(%d+)")
-  if file and line_num then
-    vim.cmd("e +" .. line_num .. " " .. vim.fn.fnameescape(file))
-  else
-    vim.notify("No valid file:line pattern found", vim.log.levels.WARN)
-  end
-end, { nargs = "?", desc = "Jump to file:line pattern" })
+-- -- Optional: Also add a global command to jump to errors from any buffer
+-- vim.api.nvim_create_user_command("GotoError", function(opts)
+--   -- Get the line from args or visual selection
+--   local line
+--   if opts.args and opts.args ~= "" then
+--     line = opts.args
+--   else
+--     line = vim.api.nvim_get_current_line()
+--   end
+--
+--   -- Parse and jump (simplified parsing)
+--   local file, line_num = line:match("([^:]+):(%d+)")
+--   if file and line_num then
+--     vim.cmd("e +" .. line_num .. " " .. vim.fn.fnameescape(file))
+--   else
+--     vim.notify("No valid file:line pattern found", vim.log.levels.WARN)
+--   end
+-- end, { nargs = "?", desc = "Jump to file:line pattern" })

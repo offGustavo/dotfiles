@@ -34,7 +34,8 @@ M.colors_day = {
   fg_dark = "#6172b0",
 
   -- Soft backgrounds (derived / desaturated)
-  bg = "#eef0f7",
+  -- bg = "#eef0f7",
+  bg = "none",
   -- bg = "#ffffff",
   bg_alt = "#e4e7f2",
   bg_float = "#dde1ef",

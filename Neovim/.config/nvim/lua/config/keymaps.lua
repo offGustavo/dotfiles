@@ -47,7 +47,7 @@ vim.keymap.set("n", "<leader>tV", "<Cmd>vertical terminal<CR>", { silent = true,
 vim.keymap.set("n", "<leader>tS", "<Cmd>horizontal terminal<CR>", { silent = true, desc = "Horizontal Terminal" })
 
 -- vim.keymap.set("n", "<leader>occ", ":hor term ", { desc = "Compile Mode" })
-vim.keymap.set("n", "<leader>cc", ":hor term ", { desc = "Compile Mode" })
+vim.keymap.set("n", "<leader>occ", ":hor term ", { desc = "Compile Mode" })
 vim.keymap.set("n", "<leader>olg", "<Cmd>term lazygit<CR><Cmd>start<Cr>", { desc = "Lazygit" })
 vim.keymap.set("n", "<leader>o?", ":hor term rg --vimgrep ", { desc = "Grep" })
 
