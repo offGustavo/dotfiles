@@ -104,10 +104,10 @@ alias untar='tar -zxvf '
 
 ## Useful aliases
 # Replace ls with eza
-alias ls='eza -al --color=always --group-directories-first --icons=always' # preferred listing
-alias la='eza -a --color=always --group-directories-first --icons=always' # all files and dirs
-alias ll='eza -l --color=always --group-directories-first --icons=always' # long format
-alias lt='eza -aT --color=always --group-directories-first --icons=always' # tree listing
+alias ls='eza -al --color=always --group-directories-first --icons=always --hyperlink' # preferred listing
+alias la='eza -a  --color=always --group-directories-first --icons=always --hyperlink' # all files and dirs
+alias ll='eza -l  --color=always --group-directories-first --icons=always --hyperlink' # long format
+alias lt='eza -aT --color=always --group-directories-first --icons=always --hyperlink' # tree listing
 alias l.="eza -a | grep -e '^\.'" # show only dotfiles
 
 # Append common directories for executable files to $PATH
