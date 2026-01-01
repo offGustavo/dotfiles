@@ -26,7 +26,7 @@ local ivy_like = {
     width = 0,
     height = 0.4,
     position = "bottom",
-    border = "top",
+    border = "none",
     title = " {title} {live} {flags}",
     title_pos = "left",
     { win = "preview", title = "{preview}", width = 0.6, border = "none" },
@@ -111,7 +111,7 @@ return {
           layout = ivy_like,
         },
       },
-      layout = { preset = "ivy_split" }, 
+      layout = ivy_like, 
     },
     animate = {
       duration = 10, -- ms per step
