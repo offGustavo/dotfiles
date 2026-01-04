@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ -z "$1" ]; then
-  echo "Uso: $0 [--float] <nome_do_programa> [args...]"
+  echo "Use: $0 [--float] <cmd> [args...]"
   exit 1
 fi
 
