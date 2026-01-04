@@ -6,6 +6,7 @@ return {
     -- preset = "modern",
     preset = "helix",
     -- preset = "classic",
+    delay = 1000,
     defaults = {},
     spec = {
       {
@@ -56,14 +57,14 @@ return {
             return require("which-key.extras").expand.buf()
           end,
         },
-        {
-          "<leader>w",
-          group = "windows",
-          proxy = "<c-w>",
-          expand = function()
-            return require("which-key.extras").expand.win()
-          end,
-        },
+        -- {
+        --   "<leader>w",
+        --   group = "windows",
+        --   proxy = "<c-w>",
+        --   expand = function()
+        --     return require("which-key.extras").expand.win()
+        --   end,
+        -- },
         -- better descriptions
         { "gx", desc = "Open with system app" },
       },

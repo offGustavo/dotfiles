@@ -34,8 +34,8 @@ M.colors_day = {
   fg_dark = "#6172b0",
 
   -- Soft backgrounds (derived / desaturated)
-  -- bg = "#eef0f7",
-  bg = "none",
+  bg = "#eef0f7",
+  -- bg = "none",
   -- bg = "#ffffff",
   bg_alt = "#e4e7f2",
   bg_float = "#dde1ef",
@@ -66,7 +66,7 @@ M.colors_day = {
   cyan_bg = "#e6f6ff", -- Soft cyan background
   cyan_bright = "#a4daff",
 
-  none = "NONE",
+  none = "\bNONE",
 }
 
 local p = M.colors
@@ -208,7 +208,7 @@ local function apply_highlights(is_day_mode)
 
   -- Special
   set(0, "Special", { fg = colors.fg })
-  set(0, "SpecialChar", { fg = colors.magenta })
+  set(0, "SpecialChar", { fg = colors.red, bg = colors.green_bg })
   set(0, "Tag", { fg = colors.blue })
   set(0, "Delimiter", { fg = colors.fg })
 

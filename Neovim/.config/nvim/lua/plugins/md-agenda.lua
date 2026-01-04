@@ -48,12 +48,19 @@ return {
             -- Both, deadline and scheduled filters can take the same parameters.
             -- "none", "today", "past", "nearFuture", "before-yyyy-mm-dd", "after-yyyy-mm-dd".
             -- Ignored if empty.
-            deadline = "",
+            deadline = "today",
             scheduled = "",
           },
           --{...}, Additional filter maps can be added in the same group.
         },
         --{"Other Group", {...}, ...}
+        {
+          "Aniversários",
+          { type = "NIVER" },
+          tags = {},
+          deadline = "today",
+          scheduled = "",
+        },
         --...
       },
 
@@ -96,11 +103,31 @@ return {
         end
 
         vim.keymap.set("n", "<Cr>", "<Cmd>CheckTask<CR>", { silent = true, buffer = buf, desc = "Check Tesk" })
-        vim.keymap.set("n", "<localleader>c", "<Cmd>CancelTask<CR>", { silent = true, buffer = buf, desc = "Cancel Tesk" })
+        vim.keymap.set(
+          "n",
+          "<localleader>c",
+          "<Cmd>CancelTask<CR>",
+          { silent = true, buffer = buf, desc = "Cancel Tesk" }
+        )
         vim.keymap.set("n", "<localleader>h", "<Cmd>HabitView<CR>", { silent = true, buffer = buf, desc = "Habits" })
-        vim.keymap.set("n", "<localleader>D", "<Cmd>AgendaDashboard<CR>", { silent = true, buffer = buf, desc = "Check Tesk" })
-        vim.keymap.set("n", "<localleader>s", "<Cmd>TaskScheduled<CR>", { silent = true, buffer = buf, desc = "Check Tesk" })
-        vim.keymap.set("n", "<localleader>d", "<Cmd>TaskDeadline<CR>", { silent = true, buffer = buf, desc = "Check Tesk" })
+        vim.keymap.set(
+          "n",
+          "<localleader>D",
+          "<Cmd>AgendaDashboard<CR>",
+          { silent = true, buffer = buf, desc = "Check Tesk" }
+        )
+        vim.keymap.set(
+          "n",
+          "<localleader>s",
+          "<Cmd>TaskScheduled<CR>",
+          { silent = true, buffer = buf, desc = "Check Tesk" }
+        )
+        vim.keymap.set(
+          "n",
+          "<localleader>d",
+          "<Cmd>TaskDeadline<CR>",
+          { silent = true, buffer = buf, desc = "Check Tesk" }
+        )
       end,
     })
 

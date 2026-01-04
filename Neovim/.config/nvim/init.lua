@@ -75,8 +75,8 @@ end
 
 if vim.uv.os_uname().sysname == "Windows_NT" then
 else
-  require("fish.wezterm")
+  -- require("fish.wezterm")
   require("fish.kitty")
-  require("fish.tmux")
+  -- require("fish.tmux")
   -- require("fish.lazygit")
 end

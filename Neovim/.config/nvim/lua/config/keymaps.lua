@@ -17,6 +17,11 @@ pcall(function()
     vim.keymap.set({ "x", "n" }, "<Up>", "<Up>")
     vim.keymap.set({ "x", "n" }, "<Down>", "<Down>")
     vim.keymap.set({ "x", "n" }, "<Right>", "<Right>")
+
+    -- vim.keymap.del({ "n" }, "<C-h>")
+    -- vim.keymap.del({ "n" }, "<C-j>")
+    -- vim.keymap.del({ "n" }, "<C-k>")
+    -- vim.keymap.del({ "n" }, "<C-l>")
 end)
 -----------------
 --- DASHBOARD ---
@@ -28,7 +33,7 @@ end, { silent = true, desc = "Open Dashboard" })
 ----------------
 --- TERMINAL ---
 ----------------
----- Normal Mode to Terminal
+---- Normal neovim Mode to Terminal
 ---- Remap default C-/ Lazyvim
 -- vim.keymap.set({ "n", "t", "i", "v" }, "<c-/>", function()
 --   Snacks.terminal("zellij")
@@ -147,13 +152,20 @@ vim.keymap.set(
     { silent = true, desc = "Remove Italic/Bold(*)" }
 )
 
--- -- Buffer Movement
+--- Buffers
+-- Remove Lazyvim default keymap
+pcall(function()
+    vim.keymap.del("n", "<S-h>")
+    vim.keymap.del("n", "<S-l>")
+end)
+vim.keymap.set("n", "<C-S-PageUp>", vim.cmd.bnext, { desc = "Next Buffer" })
+vim.keymap.set("n", "<C-S-PageDown>", vim.cmd.bprev, { desc = "Previous Buffer" })
+-- vim.keymap.set("n", "<leader>bp", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
+-- vim.keymap.set("n", "<leader>bn", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
 -- vim.keymap.set("n", "<C-w>p", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
-vim.keymap.set("n", "<leader>bp", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
 -- vim.keymap.set("n", "<leader>bp", vim.cmd.bp, { silent = false, desc = "Next Buffer" })
 -- vim.keymap.set("n", "<C-w>n", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
 -- vim.keymap.set("n", "<leader>wn", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
-vim.keymap.set("n", "<leader>bn", vim.cmd.bn, { silent = false, desc = "Previous Buffer" })
 
 -- Copy Entire Buffer
 vim.keymap.set("n", "gA", "<Cmd>%y<Cr>", { silent = true, desc = "Yank entire file" })
@@ -245,14 +257,6 @@ vim.keymap.set("x", "<leader>rp", '"_dP', { silent = true, desc = "Paste Without
 
 vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
 
---- Buffers
--- Remove Lazyvim default keymap
-pcall(function()
-    vim.keymap.del("n", "<S-h>")
-    vim.keymap.del("n", "<S-l>")
-end)
-vim.keymap.set("n", "<C-PageUp>", vim.cmd.bnext, { desc = "Next Buffer" })
-vim.keymap.set("n", "<C-PageDown>", vim.cmd.bprev, { desc = "Previous Buffer" })
 
 -- Toggle Options
 Snacks.toggle
@@ -294,10 +298,24 @@ vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- vim.keymap.set("n", "<leader>t]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 -- vim.keymap.set("n", "<leader>t[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
+-- vim.o.timeout = false
+local tmux_prefix = "<A-p>"
+local map = vim.keymap.set
+local modes = { "n", "x", "i", "t" }
+local term_insert_mode = "<Cmd>term<Cr><Cmd>start<Cr>"
+
+map(modes, tmux_prefix .. "%", "<Cmd>split<Cr>" .. term_insert_mode, { desc = "Tmux Split" })
+map(modes, tmux_prefix .. "\"", "<Cmd>vsplit<Cr>" .. term_insert_mode, { desc = "Tmux Vertical Split" })
+map(modes, tmux_prefix .. "c", "<Cmd>tabnew<Cr>" .. term_insert_mode, { desc = "Tmux New Tab" })
+map(modes, tmux_prefix .. "x", "<Cmd>close!<Cr>", { desc = "Tmux Close" })
+map(modes, tmux_prefix .. "w", ":b term:h", { desc = "Tmux Switch Terminals" })
+map(modes, tmux_prefix .. "[", "<C-\\><C-n>", { desc = "Tmux Copy Mode" })
+
 for i = 1, 9, 1 do
-    vim.keymap.set("n", "<leader>t" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
+    map(modes, tmux_prefix .. i, "<Cmd>norm " .. i .. "gt<Cr>", { desc = "Tmux to tab " .. i })
     vim.keymap.set("n", "<leader><tab>" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
 end
+
 
 vim.cmd([[
  nmap  <S-ScrollWheelUp> zh
@@ -400,6 +418,7 @@ vim.keymap.set("x", "<leader>a", ":AlignRegexp<CR>", { desc = "Align by regex", 
 
 vim.keymap.set("n", "<leader>of", ":find ", { desc = "Find" })
 vim.keymap.set("n", "<leader>og", ":grep ", { desc = "Grep" })
+vim.keymap.set("n", "<leader>or", ":grep <cword><cr>:cope<Cr>", { desc = "Find Function/Decaration/References" })
 vim.keymap.set("n", "<leader>o/", ":LiveGrep  %:h<left><left><left><left>") -- Custom Autocmd
 
 ----------

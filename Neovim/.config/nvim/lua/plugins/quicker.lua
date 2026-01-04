@@ -1,6 +1,6 @@
 return {
   "stevearc/quicker.nvim",
-  enabled = false,
+  -- enabled = false,
   ft = "qf",
   config = function()
     vim.keymap.set("n", "<leader>qt", function()

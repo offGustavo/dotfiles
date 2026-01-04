@@ -1,3 +1,5 @@
+-- vim: foldmethod=marker
+
 --{{{ -- Options
 vim.g.mapleader = ' '
 vim.cmd([[
@@ -43,14 +45,17 @@ vim.o.foldlevel = 99
 vim.o.swapfile = false
 vim.o.path = vim.o.path .. '**'
 vim.cmd([[
-		set wildignore=*.o,*.obj,**/node_modules/**,/
-    ]])
+  set wildignore=*.o,*.obj,**/node_modules/**,/
+]])
 vim.o.termguicolors = true
-vim.o.autocomplete = false
---[Neovim native, built-in, LSP autocomplete · Tomas Vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
+
+-- [Neovim native, built-in, LSP autocomplete · Tomas Vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
 -- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
+vim.o.autocomplete = true
 vim.opt.completeopt = { 'menuone', 'noselect', 'popup' }
--- vim.o.acd = true
+
+vim.o.acd = true
+vim.g.netrw_keepdir = 0
 -- vim.cmd([[
 -- autocmd BufEnter * lcd %:p:h
 -- ]])
@@ -64,6 +69,8 @@ require('vim._extui').enable({
     timeout = 2000, -- Time a message is visible in the message window.
   },
 })
+
+
 
 -- Better Grep and Find with ripgrep
 if vim.fn.executable 'rg' then
@@ -140,6 +147,7 @@ vim.keymap.set('n', '<leader>z', ':cd ')
 
 vim.keymap.set('n', '<leader>tn', ':term ')
 vim.keymap.set('n', '<leader>cc', ':hor term ')
+vim.keymap.set('n', '<A-c>', ':hor term ')
 
 vim.keymap.set('n', '<leader>lg', ':term lazygit<Cr>:start<Cr>')
 vim.keymap.set('n', '<leader>lu', function()
@@ -392,7 +400,7 @@ Shibuya.colors_day = {
   fg_dark = "#6172b0",
 
   -- Soft backgrounds (derived / desaturated)
-  bg = "none",
+  bg = "#e1e2e7",
   bg_alt = "#e4e7f2",
   bg_float = "#dde1ef",
   bg_highlight = "#d6dbea",
@@ -518,7 +526,6 @@ local function apply_highlights(is_day_mode)
 
   -- Keywords and control flow
   if is_day_mode then
-    vim.api.nvim_set_hl(0, "Keyword", { fg = colors.red, bg = colors.red_bg, italic = true })
   else
     vim.api.nvim_set_hl(0, "Keyword", { fg = colors.magenta, italic = true })
   end
@@ -553,15 +560,15 @@ local function apply_highlights(is_day_mode)
   vim.api.nvim_set_hl(0, "Typedef", { fg = colors.fg })
 
   -- Special
-  vim.api.nvim_set_hl(0, "Special", { fg = colors.fg })
+  vim.api.nvim_set_hl(0, "Special", { fg = colors.red, bg = colors.green_bg })
   vim.api.nvim_set_hl(0, "SpecialChar", { fg = colors.magenta })
   vim.api.nvim_set_hl(0, "Tag", { fg = colors.blue })
   vim.api.nvim_set_hl(0, "Delimiter", { fg = colors.fg })
 
   -- Special comments and TODOs
-  vim.api.nvim_set_hl(0, "SpecialComment", { fg = colors.yellow, bold = false })
+  vim.api.nvim_set_hl(0, "SpecialComment", { fg = colors.yellow, bg = colors.yellow_bg, bold = false })
   if is_day_mode then
-    vim.api.nvim_set_hl(0, "Todo", { fg = colors.bg, bg = colors.yellow, bold = true, italic = true })
+    vim.api.nvim_set_hl(0, "Todo", { fg = colors.yellow, bg = colors.yellow_bg, bold = false })
   else
     vim.api.nvim_set_hl(0, "Todo", { fg = colors.fg_dark, bg = colors.yellow, bold = false, italic = true })
   end
@@ -654,10 +661,10 @@ end
 Shibuya.setup = function(opts)
   opts = opts or {}
   local is_day_mode = opts.mode == "day"
-  
+
   -- Update vim.o.background to match the mode
   vim.o.background = is_day_mode and "light" or "dark"
-  
+
   vim.g.colors_name = is_day_mode and "shibuya_day" or "shibuya"
   apply_highlights(is_day_mode)
 
@@ -755,38 +762,38 @@ require('mason-lspconfig').setup {
 }
 --}}}
 
---{{{
--- require 'nvim-treesitter'.install {
---   "java",
---   "javadoc",
---   "bash",
---   "c",
---   "diff",
---   "html",
---   "css",
---   "javascript",
---   "jsdoc",
---   "json",
---   "jsonc",
---   "lua",
---   "luadoc",
---   "luap",
---   "markdown",
---   "markdown_inline",
---   "printf",
---   "python",
---   "query",
---   "regex",
---   "toml",
---   "tsx",
---   "typescript",
---   "vim",
---   "vimdoc",
---   "xml",
---   "yaml",
---   "rust",
--- }
+--{{{ -- Tmux Mode
+vim.o.timeout = false
+local tmux_prefix = "<A-p>"
+local map = vim.keymap.set
+local modes = { "n", "x", "i", "t" }
+local term_insert_mode = "<Cmd>term<Cr><Cmd>start<Cr>"
+local insert_mode = "<Cmd>start<Cr>"
+local exit_term_mode = "<C-\\><C-n>" 
 
-vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.o.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+map(modes, tmux_prefix .. "%", "<Cmd>split<Cr>" .. term_insert_mode, { desc = "Tmux Split" })
+map(modes, "<A-s>", "<Cmd>split<Cr>" .. term_insert_mode, { desc = "Tmux Vertical Split" })
+map(modes, tmux_prefix .. "\"", "<Cmd>vsplit<Cr>" .. term_insert_mode, { desc = "Tmux Vertical Split" })
+map(modes, "<A-v>", "<Cmd>vsplit<Cr>" .. term_insert_mode, { desc = "Tmux Vertical Split" })
+map(modes, tmux_prefix .. "c", "<Cmd>tabnew<Cr>" .. term_insert_mode, { desc = "Tmux New Tab" })
+map(modes, "<A-n>", "<Cmd>tabnew<Cr>" .. term_insert_mode, { desc = "Tmux New Tab" })
+map(modes, tmux_prefix .. "x", "<Cmd>close!<Cr>", { desc = "Tmux Close" })
+map(modes, "<A-x>", "<Cmd>close!<Cr>", { desc = "Tmux Close" })
+map(modes, tmux_prefix .. "w", ":b term:h", { desc = "Tmux Switch Terminals" })
+map(modes, tmux_prefix .. "[", exit_term_mode, { desc = "Tmux Copy Mode" })
+
+map(modes, tmux_prefix .. "h", exit_term_mode .. "<C-w>h" .. insert_mode, { desc = "Tmux Copy Mode" })
+map(modes, tmux_prefix .. "j", exit_term_mode .. "<C-w>j" .. insert_mode, { desc = "Tmux Copy Mode" })
+map(modes, tmux_prefix .. "k", exit_term_mode .. "<C-w>k" .. insert_mode, { desc = "Tmux Copy Mode" })
+map(modes, tmux_prefix .. "l", exit_term_mode .. "<C-w>l" .. insert_mode, { desc = "Tmux Copy Mode" })
+map(modes, "<A-h>", exit_term_mode .. "<C-w>h" .. insert_mode, { desc = "Tmux Copy Mode" })
+map(modes, "<A-j>", exit_term_mode .. "<C-w>j" .. insert_mode, { desc = "Tmux Copy Mode" })
+map(modes, "<A-k>", exit_term_mode .. "<C-w>k" .. insert_mode, { desc = "Tmux Copy Mode" })
+map(modes, "<A-l>", exit_term_mode .. "<C-w>l" .. insert_mode, { desc = "Tmux Copy Mode" })
+
+for i = 1, 9, 1 do
+    map({ "n", "x", "i"} , tmux_prefix .. i, "<Cmd>norm " .. i .. "gt<Cr>", { desc = "Tmux to tab " .. i })
+    map("t", tmux_prefix .. i, "<C-\\><C-o>:norm " .. i .. "gt<Cr>", { desc = "Tmux to tab " .. i })
+end
+
 --}}}

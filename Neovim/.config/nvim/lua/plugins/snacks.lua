@@ -1,42 +1,42 @@
--- local ivy_like = {
---             preview = false,
---             layout = {
---               box = "vertical",
---               backdrop = false,
---               row = -1,
---               width = 0,
---               height = 0.4,
---               border = "top",
---               title = " {title} {live} {flags}",
---               title_pos = "left",
---               { win = "input", height = 1, border = "none" },
---               {
---                 box = "horizontal",
---                 { win = "list", border = "none" },
---                 { win = "preview", width = 0.6, border = "rounded" },
---               },
---             },
---           }
-
 local ivy_like = {
-  preview = "main",
-  layout = {
-    box = "vertical",
-    backdrop = false,
-    width = 0,
-    height = 0.4,
-    position = "bottom",
-    border = "none",
-    title = " {title} {live} {flags}",
-    title_pos = "left",
-    { win = "preview", title = "{preview}", width = 0.6, border = "none" },
-    { win = "input", height = 1, border = "none" },
-    {
-      box = "horizontal",
-      { win = "list", border = "none" },
-    },
-  },
-}
+            preview = false,
+            layout = {
+              box = "vertical",
+              backdrop = false,
+              row = -1,
+              width = 0,
+              height = 0.4,
+              border = "top",
+              title = " {title} {live} {flags}",
+              title_pos = "left",
+              { win = "input", height = 1, border = "none" },
+              {
+                box = "horizontal",
+                { win = "list", border = "none" },
+                { win = "preview", width = 0.6, border = "rounded" },
+              },
+            },
+          }
+
+-- local ivy_like = {
+--   preview = "main",
+--   layout = {
+--     box = "vertical",
+--     backdrop = false,
+--     width = 0,
+--     height = 0.4,
+--     position = "bottom",
+--     border = "none",
+--     title = " {title} {live} {flags}",
+--     title_pos = "left",
+--     { win = "preview", title = "{preview}", width = 0.6, border = "none" },
+--     { win = "input", height = 1, border = "none" },
+--     {
+--       box = "horizontal",
+--       { win = "list", border = "none" },
+--     },
+--   },
+-- }
 
 return {
   "folke/snacks.nvim",

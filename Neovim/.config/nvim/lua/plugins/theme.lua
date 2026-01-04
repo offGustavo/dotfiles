@@ -67,7 +67,7 @@ return {
   },
 
   {
-    dir = "~/Temp/themery.nvim/"
+    dir = "~/Projects/shibuya.nvim/"
   }
 
   --   { "EdenEast/nightfox.nvim" } -- lazy
