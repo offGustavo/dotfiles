@@ -36,9 +36,9 @@
    ;; (grv ret)   @bas 100 all-released() 
    ;; (grv spc)   @gam 100 all-released() 
    ;; (lsft rsft) caps 100 all-released() 
-   ;; (m ,)       [ 100 all-released   () 
-   ;; (, .)       ] 100 all-released   () 
-   ;; (. /)       \ 100 all-released   ()
+   (m ,)       [ 100 all-released   () 
+   (, .)       ] 100 all-released   () 
+   (. /)       \ 100 all-released   ()
    (' c)       RA-, 100 all-released())
 
    (defalias
