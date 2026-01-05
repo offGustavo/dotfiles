@@ -28,6 +28,7 @@ return {
     require("tabby").setup({
       line = function(line)
         return {
+          "%=", 
           line.tabs().foreach(function(tab)
             local hl = tab.is_current() and theme.current_tab or theme.bg
             return {

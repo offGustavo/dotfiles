@@ -44,11 +44,11 @@
         },
         sections = {
           { section = "header" },
-          -- {
-          --   -- pane = 2,
-          --   section = "startup",
-          --   padding = { 1, 0 },
-          -- },
+          {
+            -- pane = 2,
+            section = "startup",
+            padding = { 1, 0 },
+          },
           -- {
           --   pane = 2,
           --   section = "terminal",

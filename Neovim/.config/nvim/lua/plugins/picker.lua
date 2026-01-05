@@ -1,4 +1,7 @@
+-- if true then return {} end
+
 return {
+  {
   "santhosh-tekuri/picker.nvim",
   enabled = false,
   config = function()
@@ -28,4 +31,25 @@ return {
     --     end,
     -- });
   end,
+  },
+{
+  "ibhagwan/fzf-lua",
+  -- optional for icon support
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  -- or if using mini.icons/mini.nvim
+  -- dependencies = { "nvim-mini/mini.icons" },
+  ---@module "fzf-lua"
+  ---@type fzf-lua.Config|{}
+  ---@diagnostic disable: missing-fields
+  opts = {}
+  ---@diagnostic enable: missing-fields
+},
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      -- optional but recommended
+      -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    }
+}
 }

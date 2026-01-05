@@ -8,8 +8,8 @@ vim.cmd([[
 
 vim.g.snacks_animate = false
 
--- vim.opt.scrolloff = 999
-vim.opt.scrolloff = 0
+-- vim.o.scrolloff = 999
+vim.o.scrolloff = 0
 
 vim.o.wrap = false
 
@@ -17,7 +17,7 @@ vim.o.list = false
 
 vim.o.swapfile = false
 
-vim.opt.spelllang = { "pt_br", "en_us", "es" }
+vim.o.spelllang = "pt_br,en_us,es"
 
 vim.cmd([[
   " let g:netrw_banner = 0
@@ -44,7 +44,7 @@ vim.g.autoformat = false -- globally
 --   local pct_thru_file = "%5p%%"
 --   return string.format("%s%s%s", normal_color, file_name, modified)
 -- end
--- vim.opt.winbar = Winbar()
+-- vim.o.winbar = Winbar()
 
 ----------------------
 -- NEOVIDE          --
@@ -58,8 +58,8 @@ if vim.g.neovide then
 end
 
 if vim.uv.os_uname().sysname == "Windows_NT" then
-  vim.opt.shell = "pwsh.exe"
-  vim.opt.shellcmdflag =
+  vim.o.shell = "pwsh.exe"
+  vim.o.shellcmdflag =
     "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
 end
 
