@@ -1,3 +1,4 @@
+-- vim: foldmethod=marker
 vim.keymap.set('n', '<leader>qo', vim.cmd.copen, { desc = 'QuickFix Open', silent = true })
 vim.keymap.set('n', '<leader>qc', vim.cmd.cclose, { desc = 'QuickFix Close', silent = true })
 
@@ -26,15 +27,9 @@ vim.keymap.set(
 )
 vim.keymap.set("x", "S", ":s/", { desc = "Substitute in line" })
 
-vim.keymap.set('n', '<leader>lu', function()
-  vim.pack.update {}
-end)
-vim.keymap.set('n', '<leader>lx', function()
-  vim.pack.del {}
-end)
-vim.keymap.set('n', '<leader>le', function()
-  vim.cmd("e ~/.local/share/lvim/site/pack/core/opt/")
-end)
+vim.keymap.set("n","<M-t>", ":t.<CR>")
+vim.keymap.set("x","<C-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("x","<C-k>", ":m '<-2<CR>gv=gv")
 
 -- {{{ Tabs
 vim.keymap.set("n", "<leader><tab>o", "<Cmd>tabonly<CR>")
@@ -115,11 +110,24 @@ end)
 vim.keymap.set({'x', 'n', 'i', 't'}, '<M-S-k>', function ()
   vim.cmd.wincmd("W")
 end)
+vim.keymap.set("n", "<M-=>", function ()
+  vim.cmd.wincmd("=")
+end, { desc = "Windows"})
+vim.keymap.set("n", "<M-S-=>", function ()
+  vim.cmd.wincmd("+")
+end, { desc = "Windows"})
+vim.keymap.set("n", "<M-->", function ()
+  vim.cmd.wincmd("-")
+end, { desc = "Windows"})
+vim.keymap.set("n", "<M-S-,>", function ()
+  vim.cmd.wincmd("<")
+end, { desc = "Windows"})
+vim.keymap.set("n", "<M-S-.>", function ()
+  vim.cmd.wincmd(">")
+end, { desc = "Windows"})
   --- }}}
 
 --{{{ -- Terminal
-
-
 vim.keymap.set({"i", "c", "n", "v", "x" }, '<C-c>', "<Esc>", { desc = 'Fix <C-c>', silent = true })
 vim.keymap.set('t', '<M-;>', '<C-\\><C-n>', { silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true })
 vim.keymap.set('t', '<S-Esc>', '<C-\\><C-n>', { silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true })
@@ -255,43 +263,21 @@ vim.keymap.set(
 vim.keymap.set({ "x", "n" }, "<leader>rr", ":s/", { desc = "Search and Replace" })
 vim.keymap.set("x", "S", ":s/", { desc = "Substitute in line(or selection)" })
 
-vim.keymap.set("x", "<leader>rp", '"_dP', { silent = true, desc = "Paste Without Copy" })
+-- vim.keymap.set("x", "<leader>rp", '"_dP', { silent = true, desc = "Paste Without Copy" })
 
 vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
 
 
--- -- Toggle Options
--- Snacks.toggle
---     .new({
---         id = "toggle_sing_and_line_column",
---         name = "Relative Line Number and Sign Column",
---         get = function()
---             return vim.o.relativenumber
---         end,
---         set = function(state)
---             if state then
---                 vim.o.signcolumn = "no"
---                 vim.opt.number = false
---                 vim.opt.relativenumber = false
---             end
---             vim.o.signcolumn = "yes"
---             vim.opt.number = state
---             vim.opt.relativenumber = state
---         end,
---     })
---     :map("<leader>on")
---
--- Snacks.toggle.option("cursorline", { off = false, on = true }):map("<leader>ol")
---
--- --------------------
--- ---- TABBY/TABS ----
--- --------------------
--- vim.keymap.set("n", "<leader><Tab>z", ":tcd ", { desc = "Tab Cd" })
--- vim.keymap.set("n", "<leader><Tab>n", "<cmd>tabnew<cr>", { desc = "New Tab" })
--- vim.keymap.set("n", "<leader><Tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
--- vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
--- vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
---
+--------------------
+---- TABBY/TABS ----
+--------------------
+vim.keymap.set("n", "<leader><Tab>z", ":tcd ", { desc = "Tab Cd" })
+vim.keymap.set("n", "<leader><Tab>n", "<cmd>tabnew<cr>", { desc = "New Tab" })
+vim.keymap.set("n", "<leader><Tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+---{{{ Tab
 -- -- vim.keymap.set("n", "<leader>tL", "<cmd>tablast<cr>", { desc = "Last Tab" })
 -- -- vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
 -- -- vim.keymap.set("n", "<leader>tF", "<cmd>tabfirst<cr>", { desc = "First Tab" })
@@ -317,44 +303,40 @@ vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" 
 --     map(modes, tmux_prefix .. i, "<Cmd>norm " .. i .. "gt<Cr>", { desc = "Tmux to tab " .. i })
 --     vim.keymap.set("n", "<leader><tab>" .. i, "<Cmd>norm" .. i .. "gt<Cr>", { desc = "which_key_ignore" })
 -- end
---
---
--- vim.cmd([[
---  nmap  <S-ScrollWheelUp> zh
---  nmap  <S-ScrollWheelDown> zl
---  ]])
---
--- ---------------
--- -- OBSIDIAN ---
--- ---------------
--- vim.keymap.set("n", "<leader>ood", function()
---     local current_date = os.date("%Y-%m-%d")
---     local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
---     vim.cmd("e " .. daily_note_date)
--- end, { desc = "Daily Note" })
---
--- vim.keymap.set("n", "<leader>ooc", function()
---     local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
---     local commit_date = "vault backup: " .. current_date_and_time
---     vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
---     print("Commit: " .. commit_date)
--- end, { desc = "Commit All Changes" })
---
--- vim.keymap.set("n", "<leader>oop", function()
---     vim.cmd("!git pull")
---     print("Pull Changes")
--- end, { desc = "Pull Changes" })
---
--- vim.keymap.set("n", "<leader>ooP", function()
---     vim.cmd("!git push")
---     print("Push Changes")
--- end, { desc = "Push Changes" })
---
--- vim.keymap.set("x", "<leader>oof", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', { desc = "Format Table in Markdown" })
---
--- vim.keymap.set("x", "<leader>a", ":AlignRegexp<CR>", { desc = "Align by regex", silent = true })
---
---
+---}}}
+
+vim.cmd([[
+ nmap  <S-ScrollWheelUp> zh
+ nmap  <S-ScrollWheelDown> zl
+ ]])
+
+---------------
+-- OBSIDIAN ---
+---------------
+vim.keymap.set("n", "<leader>ood", function()
+    local current_date = os.date("%Y-%m-%d")
+    local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
+    vim.cmd("e " .. daily_note_date)
+end, { desc = "Daily Note" })
+
+vim.keymap.set("n", "<leader>gnc", function()
+    local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
+    local commit_date = "vault backup: " .. current_date_and_time
+    vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
+    print("Commit: " .. commit_date)
+end, { desc = "Commit All Changes" })
+
+vim.keymap.set("n", "<leader>gp", function()
+    vim.cmd("!git pull")
+    print("Pull Changes")
+end, { desc = "Pull Changes" })
+
+vim.keymap.set("n", "<leader>gP", function()
+    vim.cmd("!git push")
+    print("Push Changes")
+end, { desc = "Push Changes" })
+
+-- {{{ Find
 -- -------------------------------------
 -- ----- CUSTOM SEARCH FILES AND WORD --
 -- -------------------------------------
@@ -422,21 +404,21 @@ vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" 
 -- vim.keymap.set("n", "<leader>og", ":grep ", { desc = "Grep" })
 -- vim.keymap.set("n", "<leader>or", ":grep <cword><cr>:cope<Cr>", { desc = "Find Function/Decaration/References" })
 -- vim.keymap.set("n", "<leader>o/", ":LiveGrep  %:h<left><left><left><left>") -- Custom Autocmd
---
--- ----------
--- -- Make --
--- ----------
--- vim.keymap.set("n", "<leader>cm", ":make ", { desc = "Make", remap = true })
--- vim.keymap.set("n", "<leader>cM", "<Cmd>make<CR>", { desc = "Run Make" })
---
---
--- vim.keymap.set('n', 'gX', function()
---     local file = vim.fn.expand("%:p")
---     if file ~= "" then
---         vim.ui.open(file)
---     else
---         vim.notify("No file to open", vim.log.levels.WARN)
---     end
--- end, { desc = "Open current file" })
---
+-- }}}
+
+----------
+-- Make --
+----------
+vim.keymap.set("n", "<leader>cm", ":make ", { desc = "Make", remap = true })
+vim.keymap.set("n", "<leader>cM", "<Cmd>make<CR>", { desc = "Run Make" })
+
+vim.keymap.set('n', 'gX', function()
+    local file = vim.fn.expand("%:p")
+    if file ~= "" then
+        vim.ui.open(file)
+    else
+        vim.notify("No file to open", vim.log.levels.WARN)
+    end
+end, { desc = "Open current file" })
+
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })

@@ -52,7 +52,7 @@ M.compile = function()
 end
 
 M.setup = function()
-  local c = require("forge.compile")
+  local c = require("fish.compile")
 
 	if vim.g.forge_terminal_loaded then
 		return

@@ -1,4 +1,4 @@
-if true then return {} end
+-- if true then return {} end
 ---@type LazySpec
 return {
 	"mikavilpas/yazi.nvim",
@@ -9,6 +9,12 @@ return {
 	},
 	keys = {
 		-- 👇 in this section, choose your own keymappings!
+		{
+			"<M-e>",
+			mode = { "n", "v" },
+			"<cmd>Yazi<cr>",
+			desc = "Open yazi at the current file",
+		},
 		{
 			"-",
 			mode = { "n", "v" },
@@ -61,7 +67,7 @@ return {
 		},
 
 		-- the floating window scaling factor. 1 means 100%, 0.9 means 90%, etc.
-		floating_window_scaling_factor = 0.8,
+		floating_window_scaling_factor = 1,
 
 		-- the transparency of the yazi floating window (0-100). See :h winblend
 		yazi_floating_window_winblend = 0,

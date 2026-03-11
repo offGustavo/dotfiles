@@ -2,20 +2,18 @@
 
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.mouse = "a"
 vim.o.showmode = true
 vim.o.laststatus = 3
 vim.o.breakindent = true
 vim.o.linebreak = true
 vim.o.undofile = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
+-- vim.o.ignorecase = true
+-- vim.o.smartcase = true
 vim.o.signcolumn = "yes"
-vim.o.updatetime = 50
+vim.o.updatetime = 100
 vim.o.timeoutlen = 400
 vim.o.splitright = true
 vim.o.splitbelow = true
-vim.o.spell = false
 vim.o.list = false
 vim.o.inccommand = "split"
 vim.o.cursorline = false
@@ -25,8 +23,6 @@ vim.o.tabstop = 2 -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
 vim.o.softtabstop = 2 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 2 -- Number of spaces inserted when indenting
-vim.o.ignorecase = true
-vim.o.smartcase = true
 vim.o.showmode = true
 vim.o.showcmd = true
 vim.o.showcmdloc = "statusline"
@@ -38,17 +34,19 @@ vim.o.swapfile = false
 --   set wildignore=*.o,*.obj,**/node_modules/**,/
 -- ]])
 vim.o.termguicolors = true
-vim.o.spelllang = "pt_br,en_us,es"
 if vim.uv.os_uname().sysname == "Windows_NT" then
   vim.o.shell = "pwsh.exe"
   vim.o.shellcmdflag =
     "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
 end
 
-
 -- Mini Max
 vim.o.shortmess = "CFOSWaco" -- Disable some built-in completion messages
 vim.o.virtualedit = "block" -- Allow going past end of line in blockwise mode
+
+-- Spell
+vim.o.spelllang = "pt_br,en_us,es"
+vim.o.spell = true
 vim.o.spelloptions = "camel" -- Treat camelCase word parts as separate words
 
 -- vim.o.cursorlineopt  = 'screenline,number' -- Show cursor line per screen line
@@ -58,7 +56,40 @@ vim.o.spelloptions = "camel" -- Treat camelCase word parts as separate words
 vim.o.fillchars = "eob:$,fold:-"
 -- vim.o.listchars = "extends:…,nbsp:␣,precedes:…,tab:	,eol:$"
 
+vim.api.nvim_create_autocmd({ "VimEnter", "VimResume", "UIEnter" }, {
+  group = vim.api.nvim_create_augroup("KittySetVarVimEnter", { clear = true }),
+  callback = function()
+    if vim.api.nvim_ui_send then
+      vim.api.nvim_ui_send("\x1b]1337;SetUserVar=in_editor=MQo\007")
+    else
+      io.stdout:write("\x1b]1337;SetUserVar=in_editor=MQo\007")
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
+  group = vim.api.nvim_create_augroup("KittyUnsetVarVimLeave", { clear = true }),
+  callback = function()
+    if vim.api.nvim_ui_send then
+      vim.api.nvim_ui_send("\x1b]1337;SetUserVar=in_editor=MQo\007")
+    else
+      io.stdout:write("\x1b]1337;SetUserVar=in_editor\007")
+    end
+  end,
+})
 vim.schedule(function()
+
+  -- TODO: clipboard keymaps, this should be in keymaps file
+vim.keymap.set({ "n" }, "<leader>p", '"+p', { desc = "Paste from System" })
+vim.keymap.set("x", "<leader>p", '"_dP') -- Paste without overwriting the default register
+vim.keymap.set({ "n", "x" }, "<C-s-v>", '"+p', { desc = "Paste from System" })
+vim.keymap.set({ "n", "x" }, "<C-S-c>", '"+y', { desc = "Yank from System" })
+vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Yank from System" })
+vim.keymap.set({ "n", "x" }, "<D-c>", '"+y', { desc = "Yank from System" })
+vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank from System" })
+
+-- vim.o.clipboard = "unnamed,unnamedplus"
+
 	-- [Neovim native, built-in, LSP autocomplete · Tomas Vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
 	-- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
 	-- vim.o.autocomplete = true
@@ -87,10 +118,12 @@ vim.schedule(function()
 	--
 	-- 	vim.o.findfunc = "v:lua.RgFindFiles"
 	-- end
-	--
-	-- vim.filetype.add({
-	-- 	extension = {
-	-- 		kbd = "kbd", -- maps *.kbd → filetype=kbd
-	-- 	},
-	-- })
+
+	vim.filetype.add({
+		extension = {
+			kbd = "kbd", -- maps *.kbd → filetype=kbd
+		},
+	})
 end)
+
+vim.o.keymodel = "startsel,stopsel"

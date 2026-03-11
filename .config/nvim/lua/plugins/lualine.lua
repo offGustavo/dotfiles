@@ -1,4 +1,5 @@
 if true then return {} end
+
 local function show_macro_recording()
   local recording_register = vim.fn.reg_recording()
   if recording_register == "" then

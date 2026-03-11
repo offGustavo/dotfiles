@@ -9,12 +9,13 @@ return {
       style = "night",
       transparent = false,
       styles = {
-        sidebars = "transparent",
-        floats = "transparent",
+        -- sidebars = "transparent",
+        -- floats = "transparent",
         -- functions = { bold = true },
         -- keywords = { bold = true },
       },
       on_colors = function(colors)
+        -- colors.bg = "#000000" -- To check if its working try something like "#ff00ff" instead of colors.none
         colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
         colors.bg_statusline = colors.none
       end,
@@ -22,7 +23,7 @@ return {
   },
 
   -- {
-  --   "catppuccin/nvim",
+
   --   opts = {
   --     transparent_background = false, -- disables setting the background color.
   --     float = {

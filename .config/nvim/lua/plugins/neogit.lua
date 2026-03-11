@@ -1,4 +1,4 @@
-if true then return {} end
+-- if true then return {} end
 return {
   "NeogitOrg/neogit",
   lazy = true,
@@ -17,6 +17,7 @@ return {
   },
   cmd = "Neogit",
   keys = {
-    { "<leader>gg", "<cmd>Neogit kind=replace<cr>", desc = "Show Neogit UI" }
+    { "<leader>gg", "<cmd>Neogit kind=replace<cr>", desc = "Show Neogit UI" },
+    { "<M-g>", "<cmd>Neogit kind=replace<cr>", desc = "Show Neogit UI" }
   }
 }

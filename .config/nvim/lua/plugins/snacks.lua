@@ -1,24 +1,24 @@
 if true then return {} end
 
-local ivy_like_2  = {
-            preview = false,
-            layout = {
-              box = "vertical",
-              backdrop = false,
-              row = -1,
-              width = 0,
-              height = 0.4,
-              border = "top",
-              title = " {title} {live} {flags}",
-              title_pos = "left",
-              {
-                box = "horizontal",
-                { win = "list", border = "none" },
-                { win = "preview", width = 0.6, border = "rounded" },
-              },
-              { win = "input", height = 1, border = "none" },
-            },
-          }
+local ivy_like_2 = {
+	preview = false,
+	layout = {
+		box = "vertical",
+		backdrop = false,
+		row = -1,
+		width = 0,
+		height = 0.4,
+		border = "top",
+		title = " {title} {live} {flags}",
+		title_pos = "left",
+		{
+			box = "horizontal",
+			{ win = "list", border = "none" },
+			{ win = "preview", width = 0.6, border = "rounded" },
+		},
+		{ win = "input", height = 1, border = "none" },
+	},
+}
 
 -- TODO: improve and fix the layouts
 local ivy_like = {
@@ -219,11 +219,62 @@ local init_config = function()
 			Snacks.toggle.inlay_hints():map("<leader>uh")
 			Snacks.toggle.indent():map("<leader>ug")
 			Snacks.toggle.dim():map("<leader>uD")
+      -- Toggle Options
+      Snacks.toggle
+        .new({
+          id = "toggle_sing_and_line_column",
+          name = "Relative Line Number and Sign Column",
+          get = function()
+            return vim.o.relativenumber
+          end,
+          set = function(state)
+            if state then
+              vim.o.signcolumn = "no"
+              vim.opt.number = false
+              vim.opt.relativenumber = false
+            end
+            vim.o.signcolumn = "yes"
+            vim.opt.number = state
+            vim.opt.relativenumber = state
+          end,
+        })
+        :map("<leader>on")
+
+      Snacks.toggle.option("cursorline", { off = false, on = true }):map("<leader>ol")
+
 		end,
 	})
 end
 
 local snacks_keys = {
+	{
+		"<leader>gi",
+		function()
+			Snacks.picker.gh_issue()
+		end,
+		desc = "GitHub Issues (open)",
+	},
+	{
+		"<leader>gI",
+		function()
+			Snacks.picker.gh_issue({ state = "all" })
+		end,
+		desc = "GitHub Issues (all)",
+	},
+	{
+		"<leader>gp",
+		function()
+			Snacks.picker.gh_pr()
+		end,
+		desc = "GitHub Pull Requests (open)",
+	},
+	{
+		"<leader>gP",
+		function()
+			Snacks.picker.gh_pr({ state = "all" })
+		end,
+		desc = "GitHub Pull Requests (all)",
+	},
 	-- Top Pickers & Explorer
 	{
 		"<leader><space>",
@@ -770,14 +821,17 @@ local snacks_keys = {
 
 return {
 	"folke/snacks.nvim",
-	priority = 1000,
-	lazy = false,
+	-- priority = 1000,
+	-- lazy = false,
+	lazy = true,
+	event = "VeryLazy",
 	enabled = true,
 	---@type snacks.Config
 	opts = {
 		bigfile = { enabled = true },
-		-- dashboard = { enabled = false } ,
-		dashboard = dashboard_config,
+    dashboard = { enabled = false } ,
+		-- dashboard = dashboard_config,
+		gh = {},
 		explorer = { enabled = false },
 		indent = { enabled = false },
 		input = { enabled = false },
@@ -799,5 +853,11 @@ return {
 		},
 	},
 	keys = snacks_keys,
+	-- keys = { {
+	-- 	"<M-g>",
+	-- 	function()
+	-- 		Snacks.lazygit()
+	-- 	end,
+	-- } },
 	init = init_config,
 }

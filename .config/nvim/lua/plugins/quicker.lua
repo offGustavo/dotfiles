@@ -1,8 +1,9 @@
+if true then return {} end
 return {
 	"stevearc/quicker.nvim",
 	ft = "qf",
 	lazy = true,
-  enabled = false,
+  -- enabled = false,
 	---@module "quicker"
 	---@type quicker.SetupOptions
 	opts = {

@@ -1,15 +1,22 @@
--- if true then return {} end
 return {
   "ThePrimeagen/harpoon",
+  enabled = true,
+  lazy = true,
   branch = "harpoon2",
-  opts = {
+  dependencies = { "nvim-lua/plenary.nvim" },
+  config = function ()
+    local harpoon = require("harpoon")
+    harpoon.setup({
     menu = {
       width = vim.api.nvim_win_get_width(0) - 4,
     },
     settings = {
       save_on_toggle = true,
     },
-  },
+  })
+    local harpoon_extensions = require("harpoon.extensions")
+    harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
+  end,
   keys = function()
     local keys = {
       {
@@ -35,17 +42,18 @@ return {
         function()
           require("harpoon"):list():select(i)
         end,
-        desc = "Harpoon to File " .. i,
+        desc = "which_key_ignore",
       })
+
       table.insert(keys, {
         "<leader>h" .. i,
         function()
-          require("harpoon"):list():add(i)
+          require("harpoon"):list():replace_at(i)
         end,
-        desc = "Harpoon to File " .. i,
+        desc = "Add to " .. i,
       })
-
     end
     return keys
   end,
 }
+

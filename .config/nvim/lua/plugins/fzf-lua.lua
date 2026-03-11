@@ -2,24 +2,36 @@
 return {
 	"ibhagwan/fzf-lua",
 	cmd = "FzfLua",
-	enabled = true,
+	enadbled = true,
 	config = function()
-		-- require("fzf-lua").register_ui_select()
+		require("fzf-lua").register_ui_select()
+		-- "borderless",
+		-- "ivy",
 		require("fzf-lua").setup({
-			-- "ivy",
-			-- "borderless",
+			"fzf-native",
+			winopts = { preview = { default = "head" } },
 		})
+    -- vim.keymap.set("n", "<M-o>", ":FzfLua files<CR>")
+    -- vim.keymap.set("n", "<M-s>", ":FzfLua live_grep<CR>")
+    -- vim.keymap.set("n", "<M-b>", ":FzfLua buffers<CR>")
 	end,
 	keys = {
-		{ "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
-		{ "<c-k>", "<c-k>", ft = "fzf", mode = "t", nowait = true },
+		-- { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
+		-- { "<c-k>", "<c-k>", ft = "fzf", mode = "t", nowait = true },
+		{
+			"<M-u>",
+			"<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>",
+			desc = "Switch Buffer",
+		},
 		{
 			"<leader>,",
 			"<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>",
 			desc = "Switch Buffer",
 		},
 		{ "<leader>/", "<Cmd>FzfLua live_grep<CR>", desc = "Grep (Root Dir)" },
+		{ "<M-i>", "<Cmd>FzfLua live_grep<CR>", desc = "Grep (Root Dir)" },
 		{ "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+		{ "<M-o>", "<cmd>FzfLua files<CR>", desc = "Find Files", },
 		{
 			"<leader><space>",
 			"<cmd>FzfLua files<CR>",
@@ -42,7 +54,7 @@ return {
 		},
 		{ "<leader>fF", "<cmd>FzfLua files<CR>", desc = "Find Files (cwd)" },
 		{
-			"<leader>fg",
+			"<leader>pf",
 			"<cmd>FzfLua git_files<cr>",
 			desc = "Find Files (git-files)",
 		},
@@ -77,10 +89,8 @@ return {
 		{ "<leader>sm", "<cmd>FzfLua marks<cr>", desc = "Jump to Mark" },
 		{ "<leader>sR", "<cmd>FzfLua resume<cr>", desc = "Resume" },
 		{ "<leader>sq", "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
-		-- { "<leader>sw", LazyVim.pick("grep_cword"), desc = "Word (Root Dir)" },
-		-- { "<leader>sW", LazyVim.pick("grep_cword", { root = false }), desc = "Word (cwd)" },
-		-- { "<leader>sw", LazyVim.pick("grep_visual"), mode = "x", desc = "Selection (Root Dir)" },
-		-- { "<leader>sW", LazyVim.pick("grep_visual", { root = false }), mode = "x", desc = "Selection (cwd)" },
+		{ mode = { "x", "n" }, "<leader>sw", "<cmd>FzfLua grep_cword<cr>", desc = "Grep <cword>" },
+		{ mode = { "x", "n" }, "<leader>sW", "<cmd>FzfLua grep_cWORD<cr>", desc = "Grep <cWORD>" },
 		{ "<leader>uC", "<Cmd>FzfLua colorschemes<Cr>", desc = "Colorscheme with Preview" },
 		{ "<leader>sr", "<cmd>FzfLua lsp_references<cr>", desc = "Lsp References" },
 		{ "<leader>fa", "<cmd>FzfLua builtin<cr>", desc = "Fzf" },

@@ -50,6 +50,12 @@ return {
 			desc = "Add cursor and move down",
 		},
 		{
+			"<C-S-m>",
+			"<Cmd>MultipleCursorsMouseAddDelete<CR>",
+			mode = { "n", "i" },
+			desc = "Add or remove cursor",
+		},
+		{
 			"<C-LeftMouse>",
 			"<Cmd>MultipleCursorsMouseAddDelete<CR>",
 			mode = { "n", "i" },

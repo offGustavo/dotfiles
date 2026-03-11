@@ -1,4 +1,8 @@
-vim.cmd "let g:markdown_syntax_conceal = 0"
+vim.cmd [[
+let g:markdown_syntax_conceal = 0
+let g:markdown_recommended_style = 0
+let g:markdown_folding = 1
+]]
 
 -- if Fish.markview_loaded then
 --   return

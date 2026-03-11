@@ -1,0 +1,69 @@
+-- require("fish.espeto").setup()
+-- require("fish.vidir")
+-- require("fish.statusline")
+require("fish.compile").setup()
+require("fish.commands")
+-- require("fish.yazi").setup({
+--     enable_cmds = true,
+--     replace_netrw = true,
+--     ui = {
+--         border = "rounded",
+--         height = 1,
+--         width = 1,
+--         x = 0.5,
+--         y = 0.5,
+--     },
+--     keybindings = {},
+-- })
+
+-- vim.keymap.set("n", "<M-e>", ":Yazi<CR>")
+-- vim.keymap.set("n", "<M-g>", ":LazyGit<CR>")
+-- In your init.lua
+-- require("fish.lazygit").setup({
+--     ui = {
+--         border = "rounded",
+--         height = 0.9,
+--         width = 0.9,
+--     },
+--     keybindings = {
+--         ["<C-h>"] = "<C-\\><C-n><C-w>h", -- navigate left
+--         ["<C-l>"] = "<C-\\><C-n><C-w>l", -- navigate right
+--     },
+--     on_exit = function()
+--         vim.cmd("checktime") -- refresh buffers if files changed
+--     end,
+-- })
+
+local TabTerm = require("fish.tabterm")
+TabTerm.setup({
+    -- Winbar Config
+    separator_right = "",
+    separator_left = "",
+    separator_first = "",
+    center = true,
+    default_highlight = "%#Tabline#",
+    tab_highlight = "%#TablineSel#",
+    -- Window Config
+    vertical_size = 20,
+    float = false,
+})
+-- Define Keys
+vim.keymap.set({ "n", "i", "x", "t" }, "<A-n>", function()
+    TabTerm.new()
+end, { desc = "TabTerm New" })
+vim.keymap.set({ "n", "i", "x", "t" }, "<A-x>", function()
+    TabTerm.close()
+end, { desc = "TabTerm Close" })
+vim.keymap.set({ "n", "i", "x", "t" }, "<A-,>", function()
+    TabTerm.rename()
+end, { desc = "TabTerm Rename" })
+vim.keymap.set({ "n", "i", "x", "t" }, "<A-/>", function()
+    TabTerm.toggle()
+end, { desc = "TabTerm Toggle" })
+for i = 1, 10, 1 do
+    vim.keymap.set({ "n", "i", "x", "t" }, "<A-" .. i .. ">", function()
+        TabTerm.go(i)
+    end, { desc = "TabTerm Toggle" })
+end
+
+vim.keymap.set('n', '<leader>rt', function() require('fish.toggle').toggle() end)

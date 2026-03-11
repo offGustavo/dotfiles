@@ -1,12 +1,14 @@
 local M = {}
 
+local path_name = "espeto"
+
 -- Identificador do projeto (cwd)
 local function get_project_key()
 	return vim.fn.getcwd():gsub("[^%w]", "_")
 end
 
 local function get_storage_path()
-	return vim.fn.stdpath("data") .. "/espeto/" .. get_project_key() .. ".json"
+	return vim.fn.stdpath("data") .. path_name .. "/" .. get_project_key() .. ".json"
 end
 
 local marks = {}
@@ -31,7 +33,7 @@ end
 
 local function save()
 	local path = get_storage_path()
-	vim.fn.mkdir(vim.fn.stdpath("data") .. "/harpoon_alt", "p")
+	vim.fn.mkdir(vim.fn.stdpah("data") .. path_name, "p")
 	local file = io.open(path, "w")
 	if file then
 		file:write(vim.json.encode(marks))
