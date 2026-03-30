@@ -328,9 +328,11 @@ end
 
 -- Register the user command
 vim.api.nvim_create_user_command('Vidir', function(opts)
-  local path = opts.fargs or vim.loop.cwd()
-  print(path)
-  M.open(path)
+  local args = opts.fargs
+  if #args == 0 then
+    args = { vim.loop.cwd() }
+  end
+  M.open(args)
 end, { nargs = '*', complete = 'file' })
 
 return M

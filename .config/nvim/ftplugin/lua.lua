@@ -6,7 +6,7 @@ vim.keymap.set("n", "<localleader>r", "<Cmd>!%<Cr>", { silent = true, desc = "Ex
 vim.keymap.set("n", "<localleader>l", ":.lua<Cr>", { silent = true, desc = "Execute Line in Lua", buffer = true })
 vim.keymap.set( "x", "<localleader>l", ":'<,'>lua<Cr>", { silent = true, desc = "Execute Selection in Lua", buffer = true })
 
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+-- vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.wo[0][0].foldmethod = "expr"
+vim.wo[0][0].foldmethod = "expr"--
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

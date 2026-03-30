@@ -33,7 +33,7 @@ end
 
 local function save()
 	local path = get_storage_path()
-	vim.fn.mkdir(vim.fn.stdpah("data") .. path_name, "p")
+	vim.fn.mkdir(vim.fn.stdpath("data") .. path_name, "p")
 	local file = io.open(path, "w")
 	if file then
 		file:write(vim.json.encode(marks))
@@ -87,9 +87,9 @@ function M.list()
 		end
 	end
 	if #items == 0 then
-		vim.notify("Nenhum arquivo marcado", vim.log.levels.INFO)
+		vim.notify("No file", vim.log.levels.INFO)
 	else
-		vim.notify(table.concat(items, "\n"), vim.log.levels.INFO, { title = "Harpoon Alt" })
+		vim.notify(table.concat(items, "\n"), vim.log.levels.INFO, { title = "Espeto Alt" })
 	end
 end
 
@@ -98,7 +98,7 @@ function M.go(index)
 	if path then
 		vim.cmd("edit " .. vim.fn.fnameescape(path))
 	else
-		vim.notify("Nenhum arquivo na posição " .. index, vim.log.levels.WARN)
+		vim.notify("No file in " .. index, vim.log.levels.WARN)
 	end
 end
 
@@ -113,7 +113,7 @@ function M.setup(opts)
 	for i = 1, 9 do
 		map("n", prefix .. i, function()
 			M.go(i)
-		end, { desc = "Harpoon: ir posição " .. i })
+		end, { desc = "Espeto: go to file in " .. i })
 	end
 
 	for i = 1, 9 do
@@ -121,20 +121,20 @@ function M.setup(opts)
 			local buf = vim.api.nvim_get_current_buf()
 			local path = vim.api.nvim_buf_get_name(buf)
 			if path == "" then
-				vim.notify("Buffer sem nome", vim.log.levels.ERROR)
+				vim.notify("No File", vim.log.levels.ERROR)
 				return
 			end
 			M.set(i, path)
-		end, { desc = "Harpoon: definir posição " .. i })
+		end, { desc = "Espeto: add file in " .. i })
 	end
 
 	for i = 1, 9 do
 		map("n", prefix .. "hd" .. i, function()
 			M.remove(i)
-		end, { desc = "Harpoon: deletar posição " .. i })
+		end, { desc = "Espeto: delete file in " .. i })
 	end
 
-	map("n", prefix .. "he", M.list, { desc = "Harpoon: listar arquivos" })
+	map("n", prefix .. "he", M.list, { desc = "Espeto: list files" })
 
 	map("n", prefix .. "ha", function()
 		local buf = vim.api.nvim_get_current_buf()
@@ -144,7 +144,7 @@ function M.setup(opts)
 			return
 		end
 		M.add(path)
-	end, { desc = "Harpoon: adicionar ao primeiro slot vazio" })
+	end, { desc = "Espeto: add file" })
 end
 
 return M
