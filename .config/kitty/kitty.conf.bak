@@ -3,10 +3,11 @@
 #: kitty has very powerful font management. You can configure
 #: individual font faces and even specify special fonts for particular
 #: characters.
-# font_family      JetBrainsMonoNL NF Mono
-# bold_font        auto
-# italic_font      auto
-# bold_italic_font auto
+
+font_family      JetBrainsMonoNL NF Mono
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
 
 #: You can specify different fonts for the bold/italic/bold-italic
 #: variants. The easiest way to select fonts is to run the `kitten
@@ -1996,7 +1997,6 @@ map alt+shift+0 goto_tab 10
 #: available here <https://sw.kovidgoyal.net/kitty/actions/>.
 
 #: kitty_mod alt+shift
-# kitty_mod alt
 # kitty_mod alt+shift
 
 #: Special modifier key alias for default shortcuts. You can change
@@ -2712,11 +2712,3 @@ map alt+shift+0 goto_tab 10
 include current-theme.conf
 # END_KITTY_THEME
 # }}}
-
-
-# BEGIN_KITTY_FONTS
-font_family      family="JetBrainsMonoNL Nerd Font Mono"
-bold_font        auto
-italic_font      auto
-bold_italic_font auto
-# END_KITTY_FONTS

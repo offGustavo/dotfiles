@@ -39,6 +39,58 @@ if [[ -f "$CONFIG_FILE_NAME" ]]; then
 fi
 
 
+# List all available kitty session files (from both storage locations)
+list_sessions() {
+    local sessions=()
+    local path
+
+    # Persistent sessions
+    if [[ -d "$PERSISTENT_SESSION_STORAGE" ]]; then
+        for file in "$PERSISTENT_SESSION_STORAGE"/*.kitty-session; do
+            [[ -f "$file" ]] || continue
+            sessions+=("$(basename "${file%.kitty-session}")")
+        done
+    fi
+
+    # Temporary sessions (from /tmp/kitty-sessions)
+    if [[ -d "$SESSION_FILE_PREFIX" && "$SESSION_FILE_PREFIX" != "$PERSISTENT_SESSION_STORAGE" ]]; then
+        for file in "$SESSION_FILE_PREFIX"/*.kitty-session; do
+            [[ -f "$file" ]] || continue
+            sessions+=("$(basename "${file%.kitty-session}")")
+        done
+    fi
+
+    # Output formatted list
+    printf '%s\n' "${sessions[@]}"
+}
+
+# Use fzf to select a session and switch to it
+switch_session_with_fzf() {
+    local sessions
+    sessions=$(list_sessions)
+    if [[ -z "$sessions" ]]; then
+        log "No session files found in $PERSISTENT_SESSION_STORAGE or $SESSION_FILE_PREFIX"
+        return 1
+    fi
+
+    # fzf selection: show "type:name" and on selection extract the file path
+    local selected
+    selected=$(
+        echo "$sessions" \
+        | fzf --prompt="Switch to session > " \
+              --delimiter='|' --with-nth=1 \
+              --preview='cat {2}' \
+              --preview-window=up:30% \
+              --color=base16 --margin=20% --reverse --style=default
+    )
+    [[ -z "$selected" ]] && return 1
+
+    local session_file="${selected#*|}"  # strip everything up to the first '|'
+    log "Switching to session: $session_file"
+    kitten @ action goto_session "$session_file"
+}
+
+
 while [[ "$#" -gt 0 ]]; do
     case "$1" in
     -h | --help)
@@ -63,6 +115,10 @@ while [[ "$#" -gt 0 ]]; do
         editing="yes"
         shift
         ;;
+    -l | --list-switch)
+      switch_session_with_fzf
+      exit
+      ;;
     *)
         show_help
         exit 1
@@ -105,7 +161,7 @@ create_session_file(){
 }
 
 ## Script ##
-[[ -z $session_path ]] && session_path=$(zoxide query --list --score | fzf --no-sort --color=base16 --margin=20% --reverse --style=full --prompt "Switch to session > " | awk '{print $2}' || exit 1)
+[[ -z $session_path ]] && session_path=$(zoxide query --list --score | fzf --no-sort --color=base16 --margin=20% --reverse --style=default --prompt "Switch to session > " | awk '{print $2}' || exit 1)
 
 [[ -z "$session_path" ]] && {
     printf "No session selected" >&2
