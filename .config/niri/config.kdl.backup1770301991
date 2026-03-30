@@ -52,18 +52,16 @@ input {
       // For more information, see xkeyboard-config(7).
 
       // For example:
-      // layout "us"
-      // variant "intl" 
-      layout "us,br"
-      variant "intl,"
+      layout "us"
+      variant "intl" 
+      // layout "us,br"
+      // variant "intl-altgr,"
       // options "grp:win_space_toggle"
-      // options "caps:escape,escape:swapcaps"
-      // options "caps:ctrl_modifier,ctrl:swapcaps"
-      options "caps:ctrl_modifier"
     }
 
-   // Enable numlock on startup, omitting this setting disables it.
+    // Enable numlock on startup, omitting this setting disables it.
     numlock
+
   }
 
   // workspace-auto-back-and-forth
@@ -87,10 +85,10 @@ input {
   mouse {
     // off
     // natural-scroll
-    // accel-speed -0.6
+    accel-speed -0.6
     accel-profile "flat"
     // scroll-method "no-scroll"
-    // left-handed
+    left-handed
   }
 
   trackpoint {
@@ -135,7 +133,7 @@ output "eDP-1" {
   // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
   mode "1920x1080@60"
   // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-  scale 1.0
+  scale 1.25
   // Transform allows to rotate the output counter-clockwise, valid values are:
   // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
   transform "normal"
@@ -152,34 +150,6 @@ output "eDP-1" {
   // position x=0 y=1080
 }
 
-// output "HDMI-A-2" {
-//   // Uncomment this line to disable this output.
-//   // off
-//   // Resolution and, optionally, refresh rate of the output.
-//   // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
-//   // If the refresh rate is omitted, niri will pick the highest refresh rate
-//   // for the resolution.
-//   // If the mode is omitted altogether or is invalid, niri will pick one automatically.
-//   // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-//   mode "1920x1080@179.961"
-//   // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-//   scale 1.0
-//   // Transform allows to rotate the output counter-clockwise, valid values are:
-//   // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-//   transform "normal"
-//   // Position of the output in the global coordinate space.
-//   // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
-//   // The cursor can only move between directly adjacent outputs.
-//   // Output scale and rotation has to be taken into account for positioning:
-//   // outputs are sized in logical, or scaled, pixels.
-//   // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
-//   // so to put another output directly adjacent to it on the right, set its x to 1920.
-//   // If the position is unset or results in an overlap, the output is instead placed
-//   // automatically.
-//   position x=1920 y=0
-//   focus-at-startup
-// }
-
 output "HDMI-A-2" {
   // Uncomment this line to disable this output.
   // off
@@ -189,10 +159,8 @@ output "HDMI-A-2" {
   // for the resolution.
   // If the mode is omitted altogether or is invalid, niri will pick one automatically.
   // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-  // mode "3840x2160@60.000"
-  mode "1920x1080@60.00"
+  mode "1920x1080@179.961"
   // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-  // scale 2.0
   scale 1.0
   // Transform allows to rotate the output counter-clockwise, valid values are:
   // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -214,6 +182,8 @@ output "HDMI-A-2" {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
+
+
   // Set gaps around windows in logical pixels.
   gaps 6
 
@@ -280,7 +250,7 @@ layout {
   // You can change how the focus ring looks.
   focus-ring {
     // Uncomment this line to disable the focus ring.
-    // off
+    off
 
     // How many logical pixels the ring extends out from the windows.
     width 2
@@ -316,7 +286,7 @@ layout {
   border {
     // The settings are the same as for the focus ring.
     // If you enable the border, you probably want to disable the focus ring.
-    off
+    // off
 
     width 2
 
@@ -388,15 +358,14 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // spawn-at-startup "sh" "-c" "cosmic-ext-alternative-startup"
 // Start
-spawn-at-startup "sh" "-c" "systemctl --user start gnome-keyring-daemon.service"
+// spawn-at-startup "sh" "-c" "systemctl --user start gnome-keyring-daemon.service"
 // spawn-at-startup "sh" "-c" "sleep 1 && waybar -c ~/.config/niri/waybar/config.jsonc  -s ~/.config/niri/waybar/style.css"
-// spawn-at-startup "sh" "-c" "sleep 1 && swaybg -i ~/Pictures/Wallpapers/The-Path-of-Giants.png"
-// spawn-at-startup "sh" "-c" "sleep 1 && ~/.local/bin/start_swaybg.lua"
-// spawn-at-startup "sh" "-c" "waybar"
+// spawn-at-startup "sh" "-c" "sleep 1 && swaybg -i ~/Pictures/Wallpapers/my/The-Path-of-Giants.png"
 // spawn-at-startup "sh" "-c" "sleep 1 && ~/.config/waybar/scripts/toggle-waybar.sh"
-// spawn-at-startup "sh" "-c" "wayscriber -d"
+// spawn-at-startup "sh" "-c" "sleep 1 && ~/.local/bin/start_swaybg.lua"
 // spawn-at-startup "sh" "-c" "mako"
-// spawn-at-startup "sh" "-c" "dms run"
+// spawn-at-startup "sh" "-c" "waybar"
+spawn-at-startup "sh" "-c" "dms run"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -418,7 +387,7 @@ screenshot-path "~/Pictures/Screenshots/niri_screenshot_%Y-%m-%d %H-%M-%S.png"
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {
   // Uncomment to turn off all animations.
-  // off
+  // o:ff
 
   // Slow down all animations by this factor. Values below 1 speed them up instead.
   slowdown 1.2
@@ -439,19 +408,17 @@ window-rule {
   // since this is the default config, and we want no false positives.
   // You can get away with just app-id="wezterm" if you want.
   match app-id=r#"^org\.wezfurlong\.wezterm$"#
-  match app-id=r#"^app\.zen_browser\.zen$"#
-  default-column-width { proportion 1.0; }
+  default-column-width {}
 }
 
-// // Open the Firefox picture-in-picture player as floating by default.
-// window-rule {
-//   // This app-id regular expression will work for both:
-//   // - host Firefox (app-id is "firefox")
-//   // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-//   // match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-//   match title="^Picture-in-Picture$"
-//   open-floating true
-// }
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+  // This app-id regular expression will work for both:
+  // - host Firefox (app-id is "firefox")
+  // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+  open-floating true
+}
 
 // Open the picture-in-picture player as floating by default.
 window-rule {
@@ -520,7 +487,6 @@ binds {
   // Most actions that you can bind here can also be invoked programmatically with
   // `niri msg action do-something`.
 
-
   // Mod-Shift-/, which is usually the same as Mod-?,
   // shows a list of important hotkeys.
   Mod+Shift+Slash { show-hotkey-overlay; }
@@ -531,20 +497,11 @@ binds {
   Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
   Mod+Shift+Return { spawn-sh "kitten quick-access-terminal"; }
 
-  // FIXME: not working
-  // Mod+c { spawn-sh "wl-copy"; }
-  // Mod+v { spawn-sh "wl-paste"; }
+  // Mod+D { spawn-sh "rofi -combi-modi window,drun,run -show combi "; }
+  Mod+Slash { spawn-sh "fuzzel"; }
+  // Alt+Space { spawn-sh "fuzzel"; }
 
-  Mod+D { spawn-sh "rofi -show run"; }
-  Mod+Slash { spawn-sh "rofi -show drun"; }
-  Alt+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
-  // Mod+Slash { spawn-sh "fuzzel"; }
-  //Alt+Space { spawn-sh "fuzzel"; }
-
-  // Super+Escape hotkey-overlay-title="Lock the Screen And Suspend" { spawn-sh "$HOME/.config/niri/scripts/lock.sh"; }
-  Super+Ctrl+Escape hotkey-overlay-title="Lock the Screen" { spawn-sh "hyprlock"; }
-  Super+Escape hotkey-overlay-title="Lock the Screen" { spawn-sh "hyprlock"; }
-  // Super+Escape hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "dms ipc call lock lock"; }
+  Super+Alt+Escape hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "dms ipc call lock lock"; }
 
   // You can also use a shell. Do this if you need pipes, multiple commands, etc.
   // Note: the entire command goes as a single argument in the end.
@@ -559,30 +516,15 @@ binds {
   XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
   XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-  Mod+F12 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-  Mod+F11 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-  Mod+Shift+F12 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.01+"; }
-  Mod+Shift+F11 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.01-"; }
-  // XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-  // XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-  Super+F8 allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-  Super+F9 allow-when-locked=true { spawn-sh "playerctl next"; }
-  Super+F7 allow-when-locked=true { spawn-sh "playerctl previous"; }
-
   XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "10%+"; }
   XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
   Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "1%+"; }
   Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "1%-"; }
 
-  Mod+F1 allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
-  Mod+F2   allow-when-locked=true { spawn "brightnessctl" "set" "10%+"; }
-  Shift+F1   allow-when-locked=true { spawn "brightnessctl" "set" "1%+"; }
-  Shift+F2 allow-when-locked=true { spawn "brightnessctl" "set" "1%-"; }
-
-  // Super+XF86MonBrightnessUp   allow-when-locked=true { spawn "ddc-brightness.sh" "+10"; }
-  // Super+XF86MonBrightnessDown allow-when-locked=true { spawn "ddc-brightness.sh" "-10"; }
-  // Super+Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "ddc-brightness.sh" "+1"; }
-  // Super+Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "ddc-brightness.sh" "-1"; }
+  Super+XF86MonBrightnessUp   allow-when-locked=true { spawn "ddc-brightness.sh" "+10"; }
+  Super+XF86MonBrightnessDown allow-when-locked=true { spawn "ddc-brightness.sh" "-10"; }
+  Super+Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "ddc-brightness.sh" "+1"; }
+  Super+Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "ddc-brightness.sh" "-1"; }
 
   // Open/close the Overview: a zoomed-out view of workspaces and windows.
   // You can also move the mouse into the top-left hot corner,
@@ -592,6 +534,7 @@ binds {
   // Super {
   //   release { toggle-overview; }
   // }
+  Mod+Shift+W repeat=false { spawn-sh "~/.config/niri/scripts/windows.sh"; }
 
   // Switches focus between the current and the previous workspace.
   // Mod+Tab { focus-workspace-previous; }
@@ -601,20 +544,20 @@ binds {
   Mod+q { close-window; }
   Mod+Delete { close-window; }
 
-  Mod+I     { focus-window-up; }
-  Mod+J     { focus-column-left; }
-  Mod+K     { focus-window-down; }
+  Mod+H     { focus-column-left; }
+  Mod+J     { focus-window-down; }
+  Mod+K     { focus-window-up; }
   Mod+L     { focus-column-right; }
 
-  Mod+Up     { focus-window-or-workspace-up; }
   Mod+Left     { focus-column-or-monitor-left; }
   Mod+Down     { focus-window-or-workspace-down; }
+  Mod+Up     { focus-window-or-workspace-up; }
   Mod+Right     { focus-column-or-monitor-right; }
 
-  Mod+Shift+I { move-window-up; }    
-  Mod+Shift+J { consume-or-expel-window-left; }
-  Mod+Shift+K { move-window-down; }
+  Mod+Shift+H { consume-or-expel-window-left; }
+  Mod+Shift+J { move-window-down; }
   Mod+Shift+L { consume-or-expel-window-right; }
+  Mod+Shift+K { move-window-up; }    
 
   Mod+Shift+Left { move-column-left-or-to-monitor-left; }
   Mod+Shift+Down { move-window-down-or-to-workspace-down; }
@@ -625,20 +568,22 @@ binds {
   Mod+Ctrl+Shift+Right { consume-or-expel-window-right; }
 
   Mod+o     { focus-workspace-down; }
-  Mod+u     { focus-workspace-up; }  
+  Mod+i     { focus-workspace-up; }  
   Mod+Shift+o     { move-window-to-workspace-down; }
-  Mod+Shift+u     { move-window-to-workspace-up; }
+  Mod+Shift+i     { move-window-to-workspace-up; }
 
   Mod+comma  { focus-monitor-left; }
   Mod+period { focus-monitor-right; }
   Mod+Shift+comma     { move-window-to-monitor-left; }
   Mod+Shift+period     { move-window-to-monitor-right; }
 
+  Mod+Alt+comma     { move-workspace-to-monitor-left; }
+  Mod+Alt+period     { move-workspace-to-monitor-right; }
   Mod+Ctrl+comma     { move-workspace-to-monitor-left; }
   Mod+Ctrl+period     { move-workspace-to-monitor-right; }
 
-  Mod+Ctrl+u        { move-workspace-up; }  
-  Mod+Ctrl+o       { move-workspace-down; }
+  Mod+Alt+i        { move-workspace-up; }  
+  Mod+Alt+o       { move-workspace-down; }
 
   // You can bind mouse wheel scroll ticks using the following syntax.
   // These binds will change direction based on the natural-scroll setting.
@@ -696,7 +641,6 @@ binds {
   Mod+8 { focus-workspace "8"; }
   Mod+9 { focus-workspace "9"; }
   Mod+0 { focus-workspace "0"; }
-
   Mod+Shift+1 { move-window-to-workspace "1"; }
   Mod+Shift+2 { move-window-to-workspace "2"; }
   Mod+Shift+3 { move-window-to-workspace "3"; }
@@ -707,17 +651,6 @@ binds {
   Mod+Shift+8 { move-window-to-workspace "8"; }
   Mod+Shift+9 { move-window-to-workspace "9"; }
   Mod+Shift+0 { move-window-to-workspace "0"; }
-
-  Mod+Ctrl+1 { move-column-to-workspace "1"; }
-  Mod+Ctrl+2 { move-column-to-workspace "2"; }
-  Mod+Ctrl+3 { move-column-to-workspace "3"; }
-  Mod+Ctrl+4 { move-column-to-workspace "4"; }
-  Mod+Ctrl+5 { move-column-to-workspace "5"; }
-  Mod+Ctrl+6 { move-column-to-workspace "6"; }
-  Mod+Ctrl+7 { move-column-to-workspace "7"; }
-  Mod+Ctrl+8 { move-column-to-workspace "8"; }
-  Mod+Ctrl+9 { move-column-to-workspace "9"; }
-  Mod+Ctrl+0 { move-column-to-workspace "0"; }
 
   // Alternatively, there are commands to move just a single window:
   // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -771,10 +704,10 @@ binds {
   Mod+Shift+Equal { set-column-width "+1%"; }
 
   // Finer height adjustments when in column with other windows.
-  Mod+Ctrl+Minus { set-window-height "-10%"; }
-  Mod+Ctrl+Equal { set-window-height "+10%"; }
-  Mod+Shift+Ctrl+Minus { set-window-height "-1%"; }
-  Mod+Shift+Ctrl+Equal { set-window-height "+1%"; }
+  Mod+Alt+Minus { set-window-height "-10%"; }
+  Mod+Alt+Equal { set-window-height "+10%"; }
+  Mod+Shift+Alt+Minus { set-window-height "-1%"; }
+  Mod+Shift+Alt+Equal { set-window-height "+1%"; }
 
   // Move the focused window between the floating and the tiling layout.
   Mod+g           { toggle-window-floating; }                  
@@ -793,9 +726,8 @@ binds {
   // Mod+Space       { switch-layout "next"; }
   // Mod+Shift+Space { switch-layout "prev"; }
 
-  // Mod+Shift+s { spawn-sh "flatpak run be.alexandervanhee.gradia --screenshot=INTERACTIVE"; }
   Mod+Shift+s { screenshot; }
-  Mod+Ctrl+Shift+s { screenshot-screen; }
+  Mod+Alt+s { screenshot-screen; }
   Mod+Ctrl+s { screenshot-window; }
 
   // Applications such as remote-desktop clients and software KVM switches may
@@ -814,25 +746,22 @@ binds {
 
   // Powers off the monitors. To turn them back on, do any input like
   // moving the mouse or pressing any other key.
-  Mod+Shift+Ctrl+P { power-off-monitors; }
+  Mod+Shift+Alt+P { power-off-monitors; }
 
   // Scripts
-  Mod+b { spawn "sh" "-c" "/home/gustavo/.config/rofi/scripts/bluetooth.sh"; }
-  Mod+Alt+b { spawn "sh" "-c" "adw-bluetooth"; }
-  // Mod+Ctrl+b { spawn "sh" "-c" "$HOME/.config/waybar/scripts/toggle-waybar.sh"; }
-  Mod+Ctrl+b { spawn "sh" "-c" "$HOME/.local/bin/toggle-dark-mode.sh"; }
+  Mod+b { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/bluetooth.sh"; }
+  Mod+Ctrl+b { spawn "sh" "-c" "$HOME/.config/waybar/scripts/toggle-waybar.sh"; }
+  Mod+Alt+b { spawn "sh" "-c" "$HOME/.local/bin/toggle-dark-mode.sh"; }
   Mod+Shift+b { spawn "sh" "-c" "$HOME/.config/niri/scripts/toggle-sunset.sh"; }
-  // Mod+Ctrl+W { spawn "sh" "-c" "$HOME/.local/bin/start_swaybg.lua"; }
-  Mod+Ctrl+W { spawn "sh" "-c" "$HOME/.config/niri/scripts/windows.sh"; }
-  Mod+n { spawn "sh" "-c" "nmgui"; }
-  Mod+Ctrl+v { spawn "sh" "-c" "$HOME/.config/rofi/scripts/output.sh"; }
+  Mod+Alt+W { spawn "sh" "-c" "$HOME/.local/bin/start_swaybg.lua"; }
+  Mod+n { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/network.lua"; }
+  Mod+Ctrl+v { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/output.sh"; }
   Mod+p { spawn "sh" "-c" "/home/gustavo/.config/niri/scripts/monitors.sh"; }
-  Mod+Ctrl+p { spawn-sh "hyprpicker -a"; }
-  Mod+Ctrl+x { spawn "sh" "-c" "$HOME/.config/rofi/scripts/power.sh"; }
-  Mod+s { spawn "sh" "-c" "$HOME/.config/rofi/scripts/screenshot.sh"; }
+  Mod+Alt+p { spawn-sh "hyprpicker -a"; }
+  Mod+Ctrl+x { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/power.sh"; }
+  Mod+s { spawn "sh" "-c" "$HOME/.config/fuzzel/scripts/screenshot.sh"; }
   Mod+semicolon { spawn "sh" "-c" "rofimoji -a copy"; }
   Mod+z { spawn "sh" "-c" "pkill -SIGUSR1 wayscriber"; }
-  Mod+Shift+z { spawn "sh" "-c" "pkill -SIGUSR1 wayscriber --freeze"; }
 
   // Notification
   Mod+Shift+n { spawn "sh" "-c" "makoctl dismiss -a"; }
@@ -865,10 +794,3 @@ recent-windows {
     Alt+Shift+escape { previous-window scope="workspace"; }
   }
 }
-
-cursor {
-    xcursor-theme "Frieren-Winter"
-    xcursor-size 26
-}
-
-include "dms/cursor.kdl"

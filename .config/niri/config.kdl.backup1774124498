@@ -64,6 +64,7 @@ input {
 
    // Enable numlock on startup, omitting this setting disables it.
     numlock
+
   }
 
   // workspace-auto-back-and-forth
@@ -152,34 +153,6 @@ output "eDP-1" {
   // position x=0 y=1080
 }
 
-// output "HDMI-A-2" {
-//   // Uncomment this line to disable this output.
-//   // off
-//   // Resolution and, optionally, refresh rate of the output.
-//   // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
-//   // If the refresh rate is omitted, niri will pick the highest refresh rate
-//   // for the resolution.
-//   // If the mode is omitted altogether or is invalid, niri will pick one automatically.
-//   // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-//   mode "1920x1080@179.961"
-//   // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-//   scale 1.0
-//   // Transform allows to rotate the output counter-clockwise, valid values are:
-//   // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-//   transform "normal"
-//   // Position of the output in the global coordinate space.
-//   // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
-//   // The cursor can only move between directly adjacent outputs.
-//   // Output scale and rotation has to be taken into account for positioning:
-//   // outputs are sized in logical, or scaled, pixels.
-//   // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
-//   // so to put another output directly adjacent to it on the right, set its x to 1920.
-//   // If the position is unset or results in an overlap, the output is instead placed
-//   // automatically.
-//   position x=1920 y=0
-//   focus-at-startup
-// }
-
 output "HDMI-A-2" {
   // Uncomment this line to disable this output.
   // off
@@ -189,10 +162,8 @@ output "HDMI-A-2" {
   // for the resolution.
   // If the mode is omitted altogether or is invalid, niri will pick one automatically.
   // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-  // mode "3840x2160@60.000"
-  mode "1920x1080@60.00"
+  mode "1920x1080@179.961"
   // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-  // scale 2.0
   scale 1.0
   // Transform allows to rotate the output counter-clockwise, valid values are:
   // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -390,12 +361,12 @@ layout {
 // Start
 spawn-at-startup "sh" "-c" "systemctl --user start gnome-keyring-daemon.service"
 // spawn-at-startup "sh" "-c" "sleep 1 && waybar -c ~/.config/niri/waybar/config.jsonc  -s ~/.config/niri/waybar/style.css"
-// spawn-at-startup "sh" "-c" "sleep 1 && swaybg -i ~/Pictures/Wallpapers/The-Path-of-Giants.png"
-// spawn-at-startup "sh" "-c" "sleep 1 && ~/.local/bin/start_swaybg.lua"
-// spawn-at-startup "sh" "-c" "waybar"
+spawn-at-startup "sh" "-c" "sleep 1 && swaybg -i ~/Pictures/Wallpapers/my/The-Path-of-Giants.png"
 // spawn-at-startup "sh" "-c" "sleep 1 && ~/.config/waybar/scripts/toggle-waybar.sh"
-// spawn-at-startup "sh" "-c" "wayscriber -d"
-// spawn-at-startup "sh" "-c" "mako"
+// spawn-at-startup "sh" "-c" "sleep 1 && ~/.local/bin/start_swaybg.lua"
+spawn-at-startup "sh" "-c" "mako"
+spawn-at-startup "sh" "-c" "waybar"
+spawn-at-startup "sh" "-c" "wayscriber -d"
 // spawn-at-startup "sh" "-c" "dms run"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -439,19 +410,17 @@ window-rule {
   // since this is the default config, and we want no false positives.
   // You can get away with just app-id="wezterm" if you want.
   match app-id=r#"^org\.wezfurlong\.wezterm$"#
-  match app-id=r#"^app\.zen_browser\.zen$"#
-  default-column-width { proportion 1.0; }
+  default-column-width {}
 }
 
-// // Open the Firefox picture-in-picture player as floating by default.
-// window-rule {
-//   // This app-id regular expression will work for both:
-//   // - host Firefox (app-id is "firefox")
-//   // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-//   // match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-//   match title="^Picture-in-Picture$"
-//   open-floating true
-// }
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+  // This app-id regular expression will work for both:
+  // - host Firefox (app-id is "firefox")
+  // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+  open-floating true
+}
 
 // Open the picture-in-picture player as floating by default.
 window-rule {
@@ -537,14 +506,10 @@ binds {
 
   Mod+D { spawn-sh "rofi -show run"; }
   Mod+Slash { spawn-sh "rofi -show drun"; }
-  Alt+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
   // Mod+Slash { spawn-sh "fuzzel"; }
   //Alt+Space { spawn-sh "fuzzel"; }
 
-  // Super+Escape hotkey-overlay-title="Lock the Screen And Suspend" { spawn-sh "$HOME/.config/niri/scripts/lock.sh"; }
-  Super+Ctrl+Escape hotkey-overlay-title="Lock the Screen" { spawn-sh "hyprlock"; }
-  Super+Escape hotkey-overlay-title="Lock the Screen" { spawn-sh "hyprlock"; }
-  // Super+Escape hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "dms ipc call lock lock"; }
+  Super+Escape hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "dms ipc call lock lock"; }
 
   // You can also use a shell. Do this if you need pipes, multiple commands, etc.
   // Note: the entire command goes as a single argument in the end.
@@ -559,30 +524,16 @@ binds {
   XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
   XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-  Mod+F12 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-  Mod+F11 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-  Mod+Shift+F12 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.01+"; }
-  Mod+Shift+F11 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.01-"; }
-  // XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-  // XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-  Super+F8 allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-  Super+F9 allow-when-locked=true { spawn-sh "playerctl next"; }
-  Super+F7 allow-when-locked=true { spawn-sh "playerctl previous"; }
-
   XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "10%+"; }
   XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
   Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "1%+"; }
   Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "1%-"; }
 
-  Mod+F1 allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
-  Mod+F2   allow-when-locked=true { spawn "brightnessctl" "set" "10%+"; }
-  Shift+F1   allow-when-locked=true { spawn "brightnessctl" "set" "1%+"; }
-  Shift+F2 allow-when-locked=true { spawn "brightnessctl" "set" "1%-"; }
-
-  // Super+XF86MonBrightnessUp   allow-when-locked=true { spawn "ddc-brightness.sh" "+10"; }
-  // Super+XF86MonBrightnessDown allow-when-locked=true { spawn "ddc-brightness.sh" "-10"; }
-  // Super+Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "ddc-brightness.sh" "+1"; }
-  // Super+Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "ddc-brightness.sh" "-1"; }
+  Super+XF86MonBrightnessUp   allow-when-locked=true { spawn "ddc-brightness.sh" "+10"; }
+  Super+XF86MonBrightnessDown allow-when-locked=true { spawn "ddc-brightness.sh" "-10"; }
+  Super+Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "ddc-brightness.sh" "+1"; }
+  Super+Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "ddc-brightness.sh" "-1"; }
+  Super+Ctrl+Return allow-when-locked=true { spawn-sh "playerctl play-pause"; }
 
   // Open/close the Overview: a zoomed-out view of workspaces and windows.
   // You can also move the mouse into the top-left hot corner,
@@ -790,7 +741,7 @@ binds {
   // a matching layout switch hotkey configured in xkb options above.
   // Having both at once on the same hotkey will break the switching,
   // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-  // Mod+Space       { switch-layout "next"; }
+  Mod+Space       { switch-layout "next"; }
   // Mod+Shift+Space { switch-layout "prev"; }
 
   // Mod+Shift+s { spawn-sh "flatpak run be.alexandervanhee.gradia --screenshot=INTERACTIVE"; }
@@ -817,13 +768,12 @@ binds {
   Mod+Shift+Ctrl+P { power-off-monitors; }
 
   // Scripts
-  Mod+b { spawn "sh" "-c" "/home/gustavo/.config/rofi/scripts/bluetooth.sh"; }
-  Mod+Alt+b { spawn "sh" "-c" "adw-bluetooth"; }
+  Mod+b { spawn "sh" "-c" "adw-bluetooth"; }
   // Mod+Ctrl+b { spawn "sh" "-c" "$HOME/.config/waybar/scripts/toggle-waybar.sh"; }
   Mod+Ctrl+b { spawn "sh" "-c" "$HOME/.local/bin/toggle-dark-mode.sh"; }
   Mod+Shift+b { spawn "sh" "-c" "$HOME/.config/niri/scripts/toggle-sunset.sh"; }
-  // Mod+Ctrl+W { spawn "sh" "-c" "$HOME/.local/bin/start_swaybg.lua"; }
-  Mod+Ctrl+W { spawn "sh" "-c" "$HOME/.config/niri/scripts/windows.sh"; }
+  Mod+Ctrl+W { spawn "sh" "-c" "$HOME/.local/bin/start_swaybg.lua"; }
+  Mod+Shift+W { spawn "sh" "-c" "$HOME/.config/niri/scripts/windows.lua"; }
   Mod+n { spawn "sh" "-c" "nmgui"; }
   Mod+Ctrl+v { spawn "sh" "-c" "$HOME/.config/rofi/scripts/output.sh"; }
   Mod+p { spawn "sh" "-c" "/home/gustavo/.config/niri/scripts/monitors.sh"; }
@@ -832,7 +782,6 @@ binds {
   Mod+s { spawn "sh" "-c" "$HOME/.config/rofi/scripts/screenshot.sh"; }
   Mod+semicolon { spawn "sh" "-c" "rofimoji -a copy"; }
   Mod+z { spawn "sh" "-c" "pkill -SIGUSR1 wayscriber"; }
-  Mod+Shift+z { spawn "sh" "-c" "pkill -SIGUSR1 wayscriber --freeze"; }
 
   // Notification
   Mod+Shift+n { spawn "sh" "-c" "makoctl dismiss -a"; }
@@ -866,9 +815,4 @@ recent-windows {
   }
 }
 
-cursor {
-    xcursor-theme "Frieren-Winter"
-    xcursor-size 26
-}
 
-include "dms/cursor.kdl"
