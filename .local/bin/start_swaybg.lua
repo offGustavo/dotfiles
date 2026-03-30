@@ -27,7 +27,7 @@ local wallpapers = {
 		},
 		{
 			name = "The Path of Giants",
-			path = "/home/gustavo/Pictures/Wallpapers/my/The-Path-of-Giants.png",
+			path = "/home/gustavo/Pictures/Wallpapers/The-Path-of-Giants.png",
 		},
 	},
 }
@@ -39,6 +39,7 @@ local function kill_swaybg_if_running()
 	handle:close()
 
 	if result and result ~= "" then
+    -- TODO: Use kill here, pgrep so find swaybg PID
 		os.execute("killall swaybg 2>/dev/null")
 		-- Esperar um pouco para garantir que o processo terminou
 		os.execute("sleep 0.1")
