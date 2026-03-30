@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 chosen=$(echo -e "Ativar Externo Esquerda\nAtivar Externo Acima\nDesativar Externo\nAtivar Interno\nDesativar Interno\nEspelhar" | fuzzel -d -p "Monitors:")
 
 case "$chosen" in
