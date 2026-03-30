@@ -1,13 +1,10 @@
-@import "./colors.css";
-
 * {
   border: none;
-  font-size: 10px;
-  font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
+  font-size: 12px;
+  font-family: "JetBrainsMono Nerd Font Propo" ;
   color: @fg;
   /* background-color: transparent; */
   padding: 0;
-  font-size: 12px;
 }
 
 window#waybar {
@@ -122,10 +119,10 @@ window#waybar {
   padding: 0 5px;
 }
 
-#custom-weather,
-#pulseaudio {
-  padding-top: 4px;
-}
+/* #custom-weather, */
+/* #pulseaudio { */
+/*   padding-top: 4px; */
+/* } */
 
 #pulseaudio.muted {
   color: @red ;

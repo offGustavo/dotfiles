@@ -165,10 +165,10 @@
     }
   },
 	"tray": {
-		"icon-size": 16,
+		// "icon-size": 16,
 		"show-passive-items": true,
 		// "smooth-scrolling-threshold":
-		"spacing": 12,
+		// "spacing": 12,
 		// "reverse-direction":
 		// "on-update":
 		// "expand":
@@ -321,7 +321,7 @@
     "on-click": "waybar-hotspot -a toggle",
   },
   "network": {
-    "format-wifi": "  {essid}",
+    "format-wifi": " {essid}",
     "format-ethernet": "󰈀",
     "format-disconnected": "󱐅",
     "tooltip-format": "{ipaddr}",
