@@ -1,9 +1,9 @@
-if true then return {} end
+-- if true then return {} end
 return {
     "OXY2DEV/markview.nvim",
     -- For some reason we should't lazy loaded this.
-    lazy = true,
-    ft = { "Markdown", "md" },
+    lazy = false,
+    -- ft = { "Markdown", "md" },
     -- Completion for `blink.cmp`
     -- dependencies = { "saghen/blink.cmp" },
     opts = {

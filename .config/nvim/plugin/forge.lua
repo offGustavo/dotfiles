@@ -1,13 +1,12 @@
 -- require("fish.easymode")
 require("fish.espeto").setup()
-require("fish.vidir")
 
-vim.keymap.set("n", "<leader>v", function()
-  require("vidir").open()
-end)
+-- vim.keymap.set("n", "<leader>v", function()
+--   require("fish.vidir").open()
+-- end)
 -- require("fish.statusline")
 -- require("fish.tabline")
-require("fish.compile").setup()
+-- require("fish.compile").setup()
 -- require("fish.commands")
 -- require("fish.yazi").setup({
 --   enable_cmds = true,
@@ -67,7 +66,7 @@ end, { desc = "TabTerm Rename" })
 vim.keymap.set({ "n", "i", "x", "t" }, "<A-/>", function()
     TabTerm.toggle()
 end, { desc = "TabTerm Toggle" })
-for i = 1, 10, 1 do
+for i = 1, 9, 1 do
     vim.keymap.set({ "n", "i", "x", "t" }, "<A-" .. i .. ">", function()
         TabTerm.go(i)
     end, { desc = "TabTerm Toggle" })

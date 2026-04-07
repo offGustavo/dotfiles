@@ -11,6 +11,8 @@ vim.keymap.set("n", "<leader>qQ", ":qa!<Cr>", { desc = "Force Quit All", silent 
 vim.keymap.set("n", "<leader>qr", vim.cmd.restart, { desc = "Restart", silent = true })
 
 vim.keymap.set("n", "<leader>fC", ":e $MYVIMRC<Cr>", { silent = true, desc = "Edit the Init.lua file" })
+vim.keymap.set("n", "<leader>fD", ":e $MYVIMDIR<Cr>", { silent = true, desc = "Edit the Init.lua file" })
+vim.keymap.set("n", "<leader>fn", ":enew<Cr>", { silent = true, desc = "Edit the Init.lua file" })
 
 vim.keymap.set("n", "<leader>bb", ":b #<Cr>", { desc = "Alternative Buffer" })
 vim.keymap.set("n", "<M-a>", ":b #<Cr>", { desc = "Alternative Buffer" })
@@ -28,6 +30,9 @@ vim.keymap.set("x", "sg", [[:s//gI<Left><Left><Left>]], { desc = "Substitute Glo
 vim.cmd([[
    nmap <C-BS> <C-w>
 ]])
+
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "U", require("undotree").open)
 
 vim.keymap.set("n", "<m-t>", ":t.<cr>")
 vim.keymap.set("x", "<C-j>", ":m '>+1<CR>gv=gv")
@@ -137,6 +142,7 @@ vim.keymap.set("t", "<S-Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Nor
 -- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true })
 vim.keymap.set("n", "<leader>tn", ":term ")
 vim.keymap.set('n', '<leader>th', ':hor term ')
+vim.keymap.set('n', '<M-c>', ':hor term ')
 vim.keymap.set('n', '<leader>tv', ':vert term ')
 vim.keymap.set('n', '<leader>tg', ':hor term rg')
 
@@ -242,7 +248,7 @@ vim.cmd([[
 ---------------
 -- OBSIDIAN ---
 ---------------
-vim.keymap.set("n", "<leader>od", function()
+vim.keymap.set("n", "<leader>ad", function()
 	local current_date = os.date("%Y-%m-%d")
 	local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
 	vim.cmd("e " .. daily_note_date)
@@ -253,14 +259,14 @@ vim.keymap.set("n", "<leader>gcc", function()
 	local commit_date = "vault backup: " .. current_date_and_time
 	vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
 	print("Commit: " .. commit_date)
-end, { desc = "Commit All Changes" })
+end, { desc = "Commit All Changes From Vault" })
 
-vim.keymap.set("n", "<leader>gp", function()
+vim.keymap.set("n", "<leader>gcp", function()
 	vim.cmd("!git pull")
 	print("Pull Changes")
 end, { desc = "Pull Changes" })
 
-vim.keymap.set("n", "<leader>gP", function()
+vim.keymap.set("n", "<leader>gcP", function()
 	vim.cmd("!git push")
 	print("Push Changes")
 end, { desc = "Push Changes" })

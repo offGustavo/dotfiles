@@ -20,7 +20,6 @@ vim.keymap.set("i", "<C-s>", "<C-o>:w<CR>", { noremap = true, silent = true })
 
 -- Quit
 vim.keymap.set("i", "<C-q>", "<C-o>:q<CR>", { noremap = true, silent = true })
-\|\\\\\\\\p.setup("fish.oi")
 
 --- Cmd Mode
 vim.keymap.set("i", "<C-S-p>", "<C-o>:", { noremap = true, silent = false })

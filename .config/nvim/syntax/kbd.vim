@@ -1,7 +1,7 @@
 " Vim syntax file for Kanata configuration files
 " Language: Kanata
 " Maintainer: Luiz Melo
-" Last Change: (custom)
+" Last Change: 2026-03-31
 
 if exists("b:current_syntax")
   finish

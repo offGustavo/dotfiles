@@ -1,6 +1,0 @@
-vim.keymap.set("c", "<C-a>", "<home>")
-vim.keymap.set("c", "<C-e>", "<end>")
-vim.keymap.set("c", "<C-f>", "<right>")
-vim.keymap.set("c", "<C-b>", "<left>")
-vim.keymap.set("c", "<C-d>", "<del>")
-vim.keymap.set("c", "<C-o>", "<C-f>")
