@@ -1,6 +1,8 @@
 vim.schedule(function()
-    vim.cmd.packadd("flash.nvim")
-    require("flash").setup()
+  vim.pack.add({
+    "https://github.com/folke/flash.nvim",
+  })
+  require("flash").setup()
 
     vim.keymap.set({"n", "x", "o"}, "ss", function()
         require("flash").jump()

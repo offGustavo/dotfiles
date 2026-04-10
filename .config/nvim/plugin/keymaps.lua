@@ -8,7 +8,7 @@ vim.keymap.set("n", "<leader>qc", vim.cmd.cclose, { desc = "QuickFix Close", sil
 
 vim.keymap.set("n", "<leader>qq", vim.cmd.quit, { desc = "Quit", silent = true })
 vim.keymap.set("n", "<leader>qQ", ":qa!<Cr>", { desc = "Force Quit All", silent = true })
-vim.keymap.set("n", "<leader>qr", vim.cmd.restart, { desc = "Restart", silent = true })
+vim.keymap.set("n", "ZR", vim.cmd.restart, { desc = "Restart", silent = true })
 
 vim.keymap.set("n", "<leader>fC", ":e $MYVIMRC<Cr>", { silent = true, desc = "Edit the Init.lua file" })
 vim.keymap.set("n", "<leader>fD", ":e $MYVIMDIR<Cr>", { silent = true, desc = "Edit the Init.lua file" })
@@ -34,7 +34,7 @@ vim.cmd([[
 vim.cmd("packadd nvim.undotree")
 vim.keymap.set("n", "U", require("undotree").open)
 
-vim.keymap.set("n", "<m-t>", ":t.<cr>")
+vim.keymap.set("n", "<M-t>", ":t.<cr>")
 vim.keymap.set("x", "<C-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("x", "<C-k>", ":m '<-2<CR>gv=gv")
 
@@ -142,7 +142,6 @@ vim.keymap.set("t", "<S-Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Nor
 -- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true })
 vim.keymap.set("n", "<leader>tn", ":term ")
 vim.keymap.set('n', '<leader>th', ':hor term ')
-vim.keymap.set('n', '<M-c>', ':hor term ')
 vim.keymap.set('n', '<leader>tv', ':vert term ')
 vim.keymap.set('n', '<leader>tg', ':hor term rg')
 

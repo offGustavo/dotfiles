@@ -1,6 +1,7 @@
-vim.autocmd("UIEnter", {
-	callback = function()
-		vim.cmd.packadd("oil.nvim")
+
+vim.pack.add({
+  "https://github.com/stevearc/oil.nvim",
+})
 
 		vim.keymap.set("n", "<leader>fd", "<Cmd>Oil<Cr>", { desc = "Open current dir" })
 		vim.keymap.set("n", "<M-e>", "<Cmd>Oil<Cr>", { desc = "Open current dir" })
@@ -234,5 +235,3 @@ vim.autocmd("UIEnter", {
 				border = "rounded",
 			},
 		})
-	end,
-})

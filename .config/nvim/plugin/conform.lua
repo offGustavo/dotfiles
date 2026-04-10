@@ -1,13 +1,15 @@
 vim.schedule(function()
-  vim.cmd.packadd("conform.nvim")
+  vim.pack.add({
+    "https://github.com/stevearc/conform.nvim",
+  })
   vim.keymap.set("n",   -- Customize or remove this keymap to your liking
-    "<leader>cf", function()
-      require("conform").format({
-        async = true
-      })
-    end, {
-      desc = "Format buffer"
+  "<leader>cf", function()
+    require("conform").format({
+      async = true
     })
+  end, {
+  desc = "Format buffer"
+})
 
   require("conform").setup({
     -- Define your formatters

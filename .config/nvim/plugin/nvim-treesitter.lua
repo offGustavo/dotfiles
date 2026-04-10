@@ -1,6 +1,8 @@
 -- REF: https://www.reddit.com/r/NixOS/comments/1raqini/i_built_a_vs_code_extension_that_brings_syntax/
 vim.schedule(function()
-	vim.cmd.packadd("nvim-treesitter")
+  vim.pack.add({
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+  })
 
 	-- build = ":TSUpdate",
 	local ts = require("nvim-treesitter")

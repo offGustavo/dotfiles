@@ -1,12 +1,10 @@
-if true then return {} end
-return {
-	"stevearc/quicker.nvim",
-	ft = "qf",
-	lazy = true,
-	-- enabled = false,
-	---@module "quicker"
-	---@type quicker.SetupOptions
-	opts = {
+vim.schedule(function()
+
+	vim.pack.add({
+		"https://github.com/stevearc/quicker.nvim",
+	})
+
+	require("quicker").setup({
 		-- Local options to set for quickfix
 		opts = {
 			buflisted = false,
@@ -66,14 +64,14 @@ return {
 			soft_end = " ",
 		},
 		-- How to trim the leading whitespace from results. Can be 'all', 'common', or false
-		trim_leading_whitespace = "common",
+		trim_leading_whitespace = "all",
 		-- Maximum width of the filename column
 		max_filename_width = function()
-			return math.floor(math.min(95, vim.o.columns / 2))
+			return math.floor(math.min(50, vim.o.columns / 2))
 		end,
 		-- How far the header should extend to the right
 		header_length = function(type, start_col)
 			return vim.o.columns - start_col
 		end,
-	},
-}
+	})
+end)

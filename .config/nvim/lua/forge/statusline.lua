@@ -1,5 +1,6 @@
 Fish.statusline = {}
 
+
 local function render_icon_with_mode_color(icon)
 	return icon
 end

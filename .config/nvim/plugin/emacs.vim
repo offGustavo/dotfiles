@@ -6,3 +6,6 @@ cmap <M-f> <C-right>
 cmap <M-b> <C-left>
 cmap <C-d> <del>
 cmap <C-o> <C-f>
+
+" Emacs shit
+nmap <M-x> :

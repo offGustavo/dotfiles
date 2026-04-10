@@ -1,5 +1,7 @@
 vim.schedule(function()
-  vim.cmd.packadd("multiple-cursors.nvim")
+  vim.pack.add({
+    "https://github.com/brenton-leighton/multiple-cursors.nvim",
+  })
   require("multiple-cursors").setup({
     pre_hook = function()
       require('vim._core.ui2').enable({

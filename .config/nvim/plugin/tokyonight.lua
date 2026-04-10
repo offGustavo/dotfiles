@@ -1,4 +1,6 @@
-vim.cmd.packadd("tokyonight.nvim")
+vim.pack.add({
+	"https://github.com/folke/tokyonight.nvim",
+})
 
 require("tokyonight").setup({
   dim_inactive = false,
