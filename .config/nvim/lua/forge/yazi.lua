@@ -284,7 +284,7 @@ function M.setup(user_opts)
 
     if opts.enable_cmds then
         vim.cmd('command! Yazi lua require("forge.yazi").open()')
-        vim.keymap.set("n", "<M-_>", ":Yazi<CR>")
+        vim.keymap.set("n", "<M-S-y>", ":Yazi<CR>")
         -- vim.keymap.set("n", "-", function()
         --     require("forge.yazi").open(vim.fn.expand("%:h"), nil)
         -- end, { desc = "Open Yazi File Manager" })

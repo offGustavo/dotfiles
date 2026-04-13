@@ -33,6 +33,10 @@
       "rev": "306a05526ada86a7b30af95c5cc81ffba93fef97",
       "src": "https://github.com/folke/lazy.nvim.git"
     },
+    "lazygit.nvim": {
+      "rev": "a04ad0dbc725134edbee3a5eea29290976695357",
+      "src": "https://github.com/kdheepak/lazygit.nvim"
+    },
     "markview.nvim": {
       "rev": "1861f959599ae03cfd59f56222a542035b0cd947",
       "src": "https://github.com/OXY2DEV/markview.nvim"
@@ -64,6 +68,10 @@
     "nvim-lspconfig": {
       "rev": "c588db330592fa477a70d2fee6ba20a57194bdc3",
       "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-sessionizer": {
+      "rev": "e9bd58c1cd0982827254230d75f4cba19d21b5c2",
+      "src": "https://github.com/offGustavo/nvim-sessionizer"
     },
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",

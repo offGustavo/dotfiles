@@ -131,14 +131,14 @@ vim.schedule(function()
 		},
 	})
 
-	local ui_select_orig = vim.ui.select
+	-- local ui_select_orig = vim.ui.select
 	require("mini.pick").setup()
-	vim.ui.select = ui_select_orig
+	-- vim.ui.select = ui_select_orig
 	require("mini.extra").setup()
 
-	require("mini.snippets").setup()
-	require("mini.completion").setup()
-	require("mini.cmdline").setup()
+	-- require("mini.snippets").setup()
+	-- require("mini.completion").setup()
+	-- require("mini.cmdline").setup()
 
 	-- require("mini.files").setup()
 	-- vim.keymap.set("n", "<leader>fe", function ()

@@ -1,6 +1,5 @@
 Fish.statusline = {}
 
-
 local function render_icon_with_mode_color(icon)
 	return icon
 end
@@ -19,14 +18,13 @@ local function gitInfo()
 end
 
 local function show_macro_recording()
-  local recording_register = vim.fn.reg_recording()
-  if recording_register == "" then
-    return ""
-  else
-    return "@" .. recording_register .. " "
-  end
+	local recording_register = vim.fn.reg_recording()
+	if recording_register == "" then
+		return ""
+	else
+		return "@" .. recording_register .. " "
+	end
 end
-
 
 function Fish.buildStatusLine()
 	return render_icon_with_mode_color("▊ ")
@@ -34,7 +32,7 @@ function Fish.buildStatusLine()
 		.. fileName()
 		.. "%l:%c %L:%p%% "
 		.. "%="
-    .. show_macro_recording()
+		.. show_macro_recording()
 		.. gitInfo()
 		.. " %r "
 		.. "%y "

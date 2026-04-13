@@ -61,9 +61,7 @@ end
 if not Fish.imgclip_loaded then
 	-- print("imgclip_loaded")
 	Fish.imgclip_loaded = true
-	vim.pack.add({
-		"https://github.com/HakonHarnes/img-clip.nvim",
-	})
+	vim.pack.add({ "https://github.com/HakonHarnes/img-clip.nvim" })
 	require("img-clip").setup({
 		-- add options here
 		-- or leave it empty to use the default settings

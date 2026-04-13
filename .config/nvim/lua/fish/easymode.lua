@@ -1,17 +1,16 @@
 -- https://github.com/codebam/easymode.nvim/blob/main/plugin/easymode.lua
 -- easymode.nvim/plugin/easymode.lua
 
--- Enforce permanent insert mode
-vim.api.nvim_create_autocmd("VimEnter", {
-    pattern = "*",
-    command = "startinsert",
-})
-
-vim.api.nvim_create_autocmd("InsertLeave", {
-    pattern = "*",
-    command = "startinsert",
-})
-
+-- -- Enforce permanent insert mode
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--     pattern = "*",
+--     command = "startinsert",
+-- })
+-- vim.api.nvim_create_autocmd("InsertLeave", {
+--     pattern = "*",
+--     command = "startinsert",
+-- })
+--
 -- Key mappings for a more familiar experience.
 -- We use <C-o> to execute a single normal-mode command without leaving insert mode.
 
@@ -44,5 +43,16 @@ vim.keymap.set("i", "<C-g>", "<C-o>n", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-S-g>", "<C-o>N", { noremap = true, silent = true })
 
 vim.o.keymodel = "startsel,stopsel"
+
+vim.keymap.set("i", "<C-Up>",   "<C-o>{", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-Down>", "<C-o>}", { noremap = true, silent = true })
+
+vim.keymap.set("i", "<C-d>", "<Cmd>MultipleCursorsAddMatches<Cr>")
+vim.keymap.set("i", "<M-Down>", "<Cmd>MultipleCursorsAddDown<Cr>")
+vim.keymap.set("i", "<M-Up>", "<Cmd>MultipleCursorsAddUp<Cr>")
+-- vim.keymap.set("n", "<C-.>", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>")
+-- vim.keymap.set("n", "<C-,>", "<Cmd>MultipleCursorsAddJumpPrevMatch<CR>")
+-- vim.keymap.set("n", "<C-p>", "<Cmd>MultipleCursorsJumpPrevMatch<Cr>")
+-- vim.keymap.set("n", "<C-n>", "<Cmd>MultipleCursorsJumpNextMatch<Cr>")
 
 print("easymode.nvim loaded!")

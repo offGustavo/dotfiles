@@ -1,5 +1,8 @@
 -- vim: foldmethod=marker
 
+vim.keymap.set("n", "<C-Down>", "}", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-Up>",   "{", { noremap = true, silent = true })
+
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 
@@ -34,7 +37,7 @@ vim.cmd([[
 vim.cmd("packadd nvim.undotree")
 vim.keymap.set("n", "U", require("undotree").open)
 
-vim.keymap.set("n", "<M-t>", ":t.<cr>")
+vim.keymap.set("n", "<M-d>", ":t.<cr>")
 vim.keymap.set("x", "<C-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("x", "<C-k>", ":m '<-2<CR>gv=gv")
 
@@ -118,6 +121,15 @@ end)
 vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-k>", function()
 	vim.cmd.wincmd("W")
 end)
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-s>", function()
+	vim.cmd.wincmd("s")
+end)
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-v>", function()
+	vim.cmd.wincmd("v")
+end)
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-o>", function()
+	vim.cmd.wincmd("o")
+end)
 vim.keymap.set("n", "<M-=>", function()
 	vim.cmd.wincmd("=")
 end, { desc = "Windows" })
@@ -133,6 +145,7 @@ end, { desc = "Windows" })
 vim.keymap.set("n", "<M-S-.>", function()
 	vim.cmd.wincmd(">")
 end, { desc = "Windows" })
+
 --- }}}
 
 --{{{ -- Terminal
@@ -140,10 +153,11 @@ vim.keymap.set({ "i", "c", "n", "v", "x" }, "<C-c>", "<Esc>", { desc = "Fix <C-c
 vim.keymap.set("t", "<M-;>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true })
 vim.keymap.set("t", "<S-Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true })
 -- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true })
+vim.keymap.set("n", "<M-t>", ":term ")
 vim.keymap.set("n", "<leader>tn", ":term ")
 vim.keymap.set('n', '<leader>th', ':hor term ')
 vim.keymap.set('n', '<leader>tv', ':vert term ')
-vim.keymap.set('n', '<leader>tg', ':hor term rg')
+vim.keymap.set('n', '<leader>tg', ':hor term rg ')
 
 -- Copy Entire Buffer
 vim.keymap.set("n", "gA", "<Cmd>%y +<Cr>", { silent = true, desc = "Yank entire file to System" })

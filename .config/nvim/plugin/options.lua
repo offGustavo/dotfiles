@@ -1,4 +1,4 @@
--- vim.g.netrw_banner = 
+-- vim.g.netrw_banner =
 vim.o.number = true
 vim.o.relativenumber = true
 -- vim.o.laststatus = 3
@@ -7,8 +7,8 @@ vim.o.linebreak = true
 vim.o.undofile = true
 -- vim.o.ignorecase = true
 -- vim.o.smartcase = true
-vim.o.signcolumn = "yes:1"
-vim.o.foldcolumn = "auto"
+-- vim.o.signcolumn = "yes:2"
+-- vim.o.foldcolumn = "1"
 vim.o.updatetime = 100
 vim.o.timeoutlen = 400
 vim.o.splitright = true
@@ -31,14 +31,14 @@ vim.o.swapfile = false
 -- ]])
 vim.o.termguicolors = true
 if vim.uv.os_uname().sysname == "Windows_NT" then
-  vim.o.shell = "pwsh.exe"
-  vim.o.shellcmdflag =
-    "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+	vim.o.shell = "pwsh.exe"
+	vim.o.shellcmdflag =
+		"-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
 end
 
 -- Mini Max
-vim.o.iskeyword = '@,48-57,192-255,-' -- _ works like an separate word
-vim.o.shortmess      = 'ICFOSWaco' -- Disable some built-in completion messages
+vim.o.iskeyword = "@,48-57,192-255,-" -- _ works like an separate word
+vim.o.shortmess = "ICFOSWaco" -- Disable some built-in completion messages
 vim.o.virtualedit = "block" -- Allow going past end of line in blockwise mode
 
 -- vim.o.cursorlineopt  = 'screenline,number' -- Show cursor line per screen line
@@ -49,38 +49,37 @@ vim.o.fillchars = "eob:$,fold:-"
 -- vim.o.listchars = "extends:…,nbsp:␣,precedes:…,tab:	,eol:$"
 
 vim.api.nvim_create_autocmd({ "VimEnter", "VimResume", "UIEnter" }, {
-  group = vim.api.nvim_create_augroup("KittySetVarVimEnter", { clear = true }),
-  callback = function()
-    if vim.api.nvim_ui_send then
-      vim.api.nvim_ui_send("\x1b]1337;SetUserVar=in_editor=MQo\007")
-    else
-      io.stdout:write("\x1b]1337;SetUserVar=in_editor=MQo\007")
-    end
-  end,
+	group = vim.api.nvim_create_augroup("KittySetVarVimEnter", { clear = true }),
+	callback = function()
+		if vim.api.nvim_ui_send then
+			vim.api.nvim_ui_send("\x1b]1337;SetUserVar=in_editor=MQo\007")
+		else
+			io.stdout:write("\x1b]1337;SetUserVar=in_editor=MQo\007")
+		end
+	end,
 })
 
 vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
-  group = vim.api.nvim_create_augroup("KittyUnsetVarVimLeave", { clear = true }),
-  callback = function()
-    if vim.api.nvim_ui_send then
-      vim.api.nvim_ui_send("\x1b]1337;SetUserVar=in_editor=MQo\007")
-    else
-      io.stdout:write("\x1b]1337;SetUserVar=in_editor\007")
-    end
-  end,
+	group = vim.api.nvim_create_augroup("KittyUnsetVarVimLeave", { clear = true }),
+	callback = function()
+		if vim.api.nvim_ui_send then
+			vim.api.nvim_ui_send("\x1b]1337;SetUserVar=in_editor=MQo\007")
+		else
+			io.stdout:write("\x1b]1337;SetUserVar=in_editor\007")
+		end
+	end,
 })
 vim.schedule(function()
+	-- TODO: clipboard keymaps, this should be in keymaps file
+	vim.keymap.set({ "n" }, "<leader>p", '"+p', { desc = "Paste from System" })
+	vim.keymap.set("x", "<leader>p", '"_dP') -- Paste without overwriting the default register
+	vim.keymap.set({ "n", "x" }, "<C-s-v>", '"+p', { desc = "Paste from System" })
+	vim.keymap.set({ "n", "x" }, "<C-S-c>", '"+y', { desc = "Yank from System" })
+	vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Yank from System" })
+	vim.keymap.set({ "n", "x" }, "<D-c>", '"+y', { desc = "Yank to System" })
+	vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank from System" })
 
-  -- TODO: clipboard keymaps, this should be in keymaps file
-vim.keymap.set({ "n" }, "<leader>p", '"+p', { desc = "Paste from System" })
-vim.keymap.set("x", "<leader>p", '"_dP') -- Paste without overwriting the default register
-vim.keymap.set({ "n", "x" }, "<C-s-v>", '"+p', { desc = "Paste from System" })
-vim.keymap.set({ "n", "x" }, "<C-S-c>", '"+y', { desc = "Yank from System" })
-vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Yank from System" })
-vim.keymap.set({ "n", "x" }, "<D-c>", '"+y', { desc = "Yank to System" })
-vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank from System" })
-
--- vim.o.clipboard = "unnamed,unnamedplus"
+	-- vim.o.clipboard = "unnamed,unnamedplus"
 
 	-- [Neovim native, built-in, LSP autocomplete · Tomas Vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
 	-- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
@@ -92,7 +91,6 @@ vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank from System" })
 	-- vim.cmd([[
 	-- autocmd BufEnter * lcd %:p:h
 	-- ]])
-
 
 	-- Better Grep and Find with ripgrep
 	if vim.fn.executable("rg") then
@@ -109,11 +107,10 @@ vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank from System" })
 
 		vim.o.findfunc = "v:lua.RgFindFiles"
 	end
-
 end)
 
 vim.filetype.add({
-  extension = {
-    kbd = "kbd", -- maps *.kbd → filetype=kbd
-  },
+	extension = {
+		kbd = "kbd", -- maps *.kbd → filetype=kbd
+	},
 })
