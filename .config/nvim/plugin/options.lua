@@ -7,7 +7,7 @@ vim.o.linebreak = true
 vim.o.undofile = true
 -- vim.o.ignorecase = true
 -- vim.o.smartcase = true
--- vim.o.signcolumn = "yes:2"
+vim.o.signcolumn = "yes:2"
 -- vim.o.foldcolumn = "1"
 vim.o.updatetime = 100
 vim.o.timeoutlen = 400
@@ -45,8 +45,7 @@ vim.o.virtualedit = "block" -- Allow going past end of line in blockwise mode
 
 -- Special UI symbols. More is set via 'mini.basics' later.
 -- vim.o.list = true
-vim.o.fillchars = "eob:$,fold:-"
--- vim.o.listchars = "extends:…,nbsp:␣,precedes:…,tab:	,eol:$"
+-- vim.o.fillchars = "eob:$,fold:-"
 
 vim.api.nvim_create_autocmd({ "VimEnter", "VimResume", "UIEnter" }, {
 	group = vim.api.nvim_create_augroup("KittySetVarVimEnter", { clear = true }),
@@ -69,15 +68,8 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
 		end
 	end,
 })
+
 vim.schedule(function()
-	-- TODO: clipboard keymaps, this should be in keymaps file
-	vim.keymap.set({ "n" }, "<leader>p", '"+p', { desc = "Paste from System" })
-	vim.keymap.set("x", "<leader>p", '"_dP') -- Paste without overwriting the default register
-	vim.keymap.set({ "n", "x" }, "<C-s-v>", '"+p', { desc = "Paste from System" })
-	vim.keymap.set({ "n", "x" }, "<C-S-c>", '"+y', { desc = "Yank from System" })
-	vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Yank from System" })
-	vim.keymap.set({ "n", "x" }, "<D-c>", '"+y', { desc = "Yank to System" })
-	vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank from System" })
 
 	-- vim.o.clipboard = "unnamed,unnamedplus"
 
@@ -114,3 +106,5 @@ vim.filetype.add({
 		kbd = "kbd", -- maps *.kbd → filetype=kbd
 	},
 })
+
+vim.o.keymodel = "startsel,stopsel"

@@ -206,14 +206,14 @@ local function apply_highlights(is_day_mode)
 	vim.api.nvim_set_hl(0, "Tag", { fg = colors.blue })
 	vim.api.nvim_set_hl(0, "Delimiter", { fg = colors.fg })
 
-	-- Special comments and TODOs
-	vim.api.nvim_set_hl(0, "SpecialComment", { fg = colors.yellow, bg = colors.yellow_bg, bold = false })
-	if is_day_mode then
-		vim.api.nvim_set_hl(0, "Todo", { fg = colors.yellow, bg = colors.yellow_bg, bold = false })
-	else
-		vim.api.nvim_set_hl(0, "Todo", { fg = colors.fg_dark, bg = colors.yellow, bold = false, italic = true })
-	end
-	vim.api.nvim_set_hl(0, "Debug", { fg = colors.red })
+	-- -- Special comments and TODOs
+	-- vim.api.nvim_set_hl(0, "SpecialComment", { fg = colors.yellow, bg = colors.yellow_bg, bold = false })
+	-- if is_day_mode then
+	-- 	vim.api.nvim_set_hl(0, "Todo", { fg = colors.yellow, bg = colors.yellow_bg, bold = false })
+	-- else
+	-- 	vim.api.nvim_set_hl(0, "Todo", { fg = colors.fg_dark, bg = colors.yellow, bold = false, italic = true })
+	-- end
+	-- vim.api.nvim_set_hl(0, "Debug", { fg = colors.red })
 
 	-- Underlined text
 	vim.api.nvim_set_hl(0, "Underlined", { underline = true })
@@ -253,53 +253,53 @@ local function apply_highlights(is_day_mode)
 	vim.api.nvim_set_hl(0, "WinSeparator", { fg = is_day_mode and colors.gray or colors.fg_dark })
 	vim.api.nvim_set_hl(0, "Title", { fg = is_day_mode and colors.gray or colors.fg_dark })
 
--- 	-- =====================
--- 	-- TREE-SITTER
--- 	-- =====================
---
--- 	-- Keywords
--- 	if is_day_mode then
--- 		vim.api.nvim_set_hl(0, "@keyword", { fg = colors.red, bg = colors.red_bg, italic = true })
--- 	else
--- 		vim.api.nvim_set_hl(0, "@keyword", { fg = colors.magenta, italic = true })
--- 	end
---
--- 	-- Functions
--- 	if is_day_mode then
--- 		vim.api.nvim_set_hl(0, "@function", { fg = colors.magenta, bg = colors.magenta_bg })
--- 		vim.api.nvim_set_hl(0, "@function.call", { fg = colors.magenta, bg = colors.magenta_bg })
--- 	else
--- 		vim.api.nvim_set_hl(0, "@function", { fg = colors.magenta })
--- 		vim.api.nvim_set_hl(0, "@function.call", { fg = colors.magenta })
--- 	end
---
--- 	-- Methods
--- 	if is_day_mode then
--- 		vim.api.nvim_set_hl(0, "@method", { fg = colors.magenta, bg = colors.magenta_bg })
--- 		vim.api.nvim_set_hl(0, "@method.call", { fg = colors.magenta, bg = colors.magenta_bg })
--- 	else
--- 		vim.api.nvim_set_hl(0, "@method", { fg = colors.magenta })
--- 		vim.api.nvim_set_hl(0, "@method.call", { fg = colors.magenta })
--- 	end
---
--- 	-- Variables
--- 	vim.api.nvim_set_hl(0, "@variable", { fg = colors.fg })
--- 	if is_day_mode then
--- 		vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.blue, bg = colors.blue_bg })
--- 	else
--- 		vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.red })
--- 	end
---
--- 	-- Namespaces / modules
--- 	if is_day_mode then
--- 		vim.api.nvim_set_hl(0, "@namespace", { fg = colors.red, bg = colors.red_bg })
--- 	else
--- 		vim.api.nvim_set_hl(0, "@namespace", { fg = colors.magenta })
--- 	end
---
--- 	-- Properties / fields
--- 	vim.api.nvim_set_hl(0, "@field", { fg = colors.fg })
--- 	vim.api.nvim_set_hl(0, "@property", { fg = colors.fg })
+	-- =====================
+	-- TREE-SITTER
+	-- =====================
+
+	-- Keywords
+	if is_day_mode then
+		vim.api.nvim_set_hl(0, "@keyword", { fg = colors.red, bg = colors.red_bg, italic = true })
+	else
+		vim.api.nvim_set_hl(0, "@keyword", { fg = colors.magenta, italic = true })
+	end
+
+	-- Functions
+	if is_day_mode then
+		vim.api.nvim_set_hl(0, "@function", { fg = colors.magenta, bg = colors.magenta_bg })
+		vim.api.nvim_set_hl(0, "@function.call", { fg = colors.magenta, bg = colors.magenta_bg })
+	else
+		vim.api.nvim_set_hl(0, "@function", { fg = colors.magenta })
+		vim.api.nvim_set_hl(0, "@function.call", { fg = colors.magenta })
+	end
+
+	-- Methods
+	if is_day_mode then
+		vim.api.nvim_set_hl(0, "@method", { fg = colors.magenta, bg = colors.magenta_bg })
+		vim.api.nvim_set_hl(0, "@method.call", { fg = colors.magenta, bg = colors.magenta_bg })
+	else
+		vim.api.nvim_set_hl(0, "@method", { fg = colors.magenta })
+		vim.api.nvim_set_hl(0, "@method.call", { fg = colors.magenta })
+	end
+
+	-- Variables
+	vim.api.nvim_set_hl(0, "@variable", { fg = colors.fg })
+	if is_day_mode then
+		vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.blue, bg = colors.blue_bg })
+	else
+		vim.api.nvim_set_hl(0, "@variable.builtin", { fg = colors.red })
+	end
+
+	-- Namespaces / modules
+	if is_day_mode then
+		vim.api.nvim_set_hl(0, "@namespace", { fg = colors.red, bg = colors.red_bg })
+	else
+		vim.api.nvim_set_hl(0, "@namespace", { fg = colors.magenta })
+	end
+
+	-- Properties / fields
+	vim.api.nvim_set_hl(0, "@field", { fg = colors.fg })
+	vim.api.nvim_set_hl(0, "@property", { fg = colors.fg })
 end
 
 Shibuya.setup = function(opts)
@@ -320,17 +320,17 @@ Shibuya.setup = function(opts)
 		end,
 	})
 end
---
--- -- Helper function to toggle between modes
--- Shibuya.toggle_mode = function()
--- 	local new_mode = (vim.o.background == "light") and "night" or "day"
--- 	Shibuya.setup({ mode = new_mode })
--- 	print("Switched to " .. new_mode .. " mode")
--- end
+
+-- Helper function to toggle between modes
+Shibuya.toggle_mode = function()
+	local new_mode = (vim.o.background == "light") and "night" or "day"
+	Shibuya.setup({ mode = new_mode })
+	print("Switched to " .. new_mode .. " mode")
+end
 
 -- Initialize the theme (default to dark mode)
 Shibuya.setup({ mode = "night" })
 
--- vim.keymap.set("n", "<leader>ub", function()
--- 	Shibuya.toggle_mode()
--- end, { desc = "Toggle color theme" })
+vim.keymap.set("n", "<localleader>b", function()
+	Shibuya.toggle_mode()
+end, { desc = "Toggle color theme" })

@@ -3,6 +3,8 @@ if vim.fn.has('nvim-0.12') ~= 1 then
   return
 end
 
+
+vim.o.cmdheight = 0
 require('vim._core.ui2').enable({
   enable = true, -- Whether to enable or disable the UI.
   msg = { -- Options related to the message module.
@@ -13,7 +15,6 @@ require('vim._core.ui2').enable({
     targets = 'msg',
   }
 })
-
 
 -- -- Experimental UI2: floating cmdline and messages
 -- require('vim._core.ui2').enable({

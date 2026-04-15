@@ -1,8 +1,11 @@
 vim.schedule(function()
 	vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
 
-	require("mini.icons").setup({})
-	require("mini.git").setup({})
+	require("mini.icons").setup({
+    -- -- Icon style: 'glyph' or 'ascii'
+    -- style = 'ascii',
+  })
+	-- require("mini.git").setup({})
 	require("mini.diff").setup({
 		-- Options for how hunks are visualized
 		view = {
@@ -131,9 +134,9 @@ vim.schedule(function()
 		},
 	})
 
-	-- local ui_select_orig = vim.ui.select
+	local ui_select_orig = vim.ui.select
 	require("mini.pick").setup()
-	-- vim.ui.select = ui_select_orig
+	vim.ui.select = ui_select_orig
 	require("mini.extra").setup()
 
 	-- require("mini.snippets").setup()
