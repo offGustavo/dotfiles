@@ -59,7 +59,7 @@ input {
       // options "grp:win_space_toggle"
       // options "caps:escape,escape:swapcaps"
       // options "caps:ctrl_modifier,ctrl:swapcaps"
-      options "caps:ctrl_modifier"
+      // options "caps:ctrl_modifier"
     }
 
    // Enable numlock on startup, omitting this setting disables it.
@@ -152,34 +152,6 @@ output "eDP-1" {
   // position x=0 y=1080
 }
 
-// output "HDMI-A-2" {
-//   // Uncomment this line to disable this output.
-//   // off
-//   // Resolution and, optionally, refresh rate of the output.
-//   // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
-//   // If the refresh rate is omitted, niri will pick the highest refresh rate
-//   // for the resolution.
-//   // If the mode is omitted altogether or is invalid, niri will pick one automatically.
-//   // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-//   mode "1920x1080@179.961"
-//   // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-//   scale 1.0
-//   // Transform allows to rotate the output counter-clockwise, valid values are:
-//   // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-//   transform "normal"
-//   // Position of the output in the global coordinate space.
-//   // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
-//   // The cursor can only move between directly adjacent outputs.
-//   // Output scale and rotation has to be taken into account for positioning:
-//   // outputs are sized in logical, or scaled, pixels.
-//   // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
-//   // so to put another output directly adjacent to it on the right, set its x to 1920.
-//   // If the position is unset or results in an overlap, the output is instead placed
-//   // automatically.
-//   position x=1920 y=0
-//   focus-at-startup
-// }
-
 output "HDMI-A-2" {
   // Uncomment this line to disable this output.
   // off
@@ -189,10 +161,8 @@ output "HDMI-A-2" {
   // for the resolution.
   // If the mode is omitted altogether or is invalid, niri will pick one automatically.
   // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-  // mode "3840x2160@60.000"
-  mode "1920x1080@60.00"
+  mode "1920x1080@179.961"
   // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-  // scale 2.0
   scale 1.0
   // Transform allows to rotate the output counter-clockwise, valid values are:
   // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -209,6 +179,36 @@ output "HDMI-A-2" {
   position x=1920 y=0
   focus-at-startup
 }
+
+// output "HDMI-A-2" {
+//   // Uncomment this line to disable this output.
+//   // off
+//   // Resolution and, optionally, refresh rate of the output.
+//   // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
+//   // If the refresh rate is omitted, niri will pick the highest refresh rate
+//   // for the resolution.
+//   // If the mode is omitted altogether or is invalid, niri will pick one automatically.
+//   // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
+//   // mode "3840x2160@60.000"
+//   mode "1920x1080@60.00"
+//   // You can use integer or fractional scale, for example use 1.5 for 150% scale.
+//   // scale 2.0
+//   scale 1.0
+//   // Transform allows to rotate the output counter-clockwise, valid values are:
+//   // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+//   transform "normal"
+//   // Position of the output in the global coordinate space.
+//   // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
+//   // The cursor can only move between directly adjacent outputs.
+//   // Output scale and rotation has to be taken into account for positioning:
+//   // outputs are sized in logical, or scaled, pixels.
+//   // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
+//   // so to put another output directly adjacent to it on the right, set its x to 1920.
+//   // If the position is unset or results in an overlap, the output is instead placed
+//   // automatically.
+//   position x=1920 y=0
+//   focus-at-startup
+// }
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
@@ -390,9 +390,9 @@ layout {
 // Start
 spawn-at-startup "sh" "-c" "systemctl --user start gnome-keyring-daemon.service"
 // spawn-at-startup "sh" "-c" "sleep 1 && waybar -c ~/.config/niri/waybar/config.jsonc  -s ~/.config/niri/waybar/style.css"
-// spawn-at-startup "sh" "-c" "sleep 1 && swaybg -i ~/Pictures/Wallpapers/The-Path-of-Giants.png"
+spawn-at-startup "sh" "-c" "sleep 1 && swaybg -i ~/Pictures/Wallpapers/The-Path-of-Giants.png"
 // spawn-at-startup "sh" "-c" "sleep 1 && ~/.local/bin/start_swaybg.lua"
-// spawn-at-startup "sh" "-c" "waybar"
+spawn-at-startup "sh" "-c" "waybar"
 // spawn-at-startup "sh" "-c" "sleep 1 && ~/.config/waybar/scripts/toggle-waybar.sh"
 // spawn-at-startup "sh" "-c" "wayscriber -d"
 // spawn-at-startup "sh" "-c" "mako"
@@ -506,7 +506,8 @@ overview {
   workspace-shadow {
     off
   }
-  backdrop-color "#1A1B26"
+  backdrop-color "#000000"
+  // backdrop-color "#1A1B26"
 }
 
 binds {
@@ -532,14 +533,12 @@ binds {
   Mod+Shift+Return { spawn-sh "kitten quick-access-terminal"; }
 
   // FIXME: not working
-  // Mod+c { spawn-sh "wl-copy"; }
-  // Mod+v { spawn-sh "wl-paste"; }
+  // Mod+C { spawn-sh "wl-copy"; }
+  // Mod+V { spawn-sh "wl-paste"; }
 
   Mod+D { spawn-sh "rofi -show run"; }
   Mod+Slash { spawn-sh "rofi -show drun"; }
-  Alt+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
-  // Mod+Slash { spawn-sh "fuzzel"; }
-  //Alt+Space { spawn-sh "fuzzel"; }
+  Alt+Space { spawn-sh "rofi -show drun"; }
 
   // Super+Escape hotkey-overlay-title="Lock the Screen And Suspend" { spawn-sh "$HOME/.config/niri/scripts/lock.sh"; }
   Super+Ctrl+Escape hotkey-overlay-title="Lock the Screen" { spawn-sh "hyprlock"; }
@@ -790,11 +789,12 @@ binds {
   // a matching layout switch hotkey configured in xkb options above.
   // Having both at once on the same hotkey will break the switching,
   // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-  // Mod+Space       { switch-layout "next"; }
+  Mod+Space       { switch-layout "next"; }
   // Mod+Shift+Space { switch-layout "prev"; }
 
   // Mod+Shift+s { spawn-sh "flatpak run be.alexandervanhee.gradia --screenshot=INTERACTIVE"; }
   Mod+Shift+s { screenshot; }
+  Print { screenshot; }
   Mod+Ctrl+Shift+s { screenshot-screen; }
   Mod+Ctrl+s { screenshot-window; }
 
@@ -864,11 +864,6 @@ recent-windows {
     Alt+escape       { next-window     scope="workspace"; }
     Alt+Shift+escape { previous-window scope="workspace"; }
   }
-}
-
-cursor {
-    xcursor-theme "Frieren-Winter"
-    xcursor-size 26
 }
 
 include "dms/cursor.kdl"
