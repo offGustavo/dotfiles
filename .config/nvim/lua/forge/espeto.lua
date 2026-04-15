@@ -1,3 +1,66 @@
+-- -- Poor man harpoon
+-- vim.keymap.set('n', '<leader>ha', function()
+--   vim.cmd 'argadd %'
+--   vim.cmd 'argdedup'
+-- end)
+--
+-- vim.keymap.set('n', '<leader>hd', function()
+--   vim.cmd 'argd %'
+-- end)
+--
+-- -- assign arg to each number
+-- for i = 1, 9 do
+--   vim.keymap.set('n', '<leader>' .. i, '<CMD>argu ' .. i .. '<CR>', { silent = true, desc = 'Go to arg ' .. i })
+--   vim.keymap.set('n', '<leader>h' .. i, '<CMD>' .. i - 1 .. 'arga<CR>',
+--     { silent = true, desc = 'Add current to arg ' .. i })
+--   vim.keymap.set('n', '<leader>d' .. i, '<CMD>' .. i .. 'argd<CR>', { silent = true, desc = 'Delete current arg' })
+-- end
+--
+-- -- to qf
+-- vim.keymap.set('n', '<leader>he', function()
+--   local list = vim.fn.argv()
+--   if #list > 0 then
+--     local qf_items = {}
+--     for _, filename in ipairs(list) do
+--       table.insert(qf_items, {
+--         filename = filename,
+--         lnum = 1,
+--         text = filename,
+--       })
+--     end
+--     vim.fn.setqflist(qf_items, 'r')
+--     vim.cmd.copen()
+--   end
+-- end, { silent = true, desc = 'Show args in qf' })
+--
+-- -- Convert quickfix list to argument list
+-- vim.keymap.set('n', '<leader>hq', function()
+--   local qf_list = vim.fn.getqflist()
+--   if #qf_list == 0 then
+--     vim.notify("Quickfix list is empty", vim.log.levels.WARN)
+--     return
+--   end
+--   -- Clear current argument list
+--   vim.cmd '%argdelete'
+--   -- Add each quickfix item to argument list
+--   for _, item in ipairs(qf_list) do
+--     if item.filename and item.filename ~= '' then
+--       -- Use absolute path to avoid issues
+--       local filename = vim.fn.fnamemodify(item.filename, ':p')
+--       vim.cmd('argadd ' .. vim.fn.fnameescape(filename))
+--     elseif item.bufnr and vim.fn.bufexists(item.bufnr) > 0 then
+--       -- If we have a buffer number but no filename, use buffer name
+--       local bufname = vim.fn.bufname(item.bufnr)
+--       if bufname and bufname ~= '' then
+--         local filename = vim.fn.fnamemodify(bufname, ':p')
+--         vim.cmd('argadd ' .. vim.fn.fnameescape(filename))
+--       end
+--     end
+--   end
+--   -- Remove duplicates
+--   vim.cmd 'argdedup'
+--   vim.notify(string.format("Added %d files from quickfix to argument list", #qf_list))
+-- end, { silent = true, desc = 'Quickfix to args' })
 local M = {}
 
 -- vim.schedule(function() vim.nofity("TODO: Fix espeto moving to v:null file") end)
@@ -82,7 +145,7 @@ function M.add(path)
 end
 
 function M.list()
-	local items = {}
+  local items = {}
 	for i = 1, 9 do
 		if marks[i] then
 			table.insert(items, string.format("%d: %s", i, marks[i]))

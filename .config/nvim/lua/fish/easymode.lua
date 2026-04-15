@@ -42,9 +42,8 @@ vim.keymap.set("i", "<C-f>", "<C-o>/", { noremap = true, silent = false })
 vim.keymap.set("i", "<C-g>", "<C-o>n", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-S-g>", "<C-o>N", { noremap = true, silent = true })
 
-vim.o.keymodel = "startsel,stopsel"
 
-vim.keymap.set("i", "<C-Up>",   "<C-o>{", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-Up>", "<C-o>{", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-Down>", "<C-o>}", { noremap = true, silent = true })
 
 vim.keymap.set("i", "<C-d>", "<Cmd>MultipleCursorsAddMatches<Cr>")

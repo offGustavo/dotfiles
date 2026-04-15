@@ -30,7 +30,8 @@ function zoxide_cd
     # end
     #
     # if test $use_fuzzel -eq 1
-    set -l dir (zoxide query -l -s | fuzzel --dmenu | awk "{print \$2}")
+    set -l dir (zoxide query -l -s | rofi -dmenu | awk "{print \$2}")
+bind -a alt-G lazygit
     # else
     # set -l dir (zoxide query -l | fzf)
     # end
@@ -41,9 +42,17 @@ function zoxide_cd
     end
 end
 
-bind -a alt-z zoxide_cd
+bind -a alt-Z zoxide_cd
 
-function y
+bind -a alt-G lazygit
+
+function fzf_nvim
+  nvim (fzf)
+end
+
+bind -a alt-o  fzf_nvim
+
+function yazi_cd
 	set tmp (mktemp -t "yazi-cwd.XXXXXX")
 	command yazi $argv --cwd-file="$tmp"
 	if read -z cwd < "$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
@@ -52,7 +61,7 @@ function y
 	rm -f -- "$tmp"
 end
 
-bind -a alt-y yazi_cd
+bind -a alt-Y yazi_cd
 
 # Nvim
 set -gx EDITOR nvim
@@ -162,3 +171,6 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 fzf --fish | source
 
 alias vim=nvim
+
+# FIXME: arruma essa merda
+# alias start-kanata='tmux has-session -t kanata 2>/dev/null && tmux attach -t kanata || (tmux new-session -s kanata -c "$HOME/.config/kanata" && tmux send-keys -t kanata "sudo kanata -c $HOME/.config/kanata/kanata.kbd" C-m'

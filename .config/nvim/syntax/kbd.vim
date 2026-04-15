@@ -18,6 +18,10 @@ highlight def link kanataComment Comment
 " ============
 syntax match kanataAlias /@[A-Za-z0-9_\-;.,/]\+/ containedin=ALLBUT,kanataComment
 highlight def link kanataAlias Define
+
+" ============
+" Variables (e.g., $value, $something)
+" ============
 syntax match kanataVar /$[A-Za-z0-9_\-;.,/]\+/ containedin=ALLBUT,kanataComment
 highlight def link kanataVar Constant
 

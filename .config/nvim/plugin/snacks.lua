@@ -49,9 +49,9 @@ vim.schedule(function()
 			buffers = { hidden = true, layout = ivy_like },
 			recent = { hidden = true, layout = ivy_like },
 			explorer = {
-				-- layout = {
-				--   preset = "ivy",
-				-- },
+				layout = {
+					preset = "ivy",
+				},
 				hidden = true,
 				follow_file = true,
 				auto_close = true,
@@ -136,7 +136,9 @@ vim.schedule(function()
 			enabled = false,
 			timeout = 3000,
 		},
-		picker = { enabled = true, layout = "ivy_split" },
+    picker = { enabled = false },
+		-- picker = { enabled = true, layout = "ivy_split" },
+		-- picker = picker_config,
 		quickfile = { enabled = true },
 		scope = { enabled = true },
 		scroll = { enabled = false },
@@ -149,9 +151,6 @@ vim.schedule(function()
 			},
 		},
 	})
-
-
-
 
 	-- vim.api.nvim_create_autocmd("User", {
 	-- 	pattern = "VeryLazy",
@@ -172,7 +171,6 @@ vim.schedule(function()
 	-- 		else
 	-- 			vim.print = _G.dd
 	-- 		end
-
 
 	-- Create some toggle mappings
 	Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
@@ -418,7 +416,6 @@ vim.schedule(function()
 	-- vim.keymap.set("n", "<leader>sS", function()
 	-- 	Snacks.picker.lsp_workspace_symbols()
 	-- end, { desc = "LSP Workspace Symbols" })
-
 	-- Other
 	vim.keymap.set("n", "<leader>uz", function()
 		Snacks.zen()
@@ -429,51 +426,48 @@ vim.schedule(function()
 	vim.keymap.set("n", "<leader>.", function()
 		Snacks.scratch()
 	end, { desc = "Toggle Scratch Buffer" })
-	vim.keymap.set("n", "<leader>S", function()
-		Snacks.scratch.select()
-	end, { desc = "Select Scratch Buffer" })
-	vim.keymap.set("n", "<leader>n", function()
-		Snacks.notifier.show_history()
-	end, { desc = "Notification History" })
-	vim.keymap.set("n", "<leader>bd", function()
-		Snacks.bufdelete()
-	end, { desc = "Delete Buffer" })
-	vim.keymap.set("n", "<leader>cR", function()
-		Snacks.rename.rename_file()
-	end, { desc = "Rename File" })
-	vim.keymap.set({ "n", "v" }, "<leader>gB", function()
-		Snacks.gitbrowse()
-	end, { desc = "Git Browse" })
-	-- vim.keymap.set("n",  "<leader>-", function() Snacks.terminal("yazi") end, { desc = "Yazi" })
-	vim.keymap.set("n", "<leader>un", function()
-		Snacks.notifier.hide()
-	end, { desc = "Dismiss All Notifications" })
-	vim.keymap.set({ "n", "t" }, "]]", function()
-		Snacks.words.jump(vim.v.count1)
-	end, { desc = "Next Reference" })
-	vim.keymap.set({ "n", "t" }, "[[", function()
-		Snacks.words.jump(-vim.v.count1)
-	end, { desc = "Prev Reference" })
-	vim.keymap.set("n", "<leader>N", function()
-		Snacks.win({
-			file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-			width = 0.8,
-			height = 0.6,
-			wo = {
-				spell = false,
-				wrap = false,
-				signcolumn = "yes",
-				statuscolumn = " ",
-				conceallevel = 3,
-			},
-		})
-	end, {
-		desc = "Neovim News",
-	})
-
-	vim.keymap.set("n", "<M-S-g>", function()
-		Snacks.lazygit()
-	end, { desc = "Lazgit" })
-
+	-- vim.keymap.set("n", "<leader>S", function()
+	-- 	Snacks.scratch.select()
+	-- end, { desc = "Select Scratch Buffer" })
+	-- vim.keymap.set("n", "<leader>n", function()
+	-- 	Snacks.notifier.show_history()
+	-- end, { desc = "Notification History" })
+	-- vim.keymap.set("n", "<leader>bd", function()
+	-- 	Snacks.bufdelete()
+	-- end, { desc = "Delete Buffer" })
+	-- vim.keymap.set("n", "<leader>cR", function()
+	-- 	Snacks.rename.rename_file()
+	-- end, { desc = "Rename File" })
+	-- vim.keymap.set({ "n", "v" }, "<leader>gB", function()
+	-- 	Snacks.gitbrowse()
+	-- end, { desc = "Git Browse" })
+	-- -- vim.keymap.set("n",  "<leader>-", function() Snacks.terminal("yazi") end, { desc = "Yazi" })
+	-- vim.keymap.set("n", "<leader>un", function()
+	-- 	Snacks.notifier.hide()
+	-- end, { desc = "Dismiss All Notifications" })
+	-- vim.keymap.set({ "n", "t" }, "]]", function()
+	-- 	Snacks.words.jump(vim.v.count1)
+	-- end, { desc = "Next Reference" })
+	-- vim.keymap.set({ "n", "t" }, "[[", function()
+	-- 	Snacks.words.jump(-vim.v.count1)
+	-- end, { desc = "Prev Reference" })
+	-- vim.keymap.set("n", "<leader>N", function()
+	-- 	Snacks.win({
+	-- 		file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+	-- 		width = 0.8,
+	-- 		height = 0.6,
+	-- 		wo = {
+	-- 			spell = false,
+	-- 			wrap = false,
+	-- 			signcolumn = "yes",
+	-- 			statuscolumn = " ",
+	-- 			conceallevel = 3,
+	-- 		},
+	-- 	})
+	-- end, {
+	-- 	desc = "Neovim News",
+	-- })
+	-- vim.keymap.set("n", "<M-S-g>", function()
+	-- 	Snacks.lazygit()
+	-- end, { desc = "Lazgit" })
 end)
-

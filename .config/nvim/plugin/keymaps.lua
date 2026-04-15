@@ -1,7 +1,24 @@
--- vim: foldmethod=marker
+vim.keymap.set("n", "<M-o>", ":fin ")
+vim.keymap.set("n", "<M-e>", ":Ex<Cr>")
+vim.keymap.set("n", "<M-s>", ":grep ")
+vim.keymap.set("n", "<M-b>", ":b ")
+
+vim.keymap.set("n", "<M-y>", '"+p')
+vim.keymap.set("n", "<M-w>", '"+y')
+vim.keymap.set({ "n" }, "<leader>p", '"+p', { desc = "Paste from System" })
+vim.keymap.set("x", "<leader>p", '"_dP') -- Paste without overwriting the default register
+vim.keymap.set({ "n", "x" }, "<C-s-v>", '"+p', { desc = "Paste from System" })
+vim.keymap.set({ "n", "x" }, "<C-S-c>", '"+y', { desc = "Yank from System" })
+vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Yank from System" })
+vim.keymap.set({ "n", "x" }, "<D-c>", '"+y', { desc = "Yank to System" })
+vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank from System" })
 
 vim.keymap.set("n", "<C-Down>", "}", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-Up>",   "{", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-Up>", "{", { noremap = true, silent = true })
+vim.keymap.set("i", "<M->>", "G", { noremap = true, silent = true })
+vim.keymap.set("i", "<M-<>", "<C-o>gg", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<M->>", "G", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<M-<>", "gg", { noremap = true, silent = true })
 
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
@@ -22,7 +39,12 @@ vim.keymap.set("n", "<M-a>", ":b #<Cr>", { desc = "Alternative Buffer" })
 vim.keymap.set("n", "<leader>bd", ":bd<Cr>", { desc = "Delete Buffer" })
 vim.keymap.set("n", "<leader>bD", ":bufdo bd<Cr>", { desc = "Delete All Buffers" })
 
-vim.keymap.set( "n", "s/", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute Current Word Globally" })
+vim.keymap.set(
+	"n",
+	"s/",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	{ desc = "Substitute Current Word Globally" }
+)
 vim.keymap.set("n", "s.", [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute Current Word" })
 vim.keymap.set("n", "sf", ":s/", { desc = "Substitute in Line" })
 vim.keymap.set("n", "sg", ":%s/", { desc = "Substitute in all file" })
@@ -30,9 +52,8 @@ vim.keymap.set("n", "SG", ":%s/", { desc = "Substitute in all file" })
 vim.keymap.set("x", "S", ":s/", { desc = "Substitute in selection" })
 vim.keymap.set("x", "sg", [[:s//gI<Left><Left><Left>]], { desc = "Substitute Global" })
 
-vim.cmd([[
-   nmap <C-BS> <C-w>
-]])
+vim.keymap.set("i", "<C-Bs>", "<C-w>")
+vim.keymap.set("i", "<M-Bs>", "<C-w>")
 
 vim.cmd("packadd nvim.undotree")
 vim.keymap.set("n", "U", require("undotree").open)
@@ -49,69 +70,6 @@ vim.keymap.set("n", "[<tab>", "<Cmd>tabnext<CR>")
 vim.keymap.set("n", "<leader><tab>c", "<Cmd>tabclose<CR>")
 ---}}}
 
--- -- Poor man harpoon
--- vim.keymap.set('n', '<leader>ha', function()
---   vim.cmd 'argadd %'
---   vim.cmd 'argdedup'
--- end)
---
--- vim.keymap.set('n', '<leader>hd', function()
---   vim.cmd 'argd %'
--- end)
---
--- -- assign arg to each number
--- for i = 1, 9 do
---   vim.keymap.set('n', '<leader>' .. i, '<CMD>argu ' .. i .. '<CR>', { silent = true, desc = 'Go to arg ' .. i })
---   vim.keymap.set('n', '<leader>h' .. i, '<CMD>' .. i - 1 .. 'arga<CR>',
---     { silent = true, desc = 'Add current to arg ' .. i })
---   vim.keymap.set('n', '<leader>d' .. i, '<CMD>' .. i .. 'argd<CR>', { silent = true, desc = 'Delete current arg' })
--- end
---
--- -- to qf
--- vim.keymap.set('n', '<leader>he', function()
---   local list = vim.fn.argv()
---   if #list > 0 then
---     local qf_items = {}
---     for _, filename in ipairs(list) do
---       table.insert(qf_items, {
---         filename = filename,
---         lnum = 1,
---         text = filename,
---       })
---     end
---     vim.fn.setqflist(qf_items, 'r')
---     vim.cmd.copen()
---   end
--- end, { silent = true, desc = 'Show args in qf' })
---
--- -- Convert quickfix list to argument list
--- vim.keymap.set('n', '<leader>hq', function()
---   local qf_list = vim.fn.getqflist()
---   if #qf_list == 0 then
---     vim.notify("Quickfix list is empty", vim.log.levels.WARN)
---     return
---   end
---   -- Clear current argument list
---   vim.cmd '%argdelete'
---   -- Add each quickfix item to argument list
---   for _, item in ipairs(qf_list) do
---     if item.filename and item.filename ~= '' then
---       -- Use absolute path to avoid issues
---       local filename = vim.fn.fnamemodify(item.filename, ':p')
---       vim.cmd('argadd ' .. vim.fn.fnameescape(filename))
---     elseif item.bufnr and vim.fn.bufexists(item.bufnr) > 0 then
---       -- If we have a buffer number but no filename, use buffer name
---       local bufname = vim.fn.bufname(item.bufnr)
---       if bufname and bufname ~= '' then
---         local filename = vim.fn.fnamemodify(bufname, ':p')
---         vim.cmd('argadd ' .. vim.fn.fnameescape(filename))
---       end
---     end
---   end
---   -- Remove duplicates
---   vim.cmd 'argdedup'
---   vim.notify(string.format("Added %d files from quickfix to argument list", #qf_list))
--- end, { silent = true, desc = 'Quickfix to args' })
 
 --- {{{ Windows
 vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Windows" })
@@ -133,16 +91,16 @@ end)
 vim.keymap.set("n", "<M-=>", function()
 	vim.cmd.wincmd("=")
 end, { desc = "Windows" })
-vim.keymap.set("n", "<M-S-=>", function()
+vim.keymap.set("n", "<M-+>", function()
 	vim.cmd.wincmd("+")
 end, { desc = "Windows" })
 vim.keymap.set("n", "<M-->", function()
 	vim.cmd.wincmd("-")
 end, { desc = "Windows" })
-vim.keymap.set("n", "<M-S-,>", function()
+vim.keymap.set("n", "<M-,>", function()
 	vim.cmd.wincmd("<")
 end, { desc = "Windows" })
-vim.keymap.set("n", "<M-S-.>", function()
+vim.keymap.set("n", "<M-.>", function()
 	vim.cmd.wincmd(">")
 end, { desc = "Windows" })
 
@@ -155,9 +113,9 @@ vim.keymap.set("t", "<S-Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Nor
 -- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true })
 vim.keymap.set("n", "<M-t>", ":term ")
 vim.keymap.set("n", "<leader>tn", ":term ")
-vim.keymap.set('n', '<leader>th', ':hor term ')
-vim.keymap.set('n', '<leader>tv', ':vert term ')
-vim.keymap.set('n', '<leader>tg', ':hor term rg ')
+vim.keymap.set("n", "<leader>th", ":hor term ")
+vim.keymap.set("n", "<leader>tv", ":vert term ")
+vim.keymap.set("n", "<leader>tg", ":hor term rg ")
 
 -- Copy Entire Buffer
 vim.keymap.set("n", "gA", "<Cmd>%y +<Cr>", { silent = true, desc = "Yank entire file to System" })
@@ -252,6 +210,9 @@ vim.keymap.set("n", "<leader><Tab>F", "<cmd>tabfirst<cr>", { desc = "First Tab" 
 vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
+vim.keymap.set("n", "<C-S-PageUp>", "<cmd>tabmove -1<cr>")
+vim.keymap.set("n", "<C-S-PageDown>", "<cmd>tabmove +1<cr>")
+
 --- Scroll
 vim.cmd([[
  nmap  <S-ScrollWheelUp> zh
@@ -298,6 +259,5 @@ vim.keymap.set("n", "gX", function()
 		vim.notify("No file to open", vim.log.levels.WARN)
 	end
 end, { desc = "Open current file" })
-
 
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })

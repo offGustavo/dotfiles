@@ -95,3 +95,12 @@ hi Underlined    guifg=#7aa2f7 gui=underline
 hi Ignore        guifg=#1a1b26
 hi Error         guifg=#f7768e guibg=#1a1b26
 hi Todo          guifg=#e0af68 guibg=#1a1b26 gui=bold
+
+" ========================
+" Diff Colors
+" ========================
+hi DiffAdd       guifg=#9ece6a guibg=#2b485a
+hi DiffChange    guifg=#c0caf5 guibg=#272d43
+hi DiffDelete    guifg=#f7768e guibg=#52313f
+hi DiffText      guifg=#7aa2f7 guibg=#2b485a gui=bold
+

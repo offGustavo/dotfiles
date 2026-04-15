@@ -1,0 +1,144 @@
+--- Startup times for process: Primary (or UI client) ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.001  000.001: --- NVIM STARTING ---
+000.366  000.365: event init
+000.583  000.217: early init
+000.744  000.161: locale set
+000.840  000.096: init first window
+002.074  001.235: inits 1
+002.101  000.027: window checked
+002.108  000.007: parsing arguments
+003.747  000.147  000.147: require('vim._core.shared')
+004.006  000.016  000.016: require('string.buffer')
+004.097  000.161  000.145: require('vim.inspect')
+004.343  000.207  000.207: require('vim._core.options')
+004.352  000.595  000.227: require('vim._core.editor')
+004.450  000.094  000.094: require('vim._core.system')
+004.455  000.924  000.089: require('vim._init_packages')
+004.461  001.429: init lua interpreter
+007.129  002.669: nvim_ui_attach
+008.343  001.213: nvim_set_client_info
+008.351  000.008: --- NVIM STARTED ---
+
+--- Startup times for process: Embedded ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.001  000.001: --- NVIM STARTING ---
+000.308  000.306: event init
+000.537  000.229: early init
+000.704  000.167: locale set
+000.789  000.086: init first window
+002.938  002.149: inits 1
+002.990  000.052: window checked
+003.000  000.010: parsing arguments
+004.680  000.145  000.145: require('vim._core.shared')
+004.944  000.016  000.016: require('string.buffer')
+005.058  000.192  000.176: require('vim.inspect')
+005.237  000.150  000.150: require('vim._core.options')
+005.244  000.552  000.210: require('vim._core.editor')
+005.325  000.078  000.078: require('vim._core.system')
+005.331  000.883  000.108: require('vim._init_packages')
+005.336  001.454: init lua interpreter
+005.486  000.150: expanding arguments
+005.554  000.068: inits 2
+006.550  000.996: init highlight
+006.555  000.006: waiting for UI
+006.876  000.321: done waiting for UI
+006.909  000.033: clear screen
+007.433  000.043  000.043: require('vim.keymap')
+010.795  000.449  000.449: sourcing nvim_exec2()
+010.885  000.021  000.021: require('vim._core.log')
+013.092  006.175  005.661: require('vim._core.defaults')
+013.103  000.019: init default mappings & autocommands
+017.622  000.133  000.133: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/ftplugin.vim
+017.878  000.083  000.083: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/indent.vim
+021.010  002.229  002.229: sourcing /home/gustavo/.config/nvim/colors/tokyo.vim
+021.041  002.634  000.405: sourcing /home/gustavo/.config/nvim/init.lua
+021.062  005.110: sourcing vimrc file(s)
+021.742  000.119  000.119: sourcing nvim_exec2() called at /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/filetype.lua:0
+021.755  000.515  000.396: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/filetype.lua
+022.287  000.202  000.202: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/syntax/synload.vim
+022.847  000.974  000.771: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/syntax/syntax.vim
+026.219  000.076  000.076: sourcing /home/gustavo/.config/nvim/plugin/emacs.vim
+026.452  000.184  000.184: sourcing /home/gustavo/.config/nvim/plugin/titlecase.vim
+026.659  000.143  000.143: sourcing /home/gustavo/.config/nvim/plugin/autocmds.lua
+026.912  000.200  000.200: sourcing /home/gustavo/.config/nvim/plugin/blink.lua
+027.082  000.120  000.120: sourcing /home/gustavo/.config/nvim/plugin/conform.lua
+027.240  000.094  000.094: sourcing /home/gustavo/.config/nvim/plugin/flash.lua
+028.110  000.646  000.646: require('forge.yazi')
+028.236  000.017  000.017: sourcing nvim_exec2() called at /home/gustavo/.config/nvim/plugin/forge.lua:0
+028.285  000.010  000.010: sourcing nvim_exec2() called at /home/gustavo/.config/nvim/plugin/forge.lua:0
+028.311  000.008  000.008: sourcing nvim_exec2() called at /home/gustavo/.config/nvim/plugin/forge.lua:0
+028.326  000.007  000.007: sourcing nvim_exec2() called at /home/gustavo/.config/nvim/plugin/forge.lua:0
+028.333  001.046  000.357: sourcing /home/gustavo/.config/nvim/plugin/forge.lua
+028.930  000.538  000.538: sourcing /home/gustavo/.config/nvim/plugin/fzf-lua.lua
+029.136  000.134  000.134: sourcing /home/gustavo/.config/nvim/plugin/harpoon.lua
+034.166  000.106  000.106: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/pack/dist/opt/nvim.undotree/plugin/undotree.lua
+034.565  002.730  002.624: sourcing nvim_exec2() called at /home/gustavo/.config/nvim/plugin/keymaps.lua:0
+035.526  000.949  000.949: require('undotree')
+042.545  000.020  000.020: require('vim.F')
+042.919  006.632  006.611: require('vim.diagnostic')
+043.833  000.027  000.027: sourcing nvim_exec2() called at /home/gustavo/.config/nvim/plugin/keymaps.lua:0
+044.183  014.999  004.662: sourcing /home/gustavo/.config/nvim/plugin/keymaps.lua
+044.865  000.560  000.560: sourcing /home/gustavo/.config/nvim/plugin/lsp.lua
+045.554  000.587  000.587: sourcing /home/gustavo/.config/nvim/plugin/lualine.lua
+045.764  000.157  000.157: sourcing /home/gustavo/.config/nvim/plugin/md-agenda.lua
+046.519  000.707  000.707: sourcing /home/gustavo/.config/nvim/plugin/mini.lua
+046.827  000.253  000.253: sourcing /home/gustavo/.config/nvim/plugin/multicursor.lua
+046.962  000.080  000.080: sourcing /home/gustavo/.config/nvim/plugin/neogit.lua
+047.338  000.262  000.262: sourcing /home/gustavo/.config/nvim/plugin/neovide.lua
+047.479  000.089  000.089: sourcing /home/gustavo/.config/nvim/plugin/nvim-lspconfig-mason.lua
+047.962  000.435  000.435: sourcing /home/gustavo/.config/nvim/plugin/oil.lua
+054.285  005.821  005.821: require('vim.filetype')
+054.332  006.300  000.479: sourcing /home/gustavo/.config/nvim/plugin/options.lua
+054.862  000.440  000.440: sourcing /home/gustavo/.config/nvim/plugin/pack.lua
+055.124  000.193  000.193: sourcing /home/gustavo/.config/nvim/plugin/quicker.lua
+055.429  000.251  000.251: sourcing /home/gustavo/.config/nvim/plugin/sessionizer.lua
+056.110  000.615  000.615: sourcing /home/gustavo/.config/nvim/plugin/snacks.lua
+056.212  000.046  000.046: sourcing /home/gustavo/.config/nvim/plugin/spell.lua
+056.293  000.034  000.034: sourcing /home/gustavo/.config/nvim/plugin/startuptime.lua
+056.405  000.067  000.067: sourcing /home/gustavo/.config/nvim/plugin/tokyonight.lua
+056.774  000.139  000.139: require('vim._core.ui2')
+058.145  000.804  000.804: require('vim._core.ui2.cmdline')
+062.360  004.205  004.205: require('vim._core.ui2.messages')
+062.493  006.038  000.890: sourcing /home/gustavo/.config/nvim/plugin/ui2.lua
+062.649  000.074  000.074: sourcing /home/gustavo/.config/nvim/plugin/yazi.lua
+063.299  000.600  000.600: sourcing /home/gustavo/.config/nvim/plugin/zoxide.lua
+066.644  002.217  002.217: sourcing /etc/profiles/per-user/gustavo/share/nvim/site/plugin/fzf.vim
+068.343  000.535  000.535: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/gzip.vim
+070.931  000.503  000.503: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+071.338  002.917  002.414: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/matchit.vim
+071.761  000.356  000.356: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/matchparen.vim
+071.872  000.027  000.027: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/netrwPlugin.vim
+072.349  000.411  000.411: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/rplugin.vim
+072.932  000.506  000.506: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/tarPlugin.vim
+073.305  000.145  000.145: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/tutor.vim
+074.428  000.968  000.968: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/zipPlugin.vim
+074.635  000.127  000.127: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/editorconfig.lua
+074.877  000.171  000.171: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/man.lua
+075.342  000.390  000.390: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/net.lua
+075.665  000.245  000.245: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/osc52.lua
+076.098  000.357  000.357: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/shada.lua
+076.282  000.087  000.087: sourcing /home/gustavo/.local/share/bob/nightly/share/nvim/runtime/plugin/spellfile.lua
+076.344  009.007: loading rtp plugins
+077.615  001.272: loading packages
+077.623  000.007: loading after plugins
+077.652  000.029: inits 3
+089.396  011.744: reading ShaDa
+090.041  000.645: opening buffers
+090.050  000.009: BufEnter autocommands
+090.056  000.006: editing files in windows
+090.272  000.216: VimEnter autocommands
+090.338  000.066: UIEnter autocommands
+090.344  000.006: before starting main loop
+090.865  000.037  000.037: require('vim._core.util')
+091.136  000.755: first screen update
+091.142  000.006: --- NVIM STARTED ---
+

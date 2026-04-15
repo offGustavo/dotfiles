@@ -32,7 +32,6 @@
 
 	;; Define a layer com as teclas de navegação e mídia
 	nav (layer-toggle navigation)
-	alt-nav (layer-toggle navigation-alt)
 	edt (layer-switch navigation)
 
   ;; Define a layer com os simbolos
@@ -45,17 +44,17 @@
 	bas (layer-switch base)
 
 	;; Navigation
-	lnx (tap-hold 100 200 x @nav)
-	rn. (tap-hold 100 200 . @nav)
+	lnx (tap-hold 100 150 x @nav)
+	rn. (tap-hold 100 150 . @nav)
 	rmn (tap-hold 100 300 menu @nav)
 	lne (tap-hold 100 300 e @nav)
 	rni (tap-hold 100 300 i @nav)
-  lsn (tap-hold-release 100 200 spc @nav)
+  lsn (tap-hold-release 100 150 spc @nav)
 	rbn (tap-hold 100 300 bspc @nav)
   ;; test (tap-dance @lsn lsft)
-  lnt (tap-hold 100 200 tab @alt-nav)
-  ccn (tap-dance 200 ((tap-hold-press 100 200 caps lctrl) (layer-toggle navigation-alt)))
-  rnl (tap-hold 100 200 [ @nav)
+  lnt (tap-hold 100 150 tab @nav)
+  ccn (tap-dance 150 ((tap-hold-press 100 200 caps lctrl) (layer-toggle navigation)))
+  rnl (tap-hold 100 150 [ @nav)
   ren (tap-hold 100 300 ret @nav)
 
 	;; Numbers
@@ -77,8 +76,8 @@
 	;; Remap
 
 	;; Caps
-	ecc (tap-hold 100 200 esc caps)
-	rcs (tap-hold-press 100 200 caps rsft)
+	ecc (tap-hold 100 150 esc caps)
+	rcs (tap-hold-press 100 150 caps rsft)
 	lcc (tap-hold-press 100 300 caps lctl)
   ;; Esc
   ste (switch (lsft rsft) S-grv  break 
@@ -97,14 +96,14 @@
   ;;             () left break)
 
 	;; Space
-	;;ssc (tap-hold 100 300 (tap-dance 200 ((macro spc) (macro spc spc) @nav)) lsft)
-	;; ssc (tap-dance 200 ( (tap-hold 100 300 (macro spc) lsft) (tap-hold 100 300 (macro spc spc) @nav)))
-	ssc (tap-hold-release 100 200 spc lsft)
+	;;ssc (tap-hold 100 300 (tap-dance 150 ((macro spc) (macro spc spc) @nav)) lsft)
+	;; ssc (tap-dance 150 ( (tap-hold 100 300 (macro spc) lsft) (tap-hold 100 300 (macro spc spc) @nav)))
+	ssc (tap-hold-release 100 150 spc lsft)
 
 	;; Control
 	lcf (tap-hold 100 300 f lctl)
 	rcj (tap-hold 100 300 j rctl) cNe (tap-hold 100 300 next lctl)
-	rhc (tap-hold 100 200 home lctrl)
+	rhc (tap-hold 100 150 home lctrl)
 	lce (tap-hold-press 100 300 esc lctrl)
 	rlc (tap-hold-press 100 300 esc lctrl)
 	;; ecc (tap-hold-press 100 300 esc lctrl)
@@ -120,7 +119,7 @@
 	lma (tap-hold 100 300 a lmet)
 	rm; (tap-hold 100 300 ; lmet)
 	mPr (tap-hold 100 300 prev lmet)
-	rdm (tap-hold 100 200 pgdn lmet)
+	rdm (tap-hold 100 150 pgdn lmet)
 	rbm (tap-hold 100 300 [ lmet)
 	rmm (tap-hold-release 100 300 menu lmet)
 
@@ -128,8 +127,8 @@
 	las (tap-hold 100 300 s lalt)
 	ral (tap-hold 100 300 l lalt)
 	aVd (tap-hold 100 300 vold lalt)
-	rua (tap-hold 100 200 pgup lalt)
-	rau (tap-hold 100 200 up lalt)
+	rua (tap-hold 100 150 pgup lalt)
+	rau (tap-hold 100 150 up lalt)
 	lab (tap-hold-press 100 300 bspc lalt)
 	;; rna (tap-dance 300 ( @rar @nav))
   ;; lsa (tap-dance 300 ( @lab lsft))
@@ -159,7 +158,7 @@
 	;; Mouse Input
 	;; mrc (tap-hold 100 200 🖰2 lctrl )
 	mfs (tap-hold 100 200 fwd lctrl)
-	mbn (tap-hold 100 200 bck (layer-toggle navigation-alt))
+	mbn (tap-hold 100 200 bck (layer-toggle navigation))
 
 	;; Qwerty
 	lqg (tap-hold 100 300 grv (layer-switch base))
@@ -178,60 +177,39 @@
 	lmf(tap-hold 100 300 - f11)
 	lef(tap-hold 100 300 = f12)
 	hhkb_shift (tap-hold-press 100 300 (one-shot 500 lsft) @nav)
-	hhkb_up (tap-hold-press 100 200 up @nav))
-
-;; (deflayer base
-;;   @ste  @l1f @l2f @l3f @l4f @l5f @l6f @l7f @l8f @l9f @l0f @lmf @lef bspc
-;;   @lnt   @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [     ]   \
-;;   @ccn   @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @ren
-;;   lsft     @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft  @hhkb_up
-;;   lctl  lmet lalt           @lsn           ralt rmet @hhkb_up
-;;   🖰1 🖰2 🖰3 @mbn @mfs)
+	hhkb_up (tap-hold-press 100 200 up (layer-toggle hhkb)))
 
 (deflayer base
-  @ste 1    2    3    4    5    6    7    8    9    0    -    =    bspc
-	tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-	lctl a    s    d    f    g    h    j    k    l    ;    '    ret
-	lsft z    x    c    v    b    n    m    ,    .    /    rsft @hhkb_up
-	lctl lmet lalt           spc            ralt  lmet  @hhkb_up
-	mlft mrgt mmid mfwd @mbn)
+  @ste  @l1f @l2f @l3f @l4f @l5f @l6f @l7f @l8f @l9f @l0f @lmf @lef bspc
+  @lnt   @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [     ]   \
+  lctl   @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @ren
+  lsft     @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft  @hhkb_up
+  lctl  lmet lalt           @lsn           ralt rmet @hhkb_up
+  🖰1 🖰2 🖰3 @mbn @mfs)
 
-(deflayer navigation
+;; (deflayer base
+;;   @ste 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+;; 	tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+;; 	lctl a    s    d    f    g    h    j    k    l    ;    '    ret
+;; 	lsft z    x    c    v    b    n    m    ,    .    /    rsft @hhkb_up
+;; 	lctl lmet lalt           spc            ralt  lmet  @hhkb_up
+;; 	mlft mrgt mmid mfwd @mbn)
+
+(deflayer hhkb
 	 grv  f1    f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
-	 caps _     _    _    _    _    _    _    _    _    _    up   _    ins
-	 lctl volu  vold mute _    _    S-8  /    home pgup left rght _ 
-	 _    @mov  _    @num _    _    S-=  -    end  pgdn down _    up
+	 caps S-grv grv  _    _    _    _    _    _    _    _    up   _    ins
+	 lctl volu  vold mute _    @mov S-8  /    home pgup left rght _ 
+	 _    pp    _    @num _    @num S-=  -    end  pgdn down _    up
 	 _    _    _              _              _     _    _
 	 _  _  _  _  _ )
 
-
-;; (deflayer navigation-alt
-;; 	 grv  f1    f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
-;; 	 caps _     home up   pgup _    _    _    _    _    _    up   _    ins
-;; 	 lctl _     left _    rght _    S-8  /    home pgup left rght _ 
-;; 	 _    _     end  down pgdn _    S-=  -    end  pgdn down _    up
-;; 	 _    _    _              _              _     _    _
-;; 	 _  _  _  _  _ )
-
-(deflayermap  navigation-alt
- ;; Left
- e up
- s left
- d down 
- f right
- w home
- r end
- q pgup
- a pgdn
- ;; Right
- i up
- j left
- k down 
- l right
- u home
- o end
- p pgup
- ; pgdn)  
+(deflayer navigation
+	 grv  f1    f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+	 caps pgup  home up   end  @mov _    _    up   _    _    up   _    ins
+	 lctl pgdn  left down rght @num _    left down rght left rght _ 
+	 _    ins   del  bspc _    _    _    _    end  pgdn down _    up
+	 _    _    _              _              _     _    _
+	 _  _  _  _  _ )
 
 (deflayer numbers
 	 _    _    _    _    _    _    esc  nlck kp/  kp*  kp-  bspc _    _
@@ -252,7 +230,7 @@
 (deflayer mouse
 	 _    _    _    _    _    _    _    _    _    _    _    _    _    _
 	 lrld _    _    _    _    _    bck  mwu  @mau mwl  mfwd _    _    _
-	 _    @slw _    @mid @fst _    mmid @mal mrgt @mar mlft _    _
+	 _    @slw @mid @fst _    _    mmid @mal mrgt @mar mlft _    _
 	 _    _    bck  fwd  _    _    fwd  mwd  @mad mwr  mbck _  up
 	 _    _    _              _              _     _    _      _  
    _  _  _  _ )

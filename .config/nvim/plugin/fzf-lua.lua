@@ -2,11 +2,14 @@ vim.schedule(function()
 vim.pack.add({ "https://github.com/ibhagwan/fzf-lua" })
 local Fzf = require("fzf-lua")
 Fzf.setup({
-	"ivy",
+	-- "ivy",
+  ui_select = true,
 	fzf_colors = {
 		true, -- inherit fzf colors that aren't specified below from
 	},
 })
+
+vim.keymap.set("n", "z=", ":FzfLua spell_suggest<Cr>")
 
 vim.keymap.set("n", "<M-o>", "<Cmd>FzfLua files<Cr>", { desc = "Find" })
 vim.keymap.set("n", "<M-s>", "<Cmd>FzfLua live_grep<Cr>", { desc = "Grep" })
@@ -21,9 +24,7 @@ vim.keymap.set("n", "<leader>gP", function()
 	Fzf.gh_pr({ state = "all" })
 end, { desc = "GitHub Pull Requests (all)" })
 -- Top Pickers & Explorer
-vim.keymap.set("n", "<leader><space>", function()
-	Fzf.smart()
-end, { desc = "Smart Find Files" })
+vim.keymap.set("n", "<leader><space>", "<Cmd>FzfLua global<Cr>", { desc = "Smart Find Files" })
 vim.keymap.set("n", "<M-h>", function()
 	Fzf.buffers()
 end, { desc = "Buffers" })
@@ -89,7 +90,7 @@ end, { desc = "Git Diff (Hunks)" })
 vim.keymap.set("n", "<leader>gf", function()
 	Fzf.git_log_file()
 end, { desc = "Git Log File" })
--- gh
+-- GitHub
 vim.keymap.set("n", "<leader>gi", function()
 	Fzf.gh_issue()
 end, { desc = "GitHub Issues (open)" })
