@@ -1,4 +1,0 @@
-# This file contains fish universal variable definitions.
-# VERSION: 3.0
-SETUVAR __fish_initialized:4300
-SETUVAR fish_user_paths:/home/gustavo/\x2enix\x2dprofile/bin\x1e/home/gustavo/\x2elocal/share/bob/nightly/bin\x1e/home/gustavo/\x2elocal/bin
