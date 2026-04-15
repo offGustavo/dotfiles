@@ -107,7 +107,7 @@ alias untar='tar -zxvf '
 
 # Dotfiles
 alias dot='/usr/bin/env git --git-dir="$HOME"/.dotfiles/ --work-tree="$HOME"'
-# alias dotui='/usr/bin/env lazygit --git-dir="$HOME"/.dotfiles/ --work-tree="$HOME"'
+alias dotui='/usr/bin/env lazygit --git-dir="$HOME"/.dotfiles/ --work-tree="$HOME"'
 
 # Change go PATH
 set -x GOPATH "$HOME/.go"
