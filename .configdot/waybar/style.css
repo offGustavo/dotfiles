@@ -1,0 +1,182 @@
+* {
+  border: none;
+  font-size: 12px;
+  font-family: "JetBrainsMono Nerd Font Propo" ;
+  color: @fg;
+  /* background-color: transparent; */
+  padding: 0;
+}
+
+window#waybar {
+  background: @bg;
+}
+
+#custom-logo {
+  font-size: 18px;
+  background-color: @blue;
+  color: @bg;
+  border-radius: 0px 5px 5px 0px;
+}
+
+#custom-privacydots{
+  background-color: @bg;
+}
+
+#custom-weather{
+  background-color: @bg;
+  color: @fg;
+}
+
+/*.modules-right {*/
+/*  padding-left: 5px;*/
+/*  border-radius: 15px 0 0 15px;*/
+/*  margin-top: 2px;*/
+/*}*/
+
+/*.modules-center {*/
+/*  padding: 0 15px;*/
+/*  margin-top: 2px;*/
+/*  border-radius: 15px 15px 15px 15px;*/
+/*  background: #000000;*/
+/*}*/
+
+/*.modules-left {*/
+/*  border-radius: 0 15px 15px 0;*/
+/*  margin-top: 2px;*/
+/*}*/
+
+#workspaces button {
+  padding: 0px 5px;
+  margin: 2px;
+  border-radius: 5px;
+  background-color: @bg;
+}
+
+/* #workspaces button */
+/* #workspaces button.focused: The single focused workspace. */
+/* #workspaces  button.active:  The workspace is active (visi‐ */
+/* ble) on its output. */
+/* #workspaces button.urgent: The workspace has  one  or  more */
+/* urgent windows. */
+/* #workspaces button.empty: The workspace is empty. */
+/* #workspaces  button.current_output:  The  workspace is from */
+/* the same output as the bar that it is displayed on. */
+/* #workspaces button#niri-workspace-<name>: Workspaces  named */
+/* this, or index for unnamed workspaces. */
+
+/* #workspaces button label{ */
+/*   font-size: 12px; */
+/* } */
+
+/*#workspaces button.active {*/
+/*}*/
+/*workspaces{*/
+/*}*/
+/*#workspaces button.empty{*/
+/*}*/
+/*#workspaces button.persistent{*/
+/*}*/
+/*#workspaces button.special{*/
+/*}*/
+
+#workspaces button.focused,
+#workspaces button.active,
+#workspaces button.visible{
+  background: @blue;
+  color: @bg;
+}
+
+#workspaces button.urgent{
+  background: @red;
+  color: @bg;
+}
+#workspaces button.visible label,
+#workspaces button.urgent label{
+  background: @blue;
+  color: @bg;
+}
+
+#custom-logo,
+#battery,
+#custom-clipboard,
+#custom-colorpicker,
+#custom-powerDraw,
+#bluetooth,
+#pulseaudio,
+#network,
+#disk,
+#memory,
+#backlight,
+#cpu,
+#temperature,
+#custom-weather,
+#idle_inhibitor,
+#jack,
+#tray,
+#window,
+#workspaces,
+#clock {
+  padding: 0 5px;
+}
+
+/* #custom-weather, */
+/* #pulseaudio { */
+/*   padding-top: 4px; */
+/* } */
+
+#pulseaudio.muted {
+  color: @red ;
+}
+#temperature.critical{
+  padding-top: 0;
+  color: @red ;
+}
+
+/*#clock{*/
+/*  color: #5fd1fa;*/
+/*}*/
+
+#battery {
+  border-radius: 5px 0px 0px 5px;
+}
+
+#battery.charging {
+  color: @bg;
+  background-color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @bg;
+  background-color: @orange;
+}
+
+#battery.critical:not(.charging) {
+  color: @fg;
+  background-color: @red;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
+#tray.active{
+  color: @red;
+  background-color: @bg;
+}       
+
+/* #tray > .passive         */
+/* #tray > .active           */
+/* #tray > .needs-attention  */
+
+#taskbar {         
+  font-size: 20px; 
+  padding: 0px;    
+  margin: 0px;
+}

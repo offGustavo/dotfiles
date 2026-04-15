@@ -1,0 +1,55 @@
+(defsrc
+grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+caps a    s    d    f    g    h    j    k    l    ;    '    ret
+lsft z    x    c    v    b    n    m    ,    .    /    rsft
+lctl lmet lalt           spc            ralt  menu mctl )
+
+(defalias 
+  ha (switch  (lctl) (unmod home) break
+              () (unmod a) break)
+  ee (switch  (lctl) (unmod end) break
+              () (unmod e) break)
+  ga (switch (lalt) lrld break
+             () (unmod grv) break)
+)
+
+(deflayermap main
+ tab (switch (ralt) lrld break
+   () grv break)
+
+ a (switch  
+   (lctl) (unmod home) break
+   (lctl lsft) (unmod S-home) break
+   () a break)
+
+ e (switch 
+   (lctl) (unmod end) break
+   (lctl lsft) (unmod S-end) break
+   () e break)
+
+ f (switch 
+   (lctl) (unmod left) break
+   (lalt) (unmod C-left) break
+   () f break)
+
+ b (switch 
+   (lctl) (unmod right) break
+   (lalt) (unmod C-right) break
+   () b break)
+
+ n (switch 
+   (lctl) (unmod down) break
+   () n break)
+
+ p (switch 
+   (lctl) (unmod up) break
+   () p break)
+ )
+
+;; (deflayer main
+    ;; @ga  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+    ;; tab  q    w    @ee  r    t    y    u    i    o    p    [    ]    \
+    ;; caps @ha  s    d    f    g    h    j    k    l    ;    '    ret
+    ;; lsft z    x    c    v    b    n    m    ,    .    /    rsft
+    ;; lctl lmet lalt           spc            ralt  menu mctl )

@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/gustavo/.config/nvim'
+let g:netrw_dirhist_1='/home/gustavo/.config/nvim/plugin'
+let g:netrw_dirhist_0='/home/gustavo/.config/nvim'
+let g:netrw_dirhist_9='/home/gustavo/.config/nvim/lsp'
+let g:netrw_dirhist_8='/home/gustavo/.config/nvim'
+let g:netrw_dirhist_7='/nix/store/svr33k38yd48v85si5y73ya44yyvmnlq-vim-9.1.2148/share/vim/vim91/colors'
+let g:netrw_dirhist_6='/nix/store/svr33k38yd48v85si5y73ya44yyvmnlq-vim-9.1.2148/share/vim/vim91'
+let g:netrw_dirhist_5='/nix/store/svr33k38yd48v85si5y73ya44yyvmnlq-vim-9.1.2148/share/vim'
+let g:netrw_dirhist_4='/nix/store/svr33k38yd48v85si5y73ya44yyvmnlq-vim-9.1.2148/share/vim/vim91'
+let g:netrw_dirhist_3='/home/gustavo/.config/nvim/colors'

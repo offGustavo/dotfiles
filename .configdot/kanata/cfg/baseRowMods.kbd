@@ -1,0 +1,28 @@
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps  a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft up
+  lctl lmet lalt           spc            ralt  menu mctl
+  🖰1 🖰2 🖰3 🖰4 🖰5)
+
+(defalias
+  zt (tap-hold-press 100 200 z lmet)
+  xt (tap-hold-press 100 200 x lalt)
+  ct (tap-hold-press 100 200 c lsft)
+  vt (tap-hold-press 100 200 v lctl)
+  bt (tap-hold-press 100 200 b ralt)
+  /t (tap-hold-press 100 200 / lmet)
+  .t (tap-hold-press 100 200 . lalt)
+  ,t (tap-hold-press 100 200 , lsft)
+  mt (tap-hold-press 100 200 m lctl)
+  nt (tap-hold-press 100 200 n ralt)
+  st (tap-hold-press 100 200 spc @nav))
+
+(deflayer base
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft @zt  @xt  @ct  @vt  @bt  @nt  @mt  @,t  @.t  @/t  rsft
+  lctl lmet lalt           @st            ralt  menu mctl
+  🖰1 🖰2 🖰3 🖰4 🖰5)

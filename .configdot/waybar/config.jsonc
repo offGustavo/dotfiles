@@ -1,0 +1,453 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": [
+    "custom/logo",
+    "clock",
+    "cpu",
+    "memory",
+    "temperature",
+    // "disk",
+    // "custom/powerDraw",
+    "custom/weather",
+    "hyprland/workspaces",
+    "niri/workspaces",
+    // "mpd",
+    // "hyprland/window",
+    "hyprland/submap"
+  ],
+  "modules-center": [
+    "custom/privacydots"
+    // "wlr/taskbar"
+  ],
+  "modules-right": [
+    "tray",
+    "idle_inhibitor",
+    "hyprland/language",
+    // "custom/updates",
+    // "custom/clipboard",
+    "backlight",
+    // "idle_inhibitor",
+    // "custom/colorpicker",
+    "pulseaudio",
+    "bluetooth",
+    // "custom/hotspot",
+    "group/networking",
+    "battery"
+  ],
+  "reload_style_on_change": true,
+  "custom/logo": {
+    "format": "  ",
+    "tooltip": true,
+    "on-click": "fuzzel -a top-left -w 20 -l 10"
+  },
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 30,
+      "icon-theme": "adwaita",
+      "tooltip-format": "{title}",
+      "on-click": "activate",
+      "on-click-middle": "close",
+      "ignore-list": [
+        "Alacritty"
+      ],
+      "app_ids-mapping": {
+        "firefoxdeveloperedition": "firefox-developer-edition"
+      },
+      "rewrite": {
+        "Firefox Web Browser": "Firefox",
+        "Foot Server": "Terminal"
+      }
+    },
+  "clock": {
+    "format": "{:%H:%M %a %d, %b }",
+    "interval": 1,
+    "tooltip-format": "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "calendar-weeks-pos": "right",
+    "today-format": "<span color='#7645AD'><b><u>{}</u></b></span>",
+    "format-calendar": "<span color='#aeaeae'><b>{}</b></span>",
+    "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
+    "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>"
+  },
+  "hyprland/submap": {
+    "format": "({})",
+    // "max-length": 8,
+    "tooltip": false
+  },
+  "hyprland/language": {
+    "format": "{}",
+    "keyboard-name": "at-translated-set-2-keyboard",
+    "format-en": "English (us) ",
+    "format-pt": "Portuguese (abnt) ",
+    "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
+  },
+  "disk": {
+    "interval": 30,
+    "format": " {percentage_used}%",
+    "path": "/home"
+  },
+  "memory": {
+    "format": " {percentage}%"
+  },
+  "cpu": {
+    "interval": 1,
+    "format": " {usage}%",
+    "format-icons": [
+      "▁",
+      "▂",
+      "▃",
+      "▄",
+      "▅",
+      "▆",
+      "▇",
+      "█"
+    ],
+  },
+  "temperature": {
+    "format": " {temperatureC}°C",
+    "format-critical": " {temperatureC}°C",
+    "interval": 1,
+    "critical-threshold": 80,
+    "on-click": "kitty -e btop",
+  },
+  "custom/powerDraw": {
+    "format": "{}",
+    "interval": 1,
+    "exec": "~/.config/waybar/scripts/powerdraw.sh",
+    "return-type": "json"
+  },
+  "niri/workspaces": {
+	"format": "{name}",
+	"format-icons": {
+		// Named workspaces
+		// (you need to configure them in niri)
+		// "zen": "<b>󰖟</b>",
+		// "term": "",
+		// "note": "",
+		// "temp": "",
+		// // Icons by state
+		// "active": "{name}",
+		// "default": "{index}"
+		// "active": "",
+		// "default": ""
+	}
+},
+  "hyprland/workspaces": {
+    // "format": "<span font='18px'>{icon}</span>",
+    "format": "{icon}",
+    // "format-icons": {
+    //   "1": "१",
+    //   "2": "२",
+    //   "3": "३",
+    //   "4": "४",
+    //   "5": "५",
+    //   "6": "६",
+    //   "default": ""
+    // },
+    // "persistent-workspaces": {
+    //   "*": [
+    //     1,
+    //     2,
+    //     3,
+    //     4,
+    //     5,
+    //     6
+    //   ]
+    // }
+  },
+  "hyprland/window": {
+    "format": "( {class} )",
+    "rewrite": {
+      "(.*) - Mozilla Firefox": "🌎 $1",
+      "org.telegram.desktop": "> [$1]",
+      "org.gnome.Nautilus": "> [$1]",
+      "(.*) - zsh": "> [$1]"
+    }
+  },
+	"tray": {
+		// "icon-size": 16,
+		"show-passive-items": true,
+		// "smooth-scrolling-threshold":
+		// "spacing": 12,
+		// "reverse-direction":
+		// "on-update":
+		// "expand":
+		// "icons":
+		"cursor": true
+	},
+  "custom/updates": {
+    "format": "{}",
+    "interval": 60,
+    "exec": "~/.config/waybar/scripts/checkupdate.sh",
+    "return-type": "json",
+    "exec-if": "exit 0",
+  },
+  "custom/clipboard": {
+    // "exec": "echo '󰅍'",
+    "interval": 5,
+    "tooltip": true,
+    // "tooltip-format": "{output}",
+    // "exec-tooltip": "sh -c cliphist list | head -n 5",
+    "on-click": "sh -c 'cliphist list | rofi -dmenu | cliphist decode | wl-copy'"
+  },
+  "group/blight": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "backlight",
+      "backlight/slider"
+    ]
+  },
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "device": "intel_backlight",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "󰽢",
+    ],
+    "on-scroll-down": "brightnessctl set 10%+",
+    "on-scroll-up": "brightnessctl set 10%-",
+    "on-click": "~/.config/hypr/scripts/toggle-dark-mode.sh",
+    "smooth-scrolling-threshold": 1
+  },
+  "backlight/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal",
+    "device": "intel_backlight"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰾪",
+      "deactivated": "󰅶"
+    }
+  },
+  "custom/colorpicker": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": "once",
+    "exec": "~/.config/waybar/scripts/colorpicker.sh -j",
+    "on-click": "sleep 1 && ~/.config/waybar/scripts/colorpicker.sh",
+  },
+  "bluetooth": {
+    "format-on": "󰂯 ",
+    "format-off": "",
+    "format-disabled": "",
+    "format-connected": "󰂯 {device_alias}",
+    "format-connected-battery": "󰂯 {device_alias} {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "~/.config/fuzzel/scripts/bluetooth.sh --waybar",
+    "on-click-middle": "adw-bluetooth",
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "  Muted",
+    // "tooltip-format": "{icon} {volume}%",
+    "format-icons": {
+      "headphones": "",
+      "bluetooth": "󰥰",
+      "handsfree": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "🕨",
+        "🕩",
+        "🕪"
+      ]
+    },
+    "scroll-step": 5,
+    "justify": "center",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-right": "~/.config/fuzzel/scripts/sound.sh --waybar",
+    "on-click-middle": "flatpak run com.saivert.pwvucontrol",
+    "tooltip-format": "{volume}%  {icon}",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+  },
+  "pulseaudio#mic": {
+    "format": "{format_source}",
+    "format-source": "",
+    "format-source-muted": "",
+    "tooltip-format": "{volume}% {format_source} ",
+    "on-click": "pactl set-source-mute 0 toggle",
+    "on-scroll-down": "pactl set-source-volume 0 -1%",
+    "on-scroll-up": "pactl set-source-volume 0 +1%"
+  },
+  "group/audio": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "pulseaudio",
+      "pulseaudio#mic",
+      "pulseaudio/slider"
+    ]
+  },
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 140,
+    "orientation": "horizontal"
+  },
+  "custom/hotspot": {
+    "format": "{icon}",
+    "interval": 1,
+    "tooltip": true,
+    "return-type": "json",
+    "format-icons": {
+      "active": "󱜠",
+      "notactive": "󱜡"
+    },
+    "exec": "waybar-hotspot -a watch",
+    "on-click": "waybar-hotspot -a toggle",
+  },
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󱐅",
+    "tooltip-format": "{ipaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
+    "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
+    "tooltip-format-ethernet": "{bandwidthTotalBytes}",
+    "on-click": "~/.config/fuzzel/scripts/network.lua --waybar",
+  },
+  "network#speed": {
+    "format": "{bandwidthDownBits}",
+    "interval": 1,
+    "tooltip-format": "{ipaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)   \n{ipaddr} | {frequency} MHz{icon} ",
+    "tooltip-format-ethernet": "{ifname} 󰈀 \n{ipaddr} | {frequency} MHz{icon} ",
+    "tooltip-format-disconnected": "Not Connected to any type of Network",
+    "tooltip": true,
+    "on-click": "~/.config/fuzzel/scripts/network.lua --waybar",
+  },
+  "group/networking": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "network",
+      "network#speed"
+    ]
+  },
+  "custom/weather": {
+    "format": "{}",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "~/.config/waybar/scripts/weather.sh",
+    "on-click": "xdg-open https://wttr.in/Guaratingueta",
+    "return-type": "json"
+  },
+  "battery": {
+    "interval": 1,
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 20
+    },
+    "tooltip": true,
+    "format": "{capacity}% {icon}",
+    "tooltip": "{capacity}% {icon} {time}",
+    "format-charging": "{capacity}% {icon}",
+    "format-plugged": "{capacity}% 󰂄",
+    "format-icons": [
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂁",
+      "󰁹"
+    ],
+    "on-click": "~/.config/fuzzel/scripts/power.sh --waybar",
+  },
+  "mpd": {
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) <U+F001>",
+    "format-disconnected": "Disconnected <U+F001>",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped <U+F001>",
+    "interval": 2,
+    "consume-icons": {
+      "on": "<U+F0C4> " 
+    },
+    "random-icons": {
+      "off": "<span color=\"#f53c3c\"><U+F074></span> ", 
+      "on": "<U+F074> "
+    },
+    "repeat-icons": {
+      "on": "<U+F01E> "
+    },
+    "single-icons": {
+      "on": "<U+F01E>1 "
+    },
+    "state-icons": {
+      "paused": "<U+F04C>",
+      "playing": "<U+F04B>"
+    },
+    "tooltip-format": "MPD (connected)",
+    "tooltip-format-disconnected": "MPD (disconnected)"
+  },
+  "custom/privacydots": {
+    "exec": "~/.config/waybar/scripts/privacydots.sh",
+    "return-type": "json",
+    "interval": 3,
+    "format": "{text}",
+    "tooltip": true,
+    "escape": false,
+    "markup": "pango"
+  },
+"privacy": {
+    "icon-spacing": 5,
+    "icon-size": 12,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      }
+    ],
+    "ignore-monitor": true
+    // "ignore": [
+    //   {
+    //     "type": "audio-in",
+    //     "name": "cava"
+    //   },
+    //   {
+    //     "type": "screenshare",
+    //     "name": "obs"
+    //   }
+    // ]
+  },
+}
