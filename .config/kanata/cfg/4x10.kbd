@@ -1,0 +1,59 @@
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  esc  a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defalias
+  ;; Set Layer
+  nav (layer-toggle navgation)
+  syb (layer-toggle symbols)
+  ;; Layers 
+  css(tap-hold 100 300 spc @nav)
+  lnc(tap-hold 100 300 c @syb)
+  lnm(tap-hold 100 300 m @syb)
+
+  ;; Control
+  rcj (tap-hold 100 300 j lctl)
+  lcf (tap-hold 100 300 f lctl)
+
+  ;; Shift
+  lsd (tap-hold 100 300 d lsft)
+  rsk (tap-hold 100 300 k lsft)
+
+  ;; Super/Windows
+  lms (tap-hold 100 300 s lmet)   
+  rml (tap-hold 100 300 l lmet)
+
+  ;; Alt
+  laa (tap-hold 100 300 a lalt) 
+  ras (tap-hold 100 300 ; lalt) 
+)
+
+(deflayer 4x10
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX  
+  XX    q    w    e    r    t    y    u    i    o    p    XX   XX   XX
+  XX   @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras XX   XX  
+  lsft    z    x    @lnc v    b    n    @lnm  ,   .    /   rsft
+  @syb XX   lsft          @css            lctrl         XX   XX  
+)
+(deflayer symbols
+
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   
+  XX    1    2    3    4    5    6    7    8    9    0    XX   XX   XX
+  XX     esc  tab  [    ]    grv  -    ;    =    ret  bspc XX       XX 
+  _       \    XX   XX   XX   caps XX   '    _    _    _            _    
+  XX     XX     XX             XX               XX     XX           XX  
+)
+(deflayer navgation
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   
+  XX    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  XX   
+  XX     alt  met  sft ctl  XX   lft  down up   rght del  XX        XX 
+  _       XX   XX   XX   XX   XX   ins  home end  pgup pgdn         _   
+  XX   XX   _              _              _       XX                XX  
+)
+
+
+

@@ -1,0 +1,401 @@
+(defcfg
+  movemouse-smooth-diagonals yes
+)
+
+(defsrc
+  ;;esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt  menu rctl 
+)
+
+(defalias
+
+  ;; Define a layer dos números e teclas F1 a F12
+  num (layer-toggle numbers)
+
+  ;; Define a layer com as teclas de navegação e mídia
+  nav (layer-toggle navgation)
+
+  ;; Define a layer com os simbolos
+  syb (layer-toggle symbols)
+
+  ;; Define a layer de movimento do mouse
+  mov (layer-toggle mouse)
+
+  ;; Navgation
+  lnv (tap-hold 100 300 x @nav) 
+  rnv (tap-hold 100 300 , @nav) 
+  ;; ssc (tap-hold 100 300 spc @nav)
+
+  ;; Numbers
+  lnm (tap-hold 100 300 c @num)
+  rnm (tap-hold 100 300 m @num)
+  ;; ssc (tap-hold 100 300 spc @num)
+
+  ;; Symbols
+  lsy (tap-hold 100 300 v @syb)  
+  rsy (tap-hold 100 300 n @syb)  
+  ;;ssc (tap-hold 100 300 spc @syb)
+
+  ;; Mouse
+  lmv (tap-hold 100 300 z @mov)
+  rmv (tap-hold 100 300 . @mov)
+
+    ;; Remap
+
+  ;; Caps
+  ecc (tap-hold 100 300 esc caps)
+
+  ;; Control
+    ;;ecc (tap-hold 100 300 esc lctl)
+  lcf (tap-hold 100 300 f lctl)
+  rcj (tap-hold 100 300 j lctl)
+  cNe (tap-hold 100 300 next lctl)
+
+  ;; Shift
+  lsd (tap-hold 100 300 d lsft)
+  rsk (tap-hold 100 300 k lsft)
+  sVu (tap-hold 100 300 volu lsft)
+  ssc (tap-hold-release 100 300 spc lsft)
+
+  ;; Super/Windows
+  lms (tap-hold 100 300 s lmet)   
+  rml (tap-hold 100 300 l lmet)
+  mVd (tap-hold 100 300 vold lmet)
+
+  ;; Alt
+  laa (tap-hold 100 300 a lalt) 
+  ras (tap-hold 100 300 ; lalt) 
+  aPr (tap-hold 100 300 prev lalt)
+
+  ;; Mouse
+  mwu (mwheel-up 50 120)
+  mwd (mwheel-down 50 120)
+  mwl (mwheel-left 50 120)
+  mwr (mwheel-right 50 120)
+  mau (movemouse-accel-up 1 2000 1 10)
+  mal (movemouse-accel-left 1 2000 1 10)
+  mad (movemouse-accel-down 1 2000 1 10)
+  mar (movemouse-accel-right 1 2000 1 10)
+
+)
+
+(deflayer base
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc 
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \ 
+  @ecc @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret 
+  lsft @lmv @lnv @lnm @lsy b    @rsy @rnm @rnv @rmv /    rsft 
+  lctl lmet lalt           @ssc           ralt menu rctl 
+)
+
+;; (deflayer numbers
+;;   _    _    _    _    _    _    _    _    _    _    _    _    _    _   
+;;   _    f1   f2   f3   f4   _    .    kp7  kp8  kp9  kp-  _    =    _ 
+;;   _    f5   f6   f7   f8   _    kp*  kp4  kp5  kp6  kp+  _    _  
+;;   _    f9   f10  f11  f12  _    ,    kp1  kp2  kp3  kp/  _   
+;;   _    _    _              kp0            _    _    _    
+;; )
+
+(deflayer numbers
+  _    _    _    _    _    _    _    kp7  kp8  kp9  kp/  _    _    _   
+  _    f1   f2   f3   f4   _    _    kp4  kp5  kp6  kp*  _    =    _ 
+  _    f5   f6   f7   f8   _    _    kp1  kp2  kp3  kp-  _    _  
+  _    f9   f10  f11  f12  _    _    kp.  kp0  kprt kp+  _   
+  _    _    _              _              _    _    _    
+)
+
+(deflayer navgation
+  _    1    2    3    4    5    6    7    8    9    0    -    =    _   
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _   
+  _    @aPr @mVd @sVu @cNe caps lft  down up   rght del  bspc _  
+  _    mute pp   brup brdn menu ins   home end  pgup pgdn _   
+  _    _    _              _              _    _    _    
+)
+;; blup bldn
+
+(deflayer symbols
+  _    S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S-9  S-0  S--  S-=  _   
+  _    1   2    3    4    5    6    7    8    9    0    -    =    grv 
+  _    [    S-[  S-]  ]    S-9  S-0  =    S-=  '    S-6  S-grv   _  
+  _    \    S-\  _    S-,  S-.  _    S--  _    S-'  _    _   
+  _    _    _              _              _    _    _    
+)
+
+(deflayer mouse
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _   
+  _    _    mwu  @mau mwl  _    _    mwu  @mau mwl  mfwd _    _    _ 
+  _    mlft @mal mrgt @mar _    mmid @mal mrgt @mar mlft _    _  
+  _    mwd  @mad mwr  _    _    _    mwd  @mad mwr  mbck _   
+  _    _    _              _              _    _    _    
+)
+
+;; (defcfg)
+
+;; (defsrc
+;;   grv
+;;   1
+;;   2
+;;   3
+;;   4
+;;   5
+;;   6
+;;   7
+;;   8
+;;   9
+;;   0
+;;   min
+;;   eql
+;;   bspc
+;;   tab
+;;   q
+;;   w
+;;   e
+;;   r
+;;   t
+;;   y
+;;   u
+;;   i
+;;   o
+;;   p
+;;   {
+;;   }
+;;   \
+;;   caps
+;;   a
+;;   s
+;;   d
+;;   f
+;;   g
+;;   h
+;;   j
+;;   k
+;;   l
+;;   scln
+;;   '
+;;   ret
+;;   lshift
+;;   z
+;;   x
+;;   c
+;;   v
+;;   b
+;;   n
+;;   m
+;;   comm
+;;   .
+;;   /
+;;   kp=
+;;   kp0
+;;   kp1
+;;   kp2
+;;   kp3
+;;   kp4
+;;   kp5
+;;   kp6
+;;   kp7
+;;   kp8
+;;   kp9
+;;   kprt
+;;   kp/
+;;   kp+
+;;   kp*
+;;   kp-
+;;   kp.
+;;   102d
+;;   scrlck
+;;   pause
+;;   wkup
+;;   esc
+;;   rshift
+;;   lctrl
+;;   lalt
+;;   spc
+;;   ralt
+;;   comp
+;;   lmeta
+;;   rmeta
+;;   rctrl
+;;   del
+;;   ins
+;;   bck
+;;   fwd
+;;   pgup
+;;   pgdn
+;;   up
+;;   down
+;;   lft
+;;   rght
+;;   home
+;;   end
+;;   nlck
+;;   mute
+;;   volu
+;;   voldwn
+;;   brup
+;;   brdown
+;;   blup
+;;   bldn
+;;   next
+;;   pp
+;;   prev
+;;   f1
+;;   f2
+;;   f3
+;;   f4
+;;   f5
+;;   f6
+;;   f7
+;;   f8
+;;   f9
+;;   f10
+;;   f11
+;;   f12
+;;   f13
+;;   f14
+;;   f15
+;;   f16
+;;   f17
+;;   f18
+;;   f19
+;;   f20
+;;   f21
+;;   f22
+;;   f23
+;;   f24
+;; )
+
+;; (deflayer base
+;;   grv
+;;   1
+;;   2
+;;   3
+;;   4
+;;   5
+;;   6
+;;   7
+;;   8
+;;   9
+;;   0
+;;   min
+;;   eql
+;;   bspc
+;;   tab
+;;   q
+;;   w
+;;   e
+;;   r
+;;   t
+;;   y
+;;   u
+;;   i
+;;   o
+;;   p
+;;   {
+;;   }
+;;   \
+;;   caps
+;;   a
+;;   s
+;;   d
+;;   f
+;;   g
+;;   h
+;;   j
+;;   k
+;;   l
+;;   scln
+;;   '
+;;   ret
+;;   lshift
+;;   z
+;;   x
+;;   c
+;;   v
+;;   b
+;;   n
+;;   m
+;;   comm
+;;   .
+;;   /
+;;   kp=
+;;   kp0
+;;   kp1
+;;   kp2
+;;   kp3
+;;   kp4
+;;   kp5
+;;   kp6
+;;   kp7
+;;   kp8
+;;   kp9
+;;   kprt
+;;   kp/
+;;   kp+
+;;   kp*
+;;   kp-
+;;   kp.
+;;   102d
+;;   scrlck
+;;   pause
+;;   wkup
+;;   esc
+;;   rshift
+;;   lctrl
+;;   lalt
+;;   spc
+;;   ralt
+;;   comp
+;;   lmeta
+;;   rmeta
+;;   rctrl
+;;   del
+;;   ins
+;;   bck
+;;   fwd
+;;   pgup
+;;   pgdn
+;;   up
+;;   down
+;;   lft
+;;   rght
+;;   home
+;;   end
+;;   nlck
+;;   mute
+;;   volu
+;;   voldwn
+;;   brup
+;;   brdown
+;;   blup
+;;   bldn
+;;   next
+;;   pp
+;;   prev
+;;   f1
+;;   f2
+;;   f3
+;;   f4
+;;   f5
+;;   f6
+;;   f7
+;;   f8
+;;   f9
+;;   f10
+;;   f11
+;;   f12
+;;   f13
+;;   f14
+;;   f15
+;;   f16
+;;   f17
+;;   f18
+;;   f19
+;;   f20
+;;   f21
+;;   f22
+;;   f23
+;;   f24
+;; )

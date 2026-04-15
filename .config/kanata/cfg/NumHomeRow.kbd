@@ -1,0 +1,97 @@
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet  rctl 
+)
+
+(defalias
+
+  ;; Definer as layer
+;; Define a layer dos números e teclas F1 a F12
+num (layer-toggle numbers)
+;; Define a layer com as teclas de navegação e mídia
+nav (layer-toggle navgation)
+;; Define a layer com os simbolos
+syb (layer-toggle symbols)
+;; Define a layer de movimento do mouse
+
+;; Navgation
+lnv (tap-hold 100 300 x @nav) 
+rnv (tap-hold 100 300 , @nav) 
+
+;; Numbers
+lnm (tap-hold 100 300 c @num)
+rnm (tap-hold 100 300 m @num)
+
+;; Symbols
+lsy (tap-hold 100 300 v @syb)  
+rsy (tap-hold 100 300 n @syb)  
+
+  ;; Remap
+
+;; Space Shift layer de simbolos
+css (tap-hold-release 100 300 spc @syb)
+
+;; Control
+rcj (tap-hold 100 300 j lctl)
+lcf (tap-hold 100 300 f lctl)
+
+;; Shift
+lsd (tap-hold 100 300 d lsft)
+rsk (tap-hold 100 300 k lsft)
+
+;; Super/Windows
+lms (tap-hold 100 300 s lmet)   
+rml (tap-hold 100 300 l lmet)
+
+;; Alt
+laa (tap-hold 100 300 a lalt) 
+ras (tap-hold 100 300 ; lalt) 
+
+;; Caps Lock / Esc
+lec (tap-hold 100 300 esc caps)
+
+;; Mouse
+  mwu (mwheel-up 50 120)
+  mwd (mwheel-down 50 120)
+  mwl (mwheel-left 50 120)
+  mwr (mwheel-right 50 120)
+  mau (movemouse-accel-up 1 2000 1 10)
+  mal (movemouse-accel-left 1 2000 1 10)
+  mad (movemouse-accel-down 1 2000 1 10)
+  mar (movemouse-accel-right 1 2000 1 10)
+  
+)
+
+(deflayer qwerty
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc 
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \ 
+  @lec @laa @lms @lsd @lcf g    h    @rcj @rsk @rml @ras '    ret 
+  lsft z    @lnv @lnm @lsy b    @rsy @rnm @rnv .    /    rsft 
+  lctl lmet lalt           @css           lctl lalt rctl 
+)
+
+(deflayer numbers
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _   
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
+  _    1    2    3    4    5    6    7    8    9    0    _    _  
+  _    /    -   S-=  S-8   =    _    S-=  S-8  -    /    _   
+  _    _    _              kp0            _    _    _    
+)
+(deflayer navgation
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _   
+  _    _    mwu  @mau mwl  _    prev vold volu next mute pp   _    _ 
+  _    mlft @mal mrgt @mar _    lft  down up   rght del  _    _  
+  _    mwd  @mad mwr  _    _    ins  home end  pgup pgdn _   
+  _    _    _              _              _    _    _    
+)
+
+(deflayer symbols
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _   
+  _    S-1  S-2  S-3  S-4  S-5  grv  S-7  S-8  S-9  S-0  -    =    _ 
+  _    S-\  [    S-[  ]    S-]  _    =    S-=  -    S-6  S-grv _  
+  _    \    _    _    S-,  S-.  _    S--  '    S-'  _    _   
+  _    _    _              _              _    _    _    
+)

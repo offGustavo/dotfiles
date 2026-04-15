@@ -1,0 +1,31 @@
+;; Define a layer base
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  esc  a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt menu rctl 
+)
+
+(defalias
+  ;; Definer as layer
+  nav (layer-toggle navgation)
+  ;; Space Shift
+  css (tap-hold 100 300 spc @nav)
+
+)
+(deflayer qwerty
+  grv  S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S-9  S-0  -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  esc  a    s    d    f    g    h    j    k    l    ;    '    ret 
+  lsft z    x    c    b    b    n    m    ,    .    /    rsft 
+  lctl lmet lalt          @css           ralt rmet rctl
+)
+(deflayer navgation
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _   
+  _    7    8    9    _    _    _    _    up   _    pgup pgdn _    _   
+  _    4    5    6    0    _     _   lft down rght  home end  _  
+  _    1    2    3    _    _     _    _    _        ins del  _ 
+  _    _    _              _              _    _    _   
+)

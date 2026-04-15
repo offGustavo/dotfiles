@@ -1,0 +1,3 @@
+new_tab @@session@@ - nvim
+cd @@session-path@@ 
+launch --title "@@session@@ - nvim" nvim 

@@ -1,0 +1,74 @@
+(deflocalkeys-win
+  mctl 193
+)
+
+(defsrc
+ grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+ tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+ caps a    s    d    f    g    h    j    k    l    ;    '    ret
+ lsft z    x    c    v    b    n    m    ,    .    /    rsft
+ lctl lmet lalt    spc    ralt  menu mctl)
+
+(defalias 
+nav (tap-hold 100 300 spc (layer-toggle nav)))
+
+(deflayer base
+ grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+ tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+ esc  a    s    d    f    g    h    j    k    l    ;    '    ret
+ lsft z    x    c    v    b    n    m    ,    .    /    rsft
+ lctl lmet lalt    @nav   ralt  menu rctl)
+
+(deflayermap nav
+
+;; Numbers
+ q 1
+ w 2
+ e 3
+ r 4
+ t 5
+ y 6
+ u 7
+ i 8
+ o 9
+ p 0
+
+;; ;; Left Hand
+;;    w up
+;;    a left
+;;    s down
+;;    d rght
+;;    q home
+;;    e end
+;;    f pgup
+;;    v pgdn
+;;    x del
+;;    c bspc
+;;    z ins
+
+   ;; Right Hand
+   h left
+   k up
+   j down
+   l rght
+   m home
+   , end
+   . pgup
+   / pgdn
+   ; del
+   ' bspc
+   n ins
+
+   ;; Others Keys
+   1 f1 
+   2 f2 
+   3 f3 
+   4 f4 
+   5 f5 
+   6 f6 
+   7 f7 
+   8 f8 
+  9 f9 
+  0 f10 
+  - f11 
+  = f12)

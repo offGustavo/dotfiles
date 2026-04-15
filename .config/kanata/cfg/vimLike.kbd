@@ -1,0 +1,37 @@
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt menu rctl 
+)
+
+(defalias
+  ins(layer-switch insert)
+  com(layer-switch command)
+  eob(tap-hold 100 300 esc @com)
+  norm_ctrl_motion (layertoggle normal_ctrl_motion)
+)
+
+(deflayer command
+  XX  XX    XX    XX   end  XX   XX    XX    XX   XX   home   XX    XX    XX
+  tab XX    C-lft XX   ins  XX   C-c   C-z @ins   XX   C-v    XX    XX    XX
+  XX  XX    del  bspc XX    XX    left  down up  rght XX    XX    XX
+  lsft C-S-z    C-x  XX    C-rght    XX    XX    home end  pgdn pgup  rsft
+  lctl lmet lalt           spc            ralt menu rctl 
+)
+
+(deflayer insert
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @eob a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt menu rctl 
+)
+
+(defmaplayer normal_ctrl_motion
+    d pgdown
+    f pgdown
+    u pgup
+    b pgup
+    s (macro C-s))
