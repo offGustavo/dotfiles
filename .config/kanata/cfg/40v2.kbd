@@ -80,22 +80,19 @@ mar (movemouse-accel-right 1 1000 1 5)
   _       f9   f10  f11  f12  _    ,    kp1  kp2  kp3  kp/    _   
   _    _    _              kp0            _    _    _   
 )
-
 (deflayer navgation
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
   XX   1    2     3   4    5    6    7    8    9    0    -    =    XX
   _    prev vold volu next _     lft  down up   rght  del  bspc _  
   _    mute pp   _    _    _    ins  home pgup pgdn end  _   
-  _    _    _              _              _    _    _   
-)
+  _    _    _              _              _    _    _)
 
 (deflayer symbols ;;teste 
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
   _    S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S-9  S-0  -    =    _    
   _    S-\  [    S-[  ]    S-]  S--  =    '    S-'  S-6  S-grv _  
   _    \    S-9  S-0  S-,  S-.  _    _    S-=  grv  _    _   
-  _    _    _              _              _    _    _   
-)
+  _    _    _              _              _    _    _)
 
 (deflayer mouse
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX

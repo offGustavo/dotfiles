@@ -6,8 +6,7 @@
   lctl lmet lalt           spc            ralt rmet rctl
 )
 (defalias
-  lay(layer-toggle lay)
-  spc(tap-hold 100 300 spc @lay)
+  spc(tap-hold 100 300 spc (layer-toggle lay))
 )
 
 (deflayer qwerty

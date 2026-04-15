@@ -1,0 +1,66 @@
+{
+  1 =   {
+    "title" =     How to access JSON parsed data - DeepSeek — Zen Browser
+    "pid" =     3308
+    "is_floating" =     false
+    "is_urgent" =     false
+    "focus_timestamp" =     {
+      "nanos" =       622610710
+      "secs" =       903
+    }
+    "layout" =     {
+      "window_size" =       {
+        1 =         1920
+        2 =         1024
+      }
+      "window_offset_in_tile" =       {
+        1 =         0
+        2 =         0
+      }
+      "pos_in_scrolling_layout" =       {
+        1 =         1
+        2 =         1
+      }
+      "tile_size" =       {
+        1 =         1920
+        2 =         1024
+      }
+    }
+    "app_id" =     app.zen_browser.zen
+    "id" =     3
+    "is_focused" =     false
+    "workspace_id" =     4
+  }
+  2 =   {
+    "title" =     ./windows.lua > wind ~/.c/n/scripts
+    "pid" =     2493
+    "is_floating" =     false
+    "is_urgent" =     false
+    "focus_timestamp" =     {
+      "nanos" =       971429773
+      "secs" =       904
+    }
+    "layout" =     {
+      "window_size" =       {
+        1 =         1908
+        2 =         1024
+      }
+      "window_offset_in_tile" =       {
+        1 =         0
+        2 =         0
+      }
+      "pos_in_scrolling_layout" =       {
+        1 =         1
+        2 =         1
+      }
+      "tile_size" =       {
+        1 =         1908
+        2 =         1024
+      }
+    }
+    "app_id" =     kitty
+    "id" =     2
+    "is_focused" =     true
+    "workspace_id" =     3
+  }
+}

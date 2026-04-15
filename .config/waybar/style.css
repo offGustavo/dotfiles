@@ -1,27 +1,30 @@
-@import "./colors.css";
-
 * {
   border: none;
-  font-size: 10px;
-  font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
-  /*height: 10px;*/
-  color: @fg;
-  padding: 0;
   font-size: 12px;
+  font-family: "JetBrainsMono Nerd Font Propo" ;
+  color: @fg;
+  /* background-color: transparent; */
+  padding: 0;
 }
-
 
 window#waybar {
   background: @bg;
 }
 
 #custom-logo {
-  /* padding: 10px; */
-  /* padding: 0px; */
-  font-size: 20px;
+  font-size: 18px;
   background-color: @blue;
   color: @bg;
   border-radius: 0px 5px 5px 0px;
+}
+
+#custom-privacydots{
+  background-color: @bg;
+}
+
+#custom-weather{
+  background-color: @bg;
+  color: @fg;
 }
 
 /*.modules-right {*/
@@ -42,23 +45,24 @@ window#waybar {
 /*  margin-top: 2px;*/
 /*}*/
 
-
 #workspaces button {
-  padding: 5px 10px;
+  padding: 0px 5px;
+  margin: 2px;
   border-radius: 5px;
+  background-color: @bg;
 }
 
-       /* #workspaces button */
-       /* #workspaces button.focused: The single focused workspace. */
-       /* #workspaces  button.active:  The workspace is active (visi‐ */
-       /* ble) on its output. */
-       /* #workspaces button.urgent: The workspace has  one  or  more */
-       /* urgent windows. */
-       /* #workspaces button.empty: The workspace is empty. */
-       /* #workspaces  button.current_output:  The  workspace is from */
-       /* the same output as the bar that it is displayed on. */
-       /* #workspaces button#niri-workspace-<name>: Workspaces  named */
-       /* this, or index for unnamed workspaces. */
+/* #workspaces button */
+/* #workspaces button.focused: The single focused workspace. */
+/* #workspaces  button.active:  The workspace is active (visi‐ */
+/* ble) on its output. */
+/* #workspaces button.urgent: The workspace has  one  or  more */
+/* urgent windows. */
+/* #workspaces button.empty: The workspace is empty. */
+/* #workspaces  button.current_output:  The  workspace is from */
+/* the same output as the bar that it is displayed on. */
+/* #workspaces button#niri-workspace-<name>: Workspaces  named */
+/* this, or index for unnamed workspaces. */
 
 /* #workspaces button label{ */
 /*   font-size: 12px; */
@@ -76,17 +80,19 @@ window#waybar {
 /*}*/
 
 #workspaces button.focused,
-#workspaces  button.active,
+#workspaces button.active,
 #workspaces button.visible{
   background: @blue;
   color: @bg;
 }
+
 #workspaces button.urgent{
   background: @red;
   color: @bg;
 }
 #workspaces button.visible label,
 #workspaces button.urgent label{
+  background: @blue;
   color: @bg;
 }
 
@@ -113,12 +119,12 @@ window#waybar {
   padding: 0 5px;
 }
 
-#pulseaudio {
-  padding-top: 4px;
-}
+/* #custom-weather, */
+/* #pulseaudio { */
+/*   padding-top: 4px; */
+/* } */
 
 #pulseaudio.muted {
-  padding-top: 0;
   color: @red ;
 }
 #temperature.critical{
@@ -133,6 +139,7 @@ window#waybar {
 #battery {
   border-radius: 5px 0px 0px 5px;
 }
+
 #battery.charging {
   color: @bg;
   background-color: @green;
@@ -159,9 +166,17 @@ window#waybar {
     color: #000000;
   }
 }
+#tray.active{
+  color: @red;
+  background-color: @bg;
+}       
 
-#taskbar {
-  font-size: 20px;
-  padding: 0px;
+/* #tray > .passive         */
+/* #tray > .active           */
+/* #tray > .needs-attention  */
+
+#taskbar {         
+  font-size: 20px; 
+  padding: 0px;    
   margin: 0px;
 }

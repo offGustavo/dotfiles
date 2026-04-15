@@ -3,30 +3,53 @@ grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
 tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
 caps a    s    d    f    g    h    j    k    l    ;    '    ret
 lsft z    x    c    v    b    n    m    ,    .    /    rsft
-lctl lmet lalt           spc            ralt  menu mctl 
+lctl lmet lalt           spc            ralt  menu mctl )
+
+(defalias 
+  ha (switch  (lctl) (unmod home) break
+              () (unmod a) break)
+  ee (switch  (lctl) (unmod end) break
+              () (unmod e) break)
+  ga (switch (lalt) lrld break
+             () (unmod grv) break)
 )
 
+(deflayermap main
+ tab (switch (ralt) lrld break
+   () grv break)
 
-(deflayer base
-grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-caps (tap-hold 100 300 a (layer-toggle layer-alt))    s    d    (tap-hold 100 300 f (layer-toggle layer-ctrl))    g    h    (tap-hold 100 300 j (layer-toggle layer-ctrl))    k    l    (tap-hold 100 300 ; (layer-toggle layer-alt))    '    ret
-lsft z    x    c    v    b    n    m    ,    .    /    rsft
-lctl lmet lalt          spc            ralt  menu mctl 
-)
+ a (switch  
+   (lctl) (unmod home) break
+   (lctl lsft) (unmod S-home) break
+   () a break)
 
-(deflayer layer-ctrl
-grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-tab  q    w    end    r    t    y    u    i    o    up   [    ]    \
-XX   home s    d    right    g    h    j    k    l    ;    '    ret
-lsft z    x    c    v    left    down m    ,    .    /    rsft
-caps lmet lalt           spc            ralt  menu mctl 
-)
+ e (switch 
+   (lctl) (unmod end) break
+   (lctl lsft) (unmod S-end) break
+   () e break)
 
-(deflayer layer-alt
-grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-tab  q    C-c  e    r    t    C-v    u    i    o    p    [    ]    \
-caps a    s    d    C-left    g    h    j    k    l    ;    '    ret
-lsft z    x    c    v    C-left    n    m    ,    .    /    rsft
-lctl lmet lalt         spc            ralt  menu mctl 
-)
+ f (switch 
+   (lctl) (unmod left) break
+   (lalt) (unmod C-left) break
+   () f break)
+
+ b (switch 
+   (lctl) (unmod right) break
+   (lalt) (unmod C-right) break
+   () b break)
+
+ n (switch 
+   (lctl) (unmod down) break
+   () n break)
+
+ p (switch 
+   (lctl) (unmod up) break
+   () p break)
+ )
+
+;; (deflayer main
+    ;; @ga  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+    ;; tab  q    w    @ee  r    t    y    u    i    o    p    [    ]    \
+    ;; caps @ha  s    d    f    g    h    j    k    l    ;    '    ret
+    ;; lsft z    x    c    v    b    n    m    ,    .    /    rsft
+    ;; lctl lmet lalt           spc            ralt  menu mctl )

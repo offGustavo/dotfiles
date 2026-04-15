@@ -41,7 +41,7 @@ case "$chosen" in
   hyprctl dispatch exit
   ;;
 "Profile")
-  chosen2=$(echo -e "Power Saver\nBalanced\nPerformance\nExit" | eval $fuzzel_command'"Current: ($(powerprofilesctl get)):"')
+  chosen2=$(echo -e "Power Saver\nBalanced\nPerformance\nExit" | eval $fuzzel_command'"current := \"$(powerprofilesctl get)\" >"')
   case "$chosen2" in
   "Power Saver")
     powerprofilesctl set power-saver

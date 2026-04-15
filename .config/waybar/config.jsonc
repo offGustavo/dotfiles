@@ -14,7 +14,7 @@
     "niri/workspaces",
     // "mpd",
     // "hyprland/window",
-    "hyprland/submap",
+    "hyprland/submap"
   ],
   "modules-center": [
     "custom/privacydots"
@@ -22,6 +22,7 @@
   ],
   "modules-right": [
     "tray",
+    "idle_inhibitor",
     "hyprland/language",
     // "custom/updates",
     // "custom/clipboard",
@@ -163,10 +164,17 @@
       "(.*) - zsh": "> [$1]"
     }
   },
-  "tray": {
-    "icon-size": 14,
-    "spacing": 10
-  },
+	"tray": {
+		// "icon-size": 16,
+		"show-passive-items": true,
+		// "smooth-scrolling-threshold":
+		// "spacing": 12,
+		// "reverse-direction":
+		// "on-update":
+		// "expand":
+		// "icons":
+		"cursor": true
+	},
   "custom/updates": {
     "format": "{}",
     "interval": 60,
@@ -252,13 +260,13 @@
     "format-muted": "  Muted",
     // "tooltip-format": "{icon} {volume}%",
     "format-icons": {
-      // "headphones": "",
-      // "bluetooth": "󰥰",
-      // "handsfree": "",
-      // "headset": "",
-      // "phone": "",
-      // "portable": "",
-      // "car": "",
+      "headphones": "",
+      "bluetooth": "󰥰",
+      "handsfree": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
       "default": [
         "🕨",
         "🕩",
@@ -269,7 +277,7 @@
     "justify": "center",
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-right": "~/.config/fuzzel/scripts/sound.sh --waybar",
-    "on-click-middle": "pavucontrol",
+    "on-click-middle": "flatpak run com.saivert.pwvucontrol",
     "tooltip-format": "{volume}%  {icon}",
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
@@ -313,7 +321,7 @@
     "on-click": "waybar-hotspot -a toggle",
   },
   "network": {
-    "format-wifi": "  {essid}",
+    "format-wifi": " {essid}",
     "format-ethernet": "󰈀",
     "format-disconnected": "󱐅",
     "tooltip-format": "{ipaddr}",

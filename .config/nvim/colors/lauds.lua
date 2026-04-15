@@ -1,2 +1,0 @@
-
-require('themes.lauds').setup()

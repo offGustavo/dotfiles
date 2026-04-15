@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-chosen=$(echo -e "Ativar Externo Direita\nAtivar Externo Acima\nDesativar Externo\nAtivar Interno\nDesativar Interno\nEspelhar" | fuzzel -d -p "Escolha uma opção:")
+chosen=$(echo -e "Ativar Externo Direita\nAtivar Externo Acima\nDesativar Externo\nAtivar Interno\nDesativar Interno\nEspelhar" | rofi -dmenu -p "Escolha uma opção:")
 
 case "$chosen" in
 "Ativar Externo Direita")

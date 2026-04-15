@@ -1,0 +1,14 @@
+(defsrc 
+  caps
+  menu
+  ret
+  up)
+
+(deflayer main 
+          lctrl
+          rmet
+          (tap-hold 100 200 ret (layer-toggle nav))
+          (tap-hold 100 200 ret (layer-toggle nav)))
+(deflayer nav 
+
+

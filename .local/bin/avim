@@ -1,3 +1,27 @@
 #!/usr/bin/env bash
 
-nvim --server "$NVIM" --remote-tab "$@"
+# Convert all arguments to absolute paths
+args=()
+for arg in "$@"; do
+    if [ -e "$arg" ]; then
+        # Use realpath if available, otherwise try readlink
+        if command -v realpath >/dev/null 2>&1; then
+            args+=("$(realpath "$arg")")
+        elif command -v readlink >/dev/null 2>&1; then
+            args+=("$(readlink -f "$arg" 2>/dev/null || echo "$arg")")
+        else
+            # Fallback - try to get absolute path
+            if [[ "$arg" != /* ]]; then
+                args+=("$(pwd)/$arg")
+            else
+                args+=("$arg")
+            fi
+        fi
+    else
+        # Not an existing file/directory, pass as-is
+        args+=("$arg")
+    fi
+done
+
+# Pass the converted paths to nvim
+nvim --server "$NVIM" --remote "${args[@]}"

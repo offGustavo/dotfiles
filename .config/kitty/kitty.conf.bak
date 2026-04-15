@@ -1,12 +1,10 @@
 # vim:fileencoding=utf-8:foldmethod=marker
-
 #: Fonts {{{
-
 #: kitty has very powerful font management. You can configure
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-font_family      JetBrainsMonoNL NF
+font_family      JetBrainsMonoNL NF Mono
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
@@ -20,7 +18,7 @@ bold_italic_font auto
 #: <https://sw.kovidgoyal.net/kitty/kittens/choose-fonts/#font-spec-
 #: syntax>.
 
-font_size 13.0
+font_size 12.0
 
 #: Font size (in pts).
 
@@ -347,7 +345,7 @@ cursor_trail_decay 0.1 0.4
 
 #: Scrollback {{{
 
-# scrollback_lines 2000
+scrollback_lines 10000
 
 #: Number of lines of history to keep in memory for scrolling back.
 #: Memory is allocated on demand. Negative numbers are (effectively)
@@ -476,7 +474,7 @@ cursor_trail_decay 0.1 0.4
 #: When the mouse hovers over a terminal hyperlink, show the actual
 #: URL that will be activated when the hyperlink is clicked.
 
-# underline_hyperlinks hover
+underline_hyperlinks hover
 
 #: Control how hyperlinks are underlined. They can either be
 #: underlined on mouse hover, always (i.e. permanently underlined) or
@@ -488,7 +486,7 @@ cursor_trail_decay 0.1 0.4
 #: to/from always will only affect text subsequently received by
 #: kitty.
 
-# copy_on_select no
+copy_on_select yes
 
 #: Copy to clipboard or a private buffer on select. With this set to
 #: clipboard, selecting text with the mouse will cause the text to be
@@ -906,7 +904,8 @@ visual_bell_duration 0.0
 #: set the vertical and horizontal sides. Three values set top,
 #: horizontal and bottom. Four values set top, right, bottom and left.
 
-window_padding_width 8
+# window_padding_width 0
+window_padding_width 4
 
 #: The window padding (in pts) (blank area between the text and the
 #: window border). A single value sets all four sides. Two values set
@@ -946,7 +945,7 @@ window_padding_width 8
 #: The color for the border of inactive windows in which a bell has
 #: occurred.
 
-# inactive_text_alpha 1.0
+inactive_text_alpha 0.7
 
 #: Fade the text in inactive windows by the specified amount (a number
 #: between zero and one, with zero being fully faded).
@@ -963,7 +962,7 @@ hide_window_decorations yes
 #: placement_strategy to prevent the rounded corners from clipping
 #: text. Or use titlebar-and-corners.
 
-# window_logo_path none
+#: window_logo_path none
 
 #: Path to a logo image. Must be in PNG/JPEG/WEBP/GIF/TIFF/BMP format.
 #: Relative paths are interpreted relative to the kitty config
@@ -1027,7 +1026,7 @@ hide_window_decorations yes
 #: insensitive, from the set 0-9A-Z\-=[];',./\\`. Specify your
 #: preference as a string of characters.
 
-# confirm_os_window_close -1
+# confirm_os_window_close 0
 
 #: Ask for confirmation when closing an OS window or a tab with at
 #: least this number of kitty windows in it by window manager (e.g.
@@ -1046,7 +1045,7 @@ hide_window_decorations yes
 
 #: Tab bar {{{
 
-tab_bar_edge top
+# tab_bar_edge top
 
 #: The edge to show the tab bar on, top or bottom.
 
@@ -1061,7 +1060,7 @@ tab_bar_edge top
 #: The second number is the margin between the tab bar and the
 #: contents of the current tab.
 
-# tab_bar_style fade
+tab_bar_style fade
 
 #: The tab bar style, can be one of:
 
@@ -1087,12 +1086,12 @@ tab_bar_edge top
 #:     a mapping for the select_tab action which presents you with a list of
 #:     tabs and allows for easy switching to a tab.
 
-# tab_bar_align left
+tab_bar_align center
 
 #: The horizontal alignment of the tab bar, can be one of: left,
 #: center, right.
 
-# tab_bar_min_tabs 2
+#: tab_bar_min_tabs 2
 
 #: The minimum number of tabs that must exist before the tab bar is
 #: shown.
@@ -1119,7 +1118,7 @@ tab_bar_edge top
 #: The separator between tabs in the tab bar when using separator as
 #: the tab_bar_style.
 
-# tab_powerline_style angled
+#: tab_powerline_style round
 
 #: The powerline separator style between tabs in the tab bar when
 #: using powerline as the tab_bar_style, can be one of: angled,
@@ -1218,7 +1217,7 @@ tab_bar_edge top
 
 #: Color scheme {{{
 
-include ~/.config/kitty/themes/gruvbox.conf
+# include ~/.config/kitty/themes/gruvbox.conf
 
 # foreground #dddddd
 # background #000000
@@ -1300,7 +1299,7 @@ background_blur 30
 
 #:     transparent_background_colors red@0.5 #00ff00@0.3
 
-# dynamic_background_opacity no
+dynamic_background_opacity yes
 
 #: Allow changing of the background_opacity dynamically, using either
 #: keyboard shortcuts (increase_background_opacity and
@@ -1482,7 +1481,8 @@ background_blur 30
 #: See rc_custom_auth <https://sw.kovidgoyal.net/kitty/remote-
 #: control/#rc-custom-auth> for details.
 
-# allow_remote_control no
+# allow_remote_control yes
+allow_remote_control socket-only
 
 #: Allow other programs to control kitty. If you turn this on, other
 #: programs can control all aspects of kitty, including sending text
@@ -1512,6 +1512,7 @@ background_blur 30
 #:     Remote control requests are always accepted.
 
 # listen_on none
+listen_on unix:/tmp/mykitty
 
 #: Listen to the specified socket for remote control connections. Note
 #: that this will apply to all kitty instances. It can be overridden
@@ -1807,7 +1808,7 @@ background_blur 30
 
 #: OS specific tweaks {{{
 
-# wayland_titlebar_color system
+# wayland_titlebar_color background
 
 #: The color of the kitty window's titlebar on Wayland systems with
 #: client side window decorations such as GNOME. A value of system
@@ -1911,7 +1912,7 @@ background_blur 30
 #: configuration will change this value only for newly created OS
 #: windows.
 
-# linux_display_server auto
+# linux_display_server Wayland
 
 #: Choose between Wayland and X11 backends. By default, an appropriate
 #: backend based on the system state is chosen automatically. Set it
@@ -1945,16 +1946,43 @@ background_blur 30
 #: quick examples to illustrate common tasks::
 #
 
-# clear_all_shortcuts		yes
+# [Navigate the Kitty Scrollback with Neovim - YouTube](https://www.youtube.com/watch?v=2IU5qd-ahgw)
+map alt+: launch --stdin-source=@screen_scrollback --type=overlay /usr/bin/env bash -c "SCROLL_MODE=2 nvim +$ +'nmap q ZQ' +'xmap q ZQ' +'nnoremap yy yyq' +'xmap y yq' +'set laststatus=0 nonu nornu signcolumn=no cursorline cmdheight=0'"
 
-map ctrl+shift+c				copy_to_clipboard
-map ctrl+shift+v				paste_from_clipboard
+# map alt+shift+g launch --type=overlay --cwd=current lazygit 
 
-map ctrl+equal		      change_font_size all +1.0
-map ctrl+minus			    change_font_size all -1.0
-map ctrl+0		         change_font_size all 0
+tab_bar_filter session:~ or session:^$ 
+allow_remote_control yes 
+# Unfortunatly still needed since we use remote control to start the session 
+map alt+ctrl+w save_as_session --relocatable --use-foreground-process --match=session:. .
+map alt+ctrl+o launch  --type=tab ~/.config/kitty/kitty-sessionizer.sh
+# Save the status of the current session to its file
+map alt+ctrl+a goto_session -1
+# Go to the previously opened session
+map alt+ctrl+u  launch  --type=tab ~/.config/kitty/session-switch.sh
+# See a overview of open sessions and choose one
+map alt+ctrl+q close_session 
+# See a overview of open sessions and close one
+map kitty_mod+t launch --type=tab --cwd=current 
+map kitty_mod+enter launch --type=window --cwd=current 
+map kitty_mod+n launch --type=os-window --cwd=current 
 
-map ctrl+shift+,       load_config_file
+map ctrl+shift+v paste_from_clipboard
+map ctrl+shift+c copy_to_clipboard
+map --when-focus-on var:in_editor ctrl+shift+c
+
+map alt+shift+1 goto_tab 1
+map alt+shift+2 goto_tab 2
+map alt+shift+3 goto_tab 3
+map alt+shift+4 goto_tab 4
+map alt+shift+5 goto_tab 5
+map alt+shift+6 goto_tab 6
+map alt+shift+7 goto_tab 7
+map alt+shift+8 goto_tab 8
+map alt+shift+9 goto_tab 9
+map alt+shift+0 goto_tab 10
+
+# clear_all_shortcuts yes
 
 #:     # unmap a keyboard shortcut, passing it to the program running in kitty
 #:     map kitty_mod+space
@@ -1968,9 +1996,8 @@ map ctrl+shift+,       load_config_file
 #: The full list of actions that can be mapped to key presses is
 #: available here <https://sw.kovidgoyal.net/kitty/actions/>.
 
-# kitty_mod ctrl+s
-
-# map kitty_mod>c new_window
+#: kitty_mod alt+shift
+# kitty_mod alt+shift
 
 #: Special modifier key alias for default shortcuts. You can change
 #: the value of this option to alter all default shortcuts that use
@@ -2013,7 +2040,7 @@ map ctrl+shift+,       load_config_file
 
 #: Copy to clipboard
 
-# map kitty_mod+c copy_to_clipboard
+#: map kitty_mod+c copy_to_clipboard
 # map cmd+c       copy_to_clipboard
 
 #::  There is also a copy_or_interrupt action that can be optionally
@@ -2679,7 +2706,9 @@ map ctrl+shift+,       load_config_file
 
 #: }}}
 
+#: Kitty Theme {{{ 
 # BEGIN_KITTY_THEME
-# Tokyo Night
+# Tokyo Night Day
 include current-theme.conf
 # END_KITTY_THEME
+# }}}
