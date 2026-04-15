@@ -22,8 +22,9 @@
   ],
   "modules-right": [
     "tray",
-    "idle_inhibitor",
+    "niri/language",
     "hyprland/language",
+    // "idle_inhibitor",
     // "custom/updates",
     // "custom/clipboard",
     "backlight",
@@ -115,6 +116,13 @@
     "interval": 1,
     "exec": "~/.config/waybar/scripts/powerdraw.sh",
     "return-type": "json"
+  },
+  "niri/language": {
+    "format": "{}",
+    "keyboard-name": "at-translated-set-2-keyboard",
+    "format-en": "(us) ",
+    "format-pt": "(br) ",
+    "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
   },
   "niri/workspaces": {
 	"format": "{name}",
