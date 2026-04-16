@@ -1,8 +1,8 @@
 vim.schedule(function()
-vim.pack.add({ "https://github.com/ibhagwan/fzf-lua" })
+vim.cmd.packadd("fzf-lua")
 local Fzf = require("fzf-lua")
 Fzf.setup({
-	-- "ivy",
+	"ivy",
   ui_select = true,
 	fzf_colors = {
 		true, -- inherit fzf colors that aren't specified below from
@@ -32,7 +32,7 @@ vim.keymap.set("n", "<leader>,", function()
 	Fzf.buffers()
 end, { desc = "Buffers" })
 vim.keymap.set("n", "<leader>/", function()
-	Fzf.grep()
+	Fzf.live_grep()
 end, { desc = "Grep" })
 vim.keymap.set("n", "<leader>:", function()
 	Fzf.command_history()

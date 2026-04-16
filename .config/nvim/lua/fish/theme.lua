@@ -1,6 +1,6 @@
 -- local themes = {
 --   name = "tokyonight",
-vim.pack.add({ src = "https://github.com/folke/tokyonight.nvim" })
+vim.cmd.packadd("tokyonight.nvim")
 -- config = function ()
 require("tokyonight").setup({
 	dim_inactive = false,

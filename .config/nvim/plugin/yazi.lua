@@ -1,9 +1,7 @@
 vim.schedule(function()
 	-- (Obtain yazi.nvim and its dependencies using your preferred method first)
-	vim.pack.add({
-		"https://github.com/nvim-lua/plenary.nvim",
-		"https://github.com/mikavilpas/yazi.nvim",
-	})
+	vim.cmd.packadd("plenary.nvim")
+	vim.cmd.packadd("yazi.nvim")
 	-- Next, map a key to open yazi.nvim
 	vim.keymap.set("n", "<M-e>", function()
 		require("yazi").yazi()

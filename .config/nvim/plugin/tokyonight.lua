@@ -1,5 +1,5 @@
 vim.schedule(function()
-	vim.pack.add({ "https://github.com/folke/tokyonight.nvim" })
+  vim.cmd.packadd("tokyonight.nvim")
 
 	require("tokyonight").setup({
 		dim_inactive = false,

@@ -1,5 +1,5 @@
 vim.schedule(function()
-	vim.pack.add({ "https://github.com/folke/snacks.nvim" })
+  vim.cmd.packadd("snacks.nvim")
 
 	local ivy_like_2 = {
 		preview = false,

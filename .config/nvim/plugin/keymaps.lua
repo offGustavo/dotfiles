@@ -35,7 +35,6 @@ vim.keymap.set("n", "<leader>fD", ":e $MYVIMDIR<Cr>", { silent = true, desc = "E
 vim.keymap.set("n", "<leader>fn", ":enew<Cr>", { silent = true, desc = "Edit the Init.lua file" })
 
 vim.keymap.set("n", "<leader>bb", ":b #<Cr>", { desc = "Alternative Buffer" })
-vim.keymap.set("n", "<M-a>", ":b #<Cr>", { desc = "Alternative Buffer" })
 vim.keymap.set("n", "<leader>bd", ":bd<Cr>", { desc = "Delete Buffer" })
 vim.keymap.set("n", "<leader>bD", ":bufdo bd<Cr>", { desc = "Delete All Buffers" })
 

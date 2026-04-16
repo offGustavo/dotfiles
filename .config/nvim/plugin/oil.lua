@@ -1,6 +1,6 @@
 -- if true then return end
 vim.schedule(function ()
-  
+  --    TODO: depois eu vejo isso aqui
 -- vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
 vim.opt.rtp:append("~/Projects/oil.nvim/")
 

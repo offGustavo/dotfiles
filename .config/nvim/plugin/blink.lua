@@ -1,10 +1,7 @@
 vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter" }, {
   once = true,
   callback = function()
-    vim.pack.add({
-      { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("*") },
-      "https://github.com/rafamadriz/friendly-snippets"
-    })
+    vim.cmd.packadd("friendly-snippets")
     vim.cmd.packadd("blink.cmp")
     require("blink.cmp").setup({
       -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)

@@ -1,5 +1,5 @@
 vim.schedule(function()
-	vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
+  vim.cmd.packadd("conform.nvim")
 	vim.keymap.set(
 		"n", -- Customize or remove this keymap to your liking
 		"<leader>cf",

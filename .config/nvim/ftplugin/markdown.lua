@@ -7,7 +7,7 @@ let g:markdown_folding = 1
 if not Fish.markview_loaded then
 	-- print("markview_loaded")
 	Fish.markview_loaded = true
-	vim.pack.add({ "https://github.com/OXY2DEV/markview.nvim" })
+	vim.cmd.packadd("markview.nvim")
 	require("markview").setup({
 		preview = {
 			modes = { "n", "no", "c" },
@@ -61,7 +61,7 @@ end
 if not Fish.imgclip_loaded then
 	-- print("imgclip_loaded")
 	Fish.imgclip_loaded = true
-	vim.pack.add({ "https://github.com/HakonHarnes/img-clip.nvim" })
+	vim.cmd.packadd("img-clip.nvim")
 	require("img-clip").setup({
 		-- add options here
 		-- or leave it empty to use the default settings

@@ -1,5 +1,5 @@
 vim.schedule(function()
-	vim.pack.add({ "https://github.com/zenarvus/md-agenda.nvim" })
+  vim.cmd.packadd("md-agenda.nvim")
 	vim.keymap.set("n", "<leader>aa", "<Cmd>AgendaView<CR>", { silent = true, desc = "Md Agenda" })
 	require("md-agenda").setup({
 		--- REQUIRED ---

@@ -115,6 +115,10 @@
       "rev": "97e1548a40d5e9a613dd3789f3d422fb8e501781",
       "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
+    "vim-eunuch": {
+      "rev": "e86bb794a1c10a2edac130feb0ea590a00d03f1e",
+      "src": "https://github.com/tpope/vim-eunuch"
+    },
     "vim-fugitive": {
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
       "src": "https://github.com/tpope/vim-fugitive"

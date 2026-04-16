@@ -1,3 +1,4 @@
+vim.o.modeline = false
 -- vim.g.netrw_banner =
 vim.o.number = true
 vim.o.relativenumber = true

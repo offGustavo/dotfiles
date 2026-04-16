@@ -1,6 +1,5 @@
-if true then return {} end
 vim.schedule(function()
-	vim.pack.add({ { src = "https://github.com/nvim-lualine/lualine.nvim" } })
+  vim.cmd.packadd("lualine.nvim")
 
 	local function show_macro_recording()
 		local recording_register = vim.fn.reg_recording()

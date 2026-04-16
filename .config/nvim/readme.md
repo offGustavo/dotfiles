@@ -21,7 +21,7 @@ nmap <leader>ff :FzfLua files<CR>
 ```
 
 On the <localleader> you can map things like ftplugin keymaps, so you have a keymaps to run a line of lua in the lua ftplugin, map this to 
- 
+
 ```vim
 nmap <localleader>l :.lua<Cr>
 ```
@@ -30,25 +30,25 @@ So with this you keep <leader>l free to keymaps for location list(or any shortcu
 
 ### Autocmds
 
-```lua
-vim.autocmd = vim.nvim_api.autocmd
-vim.doautocmd = vim.nvim_api.doautocmd
-```
+    ```lua
+    vim.autocmd = vim.nvim_api.autocmd
+    vim.doautocmd = vim.nvim_api.doautocmd
+    ```
 
 
 ### Global 
 
-You can make state global in neovim
-```lua
-_G.Fish = {}
-function _G.my_func() 
-  do_something()
-end
-```
+    You can make state global in neovim
+    ```lua
+    _G.Fish = {}
+    function _G.my_func() 
+do_something()
+    end
+    ```
 
 ### Theme
 
-```
--- Set Theme
-require("fish.theme")
-```
+    ```
+    -- Set Theme
+    require("fish.theme")
+    ```
