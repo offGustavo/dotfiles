@@ -170,7 +170,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 
 fzf --fish | source
 
-alias vim=nvim
+# alias vim=nvim
 
 # FIXME: arruma essa merda
 # alias start-kanata='tmux has-session -t kanata 2>/dev/null && tmux attach -t kanata || (tmux new-session -s kanata -c "$HOME/.config/kanata" && tmux send-keys -t kanata "sudo kanata -c $HOME/.config/kanata/kanata.kbd" C-m'
