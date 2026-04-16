@@ -1,5 +1,7 @@
 set nu rnu
 set shiftwidth=2
+set signcolumn=yes
+set foldmethod=indent
 
 set termguicolors
 syntax on
