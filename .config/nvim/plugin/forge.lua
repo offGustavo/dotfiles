@@ -11,6 +11,8 @@ require("forge.yazi").setup({
   keybindings = {},
 })
 
+require("forge.statusline")
+
 vim.schedule(function ()
 -- require("forge.easymode")
 
@@ -20,7 +22,6 @@ vim.schedule(function ()
 --   require("forge.vidir").open()
 -- end)
 
--- require("forge.statusline")
 
 -- require("forge.tabline")
 
@@ -55,7 +56,7 @@ TabTerm.setup({
     separator_left = "",
     separator_first = "",
     center = true,
-    default_highlight = "%#Tabline#",
+    default_highlight = "%#Normal#",
     tab_highlight = "%#TablineSel#",
     -- Window Config
     vertical_size = 20,

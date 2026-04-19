@@ -1,18 +1,10 @@
--- We set the leader and localleader keys before any mapping
 vim.g.mapleader = " "
 vim.g.maplocalleader = "<M-m>"
 
--- Set Global state
 _G.Fish = {}
 
--- Set our temp theme
-if vim.o.background == "dark" then
-  vim.cmd.colorscheme("tokyo")
-else
-  vim.cmd.colorscheme("tokyo-day")
-end
-
 vim.pack.add({
+    "https://github.com/RRethy/base16-nvim",
     "https://github.com/folke/flash.nvim",
     "https://github.com/folke/tokyonight.nvim",
     "https://github.com/nvim-lua/plenary.nvim",
@@ -40,3 +32,12 @@ vim.pack.add({
     load = function()
     end
   })
+
+if vim.o.background == "dark" then
+  -- vim.cmd.colorscheme("shibuya")
+  vim.cmd.colorscheme("tokyo")
+else
+  -- vim.cmd('packadd base16-nvim')
+  -- vim.cmd.colorscheme("base16-gruvbox-light")
+  vim.cmd.colorscheme("tokyo-day")
+end

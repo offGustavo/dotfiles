@@ -3,7 +3,6 @@ if vim.fn.has('nvim-0.12') ~= 1 then
   return
 end
 
-
 vim.o.cmdheight = 0
 require('vim._core.ui2').enable({
   enable = true, -- Whether to enable or disable the UI.

@@ -1,5 +1,6 @@
 vim.schedule(function()
-	vim.pack.add({ "https://github.com/offGustavo/nvim-sessionizer" })
+	-- vim.pack.add({ "https://github.com/offGustavo/nvim-sessionizer" })
+  vim.opt.rtp:append("~/Projects/nvim-sessionizer/")
   vim.g.sessionizer = {
     -- Disable Zoxide integration.
     -- Set to true if prefer not to use it. 

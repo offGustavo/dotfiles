@@ -3,7 +3,7 @@ vim.cmd.packadd("fzf-lua")
 local Fzf = require("fzf-lua")
 Fzf.setup({
 	"ivy",
-  ui_select = true,
+  -- ui_select = true,
 	fzf_colors = {
 		true, -- inherit fzf colors that aren't specified below from
 	},
@@ -13,7 +13,7 @@ vim.keymap.set("n", "z=", ":FzfLua spell_suggest<Cr>")
 
 vim.keymap.set("n", "<M-o>", "<Cmd>FzfLua files<Cr>", { desc = "Find" })
 vim.keymap.set("n", "<M-s>", "<Cmd>FzfLua live_grep<Cr>", { desc = "Grep" })
-vim.keymap.set("n", "<M-h>", "<Cmd>FzfLua buffers<Cr>", { desc = "Buffers" })
+vim.keymap.set("n", "<M-b>", "<Cmd>FzfLua buffers<Cr>", { desc = "Buffers" })
 vim.keymap.set("n", "<M-r>", "<Cmd>FzfLua oldfiles<Cr>", { desc = "Old Files" })
 vim.keymap.set("n", "<M-p>", "<Cmd>FzfLua global<Cr>", { desc = "Global" })
 vim.keymap.set("n", "<leader>fa", "<Cmd>FzfLua<Cr>", { desc = "Fzf Lua Builtin" })

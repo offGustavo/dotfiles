@@ -1,5 +1,13 @@
 {
   "plugins": {
+    "artio.nvim": {
+      "rev": "207c1ece931eaf40e310ecb3436312c586c26756",
+      "src": "https://codeberg.org/comfysage/artio.nvim"
+    },
+    "base16-nvim": {
+      "rev": "4a6ef31745f851e11424a12b63fb3d2a80b2916c",
+      "src": "https://github.com/RRethy/base16-nvim"
+    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/Saghen/blink.cmp",
@@ -24,6 +32,10 @@
     "fzf-lua": {
       "rev": "4deeecf611c0beba6455e6cf06e2c051a6169dd4",
       "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "gruvbox.nvim": {
+      "rev": "154eb5ff5b96d0641307113fa385eaf0d36d9796",
+      "src": "https://github.com/ellisonleao/gruvbox.nvim"
     },
     "harpoon": {
       "rev": "87b1a3506211538f460786c23f98ec63ad9af4e5",

@@ -1,6 +1,7 @@
 vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter" }, {
   once = true,
   callback = function()
+    -- if true then return end
     vim.cmd.packadd("friendly-snippets")
     vim.cmd.packadd("blink.cmp")
     require("blink.cmp").setup({

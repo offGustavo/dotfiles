@@ -1,3 +1,5 @@
+vim.schedule(function ()
+  
 vim.keymap.set("n", "<M-o>", ":fin ")
 vim.keymap.set("n", "<M-e>", ":Ex<Cr>")
 vim.keymap.set("n", "<M-s>", ":grep ")
@@ -15,10 +17,10 @@ vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank from System" })
 
 vim.keymap.set("n", "<C-Down>", "}", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-Up>", "{", { noremap = true, silent = true })
-vim.keymap.set("i", "<M->>", "G", { noremap = true, silent = true })
-vim.keymap.set("i", "<M-<>", "<C-o>gg", { noremap = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<M->>", "G", { noremap = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<M-<>", "gg", { noremap = true, silent = true })
+vim.keymap.set("i", "<M-S-.>", "G", { noremap = true, silent = true })
+vim.keymap.set("i", "<M-S-,>", "<C-o>gg", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<M-S-.>", "G", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<M-S-,>", "gg", { noremap = true, silent = true })
 
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
@@ -255,8 +257,9 @@ vim.keymap.set("n", "gX", function()
 	if file ~= "" then
 		vim.ui.open(file)
 	else
-		vim.notify("No file to open", vim.log.levels.WARN)
+		vim.notify("no file to open", vim.log.levels.warn)
 	end
 end, { desc = "Open current file" })
 
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })
+end)

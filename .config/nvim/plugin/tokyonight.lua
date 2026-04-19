@@ -19,5 +19,5 @@ vim.schedule(function()
 		end,
 	})
 
-	vim.cmd.colorscheme("tokyonight")
+	-- vim.cmd.colorscheme("tokyonight")
 end)
