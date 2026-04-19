@@ -27,6 +27,7 @@ vim.pack.add({
     "https://github.com/stevearc/quicker.nvim",
     "https://github.com/folke/snacks.nvim",
     "https://github.com/folke/tokyonight.nvim",
+    "https://github.com/chomosuke/term-edit.nvim"
   },
   {
     load = function()

@@ -115,6 +115,10 @@
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
       "src": "https://github.com/folke/snacks.nvim"
     },
+    "term-edit.nvim": {
+      "rev": "29c4584c2cef44a3fdcc55860957d081b892a569",
+      "src": "https://github.com/chomosuke/term-edit.nvim"
+    },
     "tiny-cmdline.nvim": {
       "rev": "807d23bcb7cdf26da9e92c5ea5299e7f0d07383d",
       "src": "https://github.com/rachartier/tiny-cmdline.nvim"
