@@ -5,13 +5,13 @@ vim.schedule(function ()
 -- vim.keymap.set("n", "<M-s>", ":grep ")
 -- vim.keymap.set("n", "<M-b>", ":b ")
 
-vim.keymap.set("n", "<M-y>", '"+p')
-vim.keymap.set("n", "<M-w>", '"+y')
+vim.keymap.set("n", "<M-y>", '"+')
 vim.keymap.set({ "n" }, "<leader>p", '"+p', { desc = "Paste from System" })
 vim.keymap.set("x", "<leader>p", '"_dP') -- Paste without overwriting the default register
 vim.keymap.set({ "n", "x" }, "<C-s-v>", '"+p', { desc = "Paste from System" })
 vim.keymap.set({ "n", "x" }, "<C-S-c>", '"+y', { desc = "Yank to System" })
 vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Yank to System" })
+vim.keymap.set({ "n", "x" }, "<D-c>", '"+y', { desc = "Yank to System" })
 vim.keymap.set({ "n", "x" }, "<D-c>", '"+y', { desc = "Yank to System" })
 vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank to System" })
 

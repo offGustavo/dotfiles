@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 -- FIXME: The local leader stop working after first use, for some reason
 -- vim.g.maplocalleader = "<C-m>"
+-- vim.g.maplocalleader = "<M-m>"
 vim.g.maplocalleader = "<space><space>"
 
 _G.Fish = {}
@@ -15,7 +16,7 @@ else
 end
 
 Fish.plugins = {
-	"https://github.com/RRethy/base16-nvim",
+	-- "https://github.com/RRethy/base16-nvim",
 	"https://github.com/folke/flash.nvim",
 	"https://github.com/folke/tokyonight.nvim",
 	"https://github.com/nvim-lua/plenary.nvim",
@@ -32,7 +33,7 @@ Fish.plugins = {
 	"https://github.com/esmuellert/codediff.nvim",
 	"https://github.com/NeogitOrg/neogit",
 	"https://github.com/tpope/vim-fugitive",
-	"https://github.com/nvim-lualine/lualine.nvim",
+	-- "https://github.com/nvim-lualine/lualine.nvim",
 	"https://github.com/stevearc/conform.nvim",
 	"https://github.com/ibhagwan/fzf-lua",
 	"https://github.com/brenton-leighton/multiple-cursors.nvim",
@@ -44,8 +45,6 @@ Fish.plugins = {
 	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/folke/which-key.nvim",
 }
-
-
 
 vim.pack.add(Fish.plugins, {
 	load = function() end,

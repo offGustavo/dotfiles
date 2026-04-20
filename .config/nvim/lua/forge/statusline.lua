@@ -48,7 +48,7 @@ local function git_info()
     end
 
     local highlighted_diff = table.concat(highlighted_parts, " ")
-    return vim.b.minigit_summary_string .. " %#Normal#" .. highlighted_diff .. "%#Normal#"
+    return vim.b.minigit_summary_string .. " %#Normal#" .. highlighted_diff .. "%#Normal# "
   end
   return ""
 end
@@ -135,7 +135,7 @@ function Fish.build_statusline_inactive()
 end
 
 -- FIXME: Quero usar o laststatus = 0, mas o nome do arquivo não fica salvo per janela
--- vim.o.laststatus = 3
+vim.o.laststatus = 3
 vim.o.showmode = false
 
 -- set statusline=%<%f\ %h%w%m%r\ %{%\ v:lua.require('vim._core.util').term_exitcode()\ %}%=%{%\ luaeval('(package.loaded[''vim.ui'']\ and\ vim.api.nvim_get_current_win()\ ==\ tonumber(vim.g.actual_curwin\ or\ -1)\ and\ vim.ui.progress_status())\ or\ ''''\ ')%}%{%\ &showcmdloc\ ==\ 'statusline'\ ?\ '%-10.S\ '\ :\ ''\ %}%{%\ exists('b:keymap_name')\ ?\ '<'..b:keymap_name..'>\ '\ :\ ''\ %}%{%\ &busy\ >\ 0\ ?\ '◐\ '\ :\ ''\ %}%{%\ luaeval('(package.loaded[''vim.diagnostic'']\ and\ next(vim.diagnostic.count())\ and\ vim.diagnostic.status()\ ..\ ''\ '')\ or\ ''''\ ')\ %}%{%\ &ruler\ ?\ (\ &rulerformat\ ==\ ''\ ?\ '%-14.(%l,%c%V%)\ %P'\ :\ &rulerformat\ )\ :\ ''\ %}

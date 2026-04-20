@@ -82,6 +82,7 @@ vim.schedule(function()
       reindent_linewise = true,
     },
   })
+
   local hipatterns = require("mini.hipatterns")
   hipatterns.setup({
     highlighters = {
