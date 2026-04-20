@@ -1,6 +1,7 @@
 set nu rnu
-set shiftwidth=2
+set shiftwidth=1
 set signcolumn=yes
+set foldcolumn=1
 set foldmethod=indent
 
 set termguicolors
