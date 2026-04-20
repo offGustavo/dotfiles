@@ -598,6 +598,7 @@ binds {
   // Alt+Shift+Tab repeat=true { spawn "sh" "-c" "~/.config/niri/scripts/alt_tab.sh prev"; }
 
   Mod+q { close-window; }
+  Alt+F4 { close-window; }
   Mod+Delete { close-window; }
 
   Mod+I     { focus-window-up; }
