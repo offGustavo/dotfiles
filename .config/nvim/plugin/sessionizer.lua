@@ -1,9 +1,9 @@
 vim.schedule(function()
-	-- vim.pack.add({ "https://github.com/offGustavo/nvim-sessionizer" })
+  vim.cmd.packadd("nvim-sessionizer")
   vim.opt.rtp:append("~/Projects/nvim-sessionizer/")
   vim.g.sessionizer = {
     -- Disable Zoxide integration.
-    -- Set to true if prefer not to use it. 
+    -- Set to true if prefer not to use it.
     -- If Zoxide isn't installed, this setting has no effect.
     no_zoxide = false,
 
@@ -20,22 +20,22 @@ vim.schedule(function()
     -- UI configuration
     ui = {
       keymap = {
-        quit = "q",         -- Key to quit the session window
-        attach = "<CR>",    -- Key to attach to a session
-        delete = "<S-d>",   -- Key to delete a session
-        move_up = "<C-k>",  -- Move session up
-        move_down = "<C-j>",-- Move session down
+        quit = "q",          -- Key to quit the session window
+        attach = "<CR>",     -- Key to attach to a session
+        delete = "<S-d>",    -- Key to delete a session
+        move_up = "<C-k>",   -- Move session up
+        move_down = "<C-j>", -- Move session down
       },
       win = {
-        width = 0.6,        -- Window width ratio (0-1)
-        height = 0.4,       -- Window height ratio (0-1)
+        width = 0.6, -- Window width ratio (0-1)
+        height = 0.4, -- Window height ratio (0-1)
         winbar = {
-          hl_left = "Title",      -- Highlight for left section text
-          hl_right = "Comment",   -- Highlight for right section text
+          hl_left = "Title", -- Highlight for left section text
+          hl_right = "Comment", -- Highlight for right section text
           hl_separator = "Comment", -- Highlight for separators
-          sep_left = "/",         -- Separator between left items
-          sep_mid = "%=",         -- Separator for center alignment
-          sep_right = "│",        -- Separator for right items
+          sep_left = "/", -- Separator between left items
+          sep_mid = "%=", -- Separator for center alignment
+          sep_right = "│", -- Separator for right items
           format = function(config) -- Function to format winbar items
             return {
               left = {
@@ -51,8 +51,8 @@ vim.schedule(function()
         },
       },
       current = {
-        mark = ">",          -- Marker for the current session
-        hl = "MatchParen",   -- Highlight group for the marker
+        mark = ">",        -- Marker for the current session
+        hl = "MatchParen", -- Highlight group for the marker
       },
     },
   }

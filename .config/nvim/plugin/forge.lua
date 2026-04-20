@@ -1,15 +1,15 @@
-require("forge.yazi").setup({
-  enable_cmds = true,
-  replace_netrw = true,
-  ui = {
-    border = "rounded",
-    height = 0.9,
-    width = 0.9,
-    x = 0.5,
-    y = 0.5,
-  },
-  keybindings = {},
-})
+-- require("forge.yazi").setup({
+--   enable_cmds = true,
+--   replace_netrw = true,
+--   ui = {
+--     border = "rounded",
+--     height = 0.9,
+--     width = 0.9,
+--     x = 0.5,
+--     y = 0.5,
+--   },
+--   keybindings = {},
+-- })
 
 require("forge.statusline")
 
@@ -29,24 +29,21 @@ require("forge.compile").setup()
 
 require("forge.commands")
 
-vim.keymap.set("n", "<M-e>", ":Yazi<CR>")
-
-vim.keymap.set("n", "<M-S-g>", ":Lazygit<CR>")
-require("forge.lazygit").setup({
-    ui = {
-        border = "rounded",
-        height = 0.9,
-        width = 0.9,
-    },
-    keybindings = {
-        -- ["<C-h>"] = "<C-\\><C-n><C-w>h", -- navigate left
-        -- ["<C-l>"] = "<C-\\><C-n><C-w>l", -- navigate right
-    },
-    on_exit = function()
-        vim.cmd("checktime") -- refresh buffers if files changed
-    end,
-    enable_cmds = true,
-})
+-- require("forge.lazygit").setup({
+--     ui = {
+--         border = "rounded",
+--         height = 0.9,
+--         width = 0.9,
+--     },
+--     keybindings = {
+--         -- ["<C-h>"] = "<C-\\><C-n><C-w>h", -- navigate left
+--         -- ["<C-l>"] = "<C-\\><C-n><C-w>l", -- navigate right
+--     },
+--     on_exit = function()
+--         vim.cmd("checktime") -- refresh buffers if files changed
+--     end,
+--     enable_cmds = true,
+-- })
 
 
 local TabTerm = require("forge.tabterm")

@@ -29,13 +29,13 @@ local function get_tab_label(tabnr)
 
   -- Build the label: index | cwd | filename [+windows]
   -- local label = string.format("%d | %s | %s", tabnr, cwd_short, filename)
-  -- local label = string.format("%d [%s] %s", tabnr, cwd_short, filename)
-  local label = string.format("%d [%s]", tabnr, cwd_short)
+  local label = string.format("%d [%s] %s", tabnr, cwd_short, filename)
+  -- local label = string.format("%d [%s]", tabnr, cwd_short)
 
   -- -- Add window count only if more than 1
-  -- if window_count > 1 then
-  --   label = label .. string.format(" +%d", window_count)
-  -- end
+  if window_count > 1 then
+    label = label .. string.format(" +%d", window_count)
+  end
 
   return label
 end

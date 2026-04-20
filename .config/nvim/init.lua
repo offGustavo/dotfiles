@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+-- FIXME: ????
 vim.g.maplocalleader = "<M-m>"
 
 _G.Fish = {}
@@ -20,6 +21,7 @@ vim.pack.add({
     "https://github.com/nvim-lua/plenary.nvim",
     "https://github.com/esmuellert/codediff.nvim",
     "https://github.com/NeogitOrg/neogit",
+    "https://github.com/tpope/vim-fugitive",
     "https://github.com/nvim-lualine/lualine.nvim",
     "https://github.com/stevearc/conform.nvim",
     "https://github.com/ibhagwan/fzf-lua",
@@ -27,7 +29,9 @@ vim.pack.add({
     "https://github.com/stevearc/quicker.nvim",
     "https://github.com/folke/snacks.nvim",
     "https://github.com/folke/tokyonight.nvim",
-    "https://github.com/chomosuke/term-edit.nvim"
+    "https://github.com/chomosuke/term-edit.nvim",
+    "https://github.com/offGustavo/nvim-sessionizer",
+    "https://github.com/stevearc/oil.nvim",
   },
   {
     load = function()

@@ -1,12 +1,42 @@
 vim.schedule(function()
   vim.cmd.packadd("mini.nvim")
 
+  -- require("mini.statusline").setup()
+  -- require("mini.tabline").setup()
+
   require("mini.icons").setup({
     -- -- Icon style: 'glyph' or 'ascii'
     -- style = 'ascii',
   })
 
   require("mini.git").setup({})
+  -- Use only HEAD name as summary string
+  local branch_format_summary = function(data)
+    -- Utilize buffer-local table summary
+    local summary = vim.b[data.buf].minigit_summary
+    vim.b[data.buf].minigit_summary_string = summary.head_name or ''
+  end
+  local branch_au_opts = { pattern = 'MiniGitUpdated', callback = branch_format_summary }
+  vim.api.nvim_create_autocmd('User', branch_au_opts)
+
+  local diff_summary = function(data)
+    local summary = vim.b[data.buf].minidiff_summary
+    local t = {}
+    if summary.add > 0 then
+      table.insert(t, "+" .. summary.add)
+    end
+    if summary.change > 0 then
+      table.insert(t, "~" .. summary.change)
+    end
+    if summary.delete > 0 then
+      table.insert(t, "-" .. summary.delete)
+    end
+    vim.b[data.buf].minidiff_summary_string = table.concat(t, " ")
+  end
+
+  local diff_au_opts = { pattern = "MiniDiffUpdated", callback = diff_summary }
+  vim.api.nvim_create_autocmd("User", diff_au_opts)
+
   require("mini.diff").setup({
     -- Options for how hunks are visualized
     view = {
@@ -22,22 +52,6 @@ vim.schedule(function()
     },
   })
 
-  local format_summary = function(data)
-    local summary = vim.b[data.buf].minidiff_summary
-    local t = {}
-    if summary.add > 0 then
-      table.insert(t, "+" .. summary.add)
-    end
-    if summary.change > 0 then
-      table.insert(t, "~" .. summary.change)
-    end
-    if summary.delete > 0 then
-      table.insert(t, "-" .. summary.delete)
-    end
-    vim.b[data.buf].minidiff_summary_string = table.concat(t, " ")
-  end
-  local au_opts = { pattern = "MiniDiffUpdated", callback = format_summary }
-  vim.api.nvim_create_autocmd("User", au_opts)
   require("mini.ai").setup({})
   -- require("mini.sessions").setup({})
   require("mini.surround").setup({
@@ -136,29 +150,27 @@ vim.schedule(function()
   })
 
   -- require("mini.extra").setup()
-  -- local ui_select_orig = vim.ui.select
-
-  -- Centered on screen
-  local win_config = function()
-    local height = math.floor(0.618 * vim.o.lines)
-    local width = math.floor(0.618 * vim.o.columns)
-    return {
-      anchor = 'NW',
-      height = height,
-      width = width,
-      row = math.floor(0.5 * (vim.o.lines - height)),
-      col = math.floor(0.5 * (vim.o.columns - width)),
-    }
-  end
-  require("mini.pick").setup(
-    { window = { config = win_config } })
-  -- vim.ui.select = ui_select_orig
-  vim.cmd([[
-    nmap <M-o> :Pick files<Cr>
-    nmap <M-s> :Pick grep_live<Cr>
-    nmap <M-b> :Pick buffers<Cr>
-    nmap <M-r> :Pick oldfiles<Cr>
-  ]])
+  -- -- Centered on screen
+  -- local win_config = function()
+  --   local height = math.floor(0.618 * vim.o.lines)
+  --   local width = math.floor(0.618 * vim.o.columns)
+  --   return {
+  --     anchor = 'NW',
+  --     height = height,
+  --     width = width,
+  --     row = math.floor(0.5 * (vim.o.lines - height)),
+  --     col = math.floor(0.5 * (vim.o.columns - width)),
+  --   }
+  -- end
+  -- require("mini.pick").setup(
+  --   { window = { config = win_config } })
+  -- -- vim.ui.select = ui_select_orig
+  -- vim.cmd([[
+  --   nmap <M-o> :Pick files<Cr>
+  --   nmap <M-s> :Pick grep_live<Cr>
+  --   nmap <M-b> :Pick buffers<Cr>
+  --   nmap <M-r> :Pick oldfiles<Cr>
+  -- ]])
 
   -- require("mini.snippets").setup()
   -- require("mini.completion").setup()

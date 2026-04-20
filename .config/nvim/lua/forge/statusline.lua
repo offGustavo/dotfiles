@@ -1,7 +1,8 @@
+-- TODO: move this functions back to this file...
 local render_with_mode_color = require("extern.mode_colors").render_with_mode_color
 local render_with_mode_color_inverted = require("extern.mode_colors").render_with_mode_color_inverted
 
-local function fileName()
+local function get_file_name()
   local modified = vim.bo[0].modified
   local full_path = vim.fn.expand("%~:.")
 
@@ -11,6 +12,7 @@ local function fileName()
   end
 
   local file_path = vim.fn.fnamemodify(full_path, ":h")
+
   if file_path == "." then
     file_path = ""
   elseif file_path ~= "" then
@@ -18,13 +20,13 @@ local function fileName()
   end
 
   if modified then
-    return "%#Normal#" .. file_path .. "%#CursorLineNr#" .. file_name .. "%#Normal# "
+    return "%<" .. file_path .. "%>" .. "%#CursorLineNr#" .. file_name .. " "
   else
-    return "%#Normal#" .. file_path .. "%#Normal#" .. file_name .. "%#Normal# "
+    return "%<" .. file_path .. "%>" .. file_name .. " "
   end
 end
 
-local function gitInfo()
+local function git_info()
   if vim.b.minigit_summary_string and vim.b.minidiff_summary_string then
     local diff_parts = vim.split(vim.b.minidiff_summary_string, " ")
     local highlighted_parts = {}
@@ -61,26 +63,83 @@ local function show_macro_recording()
   end
 end
 
-function Fish.build_global_statusline()
-  -- return render_with_mode_color_inverted("▊ ")
+local function lsp_diagnostics()
+  local info = vim.diagnostic.status()
+  if info == ""
+  then
+    return ""
+  end
+  return info .. " "
+end
+
+-- TODO: if lsp crash, should turn red...
+local function lsp_info()
+  local msg = ""
+  -- local msg = "No Active Lsp"
+  local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+  local clients = vim.lsp.get_clients()
+  if next(clients) == nil then
+    return msg
+  end
+  for _, client in ipairs(clients) do
+    local filetypes = client.config.filetypes
+    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+      return client.name .. " "
+    end
+  end
+  return msg
+end
+
+local function fileformat()
+  local format = vim.bo.fileformat
+  if format == "" then
+    return
+  end
+  format = format .. " "
+  return format:upper()
+end
+
+function Fish.build_statusline()
   return render_with_mode_color(" ")
       .. render_with_mode_color_inverted("  ")
-      .. render_with_mode_color_inverted(" ")
-      .. fileName()
-      -- .. "%="
+      .. "%#Normal#"
+      .. get_file_name()
+      .. "%#Normal#"
+      .. lsp_diagnostics()
       .. "%l:%c %L:%p%% "
       .. "%="
       .. show_macro_recording()
-      .. gitInfo()
-      .. " %r "
+      .. git_info()
+      .. "%r "
       .. "%#Normal#"
       .. "%y "
-      -- .. render_with_mode_color(" ▊")
+      .. lsp_info()
+      .. fileformat()
       .. render_with_mode_color("  ")
 end
 
--- FIXME: Quero usar o laststatus = 0, mas o nome do arquivo não fica salvo per janela
--- temporariamente vamos deixar assim(confia)
-vim.o.laststatus = 3
+function Fish.build_statusline_inactive()
+  local active_win = vim.fn.win_getid()
+  local status_win = vim.g.statusline_winid
+  if status_win ~= active_win then
+    return render_with_mode_color(" ")
+        .. render_with_mode_color_inverted("   ")
+        .. "%#StatusLineNC#"
+        .. get_file_name()
+        .. "%#StatusLineNC#"
+        .. "%l:%c %L:%p%%"
+        .. "%="
+        .. render_with_mode_color("  ")
+  end
+end
 
-vim.o.statusline = "%!v:lua.Fish.build_global_statusline()"
+-- FIXME: Quero usar o laststatus = 0, mas o nome do arquivo não fica salvo per janela
+-- vim.o.laststatus = 3
+vim.o.showmode = false
+
+-- set statusline=%<%f\ %h%w%m%r\ %{%\ v:lua.require('vim._core.util').term_exitcode()\ %}%=%{%\ luaeval('(package.loaded[''vim.ui'']\ and\ vim.api.nvim_get_current_win()\ ==\ tonumber(vim.g.actual_curwin\ or\ -1)\ and\ vim.ui.progress_status())\ or\ ''''\ ')%}%{%\ &showcmdloc\ ==\ 'statusline'\ ?\ '%-10.S\ '\ :\ ''\ %}%{%\ exists('b:keymap_name')\ ?\ '<'..b:keymap_name..'>\ '\ :\ ''\ %}%{%\ &busy\ >\ 0\ ?\ '◐\ '\ :\ ''\ %}%{%\ luaeval('(package.loaded[''vim.diagnostic'']\ and\ next(vim.diagnostic.count())\ and\ vim.diagnostic.status()\ ..\ ''\ '')\ or\ ''''\ ')\ %}%{%\ &ruler\ ?\ (\ &rulerformat\ ==\ ''\ ?\ '%-14.(%l,%c%V%)\ %P'\ :\ &rulerformat\ )\ :\ ''\ %}
+-- vim.o.statusline = "%!v:lua.Fish.build_statusline()"
+
+-- From mini.statusline
+-- -- Set statusline globally and dynamically decide which content to use
+vim.go.statusline = '%{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.Fish.build_statusline() : v:lua.Fish.build_statusline_inactive()%}'

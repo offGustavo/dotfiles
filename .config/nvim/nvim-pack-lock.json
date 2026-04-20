@@ -1,11 +1,11 @@
 {
   "plugins": {
     "artio.nvim": {
-      "rev": "207c1ece931eaf40e310ecb3436312c586c26756",
+      "rev": "8aedc0cd8f8efd8e6062fc478f0be2b9eb31d40d",
       "src": "https://codeberg.org/comfysage/artio.nvim"
     },
     "base16-nvim": {
-      "rev": "4a6ef31745f851e11424a12b63fb3d2a80b2916c",
+      "rev": "17781884af64e4205f84dde41d6030a61d0eb0dc",
       "src": "https://github.com/RRethy/base16-nvim"
     },
     "blink.cmp": {
@@ -30,12 +30,8 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf-lua": {
-      "rev": "4deeecf611c0beba6455e6cf06e2c051a6169dd4",
+      "rev": "834246377489f9a1e6d4df570a7874a48c644b56",
       "src": "https://github.com/ibhagwan/fzf-lua"
-    },
-    "gruvbox.nvim": {
-      "rev": "154eb5ff5b96d0641307113fa385eaf0d36d9796",
-      "src": "https://github.com/ellisonleao/gruvbox.nvim"
     },
     "harpoon": {
       "rev": "87b1a3506211538f460786c23f98ec63ad9af4e5",
@@ -46,24 +42,16 @@
       "rev": "b6ddfb97b5600d99afe3452d707444afda658aca",
       "src": "https://github.com/HakonHarnes/img-clip.nvim"
     },
-    "lazy.nvim": {
-      "rev": "306a05526ada86a7b30af95c5cc81ffba93fef97",
-      "src": "https://github.com/folke/lazy.nvim.git"
-    },
-    "lazygit.nvim": {
-      "rev": "a04ad0dbc725134edbee3a5eea29290976695357",
-      "src": "https://github.com/kdheepak/lazygit.nvim"
-    },
     "lualine.nvim": {
       "rev": "a905eeebc4e63fdc48b5135d3bf8aea5618fb21c",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "markview.nvim": {
-      "rev": "1861f959599ae03cfd59f56222a542035b0cd947",
+      "rev": "e27dee8b2a61f89ac3a06deae0264ad1d3f7b62c",
       "src": "https://github.com/OXY2DEV/markview.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "63a3c6a80538de1003373a619e29aeda27809ad3",
+      "rev": "0a3b42c3e503df87aef6d6513e13148381495c3a",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
@@ -75,7 +63,7 @@
       "src": "https://github.com/zenarvus/md-agenda.nvim"
     },
     "mini.nvim": {
-      "rev": "69b7433355664cf76898eb86a12a019f39bd86d1",
+      "rev": "418ef4930ddabe80f449c6f1323f8b6abb172d1c",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "multiple-cursors.nvim": {
@@ -83,28 +71,23 @@
       "src": "https://github.com/brenton-leighton/multiple-cursors.nvim"
     },
     "neogit": {
-      "rev": "e06745228600a585b88726fc9fba44a373c15a47",
+      "rev": "d1cfc4986195239cac55700b675cea7a9578d430",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-lspconfig": {
-      "rev": "c588db330592fa477a70d2fee6ba20a57194bdc3",
+      "rev": "4b7fbaa239c5db6b36f424a4521ca9f1a401be33",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-sessionizer": {
       "rev": "e9bd58c1cd0982827254230d75f4cba19d21b5c2",
       "src": "https://github.com/offGustavo/nvim-sessionizer"
     },
-    "nvim-treesitter": {
-      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
-      "version": "'main'"
-    },
     "oil.nvim": {
       "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "plenary.nvim": {
-      "rev": "fcb3e9ac127d178b4c189088396165b3facc219e",
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "quicker.nvim": {
@@ -119,16 +102,12 @@
       "rev": "29c4584c2cef44a3fdcc55860957d081b892a569",
       "src": "https://github.com/chomosuke/term-edit.nvim"
     },
-    "tiny-cmdline.nvim": {
-      "rev": "807d23bcb7cdf26da9e92c5ea5299e7f0d07383d",
-      "src": "https://github.com/rachartier/tiny-cmdline.nvim"
-    },
     "tokyonight.nvim": {
       "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
       "src": "https://github.com/folke/tokyonight.nvim"
     },
     "tree-sitter-manager.nvim": {
-      "rev": "97e1548a40d5e9a613dd3789f3d422fb8e501781",
+      "rev": "fa63bc63ae08b661843d9976a43becfbd3daf76c",
       "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
     "vim-eunuch": {
@@ -144,7 +123,7 @@
       "src": "https://github.com/dstein64/vim-startuptime"
     },
     "yazi.nvim": {
-      "rev": "17f1984f901b01b30230e8ba988228fdac225e80",
+      "rev": "23ed41675daf019573b748c4e801a6f73b6eebae",
       "src": "https://github.com/mikavilpas/yazi.nvim"
     }
   }

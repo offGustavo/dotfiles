@@ -1,11 +1,11 @@
 -- if true then return end
-vim.schedule(function ()
+-- vim.schedule(function ()
   --    TODO: depois eu vejo isso aqui
--- vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
-vim.opt.rtp:append("~/Projects/oil.nvim/")
+vim.cmd.packadd("oil.nvim")
+-- vim.opt.rtp:append("~/Projects/oil.nvim/")
 
 vim.keymap.set("n", "<leader>fd", "<Cmd>Oil<Cr>", { desc = "Open current dir" })
--- vim.keymap.set("n", "<M-e>", "<Cmd>Oil<Cr>", { desc = "Open current dir" })
+vim.keymap.set("n", "<M-e>", "<Cmd>Oil<Cr>", { desc = "Open current dir" })
 
 -- Declare a global function to retrieve the current directory
 function _G.get_oil_winbar()
@@ -236,4 +236,4 @@ require("oil").setup({
 		border = "rounded",
 	},
 })
-end)
+-- end)

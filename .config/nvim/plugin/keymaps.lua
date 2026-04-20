@@ -1,9 +1,9 @@
 vim.schedule(function ()
   
-vim.keymap.set("n", "<M-o>", ":fin ")
-vim.keymap.set("n", "<M-e>", ":Ex<Cr>")
-vim.keymap.set("n", "<M-s>", ":grep ")
-vim.keymap.set("n", "<M-b>", ":b ")
+-- vim.keymap.set("n", "<M-o>", ":fin ")
+-- vim.keymap.set("n", "<M-e>", ":Ex<Cr>")
+-- vim.keymap.set("n", "<M-s>", ":grep ")
+-- vim.keymap.set("n", "<M-b>", ":b ")
 
 vim.keymap.set("n", "<M-y>", '"+p')
 vim.keymap.set("n", "<M-w>", '"+y')

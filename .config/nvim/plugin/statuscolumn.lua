@@ -4,9 +4,9 @@ vim.o.foldtext = ""
 vim.o.foldmethod = "indent"
 vim.o.foldlevel = 99
 
-vim.o.signcolumn = "yes:1"
+-- vim.o.signcolumn = "yes:1"
 
-vim.o.statuscolumn = "%s %l %C"
+-- vim.o.statuscolumn = "%s %l %C"
 
 -- vim.schedule(function()
 --   function Fish.statuscolumn()
