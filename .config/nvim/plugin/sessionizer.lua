@@ -81,7 +81,7 @@ vim.schedule(function()
 
   vim.keymap.set("n", "ZX", function()
     require("nvim-sessionizer").remove_session()
-  end, { silent = true })
+  end, { silent = true, desc = "Remove Session" })
 
   vim.keymap.set("n", "ZS", function()
     require("nvim-sessionizer").manage_sessions()

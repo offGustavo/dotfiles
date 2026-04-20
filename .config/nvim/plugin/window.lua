@@ -1,0 +1,66 @@
+-- TODO: Make a better window separators, this module should fill the gap between statuslines
+-- Also this module should provide an tmux like highlight for the current split, this should help
+-- the user to find what is the split he is in, and will look nice.
+
+-- vim.o.winborder='+,-,+,|,+,-,+,|'
+--
+-- -- Set custom separator characters
+-- vim.opt.fillchars = {
+--     vert = '┃',    -- Thick vertical bar
+--     horiz = '━',   -- Thick horizontal bar
+--     horizup = '+', -- Connector pointing up
+--     horizdown = '+' -- Connector pointing down
+-- }
+-- Style the separators with a highlight group
+-- vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#7aa2f7', bg = 'none' })
+
+--
+-- vim.api.nvim_set_hl(0, 'ActiveWindowBorder', { fg = '#7aa2f7', bg = 'none', bold = true })
+--
+-- -- Autocmd to apply border color to the active window
+-- vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
+--     callback = function()
+--         -- Reset any existing winhighlight for the new active window
+--         vim.wo.winhighlight = ''
+--         -- Apply the active border color to this window's separators
+--         vim.wo.winhighlight = 'WinSeparator:ActiveWindowBorder'
+--     end,
+-- })
+--
+-- -- Autocmd to remove the border when leaving a window (optional, but clean)
+-- vim.api.nvim_create_autocmd('WinLeave', {
+--     callback = function()
+--         -- Remove the custom winhighlight when leaving the window
+--         vim.wo.winhighlight = ''
+--     end,
+-- })
+--
+-- vim.opt.fillchars = { vert = '┃', horiz = '━' }  -- Thicker characters
+-- vim.api.nvim_set_hl(0, 'ActiveWindowBorder', { fg = '#ff9900', bold = true })
+
+-- -- 1. Define a highlight group for the active window's border
+-- --    Choose any color you like (here: bright yellow, tmux-style)
+-- vim.api.nvim_set_hl(0, 'TmuxActiveBorder', { fg = '#e5b567', bg = 'none', bold = true })
+--
+-- -- 2. Autocmd to apply the border to the newly active window
+-- vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
+--     callback = function()
+--         -- Clear any previous winhighlight for this window
+--         vim.wo.winhighlight = ''
+--         -- Apply: WinSeparator (split lines) gets the tmux color
+--         vim.wo.winhighlight = 'WinSeparator:TmuxActiveBorder'
+--     end,
+-- })
+--
+-- -- 3. Autocmd to remove the border when leaving a window
+-- vim.api.nvim_create_autocmd('WinLeave', {
+--     callback = function()
+--         vim.wo.winhighlight = ''
+--     end,
+-- })
+--
+-- vim.opt.laststatus = 3  -- global statusline
+-- vim.wo.winhighlight = 'WinSeparator:TmuxActiveBorder,StatusLine:TmuxActiveBorder'
+-- vim.opt.winbar = '%=%m%r%t'  -- show filename
+-- vim.wo.winhighlight = 'WinSeparator:TmuxActiveBorder,WinBar:TmuxActiveBorder'
+-- vim.opt.fillchars = { vert = '┃', horiz = '━', horizup = '┻', horizdown = '┳' }

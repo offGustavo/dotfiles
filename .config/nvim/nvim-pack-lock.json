@@ -21,6 +21,10 @@
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "dirvish-do.nvim": {
+      "rev": "7201dc07ec779f4e338aa7b0aaba3484c52e3f4a",
+      "src": "https://github.com/brianhuster/dirvish-do.nvim"
+    },
     "flash.nvim": {
       "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
       "src": "https://github.com/folke/flash.nvim"
@@ -110,6 +114,10 @@
       "rev": "fa63bc63ae08b661843d9976a43becfbd3daf76c",
       "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
+    "vim-dirvish": {
+      "rev": "6be56227a4207c93cd8b607f52f567a1e13dddb1",
+      "src": "https://github.com/justinmk/vim-dirvish"
+    },
     "vim-eunuch": {
       "rev": "e86bb794a1c10a2edac130feb0ea590a00d03f1e",
       "src": "https://github.com/tpope/vim-eunuch"
@@ -121,6 +129,14 @@
     "vim-startuptime": {
       "rev": "f10474b400c197787a0434548d842a2db583c333",
       "src": "https://github.com/dstein64/vim-startuptime"
+    },
+    "vim-vinegar": {
+      "rev": "bb1bcddf43cfebe05eb565a84ab069b357d0b3d6",
+      "src": "https://github.com/tpope/vim-vinegar"
+    },
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim"
     },
     "yazi.nvim": {
       "rev": "23ed41675daf019573b748c4e801a6f73b6eebae",

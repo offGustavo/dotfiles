@@ -77,14 +77,14 @@ vim.keymap.set(
 	"n",
 	"<localleader>ip",
 	"<cmd>PasteImage<cr>",
-	{ desc = "Paste image from system clipboard", buffer = 0 }
-)
+	{ desc = "Paste image from system clipboard", buffer = 0 })
+
 vim.keymap.set("n", "<localleader>ic", ":Editor create<Cr>", { desc = "Create a code block", buffer = 0 })
 vim.keymap.set("n", "<localleader>iC", ":Editor edit<Cr>", { desc = "Edit a code block", buffer = 0 })
 vim.keymap.set("n", "<localleader>H", ":Headings increase<Cr>", { desc = "Headings increase", buffer = 0 })
 vim.keymap.set("n", "<localleader>h", ":Headings decrease<Cr>", { desc = "Headings decrease", buffer = 0 })
-vim.keymap.set("n", "<Cr>", ":Checkbox toggle<Cr>", { desc = "Checkbox", buffer = 0 })
-vim.keymap.set("n", "<S-Cr>", ":Checkbox interactive<Cr>", { desc = "Checkbox interactive", buffer = 0 })
+vim.keymap.set("n", "<localleader><Cr>", ":Checkbox toggle<Cr>", { desc = "Checkbox", buffer = 0 })
+vim.keymap.set("n", "<localleader>i<Cr>", ":Checkbox interactive<Cr>", { desc = "Checkbox interactive", buffer = 0 })
 vim.keymap.set("n", "<localleader>td", "<Cmd>CheckTask<CR>", { silent = true, buffer = 0, desc = "Check Tesk" })
 vim.keymap.set("n", "<localleader>tc", "<Cmd>CancelTask<CR>", { silent = true, buffer = 0, desc = "Cancel Tesk" })
 vim.keymap.set("n", "<localleader>h", "<Cmd>HabitView<CR>", { silent = true, buffer = 0, desc = "Habits" })

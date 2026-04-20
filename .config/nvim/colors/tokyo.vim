@@ -167,6 +167,7 @@ hi ModeMsg gui=bold guibg=NONE guifg=#a9b1d6
 hi MoreMsg guibg=NONE guifg=#7aa2f7
 hi MsgArea guibg=NONE guifg=#a9b1d6
 hi NeogitBranch guibg=NONE guifg=#bb9af7
+hi Variable guibg=NONE guifg=#bb9af7
 hi NeogitDiffAddHighlight guibg=#243e4a guifg=#449dab
 hi NeogitDiffContextHighlight guibg=#2b2f44 guifg=#a9b1d6
 hi NeogitDiffDeleteHighlight guibg=#4a272f guifg=#914c54
@@ -318,5 +319,4 @@ hi! link MiniPickMatchMarked Visual
 hi! link MiniPickNormal NormalFloat
 hi! link MiniPickPreviewLine CursorLine
 hi! link MiniPickPreviewRegion IncSearch
-hi! link WinBar StatusLine
 hi! link WinBarNC StatusLineNC

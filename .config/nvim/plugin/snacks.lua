@@ -1,6 +1,6 @@
 -- if true then return end
 
--- vim.schedule(function()
+vim.schedule(function()
   vim.cmd.packadd("snacks.nvim")
 
   local ivy_like_2 = {
@@ -128,8 +128,8 @@
 
   require("snacks").setup({
     bigfile = { enabled = true },
-    -- dashboard = { enabled = false },
-    dashboard = dashboard_config,
+    dashboard = { enabled = false },
+    -- dashboard = dashboard_config,
     gh = {},
     explorer = { enabled = false },
     indent = { enabled = false },
@@ -230,9 +230,9 @@
     Snacks.picker.gh_pr({ state = "all" })
   end, { desc = "GitHub Pull Requests (all)" })
   -- Top Pickers & Explorer
-  vim.keymap.set("n", "<leader><space>", function()
-    Snacks.picker.smart()
-  end, { desc = "Smart Find Files" })
+  -- vim.keymap.set("n", "<leader><space>", function()
+  --   Snacks.picker.smart()
+  -- end, { desc = "Smart Find Files" })
   vim.keymap.set("n", "<M-h>", function()
     Snacks.picker.buffers()
   end, { desc = "Buffers" })
@@ -475,4 +475,4 @@
   vim.keymap.set("n", "<M-S-g>", function()
     Snacks.lazygit()
   end, { desc = "Lazgit" })
--- end)
+end)

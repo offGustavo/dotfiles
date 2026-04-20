@@ -1,4 +1,4 @@
--- if true then return end
+if true then return end
 -- vim.schedule(function ()
   --    TODO: depois eu vejo isso aqui
 vim.cmd.packadd("oil.nvim")

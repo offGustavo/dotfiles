@@ -44,7 +44,7 @@ end)  vim.keymap.set("n", "<leader>fg", "<Plug>(artio-grep)")
   vim.keymap.set("n", "<M-s>", "<Plug>(artio-grep)")
 
   -- smart file picker
-  vim.keymap.set("n", "<leader><space>", "<Plug>(artio-smart)")
+  vim.keymap.set("n", "<leader><Cr>", "<Plug>(artio-smart)")
 
   -- general built-in pickers
   vim.keymap.set("n", "<leader>fh", "<Plug>(artio-helptags)")

@@ -110,7 +110,8 @@ function Fish.build_statusline()
       .. "%="
       .. show_macro_recording()
       .. git_info()
-      .. "%r "
+      -- .. "%S "
+      -- .. "%r "
       .. "%#Normal#"
       .. "%y "
       .. lsp_info()

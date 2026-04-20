@@ -10,10 +10,10 @@ vim.keymap.set("n", "<M-w>", '"+y')
 vim.keymap.set({ "n" }, "<leader>p", '"+p', { desc = "Paste from System" })
 vim.keymap.set("x", "<leader>p", '"_dP') -- Paste without overwriting the default register
 vim.keymap.set({ "n", "x" }, "<C-s-v>", '"+p', { desc = "Paste from System" })
-vim.keymap.set({ "n", "x" }, "<C-S-c>", '"+y', { desc = "Yank from System" })
-vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Yank from System" })
+vim.keymap.set({ "n", "x" }, "<C-S-c>", '"+y', { desc = "Yank to System" })
+vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Yank to System" })
 vim.keymap.set({ "n", "x" }, "<D-c>", '"+y', { desc = "Yank to System" })
-vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank from System" })
+vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank to System" })
 
 vim.keymap.set("n", "<C-Down>", "}", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-Up>", "{", { noremap = true, silent = true })
@@ -28,9 +28,7 @@ vim.keymap.set("n", "k", "gk")
 vim.keymap.set("n", "<leader>qo", vim.cmd.copen, { desc = "QuickFix Open", silent = true })
 vim.keymap.set("n", "<leader>qc", vim.cmd.cclose, { desc = "QuickFix Close", silent = true })
 
-vim.keymap.set("n", "<leader>qq", vim.cmd.quit, { desc = "Quit", silent = true })
-vim.keymap.set("n", "<leader>qQ", ":qa!<Cr>", { desc = "Force Quit All", silent = true })
-vim.keymap.set("n", "ZR", vim.cmd.restart, { desc = "Restart", silent = true })
+vim.keymap.set("n", "ZR", vim.cmd.restart, { desc = "Restart Session", silent = true })
 
 vim.keymap.set("n", "<leader>fC", ":e $MYVIMRC<Cr>", { silent = true, desc = "Edit the Init.lua file" })
 vim.keymap.set("n", "<leader>fD", ":e $MYVIMDIR<Cr>", { silent = true, desc = "Edit the Init.lua file" })
@@ -171,9 +169,9 @@ end
 ------------
 --- Quit ---
 ------------
-vim.keymap.set("n", "<leader>qq", ":q<cr>", { silent = true, desc = "Quit" })
-vim.keymap.set("n", "<leader>qQ", ":qa!<cr>", { silent = true, desc = "Quit All" })
-vim.keymap.set("n", "<leader>qr", vim.cmd.restart, { desc = "Restart Vim" })
+-- vim.keymap.set("n", "<leader>qq", ":q<cr>", { silent = true, desc = "Quit" })
+-- vim.keymap.set("n", "<leader>qQ", ":qa!<cr>", { silent = true, desc = "Quit All" })
+-- vim.keymap.set("n", "<leader>qr", vim.cmd.restart, { desc = "Restart Vim" })
 
 --- ThePrimeagen Keymaps
 vim.keymap.set("i", "<C-c>", "<Esc>")
