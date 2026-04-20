@@ -147,7 +147,6 @@ cnoremap <C-e> <End>
 cnoremap <C-d> <Delete>
 cnoremap <C-o> <C-f>
 
-
 " Quick Fix
 nmap ]q :cnext<Cr>
 nmap ]Q :clast<Cr>
@@ -166,10 +165,12 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif 
 
-" " Run PlugInstall if there are missing plugins
-" autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-"   \| PlugInstall --sync | source $MYVIMRC
-" \| endif 
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 
 call plug#begin()
 " List your plugins here
@@ -178,6 +179,11 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 call plug#end()
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif 
 
 " Theme Settings
 set termguicolors
@@ -238,6 +244,3 @@ nmap <silent> <leader>, :FzfBuffers<Cr>
 
 " Git Keymaps
 nmap <silent> <leader>gg :Git<Cr>:only<Cr>
-
-vmap y y:call system("wl-copy", @")<cr>
-
