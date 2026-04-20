@@ -276,6 +276,5 @@
               (start-process-shell-command
                "xrandr" nil
                "xrandr --output eDP-1 --mode 1920x1080 \
-                       --output HDMI-1-0 --mode 1920x1080 --right-of eDP-1")))
-
-  (exwm-randr-enable))
+                       --output HDMI-1-0 --mode 1920x1080 --right-of eDP-1"))))
+  ;; (exwm-randr-enable))
