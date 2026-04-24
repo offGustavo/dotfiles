@@ -1,3 +1,4 @@
+-- __Mini__ Yazi.nvim for faster startuptime
 require("forge.yazi").setup({
   enable_cmds = true,
   replace_netrw = true,

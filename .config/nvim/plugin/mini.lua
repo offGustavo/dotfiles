@@ -83,17 +83,17 @@ vim.schedule(function()
     },
   })
 
-  local hipatterns = require("mini.hipatterns")
-  hipatterns.setup({
-    highlighters = {
-      fixme = { pattern = "FIXME", group = "MiniHipatternsFixme" },
-      hack = { pattern = "HACK", group = "MiniHipatternsHack" },
-      todo = { pattern = "TODO", group = "MiniHipatternsTodo" },
-      note = { pattern = "NOTE", group = "MiniHipatternsNote" },
-      perf = { pattern = "PERF", group = "MiniIconsPurple" },
-      hex_color = hipatterns.gen_highlighter.hex_color(),
-    },
-  })
+  -- local hipatterns = require("mini.hipatterns")
+  -- hipatterns.setup({
+  --   highlighters = {
+  --     fixme = { pattern = "FIXME", group = "MiniHipatternsFixme" },
+  --     hack = { pattern = "HACK", group = "MiniHipatternsHack" },
+  --     todo = { pattern = "TODO", group = "MiniHipatternsTodo" },
+  --     note = { pattern = "NOTE", group = "MiniHipatternsNote" },
+  --     perf = { pattern = "PERF", group = "MiniIconsPurple" },
+  --     hex_color = hipatterns.gen_highlighter.hex_color(),
+  --   },
+  -- })
 
   -- local miniclue = require("mini.clue")
   -- miniclue.setup({

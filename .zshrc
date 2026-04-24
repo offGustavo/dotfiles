@@ -31,4 +31,3 @@ alias kboff="sudo echo 1 | sudo tee /sys/class/input/event0/device/inhibited"
 alias kbon="sudo echo 0 | sudo tee /sys/class/input/event0/device/inhibited"
 
 export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:/home/gustavo/.local/share/bob/nvim-bin

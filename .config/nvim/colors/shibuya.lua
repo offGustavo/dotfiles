@@ -7,8 +7,10 @@ local colors = {
 	bg_float = "#24283b",
 	bg_highlight = "#292e42",
 	bg_visual = "#364a82",
+
 	fg = "#c0caf5",
 	fg_dark = "#565f89",
+
 	-- Primary colors only
 	blue = "#7aa2f7",
 	cyan = "#7dcfff",
@@ -23,33 +25,33 @@ local colors = {
 	selection_bg = "#364a82",
 }
 
--- vim.cmd.packadd("mini.nvim")
---
--- require("mini.base16").setup({
--- 	palette = {
--- 		base00 = colors.bg,
--- 		base01 = colors.bg,
--- 		base02 = colors.fg,
--- 		base03 = colors.fg,
--- 		base05 = colors.blue,
---     base04 = colors.blue,
--- 		base06 = colors.blue,
--- 		base07 = colors.blue,
--- 		base08 = colors.magenta,
--- 		base09 = colors.magenta,
--- 		base0A = colors.green,
--- 		base0B = colors.green,
--- 		base0C = colors.magenta,
--- 		base0D = colors.magenta,
--- 		base0E = colors.magenta,
--- 		base0F = colors.blue,
--- 	},
--- 	use_cterm = true,
--- 	plugins = {
--- 		default = true,
--- 		["nvim-mini/mini.nvim"] = true,
--- 	},
--- })
+vim.cmd.packadd("mini.nvim")
+
+require("mini.base16").setup({
+	palette = {
+		base00 = colors.bg,
+		base01 = colors.bg,
+		base02 = colors.fg,
+		base03 = colors.fg,
+		base05 = colors.blue,
+    base04 = colors.blue,
+		base06 = colors.blue,
+		base07 = colors.blue,
+		base08 = colors.magenta,
+		base09 = colors.magenta,
+		base0A = colors.green,
+		base0B = colors.green,
+		base0C = colors.magenta,
+		base0D = colors.magenta,
+		base0E = colors.magenta,
+		base0F = colors.blue,
+	},
+	use_cterm = true,
+	plugins = {
+		default = true,
+		["nvim-mini/mini.nvim"] = true,
+	},
+})
 
 -- Light mode (Shibuya Day) colors with background highlights
 local colors_day = {

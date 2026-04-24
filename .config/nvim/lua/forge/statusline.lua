@@ -64,6 +64,9 @@ local function show_macro_recording()
 end
 
 local function lsp_diagnostics()
+  if not Fish.did_lsp_setup then
+    return ""
+  end
   local info = vim.diagnostic.status()
   if info == ""
   then
@@ -74,6 +77,9 @@ end
 
 -- TODO: if lsp crash, should turn red...
 local function lsp_info()
+  if not Fish.did_lsp_setup then
+    return ""
+  end
   local msg = ""
   -- local msg = "No Active Lsp"
   local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
@@ -138,9 +144,11 @@ end
 vim.o.laststatus = 3
 vim.o.showmode = false
 
+
 -- set statusline=%<%f\ %h%w%m%r\ %{%\ v:lua.require('vim._core.util').term_exitcode()\ %}%=%{%\ luaeval('(package.loaded[''vim.ui'']\ and\ vim.api.nvim_get_current_win()\ ==\ tonumber(vim.g.actual_curwin\ or\ -1)\ and\ vim.ui.progress_status())\ or\ ''''\ ')%}%{%\ &showcmdloc\ ==\ 'statusline'\ ?\ '%-10.S\ '\ :\ ''\ %}%{%\ exists('b:keymap_name')\ ?\ '<'..b:keymap_name..'>\ '\ :\ ''\ %}%{%\ &busy\ >\ 0\ ?\ '◐\ '\ :\ ''\ %}%{%\ luaeval('(package.loaded[''vim.diagnostic'']\ and\ next(vim.diagnostic.count())\ and\ vim.diagnostic.status()\ ..\ ''\ '')\ or\ ''''\ ')\ %}%{%\ &ruler\ ?\ (\ &rulerformat\ ==\ ''\ ?\ '%-14.(%l,%c%V%)\ %P'\ :\ &rulerformat\ )\ :\ ''\ %}
 -- vim.o.statusline = "%!v:lua.Fish.build_statusline()"
 
 -- From mini.statusline
 -- -- Set statusline globally and dynamically decide which content to use
-vim.go.statusline = '%{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.Fish.build_statusline() : v:lua.Fish.build_statusline_inactive()%}'
+vim.go.statusline =
+'%{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.Fish.build_statusline() : v:lua.Fish.build_statusline_inactive()%}'

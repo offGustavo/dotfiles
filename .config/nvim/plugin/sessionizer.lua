@@ -1,12 +1,10 @@
 vim.schedule(function()
+  -- vim.opt.rtp:append("~/Projects/nvim-sessionizer/")
   vim.cmd.packadd("nvim-sessionizer")
-  vim.opt.rtp:append("~/Projects/nvim-sessionizer/")
   vim.g.sessionizer = {
     -- Disable Zoxide integration.
     -- Set to true if prefer not to use it.
     -- If Zoxide isn't installed, this setting has no effect.
-    no_zoxide = false,
-
     -- A list of directories where Sessionizer will search for projects.
     -- Each entry should be an absolute path or use ~ for the home directory.
     -- Example:

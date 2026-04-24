@@ -30,7 +30,7 @@ vim.schedule(function()
 			{ "<leader>q", group = "quickfix list" }, -- group
 			{ "<leader>h", group = "harpoon/espeto" }, -- group
 			{ "<leader>b", group = "buffer" }, -- group
-			{ "<leader>t", group = "terminal" }, -- group
+			{ "<leader>t", group = "terminal/todo" }, -- group
 			{ "<leader>r", group = "replace" }, -- group
 			{ "<leader><tab>", group = "tab/workspaces" }, -- group
 		},
@@ -41,7 +41,7 @@ vim.schedule(function()
 		-- Check the docs for more info.
 		---@type wk.Spec
 		triggers = {
-			{ "<auto>", mode = "nxso" },
+			{ "<auto>", mode = "nxsoi" },
 		},
 		-- Start hidden and wait for a key to be pressed before showing the popup
 		-- Only used by enabled xo mapping modes.

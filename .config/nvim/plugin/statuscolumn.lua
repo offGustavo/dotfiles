@@ -1,4 +1,4 @@
-vim.o.fillchars = "fold: "
+
 vim.o.foldcolumn = "1"
 vim.o.foldtext = ""
 vim.o.foldmethod = "indent"
@@ -8,7 +8,8 @@ vim.o.signcolumn = "yes:1"
 
 vim.o.statuscolumn = "%s %l %C"
 
-vim.schedule(function()
+-- TODO: add mouse support
+-- vim.schedule(function()
 	function Fish.statuscolumn()
 		local function pad_center(s, width)
 			local len = vim.fn.strwidth(s)
@@ -24,7 +25,7 @@ vim.schedule(function()
 		local W_SIGN = 1 -- sign column
 		local W_MARKS = 1 -- marks column
 		local W_NUM = 1 -- line number (up to 9999)
-		local W_FOLD = 1 -- fold indicator
+		local W_FOLD = 2 -- fold indicator
 		local W_DIFF = 1 -- diff character
 
 		-- Sign column (built-in %s handles it, just pad)
@@ -51,9 +52,9 @@ vim.schedule(function()
 		local fold_level = vim.fn.foldlevel(vim.v.lnum)
 
 		if vim.v.lnum == vim.fn.foldclosedend(vim.v.lnum) then
-			fold_str = "%#Folded#" .. ">"
+			fold_str = "%#Folded#" .. "> "
 		elseif fold_closed ~= -1 then
-			fold_str = "%#Folded#" .. ">"
+			fold_str = "%#Folded#" .. "> "
 		elseif fold_level > 0 then
 			fold_str = ""
 			-- -- Diff character
@@ -78,4 +79,4 @@ vim.schedule(function()
 		return "%s" .. "%l" .. fold
 	end
 	vim.o.statuscolumn = "%!v:lua.Fish.statuscolumn()"
-end)
+-- end)

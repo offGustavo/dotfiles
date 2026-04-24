@@ -11,7 +11,7 @@ if exists("syntax_on")
     syntax reset
 endif
 
-let g:colors_name = "tokyonight_minimal"
+let g:colors_name = "off"
 
 " Core palette from TokyoNight (Night variant for darkest blue)
 " Background: #1a1b26 (TokyoNight Night) [citation:1]
@@ -70,6 +70,7 @@ hi Conditional   guifg=#9d7cd8
 hi Repeat        guifg=#9d7cd8
 hi Label         guifg=#9d7cd8
 hi Operator      guifg=#89b4fa
+ff
 hi Keyword       guifg=#9d7cd8
 hi Exception     guifg=#9d7cd8
 

@@ -1,6 +1,5 @@
 vim.schedule(function()
-  vim.pack.add({ { src = "https://codeberg.org/comfysage/artio.nvim" } })
-
+  vim.cmd.packadd("artio.nvim")
   require("artio").setup({
     opts = {
       preselect = true, -- whether to preselect the first match

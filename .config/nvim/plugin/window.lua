@@ -2,8 +2,45 @@
 -- Also this module should provide an tmux like highlight for the current split, this should help
 -- the user to find what is the split he is in, and will look nice.
 
+-- TODO: Modified keybinds
+--- {{{ Windows
+vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Windows" })
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-j>", function()
+	vim.cmd.wincmd("w")
+end)
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-k>", function()
+	vim.cmd.wincmd("W")
+end)
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-s>", function()
+	vim.cmd.wincmd("s")
+end)
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-v>", function()
+	vim.cmd.wincmd("v")
+end)
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-o>", function()
+	vim.cmd.wincmd("o")
+end)
+vim.keymap.set("n", "<M-=>", function()
+	vim.cmd.wincmd("=")
+end, { desc = "Windows" })
+vim.keymap.set("n", "<M-+>", function()
+	vim.cmd.wincmd("+")
+end, { desc = "Windows" })
+vim.keymap.set("n", "<M-->", function()
+	vim.cmd.wincmd("-")
+end, { desc = "Windows" })
+vim.keymap.set("n", "<M-,>", function()
+	vim.cmd.wincmd("<")
+end, { desc = "Windows" })
+vim.keymap.set("n", "<M-.>", function()
+	vim.cmd.wincmd(">")
+end, { desc = "Windows" })
+--- }}}
+
+vim.opt.fillchars:append({ vert = '┃', horiz = '━', horizup = '┻', horizdown = '┳' })
+
 -- vim.o.winborder='+,-,+,|,+,-,+,|'
---
+
 -- -- Set custom separator characters
 -- vim.opt.fillchars = {
 --     vert = '┃',    -- Thick vertical bar
