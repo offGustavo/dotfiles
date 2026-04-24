@@ -25,7 +25,7 @@ local colors = {
 	selection_bg = "#364a82",
 }
 
-vim.cmd.packadd("mini.nvim")
+-- vim.cmd.packadd("mini.nvim")
 
 require("mini.base16").setup({
 	palette = {

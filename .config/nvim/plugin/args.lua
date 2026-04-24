@@ -1,4 +1,4 @@
--- if true then return end
+if true then return end
 vim.g.forge_arglist = {
   save_local = {
     enable = true,

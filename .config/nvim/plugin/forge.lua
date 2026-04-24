@@ -1,23 +1,23 @@
--- __Mini__ Yazi.nvim for faster startuptime
-require("forge.yazi").setup({
-  enable_cmds = true,
-  replace_netrw = true,
-  ui = {
-    border = "rounded",
-    height = 0.9,
-    width = 0.9,
-    x = 0.5,
-    y = 0.5,
-  },
-  keybindings = {},
-})
+-- -- __Mini__ Yazi.nvim for faster startuptime
+-- require("forge.yazi").setup({
+--   enable_cmds = true,
+--   replace_netrw = true,
+--   ui = {
+--     border = "rounded",
+--     height = 0.9,
+--     width = 0.9,
+--     x = 0.5,
+--     y = 0.5,
+--   },
+--   keybindings = {},
+-- })
 
-require("forge.statusline")
+-- require("forge.statusline")
 
 vim.schedule(function ()
 -- require("forge.easymode")
 
--- require("forge.espeto").setup()
+require("forge.espeto").setup()
 
 -- vim.keymap.set("n", "<leader>v", function()
 --   require("forge.vidir").open()
@@ -82,3 +82,5 @@ local toggle = require('forge.toggle')
 -- vim.keymap.set('n', '<C-x>', function() toggle.decrease() end)
 vim.keymap.set('n', '<leader>tt', function() toggle.toggle() end)
 end)
+
+return {}

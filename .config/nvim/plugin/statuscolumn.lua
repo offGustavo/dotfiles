@@ -1,4 +1,3 @@
-
 vim.o.foldcolumn = "1"
 vim.o.foldtext = ""
 vim.o.foldmethod = "indent"
@@ -6,7 +5,7 @@ vim.o.foldlevel = 99
 
 vim.o.signcolumn = "yes:1"
 
-vim.o.statuscolumn = "%s %l %C"
+-- vim.o.statuscolumn = "%s %l %C"
 
 -- TODO: add mouse support
 -- vim.schedule(function()
@@ -78,5 +77,5 @@ vim.o.statuscolumn = "%s %l %C"
 		-- return "%s" .. marks .. "%l" .. fold
 		return "%s" .. "%l" .. fold
 	end
-	vim.o.statuscolumn = "%!v:lua.Fish.statuscolumn()"
+	-- vim.o.statuscolumn = "%!v:lua.Fish.statuscolumn()"
 -- end)

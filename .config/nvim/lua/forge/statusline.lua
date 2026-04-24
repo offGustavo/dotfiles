@@ -1,6 +1,6 @@
 -- TODO: move this functions back to this file...
-local render_with_mode_color = require("extern.mode_colors").render_with_mode_color
-local render_with_mode_color_inverted = require("extern.mode_colors").render_with_mode_color_inverted
+local render_with_mode_color = require("fish.mode_colors").render_with_mode_color
+local render_with_mode_color_inverted = require("fish.mode_colors").render_with_mode_color_inverted
 
 local function get_file_name()
   local modified = vim.bo[0].modified
