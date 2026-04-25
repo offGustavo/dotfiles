@@ -156,7 +156,7 @@ nmap <leader>qo :copen<Cr>
 nmap <leader>qc :cclose<Cr>
 
 " Term Mode
-tmap <Esc><Esc> <C-\><C-n>
+tmap » <C-\><C-n>
 
 " Install vim-plug if not found
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.config/vim/after'
@@ -171,7 +171,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-
 call plug#begin()
 " List your plugins here
 Plug 'ghifarit53/tokyonight-vim'
@@ -180,11 +179,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
-" Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif 
-
 " Theme Settings
 set termguicolors
 set background=dark
@@ -192,55 +186,12 @@ let g:tokyonight_style = 'night'
 let g:tokyonight_enable_italic = 1
 colorscheme tokyonight
 
-" FZF Settings
-let g:fzf_vim = {} 
-let g:fzf_colors =
-  \ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'query':   ['fg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Comment'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] } 
-
-let g:fzf_layout = { 'down': '30%' }
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-" let g:fzf_layout = { 'down':  '40%'}
-" let g:fzf_layout = { 'window': 'enew' }
-" let g:fzf_vim.buffers_jump = 1
-    let g:fzf_vim.preview_window = ['hidden,right,50%', 'ð']
-"let g:fzf_vim.preview_window = ['up,60%', 'ctrl-o']
-" let g:fzf_vim.preview_window = []
-" let g:fzf_vim.files_options =   '--style fu ll --no-border'
-" let g:fzf_vim.buffers_options = '--style default'
-" let g:fzf_vim.rg_options =      '--style default'
-let g:fzf_vim.files_options =   ['--style', 'minimal', '--no-border']
-let g:fzf_vim.buffers_options = ['--style', 'minimal', '--no-border']
-let g:fzf_vim.rg_options =      ['--style', 'minimal', '--no-border']
-let g:fzf_vim.colors_options =      ['--style', 'minimal', '--no-preview']
-let g:fzf_vim.command_prefix = 'Fzf'
-
-command! -nargs=* FzfRG call fzf#vim#grep(
-  \   'rg --hidden --glob "!.git/*" --glob "!node_modules/" --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>),
-  \   1,
-  \   fzf#vim#with_preview(),
-  \   <bang>0
-\ )
-
 " FZF Keymaps
-nmap <silent> <leader><space> :FzfFiles<Cr>
-nmap <silent> <leader>/ :FzfRG<Cr>
-nmap <silent> <leader>, :FzfBuffers<Cr>
+nmap <silent> ï :FzfFiles<Cr>
+nmap <silent> ó :FzfRG<Cr>
 
 " Git Keymaps
-nmap <silent> <leader>gg :Git<Cr>:only<Cr>
+nmap <silent> ç :Git<Cr>:only<Cr>
+
+" Ex
+nmap å :Ex<CR>
