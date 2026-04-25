@@ -179,35 +179,36 @@
 	hhkb_shift (tap-hold-press 100 300 (one-shot 500 lsft) @nav)
 	hhkb_up (tap-hold-press 100 200 up (layer-toggle hhkb)))
 
-(deflayer base
-  @ste  @l1f @l2f @l3f @l4f @l5f @l6f @l7f @l8f @l9f @l0f @lmf @lef bspc
-  @lnt   @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [     ]   \
-  lctl   @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @ren
-  lsft     @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft  @hhkb_up
-  lctl  lmet lalt           @lsn           ralt rmet @hhkb_up
-  🖰1 🖰2 🖰3 @mbn @mfs)
 
 ;; (deflayer base
-;;   @ste 1    2    3    4    5    6    7    8    9    0    -    =    bspc
-;; 	tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-;; 	lctl a    s    d    f    g    h    j    k    l    ;    '    ret
-;; 	lsft z    x    c    v    b    n    m    ,    .    /    rsft @hhkb_up
-;; 	lctl lmet lalt           spc            ralt  lmet  @hhkb_up
-;; 	mlft mrgt mmid mfwd @mbn)
+;;   @ste  @l1f @l2f @l3f @l4f @l5f @l6f @l7f @l8f @l9f @l0f @lmf @lef bspc
+;;   @lnt   @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [     ]   \
+;;   lctl   @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @ren
+;;   lsft     @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft  @hhkb_up
+;;   lctl  lmet lalt           @lsn           ralt rmet @hhkb_up
+;;   🖰1 🖰2 🖰3 @mbn @mfs)
+
+(deflayer base
+  @ste 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+	tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+	lctl a    s    d    f    g    h    j    k    l    ;    '    ret
+	lsft z    x    c    v    b    n    m    ,    .    /    rsft @hhkb_up
+	lctl lmet lalt           spc            ralt  lmet  @hhkb_up
+	mlft mrgt mmid mfwd @mbn)
 
 (deflayer hhkb
 	 grv  f1    f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
 	 caps S-grv grv  _    _    _    _    _    _    _    _    up   _    ins
-	 lctl volu  vold mute _    @mov S-8  /    home pgup left rght _ 
-	 _    pp    _    @num _    @num S-=  -    end  pgdn down _    up
+	 lctl volu  vold mute pp   @mov S-8  /    home pgup left rght _ 
+	 _    @mov  prev next _    @num S-=  -    end  pgdn down _    up
 	 _    _    _              _              _     _    _
 	 _  _  _  _  _ )
 
 (deflayer navigation
 	 grv  f1    f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
-	 caps pgup  home up   end  @mov _    _    up   _    _    up   _    ins
-	 lctl pgdn  left down rght @num _    left down rght left rght _ 
-	 _    ins   del  bspc _    _    _    _    end  pgdn down _    up
+	 caps pgup  home up   end  _    _    _    up   _    _    _    _    ins
+	 lctl pgdn  left down rght _    _    left down rght del  ins  _ 
+	 _    ins   del  bspc _    _    _    home end  pgup pgdn _    _  
 	 _    _    _              _              _     _    _
 	 _  _  _  _  _ )
 
