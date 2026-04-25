@@ -31,7 +31,7 @@ function zoxide_cd
     #
     # if test $use_fuzzel -eq 1
     set -l dir (zoxide query -l -s | rofi -dmenu | awk "{print \$2}")
-bind -a alt-G lazygit
+    bind -a alt-G lazygit
     # else
     # set -l dir (zoxide query -l | fzf)
     # end
@@ -47,18 +47,18 @@ bind -a alt-Z zoxide_cd
 bind -a alt-G lazygit
 
 function fzf_nvim
-  nvim (fzf)
+    nvim (fzf)
 end
 
-bind -a alt-o  fzf_nvim
+bind -a alt-o fzf_nvim
 
 function yazi_cd
-	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-	command yazi $argv --cwd-file="$tmp"
-	if read -z cwd < "$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
-		builtin cd -- "$cwd"
-	end
-	rm -f -- "$tmp"
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    command yazi $argv --cwd-file="$tmp"
+    if read -z cwd <"$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
+        builtin cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
 end
 
 bind -a alt-Y yazi_cd
@@ -75,7 +75,7 @@ alias glalie="pokeget --hide-name glalie | fastfetch --file-raw - -c ~/.config/f
 
 # overwrite greeting
 function fish_greeting
-  # gengar
+    # gengar
 end
 
 # Keyboard
@@ -114,8 +114,7 @@ set -x GOPATH "$HOME/.go"
 set -x GOBIN "$GOPATH/bin"
 
 # Append common directories for executable files to $PATH
-fish_add_path ~/.local/bin ~/.cargo/bin ~/Applications/depot_tools $HOME/.go/bin $HOME/.nix-profile/bin
-
+fish_add_path ~/.local/bin ~/.cargo/bin ~/Applications/depot_tools $HOME/.go/bin $HOME/.nix-profile/bin /home/gustavo/.local/share/bob/nvim-bin/
 
 function fish_prompt --description 'Write out the prompt'
     # Salva o último comando executado (por sessão)
@@ -172,5 +171,11 @@ fzf --fish | source
 
 # alias vim=nvim
 
-# FIXME: arruma essa merda
-# alias start-kanata='tmux has-session -t kanata 2>/dev/null && tmux attach -t kanata || (tmux new-session -s kanata -c "$HOME/.config/kanata" && tmux send-keys -t kanata "sudo kanata -c $HOME/.config/kanata/kanata.kbd" C-m'
+function start-kanata
+    if tmux has-session -t kanata 2>/dev/null
+        tmux attach -t kanata
+    else
+        tmux new-session -s kanata -c "$HOME/.config/kanata"
+        tmux send-keys -t kanata "kanata -c $HOME/.config/kanata/kanata.kbd" C-m
+    end
+end
