@@ -5,6 +5,8 @@ vim.o.foldlevel = 99
 
 vim.o.signcolumn = "yes:1"
 
+Fish.close_fold_char = ""
+-- Fish.close_fold_char = ">"
 -- vim.o.statuscolumn = "%s %l %C"
 
 -- TODO: add mouse support
@@ -51,9 +53,11 @@ vim.o.signcolumn = "yes:1"
 		local fold_level = vim.fn.foldlevel(vim.v.lnum)
 
 		if vim.v.lnum == vim.fn.foldclosedend(vim.v.lnum) then
-			fold_str = "%#Folded#" .. "> "
+
+
+			fold_str = "%#Folded#" .. Fish.close_fold_char .. " "
 		elseif fold_closed ~= -1 then
-			fold_str = "%#Folded#" .. "> "
+			fold_str = "%#Folded#" .. Fish.close_fold_char .. " "
 		elseif fold_level > 0 then
 			fold_str = ""
 			-- -- Diff character
@@ -77,5 +81,6 @@ vim.o.signcolumn = "yes:1"
 		-- return "%s" .. marks .. "%l" .. fold
 		return "%s" .. "%l" .. fold
 	end
+
 	-- vim.o.statuscolumn = "%!v:lua.Fish.statuscolumn()"
 -- end)

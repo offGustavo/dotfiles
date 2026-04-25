@@ -12,8 +12,6 @@
 --   keybindings = {},
 -- })
 
--- require("forge.statusline")
-
 vim.schedule(function ()
 -- require("forge.easymode")
 
