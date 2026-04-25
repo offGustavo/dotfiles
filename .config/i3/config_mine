@@ -214,23 +214,9 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-  status_command i3status -c ~/.config/i3/i3status/status
-    position top
-    font pango:Jetbrains Mono Nerd Font 10
-    tray_output primary
-#     colors {
-#       background $bg
-#         statusline $fg
-#         separator $bg
-# #       element            border  bg    fg
-#         focused_workspace  $blue   $blue $bg
-#         active_workspace   $bg     $bg   $fg
-#         inactive_workspace $bg     $bg   $fg
-#         urgent_workspace   $red    $red  $bg
-#         binding_mode       $bg     $bg   $fg
-#     }
+  status_command i3status
+  position top
 }
-
 
 bindsym $mod+Shift+bracketleft move window to output left
 bindsym $mod+Shift+bracketright move window to output right
