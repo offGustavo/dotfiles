@@ -1,3 +1,5 @@
+-- if true then return {}  end
+
 return {
   "https://github.com/folke/which-key.nvim",
   event = "VeryLazy",
@@ -20,20 +22,20 @@ return {
     --- You can add any mappings here, or use `require('which-key').add()` later
     ---@type wk.Spec
     spec = {
-      { "<leader><space>", group = "Local Leader" }, -- group
-      { "<leader>f",       group = "File" },         -- group
-      { "<leader>s",       group = "Search" },       -- group
-      { "<leader>g",       group = "Git" },          -- group
-      { "Z",               group = "Session" },      -- group
-      { "<leader>a",       group = "Agenda" },       -- group
-      { "<leader>u",       group = "Ui" },           -- group
-      { "<leader>c",       group = "Code" },         -- group
-      { "<leader>l",       group = "Location list" }, -- group
-      { "<leader>q",       group = "Quickfix list" }, -- group
+      { "<leader><space>", group = "<localleader>" },  -- group
+      { "<leader>f",       group = "File" },           -- group
+      { "<leader>s",       group = "Search" },         -- group
+      { "<leader>g",       group = "Git" },            -- group
+      { "Z",               group = "Session" },        -- group
+      { "<leader>a",       group = "Agenda" },         -- group
+      { "<leader>u",       group = "Ui" },             -- group
+      { "<leader>c",       group = "Code" },           -- group
+      { "<leader>l",       group = "Location list" },  -- group
+      { "<leader>q",       group = "Quickfix list" },  -- group
       { "<leader>h",       group = "Harpoon/espeto" }, -- group
-      { "<leader>b",       group = "Buffer" },       -- group
-      { "<leader>t",       group = "Terminal/todo" }, -- group
-      { "<leader>r",       group = "Replace" },      -- group
+      { "<leader>b",       group = "Buffer" },         -- group
+      { "<leader>t",       group = "Terminal/todo" },  -- group
+      { "<leader>r",       group = "Replace" },        -- group
       { "<leader><tab>",   group = "Tab/workspaces" }, -- group
     },
     -- show a warning when issues were detected with your mappings
@@ -117,10 +119,11 @@ return {
     ---@type table<string, ({[1]:string, [2]:string}|fun(str:string):string)[]>
     replace = {
       key = {
-        -- function(key)
-        -- 	return require("which-key.view").format(key)
-        -- end,
+        function(key)
+        	return require("which-key.view").format(key)
+        end,
         -- { "<Space>", "SPC" },
+        -- { "<Space>", "<leader>" },
       },
       desc = {
         { "<Plug>%(?(.*)%)?", "%1" },

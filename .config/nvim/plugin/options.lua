@@ -1,4 +1,11 @@
+vim.o.foldtext = ""
+vim.o.foldmethod = "indent"
+vim.o.foldlevel = 99
+
+-- Security Things
 vim.o.modeline = false
+vim.o.exrc = false
+
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.breakindent = true

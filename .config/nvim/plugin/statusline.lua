@@ -140,8 +140,13 @@ function Fish.build_statusline_inactive()
   end
 end
 
+-- function Fish.build_quickfix_statusline()
+-- vim.cmd([[set statusline=%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} %=%-15(%l,%c%V%) %P]])
+-- end
+
+
 -- FIXME: Quero usar o laststatus = 0, mas o nome do arquivo não fica salvo per janela
--- vim.o.laststatus = 3
+vim.o.laststatus = 3
 vim.o.showmode = false
 
 
@@ -150,5 +155,4 @@ vim.o.showmode = false
 
 -- From mini.statusline
 -- -- Set statusline globally and dynamically decide which content to use
--- vim.go.statusline =
--- '%{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.Fish.build_statusline() : v:lua.Fish.build_statusline_inactive()%}'
+vim.go.statusline = '%{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.Fish.build_statusline() : v:lua.Fish.build_statusline_inactive()%}'

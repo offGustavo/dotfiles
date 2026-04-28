@@ -1,6 +1,6 @@
 return {
   "https://github.com/folke/todo-comments.nvim",
-  event = "VeryLazy",
+  event = "BufReadPost",
   opts = {
     signs = true,      -- show icons in the signs column
     sign_priority = 8, -- sign priority
@@ -67,7 +67,7 @@ return {
     },
   },
   keys = {
-    { "<leader>st", "<Cmd>TodoFzfLua<Cr>",                               desc = "Search for TODO and FIX/FIXME" },
+    -- { "<leader>st", "<Cmd>TodoFzfLua<Cr>",                               desc = "Search for TODO and FIX/FIXME" },
     { "<leader>t]", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
     { "<leader>t[", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" }
   },

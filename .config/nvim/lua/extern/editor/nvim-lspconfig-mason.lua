@@ -5,7 +5,7 @@ return {
     automatic_enable = true,
   },
   dependencies = {
-    { "https://github.com/mason-org/mason.nvim", opts = {} },
     "https://github.com/neovim/nvim-lspconfig",
+    { "https://github.com/mason-org/mason.nvim", opts = {} },
   },
 }

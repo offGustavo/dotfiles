@@ -1,4 +1,6 @@
+-- NOTE: Disabled usign harpoon
 if true then return end
+
 vim.g.forge_arglist = {
   save_local = {
     enable = true,

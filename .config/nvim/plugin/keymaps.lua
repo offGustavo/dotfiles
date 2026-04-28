@@ -20,8 +20,7 @@ vim.keymap.set("n", "<leader>qc", vim.cmd.cclose, { desc = "QuickFix Close", sil
 ---vim.keymap.set("n", "ZR", vim.cmd.restart, { desc = "Restart Session", silent = true })
 
 vim.keymap.set("n", "<leader>fC", ":e $MYVIMRC<Cr>", { silent = true, desc = "Edit the Init.lua file" })
-vim.keymap.set("n", "<leader>fD", ":e $MYVIMDIR<Cr>", { silent = true, desc = "Edit the Init.lua file" })
-vim.keymap.set("n", "<leader>fn", ":enew<Cr>", { silent = true, desc = "Edit the Init.lua file" })
+vim.keymap.set("n", "<leader>fn", ":enew<Cr>", { silent = true, desc = "New File" })
 
 vim.keymap.set("n", "<leader>bb", ":b #<Cr>", { desc = "Alternative Buffer" })
 vim.keymap.set("n", "<leader>bd", ":bd<Cr>", { desc = "Delete Buffer" })
@@ -31,10 +30,10 @@ vim.keymap.set({ "x", "n" }, "s.", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], 
 vim.keymap.set({ "x", "n" }, "S>", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
 vim.keymap.set({ "x", "n" }, "sg", ":%s/", { silent = false })
 vim.keymap.set({ "x", "n" }, "SG", ":%s//gI<Left><Left><Left>", { silent = false })
-vim.keymap.set({ "x", "n" }, "sl", ":s/", { silent = false })
-vim.keymap.set({ "x", "n" }, "SL", [[:s//gI<Left><Left><Left>]], { silent = false })
-vim.keymap.set("n", "SS", [[S<Esc>]], { silent = false })
-vim.keymap.set("x", "SS", [[:normal S<Esc>]], { silent = false })
+vim.keymap.set({ "x", "n" }, "ss", ":s/", { silent = false })
+vim.keymap.set({ "x", "n" }, "SS", [[:s//gI<Left><Left><Left>]], { silent = false })
+vim.keymap.set("n", "SV", [[S<Esc>]], { silent = false })
+vim.keymap.set("x", "SV", [[:normal S<Esc>]], { silent = false })
 
 vim.keymap.set("i", "<C-Bs>", "<C-w>")
 vim.cmd("packadd nvim.undotree")

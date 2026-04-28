@@ -1,16 +1,16 @@
--- -- __Mini__ Yazi.nvim for faster startuptime
--- require("forge.yazi").setup({
---   enable_cmds = true,
---   replace_netrw = true,
---   ui = {
---     border = "rounded",
---     height = 0.9,
---     width = 0.9,
---     x = 0.5,
---     y = 0.5,
---   },
---   keybindings = {},
--- })
+-- __Mini__ Yazi.nvim for faster startuptime
+require("forge.yazi").setup({
+  enable_cmds = true,
+  replace_netrw = true,
+  ui = {
+    border = "rounded",
+    height = 0.9,
+    width = 0.9,
+    x = 0.5,
+    y = 0.5,
+  },
+  keybindings = {},
+})
 
 vim.schedule(function ()
 -- require("forge.easymode")

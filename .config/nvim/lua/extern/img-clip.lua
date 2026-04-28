@@ -11,7 +11,6 @@ return {
   },
   keys = {
     {
-      "n",
       "<localleader>ip",
       "<cmd>PasteImage<cr>",
       desc = "Paste image from system clipboard",

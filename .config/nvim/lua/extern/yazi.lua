@@ -1,12 +1,9 @@
-if true then
-  return {}
-end
-
 ---@type LazySpec
 return {
   "mikavilpas/yazi.nvim",
   version = "*", -- use the latest stable version
   -- event = "UiEnter",
+  event = "VeryLazy",
   dependencies = {
     { "nvim-lua/plenary.nvim" },
   },
