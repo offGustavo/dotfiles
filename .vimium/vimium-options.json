@@ -1,0 +1,45 @@
+{
+  "exclusionRules": [
+    {
+      "passKeys": "",
+      "pattern": "https?://mail.google.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://monkeytype.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://docs.google.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://trello.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://web.whatsapp.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://x.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.vimonlineeditor.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://open.spotify.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://en.key-test.ru/*"
+    }
+  ],
+  "keyMappings": "unmap f\nunmap F\nunmap yf\n\nmap J nextTab\nmap K previousTab\n\nmap ; LinkHints.activateMode\nmap : LinkHints.activateModeToOpenInNewTab\nmap y; LinkHints.activateModeToCopyLinkUrl\nmap <a-;> LinkHints.activateModeToOpenIncognito\n\nmap M toggleMuteTab\n\nmap D scrollFullPageDown\nmap U scrollFullPageUp",
+  "newTabDestination": "browserNewTabPage",
+  "scrollStepSize": 20,
+  "searchEngines": "w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\ng: https://www.google.com/search?q=%s Google\ny: https://www.youtube.com/results?search_query=%s Youtube\nb: https://www.bing.com/search?q=%s Bing\nd: https://duckduckgo.com/?q=%s DuckDuckGo\na: https://wiki.archlinux.org/index.php?search=%s&title=Special%3ASearch&wprov=acrw1_-1 ArchWiki\nvf: moz-extension://49e2af00-14f2-446c-aa68-852afefb1663/pages/options.html Vimium Firefox Config\nvc: extension://djmieaghokpkpjfbpelnlkfgfjapaopa/pages/options.html Vimium Chrome/Edge Config",
+  "settingsVersion": "2.4.2"
+}
