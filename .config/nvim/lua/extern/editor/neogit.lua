@@ -14,11 +14,11 @@ return {
     -- "nvim-telescope/telescope.nvim", -- optional
     -- "ibhagwan/fzf-lua",              -- optional
     -- "nvim-mini/mini.pick",           -- optional
-    "folke/snacks.nvim", -- optional
+    -- "folke/snacks.nvim", -- optional
   },
   -- cmd = "Neogit",
   keys = {
-    { "<M-S-g>", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
+    { "<M-S-g>", "<cmd>Neogit kind=replace<cr>", desc = "Show Neogit UI" }
   }
 }
 --   "https://github.com/tpope/vim-fugitive",

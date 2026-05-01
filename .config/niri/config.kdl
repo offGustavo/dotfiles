@@ -826,6 +826,7 @@ binds {
   // Mod+Ctrl+W { spawn "sh" "-c" "$HOME/.local/bin/start_swaybg.lua"; }
   Mod+Ctrl+W { spawn "sh" "-c" "$HOME/.config/niri/scripts/windows.sh"; }
   Mod+n { spawn "sh" "-c" "nmgui"; }
+  Mod+Ctrl+n { spawn "sh" "-c" "$HOME/.config/rofi/scripts/network.lua"; }
   Mod+Ctrl+v { spawn "sh" "-c" "$HOME/.config/rofi/scripts/output.sh"; }
   Mod+p { spawn "sh" "-c" "/home/gustavo/.config/niri/scripts/monitors.sh"; }
   Mod+Ctrl+p { spawn-sh "hyprpicker -a"; }
