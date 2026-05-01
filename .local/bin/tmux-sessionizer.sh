@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+set -xe
+
 if [[ $# -eq 1 ]]; then
   selected=$(zoxide query "$1")
 else
-  selected=$(zoxide query -l -s | fzf)
-  selected=$(echo "$selected" | cut -d' ' -f3)
+  selected=$(zoxide query -l | fzf)
+  selected=$(echo "$selected" | cut -d' ' -f2)
 fi
 
 if [[ -z "$selected" ]]; then
