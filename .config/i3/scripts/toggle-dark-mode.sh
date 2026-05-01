@@ -4,11 +4,14 @@ current_scheme="$1"
 I3_CONFIG=~/.config/i3/config
 
 if [ "$current_scheme" = "light" ]; then
-  
+
+ # Wallpaper
+ xwallpaper --zoom ~/Pictures/Wallpapers/dharmx-Walls/cherry/a_tree_with_pink_flowers.jpg
+
   # Remove existing theme block if present
   sed -i '/^# Tokyo Night/,/^$/d' "$I3_CONFIG"
   # Add light theme
-  cat >> "$I3_CONFIG" << 'EOF'
+  cat >>"$I3_CONFIG" <<'EOF'
 # Tokyo Night Day Theme
 set $fg #3760bf
 set $bg #e1e2e7
@@ -18,12 +21,15 @@ set $red #f52a65
 set $green #587539
 set $purple #7847bd
 EOF
-
 else
+
+ # Wallpaper
+ xwallpaper --zoom ~/Pictures/Wallpapers/dharmx-Walls/unsorted/a_black_background_with_purple_and_blue_spots.png
+
   # Remove existing theme block if present
   sed -i '/^# Tokyo Night/,/^$/d' "$I3_CONFIG"
   # Add dark theme
-  cat >> "$I3_CONFIG" << 'EOF'
+  cat >>"$I3_CONFIG" <<'EOF'
 # Tokyo Night Theme
 set $fg #c0caf5
 set $bg #1a1b26
