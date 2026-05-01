@@ -15,18 +15,6 @@ vim.opt.fillchars:append({
 	foldinner = " ",
 })
 
--- vim.opt.fillchars:append({
--- 	fold = " ",
--- 	foldopen = "+",
--- 	foldclose = "-",
--- 	foldsep = " ",
--- 	foldinner = " ",
--- })
+vim.o.statuscolumn = "%s%l %C "
 
--- vim.o.statuscolumn = "%s%l %C "
-
--- Custom symbol for dol
-Fish.close_fold_char = ""
--- Fish.close_fold_char = ">"
-
-vim.o.statuscolumn = "%!v:lua.require('fish.statuscolumn').build()"
+-- vim.o.statuscolumn = "%!v:lua.require('fish.statuscolumn').build()"

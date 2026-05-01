@@ -20,9 +20,12 @@ require("lazy").setup({
 	spec = {
 		-- import your plugins
 		{ import = "extern" },
+		{ import = "extern.coding" },
 		{ import = "extern.editor" },
+		{ import = "extern.util" },
+		{ import = "extern.coding" },
 		{ import = "extern.themes" },
-		{ import = "extern.ui" },
+    { import = "extern.ui" },
 	},
 	root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
 	defaults = {

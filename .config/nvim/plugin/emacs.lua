@@ -11,14 +11,14 @@ vim.cmd([[
   "" Emacs shit
   "nmap <M-x> :
 
-  "imap <C-a> <home>
-  "imap <C-e> <end>
-  "imap <C-f> <right>
-  "imap <C-b> <left>
-  "imap <M-f> <C-right>
-  "imap <M-b> <C-left>
-  "imap <C-d> <del>
-  "imap <M-d> <C-o>de
+  imap <C-a> <home>
+  imap <C-e> <end>
+  imap <C-f> <right>
+  imap <C-b> <left>
+  imap <M-f> <C-right>
+  imap <M-b> <C-left>
+  imap <C-d> <del>
+  imap <M-d> <C-o>de
 ]])
 
 -- Emacs Binds

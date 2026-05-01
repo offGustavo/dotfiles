@@ -1,6 +1,6 @@
 return {
   "https://github.com/monaqa/dial.nvim",
-  enabled = false,
+  -- enabled = false,
   keys = {
     { "<C-a>", function() require("dial.map").manipulate("increment", "normal") end },
     { "<C-x>", function() require("dial.map").manipulate("decrement", "normal") end },

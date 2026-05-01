@@ -170,6 +170,14 @@ return {
 			desc = "Grep in config files",
 		},
 
+		{
+			"<leader>uC",
+			function()
+				require("fzf-lua").colorschemes()
+			end,
+			desc = "Colorschemes",
+		},
+
 		--- Agenda/Notes
 		{
 			"<leader>af",

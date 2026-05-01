@@ -104,4 +104,3 @@ hi DiffAdd       guifg=#9ece6a guibg=#2b485a
 hi DiffChange    guifg=#c0caf5 guibg=#272d43
 hi DiffDelete    guifg=#f7768e guibg=#52313f
 hi DiffText      guifg=#7aa2f7 guibg=#2b485a gui=bold
-

@@ -10,8 +10,6 @@ vim.schedule(function()
     root_markers = { ".git" },
   })
 
-  vim.lsp.enable("ts_ls")
-
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
       Fish.did_lsp_setup = true
@@ -28,6 +26,7 @@ vim.schedule(function()
         --   }
         -- }
       })
+
       -- Diagnostics
       local client = vim.lsp.get_client_by_id(ev.data.client_id)
       if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then

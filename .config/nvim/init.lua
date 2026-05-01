@@ -1,9 +1,9 @@
 -- Map Leader and Local Leader
 vim.cmd([[
   " <space> as leader
-	let g:mapleader = " "
+  let g:mapleader = " "
   " <space><space> as local leader
-	let g:maplocalleader = "  "
+  let g:maplocalleader = "  "
 ]])
 
 -- Our Global thing
@@ -33,5 +33,3 @@ require("config.lazy")
 -- Load my custom plugins
 require("config.forge")
 
--- TODO: hello
--- FIXME: hello

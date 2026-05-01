@@ -1,5 +1,3 @@
--- if true then return {}  end
-
 return {
 	"https://github.com/folke/which-key.nvim",
 	event = "VeryLazy",
@@ -32,7 +30,7 @@ return {
 			{ "<leader>c", group = "Code", icon = "" }, -- group
 			{ "<leader>l", group = "Location list", icon = "" }, -- group
 			{ "<leader>q", group = "Quickfix list", icon = "" }, -- group
-			{ "<leader>h", group = "Harpoon/Espeto", icon = "󱡅" }, -- group  TODO: modifie to harpoon
+			{ "<leader>h", group = "Harpoon/Espeto", icon = "⇁" }, -- group
 			{ "<leader>b", group = "Buffer", icon = "" }, -- group
 			{ "<leader>t", group = "Terminal/Todo", icon = "" }, -- group
 			-- { "<leader>r", group = "Rep0lace", icon = "󰛔" }, -- group
