@@ -68,14 +68,15 @@ function M.build()
 
 	-- Signs (git on left, diagnostic/other on right)
 	local signs = get_line_signs(buf, lnum)
-	local left  = render_sign(signs.sign)
+	local left = render_sign(signs.sign)
 
 	-- Fold indicator or Git diff
 	local right = "  "
 	local fold_level = vim.fn.foldlevel(lnum)
 	if fold_level > 0 then
 		if vim.fn.foldclosed(lnum) ~= -1 then
-			right = "%#Folded#" .. (Fish.close_fold_char or "") .. " %*"
+			local foldclose = vim.opt.fillchars:get().foldclose or "+" -- Use '+' as backup
+			right = "%#Folded#" .. foldclose .. " %*"
 		else
 			right = render_sign(signs.git)
 		end

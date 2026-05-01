@@ -32,3 +32,6 @@ require("config.lazy")
 
 -- Load my custom plugins
 require("config.forge")
+
+-- TODO: hello
+-- FIXME: hello
