@@ -3,6 +3,8 @@ vim.schedule(function()
 	vim.o.spell = true
 	vim.o.spelloptions = "camel" -- Treat camelCase word parts as separate words
 
+	-- vim.keymap.set("n", "z=", "<Cmd>FzfLua spell_suggest<Cr>")
+
 	-- local spell_on_choice = vim.schedule_wrap(function(_, idx)
 	-- 	if type(idx) == "number" then
 	-- 		vim.cmd("normal! " .. idx .. "z=")

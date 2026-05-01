@@ -20,6 +20,8 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
   end,
 })
 
+-- FIXME: remove some keybinds
+-- free <leader>p
 vim.keymap.set("n", "<M-w>", '"', { desc = 'Alias to "' })
 vim.keymap.set("i", "<M-w>", '<C-r>', { desc = 'Alias to "' })
 
@@ -39,6 +41,10 @@ vim.keymap.set({ "n", "x" }, "<D-c>", '"+y', { desc = "Yank to system register" 
 vim.keymap.set({ "n" }, "<C-S-c><C-S-c>", '"+yy', { desc = "Yank to system register" })
 
 vim.keymap.set({ "n", "x" }, "<leader>x", '"+d', { desc = "Cut to system register" })
+
+-- Copy Entire Buffer
+vim.keymap.set("n", "gA", "<Cmd>%y +<Cr>", { silent = true, desc = "Yank entire file to System" })
+vim.keymap.set("n", "g<M-a>", "<Cmd>%y<Cr>", { silent = true, desc = "Yank entire file" })
 
 -- vim.schedule(function()
 -- 	vim.o.clipboard = "unnamed,unnamedplus"

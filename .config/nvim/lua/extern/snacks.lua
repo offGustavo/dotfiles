@@ -2,7 +2,7 @@ return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
-	-- enabled = false,
+	enabled = true,
 	---@type snacks.Config
 	opts = {
 		bigfile = { enabled = true },
@@ -29,13 +29,13 @@ return {
 		},
 		explorer = { enabled = false },
 		indent = { enabled = false },
-		input = { enabled = true },
+		input = { enabled = false },
 		notifier = {
 			enabled = false,
 			timeout = 3000,
 		},
 		picker = {
-			enabled = true,
+			enabled = false,
 			layout = "ivy_split",
 			-- layout = {
 			--   preview = "main",
@@ -57,7 +57,7 @@ return {
 			--   },
 			-- }
 		},
-		quickfile = { enabled = true },
+		quickfile = { enabled = false },
 		scope = { enabled = false },
 		scroll = { enabled = false },
 		statuscolumn = {

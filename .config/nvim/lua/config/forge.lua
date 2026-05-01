@@ -15,7 +15,7 @@ require("forge.yazi").setup({
 vim.schedule(function ()
 -- require("forge.easymode")
 
-require("forge.espeto").setup()
+-- require("forge.espeto").setup()
 
 -- vim.keymap.set("n", "<leader>v", function()
 --   require("forge.vidir").open()
@@ -81,4 +81,3 @@ local toggle = require('forge.toggle')
 vim.keymap.set('n', '<leader>tt', function() toggle.toggle() end)
 end)
 
-return {}

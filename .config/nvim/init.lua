@@ -16,5 +16,19 @@ else
 	vim.cmd.colorscheme("tokyo-day")
 end
 
+-- Basic keymaps for Nvim (if lazy fails for some reason)
+vim.cmd([[
+  nmap <M-o> :fin 
+  nmap <M-e> :Ex<Cr>
+  nmap <M-s> :grep 
+  nmap <M-b> :b 
+]])
+
+-- Disable Custom Nix/Arch FZF.vim
+vim.cmd("let g:loaded_fzf = 1")
+
+-- Load Lazy.nvim and external plugins
 require("config.lazy")
-require("forge.forge")
+
+-- Load my custom plugins
+require("config.forge")

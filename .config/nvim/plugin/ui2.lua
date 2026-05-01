@@ -1,22 +1,22 @@
-if true then return end
+-- if true then return end
 
-if vim.fn.has('nvim-0.12') ~= 1 then
-  vim.notify("Use 0.12 to enable ui2", vim.log.levels.WARN)
-  return
-end
+-- if vim.fn.has('nvim-0.12') ~= 1 then
+--   vim.notify("Use 0.12 to enable ui2", vim.log.levels.WARN)
+--   return
+-- end
 
 vim.schedule(function()
-  vim.o.cmdheight = 0
-  require('vim._core.ui2').enable({
-    enable = true, -- Whether to enable or disable the UI.
-    msg = {      -- Options related to the message module.
-      ---@type 'cmd'|'msg' Default message target, either in the
-      ---cmdline or in a separate ephemeral message window.
-      ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
-      ---or table mapping |ui-messages| kinds and triggers to a target.
-      targets = 'msg',
-    }
-  })
+	vim.o.cmdheight = 1
+	require("vim._core.ui2").enable({
+		enable = true, -- Whether to enable or disable the UI.
+		msg = { -- Options related to the message module.
+			---@type 'cmd'|'msg' Default message target, either in the
+			---cmdline or in a separate ephemeral message window.
+			---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
+			---or table mapping |ui-messages| kinds and triggers to a target.
+			targets = "msg",
+		},
+	})
 end)
 
 -- -- Experimental UI2: floating cmdline and messages

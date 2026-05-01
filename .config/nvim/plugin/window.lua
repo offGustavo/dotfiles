@@ -1,4 +1,4 @@
--- TODO: Make a better window separators, this module should fill the gap between statuslines
+-- INFO: Make a better window separators, this module should fill the gap between statuslines
 -- Also this module should provide an tmux like highlight for the current split, this should help
 -- the user to find what is the split he is in, and will look nice.
 
