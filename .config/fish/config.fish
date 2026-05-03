@@ -170,6 +170,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 fzf --fish | source
 
 # alias vim=nvim
+alias emacs='emacs -nw'
 
 function start-kanata
     if tmux has-session -t kanata 2>/dev/null
