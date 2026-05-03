@@ -1,5 +1,5 @@
 -- FIXME: Quero usar o laststatus = 0, mas o nome do arquivo não fica salvo per janela
--- vim.o.laststatus = 3
+vim.o.laststatus = 3
 vim.o.showmode = false
 
 -- vim.opt.fillchars:append({

@@ -27,9 +27,8 @@ vim.cmd([[
 -- Disable Custom Nix/Arch FZF.vim
 vim.cmd("let g:loaded_fzf = 1")
 
--- Load Lazy.nvim and external plugins
-require("config.lazy")
+-- -- Load Lazy.nvim and external plugins
+-- require("config.lazy")
 
 -- Load my custom plugins
 require("config.forge")
-

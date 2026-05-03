@@ -15,6 +15,6 @@ vim.opt.fillchars:append({
 	foldinner = " ",
 })
 
-vim.o.statuscolumn = "%s%l %C "
+-- vim.o.statuscolumn = "%s%l %C "
 
--- vim.o.statuscolumn = "%!v:lua.require('fish.statuscolumn').build()"
+vim.o.statuscolumn = "%!v:lua.require('fish.statuscolumn').build()"
