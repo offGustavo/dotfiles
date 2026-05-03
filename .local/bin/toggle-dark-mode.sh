@@ -4,7 +4,7 @@
 
 current_scheme=$(dconf read /org/gnome/desktop/interface/color-scheme)
 
-"THEME="""
+THEME=""
 
 if [ "$current_scheme" = "'prefer-light'" ] || [ "$current_scheme" = "'default'" ]; then
   dconf write /org/gnome/desktop/interface/color-scheme '"prefer-dark"'
