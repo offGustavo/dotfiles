@@ -57,9 +57,7 @@
      default))
  '(display-line-numbers 'visual)
  '(inhibit-startup-screen t)
- '(package-selected-packages
-   '(## evil-collection evil-mc evil-numbers lua-mode magit markdown-mode
-	meow move-text multiple-cursors tokyonight-themes))
+ '(package-selected-packages '(exwm exwm-firefox-evil move-text multiple-cursors))
  '(package-vc-selected-packages
    '((tokyonight-themes :url
 			"https://github.com/xuchengpeng/tokyonight-themes"))))
@@ -87,36 +85,36 @@
   :config
   (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-; (use-package evil
-;   :config
-;   (require 'evil))
-;   ;; (evil-mode))
+ (use-package evil
+   :config
+   (require 'evil))
+   ;; (evil-mode))
 
-(use-package exwm
-  :config
-  (require 'exwm)
-  ;; Set the initial workspace number.
-  (setq exwm-workspace-number 4)
-  ;; Make class name the buffer name.
-  (add-hook 'exwm-update-class-hook
-	    (lambda () (exwm-workspace-rename-buffer exwm-class-name)))
-  ;; Global keybindings.
-  (setq exwm-input-global-keys
-	`(([?\s-r] . exwm-reset) ;; s-r: Reset (to line-mode).
-          ([?\s-w] . exwm-workspace-switch) ;; s-w: Switch workspace.
-          ([?\s-&] . (lambda (cmd) ;; s-&: Launch application.
-                       (interactive (list (read-shell-command "$ ")))
-                       (start-process-shell-command cmd nil cmd)))
-          ;; s-N: Switch to certain workspace.
-          ,@(mapcar (lambda (i)
-                      `(,(kbd (format "s-%d" i)) .
-			(lambda ()
-                          (interactive)
-                          (exwm-workspace-switch-create ,i))))
-                    (number-sequence 0 9)))))
-;; NOTE: We active EXWM manually on the session file 
-;;   ;; Enable EXWM
-;;   (exwm-wm-mode))
+;; (use-package exwm
+;;   :config
+;;   (require 'exwm)
+;;   ;; Set the initial workspace number.
+;;   (setq exwm-workspace-number 4)
+;;   ;; Make class name the buffer name.
+;;   (add-hook 'exwm-update-class-hook
+;; 	    (lambda () (exwm-workspace-rename-buffer exwm-class-name)))
+;;   ;; Global keybindings.
+;;   (setq exwm-input-global-keys
+;; 	`(([?\s-r] . exwm-reset) ;; s-r: Reset (to line-mode).
+;;           ([?\s-w] . exwm-workspace-switch) ;; s-w: Switch workspace.
+;;           ([?\s-&] . (lambda (cmd) ;; s-&: Launch application.
+;;                        (interactive (list (read-shell-command "$ ")))
+;;                        (start-process-shell-command cmd nil cmd)))
+;;           ;; s-N: Switch to certain workspace.
+;;           ,@(mapcar (lambda (i)
+;;                       `(,(kbd (format "s-%d" i)) .
+;; 			(lambda ()
+;;                           (interactive)
+;;                           (exwm-workspace-switch-create ,i))))
+;;                     (number-sequence 0 9)))))
+;; ;; NOTE: We active EXWM manually on the session file 
+;; ;;   ;; Enable EXWM
+;; ;;   (exwm-wm-mode))
 
 ;; NOTE: from rexim/tsoding
 
