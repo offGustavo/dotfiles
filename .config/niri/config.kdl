@@ -5,7 +5,7 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
 // Use server side decorations
-// prefer-no-csd
+prefer-no-csd
 
 hotkey-overlay {
     skip-at-startup

@@ -12,6 +12,7 @@
 
 return {
   "https://github.com/stevearc/oil.nvim",
+  enabled = false,
   keys = {
     -- { "<M-e>",      "<Cmd>Oil<Cr>", desc = "Open current dir" },
     { "<leader>fd", "<Cmd>Oil<Cr>", desc = "Open current dir" }

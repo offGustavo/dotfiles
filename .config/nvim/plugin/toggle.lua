@@ -1,10 +1,10 @@
 -- Toggle
 vim.keymap.set("n", "<C-a>", function()
 	require("forge.toggle").increase()
-end)
+end, { desc = "Inrease numbers and words" })
 vim.keymap.set("n", "<C-x>", function()
 	require("forge.toggle").decrease()
-end)
+end, { desc = "Inrease numbers and words" })
 
 -- FIXME: fix toggle
 vim.keymap.set("n", "<leader>tt", function()

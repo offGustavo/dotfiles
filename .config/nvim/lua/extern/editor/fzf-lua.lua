@@ -1,10 +1,14 @@
 return {
 	"https://github.com/ibhagwan/fzf-lua",
+  enabled = true,
 	opts = {
 		-- "ivy",
 		-- "fzf-native",
 		"telescope",
 		ui_select = true,
+    fzf_opts = {
+      [ "--sort"] = false,
+    },
 		fzf_colors = {
 			true, -- inherit fzf colors that aren't specified below from
 		},

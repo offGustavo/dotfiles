@@ -7,8 +7,6 @@ vim.o.relativenumber = true
 vim.o.breakindent = true
 vim.o.linebreak = true
 vim.o.undofile = true
--- vim.o.ignorecase = true
--- vim.o.smartcase = true
 vim.o.updatetime = 100
 vim.o.timeoutlen = 400
 vim.o.splitright = true
@@ -23,11 +21,8 @@ vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a T
 vim.o.softtabstop = 2 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 2 -- Number of spaces inserted when indenting
 vim.o.swapfile = false
--- vim.o.path = vim.o.path .. "**"
--- vim.cmd([[
---   set wildignore=*.o,*.obj,**/node_modules/**,/
--- ]])
 vim.o.termguicolors = true
+
 if vim.uv.os_uname().sysname == "Windows_NT" then
 	vim.o.shell = "pwsh.exe"
 	vim.o.shellcmdflag =

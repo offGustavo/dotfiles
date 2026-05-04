@@ -20,6 +20,42 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
   end,
 })
 
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+-- 	desc = "Highlight when yanking (copying) text",
+-- 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+-- 	callback = function()
+-- 		vim.hl.on_yank()
+-- 	end,
+-- })
+
+-- Define custom highlight groups (choose your own colors)
+-- Example: Cyan for normal yanks, Orange for clipboard (+ register) yanks
+vim.api.nvim_set_hl(0, "YankHlDefault", { fg = "cyan", bg = "" })
+vim.api.nvim_set_hl(0, "YankHlSystem", { fg = "orange", bg = "" })
+vim.api.nvim_set_hl(0, "YankHlBlackHole", { fg = "orange", bg = "" })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight yanked text with different colors based on register",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		local reg = vim.v.event.regname
+		if reg == "+" then
+			-- Yank to system clipboard → orange highlight
+			-- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
+			vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 })
+		elseif reg == "_" then
+			-- Yank to system clipboard → orange highlight
+			-- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
+			vim.highlight.on_yank({ higroup = "ErrorMsg", timeout = 150 })
+		else
+			-- Any other yank (default register, "*", named registers, etc.) → cyan highlight
+			-- vim.highlight.on_yank({ higroup = "YankHighlightNormal", timeout = 150 })
+			vim.highlight.on_yank({ higroup = "Search", timeout = 150 })
+		end
+	end,
+})
+
+
 -- FIXME: remove some keybinds
 -- free <leader>p
 vim.keymap.set("n", "<M-w>", '"', { desc = 'Alias to "' })
@@ -45,6 +81,10 @@ vim.keymap.set({ "n", "x" }, "<leader>x", '"+d', { desc = "Cut to system registe
 -- Copy Entire Buffer
 vim.keymap.set("n", "gA", "<Cmd>%y +<Cr>", { silent = true, desc = "Yank entire file to System" })
 vim.keymap.set("n", "g<M-a>", "<Cmd>%y<Cr>", { silent = true, desc = "Yank entire file" })
+
+vim.keymap.set({ "n", "x", "i" }, "<S-Insert>", '"+p')
+vim.keymap.set({ "n", "x", "i" }, "<C-Insert>", '"+y')
+vim.keymap.set({ "n", "x", "i" }, "<S-Del>", '"+d')
 
 -- vim.schedule(function()
 -- 	vim.o.clipboard = "unnamed,unnamedplus"

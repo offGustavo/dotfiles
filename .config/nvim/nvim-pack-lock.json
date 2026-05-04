@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "vim-startuptime": {
+      "rev": "f10474b400c197787a0434548d842a2db583c333",
+      "src": "https://github.com/dstein64/vim-startuptime"
+    }
+  }
+}

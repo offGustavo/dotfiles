@@ -1,6 +1,5 @@
 local M = {}
 
--- From Snacks.statuscolumn, thanks folke
 function M.click_fold()
 	local pos = vim.fn.getmousepos()
 	vim.api.nvim_win_set_cursor(pos.winid, { pos.line, 1 })
@@ -21,15 +20,12 @@ local function is_git_sign(name)
 	end
 end
 
--- Returns the highest-priority sign of each type for a given line
 local function get_line_signs(buf, lnum)
-	local by_type = {} -- { git = sign, sign = sign }
-
+	local by_type = {}
 	local extmarks = vim.api.nvim_buf_get_extmarks(buf, -1, { lnum - 1, 0 }, { lnum - 1, -1 }, {
 		details = true,
 		type = "sign",
 	})
-
 	for _, mark in ipairs(extmarks) do
 		local d = mark[4]
 		local name = d.sign_hl_group or d.sign_name or ""
@@ -45,7 +41,6 @@ local function get_line_signs(buf, lnum)
 			}
 		end
 	end
-
 	return by_type
 end
 
@@ -66,23 +61,30 @@ function M.build()
 	local buf = vim.api.nvim_win_get_buf(win)
 	local lnum = vim.v.lnum
 
-	-- Signs (git on left, diagnostic/other on right)
 	local signs = get_line_signs(buf, lnum)
 	local left = render_sign(signs.sign)
 
-	-- Fold indicator or Git diff
+	-- All window-sensitive calls scoped to `win`
+	local fold_level = vim.api.nvim_win_call(win, function()
+		return vim.fn.foldlevel(lnum)
+	end)
+
 	local right = "  "
-	local fold_level = vim.fn.foldlevel(lnum)
 	if fold_level > 0 then
-		if vim.fn.foldclosed(lnum) ~= -1 then
-			local foldclose = vim.opt.fillchars:get().foldclose or "+" -- Use '+' as backup
+		local fold_closed = vim.api.nvim_win_call(win, function()
+			return vim.fn.foldclosed(lnum)
+		end)
+
+		if fold_closed ~= -1 then
+			local foldclose = vim.api.nvim_win_call(win, function()
+				return vim.opt.fillchars:get().foldclose or "+"
+			end)
 			right = "%#Folded#" .. foldclose .. " %*"
 		else
 			right = render_sign(signs.git)
 		end
 	end
 
-	-- Line number
 	local num
 	if vim.wo[win].relativenumber and vim.v.relnum ~= 0 then
 		num = vim.v.relnum

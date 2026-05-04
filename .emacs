@@ -10,8 +10,9 @@
 (setq initial-scratch-message "")
 (setq make-backup-files nil)
 (add-to-list 'default-frame-alist '(undecorated . t))
-(global-visual-line-mode)
+(global-visual-line-mode 1)
 (setq make-backup-files nil)
+(delete-selection-mode 1)
 
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")

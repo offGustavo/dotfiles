@@ -1,9 +1,11 @@
 ---@type LazySpec
 return {
 	"mikavilpas/yazi.nvim",
+  -- lazy = false,
+  enabled = false,
 	version = "*", -- use the latest stable version
 	-- event = "UiEnter",
-	event = "VeryLazy",
+	-- event = "VeryLazy",
 	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
 	},
