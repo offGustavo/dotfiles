@@ -53,7 +53,7 @@ input {
 
       // For example:
       // layout "us"
-      // variant "intl" 
+      // variant "intl"
       layout "us,br"
       variant "intl,"
       // options "grp:win_space_toggle"
@@ -246,7 +246,7 @@ layout {
   }
 
   // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
-  preset-window-heights { 
+  preset-window-heights {
     proportion 0.25
     proportion 0.5
     proportion 0.75
@@ -342,13 +342,13 @@ layout {
     // radius. It has to assume that windows have square corners, leading to
     // shadow artifacts inside the CSD rounded corners. This setting fixes
     // those artifacts.
-    // 
+    //
     // However, instead you may want to set prefer-no-csd and/or
     // geometry-corner-radius. Then, niri will know the corner radius and
     // draw the shadow correctly, without having to draw it behind the
     // window. These will also remove client-side shadows if the window
     // draws any.
-    // 
+    //
     draw-behind-window true
 
     // You can change how shadows look. The values below are in logical
@@ -606,38 +606,28 @@ binds {
   Mod+K     { focus-window-down; }
   Mod+L     { focus-column-right; }
 
-  Mod+Up     { focus-window-or-workspace-up; }
-  Mod+Left     { focus-column-or-monitor-left; }
-  Mod+Down     { focus-window-or-workspace-down; }
-  Mod+Right     { focus-column-or-monitor-right; }
-
-  Mod+Shift+I { move-window-up; }    
+  Mod+Shift+I { move-window-up; }
   Mod+Shift+J { consume-or-expel-window-left; }
   Mod+Shift+K { move-window-down; }
   Mod+Shift+L { consume-or-expel-window-right; }
 
-  Mod+Shift+Left { move-column-left-or-to-monitor-left; }
-  Mod+Shift+Down { move-window-down-or-to-workspace-down; }
-  Mod+Shift+Right { move-column-right-or-to-monitor-right; }
-  Mod+Shift+Up { move-window-up-or-to-workspace-up; }    
-
-  Mod+Ctrl+Shift+Left { consume-or-expel-window-left; }
-  Mod+Ctrl+Shift+Right { consume-or-expel-window-right; }
+  Mod+Ctrl+Shift+j { consume-or-expel-window-left; }
+  Mod+Ctrl+Shift+l { consume-or-expel-window-right; }
 
   Mod+o     { focus-workspace-down; }
-  Mod+u     { focus-workspace-up; }  
+  Mod+u     { focus-workspace-up; }
   Mod+Shift+o     { move-window-to-workspace-down; }
   Mod+Shift+u     { move-window-to-workspace-up; }
 
-  Mod+comma  { focus-monitor-left; }
-  Mod+period { focus-monitor-right; }
-  Mod+Shift+comma     { move-window-to-monitor-left; }
+  Mod+Comma  { focus-monitor-left; }
+  Mod+Period { focus-monitor-right; }
+  Mod+Shift+Comma     { move-window-to-monitor-left; }
   Mod+Shift+period     { move-window-to-monitor-right; }
 
-  Mod+Ctrl+comma     { move-workspace-to-monitor-left; }
-  Mod+Ctrl+period     { move-workspace-to-monitor-right; }
+  Mod+Ctrl+Comma     { move-workspace-to-monitor-left; }
+  Mod+Ctrl+Period     { move-workspace-to-monitor-right; }
 
-  Mod+Ctrl+u        { move-workspace-up; }  
+  Mod+Ctrl+u        { move-workspace-up; }
   Mod+Ctrl+o       { move-workspace-down; }
 
   // You can bind mouse wheel scroll ticks using the following syntax.
@@ -725,13 +715,13 @@ binds {
   // The following binds move the focused window in and out of a column.
   // If the window is alone, they will consume it into the nearby column to the side.
   // If the window is already in a column, they will expel it out.
-  // Mod+BracketLeft  { consume-or-expel-window-left; }
-  // Mod+BracketRight { consume-or-expel-window-right; }
+  Mod+BracketLeft  { consume-or-expel-window-left; }
+  Mod+BracketRight { consume-or-expel-window-right; }
 
   // Consume one window from the right to the bottom of the focused column.
-  // Mod+Comma  { consume-window-into-column; }
+  Mod+Ctrl+BracketLeft  { consume-window-into-column; }
   // Expel the bottom window from the focused column to the right.
-  // Mod+Period { expel-window-from-column; }
+  Mod+Ctrl+BracketRight { expel-window-from-column; }
 
   Mod+R { switch-preset-column-width; }
   Mod+E { switch-preset-column-width-back; }
@@ -777,7 +767,7 @@ binds {
   Mod+Shift+Ctrl+Equal { set-window-height "+1%"; }
 
   // Move the focused window between the floating and the tiling layout.
-  Mod+g           { toggle-window-floating; }                  
+  Mod+g           { toggle-window-floating; }
   Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
 
   // Toggle tabbed column display mode.
