@@ -2,6 +2,10 @@
 vim.o.modeline = true
 vim.o.exrc = true
 
+
+-- Real vim shit(i keep touch the trackpad when typing)
+vim.opt.mouse = ""
+
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.breakindent = true
@@ -36,47 +40,11 @@ vim.o.virtualedit = "block" -- Allow going past end of line in blockwise mode
 
 -- vim.o.cursorlineopt  = 'screenline,number' -- Show cursor line per screen line
 
--- Special UI symbols. More is set via 'mini.basics' later.
--- vim.o.list = true
-
--- -- Fold settings
--- vim.o.foldmethod = "indent"
--- vim.o.foldlevel = 99
--- vim.o.foldtext = ""
---
--- -- Status column settings
--- vim.o.foldcolumn = "1"
--- vim.o.signcolumn = "yes:1"
---
--- vim.opt.fillchars:append({
--- 	fold = " ",
--- 	foldopen = "",
--- 	foldclose = "",
--- 	foldsep = " ",
--- 	foldinner = " ",
--- })
---
--- -- Set fold symbol
--- Fish.statuscolumn_close_char = ""   -- or ">" for ASCII
---
--- vim.o.statuscolumn = "%s %l %C"
---
--- vim.schedule(function()
---   -- In your fold/column setup file
---   -- vim.o.statuscolumn = "%!v:lua.require'fish.statuscolumn'.get()"
--- end)
-
 vim.schedule(function()
 	-- [Neovim native, built-in, LSP autocomplete · Tomas Vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
 	-- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
 	-- vim.o.autocomplete = true
 	-- vim.opt.completeopt = { 'menuone', 'noselect', 'popup' }
-
-	-- vim.o.acd = true
-	-- vim.g.netrw_keepdir = 0
-	-- vim.cmd([[
-	-- autocmd BufEnter * lcd %:p:h
-	-- ]])
 
 	-- Better Grep and Find with ripgrep
 	if vim.fn.executable("rg") then
