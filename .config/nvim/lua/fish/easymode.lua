@@ -38,10 +38,9 @@ vim.keymap.set("i", "<C-y>", "<C-o><C-r>", { noremap = true, silent = true })
 -- Select All
 vim.keymap.set("i", "<C-a>", "<C-o>ggVG", { noremap = true, silent = true })
 
-vim.keymap.set("i", "<C-f>", "<C-o>/", { noremap = true, silent = false })
+vim.keymap.set("i", "<C-f>", "<C-o>/", { noremap = false, silent = false })
 vim.keymap.set("i", "<C-g>", "<C-o>n", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-S-g>", "<C-o>N", { noremap = true, silent = true })
-
 
 vim.keymap.set("i", "<C-Up>", "<C-o>{", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-Down>", "<C-o>}", { noremap = true, silent = true })

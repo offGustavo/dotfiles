@@ -75,9 +75,8 @@ local function zoxide_execute(target, cd_cmd)
 
   if result and result ~= "" then
     vim.cmd(cd_cmd .. " " .. vim.fn.fnameescape(result))
-    print("Changed directory to: " .. result)
   else
-    print("zoxide: no match for '" .. target .. "'")
+    vim.notify("zoxide: no match for '" .. target .. "'", vim.log.levels.WARN)
   end
 end
 
