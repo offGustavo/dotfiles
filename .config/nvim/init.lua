@@ -18,10 +18,10 @@ end
 
 -- Basic keymaps for Nvim (if lazy fails for some reason)
 vim.cmd([[
-  nmap <M-o> :fin 
+  nmap <M-o> :fin<Space>
+  nmap <M-s> :grep<Space>
+  nmap <M-b> :b<Space>
   nmap <M-e> :Ex<Cr>
-  nmap <M-s> :grep 
-  nmap <M-b> :b 
 ]])
 
 -- Disable Custom Nix/Arch FZF.vim

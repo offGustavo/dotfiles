@@ -23,7 +23,6 @@
 	lctl lmet lalt           spc            ralt  menu rctl
 	mlft mrgt mmid mfwd mbck)
 
-
 (defalias
 	;; Definer as layer
 
@@ -80,12 +79,12 @@
 	rcs (tap-hold-press 100 150 caps rsft)
 	lcc (tap-hold-press 100 300 caps lctl)
   ;; Esc
-  ste (switch (lsft rsft) S-grv  break 
-              (ralt) RA-grv  break 
+  ste (switch (lsft rsft) S-grv  break
+              (ralt) RA-grv  break
               ()          esc  break)
   ;; tes (fork left home (lalt))
 
-  ;; tes (switch (;) left  break 
+  ;; tes (switch (;) left  break
   ;;             ([) up break
   ;;             (') right break
   ;;             (/) down break
@@ -179,17 +178,16 @@
 	hhkb_shift (tap-hold-press 100 300 (one-shot 500 lsft) @nav)
 	hhkb_up (tap-hold-press 100 200 up (layer-toggle hhkb)))
 
-
-;; (deflayer base
-;;   @ste  @l1f @l2f @l3f @l4f @l5f @l6f @l7f @l8f @l9f @l0f @lmf @lef bspc
-;;   @lnt   @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [     ]   \
-;;   lctl   @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @ren
-;;   lsft     @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft  @hhkb_up
-;;   lctl  lmet lalt           @lsn           ralt rmet @hhkb_up
-;;   🖰1 🖰2 🖰3 @mbn @mfs)
+(deflayer base-alt
+  @ste  @l1f @l2f @l3f @l4f @l5f @l6f @l7f @l8f @l9f @l0f @lmf @lef bspc
+  @lnt   @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [     ]   \
+  lctl   @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @ren
+  lsft     @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft  @hhkb_up
+  lctl  lmet lalt           @lsn           ralt rmet @hhkb_up
+  🖰1 🖰2 🖰3 @mbn @mfs)
 
 (deflayer base
-  @ste 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  esc 1    2    3    4    5    6    7    8    9    0    -    =    bspc
 	tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
 	lctl a    s    d    f    g    h    j    k    l    ;    '    ret
 	lsft z    x    c    v    b    n    m    ,    .    /    rsft @hhkb_up
@@ -199,7 +197,9 @@
 (deflayer hhkb
 	 grv  f1    f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
 	 caps S-grv grv  _    _    _    _    _    _    _    _    up   _    ins
-	 lctl volu  vold mute pp   @mov S-8  /    home pgup left rght _ 
+		;; NOTE: this is not the default hhkb layout
+		;; but work nice with abnt2 keyboards
+	 lctl volu  vold mute pp   @mov S-8  /    home pgup left rght ins
 	 _    @mov  prev next _    @num S-=  -    end  pgdn down _    up
 	 _    _    _              _              _     _    _
 	 _  _  _  _  _ )
@@ -207,8 +207,8 @@
 (deflayer navigation
 	 grv  f1    f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
 	 caps pgup  home up   end  _    _    _    up   _    _    _    _    ins
-	 lctl pgdn  left down rght _    _    left down rght del  ins  _ 
-	 _    ins   del  bspc _    _    _    home end  pgup pgdn _    _  
+	 lctl pgdn  left down rght _    _    left down rght del  ins  _
+	 _    ins   del  bspc _    _    _    home end  pgup pgdn _    _
 	 _    _    _              _              _     _    _
 	 _  _  _  _  _ )
 
@@ -233,5 +233,5 @@
 	 lrld _    _    _    _    _    bck  mwu  @mau mwl  mfwd _    _    _
 	 _    @slw @mid @fst _    _    mmid @mal mrgt @mar mlft _    _
 	 _    _    bck  fwd  _    _    fwd  mwd  @mad mwr  mbck _  up
-	 _    _    _              _              _     _    _      _  
+	 _    _    _              _              _     _    _      _
    _  _  _  _ )
