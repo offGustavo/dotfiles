@@ -2,9 +2,7 @@
 vim.o.modeline = true
 vim.o.exrc = true
 
-
--- Real vim shit(i keep touch the trackpad when typing)
-vim.opt.mouse = ""
+-- vim.opt.mouse = ""
 
 vim.o.number = true
 vim.o.relativenumber = true
