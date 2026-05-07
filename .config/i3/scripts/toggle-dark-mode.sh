@@ -8,6 +8,7 @@ if [ "$current_scheme" = "light" ]; then
  # Wallpaper
  xwallpaper --zoom ~/Pictures/Wallpapers/dharmx-Walls/cherry/a_tree_with_pink_flowers.jpg
 
+
   # Remove existing theme block if present
   sed -i '/^# Tokyo Night/,/^$/d' "$I3_CONFIG"
   # Add light theme
@@ -24,7 +25,9 @@ EOF
 else
 
  # Wallpaper
- xwallpaper --zoom ~/Pictures/Wallpapers/dharmx-Walls/unsorted/a_black_background_with_purple_and_blue_spots.png
+ # xwallpaper --zoom ~/Pictures/Wallpapers/dharmx-Walls/unsorted/a_black_background_with_purple_and_blue_spots.png
+ xwallpaper --zoom /home/gustavo/Pictures/Wallpapers/dharmx-Walls/spam/a_street_with_signs_and_lights_01.png
+ # xwallpaper --zoom /home/gustavo/Pictures/Wallpapers/dharmx-Walls/centered/a_blue_sky_with_clouds.png
 
   # Remove existing theme block if present
   sed -i '/^# Tokyo Night/,/^$/d' "$I3_CONFIG"
