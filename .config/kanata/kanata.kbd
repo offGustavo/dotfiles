@@ -1,4 +1,5 @@
 ;; https://www.keyboard-layout-editor.com/##@@=Esc&=!%0A1&=%2F@%0A2&=%23%0A3&=$%0A4&=%25%0A5&_x:1.25%3B&=%5E%0A6&=%2F&%0A7&=*%0A8&=(%0A9&=)%0A0&=%2F_%0A-&=+%0A%2F=&=%5C%0A%7C&=%60%0A~%3B&@_w:1.5%3B&=Tab&=Q&=W&=E&=R&=T&_x:1.25%3B&=Y&=U&=I&=O&=P&=%7B%0A%5B&=%7D%0A%5D&_w:1.5%3B&=Bs%0ADelete%3B&@_w:1.75%3B&=Control&=A&=S&=D&=F&=G&_x:1.25%3B&=H&=J&=K&=L&=%2F:%0A%2F%3B&=%22%0A'&_w:2.25%3B&=Enter%3B&@_w:2.25%3B&=Shift&=Z&=X&=C&=V&=B&_x:1.25%3B&=N&=M&=%3C%0A,&=%3E%0A.&=%3F%0A%2F%2F&_w:1.75%3B&=Shift&=Fn%3B&@_x:1.5%3B&=Win&_w:1.25%3B&=Alt&_w:1.5%3B&=Space&_w:1.25%3B&=Fn&_x:1.25&w:1.25%3B&=Shift&_w:2%3B&=Space&_w:1.25%3B&=AltGr&=Win
+
 (defcfg
   movemouse-smooth-diagonals yes
   log-layer-changes yes
@@ -15,12 +16,16 @@
     "8BitDo Ultimate 2 Wireless Controller")
   windows-altgr add-lctl-release)
 
+;; Custom laptop key
+(deflocalkeys-linux mctl 89)
+(deflocalkeys-win mctl 193)
+
 (defsrc
 	esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
 	tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
 	caps  a    s    d    f    g    h    j    k    l    ;    '    ret
 	lsft   z    x    c    v    b    n    m    ,    .    /    rsft up
-	lctl lmet lalt           spc            ralt  menu rctl
+	lctl lmet lalt           spc            ralt  menu mctl
 	mlft mrgt mmid mfwd mbck)
 
 (defalias
@@ -178,31 +183,31 @@
 	hhkb_shift (tap-hold-press 100 300 (one-shot 500 lsft) @nav)
 	hhkb_up (tap-hold-press 100 200 up (layer-toggle hhkb)))
 
-(deflayer base-alt
-  @ste  @l1f @l2f @l3f @l4f @l5f @l6f @l7f @l8f @l9f @l0f @lmf @lef bspc
-  @lnt   @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [     ]   \
-  lctl   @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @ren
-  lsft     @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft  @hhkb_up
-  lctl  lmet lalt           @lsn           ralt rmet @hhkb_up
-  🖰1 🖰2 🖰3 @mbn @mfs)
-
 (deflayer base
   esc 1    2    3    4    5    6    7    8    9    0    -    =    bspc
 	tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
 	lctl a    s    d    f    g    h    j    k    l    ;    '    ret
 	lsft z    x    c    v    b    n    m    ,    .    /    rsft @hhkb_up
-	lctl lmet lalt           spc            ralt  lmet  @hhkb_up
+	lctl lmet lalt           spc            ralt  lmet  rctl
 	mlft mrgt mmid mfwd @mbn)
 
+;; (deflayer base-alt
+  ;;   @ste  @l1f @l2f @l3f @l4f @l5f @l6f @l7f @l8f @l9f @l0f @lmf @lef bspc
+  ;;   @lnt   @lmq @law @lne @lsr t    y    @rsu @rni @rao @rmp [     ]   \
+  ;;   lctl   @lma @las @lsd @lcf g    h    @rcj @rsk @ral @rm; '    @ren
+  ;;   lsft     @lmz @lnx @lnc v    b    n    m    @rn, @rn. @rm/ rsft  @hhkb_up
+  ;;   lctl  lmet lalt           @lsn           ralt rmet @hhkb_up
+  ;;   🖰1 🖰2 🖰3 @mbn @mfs)
+
 (deflayer hhkb
-	 grv  f1    f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
-	 caps S-grv grv  _    _    _    _    _    _    _    _    up   _    ins
-		;; NOTE: this is not the default hhkb layout
-		;; but work nice with abnt2 keyboards
-	 lctl volu  vold mute pp   @mov S-8  /    home pgup left rght ins
-	 _    @mov  prev next _    @num S-=  -    end  pgdn down _    up
-	 _    _    _              _              _     _    _
-	 _  _  _  _  _ )
+   grv  f1    f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+   caps S-grv grv  _    _    _    _    _    _    _    _    up   _    ins
+  ;; NOTE: this is not the default hhkb layout
+  ;; but work nice with abnt2 keyboards
+   lctl volu  vold mute pp   @mov S-8  /    home pgup left rght ins
+   _    @mov  prev next _    @num S-=  -    end  pgdn down _    up
+   _    _    _              _              _     _    _
+   _  _  _  _  _ )
 
 (deflayer navigation
 	 grv  f1    f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
