@@ -69,6 +69,9 @@ set -gx EDITOR nvim
 # Edit File with Sudo
 alias svim='sudoedit'
 
+# alias vim=nvim
+# alias vi=nvim
+
 # Genga
 alias gengar="pokeget --hide-name gengar | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
 alias glalie="pokeget --hide-name glalie | fastfetch --file-raw - -c ~/.config/fastfetch/gengar.jsonc"
@@ -108,6 +111,12 @@ alias untar='tar -zxvf '
 # Dotfiles
 alias dot='/usr/bin/env git --git-dir="$HOME"/.dotfiles/ --work-tree="$HOME"'
 alias dotui='/usr/bin/env lazygit --git-dir="$HOME"/.dotfiles/ --work-tree="$HOME"'
+
+alias emacs='emacs -nw'
+alias zed=zeditor
+
+alias :e.='nvim .'
+alias :e='nvim'
 
 # Change go PATH
 set -x GOPATH "$HOME/.go"
@@ -167,10 +176,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --bind ctrl-q:toggle-all,alt-q:toggle-all,ctrl-o:toggle-preview \
   --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up "
 
-fzf --fish | source
-
-# alias vim=nvim
-alias emacs='emacs -nw'
+# fzf --fish | source
 
 function start-kanata
     if tmux has-session -t kanata 2>/dev/null
