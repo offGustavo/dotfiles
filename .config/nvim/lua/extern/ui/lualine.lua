@@ -1,7 +1,7 @@
 return {
   "https://github.com/nvim-lualine/lualine.nvim",
   event = "VeryLazy",
-  enabled = false,
+  enabled = true,
   config = function()
     local function show_macro_recording()
       local recording_register = vim.fn.reg_recording()

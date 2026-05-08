@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "snacks.nvim": {
+      "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
+      "src": "https://github.com/folke/snacks.nvim"
+    },
     "vim-startuptime": {
       "rev": "f10474b400c197787a0434548d842a2db583c333",
       "src": "https://github.com/dstein64/vim-startuptime"

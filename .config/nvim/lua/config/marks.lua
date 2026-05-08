@@ -53,4 +53,3 @@ vim.keymap.set("n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", { desc =
 -- ---folke
 -- vim.keymap.set("n", "dm", ":execute 'delmarks '.nr2char(getchar())<cr>", { silent = true })
 ---}}}
-

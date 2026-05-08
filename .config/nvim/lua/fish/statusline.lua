@@ -5,6 +5,10 @@ local render_with_mode_color = require("fish.mode_colors").render_with_mode_colo
 local render_with_mode_color_inverted = require("fish.mode_colors").render_with_mode_color_inverted
 
 local function get_file_name()
+
+  -- TODO: add especial case for deal when the file is a dir(omg)
+   --  canola:///home/gustavo/.config/nvim/plugin/[No Name] 8:38 8:100%                                                                                                        [canola] UNIX    
+
   local modified = vim.bo[0].modified
   local full_path = vim.fn.expand("%~:.")
 

@@ -13,7 +13,8 @@ vim.keymap.set(
 
 vim.schedule(function()
   vim.lsp.enable 'lua_ls'
-  vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+  -- vim.bo.formatprg = 'stylua'
+  -- vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   vim.wo[0][0].foldmethod = "expr"
   vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
   vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

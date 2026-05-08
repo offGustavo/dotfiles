@@ -29,6 +29,24 @@ vim.cmd("let g:loaded_fzf = 1")
 
 -- Load Lazy.nvim and external plugins
 require("config.lazy")
+-- require("config.pack")
 
--- Load my custom plugins
 require("config.forge")
+
+require("config.options")
+
+require("config.clipboard")
+require("config.marks")
+require("config.autocmds")
+require("config.spell")
+require("config.window")
+
+require("config.keymaps")
+require("config.toggle")
+require("config.emacs")
+
+require("config.statuscolumn")
+require("config.statusline")
+require("config.tabline")
+
+require("config.lsp")
