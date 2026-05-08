@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.keymap.set("n", "<M-w>", '"', { desc = 'Alias to "' })
 vim.keymap.set("i", "<M-w>", "<C-r>", { desc = 'Alias to "' })
 
-vim.keymap.set({ "n", "x" }, "<leader>+", '"+', { desc = "System Register" })
+vim.keymap.set({ "n", "x" }, "<leader>+", '"+', { desc = "System clipboard" })
 vim.keymap.set({ "n", "x" }, "<leader>_", '"_', { desc = "Black Hole Register" })
 
 vim.keymap.set({ "n" }, "<leader>p", '"+p', { desc = "Paste from system register" })

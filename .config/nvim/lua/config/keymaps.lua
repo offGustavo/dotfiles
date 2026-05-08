@@ -64,7 +64,7 @@ vim.keymap.set({ "x", "n" }, "SG", ":%s//gI<Left><Left><Left>", { silent = false
 vim.keymap.set({ "x", "n" }, "ss", ":s/", { silent = false })
 vim.keymap.set({ "x", "n" }, "SS", [[:s//gI<Left><Left><Left>]], { silent = false })
 vim.keymap.set("n", "SV", [[S<Esc>]], { silent = false })
-vim.keymap.set("x", "SV", [[:normal S<Esc>]], { silent = false })
+vim.keymap.set("x", "SV", [[:normal S<Esc>]], { silent = true })
 -- }}}
 
 -- Insert
