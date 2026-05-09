@@ -4,45 +4,44 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
-// Use server side decorations
-prefer-no-csd
-
 hotkey-overlay {
     skip-at-startup
 }
 
-workspace "1" {
-  open-on-output "HDMI-A-2"
-}
-workspace "2" {
-  open-on-output "HDMI-A-2"
-}
-workspace "3" {
-  open-on-output "HDMI-A-2"
-}
-workspace "4" {
-  open-on-output "HDMI-A-2"
-}
-workspace "5" {
-  open-on-output "HDMI-A-2"
-}
-workspace "6"  {
-  open-on-output "eDP-1"
-}
-workspace "7" {
-  open-on-output "eDP-1"
-}
-workspace "8" {
-  open-on-output "eDP-1"
-}
-workspace "9" {
-  open-on-output "eDP-1"
-}
-workspace "0" {
-  open-on-output "eDP-1"
-}
+// {{{ Workspaces
+  workspace "1" {
+    open-on-output "HDMI-A-2"
+  }
+  workspace "2" {
+    open-on-output "HDMI-A-2"
+  }
+  workspace "3" {
+    open-on-output "HDMI-A-2"
+  }
+  workspace "4" {
+    open-on-output "HDMI-A-2"
+  }
+  workspace "5" {
+    open-on-output "HDMI-A-2"
+  }
+  workspace "6"  {
+    open-on-output "eDP-1"
+  }
+  workspace "7" {
+    open-on-output "eDP-1"
+  }
+  workspace "8" {
+    open-on-output "eDP-1"
+  }
+  workspace "9" {
+    open-on-output "eDP-1"
+  }
+  workspace "0" {
+    open-on-output "eDP-1"
+  }
+// }}}
 
-// Input device configuration.
+// {{{ Input device configuration.
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
@@ -62,7 +61,7 @@ input {
       // options "caps:ctrl_modifier"
     }
 
-   // Enable numlock on startup, omitting this setting disables it.
+    // Enable numlock on startup, omitting this setting disables it.
     numlock
   }
 
@@ -114,8 +113,8 @@ input {
   // tablet {
   //     map-to-output "eDP-1"
   // }
-
 }
+// }}}
 
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
@@ -123,7 +122,7 @@ input {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-
+// {{{ Output
 output "eDP-1" {
   // Uncomment this line to disable this output.
   // off
@@ -210,9 +209,12 @@ output "HDMI-A-2" {
 //   focus-at-startup
 // }
 
+// }}}
+
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
+// {{{ Layout
 layout {
   // Set gaps around windows in logical pixels.
   gaps 6
@@ -379,24 +381,25 @@ layout {
     // bottom 64
   }
 }
+// }}}
 
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
-
-// This line starts waybar, a commonly used bar for Wayland compositors.
+// {{{ Startup
 // spawn-at-startup "sh" "-c" "cosmic-ext-alternative-startup"
-// Start
 spawn-at-startup "sh" "-c" "systemctl --user start gnome-keyring-daemon.service"
 // spawn-at-startup "sh" "-c" "sleep 1 && waybar -c ~/.config/niri/waybar/config.jsonc  -s ~/.config/niri/waybar/style.css"
-spawn-at-startup "sh" "-c" "sleep 1 && swaybg -i ~/Pictures/Wallpapers/The-Path-of-Giants.png"
+// spawn-at-startup "sh" "-c" "sleep 1 && swaybg -i ~/Pictures/Wallpapers/The-Path-of-Giants.png"
 // spawn-at-startup "sh" "-c" "sleep 1 && ~/.local/bin/start_swaybg.lua"
-spawn-at-startup "sh" "-c" "waybar"
+// This line starts waybar, a commonly used bar for Wayland compositors.
+// spawn-at-startup "sh" "-c" "waybar"
 // spawn-at-startup "sh" "-c" "sleep 1 && ~/.config/waybar/scripts/toggle-waybar.sh"
 // spawn-at-startup "sh" "-c" "wayscriber -d"
 // spawn-at-startup "sh" "-c" "mako"
-// spawn-at-startup "sh" "-c" "dms run"
+spawn-at-startup "sh" "-c" "dms run"
+// }}}
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -413,7 +416,7 @@ screenshot-path "~/Pictures/Screenshots/niri_screenshot_%Y-%m-%d %H-%M-%S.png"
 // You can also set this to null to disable saving screenshots to disk.
 // screenshot-path null
 
-// Animation settings.
+// {{{ Animation settings.
 // The wiki explains how to configure individual animations:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {
@@ -421,10 +424,11 @@ animations {
   // off
 
   // Slow down all animations by this factor. Values below 1 speed them up instead.
-  slowdown 1.2
+  slowdown 1.0
 }
+// }}}
 
-// Window rules let you adjust behavior for individual windows.
+// {{{ Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 window-rule {
@@ -460,7 +464,6 @@ window-rule {
   // - Flatpak Firefox (app-id is "org.mozilla.firefox")
   match title="^Picture-in-Picture$"
   open-floating true
-
 }
 
 // Example: block out two password managers from screen capture.
@@ -498,18 +501,21 @@ layer-rule {
   match namespace="^wallpaper$"
   place-within-backdrop true
 }
+// }}}
 
-
+// {{{ Overview
 // Optionally, disable the workspace shadows in the overview.
 overview {
   // zoom 0.75
   workspace-shadow {
     off
   }
-  backdrop-color "#000000"
+  // backdrop-color "#000000"
   // backdrop-color "#1A1B26"
 }
+// }}}
 
+// {{{ Binds
 binds {
   // Keys consist of modifiers separated by + signs, followed by an XKB key name
   // in the end. To find an XKB name for a particular key, you may use a program
@@ -857,5 +863,7 @@ recent-windows {
     Alt+Shift+escape { previous-window scope="workspace"; }
   }
 }
+// }}}
 
+// DMS
 include "dms/cursor.kdl"
