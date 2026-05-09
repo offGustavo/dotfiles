@@ -15,7 +15,7 @@ set list
 
 " Code
 set foldmethod=indent
-set shiftwidth=2 softtabstop=2
+set shiftwidth=2 softtabstop=2 expandtab
 set signcolumn=yes foldcolumn=1
 if has('nvim')
   set statuscolumn=%s%l%C 
@@ -28,6 +28,11 @@ set nobackup
 if has("unix")
   set grepprg=grep\ -rHn
 endif
+
+" set complete=o,.,b
+set complete=.,b
+set completeopt=menuone,noselect,popup
+set autocomplete
 
 autocmd CmdlineEnter [\/\?] set pumheight=8
 autocmd CmdlineLeave [\/\?] set pumheight&
