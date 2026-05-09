@@ -46,11 +46,13 @@ vim.o.virtualedit    = "block"             -- Allow going past end of line in bl
 
 vim.o.cursorlineopt  = 'screenline,number' -- Show cursor line per screen line
 
+-- -- [Neovim native, built-in, LSP autocomplete · Tomas Vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
+-- -- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
+-- vim.o.autocomplete = true
+-- vim.opt.completeopt = { "menuone", "noinsert", "popup" }
+-- vim.o.complete = "o,.,b"
+
 vim.schedule(function()
-  -- [Neovim native, built-in, LSP autocomplete · Tomas Vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
-  -- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
-  -- vim.o.autocomplete = true
-  -- vim.opt.completeopt = { 'menuone', 'noselect', 'popup' }
   -- Better Grep and Find with ripgrep
   if vim.fn.executable("rg") then
     vim.o.grepprg = "rg"

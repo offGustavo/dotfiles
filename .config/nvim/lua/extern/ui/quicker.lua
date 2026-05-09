@@ -1,6 +1,5 @@
 return {
   "https://github.com/stevearc/quicker.nvim",
-  lazy = true,
   ft = "qf",
 	config = function()
 		require("quicker").setup({

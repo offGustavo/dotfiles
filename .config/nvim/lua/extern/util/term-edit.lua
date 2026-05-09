@@ -1,5 +1,6 @@
 return {
   "https://github.com/chomosuke/term-edit.nvim",
+  enabled = false,
   event = 'TermOpen',
   version = '1.*',
   opts = {

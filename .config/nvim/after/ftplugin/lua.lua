@@ -11,11 +11,8 @@ vim.keymap.set(
   { silent = true, desc = "Execute Selection in Lua", buffer = true }
 )
 
-vim.schedule(function()
-  vim.lsp.enable 'lua_ls'
-  -- vim.bo.formatprg = 'stylua'
-  -- vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  vim.wo[0][0].foldmethod = "expr"
-  vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
-  vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-end)
+vim.lsp.enable("lua_ls")
+vim.bo.formatprg = 'stylua'
+vim.wo[0][0].foldmethod = "expr"
+vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

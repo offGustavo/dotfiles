@@ -10,9 +10,12 @@ vim.keymap.set("n", "<leader>tt", function()
   require("forge.toggle").toggle()
 end, { desc = "Toggle Value" })
 
-vim.keymap.set("n", "<leader>uc", function()
-  -- vim.o.conceallever = not vim.opt.conceallevel:get()
-  vim.print("TODO: set conceallevel!")
+vim.keymap.set("n", "<space>uc", function()
+  if vim.opt.conceallevel:get() == 3 then
+    vim.o.conceallevel = 0
+    return 
+  end
+    vim.o.conceallevel = 3
 end, {
   desc = "set conceallevel!"
 })
@@ -48,7 +51,7 @@ end, {
 })
 
 vim.keymap.set("n", "<leader>ub", function()
-  if vim.opt.backgroung:get() == "light" then
+  if vim.opt.background:get() == "light" then
     vim.o.background = "dark"
     return
   end

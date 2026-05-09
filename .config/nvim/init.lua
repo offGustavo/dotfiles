@@ -11,9 +11,9 @@ _G.Fish = {}
 
 -- Set a temp theme here to prevent light/dark flicker
 if vim.o.background == "dark" then
-	vim.cmd.colorscheme("tokyo")
+  vim.cmd.colorscheme("tokyo")
 else
-	vim.cmd.colorscheme("tokyo-day")
+  vim.cmd.colorscheme("tokyo-day")
 end
 
 -- Basic keymaps for Nvim (if lazy fails for some reason)
@@ -31,22 +31,26 @@ vim.cmd("let g:loaded_fzf = 1")
 require("config.lazy")
 -- require("config.pack")
 
+-- Intern Plugins
 require("config.forge")
 
+-- Vim options
 require("config.options")
-
 require("config.clipboard")
 require("config.marks")
 require("config.autocmds")
 require("config.spell")
 require("config.window")
 
+-- Keymaps
 require("config.keymaps")
 require("config.toggle")
 require("config.emacs")
 
+-- Ui
 require("config.statuscolumn")
 require("config.statusline")
 require("config.tabline")
 
+-- LSP
 require("config.lsp")

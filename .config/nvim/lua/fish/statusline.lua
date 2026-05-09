@@ -5,12 +5,24 @@ local render_with_mode_color = require("fish.mode_colors").render_with_mode_colo
 local render_with_mode_color_inverted = require("fish.mode_colors").render_with_mode_color_inverted
 
 local function get_file_name()
-
-  -- TODO: add especial case for deal when the file is a dir(omg)
-   --  canola:///home/gustavo/.config/nvim/plugin/[No Name] 8:38 8:100%                                                                                                        [canola] UNIX    
-
   local modified = vim.bo[0].modified
   local full_path = vim.fn.expand("%~:.")
+
+  -- Special case: buffer is a directory (e.g. opened with netrw/oil.nvim)
+  local buftype = vim.bo[0].buftype
+  local filetype = vim.bo[0].filetype
+  if
+    vim.fn.isdirectory(vim.fn.expand("%:p")) == 1
+    or filetype == "netrw"
+    or filetype == "oil"
+    or filetype == "canola"
+  then
+    local dir_name = vim.fn.fnamemodify(full_path, ":t")
+    if dir_name == "" then
+      dir_name = full_path
+    end
+    return "%#Directory# " .. dir_name .. " "
+  end
 
   local file_name = vim.fn.fnamemodify(full_path, ":t")
   if file_name == "" then
@@ -18,7 +30,6 @@ local function get_file_name()
   end
 
   local file_path = vim.fn.fnamemodify(full_path, ":h")
-
   if file_path == "." then
     file_path = ""
   elseif file_path ~= "" then
@@ -112,22 +123,22 @@ end
 
 function M.build_statusline()
   return render_with_mode_color(" ")
-      .. render_with_mode_color_inverted("  ")
-      .. "%#Normal#"
-      .. get_file_name()
-      .. "%#Normal#"
-      .. lsp_diagnostics()
-      .. "%l:%c %L:%p%% "
-      .. "%="
-      .. show_macro_recording()
-      .. git_info()
-      -- .. "%S "
-      -- .. "%r "
-      .. "%#Normal#"
-      .. lsp_info()
-      .. "%y "
-      .. fileformat()
-      .. render_with_mode_color("  ")
+    .. render_with_mode_color_inverted("  ")
+    .. "%#Normal#"
+    .. get_file_name()
+    .. "%#Normal#"
+    .. lsp_diagnostics()
+    .. "%l:%c %L:%p%% "
+    .. "%="
+    .. show_macro_recording()
+    .. git_info()
+    -- .. "%S "
+    -- .. "%r "
+    .. "%#Normal#"
+    .. lsp_info()
+    .. "%y "
+    .. fileformat()
+    .. render_with_mode_color("  ")
 end
 
 function M.build_statusline_inactive()
@@ -135,13 +146,13 @@ function M.build_statusline_inactive()
   local status_win = vim.g.statusline_winid
   if status_win ~= active_win then
     return render_with_mode_color(" ")
-        .. render_with_mode_color_inverted("   ")
-        .. "%#StatusLineNC#"
-        .. get_file_name()
-        .. "%#StatusLineNC#"
-        .. "%l:%c %L:%p%%"
-        .. "%="
-        .. render_with_mode_color("  ")
+      .. render_with_mode_color_inverted("   ")
+      .. "%#StatusLineNC#"
+      .. get_file_name()
+      .. "%#StatusLineNC#"
+      .. "%l:%c %L:%p%%"
+      .. "%="
+      .. render_with_mode_color("  ")
   end
 end
 

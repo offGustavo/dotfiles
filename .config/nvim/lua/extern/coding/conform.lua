@@ -1,7 +1,6 @@
 return {
 	"https://github.com/stevearc/conform.nvim",
 	-- event = "VeryLazy",
-  enabled = false,
 	keys = {
 		{
 			"<leader>cf",

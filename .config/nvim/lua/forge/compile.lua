@@ -38,13 +38,7 @@ M.compile = function()
 	end
 
 	if userCmd == "" then
-		vim.notify(
-			[[
-        Empty input, provide an command to compile
-        optation cacelled
-        ]],
-			vim.log.levels.WARN
-		)
+		vim.notify(" Empty input, provide an command to compile optation cacelled", vim.log.levels.WARN)
 		return
 	end
 
@@ -52,16 +46,16 @@ M.compile = function()
 end
 
 M.setup = function()
-  local c = require("forge.compile")
+	local c = require("forge.compile")
 
 	if vim.g.forge_terminal_loaded then
 		return
 	end
 	vim.g.forge_terminal_loaded = true
 
-  vim.keymap.set("n", "<M-c>", function ()
-    c.compile()
-  end, { desc = "Compile Mode" })
+	vim.keymap.set("n", "<M-c>", function()
+		c.compile()
+	end, { desc = "Compile Mode" })
 
 	vim.api.nvim_create_user_command("Compile", function()
 		c.compile()
