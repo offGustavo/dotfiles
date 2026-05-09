@@ -23,7 +23,10 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
 export EDITOR=nvim
 
 # Dotfiles
-alias dot='/usr/bin/env git --git-dir="$HOME"/.dotfiles/ --work-tree="$HOME"'
+# Dotfiles
+alias dot='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git'
+alias dotui='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit'
+alias doted='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME nvim'
 
 # Keyboard
 # cat /proc/bus/input/devices | rg --context 10 "Translated"
