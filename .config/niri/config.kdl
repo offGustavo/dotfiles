@@ -1,4 +1,5 @@
-//  vim:  foldmethod=indent
+//  vim: 
+// foldmethod=marker
 // This config is in the KDL format: htth jjjps://kdl.dev
 // "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
@@ -41,7 +42,8 @@ hotkey-overlay {
   }
 // }}}
 
-// {{{ Input device configuration.
+// {{{ Input
+// Input device configuration.
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
@@ -147,8 +149,8 @@ output "eDP-1" {
   // so to put another output directly adjacent to it on the right, set its x to 1920.
   // If the position is unset or results in an overlap, the output is instead placed
   // automatically.
-  position x=0 y=0
-  // position x=0 y=1080
+  // position x=0 y=0
+  position x=0 y=1080
 }
 
 output "HDMI-A-2" {
@@ -381,11 +383,13 @@ layout {
     // bottom 64
   }
 }
+
+
 // }}}
 
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
-// which may be more convenient to use.
+// which ma be more convenient to use.
 // See the binds section below for more spawn examples.
 // {{{ Startup
 // spawn-at-startup "sh" "-c" "cosmic-ext-alternative-startup"
@@ -416,7 +420,7 @@ screenshot-path "~/Pictures/Screenshots/niri_screenshot_%Y-%m-%d %H-%M-%S.png"
 // You can also set this to null to disable saving screenshots to disk.
 // screenshot-path null
 
-// {{{ Animation settings.
+// {{{ Animation settings
 // The wiki explains how to configure individual animations:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {
@@ -428,7 +432,8 @@ animations {
 }
 // }}}
 
-// {{{ Window rules let you adjust behavior for individual windows.
+// {{{  Window rules
+// Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 window-rule {
@@ -865,5 +870,3 @@ recent-windows {
 }
 // }}}
 
-// DMS
-include "dms/cursor.kdl"
