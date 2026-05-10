@@ -1,4 +1,5 @@
--- vim: foldmethod=marker
+-- vim:
+-- foldmethod=marker
 
 -- {{{ Nvim
 
@@ -111,7 +112,7 @@ vim.keymap.set("x", "<C-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("x", "<C-k>", ":m '<-2<CR>gv=gv")
 -- }}}
 
---{{{ Terminal
+-- {{{ Terminal
 vim.keymap.set({ "i", "c", "n", "v", "x" }, "<C-c>", "<Esc>", { desc = "Fix <C-c>", silent = true })
 vim.keymap.set("t", "<M-;>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true })
 vim.keymap.set("t", "<S-Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true })
@@ -123,7 +124,7 @@ vim.keymap.set("n", "<leader>tv", ":vert term ")
 vim.keymap.set("n", "<leader>tg", ":hor term rg ")
 --- }}}
 
---{{{ Tabs
+-- {{{ Tabs
 -- :tcd shortcut
 vim.keymap.set("n", "<leader><Tab>z", ":tcd ", { desc = "Tab Cd" })
 
@@ -205,6 +206,103 @@ end, { desc = "Commit All Changes From Vault" })
 -- {{{ Make
 vim.keymap.set("n", "<leader>cm", ":make ", { desc = "Make", remap = true })
 vim.keymap.set("n", "<leader>cM", "<Cmd>make<CR>", { desc = "Run Make" })
+-- }}}
+
+-- {{{ Toggle
+-- Smart increase/decrease
+vim.keymap.set("n", "<C-a>", function()
+  require("fish.toggle").increase()
+end, { desc = "Inrease numbers and words" })
+vim.keymap.set("n", "<C-x>", function()
+  require("fish.toggle").decrease()
+end, { desc = "Inrease numbers and words" })
+
+-- vim.keymap.set("n", "<leader>tt", function()
+--   require("fish.toggle").toggle()
+-- end, { desc = "Toggle Value" })
+
+vim.keymap.set("n", "<space>uc", function()
+  if vim.opt.conceallevel:get() == 3 then
+    vim.o.conceallevel = 0
+    return
+  end
+  vim.o.conceallevel = 3
+end, { desc = "set conceallevel!" })
+
+vim.keymap.set("n", "<leader>ul", function()
+  vim.o.cursorline = not vim.opt.cursorline:get()
+end, { desc = "set cursorline!" })
+
+vim.keymap.set("n", "<leader>un", function()
+  vim.o.number = not vim.opt.number:get()
+end, { desc = "set number!" })
+
+vim.keymap.set("n", "<leader>ur", function()
+  vim.o.relativenumber = not vim.opt.relativenumber:get()
+end, { desc = "set relativenumber!" })
+
+vim.keymap.set("n", "<leader>uw", function()
+  vim.o.wrap = not vim.opt.wrap:get()
+end, { desc = "set wrap!" })
+
+vim.keymap.set("n", "<leader>us", function()
+  vim.o.spell = not vim.opt.spell:get()
+end, { desc = "set spell!" })
+
+vim.keymap.set("n", "<leader>ub", function()
+  if vim.opt.background:get() == "light" then
+    vim.o.background = "dark"
+    return
+  end
+  vim.o.background = "light"
+end, { desc = "set bg!" })
+
+vim.keymap.set("n", "<leader>ud", function()
+  if vim.diagnostic.is_enabled() then
+    vim.diagnostic.enable(false)
+    return
+  end
+  vim.diagnostic.enable(true)
+end, { desc = "set vim.diagnostic.enable()!" })
+
+vim.keymap.set("n", "<leader>ut", function()
+  local state = vim.b.ts_highlight
+  if state then
+    vim.treesitter.stop(0)
+    return
+  end
+  vim.treesitter.start(0)
+end, { desc = "set vim.treesitter()!" })
+
+vim.keymap.set("n", "<leader>uf", function()
+  local fmd = { "expr", "indent", "marker" }
+  local length = #fmd
+  local current = vim.opt.foldmethod:get()
+  local new
+  local vim_count = vim.v.count
+
+  if vim_count > 0 then
+    vim.o.foldmethod = fmd[vim_count]
+    return
+  end
+
+  for i = 1, length do
+    if fmd[i] == current then
+      -- wrap around if index goes out of range
+      if i == length then
+        new = fmd[1]
+      else
+        new = fmd[i + 1]
+      end
+    end
+  end
+
+  vim.o.foldmethod = new
+end, { desc = "set foldmethod!" })
+
+vim.keymap.set("n", "<leader>ui", function()
+  vim.o.list = not vim.opt.list:get()
+end, { desc = "set list!" })
 -- }}}
 
 -- FIXME: try to fix this
