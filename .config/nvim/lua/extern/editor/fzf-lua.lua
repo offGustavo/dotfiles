@@ -1,6 +1,6 @@
 return {
   "https://github.com/ibhagwan/fzf-lua",
-  enabled = false,
+  enabled = true,
   opts = {
     -- "ivy",
     -- "fzf-native",
@@ -10,7 +10,7 @@ return {
       ["--sort"] = false,
     },
     fzf_colors = {
-      true, -- inherit fzf colors that aren't specified below from
+      -- true, -- inherit fzf colors that aren't specified below from
     },
   },
   keys = {
@@ -88,16 +88,6 @@ return {
       end,
       desc = "Grep <cWORD>",
     },
-    {
-      "<leader>sh",
-      "<Cmd>FzfLua helptags<Cr>",
-      desc = "Helptags",
-    },
-    {
-      "<leader>sH",
-      "<Cmd>FzfLua highlights<Cr>",
-      desc = "Highlights",
-    },
 
     -- Buffers
     {
@@ -162,24 +152,33 @@ return {
     },
     -- TODO: add more git things...
 
-    -- Config Path
+    -- Vim
     {
-      "<leader>fc",
+      "<leader>vf",
       function()
         require("fzf-lua").files({ cwd = vim.fn.stdpath("config") })
       end,
       desc = "Find in config files",
     },
     {
-      "<leader>sc",
+      "<leader>vs",
       function()
         require("fzf-lua").live_grep({ cwd = vim.fn.stdpath("config") })
       end,
       desc = "Grep in config files",
     },
-
     {
-      "<leader>uC",
+      "<leader>vh",
+      "<Cmd>FzfLua helptags<Cr>",
+      desc = "Helptags",
+    },
+    {
+      "<leader>vH",
+      "<Cmd>FzfLua highlights<Cr>",
+      desc = "Highlights",
+    },
+    {
+      "<leader>vt",
       function()
         require("fzf-lua").colorschemes()
       end,

@@ -197,9 +197,9 @@
 
 (deflayer hhkb
 	 grv  f1    f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
-	 caps S-grv grv  _    _    _    _    _    _    _    _    up   _    ins
-	 lctl volu  vold mute pp   @mov S-8  /    home pgup left rght ins
-	 _    @mov  prev next _    @num S-=  -    end  pgdn down _    up
+	 caps _     _    _    _    _    _    _    _    _    _    up   _    ins
+	 lctl volu  vold mute -    menu S-8  /    home pgup left rght ins
+	 _    @mov  prev next pp   _    S-=  -    end  pgdn down _    up
 	 _    _    _              _              _     _    _
 	 _  _  _  _  _ )
 

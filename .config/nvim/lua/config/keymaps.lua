@@ -1,5 +1,4 @@
--- vim:
--- foldmethod=marker
+-- vim: foldmethod=marker
 
 -- {{{ Nvim
 
@@ -118,9 +117,11 @@ vim.keymap.set({ "n", "x" }, "<M-x>", ":")
 --- }}}
 
 -- {{{ Copy/Move
-vim.keymap.set("n", "<M-d>", ":t.<cr>")
-vim.keymap.set("x", "<C-j>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("x", "<C-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<M-d>", ":t.<cr>", { silent = true, desc = "Duplicate line"})
+vim.keymap.set("n", "<M-j>", ":m +1<CR>==", { silent = true, desc = "Move line down"})
+vim.keymap.set("n", "<M-k>", ":m -2<CR>==", { silent = true, desc = "Move line up"})
+vim.keymap.set("x", "<M-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move line down"})
+vim.keymap.set("x", "<M-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move line up"})
 -- }}}
 
 -- {{{ Terminal
@@ -137,12 +138,19 @@ vim.keymap.set("n", "<leader>tg", ":hor term rg ")
 
 -- {{{ Tabs
 -- :tcd shortcut
-vim.keymap.set("n", "<leader><Tab>z", ":tcd ", { desc = "Tab Cd" })
+vim.keymap.set("n", "<Tab>z", ":tcd ", { desc = "Tab Cd" })
 
-vim.keymap.set("n", "<leader><Tab><Tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+vim.keymap.set("n", "<Tab><Tab>", function()
+  local count = vim.v.count
+  if count > 0 then
+    vim.cmd("norm " .. count .. "gt")
+    return
+  end
+  vim.cmd.tabnew()
+end, { desc = "New Tab" })
 
-vim.keymap.set("n", "<leader><Tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-vim.keymap.set("n", "<leader><Tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+vim.keymap.set("n", "<Tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+vim.keymap.set("n", "<Tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
 
 vim.keymap.set("n", "]<S-Tab>", "<cmd>tablast<cr>", { desc = "Last Tab" })
 vim.keymap.set("n", "[<S-Tab>", "<cmd>tabfirst<cr>", { desc = "First Tab" })

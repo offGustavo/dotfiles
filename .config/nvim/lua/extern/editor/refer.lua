@@ -1,6 +1,6 @@
 return {
   "juniorsundar/refer.nvim",
-  enabled = false,
+  enabled = true,
   dependencies = {
     -- Optional:
     -- "saghen/blink.cmp",

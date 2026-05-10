@@ -58,6 +58,60 @@ vim.go.statusline =
 -- }}}
 
 -- {{{ tabline
+-- Update when windows or tabs change
+vim.api.nvim_create_autocmd({ "WinNew", "WinClosed", "TabNew", "TabClosed" }, {
+  callback = function()
+    local ignore_ft = {
+      "neo-tree", "NvimTree", "nvimtree",
+      "toggleterm", "terminal",
+      "lazy", "mason",
+      "trouble", "qf",
+      "help",
+      "nofile",
+      "TelescopePrompt", "telescope",
+      "notify", "noice",
+      "aerial", "outline",
+      "dap-repl", "dapui_watches", "dapui_stacks",
+      "dapui_breakpoints", "dapui_scopes", "dapui_console",
+      "undotree", "diff",
+      "packer",
+      "lspinfo", "lsp-installer",
+      "startify", "alpha", "dashboard",
+    }
+
+    local ignore_ft_set = {}
+    for _, ft in ipairs(ignore_ft) do
+      ignore_ft_set[ft] = true
+    end
+
+    -- Defer so WinClosed fires after the window is actually gone
+    vim.schedule(function()
+      local tabcount = #vim.api.nvim_list_tabpages()
+      local windowcount = 0
+
+      for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+        local buf = vim.api.nvim_win_get_buf(win)
+        local ft = vim.bo[buf].filetype
+        local bt = vim.bo[buf].buftype
+        local cfg = vim.api.nvim_win_get_config(win)
+
+        -- Skip floating windows and UI filetypes/buftypes
+        if cfg.relative == "" then
+          if not ignore_ft_set[ft] and not ignore_ft_set[bt] then
+            windowcount = windowcount + 1
+          end
+        end
+      end
+
+      if tabcount > 1 or windowcount > 1 then
+        vim.o.showtabline = 2
+      else
+        vim.o.showtabline = 0
+      end
+    end)
+  end,
+})
+
 vim.o.tabline = "%!v:lua.require('fish.tabline').build_tabline()"
 -- }}}
 
@@ -72,19 +126,19 @@ if vim.fn.has('nvim-0.12') ~= 1 then
   return
 end
 
--- vim.schedule(function()
--- 	vim.o.cmdheight = 1
--- 	require("vim._core.ui2").enable({
--- 		enable = true, -- Whether to enable or disable the UI.
--- 		msg = { -- Options related to the message module.
--- 			---@type 'cmd'|'msg' Default message target, either in the
--- 			---cmdline or in a separate ephemeral message window.
--- 			---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
--- 			---or table mapping |ui-messages| kinds and triggers to a target.
--- 			targets = "msg",
--- 		},
--- 	})
--- end)
+vim.schedule(function()
+	vim.o.cmdheight = 1
+	require("vim._core.ui2").enable({
+		enable = true, -- Whether to enable or disable the UI.
+		msg = { -- Options related to the message module.
+			---@type 'cmd'|'msg' Default message target, either in the
+			---cmdline or in a separate ephemeral message window.
+			---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
+			---or table mapping |ui-messages| kinds and triggers to a target.
+			targets = "msg",
+		},
+	})
+end)
 
 -- }}}
 

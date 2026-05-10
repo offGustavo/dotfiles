@@ -164,7 +164,6 @@ local function get_window_names(tabnr)
 
   -- Then generate unique names for each buffer
   local names = {}
-  local seen_final_names = {}
 
   for _, buf in ipairs(buflist) do
     local full_path = vim.fn.expand("#" .. buf .. ":p")
@@ -184,10 +183,7 @@ local function get_window_names(tabnr)
       display_name = base_name
     end
 
-    if not seen_final_names[display_name] then
-      seen_final_names[display_name] = true
-      table.insert(names, display_name)
-    end
+    table.insert(names, display_name)
 
     ::continue::
   end
@@ -221,8 +217,8 @@ function M.build_tabline()
   local win_names = get_window_names(current_tab)
   if #win_names > 0 then
     table.insert(items, "%#Normal#  ")
-    for _, name in ipairs(win_names) do
-      table.insert(items, string.format("%%#Comment#%s%%#Normal# ", name))
+    for i, name in ipairs(win_names) do
+      table.insert(items, string.format("%%#Comment#%d:%s%%#Normal# ", i, name))
     end
   end
 

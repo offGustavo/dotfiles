@@ -1,4 +1,4 @@
-//  vim: 
+//  vim:
 // foldmethod=marker
 // This config is in the KDL format: htth jjjps://kdl.dev
 // "/-" comments out the following node.
@@ -10,36 +10,36 @@ hotkey-overlay {
 }
 
 // {{{ Workspaces
-  workspace "1" {
-    open-on-output "HDMI-A-2"
-  }
-  workspace "2" {
-    open-on-output "HDMI-A-2"
-  }
-  workspace "3" {
-    open-on-output "HDMI-A-2"
-  }
-  workspace "4" {
-    open-on-output "HDMI-A-2"
-  }
-  workspace "5" {
-    open-on-output "HDMI-A-2"
-  }
-  workspace "6"  {
-    open-on-output "eDP-1"
-  }
-  workspace "7" {
-    open-on-output "eDP-1"
-  }
-  workspace "8" {
-    open-on-output "eDP-1"
-  }
-  workspace "9" {
-    open-on-output "eDP-1"
-  }
-  workspace "0" {
-    open-on-output "eDP-1"
-  }
+workspace "1" {
+  open-on-output "HDMI-A-2"
+}
+workspace "2" {
+  open-on-output "HDMI-A-2"
+}
+workspace "3" {
+  open-on-output "HDMI-A-2"
+}
+workspace "4" {
+  open-on-output "HDMI-A-2"
+}
+workspace "5" {
+  open-on-output "HDMI-A-2"
+}
+workspace "6" {
+  open-on-output "eDP-1"
+}
+workspace "7" {
+  open-on-output "eDP-1"
+}
+workspace "8" {
+  open-on-output "eDP-1"
+}
+workspace "9" {
+  open-on-output "eDP-1"
+}
+workspace "0" {
+  open-on-output "eDP-1"
+}
 // }}}
 
 // {{{ Input
@@ -57,6 +57,8 @@ input {
       // variant "intl"
       layout "us,br"
       variant "intl,"
+      options "compose:menu"
+      // options "compose:ralt"
       // options "grp:win_space_toggle"
       // options "caps:escape,escape:swapcaps"
       // options "caps:ctrl_modifier,ctrl:swapcaps"
@@ -149,8 +151,8 @@ output "eDP-1" {
   // so to put another output directly adjacent to it on the right, set its x to 1920.
   // If the position is unset or results in an overlap, the output is instead placed
   // automatically.
-  // position x=0 y=0
-  position x=0 y=1080
+  position x=0 y=0
+  // position x=0 y=1080
 }
 
 output "HDMI-A-2" {
@@ -618,9 +620,9 @@ binds {
   Mod+L     { focus-column-right; }
 
   Mod+Shift+I { move-window-up; }
-  Mod+Shift+J { consume-or-expel-window-left; }
+  Mod+Shift+J { move-column-left; }
   Mod+Shift+K { move-window-down; }
-  Mod+Shift+L { consume-or-expel-window-right; }
+  Mod+Shift+L { move-column-right; }
 
   Mod+Ctrl+Shift+j { consume-or-expel-window-left; }
   Mod+Ctrl+Shift+l { consume-or-expel-window-right; }
@@ -870,3 +872,5 @@ recent-windows {
 }
 // }}}
 
+
+include "dms/cursor.kdl"
