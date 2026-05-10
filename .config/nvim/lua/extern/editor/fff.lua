@@ -89,21 +89,21 @@ return {
 	},
 	keys = {
 		{
-			"<M-o>",
+			"ff",
 			function()
 				require("fff").find_files()
 			end,
 			desc = "FFFind files",
 		},
 		{
-			"<M-s>",
+			"fg",
 			function()
 				require("fff").live_grep()
 			end,
 			desc = "LiFFFe grep",
 		},
 		{
-			"<leader>sw",
+			"fw",
 			function()
 				require("fff").live_grep({ query = vim.fn.expand("<cword>") })
 			end,

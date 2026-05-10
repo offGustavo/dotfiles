@@ -4,8 +4,8 @@ vim.wo.rnu = true
 
 -- vim.cmd([[set statusline=%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} %=%-15(%l,%c%V%) %P]])
 
--- TODO: add a build_quickfix_statusline
-vim.wo.statusline = '%{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.fish.build_statusline() : v:lua.Fish.build_statusline_inactive()%}'
+-- -- TODO: add a build_quickfix_statusline
+-- vim.wo.statusline = '%{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.fish.build_statusline() : v:lua.Fish.build_statusline_inactive()%}'
 
 -- Add the cfilter plugin.
 vim.cmd.packadd 'cfilter'

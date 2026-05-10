@@ -4,7 +4,7 @@ return {
 	--@class wk.Opts
 	opts = {
 		---@type false | "classic" | "modern" | "helix"
-		preset = "classic",
+		preset = "helix",
 		-- Delay before showing the popup. Can be a number or a function that returns a number.
 		---@type number | fun(ctx: { keys: string, mode: string, plugin?: string }):number
 		-- delay = function(ctx)

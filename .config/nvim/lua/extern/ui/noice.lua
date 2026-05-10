@@ -1,7 +1,8 @@
 return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
-	enabled = false,
+	enabled = true,
+  lazy = false,
 	opts = {
 		cmdline = {
 			enabled = true, -- enables the Noice cmdline UI
@@ -20,6 +21,7 @@ return {
 				filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
 				lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
 				help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+				-- input = false,
 				input = { view = "cmdline_input", icon = "󰥻 " }, -- Used by input()
 				-- lua = false, -- to disable a format, set to `false`
 			},

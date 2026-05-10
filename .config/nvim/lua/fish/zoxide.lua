@@ -1,3 +1,5 @@
+local M = {} 
+
 local function zoxide_list()
 	local handle = io.popen("zoxide query --list")
 	if not handle then
@@ -20,7 +22,7 @@ local function format_zoxide_item(item)
 	return item
 end
 
-local function zoxide_select(prompt, cmd)
+function M.zoxide_select(prompt, cmd)
 	local items = zoxide_list()
 	if #items == 0 then
 		vim.notify("No zoxide entries found", vim.log.levels.WARN)
@@ -35,9 +37,8 @@ local function zoxide_select(prompt, cmd)
 	end)
 end
 
--- Shared completion function for both Z and Zt commands
-local function zoxide_complete(_, line)
-	local arg = line:match("^%S+%s+(.*)$") or ""
+function M.zoxide_complete(cmd_line)
+	local arg = cmd_line:match("^%S+%s+(.*)$") or ""
 	local paths = zoxide_list()
 	if arg == "" then
 		return paths
@@ -53,7 +54,7 @@ local function zoxide_complete(_, line)
 end
 
 -- Shared execution function for both Z and Zt commands
-local function zoxide_execute(target, cd_cmd)
+function M.zoxide_commmand(target, cd_cmd)
 	if target == "" then
 		vim.cmd(cd_cmd .. " ~")
 		return
@@ -75,21 +76,4 @@ local function zoxide_execute(target, cd_cmd)
 	end
 end
 
--- Better Cd with Zoxide (window)
-vim.api.nvim_create_user_command("Z", function(opts)
-	zoxide_execute(opts.args, "cd")
-end, { nargs = "?", complete = zoxide_complete })
-
--- Better Cd with Zoxide (tab)
-vim.api.nvim_create_user_command("Zt", function(opts)
-	zoxide_execute(opts.args, "tcd")
-end, { nargs = "?", complete = zoxide_complete })
-
--- Keybinds using vim.ui.select
-vim.keymap.set("n", "<leader>z", function()
-	zoxide_select("Zoxide (cd):", "cd")
-end, { desc = "Zoxide picker (cd)" })
-
-vim.keymap.set("n", "<leader>Z", function()
-	zoxide_select("Zoxide (tcd):", "tcd")
-end, { desc = "Zoxide picker(tcb)" })
+return M

@@ -3,6 +3,7 @@
 
 -- {{{ Nvim
 
+
 -- Edit init.lua/init.vim/vimrc
 vim.keymap.set("n", "<leader>fC", ":e $MYVIMRC<Cr>", { silent = true, desc = "Edit the init config file" })
 
@@ -30,8 +31,9 @@ vim.keymap.set("n", "k", "gk", { silent = true })
 
 -- Comment Line/Selection
 vim.cmd([[
- nmap  <C-/> gcc
- xmap  <C-/> :norm gcc<Cr>
+ nmap <silent> <C-/> gcc
+ imap <silent> <C-/> <C-o>gcc
+ xmap <silent> <C-/> :norm gcc<Cr>
 ]])
 
 --- Scroll
@@ -40,7 +42,7 @@ vim.cmd([[
   nmap  <S-ScrollWheelDown> zl
 ]])
 
--- -- Normal mode in command line
+-- Normal mode in command line
 -- vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
 
 -- Builtin Now
@@ -73,26 +75,35 @@ vim.keymap.set("x", "SV", [[:normal S<Esc>]], { silent = true })
 vim.keymap.set("i", "<C-Bs>", "<C-w>")
 
 vim.cmd([[
-  cmap <C-a> <home>
-  cmap <C-e> <end>
-  cmap <C-f> <right>
-  cmap <C-b> <left>
-  cmap <M-f> <C-right>
-  cmap <M-b> <C-left>
-  cmap <C-d> <del>
-  cmap <C-o> <C-f>
+cmap <C-a> <home>
+cmap <C-e> <end>
+cmap <C-f> <right>
+cmap <C-b> <left>
+cmap <M-f> <C-right>
+cmap <M-b> <C-left>
+cmap <C-d> <del>
+cmap <C-o> <C-f>
 
-  "" Emacs shit
-  "nmap <M-x> :
+"" Emacs shit
+nmap <M-x> :
+imap <M-x> <C-o>:
 
-  " imap <C-a> <home>
-  " imap <C-e> <end>
-  " imap <C-f> <right>
-  " imap <C-b> <left>
-  " imap <M-f> <C-right>
-  " imap <M-b> <C-left>
-  " imap <C-d> <del>
-  " imap <M-d> <C-o>de
+inoremap <Tab> <C-t>
+inoremap <S-Tab> <C-d>
+
+imap <C-a> <home>
+imap <C-e> <end>
+imap <C-f> <right>
+imap <C-b> <left>
+imap <M-f> <C-right>
+imap <M-b> <C-left>
+imap <C-d> <del>
+imap <M-d> <C-o>de
+
+" nmap <C-á> ^
+" nmap <C-é> $
+" imap <C-á> <Home>
+" imap <C-é> <End>
 ]])
 
 -- Emacs Binds
@@ -303,6 +314,17 @@ end, { desc = "set foldmethod!" })
 vim.keymap.set("n", "<leader>ui", function()
   vim.o.list = not vim.opt.list:get()
 end, { desc = "set list!" })
+-- }}}
+
+-- {{{ Zoxide
+-- Keybinds using vim.ui.select
+vim.keymap.set("n", "<leader>z", function()
+  require("fish.zoxide").zoxide_select("Zoxide (cd):", "cd")
+end, { desc = "Zoxide picker (cd)" })
+
+vim.keymap.set("n", "<leader>Z", function()
+  require("fish.zoxide").zoxide_select("Zoxide (tcd):", "tcd")
+end, { desc = "Zoxide picker(tcb)" })
 -- }}}
 
 -- FIXME: try to fix this

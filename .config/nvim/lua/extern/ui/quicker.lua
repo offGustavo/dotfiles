@@ -1,8 +1,8 @@
 return {
   "https://github.com/stevearc/quicker.nvim",
   ft = "qf",
-	config = function()
-		require("quicker").setup({
+  enabled = false,
+	opts = {
 			-- Local options to set for quickfix
 			opts = {
 				buflisted = false,
@@ -71,6 +71,5 @@ return {
 			header_length = function(type, start_col)
 				return vim.o.columns - start_col
 			end,
-		})
-	end
+		}
 }

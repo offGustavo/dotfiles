@@ -1,6 +1,6 @@
 return {
   "https://github.com/ibhagwan/fzf-lua",
-  enabled = true,
+  enabled = false,
   opts = {
     -- "ivy",
     -- "fzf-native",

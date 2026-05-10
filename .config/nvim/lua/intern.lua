@@ -24,7 +24,7 @@ vim.schedule(function()
 
   require("fish.compile").setup()
 
-  -- require("forge.commands")
+  -- require("forge.align")
 
   require("fish.lazygit").setup({
     ui = {
