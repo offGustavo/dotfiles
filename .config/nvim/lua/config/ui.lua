@@ -58,8 +58,10 @@ vim.go.statusline =
 -- }}}
 
 -- {{{ tabline
+vim.o.showtabline = 0
+vim.o.tabline = "%!v:lua.require('fish.tabline').build_tabline()"
 -- Update when windows or tabs change
-vim.api.nvim_create_autocmd({ "WinNew", "WinClosed", "TabNew", "TabClosed" }, {
+vim.api.nvim_create_autocmd({ "VimEnter", "UiEnter", "WinNew", "WinClosed", "TabNew", "TabClosed" }, {
   callback = function()
     local ignore_ft = {
       "neo-tree", "NvimTree", "nvimtree",
@@ -111,8 +113,6 @@ vim.api.nvim_create_autocmd({ "WinNew", "WinClosed", "TabNew", "TabClosed" }, {
     end)
   end,
 })
-
-vim.o.tabline = "%!v:lua.require('fish.tabline').build_tabline()"
 -- }}}
 
 -- {{{ quickfix

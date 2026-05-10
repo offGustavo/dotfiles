@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# set -xe
+set -xe
 
 current_scheme=$(dconf read /org/gnome/desktop/interface/color-scheme)
 
@@ -14,9 +14,24 @@ else
   THEME="light"
 fi
 
-PID_dms=$(pgrep dms)
-if [[ -n "$PID_dms" ]]; then
-  dms ipc theme toggle
+if command -v rofi &>/dev/null; then
+  if [ "$THEME" = "light" ]; then
+    ln -sf ~/.config/rofi/shared/theme/light.rasi ~/.config/rofi/shared/colors.rasi
+  else
+    ln -sf ~/.config/rofi/shared/theme/dark.rasi ~/.config/rofi/shared/colors.rasi
+  fi
+fi
+
+if command -v fuzzel &>/dev/null; then
+  if [ "$THEME" = "light" ]; then
+    ln -sf "$HOME/.config/fuzzel/light.ini" "$HOME/.config/fuzzel/colors.ini"
+  else
+    ln -sf "$HOME/.config/fuzzel/dark.ini" "$HOME/.config/fuzzel/colors.ini"
+  fi
+fi
+
+if command -v i3 &>/dev/null; then
+  "$HOME"/.config/i3/scripts/toggle-dark-mode.sh "$THEME"
 fi
 
 if command -v swaybg &>/dev/null; then
@@ -26,14 +41,8 @@ if command -v swaybg &>/dev/null; then
     swaybg -i /home/gustavo/Pictures/Wallpapers/The-Path-of-Giants.png
 fi
 
-if command -v rofi &>/dev/null; then
-  "$HOME"/.config/rofi/scripts/toggle-rofi-theme.sh "$THEME"
+PID_dms=$(pgrep dms)
+if [[ -n "$PID_dms" ]]; then
+  dms ipc theme toggle
 fi
 
-if command -v fuzzel &>/dev/null; then
-  "$HOME"/.config/fuzzel/scripts/toggle-fuzzel-theme.sh "$THEME"
-fi
-
-if command -v i3 &>/dev/null; then
-  "$HOME"/.config/i3/scripts/toggle-dark-mode.sh "$THEME"
-fi
