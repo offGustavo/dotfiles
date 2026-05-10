@@ -1,12 +1,17 @@
 {
   "plugins": {
-    "snacks.nvim": {
-      "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
-      "src": "https://github.com/folke/snacks.nvim"
+    "canola.nvim": {
+      "rev": "3838f1380e9aeea0597a80beb6ab28da73e38525",
+      "src": "https://github.com/barrettruth/canola.nvim",
+      "version": "'canola'"
     },
-    "vim-startuptime": {
-      "rev": "f10474b400c197787a0434548d842a2db583c333",
-      "src": "https://github.com/dstein64/vim-startuptime"
+    "fzf-lua": {
+      "rev": "44816af2465bb0a17ae0f1f2d8a4f9c3df524fcd",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "tokyonight.nvim": {
+      "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
+      "src": "https://github.com/folke/tokyonight.nvim"
     }
   }
 }

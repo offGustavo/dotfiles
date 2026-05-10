@@ -1,6 +1,6 @@
 return {
   "https://github.com/nvim-lualine/lualine.nvim",
-  event = "VeryLazy",
+  event = "UiEnter",
   enabled = false,
   config = function()
     local function show_macro_recording()

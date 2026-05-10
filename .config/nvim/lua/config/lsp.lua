@@ -1,21 +1,18 @@
 vim.schedule(function()
-  vim.lsp.config(
-    "*",
-    {
-      capabilities = {
-        textDocument = {
-          semanticTokens = { multilineTokenSupport = true },
-        }
-      },
-      root_markers = {
-        ".git",
-      },
-    }
-  )
+  vim.lsp.config("*", {
+    capabilities = {
+      textDocument = {
+        semanticTokens = { multilineTokenSupport = true },
+      }
+    },
+    root_markers = {
+      ".git",
+    },
+  })
 
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
-      Fish.did_lsp_setup = true
+      fish.did_lsp_setup = true
       vim.diagnostic.config({
         -- Use the default configuration
         virtual_lines = false,

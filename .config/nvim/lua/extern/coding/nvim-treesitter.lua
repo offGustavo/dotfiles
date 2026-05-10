@@ -1,7 +1,7 @@
 -- REF: https://www.reddit.com/r/NixOS/comments/1raqini/i_built_a_vs_code_extension_that_brings_syntax/
 return {
   "https://github.com/nvim-treesitter/nvim-treesitter",
-  enabled = false,
+  enabled = true,
   branch = "main",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",

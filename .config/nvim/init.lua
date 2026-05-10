@@ -7,7 +7,7 @@ vim.cmd([[
 ]])
 
 -- Our Global thing
-_G.Fish = {}
+_G.fish = {}
 
 -- Set a temp theme here to prevent light/dark flicker
 if vim.o.background == "dark" then
@@ -32,7 +32,7 @@ require("config.lazy")
 -- require("config.pack")
 
 -- Intern Plugins
-require("config.forge")
+require("intern")
 
 -- Vim options
 require("config.options")
@@ -45,12 +45,10 @@ require("config.window")
 -- Keymaps
 require("config.keymaps")
 require("config.toggle")
-require("config.emacs")
+require("config.git")
 
 -- Ui
-require("config.statuscolumn")
-require("config.statusline")
-require("config.tabline")
+require("config.ui")
 
 -- LSP
 require("config.lsp")

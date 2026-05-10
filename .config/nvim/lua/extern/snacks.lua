@@ -64,7 +64,7 @@ return {
     scope = { enabled = false },
     scroll = { enabled = false },
     statuscolumn = {
-      enabled = false,
+      enabled = true,
       left = { "mark", "sign" }, -- priority of signs on the left (high to low)
       right = { "fold", "git" }, -- priority of signs on the right (high to low)
       folds = {

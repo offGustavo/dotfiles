@@ -146,7 +146,7 @@ local function apply_kitty_theme()
   vim.fn.jobstart(cmd, { detach = true })
 end
 
-function Fish.UpdateKittyTheme()
+function fish.UpdateKittyTheme()
   -- vim.notify("Kitty Theme Update")
   -- debounce (não roda várias vezes seguidas rápido)
   if debounce_timer then
@@ -170,7 +170,7 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
     -- Só executa se já tivermos sido inicializados (ignora a primeira execução)
     if initialized then
       vim.defer_fn(function()
-        Fish.UpdateKittyTheme()
+        fish.UpdateKittyTheme()
       end, 50)
     end
   end,
@@ -183,7 +183,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function(args)
     if initialized then
       vim.defer_fn(function()
-        Fish.UpdateKittyTheme()
+        fish.UpdateKittyTheme()
       end, 50)
     end
   end,
@@ -192,8 +192,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 -- Também executa uma vez ao carregar o Neovim dentro do kitty
 vim.defer_fn(function()
-  Fish.UpdateKittyTheme()
+  fish.UpdateKittyTheme()
   initialized = true   -- Marca como inicializado depois da primeira execução
 end, 100)
 
-vim.keymap.set("n", "<leader>oK", Fish.UpdateKittyTheme, { desc = "Update Kitty Theme" })
+vim.keymap.set("n", "<leader>oK", fish.UpdateKittyTheme, { desc = "Update Kitty Theme" })

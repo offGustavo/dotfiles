@@ -1,7 +1,6 @@
--- vim: foldmethod=marker:foldlevel=0
+-- vim: foldmethod=marker
 
---- {{{ Nvim
---- }}}
+-- {{{ Nvim
 
 -- Edit init.lua/init.vim/vimrc
 vim.keymap.set("n", "<leader>fC", ":e $MYVIMRC<Cr>", { silent = true, desc = "Edit the init config file" })
@@ -14,12 +13,12 @@ vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" 
 
 -- Better gX(go to file externally)
 vim.keymap.set("n", "gX", function()
-	local file = vim.fn.expand("%:p")
-	if file ~= "" then
-		vim.ui.open(file)
-	else
-		vim.notify("no file to open", vim.log.levels.WARN)
-	end
+  local file = vim.fn.expand("%:p")
+  if file ~= "" then
+    vim.ui.open(file)
+  else
+    vim.notify("no file to open", vim.log.levels.WARN)
+  end
 end, { silent = true, desc = "Open current file" })
 
 -- {{{ Better walking between wrap lines
@@ -48,6 +47,7 @@ vim.cmd([[
 
 -- File
 vim.keymap.set("n", "<leader>fn", ":enew<Cr>", { silent = true, desc = "New File" })
+--- }}}
 
 -- {{{ Buffer
 vim.keymap.set("n", "<leader>ba", ":b #<Cr>", { desc = "Alternative Buffer" })
@@ -56,6 +56,7 @@ vim.keymap.set("n", "<leader>bD", ":bufdo bd<Cr>", { desc = "Delete All Buffers"
 -- }}}
 
 -- {{{ Substitute
+
 -- ThePrimeagen Keymaps
 vim.keymap.set({ "x", "n" }, "s.", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
 vim.keymap.set({ "x", "n" }, "S>", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
@@ -67,8 +68,42 @@ vim.keymap.set("n", "SV", [[S<Esc>]], { silent = false })
 vim.keymap.set("x", "SV", [[:normal S<Esc>]], { silent = true })
 -- }}}
 
--- Insert
+-- {{{ Insert/Command Mode
 vim.keymap.set("i", "<C-Bs>", "<C-w>")
+
+vim.cmd([[
+  cmap <C-a> <home>
+  cmap <C-e> <end>
+  cmap <C-f> <right>
+  cmap <C-b> <left>
+  cmap <M-f> <C-right>
+  cmap <M-b> <C-left>
+  cmap <C-d> <del>
+  cmap <C-o> <C-f>
+
+  "" Emacs shit
+  "nmap <M-x> :
+
+  " imap <C-a> <home>
+  " imap <C-e> <end>
+  " imap <C-f> <right>
+  " imap <C-b> <left>
+  " imap <M-f> <C-right>
+  " imap <M-b> <C-left>
+  " imap <C-d> <del>
+  " imap <M-d> <C-o>de
+]])
+
+-- Emacs Binds
+vim.keymap.set("n", "<C-Down>", "}", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-Up>", "{", { noremap = true, silent = true })
+vim.keymap.set("i", "<M-S-.>", "<C-o>G", { noremap = true, silent = true })
+vim.keymap.set("i", "<M-S-,>", "<C-o>gg", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<M-S-.>", "G", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<M-S-,>", "gg", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<M-x>", ":")
+
+--- }}}
 
 -- {{{ Copy/Move
 vim.keymap.set("n", "<M-d>", ":t.<cr>")
@@ -88,25 +123,44 @@ vim.keymap.set("n", "<leader>tv", ":vert term ")
 vim.keymap.set("n", "<leader>tg", ":hor term rg ")
 --- }}}
 
+--{{{ Tabs
+-- :tcd shortcut
+vim.keymap.set("n", "<leader><Tab>z", ":tcd ", { desc = "Tab Cd" })
+
+vim.keymap.set("n", "<leader><Tab><Tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+
+vim.keymap.set("n", "<leader><Tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+vim.keymap.set("n", "<leader><Tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+
+vim.keymap.set("n", "]<S-Tab>", "<cmd>tablast<cr>", { desc = "Last Tab" })
+vim.keymap.set("n", "[<S-Tab>", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+
+vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+vim.keymap.set("n", "<C-S-PageUp>", "<cmd>tabmove -1<cr>")
+vim.keymap.set("n", "<C-S-PageDown>", "<cmd>tabmove +1<cr>")
+---}}}
+
 -- {{{ LocList
 vim.keymap.set("n", "<leader>ll", ":lwindow<Cr>", { desc = "Location List", silent = true })
 vim.keymap.set("n", "<leader>lp", ":lprev<Cr>", { desc = "Location List", silent = true })
 vim.keymap.set("n", "<leader>ln", ":lnext<Cr>", { desc = "Location List", silent = true })
 vim.keymap.set("n", "<leader>la", function()
-	local pos = vim.api.nvim_win_get_cursor(0)
-	local item = {
-		bufnr = vim.api.nvim_get_current_buf(),
-		lnum = pos[1],
-		col = pos[2] + 1,
-		text = vim.fn.getline("."),
-	}
-	vim.fn.setloclist(0, { item }, "a") -- "a" = append
-	vim.notify("Adicionado à Location List")
+  local pos = vim.api.nvim_win_get_cursor(0)
+  local item = {
+    bufnr = vim.api.nvim_get_current_buf(),
+    lnum = pos[1],
+    col = pos[2] + 1,
+    text = vim.fn.getline("."),
+  }
+  vim.fn.setloclist(0, { item }, "a") -- "a" = append
+  vim.notify("Adicionado à Location List")
 end, { desc = "Adicionar item à Location List" })
 
 vim.keymap.set("n", "<leader>lr", function()
-	vim.fn.setloclist(0, {}, "r") -- "r" = replace (aqui com vazio)
-	vim.notify("Location List resetada")
+  vim.fn.setloclist(0, {}, "r") -- "r" = replace (aqui com vazio)
+  vim.notify("Location List resetada")
 end, { desc = "Resetar Location List" })
 --- }}}
 
@@ -123,40 +177,29 @@ vim.keymap.set("n", "<leader>qh", "<Cmd>chistory<Cr>", { silent = true, desc = "
 vim.keymap.set("n", "<leader>qn", "<Cmd>cnewer<Cr>", { silent = true, desc = "Next Quickfix List" })
 vim.keymap.set("n", "<leader>qp", "<Cmd>colder<Cr>", { silent = true, desc = "Previous Quickfix List" })
 for i = 1, 9 do
-	vim.keymap.set(
-		"n",
-		"<leader>q" .. i,
-		"<Cmd>chistory " .. i .. "<Cr>",
-		{ silent = true, desc = "Go to " .. i .. " Quickfix" }
-	)
+  vim.keymap.set(
+    "n",
+    "<leader>q" .. i,
+    "<Cmd>chistory " .. i .. "<Cr>",
+    { silent = true, desc = "Go to " .. i .. " Quickfix" }
+  )
 end
 -- }}}
 
 -- {{{ Obsidian
 vim.keymap.set("n", "<leader>ad", function()
-	local current_date = os.date("%Y-%m-%d")
-	local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
-	vim.cmd("e " .. daily_note_date)
+  local current_date = os.date("%Y-%m-%d")
+  local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
+  vim.cmd("e " .. daily_note_date)
 end, { desc = "Today's Daily Note" })
 
 -- TODO: change this keymaps
 vim.keymap.set("n", "<leader>ag", function()
-	local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
-	local commit_date = "vault backup: " .. current_date_and_time
-	vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
-	print("Commit: " .. commit_date)
+  local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
+  local commit_date = "vault backup: " .. current_date_and_time
+  vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
+  print("Commit: " .. commit_date)
 end, { desc = "Commit All Changes From Vault" })
--- }}}
-
-vim.keymap.set("n", "<leader>gcp", function()
-	vim.cmd("!git pull")
-	print("Pull Changes")
-end, { desc = "Pull Changes" })
-
-vim.keymap.set("n", "<leader>gcP", function()
-	vim.cmd("!git push")
-	print("Push Changes")
-end, { desc = "Push Changes" })
 --- }}}
 
 -- {{{ Make

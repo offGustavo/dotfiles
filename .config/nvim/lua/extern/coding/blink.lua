@@ -1,7 +1,7 @@
 return {
 	"https://github.com/Saghen/blink.cmp",
 	version = "1.*",
-	enabled = false,
+	enabled = true,
 	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
 		{ "https://github.com/rafamadriz/friendly-snippets" },

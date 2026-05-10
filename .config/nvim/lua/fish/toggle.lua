@@ -150,6 +150,7 @@ local function cycle_word(direction)
     local new_line = line:sub(1, target.s - 1) .. new_word .. line:sub(target.e + 1)
     vim.fn.setline(".", new_line)
     vim.fn.cursor(current_line, target.s + #new_word - 1)
+
   else -- "word"
     local group = target.group
     local i = target.idx

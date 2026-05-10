@@ -5,7 +5,7 @@ local config = vim.tbl_extend("force", {
 	error_format = {
 		"%f:%l:%c: %m",
 	},
-}, vim.g.forge_compile_config or {})
+}, vim.g.compile_config or {})
 
 ---@return string
 --- Return user compile cmd
@@ -46,12 +46,7 @@ M.compile = function()
 end
 
 M.setup = function()
-	local c = require("forge.compile")
-
-	if vim.g.forge_terminal_loaded then
-		return
-	end
-	vim.g.forge_terminal_loaded = true
+	local c = require("fish.compile")
 
 	vim.keymap.set("n", "<M-c>", function()
 		c.compile()

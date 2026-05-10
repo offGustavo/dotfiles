@@ -57,7 +57,7 @@ vim.schedule(function()
   if vim.fn.executable("rg") then
     vim.o.grepprg = "rg"
     -- [Native Fuzzy Finder in Neovim With Lua and Cool Bindings :: Cherry's Blog](https://cherryramatis.xyz/posts/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings/)
-    function Fish.rg_find_files(cmdarg, _cmdcomplete)
+    function fish.rg_find_files(cmdarg, _cmdcomplete)
       local fnames = vim.fn.systemlist("rg --files --hidden --color=never ")
       if #cmdarg == 0 then
         return fnames
@@ -66,7 +66,7 @@ vim.schedule(function()
       end
     end
 
-    vim.o.findfunc = "v:lua.Fish.rg_find_files"
+    vim.o.findfunc = "v:lua.fish.rg_find_files"
   end
 end)
 

@@ -10,7 +10,11 @@ return {
       -- style = 'ascii',
     })
 
+    -- Git
     require("mini.git").setup({})
+    local rhs = '<Cmd>lua MiniGit.show_at_cursor()<CR>'
+    vim.keymap.set({ 'n', 'x' }, '<Leader>gs', rhs, { desc = 'Show at cursor' })
+
     -- Use only HEAD name as summary string
     local branch_format_summary = function(data)
       -- Utilize buffer-local table summary
@@ -192,8 +196,8 @@ return {
     --   nmap <M-r> :Pick oldfiles<Cr>
     -- ]])
 
-    require("mini.snippets").setup()
-    require("mini.completion").setup()
+    -- require("mini.snippets").setup()
+    -- require("mini.completion").setup()
     -- require("mini.cmdline").setup()
 
     -- require("mini.files").setup()

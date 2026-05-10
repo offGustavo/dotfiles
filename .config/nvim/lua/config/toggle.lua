@@ -1,13 +1,13 @@
 -- Smart increase/decrease
 vim.keymap.set("n", "<C-a>", function()
-  require("forge.toggle").increase()
+  require("fish.toggle").increase()
 end, { desc = "Inrease numbers and words" })
 vim.keymap.set("n", "<C-x>", function()
-  require("forge.toggle").decrease()
+  require("fish.toggle").decrease()
 end, { desc = "Inrease numbers and words" })
 
 vim.keymap.set("n", "<leader>tt", function()
-  require("forge.toggle").toggle()
+  require("fish.toggle").toggle()
 end, { desc = "Toggle Value" })
 
 vim.keymap.set("n", "<space>uc", function()
