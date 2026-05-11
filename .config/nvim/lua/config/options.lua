@@ -80,6 +80,7 @@ vim.filetype.add({
 
 vim.o.keymodel = "startsel,stopsel"
 
+-- {{{ Spell
 vim.schedule(function()
   vim.o.spelllang = "pt_br,en_us,es"
   vim.o.spell = true
@@ -101,6 +102,7 @@ vim.schedule(function()
   end
   vim.keymap.set("n", "Z=", spellsuggest_select, { desc = "Custom spelling suggestions" })
 end)
+-- }}}
 
 -- {{{ foldtext
 vim.o.foldmethod = "indent"
@@ -139,13 +141,25 @@ vim.o.statuscolumn = "%!v:lua.require('fish.statuscolumn').build()"
 -- }}}
 
 -- {{{ statusline
--- FIXME: Quero usar o laststatus = 0, mas o nome do arquivo não fica salvo per janela
 vim.o.laststatus = 3
 vim.o.showmode = false
 
 -- vim.opt.fillchars:append({
 --   stl = "-",
 --   stlnc = "-"
+-- })
+
+vim.opt.fillchars:append({
+  vert = '┃',
+  horiz = '━',
+  horizup = '┻',
+  horizdown = '┳'
+})
+-- vim.opt.fillchars:append({
+  -- vert = ' ',
+  -- horiz = ' ',
+  -- horizup = ' ',
+  -- horizdown = ' '
 -- })
 
 -- set statusline=%<%f\ %h%w%m%r\ %{%\ v:lua.require('vim._core.util').term_exitcode()\ %}%=%{%\ luaeval('(package.loaded[''vim.ui'']\ and\ vim.api.nvim_get_current_win()\ ==\ tonumber(vim.g.actual_curwin\ or\ -1)\ and\ vim.ui.progress_status())\ or\ ''''\ ')%}%{%\ &showcmdloc\ ==\ 'statusline'\ ?\ '%-10.S\ '\ :\ ''\ %}%{%\ exists('b:keymap_name')\ ?\ '<'..b:keymap_name..'>\ '\ :\ ''\ %}%{%\ &busy\ >\ 0\ ?\ '◐\ '\ :\ ''\ %}%{%\ luaeval('(package.loaded[''vim.diagnostic'']\ and\ next(vim.diagnostic.count())\ and\ vim.diagnostic.status()\ ..\ ''\ '')\ or\ ''''\ ')\ %}%{%\ &ruler\ ?\ (\ &rulerformat\ ==\ ''\ ?\ '%-14.(%l,%c%V%)\ %P'\ :\ &rulerformat\ )\ :\ ''\ %}
@@ -232,7 +246,7 @@ vim.schedule(function()
   vim.o.cmdheight = 1
   require("vim._core.ui2").enable({
     enable = true, -- Whether to enable or disable the UI.
-    msg = {      -- Options related to the message module.
+    msg = {        -- Options related to the message module.
       ---@type 'cmd'|'msg' Default message target, either in the
       ---cmdline or in a separate ephemeral message window.
       ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
@@ -242,53 +256,53 @@ vim.schedule(function()
   })
 end)
 
--- }}}
+  -- {{{ -- Experimental UI2: floating cmdline and messages
+  -- require('vim._core.ui2').enable({
+  --   enable = true,
+  --   msg = {
+  --     targets = {
+  --       [''] = 'msg',
+  --       empty = 'cmd',
+  --       bufwrite = 'msg',
+  --       confirm = 'cmd',
+  --       emsg = 'pager',
+  --       echo = 'msg',
+  --       echomsg = 'msg',
+  --       echoerr = 'pager',
+  --       completion = 'cmd',
+  --       list_cmd = 'pager',
+  --       lua_error = 'pager',
+  --       lua_print = 'msg',
+  --       progress = 'pager',
+  --       rpc_error = 'pager',
+  --       quickfix = 'msg',
+  --       search_cmd = 'cmd',
+  --       search_count = 'cmd',
+  --       shell_cmd = 'pager',
+  --       shell_err = 'pager',
+  --       shell_out = 'pager',
+  --       shell_ret = 'msg',
+  --       undo = 'msg',
+  --       verbose = 'pager',
+  --       wildlist = 'cmd',
+  --       wmsg = 'msg',
+  --       typed_cmd = 'cmd',
+  --     },
+  --     cmd = {
+  --       height = 0.5,
+  --     },
+  --     dialog = {
+  --       height = 0.5,
+  --     },
+  --     msg = {
+  --       height = 0.3,
+  --       timeout = 5000,
+  --     },
+  --     pager = {
+  --       height = 0.5,
+  --     },
+  --   },
+  -- })
+  -- }}}
 
--- {{{ -- Experimental UI2: floating cmdline and messages
--- require('vim._core.ui2').enable({
---   enable = true,
---   msg = {
---     targets = {
---       [''] = 'msg',
---       empty = 'cmd',
---       bufwrite = 'msg',
---       confirm = 'cmd',
---       emsg = 'pager',
---       echo = 'msg',
---       echomsg = 'msg',
---       echoerr = 'pager',
---       completion = 'cmd',
---       list_cmd = 'pager',
---       lua_error = 'pager',
---       lua_print = 'msg',
---       progress = 'pager',
---       rpc_error = 'pager',
---       quickfix = 'msg',
---       search_cmd = 'cmd',
---       search_count = 'cmd',
---       shell_cmd = 'pager',
---       shell_err = 'pager',
---       shell_out = 'pager',
---       shell_ret = 'msg',
---       undo = 'msg',
---       verbose = 'pager',
---       wildlist = 'cmd',
---       wmsg = 'msg',
---       typed_cmd = 'cmd',
---     },
---     cmd = {
---       height = 0.5,
---     },
---     dialog = {
---       height = 0.5,
---     },
---     msg = {
---       height = 0.3,
---       timeout = 5000,
---     },
---     pager = {
---       height = 0.5,
---     },
---   },
--- })
 -- }}}

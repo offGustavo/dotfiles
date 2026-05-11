@@ -29,8 +29,8 @@ vim.cmd([[
 vim.cmd("let g:loaded_fzf = 1")
 
 -- Load Lazy.nvim and external plugins
--- require("config.lazy")
-require("config.pack")
+require("config.lazy")
+-- require("config.pack")
 
 -- Intern Plugins
 require("intern")

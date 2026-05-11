@@ -183,6 +183,15 @@ vim.keymap.set("n", "<C-S-PageUp>", "<cmd>tabmove -1<cr>")
 vim.keymap.set("n", "<C-S-PageDown>", "<cmd>tabmove +1<cr>")
 ---}}}
 
+-- {{{ Fold
+vim.keymap.set("n", "<leader>im", "O-- {{{<Esc>", { desc = "Insert fold open marker" })
+vim.keymap.set("n", "<leader>iM", "o-- }}}<Esc>", { desc = "Insert fold close marker" })
+ vim.keymap.set("x", "<leader>im", function()
+  vim.cmd("'<normal O-- {{{")
+  vim.cmd("'>normal o-- }}}")
+end, { desc = "Insert fold markers around selection" }) 
+-- }}}
+
 -- TODO: Modified key binds
 --- {{{ Windows
 vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Windows" })
