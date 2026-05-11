@@ -12,6 +12,7 @@ vim.schedule(function()
     },
     keybindings = {},
   })
+
   -- require("forge.easymode")
 
   -- require("forge.espeto").setup()
@@ -19,8 +20,6 @@ vim.schedule(function()
   -- vim.keymap.set("n", "<leader>v", function()
   --   require("forge.vidir").open()
   -- end)
-
-  -- require("forge.tabline")
 
   require("fish.compile").setup()
 

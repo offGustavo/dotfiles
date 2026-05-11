@@ -95,20 +95,21 @@ return {
         suffix_next = "n", -- Suffix to search with "next" method
       },
     })
-    -- require("mini.move").setup({
-    --   mappings = {
-    --     -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
-    --     left = "<M-h>",
-    --     right = "<M-l>",
-    --     down = "<M-j>",
-    --     up = "<M-k>",
-    --   },
-    --   -- Options which control moving behavior
-    --   options = {
-    --     -- Automatically reindent selection during linewise vertical move
-    --     reindent_linewise = true,
-    --   },
-    -- })
+
+    require("mini.move").setup({
+      mappings = {
+        -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+        left = "<M-h>",
+        right = "<M-l>",
+        down = "<M-j>",
+        up = "<M-k>",
+      },
+      -- Options which control moving behavior
+      options = {
+        -- Automatically reindent selection during linewise vertical move
+        reindent_linewise = true,
+      },
+    })
 
     local hipatterns = require("mini.hipatterns")
     hipatterns.setup({
@@ -257,5 +258,6 @@ return {
       -- idle time if user input is required.
       silent = false,
     })
+
   end,
 }

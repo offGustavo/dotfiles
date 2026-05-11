@@ -2,6 +2,8 @@
 
 -- {{{ Nvim
 
+-- Marks
+vim.keymap.set("n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", { desc = "Del mark" })
 
 -- Edit init.lua/init.vim/vimrc
 vim.keymap.set("n", "<leader>fC", ":e $MYVIMRC<Cr>", { silent = true, desc = "Edit the init config file" })
@@ -50,6 +52,25 @@ vim.cmd([[
 -- File
 vim.keymap.set("n", "<leader>fn", ":enew<Cr>", { silent = true, desc = "New File" })
 --- }}}
+
+-- {{{ Clipboard
+vim.keymap.set({ "n", "x" }, "<C-S-v>", '"+p')
+vim.keymap.set({ "i" }, "<C-S-v>", "<C-r>+")
+vim.keymap.set({ "n", "x" }, "<C-S-c>", '"+y')
+vim.keymap.set({ "n", "x" }, "<C-S-x>", '"+d')
+
+vim.keymap.set({ "n", "x" }, "<S-Insert>", '"+p')
+vim.keymap.set({ "i" }, "<S-Insert>", "<C-r>+")
+vim.keymap.set({ "n", "x" }, "<C-Insert>", '"+y')
+vim.keymap.set({ "n", "x" }, "<S-Del>", '"+d')
+
+vim.keymap.set({ "n", "x" }, "<leader>+", '"+', { desc = "System clipboard" })
+vim.keymap.set({ "n", "x" }, "<leader>_", '"_', { desc = "Black Hole Register" })
+
+vim.keymap.set({ "n", "x" }, "<leader>p", '"+p', { desc = "Paste from system register" })
+vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Yank to system register" })
+vim.keymap.set({ "n", "x" }, "<leader>x", '"+d', { desc = "Cut to system register" })
+-- }}}
 
 -- {{{ Buffer
 vim.keymap.set("n", "<leader>ba", ":b #<Cr>", { desc = "Alternative Buffer" })
@@ -161,6 +182,41 @@ vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 vim.keymap.set("n", "<C-S-PageUp>", "<cmd>tabmove -1<cr>")
 vim.keymap.set("n", "<C-S-PageDown>", "<cmd>tabmove +1<cr>")
 ---}}}
+
+-- TODO: Modified key binds
+--- {{{ Windows
+vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Windows" })
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-j>", function()
+	vim.cmd.wincmd("w")
+end)
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-k>", function()
+	vim.cmd.wincmd("W")
+end)
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-s>", function()
+	vim.cmd.wincmd("s")
+end)
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-v>", function()
+	vim.cmd.wincmd("v")
+end)
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-o>", function()
+	vim.cmd.wincmd("o")
+end)
+vim.keymap.set("n", "<M-=>", function()
+	vim.cmd.wincmd("=")
+end, { desc = "Windows" })
+vim.keymap.set("n", "<M-+>", function()
+	vim.cmd.wincmd("+")
+end, { desc = "Windows" })
+vim.keymap.set("n", "<M-->", function()
+	vim.cmd.wincmd("-")
+end, { desc = "Windows" })
+vim.keymap.set("n", "<M-,>", function()
+	vim.cmd.wincmd("<")
+end, { desc = "Windows" })
+vim.keymap.set("n", "<M-.>", function()
+	vim.cmd.wincmd(">")
+end, { desc = "Windows" })
+--- }}}
 
 -- {{{ LocList
 vim.keymap.set("n", "<leader>ll", ":lwindow<Cr>", { desc = "Location List", silent = true })
@@ -322,6 +378,11 @@ end, { desc = "set foldmethod!" })
 vim.keymap.set("n", "<leader>ui", function()
   vim.o.list = not vim.opt.list:get()
 end, { desc = "set list!" })
+
+vim.keymap.set("n", "<leader>uS", function()
+  vim.o.laststatus = vim.opt.laststatus:get() == 3 and 2 or 3
+end, { desc = "set laststatus!" })
+
 -- }}}
 
 -- {{{ Zoxide
@@ -334,6 +395,32 @@ vim.keymap.set("n", "<leader>Z", function()
   require("fish.zoxide").zoxide_select("Zoxide (tcd):", "tcd")
 end, { desc = "Zoxide picker(tcb)" })
 -- }}}
+
+--- {{{ Git
+--- Alias to vim.keymap.set
+---@param k string
+---@param f function|string
+---@param o table
+local nmap = function(k, f, o)
+  vim.keymap.set("n", k, f, o)
+end
+
+nmap("<leader>gP", function()
+  vim.cmd("!git pull")
+end, { desc = "Pull Changes" })
+
+nmap("<leader>gp", function()
+  vim.cmd("!git push")
+end, { desc = "Push Changes" })
+
+nmap("<leader>ga", function()
+  vim.cmd("!git add %")
+end, { desc = "Git add current file" })
+
+nmap("<leader>gA", function()
+  vim.cmd("!git add .")
+end, { desc = "Git add current directory" })
+--- }}}
 
 -- FIXME: try to fix this
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })

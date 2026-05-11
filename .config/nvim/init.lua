@@ -22,35 +22,22 @@ vim.cmd([[
     nmap <M-s> :grep<Space>
     nmap <M-b> :b<Space>
     nmap <M-e> :Ex<Cr>
+    nmap <leader>vc :e $MYVIMRC<Cr>
 ]])
 
 -- Disable Custom Nix/Arch FZF.vim
 vim.cmd("let g:loaded_fzf = 1")
 
 -- Load Lazy.nvim and external plugins
-require("config.lazy")
--- require("config.pack")
+-- require("config.lazy")
+require("config.pack")
 
 -- Intern Plugins
 require("intern")
 
 -- Vim options
 require("config.options")
-require("config.clipboard")
-require("config.marks")
 require("config.autocmds")
-require("config.spell")
-require("config.window")
-
 require("config.commands")
-
--- Keymaps
 require("config.keymaps")
-require("config.toggle")
-require("config.git")
-
--- Ui
-require("config.ui")
-
--- LSP
 require("config.lsp")

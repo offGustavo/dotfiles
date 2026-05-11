@@ -1,6 +1,6 @@
 return {
   "juniorsundar/refer.nvim",
-  enabled = true,
+  enabled = false,
   dependencies = {
     -- Optional:
     -- "saghen/blink.cmp",
@@ -58,10 +58,10 @@ return {
     -- See "Tutorials" section for keymaps, custom_sorters, and custom_parsers
   },
   keys = {
-    { "<leader>pa", ":Refer<Space>" },
-    { "<leader>pf", "<Cmd>Refer Files<Cr>" },
-    { "<leader>ps", "<Cmd>Refer Grep<Cr>" },
-    { "<leader>p.", "<Cmd>Refer Extra FindFile<Cr>" },
-    { "<leader>pw", "<Cmd>Refer Selection<Cr>" },
+    { "<leader>fa", ":Refer<Space>" },
+    { "<leader>ff", "<Cmd>Refer Files<Cr>" },
+    { "<leader>fs", "<Cmd>Refer Grep<Cr>" },
+    { "<leader>f.", "<Cmd>Refer Extra FindFile<Cr>" },
+    { "<leader>fw", "<Cmd>Refer Selection<Cr>" },
   },
 }

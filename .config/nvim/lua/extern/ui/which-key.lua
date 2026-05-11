@@ -91,8 +91,8 @@ return {
 			},
 		},
 		layout = {
-			width = { min = 20 }, -- min and max width of the columns
-			spacing = 3, -- spacing between columns
+			width = { min = 20, max = 40 }, -- min and max width of the columns
+			spacing = 2, -- spacing between columns
 		},
 		keys = {
 			scroll_down = "<c-d>", -- binding to scroll down inside the popup
