@@ -8,7 +8,7 @@ set termguicolors
 set nu rnu nowrap
 
 set cmdheight=1
-set laststatus=1
+set laststatus=2
 
 set listchars=eol:\ ,space:·
 set list
