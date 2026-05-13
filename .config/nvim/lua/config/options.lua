@@ -1,9 +1,11 @@
 -- vim: foldmethod=marker
+
 -- {{{ Security Things
 vim.o.modeline       = true
 vim.o.exrc           = false
 --- }}}
 
+-- {{{ Options
 -- vim.opt.mouse = ""
 vim.o.number         = true
 vim.o.relativenumber = true
@@ -48,17 +50,36 @@ vim.o.virtualedit    = "block"             -- Allow going past end of line in bl
 
 vim.o.cursorlineopt  = 'screenline,number' -- Show cursor line per screen line
 
--- -- [Neovim native, built-in, LSP autocomplete · Tomas Vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
--- -- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
+vim.o.keymodel = "startsel,stopsel"
+--- }}}
+
+-- {{{ Tittle
+vim.o.title = true
+function fish.cwd_title()
+  -- vim.fs.normalize() converts the path, then ~ contract for readability
+  local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+  if vim.g.neovide then
+    return "neovide <" .. cwd .. ">"
+  end
+  return "nvim <" .. cwd .. ">"
+end
+vim.o.titlestring = "%{v:lua.fish.cwd_title()}"
+-- }}}
+
+-- {{{ Autocomplete
+-- [neovim native, built-in, lsp autocomplete · tomas vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
+-- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
 -- vim.o.autocomplete = true
 -- vim.opt.completeopt = { "menuone", "noinsert", "popup" }
 -- vim.o.complete = "o,.,b"
+-- }}}
 
+-- {{{ grepprg and findfunc
 vim.schedule(function()
-  -- Better Grep and Find with ripgrep
+  -- better grep and find with ripgrep
   if vim.fn.executable("rg") then
     vim.o.grepprg = "rg"
-    -- [Native Fuzzy Finder in Neovim With Lua and Cool Bindings :: Cherry's Blog](https://cherryramatis.xyz/posts/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings/)
+    -- [native fuzzy finder in neovim with lua and cool bindings :: cherry's blog](https://cherryramatis.xyz/posts/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings/)
     function fish.rg_find_files(cmdarg, _cmdcomplete)
       local fnames = vim.fn.systemlist("rg --files --hidden --color=never ")
       if #cmdarg == 0 then
@@ -71,14 +92,15 @@ vim.schedule(function()
     vim.o.findfunc = "v:lua.fish.rg_find_files"
   end
 end)
+-- }}}
 
+-- {{{ New Filetypes
 vim.filetype.add({
   extension = {
     kbd = "kbd", -- maps *.kbd → filetype=kbd
   },
 })
-
-vim.o.keymodel = "startsel,stopsel"
+-- }}}
 
 -- {{{ Spell
 vim.schedule(function()
@@ -243,7 +265,7 @@ if vim.fn.has('nvim-0.12') ~= 1 then
 end
 
 vim.schedule(function()
-  vim.o.cmdheight = 1
+  vim.o.cmdheight = 0
   require("vim._core.ui2").enable({
     enable = true, -- Whether to enable or disable the UI.
     msg = {        -- Options related to the message module.

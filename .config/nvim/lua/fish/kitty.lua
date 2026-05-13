@@ -196,4 +196,4 @@ vim.defer_fn(function()
   initialized = true   -- Marca como inicializado depois da primeira execução
 end, 100)
 
-vim.keymap.set("n", "<leader>oK", fish.UpdateKittyTheme, { desc = "Update Kitty Theme" })
+vim.keymap.set("n", "<leader>oK", Fish.UpdateKittyTheme, { desc = "Update Kitty Theme" })

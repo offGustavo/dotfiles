@@ -1,5 +1,4 @@
 vim.schedule(function()
-  -- __Mini__ Yazi.nvim for faster startuptime
   require("fish.yazi").setup({
     enable_cmds = true,
     replace_netrw = false,
@@ -21,8 +20,6 @@ vim.schedule(function()
   --   require("forge.vidir").open()
   -- end)
 
-  require("fish.compile").setup()
-
   -- require("forge.align")
 
   require("fish.lazygit").setup({
@@ -41,8 +38,7 @@ vim.schedule(function()
     enable_cmds = true,
   })
 
-  local TabTerm = require("fish.tabterm")
-  TabTerm.setup({
+  require("fish.tabterm").setup({
     -- Winbar Config
     separator_right = "",
     separator_left = "",
@@ -53,20 +49,6 @@ vim.schedule(function()
     -- Window Config
     vertical_size = 20,
     float = false,
+    default_maps = true
   })
-  -- Define Keys
-  vim.keymap.set({ "n", "i", "x", "t" }, "<A-n>", function()
-    TabTerm.new()
-  end, { desc = "TabTerm New" })
-  vim.keymap.set({ "n", "i", "x", "t" }, "<A-z>", function()
-    TabTerm.close()
-  end, { desc = "TabTerm Close" })
-  vim.keymap.set({ "n", "i", "x", "t" }, "<A-/>", function()
-    TabTerm.toggle()
-  end, { desc = "TabTerm Toggle" })
-  for i = 1, 9, 1 do
-    vim.keymap.set({ "n", "i", "x", "t" }, "<A-" .. i .. ">", function()
-      TabTerm.go(i)
-    end, { desc = "TabTerm Toggle" })
-  end
 end)

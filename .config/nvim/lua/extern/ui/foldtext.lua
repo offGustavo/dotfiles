@@ -47,7 +47,6 @@ return {
 
         -- Parts to create the foldtext.
         parts = {
-
           kind = "indent",
           -- Optional condition for this
           -- part.
@@ -58,34 +57,36 @@ return {
           hl = "Comment",
         },
       },
-      --       custom_c = {
-      --     kind = "description",
-      --     -- Optional condition for this
-      --     -- part.
-      --     condition = function ()
-      --         return true;
-      --     end,
-      --
-      --     -- Pattern to detect the foldtext from the start line.
-      --     -- Here I am using, "feat: Keymaps" & "fix, Something's not right here"
-      --     pattern = '[\'"](.+)[\'"]',
-      --     styles = {
-      --         default = {
-      --             hl = "@comment",
-      --             icon = "💭 ",
-      --             icon_hl = nil
-      --         },
-      --
-      --         -- Style for `doc`(case-insensitive).
-      --         -- Options are merged with `default`
-      --         -- before being used.
-      --         doc = {
-      --             -- hl, icon_hl are inherited from
-      --             -- `default`.
-      --             icon = "📚 ",
-      --         }
-      --     }
-      -- },
+      custom_c = {
+        -- Only on these filetypes.
+        filetypes = { "markdown" },
+        kind = "description",
+        -- Optional condition for this
+        -- part.
+        condition = function(win)
+          return vim.wo[win].foldmethod == "marker"
+        end,
+
+        -- Pattern to detect the foldtext from the start line.
+        -- Here I am using, "feat: Keymaps" & "fix, Something's not right here"
+        pattern = "['\"](.+)['\"]",
+        styles = {
+          default = {
+            hl = "@comment",
+            icon = "💭 ",
+            icon_hl = nil,
+          },
+
+          -- Style for `doc`(case-insensitive).
+          -- Options are merged with `default`
+          -- before being used.
+          doc = {
+            -- hl, icon_hl are inherited from
+            -- `default`.
+            icon = "📚 ",
+          },
+        },
+      },
     },
   },
 }

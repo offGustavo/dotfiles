@@ -1,5 +1,7 @@
+local M = {} 
+
 -- Função principal
-local function align_regexp(opts)
+function M.align_regexp(opts)
   -- pede separador (regex)
   local sep = vim.fn.input("Separador (regex ou texto): ")
   if sep == "" then
@@ -40,10 +42,4 @@ local function align_regexp(opts)
   vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, aligned)
 end
 
--- cria comando
-vim.api.nvim_create_user_command("AlignRegexp", align_regexp, { range = true })
-
--- TODO: use mini-indent
-vim.keymap.set("x", "<leader>f", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', { desc = "Format Table in Markdown" })
-vim.keymap.set("x", "<leader>a", ":AlignRegexp<CR>", { desc = "Align by regex", silent = true })
-
+return M

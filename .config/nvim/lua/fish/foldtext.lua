@@ -28,22 +28,45 @@ M.build_fold_text = function()
 
     local fragments = {}
     for _, char in ipairs(vim.fn.split(content, "\\zs")) do
-      table.insert(fragments, { char })
+      table.insert(fragments, { char, "@comment"  })
     end
     for _, char in ipairs(vim.fn.split(" ... ", "\\zs")) do
       table.insert(fragments, { char, "@comment" })
     end
     for _, char in ipairs(vim.fn.split(close_marker, "\\zs")) do
-      table.insert(fragments, { char })
+      table.insert(fragments, { char, "@comment"  })
     end
 
     return fragments
   end
 
+
+
   -- Expr / treesitter: first line + delimiter + last line (syntax highlighted)
   local buffer = vim.api.nvim_get_current_buf()
   local start_line = vim.fn.getbufline(buffer, vim.v.foldstart)[1] or ""
   local end_line = vim.fn.getbufline(buffer, vim.v.foldend)[1] or ""
+
+    -- Markdown: heading folds show only the first line, syntax-highlighted.
+  -- The end line is meaningless (blank line or unrelated content), so we
+  -- omit it and match the native treesitter fold appearance.
+  local ft = vim.bo[buffer].filetype
+  if ft == "markdown" or ft == "mdx" then
+    local fragments = {}
+    for p, char in ipairs(vim.fn.split(start_line, "\\zs")) do
+      local hl_captures = vim.treesitter.get_captures_at_pos(buffer, vim.v.foldstart - 1, p - 1)
+      if #hl_captures > 0 then
+        local last = hl_captures[#hl_captures]
+        table.insert(fragments, { char, "@" .. last.capture .. "." .. last.lang })
+      else
+        table.insert(fragments, { char })
+      end
+    end
+    for _, char in ipairs(vim.fn.split(" ... ", "\\zs")) do
+      table.insert(fragments, { char, "@comment" })
+    end
+    return fragments
+  end
 
   local fragments = {}
 

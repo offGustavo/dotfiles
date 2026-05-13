@@ -1,3 +1,4 @@
+-- {{{ Highlight on yank
 -- vim.api.nvim_create_autocmd("TextYankPost", {
 -- 	desc = "Highlight when yanking (copying) text",
 -- 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
@@ -32,6 +33,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end
   end,
 })
+-- }}}
 
 -- Set EDITOR for terminal buffers
 -- vim.api.nvim_create_autocmd("TermOpen", {
@@ -43,6 +45,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 --   end,
 -- })
 
+-- {{{ Marks
 -- REF: https://github.com/neovim/neovim/discussions/39260
 local mark_names = vim.split("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "") -- .><^
 
@@ -91,9 +94,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "MarkSet" }, {
 		end)
 	end,
 })
+-- }}}
 
-
--- Kitty
+-- {{{ Kitty
 vim.api.nvim_create_autocmd({ "VimEnter", "VimResume", "UIEnter" }, {
   group = vim.api.nvim_create_augroup("KittySetVarVimEnter", { clear = true }),
   callback = function()
@@ -104,7 +107,6 @@ vim.api.nvim_create_autocmd({ "VimEnter", "VimResume", "UIEnter" }, {
     end
   end,
 })
-
 vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
   group = vim.api.nvim_create_augroup("KittyUnsetVarVimLeave", { clear = true }),
   callback = function()
@@ -115,6 +117,7 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
     end
   end,
 })
+-- }}}
 
 -- -- [Native Fuzzy Finder in Neovim With Lua and Cool Bindings :: Cherry's Blog](https://cherryramatis.xyz/posts/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings/)
 -- vim.api.nvim_create_autocmd({ 'CmdlineChanged', 'CmdlineLeave' }, {
@@ -134,14 +137,13 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
 --     end
 --   end,
 -- })
---
+
 -- -- [:grep with live updating quickfix list : r/neovim](https://www.reddit.com/r/neovim/comments/1n2ln9w/grep_with_live_updating_quickfix_list/)
 -- vim.api.nvim_create_autocmd('CmdlineChanged', {
 --   callback = function()
 --     local cmdline = vim.fn.getcmdline()
 --     local words = vim.split(cmdline, ' ', { trimempty = true })
---
---     if words[1] == 'LiveGrep' or words[1] == 'live' and #words > 1 then
+--     if words[1] == 'Grep' and #words > 1 then
 --       vim.cmd('silent grep! ' .. vim.fn.escape(words[2], ' '))
 --       vim.cmd 'cwindow'
 --       vim.cmd.redraw()
@@ -149,7 +151,8 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
 --   end,
 --   pattern = ':',
 -- })
---
+
+-- TODO: fix remove quickfix items
 -- -- https://stackoverflow.com/questions/42905008/quickfix-list-how-to-add-and-remove-entries
 -- vim.cmd [[
 -- " When using `dd` in the quickfix list, remove the item from the quickfix list.

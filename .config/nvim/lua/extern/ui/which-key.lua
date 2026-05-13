@@ -1,6 +1,7 @@
 return {
 	"https://github.com/folke/which-key.nvim",
 	event = "VeryLazy",
+  enabled = true,
 	--@class wk.Opts
 	opts = {
 		---@type false | "classic" | "modern" | "helix"

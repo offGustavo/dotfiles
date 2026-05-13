@@ -3,7 +3,7 @@
 -- {{{ Nvim
 
 -- Marks
-vim.keymap.set("n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", { desc = "Del mark" })
+vim.keymap.set("n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", { desc = "Del mark <char>" })
 
 -- Edit init.lua/init.vim/vimrc
 vim.keymap.set("n", "<leader>fC", ":e $MYVIMRC<Cr>", { silent = true, desc = "Edit the init config file" })
@@ -13,6 +13,13 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 --- Better Go to file
 vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
+
+
+-- Align use mini-indent
+vim.keymap.set("x", "<leader>f", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', { desc = "Format Table in Markdown" })
+vim.keymap.set("x", "<leader>a", function ()
+  require('fish.align').align_regexp()
+end, { desc = "Align by regex", silent = true })
 
 -- Better gX(go to file externally)
 vim.keymap.set("n", "gX", function()
@@ -147,7 +154,7 @@ vim.keymap.set("x", "<M-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move l
 
 -- {{{ Terminal
 vim.keymap.set({ "i", "c", "n", "v", "x" }, "<C-c>", "<Esc>", { desc = "Fix <C-c>", silent = true })
-vim.keymap.set("t", "<M-;>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true })
+vim.keymap.set({ "i", "t" }, "<M-;>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true })
 vim.keymap.set("t", "<S-Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true })
 -- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true })
 vim.keymap.set("n", "<M-t>", ":term ")
@@ -159,9 +166,9 @@ vim.keymap.set("n", "<leader>tg", ":hor term rg ")
 
 -- {{{ Tabs
 -- :tcd shortcut
-vim.keymap.set("n", "<Tab>z", ":tcd ", { desc = "Tab Cd" })
+vim.keymap.set("n", "<leader><Tab>z", ":tcd ", { desc = "Tab Cd" })
 
-vim.keymap.set("n", "<Tab><Tab>", function()
+vim.keymap.set("n", "<leader><Tab><Tab>", function()
   local count = vim.v.count
   if count > 0 then
     vim.cmd("norm " .. count .. "gt")
@@ -170,8 +177,8 @@ vim.keymap.set("n", "<Tab><Tab>", function()
   vim.cmd.tabnew()
 end, { desc = "New Tab" })
 
-vim.keymap.set("n", "<Tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-vim.keymap.set("n", "<Tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+vim.keymap.set("n", "<leader><Tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+vim.keymap.set("n", "<leader><Tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
 
 vim.keymap.set("n", "]<S-Tab>", "<cmd>tablast<cr>", { desc = "Last Tab" })
 vim.keymap.set("n", "[<S-Tab>", "<cmd>tabfirst<cr>", { desc = "First Tab" })

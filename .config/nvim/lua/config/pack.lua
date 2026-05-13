@@ -6,7 +6,7 @@ vim.pack.add({
 
 require("tokyonight").setup({
   dim_inactive = false,
-  light_style = "day",   -- The theme is used when the background is set to light
+  light_style = "day", -- The theme is used when the background is set to light
   style = "night",
   transparent = false,
   styles = {
@@ -17,31 +17,27 @@ require("tokyonight").setup({
   },
   on_colors = function(colors)
     -- colors.bg = "#000000" -- To check if its working try something like "#ff00ff" instead of colors.none
-    colors.bg_statusline = colors
-        .none   -- To check if its working try something like "#ff00ff" instead of colors.none
+    colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
     colors.bg_statusline = colors.none
   end,
 })
 
 vim.cmd.colorscheme("tokyonight")
 
-vim.schedule(function()
-  require("fzf-lua").setup({
-    -- "ivy",
-    -- "fzf-native",
-    "telescope",
-    ui_select = true,
-    fzf_opts = {
-      ["--sort"] = false,
-    },
-    fzf_colors = {
-      true, -- inherit fzf colors that aren't specified below from
-    },
-  })
-end)
+require("fzf-lua").setup({
+  -- "ivy",
+  -- "fzf-native",
+  "telescope",
+  ui_select = true,
+  fzf_opts = {
+    ["--sort"] = false,
+  },
+  fzf_colors = {
+    true, -- inherit fzf colors that aren't specified below from
+  },
+})
 
 vim.keymap.set("n", "<M-e>", "<Cmd>Canola<Cr>", { desc = "Oil" })
-
 vim.keymap.set("n", "<M-o>", "<Cmd>FzfLua files<Cr>", { desc = "Find" })
 vim.keymap.set("n", "<M-s>", "<Cmd>FzfLua live_grep<Cr>", { desc = "Grep" })
 vim.keymap.set("n", "<M-b>", "<Cmd>FzfLua buffers<Cr>", { desc = "Buffers" })

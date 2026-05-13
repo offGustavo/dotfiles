@@ -19,3 +19,7 @@ end, {
     return require("fish.zoxide").zoxide_complete(cmd_line)
   end,
 })
+
+vim.api.nvim_create_user_command("AlignRegexp", function ()
+  require('fish.align').align_regexp(opts)
+end, { range = true })
