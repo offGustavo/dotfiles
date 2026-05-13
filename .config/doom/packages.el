@@ -64,6 +64,10 @@
 (package! exwm-evil :recipe
   (:host github :repo "LemonBreezes/exwm-evil"))
 
+(package! tokyonight-theme
+  :recipe
+  (:host " https://github.com/xuchengpeng/tokyonight-themes" ))
+
 ;; (package! universal-launcher
 ;;   :recipe (:host github
 ;;            :repo "jblais493/universal-launcher.el"))
