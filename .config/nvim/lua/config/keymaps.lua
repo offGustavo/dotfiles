@@ -14,6 +14,8 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 --- Better Go to file
 vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
 
+  vim.keymap.set("x", "<", "<gv", { silent = true, desc = "Better Indent" })
+  vim.keymap.set("x", ">", ">gv", { silent = true, desc = "Better Indent" })
 
 -- Align use mini-indent
 vim.keymap.set("x", "<leader>f", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', { desc = "Format Table in Markdown" })
