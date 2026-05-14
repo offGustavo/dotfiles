@@ -20,7 +20,7 @@ set signcolumn=yes foldcolumn=2
 if has('nvim')
   set statuscolumn=%s%l%C
 endif
-set fillchars=foldopen:-,foldclose:+,foldsep:\ ,foldinner:\ ,fold:\
+set fillchars=foldopen:-,foldclose:+,foldsep:\ ,foldinner:\ ,fold:\ 
 syntax on
 
 set nobackup
@@ -41,11 +41,16 @@ autocmd CmdlineChanged [:\/\?] call wildtrigger()
 set wildmode=noselect:lastused,full
 set wildoptions=pum
 
+set hidden
+
 " Theme
 silent! color catppuccin
 
 " Keymaps
 set keymodel=startsel,stopsel
+
+" Term
+tmap » <C-\><C-n>
 
 " Buffer
 nnoremap <M-b> :b<Space>
