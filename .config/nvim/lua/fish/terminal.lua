@@ -1,4 +1,4 @@
-local M = config{}
+local M = {}
 
 local opts = {
 	ui = {
