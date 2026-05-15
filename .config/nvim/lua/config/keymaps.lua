@@ -1,5 +1,3 @@
--- vim: foldmethod=marker
-
 -- {{{ Nvim
 
 -- Marks
@@ -14,13 +12,13 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 --- Better Go to file
 vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
 
-  vim.keymap.set("x", "<", "<gv", { silent = true, desc = "Better Indent" })
-  vim.keymap.set("x", ">", ">gv", { silent = true, desc = "Better Indent" })
+vim.keymap.set("x", "<", "<gv", { silent = true, desc = "Better Indent" })
+vim.keymap.set("x", ">", ">gv", { silent = true, desc = "Better Indent" })
 
 -- Align use mini-indent
 vim.keymap.set("x", "<leader>f", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', { desc = "Format Table in Markdown" })
-vim.keymap.set("x", "<leader>a", function ()
-  require('fish.align').align_regexp()
+vim.keymap.set("x", "<leader>a", function()
+  require("fish.align").align_regexp()
 end, { desc = "Align by regex", silent = true })
 
 -- Better gX(go to file externally)
@@ -147,16 +145,21 @@ vim.keymap.set({ "n", "x" }, "<M-x>", ":")
 --- }}}
 
 -- {{{ Copy/Move
-vim.keymap.set("n", "<M-d>", ":t.<cr>", { silent = true, desc = "Duplicate line"})
-vim.keymap.set("n", "<M-j>", ":m +1<CR>==", { silent = true, desc = "Move line down"})
-vim.keymap.set("n", "<M-k>", ":m -2<CR>==", { silent = true, desc = "Move line up"})
-vim.keymap.set("x", "<M-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move line down"})
-vim.keymap.set("x", "<M-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move line up"})
+vim.keymap.set("n", "<M-d>", ":t.<cr>", { silent = true, desc = "Duplicate line" })
+vim.keymap.set("n", "<M-j>", ":m +1<CR>==", { silent = true, desc = "Move line down" })
+vim.keymap.set("n", "<M-k>", ":m -2<CR>==", { silent = true, desc = "Move line up" })
+vim.keymap.set("x", "<M-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move line down" })
+vim.keymap.set("x", "<M-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move line up" })
 -- }}}
 
 -- {{{ Terminal
 vim.keymap.set({ "i", "c", "n", "v", "x" }, "<C-c>", "<Esc>", { desc = "Fix <C-c>", silent = true })
-vim.keymap.set({ "i", "t" }, "<M-;>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true })
+vim.keymap.set(
+  { "i", "t" },
+  "<M-;>",
+  "<C-\\><C-n>",
+  { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true }
+)
 vim.keymap.set("t", "<S-Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true })
 -- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true })
 vim.keymap.set("n", "<M-t>", ":term ")
@@ -195,45 +198,92 @@ vim.keymap.set("n", "<C-S-PageDown>", "<cmd>tabmove +1<cr>")
 -- {{{ Fold
 vim.keymap.set("n", "<leader>im", "O-- {{{<Esc>", { desc = "Insert fold open marker" })
 vim.keymap.set("n", "<leader>iM", "o-- }}}<Esc>", { desc = "Insert fold close marker" })
- vim.keymap.set("x", "<leader>im", function()
+vim.keymap.set("x", "<leader>im", function()
   vim.cmd("'<normal O-- {{{")
   vim.cmd("'>normal o-- }}}")
-end, { desc = "Insert fold markers around selection" }) 
+end, { desc = "Insert fold markers around selection" })
 -- }}}
 
--- TODO: Modified key binds
 --- {{{ Windows
-vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Windows" })
+-- vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Windows" })
 vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-j>", function()
-	vim.cmd.wincmd("w")
+  vim.cmd.wincmd("w")
 end)
 vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-k>", function()
-	vim.cmd.wincmd("W")
+  vim.cmd.wincmd("W")
 end)
 vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-s>", function()
-	vim.cmd.wincmd("s")
+  vim.cmd.wincmd("s")
 end)
 vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-v>", function()
-	vim.cmd.wincmd("v")
+  vim.cmd.wincmd("v")
 end)
 vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-o>", function()
-	vim.cmd.wincmd("o")
+  vim.cmd.wincmd("o")
 end)
 vim.keymap.set("n", "<M-=>", function()
-	vim.cmd.wincmd("=")
+  vim.cmd.wincmd("=")
 end, { desc = "Windows" })
 vim.keymap.set("n", "<M-+>", function()
-	vim.cmd.wincmd("+")
+  vim.cmd.wincmd("+")
 end, { desc = "Windows" })
 vim.keymap.set("n", "<M-->", function()
-	vim.cmd.wincmd("-")
+  vim.cmd.wincmd("-")
 end, { desc = "Windows" })
 vim.keymap.set("n", "<M-,>", function()
-	vim.cmd.wincmd("<")
+  vim.cmd.wincmd("<")
 end, { desc = "Windows" })
 vim.keymap.set("n", "<M-.>", function()
-	vim.cmd.wincmd(">")
+  vim.cmd.wincmd(">")
 end, { desc = "Windows" })
+
+Fish.windows = {
+  hydra_win_mode = false,
+  keys = {
+    wincmd = {
+      { "=", "=", "Equaly? window height" },
+      { "+", "+", "Increase window height" },
+      { "-", "-", "Decrease window height" },
+      { "<", "<", "Increase window height" },
+      { ">", ">", "Increase window height" },
+      { "s", "s", "Increase window height" },
+      { "v", "v", "Increase window height" },
+      { "o", "o", "Increase window height" },
+      { "w", "w", "Increase window height" },
+    },
+    exit = {
+      "<Esc>",
+      "<C-c",
+    },
+  },
+}
+
+-- vim.keymap.set("n", "<M-R>", function()
+--   if Fish.windows.hydra_win_mode then
+--     -- TODO: better logs
+--     vim.notify("active", vim.log.levels.WARN)
+--     return
+--   end
+--
+--   Fish.windows.hydra_win_mode = true
+--   vim.notify("activate", vim.log.levels.WARN)
+--
+--   for i, key in pairs(Fish.windows.keys) do
+--     vim.keymap.set("n", key[1], function()
+--       vim.cmd.wincmd(key[2])
+--     end, { desc = key[3], nowait = true })
+--   end
+--   -- exit submode
+--   vim.keymap.set("n", "<Esc>", function()
+--     Fish.windows.hydra_win_mode = false
+--     for i, key in pairs(Fish.windows.keys) do
+--       pcall(vim.keymap.del, "n", key[1])
+--     end
+--     pcall(vim.keymap.del, "n", "<Esc>")
+--     vim.notify("Exit window submode", vim.log.levels.INFO)
+--   end)
+-- end)
+
 --- }}}
 
 -- {{{ LocList

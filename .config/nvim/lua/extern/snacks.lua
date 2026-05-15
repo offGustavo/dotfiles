@@ -2,7 +2,7 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  enabled = true,
+  enabled = false,
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
@@ -36,7 +36,7 @@ return {
       timeout = 3000,
     },
     picker = {
-      enabled = false,
+      enabled = true,
       layout = "ivy_split",
     },
     layout = {

@@ -1,6 +1,6 @@
 -- Some settings.
 vim.wo.nu = true
-vim.wo.rnu = true
+vim.wo.rnu = false
 
 -- vim.cmd([[set statusline=%t%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} %=%-15(%l,%c%V%) %P]])
 

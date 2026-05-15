@@ -28,28 +28,28 @@ vim.cmd([[
 ]])
 
 -- Our Global thing
-_G.fish = {}
+_G.Fish = {}
 
--- Basic keymaps for Nvim (if lazy fails for some reason)
+-- basic keymaps for nvim (if lazy fails for some reason)
 vim.cmd([[
-  nmap <M-o> :fin<Space>
-  nmap <M-s> :grep<Space>
-  nmap <M-b> :b<Space>
-  nmap <M-e> :Ex<Cr>
-  nmap <leader>vc :e $MYVIMRC<Cr>
+  nmap <m-o> :fin<space>
+  nmap <m-s> :grep<space>
+  nmap <m-b> :b<space>
+  nmap <m-e> :ex<cr>
+  nmap <leader>vc :e $myvimrc<cr>
 ]])
 
--- Disable Custom Nix/Arch FZF.vim
+-- disable custom nix/arch fzf.vim
 vim.cmd("let g:loaded_fzf = 1")
 
--- Load Lazy.nvim and external plugins
+-- load lazy.nvim and external plugins
 require("config.lazy")
 -- require("config.pack")
 
--- Intern Plugins
+-- intern plugins
 require("intern")
 
--- Vim options
+-- vim options
 require("config.options")
 require("config.autocmds")
 require("config.commands")

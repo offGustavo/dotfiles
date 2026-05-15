@@ -12,7 +12,7 @@ vim.schedule(function()
 
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
-      fish.did_lsp_setup = true
+      Fish.did_lsp_setup = true
       vim.diagnostic.config({
         -- Use the default configuration
         virtual_lines = false,

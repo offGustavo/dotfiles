@@ -80,7 +80,7 @@ local function show_macro_recording()
 end
 
 local function lsp_diagnostics()
-  if not fish.did_lsp_setup then
+  if not Fish.did_lsp_setup then
     return ""
   end
   local info = vim.diagnostic.status()
