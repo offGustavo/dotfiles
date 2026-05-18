@@ -1,7 +1,7 @@
 return {
   "https://github.com/stevearc/quicker.nvim",
   ft = "qf",
-  enabled = false,
+  enabled = true,
 	opts = {
 			-- Local options to set for quickfix
 			opts = {

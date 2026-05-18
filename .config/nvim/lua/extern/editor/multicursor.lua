@@ -20,12 +20,8 @@ return {
     end,
   }, -- This causes the plugin setup function to be called
   keys = {
+    { "<M-q>", "<Cmd>MultipleCursorsAddDelete<Cr>" },
     { "<C-m>",   "<Cmd>MultipleCursorsLock<Cr>" },
-    { "<M-q>", function()
-      require("multiple-cursors.virtual_cursors").set_lock()
-      local lnum, col, curswant = 1, 1, 1
-      require("multiple-cursors").add_cursor(lnum, col, curswant)
-    end },
     { "<C-S-d>", "<Cmd>MultipleCursorsAddMatches<Cr>" },
     { "<C-S-k>", "<Cmd>MultipleCursorsAddUp<Cr>" },
     { "<C-S-j>", "<Cmd>MultipleCursorsAddDown<Cr>" },

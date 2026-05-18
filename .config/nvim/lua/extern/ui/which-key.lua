@@ -22,6 +22,7 @@ return {
 		---@type wk.Spec
 		spec = {
 			{ "<leader><space>", group = "<localleader>", icon = "" }, -- group
+			{ "<leader>v", group = "Vim", icon = "" }, -- group
 			{ "<leader>f", group = "File", icon = "" }, -- group
 			{ "<leader>s", group = "Search/Replace", icon = "" }, -- group
 			{ "<leader>g", group = "Git", icon = "" }, -- group
@@ -35,7 +36,6 @@ return {
 			{ "<leader>b", group = "Buffer", icon = "" }, -- group
 			{ "<leader>t", group = "Terminal/Todo", icon = "" }, -- group
 			-- { "<leader>r", group = "Rep0lace", icon = "󰛔" }, -- group
-			{ "<leader>n", group = "Nvim", icon = "" }, -- group
 			{ "<leader><tab>", group = "Tabs/Workspaces", icon = "" }, -- group
 		},
 		-- show a warning when issues were detected with your mappings
