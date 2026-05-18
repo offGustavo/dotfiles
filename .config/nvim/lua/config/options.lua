@@ -145,7 +145,7 @@ vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, {
 })
 --- }}}
 
---- {{{ statuscolumn
+-- {{{ statuscolumn
 vim.o.foldcolumn = "1"
 vim.o.signcolumn = "yes:1"
 
@@ -196,8 +196,8 @@ vim.opt.fillchars:append({
 -- }}}
 
 -- {{{ tabline
--- vim.o.showtabline = 0
--- vim.o.tabline = "%!v:lua.require('fish.tabline').build_tabline()"
+vim.o.showtabline = 0
+vim.o.tabline = "%!v:lua.require('fish.tabline').build_tabline()"
 -- Update when windows or tabs change
 vim.api.nvim_create_autocmd({ "VimEnter", "UiEnter", "WinNew", "WinClosed", "TabNew", "TabClosed" }, {
   callback = function()

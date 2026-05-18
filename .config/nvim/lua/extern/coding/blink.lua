@@ -52,8 +52,20 @@ return {
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
-			default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+			default = { "lazydev", "lsp", "path", "snippets", "buffer",  },
 			providers = {
+        buffer = {
+          opts = {
+            -- get all buffers, even ones like neo-tree
+            -- get_bufnrs = vim.api.nvim_list_bufs
+            -- or (recommended) filter to only "normal" buffers
+            get_bufnrs = function()
+              return vim.tbl_filter(function(bufnr)
+                return vim.bo[bufnr].buftype == ''
+              end, vim.api.nvim_list_bufs())
+            end
+          }
+        },
 				lazydev = {
 					name = "LazyDev",
 					module = "lazydev.integrations.blink",

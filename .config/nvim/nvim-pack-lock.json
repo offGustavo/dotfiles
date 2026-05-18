@@ -1,17 +1,3 @@
 {
-  "plugins": {
-    "canola.nvim": {
-      "rev": "3838f1380e9aeea0597a80beb6ab28da73e38525",
-      "src": "https://github.com/barrettruth/canola.nvim",
-      "version": "'canola'"
-    },
-    "fzf-lua": {
-      "rev": "44816af2465bb0a17ae0f1f2d8a4f9c3df524fcd",
-      "src": "https://github.com/ibhagwan/fzf-lua"
-    },
-    "tokyonight.nvim": {
-      "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
-      "src": "https://github.com/folke/tokyonight.nvim"
-    }
-  }
+  "plugins": []
 }

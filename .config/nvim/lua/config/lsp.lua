@@ -3,7 +3,7 @@ vim.schedule(function()
     capabilities = {
       textDocument = {
         semanticTokens = { multilineTokenSupport = true },
-      }
+      },
     },
     root_markers = {
       ".git",
@@ -13,8 +13,8 @@ vim.schedule(function()
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
       Fish.did_lsp_setup = true
+
       vim.diagnostic.config({
-        -- Use the default configuration
         virtual_lines = false,
         virtual_text = true,
         signs = {
@@ -23,11 +23,30 @@ vim.schedule(function()
             [vim.diagnostic.severity.WARN] = "",
             [vim.diagnostic.severity.INFO] = "",
             [vim.diagnostic.severity.HINT] = "",
-          }
-        }
-      })
+          },
+        },
+        -- :help vim.diagnostic.Opts.Status  (Neovim 0.12+)
+        status = {
+          format = function(counts)
+            local sign_text = vim.diagnostic.config().signs.text
+            local hls = {
+              [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+              [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+              [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+              [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+            }
+            local parts = {}
+            for severity in ipairs(vim.diagnostic.severity) do
+              local count = counts[severity]
+              if count then
+                parts[#parts + 1] = ("%%#%s#%s %d%%##"):format(hls[severity], sign_text[severity], count)
+              end
+            end
+            return table.concat(parts, " ")
+          end,
+        },
+      }) -- Diagnostics
 
-      -- Diagnostics
       local client = vim.lsp.get_client_by_id(ev.data.client_id)
       if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
         vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = false })

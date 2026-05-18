@@ -152,6 +152,33 @@ vim.keymap.set("x", "<M-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move l
 vim.keymap.set("x", "<M-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move line up" })
 -- }}}
 
+-- {{{ Lines
+vim.keymap.set({ "n", "x", "i" }, "<M-S-l>", function()
+  local mode = vim.fn.mode()
+  if mode == "i" then
+    print(mode)
+    return "<Esc>V"
+  elseif mode == "n" then
+    print(mode)
+    return "V"
+  elseif mode == "V" or mode == "v" or mode == "x" then
+    print(mode)
+    return "j0"
+  end
+  print("other" .. mode)
+end, { desc = "Sel Line (emacs)", expr = true, silent = true })
+vim.keymap.set({ "n", "x", "i" }, "<M-S-h>", function()
+  local mode = vim.fn.mode()
+  if mode == "i" then
+    return "<Esc>vap"
+  elseif mode == "n" then
+    return "vap"
+  elseif mode == "V" or mode == "v" or mode == "x" then
+    return "ap"
+  end
+end, { desc = "Sel Paragraph(emacs)", expr = true, silent = true })
+-- }}}
+
 -- {{{ Terminal
 vim.keymap.set({ "i", "c", "n", "v", "x" }, "<C-c>", "<Esc>", { desc = "Fix <C-c>", silent = true })
 vim.keymap.set(
