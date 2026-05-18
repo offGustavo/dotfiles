@@ -232,7 +232,122 @@ end, { desc = "Insert fold markers around selection" })
 -- }}}
 
 --- {{{ Windows
--- vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Windows" })
+-- Move between windows, saving and restoring the mode each window was left in.
+-- Supports: normal (n), insert (i), terminal (t), visual treated as normal on re-entry.
+--
+-- Design:
+--   Fish.windows._modes  table[winid -> mode_string]
+--     Stores the mode string at the moment we LEAVE a window.
+--
+-- On cycle:
+--   1. Record current mode for current win.
+--   2. Leave to a neutral state (stop insert / stop terminal-job so wincmd works).
+--   3. Execute wincmd w / W.
+--   4. Restore the saved mode of the new window (if any).
+Fish.windows = {}
+
+---Saved modes keyed by window handle.
+---@type table<integer, string>
+Fish.windows._modes = {}
+
+---Normalise nvim_get_mode().mode to one of: "n", "i", "t"
+---Visual modes are collapsed to "n" because selections are buffer-local and
+---meaningless once the cursor leaves the window.
+---@param raw_mode string
+---@return "n"|"i"|"t"
+local function normalise_mode(raw_mode)
+  if raw_mode == "i" or raw_mode == "ic" or raw_mode == "ix" then
+    return "i"
+  elseif raw_mode == "t" then
+    return "t"
+  else
+    -- n, v, V, ^V, R, c, … → treat as normal on re-entry
+    return "n"
+  end
+end
+
+---Exit whatever mode we are in so that wincmd can fire safely.
+---Returns the normalised mode we were in before bailing out.
+---@return "n"|"i"|"t"
+local function leave_current_mode()
+  local raw = vim.api.nvim_get_mode().mode
+  local mode = normalise_mode(raw)
+
+  if mode == "i" then
+    -- :stopinsert without moving the cursor
+    vim.cmd("stopinsert")
+  elseif mode == "t" then
+    -- Send <C-\><C-n> to leave terminal-job mode → terminal-normal
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", false)
+  end
+  -- visual / normal: already safe for wincmd
+  return mode
+end
+
+---Restore a previously saved mode in the *current* window.
+---@param mode "n"|"i"|"t"
+local function restore_mode(mode)
+  if mode == "i" then
+    vim.cmd("startinsert")
+  elseif mode == "t" then
+    -- Only meaningful if the current buffer is a terminal
+    local buftype = vim.bo.buftype
+    if buftype == "terminal" then
+      vim.cmd("startinsert") -- re-enters terminal-job mode from terminal-normal
+    end
+  end
+  -- "n" → nothing to do, already in normal mode after wincmd
+end
+
+---Move between windows keeping the mode each window was left in.
+---@param forward boolean  true = next window (wincmd w), false = prev (wincmd W)
+function Fish.windows.cycle(forward)
+  local from_win = vim.api.nvim_get_current_win()
+
+  -- 1. Record + leave current mode
+  local mode = leave_current_mode()
+  Fish.windows._modes[from_win] = mode
+
+  -- 2. Move to adjacent window
+  --    wincmd must run in normal/terminal-normal, which leave_current_mode ensures.
+  if forward then
+    vim.cmd.wincmd("w")
+  else
+    vim.cmd.wincmd("W")
+  end
+
+  -- 3. Restore the saved mode of the window we just entered (if we have one)
+  local to_win = vim.api.nvim_get_current_win()
+  if to_win ~= from_win then
+    local saved = Fish.windows._modes[to_win]
+    if saved then
+      -- Schedule so the window switch has fully settled before mode changes
+      vim.schedule(function()
+        restore_mode(saved)
+      end)
+    end
+  end
+end
+
+-- Clean up stale entries when a window is closed (avoids phantom state)
+vim.api.nvim_create_autocmd("WinClosed", {
+  group = vim.api.nvim_create_augroup("FishWindowMode", { clear = true }),
+  callback = function(ev)
+    -- ev.match is the window id as a string
+    local winid = tonumber(ev.match)
+    if winid then
+      Fish.windows._modes[winid] = nil
+    end
+  end,
+})
+
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-j>", function()
+  Fish.windows.cycle(true)
+end, { desc = "Cycle to next window (keep mode)" })
+
+vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-k>", function()
+  Fish.windows.cycle(false)
+end, { desc = "Cycle to prev window (keep mode)" })
 vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-j>", function()
   vim.cmd.wincmd("w")
 end)
@@ -265,9 +380,9 @@ vim.keymap.set("n", "<M-.>", function()
 end, { desc = "Windows" })
 
 Fish.windows = {
-  hydra_win_mode = false,
-  keys = {
-    wincmd = {
+  hydra_mode = {
+    _active = false,
+    keys = {
       { "=", "=", "Equaly? window height" },
       { "+", "+", "Increase window height" },
       { "-", "-", "Decrease window height" },
@@ -285,31 +400,31 @@ Fish.windows = {
   },
 }
 
--- vim.keymap.set("n", "<M-R>", function()
---   if Fish.windows.hydra_win_mode then
---     -- TODO: better logs
---     vim.notify("active", vim.log.levels.WARN)
---     return
---   end
---
---   Fish.windows.hydra_win_mode = true
---   vim.notify("activate", vim.log.levels.WARN)
---
---   for i, key in pairs(Fish.windows.keys) do
---     vim.keymap.set("n", key[1], function()
---       vim.cmd.wincmd(key[2])
---     end, { desc = key[3], nowait = true })
---   end
---   -- exit submode
---   vim.keymap.set("n", "<Esc>", function()
---     Fish.windows.hydra_win_mode = false
---     for i, key in pairs(Fish.windows.keys) do
---       pcall(vim.keymap.del, "n", key[1])
---     end
---     pcall(vim.keymap.del, "n", "<Esc>")
---     vim.notify("Exit window submode", vim.log.levels.INFO)
---   end)
--- end)
+vim.keymap.set("n", "<M-R>", function()
+  if Fish.windows.hydra_mode._active then
+    -- TODO: better logs
+    vim.notify("active", vim.log.levels.WARN)
+    return
+  end
+
+  Fish.windows.hydra_mode._active = true
+  vim.notify("activate", vim.log.levels.WARN)
+
+  for i, key in pairs(Fish.windows.hydra_mode.keys) do
+    vim.keymap.set("n", key[1], function()
+      vim.cmd.wincmd(key[2])
+    end, { desc = key[3], nowait = true })
+  end
+  -- exit submode
+  vim.keymap.set("n", "<Esc>", function()
+    Fish.windows.hydra_win_mode = false
+    for i, key in pairs(Fish.windows.keys) do
+      pcall(vim.keymap.del, "n", key[1])
+    end
+    pcall(vim.keymap.del, "n", "<Esc>")
+    vim.notify("Exit window submode", vim.log.levels.INFO)
+  end)
+end)
 
 --- }}}
 
