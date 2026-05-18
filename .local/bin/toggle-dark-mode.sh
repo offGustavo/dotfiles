@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -xe
+# set -xe
 
 current_scheme=$(dconf read /org/gnome/desktop/interface/color-scheme)
 
