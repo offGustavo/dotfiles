@@ -265,20 +265,20 @@
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-muted": "  Muted",
-    // "tooltip-format": "{icon} {volume}%",
+    "format-muted": "  Muted",
+    "tooltip-format": "{icon} {volume}%",
     "format-icons": {
-      "headphones": "",
-      "bluetooth": "󰥰",
-      "handsfree": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
+      // "headphones": "",
+      // "bluetooth": "󰥰",
+      // "handsfree": "",
+      // "headset": "",
+      // "phone": "",
+      // "portable": "",
+      // "car": "",
       "default": [
-        "🕨",
-        "🕩",
-        "🕪"
+        "",
+        "",
+        ""
       ]
     },
     "scroll-step": 5,
