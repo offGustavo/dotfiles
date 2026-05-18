@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# TODO: make this work
+
 # Get the list of sessions
 sessions=$(kitty @ ls | jq -r '.[] | .id + " " + .name')
 
