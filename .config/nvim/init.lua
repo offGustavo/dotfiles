@@ -42,6 +42,13 @@ vim.cmd([[
 -- disable custom nix/arch fzf.vim
 vim.cmd("let g:loaded_fzf = 1")
 
+function Fish.is_windows() 
+  if vim.fn.has('win64') or vim.fn.has('win32') then
+    return true
+  end
+  return false
+end
+
 -- load lazy.nvim and external plugins
 require("config.lazy")
 -- require("config.pack")

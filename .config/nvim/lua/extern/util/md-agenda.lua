@@ -1,6 +1,6 @@
 return {
   "https://github.com/zenarvus/md-agenda.nvim",
-  dev = true,
+  dev = false,
   ft = "markdown",
   keys = {
     { "<leader>aa",      "<Cmd>AgendaView<CR>",      desc = "Md Agenda" },

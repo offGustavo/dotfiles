@@ -149,11 +149,19 @@ vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, {
 vim.o.foldcolumn = "1"
 vim.o.signcolumn = "yes:1"
 
+-- -- Status column settings
+-- vim.opt.fillchars:append({
+--   fold = " ",
+--   foldopen = "",
+--   foldclose = "",
+--   foldsep = " ",
+--   foldinner = " ",
+-- })
 -- Status column settings
 vim.opt.fillchars:append({
   fold = " ",
-  foldopen = "",
-  foldclose = "",
+  foldopen = "v",
+  foldclose = ">",
   foldsep = " ",
   foldinner = " ",
 })

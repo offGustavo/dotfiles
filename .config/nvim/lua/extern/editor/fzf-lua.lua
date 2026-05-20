@@ -1,6 +1,12 @@
 return {
   "https://github.com/ibhagwan/fzf-lua",
-  enabled = true,
+  enabled = function()
+    -- If in windows, we will use Telescope or Snacks
+    if vim.fn.has('win64') then
+      return false
+    end
+    return true
+  end,
   opts = {
     {
       "ivy",
@@ -49,7 +55,6 @@ return {
     },
   },
   keys = {
-
     -- Custom Alt keymaps
     { "<M-o>", "<Cmd>FzfLua files<Cr>", desc = "Find" },
     { "<M-s>", "<Cmd>FzfLua live_grep<Cr>", desc = "Grep" },

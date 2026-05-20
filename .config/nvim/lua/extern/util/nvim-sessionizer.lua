@@ -1,7 +1,6 @@
 return {
-	-- "https://github.com/offGustavo/nvim-sessionizer",
-	dir = "~/Projects/nvim-sessionizer/",
-	dev = true,
+	"https://github.com/offGustavo/nvim-sessionizer",
+	dev = false,
 	keys = {
 		{
 			"ZO",
