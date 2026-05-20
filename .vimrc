@@ -7,7 +7,7 @@ set guifont=JetBrainsMono\ NFM:h12
 set termguicolors
 set nu rnu nowrap
 
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 
 set cmdheight=1
 set laststatus=2
