@@ -329,17 +329,17 @@ function Fish.windows.cycle(forward)
   end
 end
 
--- Clean up stale entries when a window is closed (avoids phantom state)
-vim.api.nvim_create_autocmd("WinClosed", {
-  group = vim.api.nvim_create_augroup("FishWindowMode", { clear = true }),
-  callback = function(ev)
-    -- ev.match is the window id as a string
-    local winid = tonumber(ev.match)
-    if winid then
-      Fish.windows._modes[winid] = nil
-    end
-  end,
-})
+-- -- Clean up stale entries when a window is closed (avoids phantom state)
+-- vim.api.nvim_create_autocmd("WinClosed", {
+--   group = vim.api.nvim_create_augroup("FishWindowMode", { clear = true }),
+--   callback = function(ev)
+--     -- ev.match is the window id as a string
+--     local winid = tonumber(ev.match)
+--     if winid then
+--       Fish.windows._modes[winid] = nil
+--     end
+--   end,
+-- })
 
 vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-j>", function()
   Fish.windows.cycle(true)
