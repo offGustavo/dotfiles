@@ -2,7 +2,10 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local config = wezterm.config_builder()
 
--- config.default_prog = { 'pwsh.exe' }
+-- If running in windows ser powershell as default shell
+-- if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+config.default_prog = { 'pwsh.exe' }
+-- end
 
 -- Function to check if the current pane is running Vim/Neovim
 local function is_vim(pane)
