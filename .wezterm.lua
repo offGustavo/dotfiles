@@ -2,11 +2,6 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local config = wezterm.config_builder()
 
--- If running in windows ser powershell as default shell
--- if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-config.default_prog = { 'pwsh.exe' }
--- end
-
 -- Function to check if the current pane is running Vim/Neovim
 local function is_vim(pane)
   -- Get the name of the foreground process (e.g., 'nvim', 'vim')
@@ -203,6 +198,12 @@ config.keys = {
     action = wezterm.action.SendKey { key = 'z', mods = 'ALT' },
   },
 }
+
+
+-- If running in windows ser powershell as default shell
+-- if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+config.default_prog = { 'pwsh.exe' }
+-- end
 
 -- and finally, return the configuration to wezterm
 return config
