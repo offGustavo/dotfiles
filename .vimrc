@@ -2,6 +2,7 @@ let g:mapleader = "\<space>"
 
 " GUI
 set guifont=JetBrainsMono\ NFM:h12
+set guioptions=!acC
 
 " UI
 set termguicolors
@@ -48,7 +49,6 @@ set keymodel=startsel,stopsel
 tmap » <C-\><C-n>
 tmap <M-;> <C-\><C-n>
 tmap ; <C-\><C-n>
-
 
 " Vim
 nnoremap <silent> <leader>vo :so %<CR>
