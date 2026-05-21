@@ -8,6 +8,7 @@ require("config.commands")
 require("config.functions")
 require("config.keymaps")
 require("config.lsp")
+require("config.neovide")
 
 -- intern plugins
 require("intern")

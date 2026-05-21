@@ -9,6 +9,10 @@
       "src": "https://github.com/barrettruth/canola.nvim",
       "version": "'canola'"
     },
+    "fff.nvim": {
+      "rev": "16b34f5eece19f7fa089352668b5a52a3ce2b05e",
+      "src": "https://github.com/dmtrKovalenko/fff.nvim"
+    },
     "fzf-lua": {
       "rev": "3f194300c92e3ec2de8f9307d6a7ce988b7b6d0c",
       "src": "https://github.com/ibhagwan/fzf-lua"

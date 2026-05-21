@@ -74,42 +74,34 @@ vim.schedule(function()
   vim.keymap.set("n", "U", require("undotree").open)
 end)
 
-vim.keymap.set("n", "<c-w>m", function()
-  require("fish.zoom").zoom()
-end, { desc = "Toggle pane/window zoom" })
-
-vim.keymap.set("n", "<leader>uz", function()
-  require("fish.zoom").zoom()
-end, { desc = "Toggle pane/window zoom" })
 
 vim.cmd([[
-" https://github.com/christoomey/vim-titlecase/blob/master/plugin/titlecase.vim
+  " https://github.com/christoomey/vim-titlecase/blob/master/plugin/titlecase.vim
 
-" plugin/titlecase.vim
-"
-" if exists('g:loaded_titlecase')
-"   finish
-" endif
-" let g:loaded_titlecase = 1
+  " plugin/titlecase.vim
+  "
+  " if exists('g:loaded_titlecase')
+  "   finish
+  " endif
+  " let g:loaded_titlecase = 1
 
-nnoremap <silent> <Plug>Titlecase
-      \ <Cmd>set opfunc=titlecase#titlecase<CR>g@
-xnoremap <silent> <Plug>Titlecase
-      \ <Cmd>call titlecase#titlecase(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
-nnoremap <silent> <Plug>TitlecaseLine
-      \ <Cmd>set opfunc=titlecase#titlecase<Bar>exe 'normal! ' . v:count1 . 'g@_'<CR>
+  nnoremap <silent> <Plug>Titlecase
+        \ <Cmd>set opfunc=titlecase#titlecase<CR>g@
+  xnoremap <silent> <Plug>Titlecase
+        \ <Cmd>call titlecase#titlecase(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
+  nnoremap <silent> <Plug>TitlecaseLine
+        \ <Cmd>set opfunc=titlecase#titlecase<Bar>exe 'normal! ' . v:count1 . 'g@_'<CR>
 
-if !hasmapto('<Plug>Titlecase', 'n') && maparg('gz', 'n') ==# ''
-  nmap gz <Plug>Titlecase
-endif
-if !hasmapto('<Plug>Titlecase', 'x') && maparg('gz', 'x') ==# ''
-  xmap gz <Plug>Titlecase
-  xmap Z <Plug>Titlecase
-endif
-if !hasmapto('<Plug>TitlecaseLine', 'n') && maparg('gzz', 'n') ==# ''
-  nmap gzz <Plug>TitlecaseLine
-endif
-
+  if !hasmapto('<Plug>Titlecase', 'n') && maparg('gz', 'n') ==# ''
+    nmap gz <Plug>Titlecase
+  endif
+  if !hasmapto('<Plug>Titlecase', 'x') && maparg('gz', 'x') ==# ''
+    xmap gz <Plug>Titlecase
+    xmap Z <Plug>Titlecase
+  endif
+  if !hasmapto('<Plug>TitlecaseLine', 'n') && maparg('gzz', 'n') ==# ''
+    nmap gzz <Plug>TitlecaseLine
+  endif
 ]])
 --- }}}
 
@@ -448,12 +440,13 @@ Fish.windows = {
     },
     exit = {
       "<Esc>",
-      "<C-c",
+      "<C-c>",
+      "<C-g>",
     },
   },
 }
 
-vim.keymap.set("n", "<M-R>", function()
+local  function hydra_keymap()
   if Fish.windows.hydra_mode._active then
     -- TODO: better logs
     vim.notify("active", vim.log.levels.WARN)
@@ -471,13 +464,27 @@ vim.keymap.set("n", "<M-R>", function()
   -- exit submode
   vim.keymap.set("n", "<Esc>", function()
     Fish.windows.hydra_win_mode = false
-    for i, key in pairs(Fish.windows.keys) do
+    for i, key in pairs(Fish.windows.hydra_mode.keys) do
       pcall(vim.keymap.del, "n", key[1])
     end
-    pcall(vim.keymap.del, "n", "<Esc>")
+    for i, key in pairs(Fish.windows.hydra_mode.exit) do
+      pcall(vim.keymap.del, "n", key[1])
+    end
     vim.notify("Exit window submode", vim.log.levels.INFO)
   end)
-end)
+end
+
+vim.keymap.set("n", "<M-R>", hydra_keymap)
+vim.keymap.set("n", "<leader>w.", hydra_keymap)
+vim.keymap.set("n", "<C-w>m.", hydra_keymap)
+
+vim.keymap.set("n", "<c-w>m", function()
+  require("fish.zoom").zoom()
+end, { desc = "Toggle pane/window zoom" })
+
+vim.keymap.set("n", "<leader>uz", function()
+  require("fish.zoom").zoom()
+end, { desc = "Toggle pane/window zoom" })
 
 --- }}}
 

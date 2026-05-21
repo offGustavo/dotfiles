@@ -1,0 +1,6 @@
+-- TODO: create a custom picker, using fff.nvim as backend, and  fallback to lua when it is not installed
+-- - [ ] Custom Ui, usign vim._core.ui2
+-- - [ ] Basic Pickers
+--   - [ ] Buffer
+--   - [ ] Files
+--   - [ ] Grep 
