@@ -3,7 +3,9 @@
 ---@type integer?
 local zoom_winid = nil
 
-local function zoom()
+local M = {} 
+
+function M.zoom()
     if zoom_winid and vim.api.nvim_win_is_valid(zoom_winid) then
         vim.api.nvim_win_close(zoom_winid, true)
         zoom_winid = nil
@@ -36,4 +38,5 @@ local function zoom()
     })
 end
 
-vim.keymap.set('n', '<c-w>m', zoom, { desc = 'toggle zoom' })
+
+return M

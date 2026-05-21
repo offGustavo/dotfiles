@@ -1,3 +1,49 @@
 {
-  "plugins": []
+  "plugins": {
+    "artio.nvim": {
+      "rev": "0b08d6862afe685fd78963808d022d7c15c89546",
+      "src": "https://codeberg.org/comfysage/artio.nvim"
+    },
+    "canola.nvim": {
+      "rev": "3838f1380e9aeea0597a80beb6ab28da73e38525",
+      "src": "https://github.com/barrettruth/canola.nvim",
+      "version": "'canola'"
+    },
+    "fzf-lua": {
+      "rev": "3f194300c92e3ec2de8f9307d6a7ce988b7b6d0c",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "gitsigns.nvim": {
+      "rev": "944ef13cc8d8fe8b846c91f36041c8dfb85ca000",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
+    "mini.completion": {
+      "rev": "09884c629cac1a8c999ffb6c57dc8424450aea5e",
+      "src": "https://github.com/nvim-mini/mini.completion"
+    },
+    "mini.nvim": {
+      "rev": "402ee6c6ec8ea44b22330446c8fb4e615fd3953e",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "nvim-lspconfig": {
+      "rev": "9ccd58a7949091c0cc2777d4e92a45a209c808c1",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "plenary.nvim": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "quicker.nvim": {
+      "rev": "063cc44da1eef8681bbd653b29d3bc961780886a",
+      "src": "https://github.com/stevearc/quicker.nvim"
+    },
+    "telescope.nvim": {
+      "rev": "aa4ad82068176e9610034eedcf945289e90e5b0a",
+      "src": "https://github.com/nvim-telescope/telescope.nvim"
+    },
+    "tokyonight.nvim": {
+      "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
+      "src": "https://github.com/folke/tokyonight.nvim"
+    }
+  }
 }

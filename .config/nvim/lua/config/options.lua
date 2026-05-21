@@ -1,10 +1,56 @@
 -- vim:
 -- foldmethod=marker
 
+-- Map Leader and Local Leader
+vim.cmd([[
+  " <space> as leader
+  let g:mapleader = " "
+  " <space><space> as local leader
+  let g:maplocalleader = "  "
+]])
+
+-- Set a temp theme here to prevent light/dark flicker
+if vim.o.background == "dark" then
+  vim.cmd.colorscheme("tokyo")
+else
+  vim.cmd.colorscheme("tokyo-day")
+end
+
+
 -- {{{ Security Things
 vim.o.modeline       = true
 vim.o.exrc           = false
 --- }}}
+
+-- {{{ Kitty scroll mode
+if os.getenv("SCROLL_MODE") then
+  vim.cmd([[
+    nmap q <Cmd>qa!<CR>
+    xmap q <Cmd>qa!<CR> 
+    nnoremap yy "+yy<Cmd>qa!<Cr>
+    xmap y "+y<Cmd>qa!<Cr>
+    set laststatus=0 nonu nornu signcolumn=no cursorline cmdheight=0
+    $ 
+  ]])
+  -- NOTE: Stop config here
+  return
+end
+-- }}}
+
+-- {{{ Disable Plugins
+-- disable custom nix/arch fzf.vim
+vim.cmd("let g:loaded_fzf = 1")
+-- }}}
+
+-- {{Netrw
+vim.cmd[[
+let g:netrw_banner = 0
+
+" -- vim.o.acd = true
+" -- vim.g.netrw_keepdir = 0
+" -- vim.cmd([[
+" -- autocmd BufEnter * lcd %:p:h
+]]
 
 -- {{{ Options
 -- vim.opt.mouse = ""
@@ -25,6 +71,13 @@ vim.o.inccommand     = "split"
 vim.o.cursorline     = false
 vim.o.confirm        = true
 vim.o.wrap           = false
+
+
+vim.cmd([[
+  aunmenu PopUp.How-to\ disable\ mouse
+  " aunmenu PopUp.-2-
+  amenu PopUp.Exit <Cmd>qa!<CR>
+]])
 
 vim.o.tabstop        = 2    -- A TAB character looks like 4 spaces
 vim.o.expandtab      = true -- Pressing the TAB key will insert spaces instead of a TAB character
@@ -149,19 +202,11 @@ vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, {
 vim.o.foldcolumn = "1"
 vim.o.signcolumn = "yes:1"
 
--- -- Status column settings
--- vim.opt.fillchars:append({
---   fold = " ",
---   foldopen = "",
---   foldclose = "",
---   foldsep = " ",
---   foldinner = " ",
--- })
 -- Status column settings
 vim.opt.fillchars:append({
   fold = " ",
-  foldopen = "v",
-  foldclose = ">",
+  foldopen = "",
+  foldclose = "",
   foldsep = " ",
   foldinner = " ",
 })

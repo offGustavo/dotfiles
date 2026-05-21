@@ -1,5 +1,14 @@
 -- {{{ Nvim
 
+-- basic keymaps for nvim (if lazy fails for some reason)
+vim.cmd([[
+  nmap <m-o> :fin<space>
+  nmap <m-s> :grep<space>
+  nmap <m-b> :b<space>
+  nmap <m-e> :ex<cr>
+  nmap <leader>vc :e $myvimrc<cr>
+]])
+
 -- Marks
 vim.keymap.set("n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", { desc = "Del mark <char>" })
 
@@ -58,6 +67,50 @@ vim.cmd([[
 
 -- File
 vim.keymap.set("n", "<leader>fn", ":enew<Cr>", { silent = true, desc = "New File" })
+
+-- Undotree
+vim.schedule(function()
+  vim.cmd("packadd nvim.undotree")
+  vim.keymap.set("n", "U", require("undotree").open)
+end)
+
+vim.keymap.set("n", "<c-w>m", function()
+  require("fish.zoom").zoom()
+end, { desc = "Toggle pane/window zoom" })
+
+vim.keymap.set("n", "<leader>uz", function()
+  require("fish.zoom").zoom()
+end, { desc = "Toggle pane/window zoom" })
+
+vim.cmd([[
+" https://github.com/christoomey/vim-titlecase/blob/master/plugin/titlecase.vim
+
+" plugin/titlecase.vim
+"
+" if exists('g:loaded_titlecase')
+"   finish
+" endif
+" let g:loaded_titlecase = 1
+
+nnoremap <silent> <Plug>Titlecase
+      \ <Cmd>set opfunc=titlecase#titlecase<CR>g@
+xnoremap <silent> <Plug>Titlecase
+      \ <Cmd>call titlecase#titlecase(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
+nnoremap <silent> <Plug>TitlecaseLine
+      \ <Cmd>set opfunc=titlecase#titlecase<Bar>exe 'normal! ' . v:count1 . 'g@_'<CR>
+
+if !hasmapto('<Plug>Titlecase', 'n') && maparg('gz', 'n') ==# ''
+  nmap gz <Plug>Titlecase
+endif
+if !hasmapto('<Plug>Titlecase', 'x') && maparg('gz', 'x') ==# ''
+  xmap gz <Plug>Titlecase
+  xmap Z <Plug>Titlecase
+endif
+if !hasmapto('<Plug>TitlecaseLine', 'n') && maparg('gzz', 'n') ==# ''
+  nmap gzz <Plug>TitlecaseLine
+endif
+
+]])
 --- }}}
 
 -- {{{ Clipboard

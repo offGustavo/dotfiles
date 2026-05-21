@@ -1,12 +1,6 @@
 return {
   "https://github.com/ibhagwan/fzf-lua",
-  enabled = function()
-    -- If in windows, we will use Telescope or Snacks
-    if vim.fn.has('win64') then
-      return false
-    end
-    return true
-  end,
+  enabled = Fish.not_windows(),
   opts = {
     {
       "ivy",

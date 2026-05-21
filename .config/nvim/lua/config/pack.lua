@@ -2,6 +2,7 @@ vim.pack.add({
   { src = "https://github.com/folke/tokyonight.nvim" },
   { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/barrettruth/canola.nvim", version = "canola" },
+  { src = "https://codeberg.org/comfysage/artio.nvim" }
 })
 
 require("tokyonight").setup({
@@ -24,24 +25,6 @@ require("tokyonight").setup({
 
 vim.cmd.colorscheme("tokyonight")
 
-require("fzf-lua").setup({
-  -- "ivy",
-  -- "fzf-native",
-  "telescope",
-  ui_select = true,
-  fzf_opts = {
-    ["--sort"] = false,
-  },
-  fzf_colors = {
-    true, -- inherit fzf colors that aren't specified below from
-  },
-})
-
-vim.keymap.set("n", "<M-e>", "<Cmd>Canola<Cr>", { desc = "Oil" })
-vim.keymap.set("n", "<M-o>", "<Cmd>FzfLua files<Cr>", { desc = "Find" })
-vim.keymap.set("n", "<M-s>", "<Cmd>FzfLua live_grep<Cr>", { desc = "Grep" })
-vim.keymap.set("n", "<M-b>", "<Cmd>FzfLua buffers<Cr>", { desc = "Buffers" })
-vim.keymap.set("n", "<M-r>", "<Cmd>FzfLua oldfiles<Cr>", { desc = "Oldfiles" })
 
 vim.g.canola = {
   columns = {
