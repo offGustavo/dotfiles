@@ -1,6 +1,6 @@
 return {
   "https://github.com/ibhagwan/fzf-lua",
-  enabled = Fish.not_windows(),
+  enabled = not Fish.is_windows(),
   opts = {
     {
       "ivy",
