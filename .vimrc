@@ -99,3 +99,7 @@ nmap b :Buffers<Cr>
 nmap ï :Files<Cr>
 nmap ó :RG<Cr>
 nmap â :Buffers<Cr>
+
+" Neovim Default 
+nmap [<space> O<Esc>cc<Esc>
+nmap ]<space> o<Esc>cc<Esc>

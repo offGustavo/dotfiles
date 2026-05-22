@@ -212,4 +212,5 @@ foreach ($mapping in $Mappings) {
 
 Write-Host '  ─────────────────────────────────────'
 Write-Host "  Done.  OK: $ok   Skipped: $skipped   Failed: $failed"
+Write-Host '  ─────────────────────────────────────'
 Write-Host ''

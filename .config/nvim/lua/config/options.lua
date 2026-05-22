@@ -1,26 +1,32 @@
 -- vim:
 -- foldmethod=marker
 
--- Map Leader and Local Leader
+-- {{{ Map Leader and Local Leader
 vim.cmd([[
   " <space> as leader
   let g:mapleader = " "
   " <space><space> as local leader
   let g:maplocalleader = "  "
 ]])
+-- }}} 
 
--- Set a temp theme here to prevent light/dark flicker
+-- {{{ Set a temp theme here to prevent light/dark flicker
 if vim.o.background == "dark" then
   vim.cmd.colorscheme("tokyo")
 else
   vim.cmd.colorscheme("tokyo-day")
 end
-
+-- }}}
 
 -- {{{ Security Things
 vim.o.modeline       = true
 vim.o.exrc           = false
 --- }}}
+
+-- {{{ Disable Plugins
+-- disable custom nix/arch fzf.vim
+vim.cmd("let g:loaded_fzf = 1")
+-- }}}
 
 -- {{{ Kitty scroll mode
 if os.getenv("SCROLL_MODE") then
@@ -37,12 +43,7 @@ if os.getenv("SCROLL_MODE") then
 end
 -- }}}
 
--- {{{ Disable Plugins
--- disable custom nix/arch fzf.vim
-vim.cmd("let g:loaded_fzf = 1")
--- }}}
-
--- {{Netrw
+-- {{{ Netrw
 vim.cmd[[
 let g:netrw_banner = 0
 
@@ -51,6 +52,7 @@ let g:netrw_banner = 0
 " -- vim.cmd([[
 " -- autocmd BufEnter * lcd %:p:h
 ]]
+-- }}}
 
 -- {{{ Options
 -- vim.opt.mouse = ""
@@ -106,6 +108,12 @@ vim.o.cursorlineopt  = 'screenline,number' -- Show cursor line per screen line
 
 vim.o.keymodel = "startsel,stopsel"
 --- }}}
+
+-- {{{
+  if Fish.is_windows() then
+    vim.opt.shell = "pwsh"
+  end
+  -- }}}
 
 -- {{{ Tittle
 vim.o.title = true
