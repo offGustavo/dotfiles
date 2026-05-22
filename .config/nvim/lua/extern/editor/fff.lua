@@ -1,6 +1,6 @@
 return {
 	"dmtrKovalenko/fff.nvim",
-  enabled = false,
+  enabled = true,
 	build = function()
 		-- downloads a prebuilt binary or falls back to cargo build
 		require("fff.download").download_or_build_binary()
@@ -96,7 +96,21 @@ return {
 			desc = "FFFind files",
 		},
 		{
+			"<leader>ff",
+			function()
+				require("fff").find_files()
+			end,
+			desc = "FFFind files",
+		},
+		{
 			"<M-s>",
+			function()
+				require("fff").live_grep()
+			end,
+			desc = "LiFFFe grep",
+		},
+		{
+			"<leader>ss",
 			function()
 				require("fff").live_grep()
 			end,

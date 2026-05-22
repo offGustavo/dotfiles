@@ -1,4 +1,3 @@
-vim.schedule(function()
   require("fish.yazi").setup({
     enable_cmds = true,
     replace_netrw = false,
@@ -51,4 +50,3 @@ vim.schedule(function()
     float = false,
     default_maps = true
   })
-end)

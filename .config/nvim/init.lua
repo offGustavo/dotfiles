@@ -2,10 +2,10 @@
 _G.Fish = {}
 
 -- vim options
-require("config.options")
 require("config.autocmds")
-require("config.commands")
 require("config.functions")
+require("config.commands")
+require("config.options")
 require("config.keymaps")
 require("config.lsp")
 require("config.neovide")
