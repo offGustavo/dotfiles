@@ -1,48 +1,49 @@
 #!/usr/bin/env bash
-#
-#
-waybar_mode=false
 
-# Parse command line arguments
-for arg in "$@"; do
-  case $arg in
-    --waybar)
-      waybar_mode=true
-      shift
-      ;;
-  esac
-done
+# Parse sinks from wpctl status
+# Format: "   45. Built-in Audio Analog Stereo        [vol: 0.70]"
+# Active sink has "*" before the ID
 
-# Set fuzzel command based on waybar mode
-if [ "$waybar_mode" = true ]; then
-  fuzzel_command="fuzzel -a top-right -w 20 -l 10 -d --x-margin 120 -p "
-else
-  fuzzel_command="fuzzel -d -p "
+sink_lines=$(wpctl status | awk '
+  /Sinks:/ { in_sinks=1; next }
+  in_sinks && /^\s*│\s*$/ { in_sinks=0 }
+  in_sinks && /^\s*[│├└]/ && /[0-9]+\./ {
+    line = $0
+    # Check if this is the active sink (has *)
+    active = (line ~ /\*/) ? 1 : 0
+    # Extract ID and name+vol
+    match(line, /[0-9]+\..*/)
+    entry = substr(line, RSTART, RLENGTH)
+    # Trim trailing whitespace
+    gsub(/[[:space:]]+$/, "", entry)
+    if (active)
+      print "* " entry
+    else
+      print "  " entry
+  }
+')
+
+if [ -z "$sink_lines" ]; then
+  notify-send "audio-switch" "No audio sinks found"
+  exit 1
 fi
 
-# Obtém a lista de dispositivos de saída de áudio
-sinks=$(pactl list sinks | awk ' /^\s*Name:/ { name = substr($0, index($0, $2)) } /^\s*Description:/ { desc = substr($0, index($0, $2)); print desc " [" name "]"; } ')
+# Show rofi menu — active sink appears with * prefix
+selected=$(echo "$sink_lines" | fuzzel --dmenu)
 
-# Usa o fuzzel no modo dmenu para selecionar a saída de som
-selected_option=$(echo -e "$sinks\nExit" | eval $fuzzel_command'"Select Audio Output:"')
+[ -z "$selected" ] && exit 0
 
-# Processa a seleção
-if [ -z "$selected_option" ]; then
-  exit 0
+# Extract the numeric sink ID from the selected line
+sink_id=$(echo "$selected" | grep -oP '(?<=\*?\s{0,3})\d+(?=\.)')
+
+if [ -z "$sink_id" ]; then
+  notify-send "audio-switch" "Could not parse sink ID"
+  exit 1
 fi
 
-# Extrai o nome do sink da opção selecionada
-selected_sink=$(echo "$selected_option" | awk -F'[][]' '{ print $2 }')
+wpctl set-default "$sink_id"
 
-# Verifica se foi selecionado "Exit"
-if [ "$selected_option" = "Exit" ]; then
-  exit 0
-fi
+# Get friendly name for notification (everything between ID. and [vol)
+sink_name=$(echo "$selected" | sed 's/^[* ]*//' | grep -oP '\d+\.\s*\K[^\[]+' | sed 's/[[:space:]]*$//')
 
-# Se um dispositivo foi selecionado, define como saída padrão
-if [ -n "$selected_sink" ]; then
-  pactl set-default-sink "$selected_sink"
-  # notify-send "Saída de áudio alterada para: $selected_sink"
-else
-  notify-send "Nenhuma saída de áudio selecionada"
-fi
+notify-send "🔊 Audio Output" "Switched to: ${sink_name}"
