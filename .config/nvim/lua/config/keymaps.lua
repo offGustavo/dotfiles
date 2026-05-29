@@ -6,7 +6,7 @@ vim.cmd([[
   nmap <m-s> :grep<space>
   nmap <m-b> :b<space>
   nmap <m-e> :ex<cr>
-  nmap <leader>vc :e $myvimrc<cr>
+  nmap <leader>vc :e $MYVIMRC<cr>
 ]])
 
 -- Marks
@@ -267,16 +267,16 @@ vim.keymap.set("n", "<C-S-PageUp>", "<cmd>tabmove -1<cr>")
 vim.keymap.set("n", "<C-S-PageDown>", "<cmd>tabmove +1<cr>")
 ---}}}
 
--- {{{ Fold
-vim.keymap.set("n", "<leader>im", "O-- {{{<Esc>", { desc = "Insert fold open marker" })
-vim.keymap.set("n", "<leader>iM", "o-- }}}<Esc>", { desc = "Insert fold close marker" })
-vim.keymap.set("x", "<leader>im", function()
-  vim.cmd("'<normal O-- {{{")
-  vim.cmd("'>normal o-- }}}")
-end, { desc = "Insert fold markers around selection" })
+-- -- {{{ Fold
+-- vim.keymap.set("n", "<leader>im", "O-- {{{<Esc>", { desc = "Insert fold open marker" })
+-- vim.keymap.set("n", "<leader>iM", "o-- }}}<Esc>", { desc = "Insert fold close marker" })
+-- vim.keymap.set("x", "<leader>im", function()
+--   vim.cmd("'<normal O-- {{{")
+--   vim.cmd("'>normal o-- }}}")
+-- end, { desc = "Insert fold markers around selection" })
 -- }}}
 
---- {{{ Windows
+-- {{{ Windows
 -- Move between windows, saving and restoring the mode each window was left in.
 -- Supports: normal (n), insert (i), terminal (t), visual treated as normal on re-entry.
 --
@@ -666,7 +666,7 @@ vim.keymap.set("n", "<leader>Z", function()
 end, { desc = "Zoxide picker(tcb)" })
 -- }}}
 
---- {{{ Git
+-- {{{ Git
 --- Alias to vim.keymap.set
 ---@param k string
 ---@param f function|string
@@ -690,7 +690,7 @@ end, { desc = "Git add current file" })
 nmap("<leader>gA", function()
   vim.cmd("!git add .")
 end, { desc = "Git add current directory" })
---- }}}
+-- }}}
 
 -- FIXME: try to fix this
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })
