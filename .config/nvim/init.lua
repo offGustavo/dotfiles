@@ -10,9 +10,10 @@ require("config.keymaps")
 require("config.lsp")
 require("config.neovide")
 
--- intern plugins
+-- Intern plugins
 require("intern")
 
--- load lazy.nvim and external plugins
+-- External plugins
 require("config.lazy")
 -- require("config.pack")
+
