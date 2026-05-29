@@ -1,6 +1,6 @@
 return {
 	"dmtrKovalenko/fff.nvim",
-  enabled = true,
+  enabled = Fish.is_windows(),
 	build = function()
 		-- downloads a prebuilt binary or falls back to cargo build
 		require("fff.download").download_or_build_binary()
