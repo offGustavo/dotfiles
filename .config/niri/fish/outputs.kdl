@@ -22,7 +22,7 @@ output "HDMI-A-2" {
   // so to put another output directly adjacent to it on the right, set its x to 1920.
   // If the position is unset or results in an overlap, the output is instead placed
   // automatically.
-  position x=-1920 y=0
+  position x=1920 y=0
   focus-at-startup
 }
 
