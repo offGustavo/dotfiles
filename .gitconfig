@@ -1,0 +1,10 @@
+[user]
+	email = change_later@example.com
+	name = Gustavo
+; [diff]
+; 	tool = kitty
+; [difftool]
+; 	prompt = false
+; 	trustExitCode = true
+; [difftool "kitty"]
+; 	cmd = kitten diff $LOCAL $REMOTE
