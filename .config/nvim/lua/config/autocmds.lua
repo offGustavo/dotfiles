@@ -13,6 +13,28 @@ vim.api.nvim_set_hl(0, "YankHlDefault", { fg = "cyan", bg = "" })
 vim.api.nvim_set_hl(0, "YankHlSystem", { fg = "orange", bg = "" })
 vim.api.nvim_set_hl(0, "YankHlBlackHole", { fg = "orange", bg = "" })
 
+vim.api.nvim_create_autocmd("TextPutPost", {
+  -- desc = "Highlight yanked text with different colors based on register",
+  -- group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+  callback = function()
+    local reg = vim.v.event.regname
+    if reg == "+" then
+      -- Yank to system clipboard → orange highlight
+      -- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
+      vim.hl.hl_op({ higroup = "IncSearch", timeout = 150 })
+    -- elseif reg == "_" then
+    -- 	-- Yank to system clipboard → orange highlight
+    -- 	-- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
+    -- 	vim.highlight.on_yank({ higroup = "ErrorMsg", timeout = 150 })
+    else
+      -- Any other yank (default register, "*", named registers, etc.) → cyan highlight
+      -- vim.highlight.on_yank({ higroup = "YankHighlightNormal", timeout = 150 })
+      vim.hl.hl_op({ higroup = "Search", timeout = 150 })
+    end
+  end,
+})
+-- }}}
+
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight yanked text with different colors based on register",
   group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
@@ -21,7 +43,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     if reg == "+" then
       -- Yank to system clipboard → orange highlight
       -- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
-      vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 })
+      vim.hl.hl_op({ higroup = "IncSearch", timeout = 150 })
     -- elseif reg == "_" then
     -- 	-- Yank to system clipboard → orange highlight
     -- 	-- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
@@ -29,7 +51,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     else
       -- Any other yank (default register, "*", named registers, etc.) → cyan highlight
       -- vim.highlight.on_yank({ higroup = "YankHighlightNormal", timeout = 150 })
-      vim.highlight.on_yank({ higroup = "Search", timeout = 150 })
+      vim.hl.hl_op({ higroup = "Search", timeout = 150 })
     end
   end,
 })
