@@ -10,6 +10,14 @@ vim.g.neovide_padding_bottom = 0
 vim.g.neovide_padding_right = 8
 vim.g.neovide_padding_left = 8
 
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        if vim.fn.argc() == 0 then
+            vim.cmd("cd ~")
+        end
+    end
+})
+
 local font_size = 12
 local function set_font_size(amount)
 	if amount == 0 then
