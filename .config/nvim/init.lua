@@ -1,7 +1,6 @@
 -- Our Global thing
 _G.Fish = {}
 
--- vim options
 require("config.autocmds")
 require("config.functions")
 require("config.commands")
