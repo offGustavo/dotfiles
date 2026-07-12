@@ -1,8 +1,8 @@
 return {
   "nvim-telescope/telescope.nvim",
   version = "*",
-  -- enabled = Fish.is_windows(),
-  enabled = false,
+  enabled = Fish.is_windows(),
+  -- enabled = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
     -- optional but recommended
@@ -11,9 +11,9 @@ return {
   keys = function()
     local builtin = require("telescope.builtin")
     return {
-      { "<M-o>", builtin.find_files, desc = "Telescope find files" },
-      { "<M-s>", builtin.live_grep, desc = "Telescope live grep" },
-      { "<M-b>", builtin.buffers, desc = "Telescope buffers" },
+      -- { "<M-o>", builtin.find_files, desc = "Telescope find files" },
+      -- { "<M-s>", builtin.live_grep, desc = "Telescope live grep" },
+      -- { "<M-b>", builtin.buffers, desc = "Telescope buffers" },
       { "<leader>ff", builtin.find_files, desc = "Telescope find files" },
       { "<leader>ss", builtin.live_grep, desc = "Telescope live grep" },
       { "<leader>bb", builtin.buffers, desc = "Telescope buffers" },
