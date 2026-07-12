@@ -1,5 +1,3 @@
-let g:mapleader = "\<space>"
-
 " GUI
 set guifont=JetBrainsMono\ NFM:h12
 set guioptions=!acC
@@ -51,18 +49,17 @@ tmap <M-;> <C-\><C-n>
 tmap ; <C-\><C-n>
 
 " Vim
-nnoremap <silent> <leader>vo :so %<CR>
-nnoremap <silent> <leader>vc <Cmd>e $MYVIMRC<CR>
+nnoremap <silent> <space>vo :so %<CR>
+nnoremap <silent> <space>vc <Cmd>e $MYVIMRC<CR>
 
 " Clipboard
+nmap <space>y <Cmd>yank +<Cr>
+nmap <space>w <Cmd>delete +<Cr>
+nmap <space>p <Cmd>iput +<Cr>
 
-nmap <leader>y <Cmd>yank +<Cr>
-nmap <leader>w <Cmd>delete +<Cr>
-nmap <leader>p <Cmd>iput +<Cr>
-
-xmap <leader>y <Cmd>yank +<Cr>
-xmap <leader>w <Cmd>delete +<Cr>
-xmap <leader>p <Cmd>iput +<Cr>
+xmap <space>y <Cmd>yank +<Cr>
+xmap <space>w <Cmd>delete +<Cr>
+xmap <space>p <Cmd>iput +<Cr>
 
 nmap <C-Insert> <Cmd>yank +<Cr>
 nmap <S-Del> <Cmd>delete +<Cr>
