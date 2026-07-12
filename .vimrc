@@ -55,6 +55,15 @@ nnoremap <silent> <leader>vo :so %<CR>
 nnoremap <silent> <leader>vc <Cmd>e $MYVIMRC<CR>
 
 " Clipboard
+
+nmap <leader>y <Cmd>yank +<Cr>
+nmap <leader>w <Cmd>delete +<Cr>
+nmap <leader>p <Cmd>iput +<Cr>
+
+xmap <leader>y <Cmd>yank +<Cr>
+xmap <leader>w <Cmd>delete +<Cr>
+xmap <leader>p <Cmd>iput +<Cr>
+
 nmap <C-Insert> <Cmd>yank +<Cr>
 nmap <S-Del> <Cmd>delete +<Cr>
 nmap <S-Insert> <Cmd>iput +<Cr>
@@ -69,7 +78,7 @@ imap <S-Insert> <Cmd>iput +<Cr>
 
 nmap <C-S-a> <Cmd>%y +<Cr>
 
-let data_dir = has('nvim') ? stdpath('data') . '/site' : has('win32') || has('win64') ? '~/vimfiles' : '~/.vim' 
+let data_dir = has('nvim') ? stdpath('data') . '/site' : has('win32') || has('win64') ? expand('~\vimfiles') : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -77,29 +86,7 @@ endif
 
 call plug#begin()
  Plug 'https://github.com/ghifarit53/tokyonight-vim'
- Plug 'https://github.com/tpope/vim-surround'
  Plug 'https://github.com/tpope/vim-fugitive'
- Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
- Plug 'junegunn/fzf.vim'
 call plug#end()
 
 silent! color tokyonight
-
-" Initialize configuration dictionary
-let g:fzf_vim = {}
-
-nmap <M-o> :Files<Cr>
-nmap <M-s> :RG<Cr>
-nmap <M-b> :Buffers<Cr>
-
-nmap o :Files<Cr>
-nmap s :RG<Cr>
-nmap b :Buffers<Cr>
-
-nmap ï :Files<Cr>
-nmap ó :RG<Cr>
-nmap â :Buffers<Cr>
-
-" Neovim Default 
-nmap [<space> O<Esc>cc<Esc>
-nmap ]<space> o<Esc>cc<Esc>
