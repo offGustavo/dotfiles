@@ -44,10 +44,10 @@ $Mappings = @(
         path_in_dots = '../.emacs'
         window_path  = '~\.emacs'
     }
-    # @{
-    #     path_in_dots = '../.vimrc'
-    #     window_path  = '~\_vimrc'
-    # }
+    @{
+        path_in_dots = '../.vimrc'
+        window_path  = '~\_vimrc'
+    }
     @{
         path_in_dots = '../.wezterm.lua'
         window_path  = '~\.wezterm.lua'
