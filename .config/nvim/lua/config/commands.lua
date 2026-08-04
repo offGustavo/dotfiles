@@ -20,6 +20,6 @@ end, {
   end,
 })
 
-vim.api.nvim_create_user_command("AlignRegexp", function ()
+command("AlignRegexp", function ()
   require('fish.align').align_regexp(opts)
 end, { range = true })

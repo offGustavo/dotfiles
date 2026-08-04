@@ -1,6 +1,7 @@
 -- Our Global thing
 _G.Fish = {}
 
+-- Config Files
 require("config.autocmds")
 require("config.functions")
 require("config.commands")

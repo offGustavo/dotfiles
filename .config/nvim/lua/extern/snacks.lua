@@ -2,7 +2,9 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  enabled = false,
+  enabled = Fish.is_windows(),
+  -- enabled = true,
+  -- enabled = false,
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
@@ -31,6 +33,7 @@ return {
     explorer = { enabled = false },
     indent = { enabled = false },
     input = { enabled = false },
+    image = { enabled = true },
     notifier = {
       enabled = false,
       timeout = 3000,
@@ -64,7 +67,7 @@ return {
     scope = { enabled = false },
     scroll = { enabled = false },
     statuscolumn = {
-      enabled = true,
+      enabled = false,
       left = { "mark", "sign" }, -- priority of signs on the left (high to low)
       right = { "fold", "git" }, -- priority of signs on the right (high to low)
       folds = {

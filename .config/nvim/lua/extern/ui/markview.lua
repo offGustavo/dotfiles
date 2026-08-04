@@ -56,7 +56,7 @@ return {
     { "<localleader>ic",    ":Editor create<Cr>",             desc = "Create a code block",  ft = "markdown" },
     { "<localleader>H",     ":Headings increase<Cr>",         desc = "Headings increase",    ft = "markdown" },
     { "<localleader>h",     ":Headings decrease<Cr>",         desc = "Headings decrease",    ft = "markdown" },
-    { "<localleader><Cr>",  ":Checkbox toggle<Cr>",           desc = "Checkbox",             ft = "markdown" },
+    { "<Cr>",  ":Checkbox toggle<Cr>",           desc = "Checkbox",             ft = "markdown" },
     { "<localleader>i<Cr>", ":Checkbox interactive<Cr>",      desc = "Checkbox interactive", ft = "markdown" },
     { "<localleader>mm",    "<Cmd>Markview Toggle<Cr>",       desc = "Toggle Markview",      ft = "markdown" },
     { "<localleader>mh",    "<Cmd>Markview hybridToggle<Cr>", desc = "Toggle Hybrid Mode",   ft = "markdown" },

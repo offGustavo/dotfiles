@@ -1,12 +1,10 @@
-" GUI
 set guifont=JetBrainsMono\ NFM:h12
 set guioptions=!acC
 
-" UI
 set termguicolors
-set nu rnu nowrap
+color catppuccin
 
-" set clipboard=unnamedplus
+set nu rnu nowrap
 
 set cmdheight=1
 set laststatus=2
@@ -14,7 +12,6 @@ set laststatus=2
 set listchars=eol:\ ,space:·
 set list
 
-" Code
 set foldmethod=indent
 set shiftwidth=2 softtabstop=2 expandtab
 set signcolumn=yes foldcolumn=2
@@ -29,30 +26,24 @@ set nobackup
 " set complete=o,.,b
 set complete=.,b
 set completeopt=menuone,noselect,popup
-set autocomplete
+" set autocomplete
 
-autocmd CmdlineEnter [\/\?] set pumheight=8
-autocmd CmdlineLeave [\/\?] set pumheight&
+"autocmd CmdlineEnter [\/\?] set pumheight=8
+"autocmd CmdlineLeave [\/\?] set pumheight&
 
-autocmd CmdlineChanged [:\/\?] call wildtrigger()
+"autocmd CmdlineChanged [:\/\?] call wildtrigger()
+
 set wildmode=noselect:lastused,full
 set wildoptions=pum
 
 set hidden
 
-" Keymaps
 set keymodel=startsel,stopsel
 
-" Term
 tmap » <C-\><C-n>
 tmap <M-;> <C-\><C-n>
 tmap ; <C-\><C-n>
 
-" Vim
-nnoremap <silent> <space>vo :so %<CR>
-nnoremap <silent> <space>vc <Cmd>e $MYVIMRC<CR>
-
-" Clipboard
 nmap <space>y <Cmd>yank +<Cr>
 nmap <space>w <Cmd>delete +<Cr>
 nmap <space>p <Cmd>iput +<Cr>
@@ -74,16 +65,3 @@ imap <S-Del> <Cmd>delete +<Cr>
 imap <S-Insert> <Cmd>iput +<Cr>
 
 nmap <C-S-a> <Cmd>%y +<Cr>
-
-let data_dir = has('nvim') ? stdpath('data') . '/site' : has('win32') || has('win64') ? expand('~\vimfiles') : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin()
- Plug 'https://github.com/ghifarit53/tokyonight-vim'
- Plug 'https://github.com/tpope/vim-fugitive'
-call plug#end()
-
-silent! color tokyonight

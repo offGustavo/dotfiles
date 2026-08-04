@@ -2,9 +2,9 @@ return {
   "https://github.com/barrettruth/canola.nvim",
   branch = "canola",
   priority = 1000,
-  lazy = false,
+  lazy = true,
   enabled = true,
-  event = "UiEnter",
+  event = "VeryLazy",
   keys = {
     { "<M-e>", "<Cmd>Canola<Cr>", desc = "Oil" },
     { "<leader><M-e>", "<Cmd>e.<Cr>", desc = "Open cwd" },

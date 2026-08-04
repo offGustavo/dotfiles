@@ -1,8 +1,8 @@
 return {
   "nvim-telescope/telescope.nvim",
   version = "*",
-  enabled = Fish.is_windows(),
-  -- enabled = false,
+  -- enabled = Fish.is_windows(),
+  enabled = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
     -- optional but recommended

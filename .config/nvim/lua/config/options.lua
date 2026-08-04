@@ -1,5 +1,4 @@
--- vim:
--- foldmethod=marker
+-- vim: foldmethod=marker
 
 -- {{{ Map Leader and Local Leader
 vim.cmd([[
@@ -45,7 +44,7 @@ end
 
 -- {{{ Netrw
 vim.cmd[[
-let g:netrw_banner = 0
+" let g:netrw_banner = 0
 
 " -- vim.o.acd = true
 " -- vim.g.netrw_keepdir = 0
@@ -109,9 +108,17 @@ vim.o.cursorlineopt  = 'screenline,number' -- Show cursor line per screen line
 vim.o.keymodel = "startsel,stopsel"
 --- }}}
 
--- {{{
+-- {{{ Windows
   if Fish.is_windows() then
-    vim.opt.shell = "pwsh"
+    vim.cmd([[
+    set noshelltemp
+    let &shell = 'powershell'
+    let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command '
+    let &shellcmdflag .= '[Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();'
+    let &shellcmdflag .= '$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';'
+    let &shellpipe  = '> %s 2>&1'
+    set shellquote= shellxquote=
+    ]])
   end
   -- }}}
 
@@ -233,12 +240,13 @@ vim.o.showmode = false
 --   stlnc = "-"
 -- })
 
-vim.opt.fillchars:append({
-  vert = '┃',
-  horiz = '━',
-  horizup = '┻',
-  horizdown = '┳'
-})
+-- vim.opt.fillchars:append({
+--   vert = '┃',
+--   horiz = '━',
+--   horizup = '┻',
+--   horizdown = '┳'
+-- })
+
 -- vim.opt.fillchars:append({
   -- vert = ' ',
   -- horiz = ' ',
@@ -248,7 +256,7 @@ vim.opt.fillchars:append({
 
 -- set statusline=%<%f\ %h%w%m%r\ %{%\ v:lua.require('vim._core.util').term_exitcode()\ %}%=%{%\ luaeval('(package.loaded[''vim.ui'']\ and\ vim.api.nvim_get_current_win()\ ==\ tonumber(vim.g.actual_curwin\ or\ -1)\ and\ vim.ui.progress_status())\ or\ ''''\ ')%}%{%\ &showcmdloc\ ==\ 'statusline'\ ?\ '%-10.S\ '\ :\ ''\ %}%{%\ exists('b:keymap_name')\ ?\ '<'..b:keymap_name..'>\ '\ :\ ''\ %}%{%\ &busy\ >\ 0\ ?\ '◐\ '\ :\ ''\ %}%{%\ luaeval('(package.loaded[''vim.diagnostic'']\ and\ next(vim.diagnostic.count())\ and\ vim.diagnostic.status()\ ..\ ''\ '')\ or\ ''''\ ')\ %}%{%\ &ruler\ ?\ (\ &rulerformat\ ==\ ''\ ?\ '%-14.(%l,%c%V%)\ %P'\ :\ &rulerformat\ )\ :\ ''\ %}
 
--- vim.o.statusline = "%!v:lua.require('fish.statusline').build_statusline()"
+vim.o.statusline = "%!v:lua.require('fish.statusline').build_statusline()"
 
 -- From mini.statusline
 -- -- Set statusline globally and dynamically decide which content to use

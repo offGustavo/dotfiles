@@ -1,36 +1,36 @@
 {
   "plugins": {
     "artio.nvim": {
-      "rev": "0b08d6862afe685fd78963808d022d7c15c89546",
+      "rev": "54b0625648bf3c89cdad9c1554903f09bddbf3a9",
       "src": "https://codeberg.org/comfysage/artio.nvim"
     },
     "canola.nvim": {
-      "rev": "3838f1380e9aeea0597a80beb6ab28da73e38525",
+      "rev": "d7c349fd0ffc3d6e8eceefdf66af66cb1ab42826",
       "src": "https://github.com/barrettruth/canola.nvim",
       "version": "'canola'"
     },
     "fff.nvim": {
-      "rev": "16b34f5eece19f7fa089352668b5a52a3ce2b05e",
+      "rev": "1eb913e509b846e77111cde2aeeb77a05243c003",
       "src": "https://github.com/dmtrKovalenko/fff.nvim"
     },
     "fzf-lua": {
-      "rev": "3f194300c92e3ec2de8f9307d6a7ce988b7b6d0c",
+      "rev": "28440c741e927592877514fba3db21eb188caec8",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns.nvim": {
-      "rev": "944ef13cc8d8fe8b846c91f36041c8dfb85ca000",
+      "rev": "31d6fb2d618bca1482b9f274751ead5f03461408",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "mini.completion": {
-      "rev": "09884c629cac1a8c999ffb6c57dc8424450aea5e",
+      "rev": "d2a2b2a2b5350b713ade3bb744df39eee7d4229b",
       "src": "https://github.com/nvim-mini/mini.completion"
     },
     "mini.nvim": {
-      "rev": "402ee6c6ec8ea44b22330446c8fb4e615fd3953e",
+      "rev": "8bf5c57bc82dd590932faa41bfde9fd6d40a9433",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "9ccd58a7949091c0cc2777d4e92a45a209c808c1",
+      "rev": "1c0d8f70dbc8827263eedc3cf7021ceba0f68689",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "plenary.nvim": {
@@ -38,11 +38,11 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "quicker.nvim": {
-      "rev": "063cc44da1eef8681bbd653b29d3bc961780886a",
+      "rev": "4a6883cb13fe097a20a046eb55f6dffd239276e3",
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "telescope.nvim": {
-      "rev": "aa4ad82068176e9610034eedcf945289e90e5b0a",
+      "rev": "427b576c16792edad01a92b89721d923c19ad60f",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "tokyonight.nvim": {
