@@ -474,9 +474,9 @@ local  function hydra_keymap()
   end)
 end
 
-vim.keymap.set("n", "<M-R>", hydra_keymap)
-vim.keymap.set("n", "<leader>w.", hydra_keymap)
-vim.keymap.set("n", "<C-w>m.", hydra_keymap)
+-- vim.keymap.set("n", "<M-R>", hydra_keymap)
+-- vim.keymap.set("n", "<leader>w.", hydra_keymap)
+-- vim.keymap.set("n", "<C-w>m.", hydra_keymap)
 
 vim.keymap.set("n", "<c-w>m", function()
   require("fish.zoom").zoom()

@@ -2,12 +2,12 @@
 
 -- {{{ Map Leader and Local Leader
 vim.cmd([[
-  " <space> as leader
-  let g:mapleader = " "
-  " <space><space> as local leader
-  let g:maplocalleader = "  "
+" <space> as leader
+let g:mapleader = " "
+" <space><space> as local leader
+let g:maplocalleader = "  "
 ]])
--- }}} 
+-- }}}
 
 -- {{{ Set a temp theme here to prevent light/dark flicker
 if vim.o.background == "dark" then
@@ -18,8 +18,8 @@ end
 -- }}}
 
 -- {{{ Security Things
-vim.o.modeline       = true
-vim.o.exrc           = false
+vim.o.modeline = true
+vim.o.exrc = false
 --- }}}
 
 -- {{{ Disable Plugins
@@ -30,67 +30,66 @@ vim.cmd("let g:loaded_fzf = 1")
 -- {{{ Kitty scroll mode
 if os.getenv("SCROLL_MODE") then
   vim.cmd([[
-    nmap q <Cmd>qa!<CR>
-    xmap q <Cmd>qa!<CR> 
-    nnoremap yy "+yy<Cmd>qa!<Cr>
-    xmap y "+y<Cmd>qa!<Cr>
-    set laststatus=0 nonu nornu signcolumn=no cursorline cmdheight=0
-    $ 
-  ]])
+	nmap q <Cmd>qa!<CR>
+	xmap q <Cmd>qa!<CR> 
+	nnoremap yy "+yy<Cmd>qa!<Cr>
+	xmap y "+y<Cmd>qa!<Cr>
+	set laststatus=0 nonu nornu signcolumn=no cursorline cmdheight=0
+	$ 
+	]])
   -- NOTE: Stop config here
   return
 end
 -- }}}
 
 -- {{{ Netrw
-vim.cmd[[
+vim.cmd([[
 " let g:netrw_banner = 0
 
 " -- vim.o.acd = true
 " -- vim.g.netrw_keepdir = 0
 " -- vim.cmd([[
 " -- autocmd BufEnter * lcd %:p:h
-]]
+]])
 -- }}}
 
 -- {{{ Options
 -- vim.opt.mouse = ""
-vim.o.number         = true
+vim.o.number = true
 vim.o.relativenumber = true
 
-vim.o.breakindent    = true
-vim.o.linebreak      = true
+vim.o.breakindent = true
+vim.o.linebreak = true
 
-vim.o.undofile       = true
-vim.o.swapfile       = false
+vim.o.undofile = true
+vim.o.swapfile = false
 
-vim.o.updatetime     = 100
-vim.o.timeoutlen     = 400
-vim.o.splitright     = true
-vim.o.splitbelow     = true
-vim.o.inccommand     = "split"
-vim.o.cursorline     = false
-vim.o.confirm        = true
-vim.o.wrap           = false
-
+vim.o.updatetime = 100
+vim.o.timeoutlen = 400
+vim.o.splitright = true
+vim.o.splitbelow = true
+vim.o.inccommand = "split"
+vim.o.cursorline = false
+vim.o.confirm = true
+vim.o.wrap = false
 
 vim.cmd([[
-  aunmenu PopUp.How-to\ disable\ mouse
-  " aunmenu PopUp.-2-
-  amenu PopUp.Exit <Cmd>qa!<CR>
+aunmenu PopUp.How-to\ disable\ mouse
+" aunmenu PopUp.-2-
+amenu PopUp.Exit <Cmd>qa!<CR>
 ]])
 
-vim.o.tabstop        = 2    -- A TAB character looks like 4 spaces
-vim.o.expandtab      = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.o.softtabstop    = 2    -- Number of spaces inserted instead of a TAB character
-vim.o.shiftwidth     = 2    -- Number of spaces inserted when indenting
+vim.o.tabstop = 2 -- A TAB character looks like 4 spaces
+vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
+vim.o.softtabstop = 2 -- Number of spaces inserted instead of a TAB character
+vim.o.shiftwidth = 2 -- Number of spaces inserted when indenting
 
-vim.o.list           = false
-vim.o.showbreak      = "↪"
-vim.opt.listchars    = {
+vim.o.list = false
+vim.o.showbreak = "↪"
+vim.opt.listchars = {
   space = "·",
   -- TODO: change the tab
-  tab = "^I"
+  tab = "^I",
 }
 
 -- vim.cmd[[
@@ -99,28 +98,28 @@ vim.opt.listchars    = {
 -- ]]
 
 -- Mini Max
-vim.o.iskeyword      = "@,48-57,192-255,-" -- _ works like an separate word
-vim.o.shortmess      = "ICFOSWaco"         -- Disable some built-in completion messages
-vim.o.virtualedit    = "block"             -- Allow going past end of line in blockwise mode
+vim.o.iskeyword = "@,48-57,192-255,-" -- _ works like an separate word
+vim.o.shortmess = "ICFOSWaco" -- Disable some built-in completion messages
+vim.o.virtualedit = "block" -- Allow going past end of line in blockwise mode
 
-vim.o.cursorlineopt  = 'screenline,number' -- Show cursor line per screen line
+vim.o.cursorlineopt = "screenline,number" -- Show cursor line per screen line
 
 vim.o.keymodel = "startsel,stopsel"
 --- }}}
 
 -- {{{ Windows
-  if Fish.is_windows() then
-    vim.cmd([[
-    set noshelltemp
-    let &shell = 'powershell'
-    let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command '
-    let &shellcmdflag .= '[Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();'
-    let &shellcmdflag .= '$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';'
-    let &shellpipe  = '> %s 2>&1'
-    set shellquote= shellxquote=
-    ]])
-  end
-  -- }}}
+if Fish.is_windows() then
+  vim.cmd([[
+	set noshelltemp
+	let &shell = 'powershell'
+	let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command '
+	let &shellcmdflag .= '[Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();'
+	let &shellcmdflag .= '$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';'
+	let &shellpipe  = '> %s 2>&1'
+	set shellquote= shellxquote=
+	]])
+end
+-- }}}
 
 -- {{{ Tittle
 vim.o.title = true
@@ -146,8 +145,22 @@ vim.o.titlestring = "%{v:lua.Fish.cwd_title()}"
 -- {{{ grepprg and findfunc
 vim.schedule(function()
   -- better grep and find with ripgrep
-  if vim.fn.executable("rg") then
-    vim.o.grepprg = "rg"
+  if vim.fn.executable("rg") == 1 then
+    if Fish.is_windows() then
+      vim.o.grepprg = "rg --vimgrep --color=never"
+    else
+      vim.o.grepprg = "rg"
+    end
+
+    vim.api.nvim_create_user_command("Rg", function(args)
+      local result = vim.fn.systemlist("rg --vimgrep " .. args.args)
+      vim.fn.setqflist({}, "r", {
+        title = "Results",
+        lines = result,
+      })
+      vim.cmd("copen")
+    end, { nargs = 1 })
+
     -- [native fuzzy finder in neovim with lua and cool bindings :: cherry's blog](https://cherryramatis.xyz/posts/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings/)
     function Fish.rg_find_files(cmdarg, _cmdcomplete)
       local fnames = vim.fn.systemlist("rg --files --hidden --color=never ")
@@ -157,8 +170,33 @@ vim.schedule(function()
         return vim.fn.matchfuzzy(fnames, cmdarg)
       end
     end
-
     vim.o.findfunc = "v:lua.Fish.rg_find_files"
+  end
+
+  if vim.fn.executable("fd") == 1 then
+    function Fish.fd_find_files(cmdarg, _cmdcomplete)
+      local fnames = vim.fn.systemlist("fd --hidden -t f --color=never")
+
+      if #cmdarg == 0 then
+        return fnames
+      end
+
+      -- build {path=..., filename=...} entries so matchfuzzy can key on filename only
+      local items = {}
+      for _, f in ipairs(fnames) do
+        table.insert(items, { path = f, filename = vim.fn.fnamemodify(f, ":t") })
+      end
+
+      local matched = vim.fn.matchfuzzy(items, cmdarg, { key = "filename" })
+
+      local results = {}
+      for _, m in ipairs(matched) do
+        table.insert(results, m.path)
+      end
+      print(results)
+      return results
+    end
+    vim.o.findfunc = "v:lua.Fish.fd_find_files"
   end
 end)
 -- }}}
@@ -209,7 +247,7 @@ end
 vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, {
   callback = function()
     Fish.clean_folded_hi()
-  end
+  end,
 })
 --- }}}
 
@@ -248,10 +286,10 @@ vim.o.showmode = false
 -- })
 
 -- vim.opt.fillchars:append({
-  -- vert = ' ',
-  -- horiz = ' ',
-  -- horizup = ' ',
-  -- horizdown = ' '
+-- vert = ' ',
+-- horiz = ' ',
+-- horizup = ' ',
+-- horizdown = ' '
 -- })
 
 -- set statusline=%<%f\ %h%w%m%r\ %{%\ v:lua.require('vim._core.util').term_exitcode()\ %}%=%{%\ luaeval('(package.loaded[''vim.ui'']\ and\ vim.api.nvim_get_current_win()\ ==\ tonumber(vim.g.actual_curwin\ or\ -1)\ and\ vim.ui.progress_status())\ or\ ''''\ ')%}%{%\ &showcmdloc\ ==\ 'statusline'\ ?\ '%-10.S\ '\ :\ ''\ %}%{%\ exists('b:keymap_name')\ ?\ '<'..b:keymap_name..'>\ '\ :\ ''\ %}%{%\ &busy\ >\ 0\ ?\ '◐\ '\ :\ ''\ %}%{%\ luaeval('(package.loaded[''vim.diagnostic'']\ and\ next(vim.diagnostic.count())\ and\ vim.diagnostic.status()\ ..\ ''\ '')\ or\ ''''\ ')\ %}%{%\ &ruler\ ?\ (\ &rulerformat\ ==\ ''\ ?\ '%-14.(%l,%c%V%)\ %P'\ :\ &rulerformat\ )\ :\ ''\ %}
@@ -271,21 +309,37 @@ vim.o.tabline = "%!v:lua.require('fish.tabline').build_tabline()"
 vim.api.nvim_create_autocmd({ "VimEnter", "UiEnter", "WinNew", "WinClosed", "TabNew", "TabClosed" }, {
   callback = function()
     local ignore_ft = {
-      "neo-tree", "NvimTree", "nvimtree",
-      "toggleterm", "terminal",
-      "lazy", "mason",
-      "trouble", "qf",
+      "neo-tree",
+      "NvimTree",
+      "nvimtree",
+      "toggleterm",
+      "terminal",
+      "lazy",
+      "mason",
+      "trouble",
+      "qf",
       "help",
       "nofile",
-      "TelescopePrompt", "telescope",
-      "notify", "noice",
-      "aerial", "outline",
-      "dap-repl", "dapui_watches", "dapui_stacks",
-      "dapui_breakpoints", "dapui_scopes", "dapui_console",
-      "undotree", "diff",
+      "TelescopePrompt",
+      "telescope",
+      "notify",
+      "noice",
+      "aerial",
+      "outline",
+      "dap-repl",
+      "dapui_watches",
+      "dapui_stacks",
+      "dapui_breakpoints",
+      "dapui_scopes",
+      "dapui_console",
+      "undotree",
+      "diff",
       "packer",
-      "lspinfo", "lsp-installer",
-      "startify", "alpha", "dashboard",
+      "lspinfo",
+      "lsp-installer",
+      "startify",
+      "alpha",
+      "dashboard",
     }
 
     local ignore_ft_set = {}
@@ -328,7 +382,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "UiEnter", "WinNew", "WinClosed", "Tab
 --- }}}
 
 -- {{{ ui2
-if vim.fn.has('nvim-0.12') ~= 1 then
+if vim.fn.has("nvim-0.12") ~= 1 then
   vim.notify("Use 0.12 to enable ui2", vim.log.levels.WARN)
   return
 end
@@ -337,7 +391,7 @@ vim.schedule(function()
   vim.o.cmdheight = 0
   require("vim._core.ui2").enable({
     enable = true, -- Whether to enable or disable the UI.
-    msg = {        -- Options related to the message module.
+    msg = { -- Options related to the message module.
       ---@type 'cmd'|'msg' Default message target, either in the
       ---cmdline or in a separate ephemeral message window.
       ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
@@ -347,53 +401,53 @@ vim.schedule(function()
   })
 end)
 
-  -- {{{ -- Experimental UI2: floating cmdline and messages
-  -- require('vim._core.ui2').enable({
-  --   enable = true,
-  --   msg = {
-  --     targets = {
-  --       [''] = 'msg',
-  --       empty = 'cmd',
-  --       bufwrite = 'msg',
-  --       confirm = 'cmd',
-  --       emsg = 'pager',
-  --       echo = 'msg',
-  --       echomsg = 'msg',
-  --       echoerr = 'pager',
-  --       completion = 'cmd',
-  --       list_cmd = 'pager',
-  --       lua_error = 'pager',
-  --       lua_print = 'msg',
-  --       progress = 'pager',
-  --       rpc_error = 'pager',
-  --       quickfix = 'msg',
-  --       search_cmd = 'cmd',
-  --       search_count = 'cmd',
-  --       shell_cmd = 'pager',
-  --       shell_err = 'pager',
-  --       shell_out = 'pager',
-  --       shell_ret = 'msg',
-  --       undo = 'msg',
-  --       verbose = 'pager',
-  --       wildlist = 'cmd',
-  --       wmsg = 'msg',
-  --       typed_cmd = 'cmd',
-  --     },
-  --     cmd = {
-  --       height = 0.5,
-  --     },
-  --     dialog = {
-  --       height = 0.5,
-  --     },
-  --     msg = {
-  --       height = 0.3,
-  --       timeout = 5000,
-  --     },
-  --     pager = {
-  --       height = 0.5,
-  --     },
-  --   },
-  -- })
-  -- }}}
+-- {{{ -- Experimental UI2: floating cmdline and messages
+-- require('vim._core.ui2').enable({
+--   enable = true,
+--   msg = {
+--     targets = {
+--       [''] = 'msg',
+--       empty = 'cmd',
+--       bufwrite = 'msg',
+--       confirm = 'cmd',
+--       emsg = 'pager',
+--       echo = 'msg',
+--       echomsg = 'msg',
+--       echoerr = 'pager',
+--       completion = 'cmd',
+--       list_cmd = 'pager',
+--       lua_error = 'pager',
+--       lua_print = 'msg',
+--       progress = 'pager',
+--       rpc_error = 'pager',
+--       quickfix = 'msg',
+--       search_cmd = 'cmd',
+--       search_count = 'cmd',
+--       shell_cmd = 'pager',
+--       shell_err = 'pager',
+--       shell_out = 'pager',
+--       shell_ret = 'msg',
+--       undo = 'msg',
+--       verbose = 'pager',
+--       wildlist = 'cmd',
+--       wmsg = 'msg',
+--       typed_cmd = 'cmd',
+--     },
+--     cmd = {
+--       height = 0.5,
+--     },
+--     dialog = {
+--       height = 0.5,
+--     },
+--     msg = {
+--       height = 0.3,
+--       timeout = 5000,
+--     },
+--     pager = {
+--       height = 0.5,
+--     },
+--   },
+-- })
+-- }}}
 
 -- }}}
