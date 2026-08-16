@@ -13,48 +13,61 @@ vim.api.nvim_set_hl(0, "YankHlDefault", { fg = "cyan", bg = "" })
 vim.api.nvim_set_hl(0, "YankHlSystem", { fg = "orange", bg = "" })
 vim.api.nvim_set_hl(0, "YankHlBlackHole", { fg = "orange", bg = "" })
 
-vim.api.nvim_create_autocmd("TextPutPost", {
-  -- desc = "Highlight yanked text with different colors based on register",
-  -- group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-  callback = function()
-    local reg = vim.v.event.regname
-    if reg == "+" then
-      -- Yank to system clipboard → orange highlight
-      -- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
-      vim.hl.hl_op({ higroup = "IncSearch", timeout = 150 })
-    -- elseif reg == "_" then
-    -- 	-- Yank to system clipboard → orange highlight
-    -- 	-- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
-    -- 	vim.highlight.on_yank({ higroup = "ErrorMsg", timeout = 150 })
-    else
-      -- Any other yank (default register, "*", named registers, etc.) → cyan highlight
-      -- vim.highlight.on_yank({ higroup = "YankHighlightNormal", timeout = 150 })
-      vim.hl.hl_op({ higroup = "Search", timeout = 150 })
-    end
-  end,
-})
--- }}}
+-- TODO: remove when 0.13 become stable
+if vim.fn.has("nvim-0.13") == 1 then
+  vim.api.nvim_create_autocmd("TextPutPost", {
+    -- desc = "Highlight yanked text with different colors based on register",
+    -- group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+    callback = function()
+      local reg = vim.v.event.regname
+      if reg == "+" then
+        -- Yank to system clipboard → orange highlight
+        -- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
+        vim.hl.hl_op({ higroup = "IncSearch", timeout = 150 })
+      -- elseif reg == "_" then
+      -- 	-- Yank to system clipboard → orange highlight
+      -- 	-- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
+      -- 	vim.highlight.on_yank({ higroup = "ErrorMsg", timeout = 150 })
+      else
+        -- Any other yank (default register, "*", named registers, etc.) → cyan highlight
+        -- vim.highlight.on_yank({ higroup = "YankHighlightNormal", timeout = 150 })
+        vim.hl.hl_op({ higroup = "Search", timeout = 150 })
+      end
+    end,
+  })
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight yanked text with different colors based on register",
-  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-  callback = function()
-    local reg = vim.v.event.regname
-    if reg == "+" then
-      -- Yank to system clipboard → orange highlight
-      -- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
-      vim.hl.hl_op({ higroup = "IncSearch", timeout = 150 })
-    -- elseif reg == "_" then
-    -- 	-- Yank to system clipboard → orange highlight
-    -- 	-- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
-    -- 	vim.highlight.on_yank({ higroup = "ErrorMsg", timeout = 150 })
-    else
-      -- Any other yank (default register, "*", named registers, etc.) → cyan highlight
-      -- vim.highlight.on_yank({ higroup = "YankHighlightNormal", timeout = 150 })
-      vim.hl.hl_op({ higroup = "Search", timeout = 150 })
-    end
-  end,
-})
+  -- }}}
+
+  vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight yanked text with different colors based on register",
+    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+    callback = function()
+      local reg = vim.v.event.regname
+      if reg == "+" then
+        -- Yank to system clipboard → orange highlight
+        -- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
+        vim.hl.hl_op({ higroup = "IncSearch", timeout = 150 })
+      -- elseif reg == "_" then
+      -- 	-- Yank to system clipboard → orange highlight
+      -- 	-- vim.highlight.on_yank({ higroup = "YankHighlightClipboard", timeout = 150 })
+      -- 	vim.highlight.on_yank({ higroup = "ErrorMsg", timeout = 150 })
+      else
+        -- Any other yank (default register, "*", named registers, etc.) → cyan highlight
+        -- vim.highlight.on_yank({ higroup = "YankHighlightNormal", timeout = 150 })
+        vim.hl.hl_op({ higroup = "Search", timeout = 150 })
+      end
+    end,
+  })
+else
+  vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+      vim.highlight.on_yank({
+        higroup = "IncSearch", -- Highlight group to use
+        timeout = 150, -- Time in milliseconds
+      })
+    end,
+  })
+end
 -- }}}
 
 -- Set EDITOR for terminal buffers
@@ -75,46 +88,46 @@ local au = vim.api.nvim_create_augroup("mark_signs", { clear = true })
 local ns = vim.api.nvim_create_namespace("mark_signs")
 
 local iter_marks = function(buf, cb)
-	local line_count = vim.api.nvim_buf_line_count(buf)
-	for _, name in ipairs(mark_names) do
-		local lnum = vim.api.nvim_buf_get_mark(buf, name)[1]
-		if lnum > 0 and lnum <= line_count then
-			cb(lnum, name)
-		end
-	end
+  local line_count = vim.api.nvim_buf_line_count(buf)
+  for _, name in ipairs(mark_names) do
+    local lnum = vim.api.nvim_buf_get_mark(buf, name)[1]
+    if lnum > 0 and lnum <= line_count then
+      cb(lnum, name)
+    end
+  end
 end
 
 vim.api.nvim_create_autocmd("MarkSet", {
-	pattern = "[[:alpha:]]",
-	group = au,
-	desc = "Remove overlapping marks on the same line",
-	callback = function(e)
-		iter_marks(e.buf, function(lnum, name)
-			if e.data.line == lnum and e.data.name ~= name then
-				vim.cmd.delmark(name)
-			end
-		end)
-	end,
+  pattern = "[[:alpha:]]",
+  group = au,
+  desc = "Remove overlapping marks on the same line",
+  callback = function(e)
+    iter_marks(e.buf, function(lnum, name)
+      if e.data.line == lnum and e.data.name ~= name then
+        vim.cmd.delmark(name)
+      end
+    end)
+  end,
 })
 
 -- NOTE: After neovim#39218 (NVIM 0.12.2+), `MarkSet` also fires on deletion,
 -- so the `event` can be changed to `{ "BufRead", "MarkSet" }`.
 -- vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold" }, {
 vim.api.nvim_create_autocmd({ "BufRead", "MarkSet" }, {
-	group = au,
-	desc = "Frequently update mark signs",
-	callback = function(e)
-		vim.api.nvim_buf_clear_namespace(e.buf, ns, 0, -1)
-		iter_marks(e.buf, function(lnum, name)
-			-- if name:match("%p") and vim.bo[e.buf].buftype ~= "" then
-			--   return
-			-- end
-			vim.api.nvim_buf_set_extmark(e.buf, ns, lnum - 1, 0, {
-				sign_text = name,
-				sign_hl_group = "DiagnosticHint",
-			})
-		end)
-	end,
+  group = au,
+  desc = "Frequently update mark signs",
+  callback = function(e)
+    vim.api.nvim_buf_clear_namespace(e.buf, ns, 0, -1)
+    iter_marks(e.buf, function(lnum, name)
+      -- if name:match("%p") and vim.bo[e.buf].buftype ~= "" then
+      --   return
+      -- end
+      vim.api.nvim_buf_set_extmark(e.buf, ns, lnum - 1, 0, {
+        sign_text = name,
+        sign_hl_group = "DiagnosticHint",
+      })
+    end)
+  end,
 })
 -- }}}
 
