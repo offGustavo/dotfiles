@@ -1,6 +1,6 @@
 return {
 	"https://github.com/ThePrimeagen/harpoon",
-  enabled = false,
+  enabled = true,
 	branch = "harpoon2",
 	dependencies = {
 		"https://github.com/nvim-lua/plenary.nvim",

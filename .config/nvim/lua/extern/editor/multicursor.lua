@@ -1,5 +1,7 @@
 return {
   "https://github.com/brenton-leighton/multiple-cursors.nvim",
+  enabled = true,
+  lazy = true,
   opts = {
     pre_hook = function()
       -- require("vim._core.ui2").enable({

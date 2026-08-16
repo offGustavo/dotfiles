@@ -18,8 +18,10 @@ end
 -- }}}
 
 -- {{{ Security Things
-vim.o.modeline = true
-vim.o.exrc = false
+set {
+  modeline = true,
+  exrc = false,
+}
 --- }}}
 
 -- {{{ Disable Plugins
@@ -43,35 +45,51 @@ end
 -- }}}
 
 -- {{{ Netrw
-vim.cmd([[
+vim.cmd [[
 " let g:netrw_banner = 0
 
 " -- vim.o.acd = true
 " -- vim.g.netrw_keepdir = 0
 " -- vim.cmd([[
 " -- autocmd BufEnter * lcd %:p:h
-]])
+]]
 -- }}}
 
 -- {{{ Options
 -- vim.opt.mouse = ""
-vim.o.number = true
-vim.o.relativenumber = true
-
-vim.o.breakindent = true
-vim.o.linebreak = true
-
-vim.o.undofile = true
-vim.o.swapfile = false
-
-vim.o.updatetime = 100
-vim.o.timeoutlen = 400
-vim.o.splitright = true
-vim.o.splitbelow = true
-vim.o.inccommand = "split"
-vim.o.cursorline = false
-vim.o.confirm = true
-vim.o.wrap = false
+set {
+  number = true,
+  relativenumber = true,
+  breakindent = true,
+  linebreak = true,
+  undofile = true,
+  swapfile = false,
+  updatetime = 100,
+  timeoutlen = 400,
+  splitright = true,
+  splitbelow = true,
+  inccommand = "split",
+  cursorline = false,
+  confirm = true,
+  wrap = false,
+  tabstop = 2, -- A TAB character looks like 4 spaces
+  expandtab = true, -- Pressing the TAB key will insert spaces instead of a TAB character
+  softtabstop = 2, -- Number of spaces inserted instead of a TAB character
+  shiftwidth = 2, -- Number of spaces inserted when indenting
+  list = false,
+  showbreak = "↪",
+  listchars = {
+    space = "·",
+    -- TODO: change the tab
+    tab = "^I",
+  },
+  -- Mini Max
+  iskeyword = "@,48-57,192-255,-", -- _ works like an separate word
+  shortmess = "ICFOSWaco", -- Disable some built-in completion messages
+  virtualedit = "block", -- Allow going past end of line in blockwise mode
+  cursorlineopt = "screenline,number", -- Show cursor line per screen line
+  keymodel = "startsel,stopsel",
+}
 
 vim.cmd([[
 aunmenu PopUp.How-to\ disable\ mouse
@@ -79,32 +97,11 @@ aunmenu PopUp.How-to\ disable\ mouse
 amenu PopUp.Exit <Cmd>qa!<CR>
 ]])
 
-vim.o.tabstop = 2 -- A TAB character looks like 4 spaces
-vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.o.softtabstop = 2 -- Number of spaces inserted instead of a TAB character
-vim.o.shiftwidth = 2 -- Number of spaces inserted when indenting
-
-vim.o.list = false
-vim.o.showbreak = "↪"
-vim.opt.listchars = {
-  space = "·",
-  -- TODO: change the tab
-  tab = "^I",
-}
-
 -- vim.cmd[[
 --   set showbreak=↪\
 --   set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 -- ]]
 
--- Mini Max
-vim.o.iskeyword = "@,48-57,192-255,-" -- _ works like an separate word
-vim.o.shortmess = "ICFOSWaco" -- Disable some built-in completion messages
-vim.o.virtualedit = "block" -- Allow going past end of line in blockwise mode
-
-vim.o.cursorlineopt = "screenline,number" -- Show cursor line per screen line
-
-vim.o.keymodel = "startsel,stopsel"
 --- }}}
 
 -- {{{ Windows
@@ -202,18 +199,20 @@ end)
 -- }}}
 
 -- {{{ New Filetypes
-vim.filetype.add({
+vim.filetype.add {
   extension = {
     kbd = "kbd", -- maps *.kbd → filetype=kbd
   },
-})
+}
 -- }}}
 
 -- {{{ Spell
 vim.schedule(function()
-  vim.o.spelllang = "pt_br,en_us,es"
-  vim.o.spell = true
-  vim.o.spelloptions = "camel" -- Treat camelCase word parts as separate words
+  set {
+    spelllang = "pt_br,en_us,es",
+    spell = true,
+    spelloptions = "camel", -- Treat camelCase word parts as separate words
+  }
 
   local spell_on_choice = vim.schedule_wrap(function(_, idx)
     if type(idx) == "number" then
@@ -252,17 +251,18 @@ vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, {
 --- }}}
 
 -- {{{ statuscolumn
-vim.o.foldcolumn = "1"
-vim.o.signcolumn = "yes:1"
-
--- Status column settings
-vim.opt.fillchars:append({
-  fold = " ",
-  foldopen = "",
-  foldclose = "",
-  foldsep = " ",
-  foldinner = " ",
-})
+set {
+  foldcolumn = "1",
+  signcolumn = "yes:1",
+  -- Status column settings
+  fillchars = {
+    fold = " ",
+    foldopen = "",
+    foldclose = "",
+    foldsep = " ",
+    foldinner = " ",
+  },
+}
 
 -- vim.o.statuscolumn = "%s%l %C "
 vim.o.statuscolumn = "%!v:lua.require('fish.statuscolumn').build()"
@@ -270,8 +270,10 @@ vim.o.statuscolumn = "%!v:lua.require('fish.statuscolumn').build()"
 -- }}}
 
 -- {{{ statusline
-vim.o.laststatus = 3
-vim.o.showmode = false
+set {
+  laststatus = 3,
+  showmode = false,
+}
 
 -- vim.opt.fillchars:append({
 --   stl = "-",
@@ -389,7 +391,7 @@ end
 
 vim.schedule(function()
   vim.o.cmdheight = 0
-  require("vim._core.ui2").enable({
+  require("vim._core.ui2").enable {
     enable = true, -- Whether to enable or disable the UI.
     msg = { -- Options related to the message module.
       ---@type 'cmd'|'msg' Default message target, either in the
@@ -398,7 +400,7 @@ vim.schedule(function()
       ---or table mapping |ui-messages| kinds and triggers to a target.
       targets = "msg",
     },
-  })
+  }
 end)
 
 -- {{{ -- Experimental UI2: floating cmdline and messages

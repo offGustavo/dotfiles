@@ -50,28 +50,60 @@ vim.schedule(function()
       local client = vim.lsp.get_client_by_id(ev.data.client_id)
       if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
         vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = false })
-        vim.keymap.set("n", "<leader>ca", function()
-          vim.lsp.buf.code_action()
-        end, { desc = "Code Action" })
-        vim.keymap.set("n", "<leader>cd", function()
-          vim.lsp.buf.definition()
-        end, { desc = "Open Definition" })
-        vim.keymap.set("n", "<leader>cr", function()
-          vim.lsp.buf.references()
-        end, { desc = "Open References" })
-        vim.keymap.set("n", "<leader>cR", function()
-          vim.lsp.buf.rename()
-        end, {
-          desc = "Lsp Rename",
-        })
-        vim.keymap.set("n", "<leader>cF", function()
-          vim.lsp.buf.format()
-        end, { desc = "Lsp Code Format" })
-        vim.keymap.set("n", "<leader>cq", function()
-          vim.diagnostic.setqflist()
-        end, { desc = "Open Diagnostics Quickfix list" })
         -- Diagnostic keymaps
-        vim.keymap.set("n", "<leader>ce", vim.diagnostic.open_float, { desc = "Line Diagnostics Error" })
+        map({
+          {
+            "<leader>ca",
+            function()
+              vim.lsp.buf.code_action()
+            end,
+            desc = "Code Action",
+          },
+          {
+            "<leader>cd",
+            function()
+              vim.lsp.buf.definition()
+            end,
+            desc = "Open Definition",
+          },
+          {
+            "<leader>cr",
+            function()
+              vim.lsp.buf.references()
+            end,
+            desc = "Open References",
+          },
+          {
+            "<leader>cR",
+            function()
+              vim.lsp.buf.rename()
+            end,
+            desc = "Lsp Rename",
+          },
+          {
+            "<leader>cF",
+            function()
+              vim.lsp.buf.format()
+            end,
+            desc = "Lsp Code Format",
+          },
+          {
+            "<leader>cq",
+            function()
+              vim.diagnostic.setqflist()
+            end,
+            desc = "Open Diagnostics Quickfix list",
+          },
+          { "<leader>ce", vim.diagnostic.open_float, desc = "Line Diagnostics Error" },
+          { "<leader>K", vim.lsp.buf.hover, desc = "Go to lsp help" },
+          { "<S-space>K", vim.lsp.buf.hover, desc = "Go to lsp help" },
+          { "<leader>ch", vim.lsp.buf.hover, desc = "Line Diagnostics Error" },
+        })
+        pcall(function()
+          -- NOTE: Remove lsp-default mappings
+          vim.cmd("nnoremap <nowait> gr gr")
+          vim.keymap.del("n", "K", { buf = ev.buf })
+        end)
       end
     end,
   })

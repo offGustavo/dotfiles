@@ -13,7 +13,7 @@ vim.cmd([[
 vim.keymap.set("n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", { desc = "Del mark <char>" })
 
 -- Edit init.lua/init.vim/vimrc
-vim.keymap.set("n", "<leader>fC", ":e $MYVIMRC<Cr>", { silent = true, desc = "Edit the init config file" })
+-- vim.keymap.set("n", "<leader>fC", ":e $MYVIMRC<Cr>", { silent = true, desc = "Edit the init config file" })
 
 -- Fix <C-c> to work like <Esc>
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -62,8 +62,9 @@ vim.cmd([[
 -- Normal mode in command line
 -- vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
 
--- Builtin Now
----vim.keymap.set("n", "ZR", vim.cmd.restart, { desc = "Restart Session", silent = true })
+-- Restart neovim without a sesions
+vim.keymap.set("n", "<leader>qr", function() vim.cmd("restart!") end, { desc = "Restart Without Session", silent = true }) -- ZR for buitin restart
+vim.keymap.set("n", "Zr", function() vim.cmd("restart!") end, { desc = "Restart Without Session", silent = true }) -- ZR for buitin restart
 
 -- File
 vim.keymap.set("n", "<leader>fn", ":enew<Cr>", { silent = true, desc = "New File" })

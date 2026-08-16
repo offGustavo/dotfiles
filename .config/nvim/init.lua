@@ -1,6 +1,9 @@
 -- Our Global thing
 _G.Fish = {}
 
+-- PERF:
+vim.loader.enable()
+
 -- Config Files
 require("config.autocmds")
 require("config.functions")
