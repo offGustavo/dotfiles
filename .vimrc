@@ -1,5 +1,7 @@
 set guifont=JetBrainsMono\ NFM:h12
-set guioptions=!acC
+if !has('nvim')
+	set guioptions=!acC
+end
 
 set termguicolors
 color catppuccin
