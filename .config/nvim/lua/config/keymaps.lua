@@ -9,6 +9,17 @@ vim.cmd([[
   nmap <leader>vc :e $MYVIMRC<cr>
 ]])
 
+  -- vim.keymap.del("n", "gd")
+  -- vim.keymap.del("n", "K")
+
+  vim.cmd([[
+   nmap <nowait> gd gd
+   nmap <nowait> gr gr
+   nmap <nowait> gD gD
+   nmap <nowait> K K
+  ]])
+
+
 -- Marks
 vim.keymap.set("n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", { desc = "Del mark <char>" })
 
@@ -63,8 +74,12 @@ vim.cmd([[
 -- vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
 
 -- Restart neovim without a sesions
-vim.keymap.set("n", "<leader>qr", function() vim.cmd("restart!") end, { desc = "Restart Without Session", silent = true }) -- ZR for buitin restart
-vim.keymap.set("n", "Zr", function() vim.cmd("restart!") end, { desc = "Restart Without Session", silent = true }) -- ZR for buitin restart
+vim.keymap.set("n", "<leader>qr", function()
+  vim.cmd("restart!")
+end, { desc = "Restart Without Session", silent = true }) -- ZR for buitin restart
+vim.keymap.set("n", "Zr", function()
+  vim.cmd("restart!")
+end, { desc = "Restart Without Session", silent = true }) -- ZR for buitin restart
 
 -- File
 vim.keymap.set("n", "<leader>fn", ":enew<Cr>", { silent = true, desc = "New File" })
@@ -74,7 +89,6 @@ vim.schedule(function()
   vim.cmd("packadd nvim.undotree")
   vim.keymap.set("n", "U", require("undotree").open)
 end)
-
 
 vim.cmd([[
   " https://github.com/christoomey/vim-titlecase/blob/master/plugin/titlecase.vim
@@ -447,7 +461,7 @@ Fish.windows = {
   },
 }
 
-local  function hydra_keymap()
+local function hydra_keymap()
   if Fish.windows.hydra_mode._active then
     -- TODO: better logs
     vim.notify("active", vim.log.levels.WARN)
@@ -676,21 +690,37 @@ local nmap = function(k, f, o)
   vim.keymap.set("n", k, f, o)
 end
 
-nmap("<leader>gP", function()
-  vim.cmd("!git pull")
-end, { desc = "Pull Changes" })
+map {
+  {
+    "<leader>gP",
+    function()
+      vim.cmd("!git pull")
+    end,
+    desc = "Pull Changes",
+  },
+  {
+    "<leader>gp",
+    function()
+      vim.cmd("!git push")
+    end,
+    desc = "Push Changes",
+  },
+  {
+    "<leader>ga",
+    function()
+      vim.cmd("!git add %")
+    end,
+    desc = "Git add current file",
+  },
+  {
+    "<leader>gA",
+    function()
+      vim.cmd("!git add .")
+    end,
+    desc = "Git add current directory",
+  },
+}
 
-nmap("<leader>gp", function()
-  vim.cmd("!git push")
-end, { desc = "Push Changes" })
-
-nmap("<leader>ga", function()
-  vim.cmd("!git add %")
-end, { desc = "Git add current file" })
-
-nmap("<leader>gA", function()
-  vim.cmd("!git add .")
-end, { desc = "Git add current directory" })
 -- }}}
 
 -- FIXME: try to fix this

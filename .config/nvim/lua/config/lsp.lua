@@ -101,7 +101,13 @@ vim.schedule(function()
         })
         pcall(function()
           -- NOTE: Remove lsp-default mappings
-          vim.cmd("nnoremap <nowait> gr gr")
+          vim.cmd([[
+          nnoremap <nowait> gr gr
+          nnoremap <nowait> gd gd
+          nnoremap <nowait> K K
+          " unamp gd
+          ]])
+          vim.keymap.del("n", "gd", { buf = ev.buf })
           vim.keymap.del("n", "K", { buf = ev.buf })
         end)
       end
