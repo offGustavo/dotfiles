@@ -5,3 +5,7 @@
 -- ]])
 
 vim.lsp.enable("marksman")
+
+map {
+  { "<M-i><M-t>", "- [ ] ", mode = "i", buf = 0 }
+}
