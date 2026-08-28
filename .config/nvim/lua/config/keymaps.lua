@@ -9,16 +9,15 @@ vim.cmd([[
   nmap <leader>vc :e $MYVIMRC<cr>
 ]])
 
-  -- vim.keymap.del("n", "gd")
-  -- vim.keymap.del("n", "K")
+-- vim.keymap.del("n", "gd")
+-- vim.keymap.del("n", "K")
 
-  vim.cmd([[
+vim.cmd([[
    nmap <nowait> gd gd
    nmap <nowait> gr gr
    nmap <nowait> gD gD
    nmap <nowait> K K
   ]])
-
 
 -- Marks
 vim.keymap.set("n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", { desc = "Del mark <char>" })
@@ -120,46 +119,44 @@ vim.cmd([[
 ]])
 --- }}}
 
--- {{{ Clipboard
-vim.keymap.set({ "n", "x" }, "<C-S-v>", '"+p')
-vim.keymap.set({ "i" }, "<C-S-v>", "<C-r>+")
-vim.keymap.set({ "n", "x" }, "<C-S-c>", '"+y')
-vim.keymap.set({ "n", "x" }, "<C-S-x>", '"+d')
+map {
+  -- {{{ Clipboard
+  { { "n", "x" }, "<C-S-v>", '"+p' },
+  { "i", "<C-S-v>", "<C-r>+" },
+  { { "n", "x" }, "<C-S-c>", '"+y' },
+  { { "n", "x" }, "<C-S-x>", '"+d' },
+  { { "n", "x" }, "<S-Insert>", '"+p' },
+  { "i", "<S-Insert>", "<C-r>+" },
+  { { "n", "x" }, "<C-Insert>", '"+y' },
+  { { "n", "x" }, "<S-Del>", '"+d' },
+  { { "n", "x" }, "<leader>+", '"+', desc = "System clipboard" },
+  { { "n", "x" }, "<leader>_", '"_', desc = "Black Hole Register" },
+  { { "n", "x" }, "<leader>p", '"+p', desc = "Paste from system register" },
+  { { "n", "x" }, "<leader>y", '"+y', desc = "Yank to system register" },
+  { { "n", "x" }, "<leader>d", '"+d', desc = "Cut to system register" },
+  -- }}}
 
-vim.keymap.set({ "n", "x" }, "<S-Insert>", '"+p')
-vim.keymap.set({ "i" }, "<S-Insert>", "<C-r>+")
-vim.keymap.set({ "n", "x" }, "<C-Insert>", '"+y')
-vim.keymap.set({ "n", "x" }, "<S-Del>", '"+d')
+  -- {{{ Buffer
+  { "<leader>ba", ":b #<Cr>", desc = "Alternative Buffer" },
+  { "<leader>bd", ":bd<Cr>", desc = "Delete Buffer" },
+  { "<leader>bD", ":bufdo bd<Cr>", desc = "Delete All Buffers" },
+  -- }}}
 
-vim.keymap.set({ "n", "x" }, "<leader>+", '"+', { desc = "System clipboard" })
-vim.keymap.set({ "n", "x" }, "<leader>_", '"_', { desc = "Black Hole Register" })
+  -- {{{ Substitute
+  -- ThePrimeagen Keymaps
+  { { "x", "n" }, "s.", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], silent = false },
+  { { "x", "n" }, "S>", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], silent = false },
+  { { "x", "n" }, "sg", ":%s/", silent = false },
+  { { "x", "n" }, "SG", ":%s//gI<Left><Left><Left>", silent = false },
+  { { "x", "n" }, "ss", ":s/", silent = false },
+  { { "x", "n" }, "SS", [[:s//gI<Left><Left><Left>]], silent = false },
+  { "n", "SV", [[S<Esc>]], silent = false },
+  { "x", "SV", [[:normal S<Esc>]], silent = true },
 
-vim.keymap.set({ "n", "x" }, "<leader>p", '"+p', { desc = "Paste from system register" })
-vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Yank to system register" })
-vim.keymap.set({ "n", "x" }, "<leader>x", '"+d', { desc = "Cut to system register" })
+  -- {{{ Insert/Command Mode
+  { "i", "<C-Bs>", "<C-w>" },
+}
 -- }}}
-
--- {{{ Buffer
-vim.keymap.set("n", "<leader>ba", ":b #<Cr>", { desc = "Alternative Buffer" })
-vim.keymap.set("n", "<leader>bd", ":bd<Cr>", { desc = "Delete Buffer" })
-vim.keymap.set("n", "<leader>bD", ":bufdo bd<Cr>", { desc = "Delete All Buffers" })
--- }}}
-
--- {{{ Substitute
-
--- ThePrimeagen Keymaps
-vim.keymap.set({ "x", "n" }, "s.", [[:s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
-vim.keymap.set({ "x", "n" }, "S>", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
-vim.keymap.set({ "x", "n" }, "sg", ":%s/", { silent = false })
-vim.keymap.set({ "x", "n" }, "SG", ":%s//gI<Left><Left><Left>", { silent = false })
-vim.keymap.set({ "x", "n" }, "ss", ":s/", { silent = false })
-vim.keymap.set({ "x", "n" }, "SS", [[:s//gI<Left><Left><Left>]], { silent = false })
-vim.keymap.set("n", "SV", [[S<Esc>]], { silent = false })
-vim.keymap.set("x", "SV", [[:normal S<Esc>]], { silent = true })
--- }}}
-
--- {{{ Insert/Command Mode
-vim.keymap.set("i", "<C-Bs>", "<C-w>")
 
 vim.cmd([[
 cmap <C-a> <home>
@@ -194,14 +191,15 @@ imap <M-d> <C-o>de
 ]])
 
 -- Emacs Binds
-vim.keymap.set("n", "<C-Down>", "}", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-Up>", "{", { noremap = true, silent = true })
-vim.keymap.set("i", "<M-S-.>", "<C-o>G", { noremap = true, silent = true })
-vim.keymap.set("i", "<M-S-,>", "<C-o>gg", { noremap = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<M-S-.>", "G", { noremap = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<M-S-,>", "gg", { noremap = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<M-x>", ":")
-
+map {
+  { "n", "<C-Down>", "}", noremap = true, silent = true },
+  { "n", "<C-Up>", "{", noremap = true, silent = true },
+  { "i", "<M-S-.>", "<C-o>G", noremap = true, silent = true },
+  { "i", "<M-S-,>", "<C-o>gg", noremap = true, silent = true },
+  { { "n", "x" }, "<M-S-.>", "G", noremap = true, silent = true },
+  { { "n", "x" }, "<M-S-,>", "gg", noremap = true, silent = true },
+  { { "n", "x" }, "<M-x>", ":" },
+}
 --- }}}
 
 -- {{{ Copy/Move
