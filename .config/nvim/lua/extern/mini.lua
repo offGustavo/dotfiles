@@ -4,6 +4,7 @@ return {
   config = function()
     -- require("mini.statusline").setup()
     -- require("mini.tabline").setup()
+    -- require('mini.statuscolumn').setup()
 
     require("mini.icons").setup({
       -- -- Icon style: 'glyph' or 'ascii'
