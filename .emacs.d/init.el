@@ -1,4 +1,3 @@
-
 ;; Enable package manager early
 
 ;; Basic UI Config
@@ -96,9 +95,6 @@
 (global-set-key (kbd "C-S-c") 'clipboard-kill-ring-save)
 (global-set-key (kbd "C-S-v") 'clipboard-yank)
 
-
-
-
 ;; ;; note: from rexim/tsoding
 ;; ;; multiple cursors
 ;; (use-package multiple-cursors
@@ -118,6 +114,13 @@
 ;;   (global-set-key (kbd "M-K") 'move-text-up)
 ;;   (global-set-key (kbd "M-J") 'move-text-down))
 
+(use-package org
+  :ensure t
+  :pin gnu  ;; ou nongnu, dependendo do repo configurado
+  :config
+  (setq org-directory "~/org")
+  (setq org-agenda-files '("~/org")))
+
 ;; Compile
 (global-set-key (kbd "M-C") 'compile)
 (global-set-key (kbd "C-M-c") 'recompile)
@@ -128,4 +131,8 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("96aa24cb6fb4b38a754726ae70f631cff06cb12892e2878eb441f1a35023722f"
-     default)))
+     default))
+ '(package-selected-packages nil)
+ '(package-vc-selected-packages
+   '((tokyonight-themes :url
+			"https://github.com/xuchengpeng/tokyonight-themes"))))
