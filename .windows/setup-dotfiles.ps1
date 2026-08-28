@@ -33,7 +33,7 @@ $ErrorActionPreference = 'Stop'
 # TODO: add a custom variable to make path correct here
 $Mappings = @(
     @{
-        path_in_dots = '../.config/nvim'
+        path_in_dots = '..\.config\nvim'
         window_path  = "$env:LOCALAPPDATA\nvim"
     }
     @{
@@ -41,11 +41,11 @@ $Mappings = @(
         window_path  = '~\.doom.d'
     }
     @{
-        path_in_dots = '../.emacs'
-        window_path  = '~\.emacs'
+        path_in_dots = '..\.emacs.d\init.el'
+        window_path  = '~\.emacs.d\init.el'
     }
     @{
-        path_in_dots = '../.vimrc'
+        path_in_dots = '..\.vimrc'
         window_path  = '~\_vimrc'
     }
     @{
