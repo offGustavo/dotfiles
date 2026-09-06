@@ -25,11 +25,9 @@ vim.cmd("let g:loaded_fzf = 1")
 -- Config Files
 if os.getenv("SCROLL_MODE") then
   require("config.kitty_scroll_mode")
-  print "load scroll mode"
   return
 end
 
-print "load my config"
 require("config.autocmds")
 require("config.functions")
 require("config.commands")
