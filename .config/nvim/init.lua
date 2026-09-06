@@ -19,3 +19,10 @@ require("intern")
 -- External plugins
 require("config.lazy")
 -- require("config.pack")
+
+-- MultiCursor
+require("fish.multicursor")
+if vim.fn.has("nvim-0.13") == 1 then
+  -- MultiCursor
+  require("fish.multicursor")
+end

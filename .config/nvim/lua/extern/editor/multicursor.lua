@@ -1,6 +1,6 @@
 return {
   "https://github.com/brenton-leighton/multiple-cursors.nvim",
-  enabled = true,
+  enabled = vim.fn.has("nvim-0.13") ~= 1,
   lazy = true,
   opts = {
     pre_hook = function()
@@ -23,15 +23,15 @@ return {
   }, -- This causes the plugin setup function to be called
   keys = {
     { "<M-q>", "<Cmd>MultipleCursorsAddDelete<Cr>" },
-    { "<C-m>",   "<Cmd>MultipleCursorsLock<Cr>" },
+    { "<C-m>", "<Cmd>MultipleCursorsLock<Cr>" },
     { "<C-S-d>", "<Cmd>MultipleCursorsAddMatches<Cr>" },
     { "<C-S-k>", "<Cmd>MultipleCursorsAddUp<Cr>" },
     { "<C-S-j>", "<Cmd>MultipleCursorsAddDown<Cr>" },
-    { "<C-;>",   "<Cmd>MultipleCursorsAddVisualArea<Cr>" },
-    { "<C-;>",   "<Cmd>MultipleCursorsAddMatchesV<Cr>" },
-    { "<C-.>",   "<Cmd>MultipleCursorsAddJumpNextMatch<CR>" },
-    { "<C-,>",   "<Cmd>MultipleCursorsAddJumpPrevMatch<CR>" },
-    { "<C-p>",   "<Cmd>MultipleCursorsJumpPrevMatch<Cr>" },
-    { "<C-n>",   "<Cmd>MultipleCursorsJumpNextMatch<Cr>" },
+    { "<C-;>", "<Cmd>MultipleCursorsAddVisualArea<Cr>" },
+    { "<C-;>", "<Cmd>MultipleCursorsAddMatchesV<Cr>" },
+    { "<C-.>", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>" },
+    { "<C-,>", "<Cmd>MultipleCursorsAddJumpPrevMatch<CR>" },
+    { "<C-p>", "<Cmd>MultipleCursorsJumpPrevMatch<Cr>" },
+    { "<C-n>", "<Cmd>MultipleCursorsJumpNextMatch<Cr>" },
   },
 }
