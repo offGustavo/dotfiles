@@ -38,8 +38,16 @@ end
 ---@field opts? table extra vim.keymap.set opts (desc, expr, nowait, etc.)
 
 local VALID_MODES = {
-  n = true, v = true, x = true, s = true, o = true,
-  i = true, l = true, c = true, t = true, [""] = true,
+  n = true,
+  v = true,
+  x = true,
+  s = true,
+  o = true,
+  i = true,
+  l = true,
+  c = true,
+  t = true,
+  [""] = true,
 }
 
 ---@param v any
