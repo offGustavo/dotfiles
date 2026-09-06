@@ -37,12 +37,12 @@ require("config.lsp")
 require("config.neovide")
 
 -- Intern plugins
-require("intern")
+require("config.intern")
 
 -- External plugins
 require("config.lazy")
 -- require("config.pack")
 if vim.fn.has("nvim-0.13") == 1 then
   -- MultiCursor
-  require("fish.multicursor")
+  require("config.multicursor")
 end
