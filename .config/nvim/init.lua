@@ -36,13 +36,15 @@ require("config.keymaps")
 require("config.lsp")
 require("config.neovide")
 
+-- TODO: remover quando 0.13 ser estavel
+if vim.fn.has("nvim-0.13") == 1 then
+  -- MultiCursor
+  require("config.multicursor")
+end
+
 -- Intern plugins
 require("config.intern")
 
 -- External plugins
 require("config.lazy")
 -- require("config.pack")
-if vim.fn.has("nvim-0.13") == 1 then
-  -- MultiCursor
-  require("config.multicursor")
-end

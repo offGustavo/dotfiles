@@ -21,14 +21,26 @@ vim.api.nvim_create_autocmd({ "VimEnter", "SessionLoadPost" }, {
   desc = "Auto-load aarguments from session",
 })
 
-vim.api.nvim_create_autocmd({ "VimLeavePre", "SessionWritePre" }, {
-  group = augroup,
-  once = true,
-  callback = function()
-    require("fish.argall").save()
-  end,
-  desc = "Auto-save arguments to session",
-})
+-- TODO: remover quando 0.13 ser estavel
+if vim.fn.has("nvim-0.13") ~= 1 then
+  vim.api.nvim_create_autocmd({ "VimLeavePre", "SessionWritePost" }, {
+    group = augroup,
+    once = true,
+    callback = function()
+      require("fish.argall").save()
+    end,
+    desc = "Auto-save arguments to session",
+  })
+else
+  vim.api.nvim_create_autocmd({ "VimLeavePre", "SessionWritePre" }, {
+    group = augroup,
+    once = true,
+    callback = function()
+      require("fish.argall").save()
+    end,
+    desc = "Auto-save arguments to session",
+  })
+end
 
 -- TODO: decidir se vou usar isso
 -- -- Auto-save the argall buffer whenever it's left or closed

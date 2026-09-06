@@ -1,5 +1,6 @@
 return {
   "https://github.com/brenton-leighton/multiple-cursors.nvim",
+-- TODO: remover quando 0.13 ser estavel
   enabled = vim.fn.has("nvim-0.13") ~= 1,
   lazy = true,
   opts = {
