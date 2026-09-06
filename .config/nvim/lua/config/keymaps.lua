@@ -720,5 +720,37 @@ map {
 }
 -- }}}
 
+local argall = require "fish.argall"
+
+map {
+  { "<leader>hl", argall.load, desc = "Load args session" },
+  { "<leader>he", argall.show, desc = "Show args in tmp buffer" },
+  {
+    "<leader>ha",
+    function()
+      argall.add(vim.fn.expand("%"))
+    end,
+    desc = "Add arg file",
+  },
+  {
+    "<leader>hd",
+    function()
+      vim.cmd "argd %"
+    end,
+    desc = "Remove arg file",
+  },
+}
+
+for i = 1, 9 do
+  vim.keymap.set("n", "<leader>" .. i, "<CMD>argu " .. i .. "<CR>", { silent = true, desc = "Go to arg " .. i })
+  vim.keymap.set(
+    "n",
+    "<leader>h" .. i,
+    "<CMD>" .. i - 1 .. "arga<CR>",
+    { silent = true, desc = "Add current to arg " .. i }
+  )
+  vim.keymap.set("n", "<leader>hd" .. i, "<CMD>" .. i .. "argd<CR>", { silent = true, desc = "Delete arg " .. i })
+end
+
 -- FIXME: try to fix this
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })

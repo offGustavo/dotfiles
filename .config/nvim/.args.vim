@@ -1,2 +1,0 @@
-argglobal
-%argdel

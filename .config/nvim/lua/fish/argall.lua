@@ -1,97 +1,63 @@
-vim.g.forge_arglist = {
-  save_local = {
-    enable = true,
-    file_name = '.args'
-  },
-  autocmd = true
-}
-
-vim.keymap.set('n', '<leader>ha', function()
-  vim.cmd 'argadd %'
-  vim.cmd 'argdedup'
-end, { desc = "Add arg file" })
-vim.keymap.set('n', '<leader>hd', function()
-  vim.cmd 'argd %'
-end, { desc = "Remove arg file" })
-
-for i = 1, 9 do
-  vim.keymap.set('n', '<leader>' .. i, '<CMD>argu ' .. i .. '<CR>', { silent = true, desc = 'Go to arg ' .. i })
-  vim.keymap.set('n', '<leader>h' .. i, '<CMD>' .. i - 1 .. 'arga<CR>',
-    { silent = true, desc = 'Add current to arg ' .. i })
-  vim.keymap.set('n', '<leader>d' .. i, '<CMD>' .. i .. 'argd<CR>', { silent = true, desc = 'Delete arg ' .. i })
-end
+local M = {}
 
 local function get_args_file()
-  local cfg = vim.g.forge_arglist or {}
-  local save_local = (cfg.save_local or {}).enable
-  local file_name = (cfg.save_local or {}).file_name or '.args'
-  local cwd = vim.fn.getcwd()
-
-  if save_local then
-    return cwd .. '/' .. file_name .. '.vim'
+  local cwd = vim.fs.normalize(vim.fn.getcwd()) -- normalizes \ to /, expands ~, etc.
+  if vim.g.argall.save_local.enable then
+    return cwd .. "/" .. vim.g.argall.save_local.file_name .. ".vim"
   end
-
-  -- Use cwd as a unique key: replace path separators with %
-  local cwd_key = cwd:gsub('[/\\]', '%%')
-  return vim.fn.stdpath('data') .. '/forge_args/' .. cwd_key .. '.vim'
+  local data_dir = vim.fs.normalize(vim.fn.stdpath("data"))
+  return data_dir .. "/argall/" .. ".vim"
 end
 
-local function load_args()
+function M.load()
   local path = get_args_file()
   if vim.fn.filereadable(path) == 1 then
-    vim.cmd('source ' .. vim.fn.fnameescape(path))
-    -- vim.notify('Loaded args from ' .. path)
+    vim.cmd("source " .. vim.fn.fnameescape(path))
   end
 end
 
-if vim.g.forge_arglist.autocmd then
-  vim.api.nvim_create_autocmd('VimEnter', {
-    group = vim.api.nvim_create_augroup('ForgeArglist', { clear = true }),
-    once = true,
-    callback = function()
-      load_args()
-    end,
-    desc = 'Auto-load forge arglist session',
-  })
+function M.save()
+  local list = vim.fn.argv()
+  local path = get_args_file()
+  vim.fn.mkdir(vim.fn.fnamemodify(path, ":h"), "p")
+  local lines = { "argglobal", "%argdel", "" }
+  for _, filename in ipairs(list) do
+    table.insert(lines, "$argadd " .. filename)
+  end
+  vim.fn.writefile(lines, path)
+  return path
 end
 
-vim.keymap.set('n', '<leader>hl', load_args, { silent = true, desc = 'Load args session' })
-vim.keymap.set('n', '<leader>he', function()
-    local list = vim.fn.argv()
-    if #list == 0 then
-      vim.notify('Argument list is empty', vim.log.levels.WARN)
-      return
-    end
+function M.add(file_name)
+  if file_name == nil then
+    vim.notify("No file provide")
+    return
+  end
+  vim.cmd("argadd " .. file_name)
+  vim.cmd "argdedup"
+  M.save()
+end
 
-    local path = get_args_file()
-
-    -- Ensure parent directory exists
-    vim.fn.mkdir(vim.fn.fnamemodify(path, ':h'), 'p')
-
-    -- Build lines in mksession style
-    local lines = { 'argglobal', '%argdel', '' }
-    for _, filename in ipairs(list) do
-      table.insert(lines, '$argadd ' .. filename)
-    end
-
-    -- Write to file
-    vim.fn.writefile(lines, path)
-
-    -- Open the file, reuse window if already visible
-    local buf = vim.fn.bufnr(path)
-    local win = buf ~= -1 and vim.iter(vim.api.nvim_list_wins()):find(function(w)
+function M.show()
+  if #vim.fn.argv() == 0 then
+    vim.notify("Argument list is empty", vim.log.levels.WARN)
+    return
+  end
+  local path = M.save()
+  local buf = vim.fn.bufnr(path)
+  local win = buf ~= -1
+    and vim.iter(vim.api.nvim_list_wins()):find(function(w)
       return vim.api.nvim_win_get_buf(w) == buf
     end)
+  if not win then
+    vim.cmd("botright split " .. vim.fn.fnameescape(path))
+    vim.api.nvim_win_set_height(0, math.min(#vim.fn.argv() + 4, 10))
+    vim.bo.filetype = "argall"
+    vim.keymap.set("n", "q", "<C-w>c", { buffer = true, silent = true })
+  else
+    vim.api.nvim_set_current_win(win)
+    vim.cmd "edit"
+  end
+end
 
-    if not win then
-      vim.cmd('botright split ' .. vim.fn.fnameescape(path))
-      local height = math.min(#lines + 1, 10)
-      vim.api.nvim_win_set_height(0, height)
-    else
-      vim.api.nvim_set_current_win(win)
-      vim.cmd 'edit'
-    end
-
-    vim.keymap.set('n', 'q', '<C-w>c', { buffer = true, silent = true })
-  end,
-  { silent = true, desc = 'Show args in tmp buffer' })
+return M
