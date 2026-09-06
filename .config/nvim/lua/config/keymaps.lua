@@ -121,10 +121,10 @@ vim.cmd([[
 
 map {
   -- {{{ Clipboard
-  { { "n", "x" }, "<C-S-v>", '"+p' },
-  { "i", "<C-S-v>", "<C-r>+" },
-  { { "n", "x" }, "<C-S-c>", '"+y' },
-  { { "n", "x" }, "<C-S-x>", '"+d' },
+  { { "n", "x" }, "<C-V>", '"+p' },
+  { "i", "<C-V>", "<C-r>+" },
+  { { "n", "x" }, "<C-C>", '"+y' },
+  { { "n", "x" }, "<C-X>", '"+d' },
   { { "n", "x" }, "<S-Insert>", '"+p' },
   { "i", "<S-Insert>", "<C-r>+" },
   { { "n", "x" }, "<C-Insert>", '"+y' },
@@ -579,7 +579,7 @@ end, { desc = "Inrease numbers and words" })
 --   require("fish.toggle").toggle()
 -- end, { desc = "Toggle Value" })
 
-vim.keymap.set("n", "<space>uc", function()
+vim.keymap.set("n", "<leader>uc", function()
   if vim.opt.conceallevel:get() == 3 then
     vim.o.conceallevel = 0
     return
@@ -718,7 +718,6 @@ map {
     desc = "Git add current directory",
   },
 }
-
 -- }}}
 
 -- FIXME: try to fix this
