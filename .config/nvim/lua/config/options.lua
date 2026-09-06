@@ -1,48 +1,12 @@
 -- vim: foldmethod=marker
 
 -- {{{ Map Leader and Local Leader
-vim.cmd([[
-" <space> as leader
-let g:mapleader = " "
-" <space><space> as local leader
-let g:maplocalleader = "  "
-]])
+-- <space> as leader
+vim.g.mapleader = " "
+-- \ as local leader
+vim.g.maplocalleader = "\\"
 -- }}}
 
--- {{{ Set a temp theme here to prevent light/dark flicker
-if vim.o.background == "dark" then
-  vim.cmd.colorscheme("tokyo")
-else
-  vim.cmd.colorscheme("tokyo-day")
-end
--- }}}
-
--- {{{ Security Things
-set {
-  modeline = true,
-  exrc = false,
-}
---- }}}
-
--- {{{ Disable Plugins
--- disable custom nix/arch fzf.vim
-vim.cmd("let g:loaded_fzf = 1")
--- }}}
-
--- {{{ Kitty scroll mode
-if os.getenv("SCROLL_MODE") then
-  vim.cmd([[
-	nmap q <Cmd>qa!<CR>
-	xmap q <Cmd>qa!<CR> 
-	nnoremap yy "+yy<Cmd>qa!<Cr>
-	xmap y "+y<Cmd>qa!<Cr>
-	set laststatus=0 nonu nornu signcolumn=no cursorline cmdheight=0
-	$ 
-	]])
-  -- NOTE: Stop config here
-  return
-end
--- }}}
 
 -- {{{ Netrw
 vim.cmd [[
