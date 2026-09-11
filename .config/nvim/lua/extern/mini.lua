@@ -4,7 +4,7 @@ return {
   config = function()
     -- require("mini.statusline").setup()
     -- require("mini.tabline").setup()
-    -- require('mini.statuscolumn').setup()
+    -- require('mini.statuscolumnsetup()
 
     require("mini.icons").setup({
       -- -- Icon style: 'glyph' or 'ascii'
@@ -13,8 +13,7 @@ return {
 
     -- Git
     require("mini.git").setup({})
-    local rhs = '<Cmd>lua MiniGit.show_at_cursor()<CR>'
-    vim.keymap.set({ 'n', 'x' }, '<Leader>gs', rhs, { desc = 'Show at cursor' })
+    vim.keymap.set({ 'n', 'x' }, '<leader>gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', { desc = 'Show at cursor' })
 
     -- Use only HEAD name as summary string
     local branch_format_summary = function(data)
