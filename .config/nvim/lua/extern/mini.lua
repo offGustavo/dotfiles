@@ -10,10 +10,11 @@ return {
       -- -- Icon style: 'glyph' or 'ascii'
       -- style = 'ascii',
     })
+    MiniIcons.mock_nvim_web_devicons()
 
     -- Git
     require("mini.git").setup({})
-    vim.keymap.set({ 'n', 'x' }, '<leader>gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', { desc = 'Show at cursor' })
+    vim.keymap.set({ "n", "x" }, "<leader>gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", { desc = "Show at cursor" })
 
     -- Use only HEAD name as summary string
     local branch_format_summary = function(data)
@@ -201,10 +202,10 @@ return {
     -- require("mini.completion").setup()
     -- require("mini.cmdline").setup()
 
-    -- require("mini.files").setup()
-    -- vim.keymap.set("n", "<leader>fe", function ()
-    --   require("mini.files").open()
-    -- end)
+    require("mini.files").setup()
+    vim.keymap.set("n", "<leader>fe", function()
+      require("mini.files").open()
+    end)
 
     require("mini.align").setup({
       -- Module mappings. Use `''` (empty string) to disable one.
@@ -258,6 +259,5 @@ return {
       -- idle time if user input is required.
       silent = false,
     })
-
   end,
 }
