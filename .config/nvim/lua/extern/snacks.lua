@@ -176,6 +176,13 @@ return {
       desc = "Projects",
     },
     {
+      "<leader>fo",
+      function()
+        Snacks.picker.recent()
+      end,
+      desc = "OldFiles",
+    },
+    {
       "<leader>fr",
       function()
         Snacks.picker.recent()
