@@ -10,7 +10,7 @@ return {
     bigfile = { enabled = true },
     dashboard = {
       --       enabled = true,
-      enabled = false,
+      enabled = true,
       preset = {
         header = [[
  ███     █████                       ███  ████ 
@@ -671,40 +671,40 @@ return {
         end
 
         -- Create some toggle mappings
-        Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
-        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-        Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-        Snacks.toggle.diagnostics():map("<leader>ud")
-        Snacks.toggle.line_number():map("<leader>ul")
-        Snacks.toggle
-          .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-          :map("<leader>uc")
-        Snacks.toggle.treesitter():map("<leader>uT")
-        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-        Snacks.toggle.inlay_hints():map("<leader>uh")
-        Snacks.toggle.indent():map("<leader>ug")
-        Snacks.toggle.dim():map("<leader>uD")
-        Snacks.toggle
-          .new({
-            id = "toggle_sing_and_line_column",
-            name = "Relative Line Number and Sign Column",
-            get = function()
-              return vim.o.relativenumber
-            end,
-            set = function(state)
-              if state then
-                vim.o.signcolumn = "no"
-                vim.opt.number = false
-                vim.opt.relativenumber = false
-              end
-              vim.o.signcolumn = "yes"
-              vim.opt.number = state
-              vim.opt.relativenumber = state
-            end,
-          })
-          :map("<leader>u<M-l>")
-
-        Snacks.toggle.option("cursorline", { off = false, on = true }):map("<leader>u<C-l>")
+        -- Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+        -- Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+        -- Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+        -- Snacks.toggle.diagnostics():map("<leader>ud")
+        -- Snacks.toggle.line_number():map("<leader>ul")
+        -- Snacks.toggle
+        --   .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+        --   :map("<leader>uc")
+        -- Snacks.toggle.treesitter():map("<leader>uT")
+        -- Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+        -- Snacks.toggle.inlay_hints():map("<leader>uh")
+        -- Snacks.toggle.indent():map("<leader>ug")
+        -- Snacks.toggle.dim():map("<leader>uD")
+        -- Snacks.toggle
+        --   .new({
+        --     id = "toggle_sing_and_line_column",
+        --     name = "Relative Line Number and Sign Column",
+        --     get = function()
+        --       return vim.o.relativenumber
+        --     end,
+        --     set = function(state)
+        --       if state then
+        --         vim.o.signcolumn = "no"
+        --         vim.opt.number = false
+        --         vim.opt.relativenumber = false
+        --       end
+        --       vim.o.signcolumn = "yes"
+        --       vim.opt.number = state
+        --       vim.opt.relativenumber = state
+        --     end,
+        --   })
+        --   :map("<leader>u<M-l>")
+        --
+        -- Snacks.toggle.option("cursorline", { off = false, on = true }):map("<leader>u<C-l>")
       end,
     })
   end,

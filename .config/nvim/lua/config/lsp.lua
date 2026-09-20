@@ -48,69 +48,83 @@ vim.schedule(function()
       }) -- Diagnostics
 
       local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+      -- -- Disable LSP Highlight
+      -- if client and client.server_capabilities then
+      --   client.server_capabilities.semanticTokensProvider = nil
+      -- end
+
       if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
         vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = false })
-        -- Diagnostic keymaps
-        map({
-          {
-            "<leader>ca",
-            function()
-              vim.lsp.buf.code_action()
-            end,
-            desc = "Code Action",
-          },
-          {
-            "<leader>cd",
-            function()
-              vim.lsp.buf.definition()
-            end,
-            desc = "Open Definition",
-          },
-          {
-            "<leader>cr",
-            function()
-              vim.lsp.buf.references()
-            end,
-            desc = "Open References",
-          },
-          {
-            "<leader>cR",
-            function()
-              vim.lsp.buf.rename()
-            end,
-            desc = "Lsp Rename",
-          },
-          {
-            "<leader>cF",
-            function()
-              vim.lsp.buf.format()
-            end,
-            desc = "Lsp Code Format",
-          },
-          {
-            "<leader>cq",
-            function()
-              vim.diagnostic.setqflist()
-            end,
-            desc = "Open Diagnostics Quickfix list",
-          },
-          { "<leader>ce", vim.diagnostic.open_float, desc = "Line Diagnostics Error" },
-          { "<leader>K", vim.lsp.buf.hover, desc = "Go to lsp help" },
-          { "<S-space>K", vim.lsp.buf.hover, desc = "Go to lsp help" },
-          { "<leader>ch", vim.lsp.buf.hover, desc = "Line Diagnostics Error" },
-        })
-        pcall(function()
-          -- NOTE: Remove lsp-default mappings
-          vim.cmd([[
-          nnoremap <nowait> gr gr
-          nnoremap <nowait> gd gd
-          nnoremap <nowait> K K
-          " unamp gd
-          ]])
-          vim.keymap.del("n", "gd", { buf = ev.buf })
-          vim.keymap.del("n", "K", { buf = ev.buf })
-        end)
       end
+
+      -- Diagnostic keymaps
+      map({
+        {
+          "<leader>ca",
+          function()
+            vim.lsp.buf.code_action()
+          end,
+          desc = "Code Action",
+          buf = ev.buf,
+        },
+        {
+          "<leader>cd",
+          function()
+            vim.lsp.buf.definition()
+          end,
+          desc = "Open Definition",
+          buf = ev.buf,
+        },
+        {
+          "<leader>cr",
+          function()
+            vim.lsp.buf.references()
+          end,
+          desc = "Open References",
+          buf = ev.buf,
+        },
+        {
+          "<leader>cR",
+          function()
+            vim.lsp.buf.rename()
+          end,
+          desc = "Lsp Rename",
+          buf = ev.buf,
+        },
+        {
+          "<leader>cF",
+          function()
+            vim.lsp.buf.format()
+          end,
+          desc = "Lsp Code Format",
+          buf = ev.buf,
+        },
+        {
+          "<leader>cq",
+          function()
+            vim.diagnostic.setqflist()
+          end,
+          desc = "Open Diagnostics Quickfix list",
+          buf = ev.buf,
+        },
+        { "<leader>ce", vim.diagnostic.open_float, desc = "Line Diagnostics Error", buf = ev.buf },
+        { "<leader>K", vim.lsp.buf.hover, desc = "Go to lsp help", buf = ev.buf },
+        { "<S-space>K", vim.lsp.buf.hover, desc = "Go to lsp help", buf = ev.buf },
+        { "<leader>ch", vim.lsp.buf.hover, desc = "Line Diagnostics Error", buf = ev.buf },
+      })
+
+      -- NOTE: Remove lsp-default mappings
+      pcall(function()
+        vim.cmd([[
+        nnoremap <nowait> gr gr
+        nnoremap <nowait> gd gd
+        nnoremap <nowait> K K
+        " unamp gd
+        ]])
+        vim.keymap.del("n", "gd", { buf = ev.buf })
+        vim.keymap.del("n", "K", { buf = ev.buf })
+      end)
     end,
   })
 end)
