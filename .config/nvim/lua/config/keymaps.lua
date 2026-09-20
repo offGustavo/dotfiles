@@ -632,6 +632,24 @@ vim.keymap.set("n", "<leader>ut", function()
   vim.treesitter.start(0)
 end, { desc = "set vim.treesitter()!" })
 
+vim.keymap.set("n", "<leader>uT", function()
+  local buf = vim.api.nvim_get_current_buf()
+  vim.lsp.semantic_tokens.enable(not vim.lsp.semantic_tokens.is_enabled({ bufnr = buf }), { bufnr = buf })
+end, { desc = "Toggle LSP semantic tokens" })
+
+vim.keymap.set("n", "<leader>u<C-t>", function()
+  local state = vim.b.ts_highlight
+  local buf = vim.api.nvim_get_current_buf()
+
+  if state then
+    vim.treesitter.stop(0)
+    vim.lsp.semantic_tokens.enable(false, { bufnf = buf })
+    return
+  end
+  vim.treesitter.start(0)
+  vim.lsp.semantic_tokens.enable(true, { bufnf = buf })
+end, { desc = "Toggle LSP and Treesitter Highlight" })
+
 vim.keymap.set("n", "<leader>uf", function()
   local fmd = { "expr", "indent", "marker" }
   local length = #fmd
