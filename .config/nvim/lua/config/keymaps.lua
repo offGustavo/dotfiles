@@ -1,127 +1,119 @@
 -- {{{ Nvim
+local argall = require "fish.argall"
 
 -- basic keymaps for nvim (if lazy fails for some reason)
 vim.cmd([[
-  nmap <m-o> :fin<space>
-  nmap <m-s> :grep<space>
-  nmap <m-b> :b<space>
-  nmap <m-e> :ex<cr>
-  nmap <leader>vc :e $MYVIMRC<cr>
+nmap <m-o> :fin<space>
+nmap <m-s> :grep<space>
+nmap <m-b> :b<space>
+nmap <m-e> :ex<cr>
+nmap <leader>vc :e $MYVIMRC<cr>
 ]])
 
 -- vim.keymap.del("n", "gd")
 -- vim.keymap.del("n", "K")
 
-vim.cmd([[
-   nmap <nowait> gd gd
-   nmap <nowait> gr gr
-   nmap <nowait> gD gD
-   nmap <nowait> K K
-  ]])
-
--- Marks
-vim.keymap.set("n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", { desc = "Del mark <char>" })
-
--- Edit init.lua/init.vim/vimrc
--- vim.keymap.set("n", "<leader>fC", ":e $MYVIMRC<Cr>", { silent = true, desc = "Edit the init config file" })
-
--- Fix <C-c> to work like <Esc>
-vim.keymap.set("i", "<C-c>", "<Esc>")
-
---- Better Go to file
-vim.keymap.set("n", "gf", ":e <cfile><Cr>", { silent = true, desc = "Better gf" })
-
-vim.keymap.set("x", "<", "<gv", { silent = true, desc = "Better Indent" })
-vim.keymap.set("x", ">", ">gv", { silent = true, desc = "Better Indent" })
-
--- Align use mini-indent
-vim.keymap.set("x", "<leader>f", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', { desc = "Format Table in Markdown" })
-vim.keymap.set("x", "<leader>a", function()
-  require("fish.align").align_regexp()
-end, { desc = "Align by regex", silent = true })
-
--- Better gX(go to file externally)
-vim.keymap.set("n", "gX", function()
-  local file = vim.fn.expand("%:p")
-  if file ~= "" then
-    vim.ui.open(file)
-  else
-    vim.notify("no file to open", vim.log.levels.WARN)
-  end
-end, { silent = true, desc = "Open current file" })
-
--- {{{ Better walking between wrap lines
--- Use <Down> and <Up> to get the default behavior
-vim.keymap.set("n", "j", "gj", { silent = true })
-vim.keymap.set("n", "k", "gk", { silent = true })
---- }}}
-
--- Comment Line/Selection
-vim.cmd([[
- nmap <silent> <C-/> gcc
- imap <silent> <C-/> <C-o>gcc
- xmap <silent> <C-/> :norm gcc<Cr>
-]])
-
---- Scroll
-vim.cmd([[
-  nmap  <S-ScrollWheelUp> zh
-  nmap  <S-ScrollWheelDown> zl
-]])
-
--- Normal mode in command line
--- vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
-
--- Restart neovim without a sesions
-vim.keymap.set("n", "<leader>qr", function()
-  vim.cmd("restart!")
-end, { desc = "Restart Without Session", silent = true }) -- ZR for buitin restart
-vim.keymap.set("n", "Zr", function()
-  vim.cmd("restart!")
-end, { desc = "Restart Without Session", silent = true }) -- ZR for buitin restart
-
--- File
-vim.keymap.set("n", "<leader>fn", ":enew<Cr>", { silent = true, desc = "New File" })
-
--- Undotree
-vim.schedule(function()
-  vim.cmd("packadd nvim.undotree")
-  vim.keymap.set("n", "U", require("undotree").open)
-end)
-
-vim.cmd([[
-  " https://github.com/christoomey/vim-titlecase/blob/master/plugin/titlecase.vim
-
-  " plugin/titlecase.vim
-  "
-  " if exists('g:loaded_titlecase')
-  "   finish
-  " endif
-  " let g:loaded_titlecase = 1
-
-  nnoremap <silent> <Plug>Titlecase
-        \ <Cmd>set opfunc=titlecase#titlecase<CR>g@
-  xnoremap <silent> <Plug>Titlecase
-        \ <Cmd>call titlecase#titlecase(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
-  nnoremap <silent> <Plug>TitlecaseLine
-        \ <Cmd>set opfunc=titlecase#titlecase<Bar>exe 'normal! ' . v:count1 . 'g@_'<CR>
-
-  if !hasmapto('<Plug>Titlecase', 'n') && maparg('gz', 'n') ==# ''
-    nmap gz <Plug>Titlecase
-  endif
-  if !hasmapto('<Plug>Titlecase', 'x') && maparg('gz', 'x') ==# ''
-    xmap gz <Plug>Titlecase
-    xmap Z <Plug>Titlecase
-  endif
-  if !hasmapto('<Plug>TitlecaseLine', 'n') && maparg('gzz', 'n') ==# ''
-    nmap gzz <Plug>TitlecaseLine
-  endif
-]])
---- }}}
+-- vim.cmd([[
+-- nmap <nowait> gd gd
+-- nmap <nowait> gr gr
+-- nmap <nowait> gD gD
+-- nmap <nowait> K K
+-- ]])
 
 map {
+  -- Marks
+  { "n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", desc = "Del mark <char>" },
+
+  -- Edit init.lua/init.vim/vimrc
+  { "n", "<leader>fC", ":e $MYVIMRC<Cr>", silent = true, desc = "Edit the init config file" },
+
+  -- Fix <C-c> to work like <Esc>
+  { "i", "<C-c>", "<Esc>" },
+
+  --- Better Go to file
+  { "n", "gf", ":e <cfile><Cr>", silent = true, desc = "Better gf" },
+
+  { "x", "<", "<gv", silent = true, desc = "Better Indent" },
+  { "x", ">", ">gv", silent = true, desc = "Better Indent" },
+
+  -- Align use mini-indent
+  { "x", "<leader>f", ':! tr -s " " | column -t -s "|" -o "|"<Cr>', desc = "Format Table in Markdown" },
+  {
+    "x",
+    "<leader>a",
+    function()
+      require("fish.align").align_regexp()
+    end,
+    desc = "Align by regex",
+    silent = true,
+  },
+
+  -- Better gX(go to file externally)
+  {
+    "n",
+    "gX",
+    function()
+      local file = vim.fn.expand("%:p")
+      if file ~= "" then
+        vim.ui.open(file)
+      else
+        vim.notify("no file to open", vim.log.levels.WARN)
+      end
+    end,
+    silent = true,
+    desc = "Open current file",
+  },
+
+  -- {{{ Better walking between wrap lines
+  -- Use <Down> and <Up> to get the default behavior
+  { "n", "j", "gj", silent = true },
+  { "n", "k", "gk", silent = true },
+  --- }}}
+
+  -- Comment Line/Selection
+  { "n", "<C-/>", "gcc", silent = true },
+  { "i", "<C-/>", " <C-o>gcc", silent = true },
+  { "x", "<C-/>", " :norm gcc<Cr>", silent = true },
+
+  --- Scroll
+  { "<S-ScrollWheelUp>", "zh" },
+  { "<S-ScrollWheelDown>", "zl" },
+
+  -- Normal mode in command line
+  -- vim.keymap.set("n", "<leader>;", ":<c-f>", { silent = true, desc = "Vi Command Mode" })
+
+  -- Restart neovim without a sesions
+  {
+    "n",
+    { "Zr", "<leader>qr" },
+    function()
+      vim.cmd("restart!")
+    end,
+    desc = "Restart Without Session",
+    silent = true,
+  },
+  -- vim.keymap.set("n", "Zr", function()
+  --   vim.cmd("restart!")
+  -- end, { desc = "Restart Without Session", silent = true }) -- ZR for buitin restart
+
+  -- File
+  { "n", "<leader>fn", ":enew<Cr>", silent = true, desc = "New File" },
+
+  -- Undotree
+  {
+    "n",
+    "U",
+    function()
+      vim.cmd("packadd nvim.undotree")
+      require("undotree").open()
+    end,
+    silent = true,
+  },
+
+  --- }}}
+
   -- {{{ Clipboard
-  { { "n", "x" }, "<C-V>", '"+p' },
+  { { "n", "x" }, "<C-S-v>", '"+p' },
   { "i", "<C-V>", "<C-r>+" },
   { { "n", "x" }, "<C-C>", '"+y' },
   { { "n", "x" }, "<C-X>", '"+d' },
@@ -155,129 +147,144 @@ map {
 
   -- {{{ Insert/Command Mode
   { "i", "<C-Bs>", "<C-w>" },
-}
--- }}}
 
-vim.cmd([[
-cmap <C-a> <home>
-cmap <C-e> <end>
-cmap <C-f> <right>
-cmap <C-b> <left>
-cmap <M-f> <C-right>
-cmap <M-b> <C-left>
-cmap <C-d> <del>
-cmap <C-o> <C-f>
+  -- }}}
 
-"" Emacs shit
-nmap <M-x> :
-imap <M-x> <C-o>:
-
-inoremap <Tab> <C-t>
-inoremap <S-Tab> <C-d>
-
-imap <C-a> <home>
-imap <C-e> <end>
-imap <C-f> <right>
-imap <C-b> <left>
-imap <M-f> <C-right>
-imap <M-b> <C-left>
-imap <C-d> <del>
-imap <M-d> <C-o>de
-
-" nmap <C-á> ^
-" nmap <C-é> $
-" imap <C-á> <Home>
-" imap <C-é> <End>
-]])
-
--- Emacs Binds
-map {
+  -- Emacs Binds
   { "n", "<C-Down>", "}", noremap = true, silent = true },
   { "n", "<C-Up>", "{", noremap = true, silent = true },
   { "i", "<M-S-.>", "<C-o>G", noremap = true, silent = true },
   { "i", "<M-S-,>", "<C-o>gg", noremap = true, silent = true },
   { { "n", "x" }, "<M-S-.>", "G", noremap = true, silent = true },
   { { "n", "x" }, "<M-S-,>", "gg", noremap = true, silent = true },
-  { { "n", "x" }, "<M-x>", ":" },
+  { { "n", "x" }, "<M-x>", ":", silent = false },
+
+  { "<C-a>", "<home>" },
+  { "<C-e>", "<end>" },
+  { "<C-f>", "<right>" },
+  { "<C-b>", "<left>" },
+  { "<M-f>", "<C-right>" },
+  { "<M-b>", "<C-left>" },
+  { "<C-d>", "<del>" },
+  { "<C-o>", "<C-f>" },
+
+  -- " " Emacs shit
+  -- nmap <M-x> :
+  -- imap <M-x> <C-o>:
+
+  { "i", "<Tab>", "<C-t>" },
+  { "i", "<S-Tab>", "<C-d>" },
+
+  { "i", "<C-a>", " <home>" },
+  { "i", "<C-e>", " <end>" },
+  { "i", "<C-f>", " <right>" },
+  { "i", "<C-b>", " <left>" },
+  { "i", "<M-f>", " <C-right>" },
+  { "i", "<M-b>", " <C-left>" },
+  { "i", "<C-d>", " <del>" },
+  { "i", "<M-d>", " <C-o>de" },
+
+  -- " nmap <C-á> ^
+  -- " nmap <C-é> $
+  -- " imap <C-á> <Home>
+  -- " imap <C-é> <End>
+
+  --- }}}
+
+  -- {{{ Copy/Move
+  { "<M-d>", ":t.<cr>", silent = true, desc = "Duplicate line" },
+  { "<M-j>", ":m +1<CR>==", silent = true, desc = "Move line down" },
+  { "<M-k>", ":m -2<CR>==", silent = true, desc = "Move line up" },
+  { "<M-j>", ":m '>+1<CR>gv=gv", silent = true, desc = "Move line down" },
+  { "<M-k>", ":m '<-2<CR>gv=gv", silent = true, desc = "Move line up" },
+  -- }}}
+
+  -- {{{ Lines
+  {
+    { "n", "x", "i" },
+    "<M-S-l>",
+    function()
+      local mode = vim.fn.mode()
+      if mode == "i" then
+        -- print(mode)
+        return "<Esc>V"
+      elseif mode == "n" then
+        -- print(mode)
+        return "V"
+      elseif mode == "V" or mode == "v" or mode == "x" then
+        -- print(mode)
+        return "j0"
+      end
+      -- print("other" .. mode)
+    end,
+    desc = "Sel Line (emacs)",
+    expr = true,
+    silent = true,
+  },
+  {
+    { "n", "x", "i" },
+    "<M-S-h>",
+    function()
+      local mode = vim.fn.mode()
+      if mode == "i" then
+        return "<Esc>vap"
+      elseif mode == "n" then
+        return "vap"
+      elseif mode == "V" or mode == "v" or mode == "x" then
+        return "ap"
+      end
+    end,
+    desc = "Sel Paragraph(emacs)",
+    expr = true,
+    silent = true,
+  },
+  -- }}}
+
+  -- {{{ Terminal
+  { { "i", "c", "n", "v", "x" }, "<C-c>", "<Esc>", desc = "Fix <C-c>", silent = true },
+  { { "i", "t" }, "<M-;>", "<C-\\><C-n>", silent = true, desc = "Go To Normal Mode in Terminal", nowait = true },
+  { "t", "<S-Esc>", "<C-\\><C-n>", silent = true, desc = "Go To Normal Mode in Terminal", nowait = true },
+  -- { 't', '<Esc><Esc>', '<C-\\><C-n>',  silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true },
+  { "n", "<M-t>", ":term " },
+  { "n", "<leader>tn", ":term " },
+  { "n", "<leader>th", ":hor term " },
+  { "n", "<leader>tv", ":vert term " },
+  { "n", "<leader>tg", ":hor term rg " },
+  --- }}}
+
+  -- {{{ Tabs
+  -- :tcd shortcut
+  { "n", "<leader><Tab>z", ":tcd ", desc = "Tab Cd" },
+
+  {
+    "n",
+    "<leader><Tab><Tab>",
+    function()
+      local count = vim.v.count
+      if count > 0 then
+        vim.cmd("norm " .. count .. "gt")
+        return
+      end
+      vim.cmd.tabnew()
+    end,
+    desc = "New Tab",
+  },
+
+  -- {{{ Tabs
+  { "n", "<leader><Tab>c", "<cmd>tabclose<cr>", desc = "Close Tab" },
+  { "n", "<leader><Tab>o", "<cmd>tabonly<cr>", desc = "Close Other Tabs" },
+
+  { "n", "]<S-Tab>", "<cmd>tablast<cr>", desc = "Last Tab" },
+  { "n", "[<S-Tab>", "<cmd>tabfirst<cr>", desc = "First Tab" },
+
+  { "n", "]<Tab>", "<cmd>tabnext<cr>", desc = "Next Tab" },
+  { "n", "[<Tab>", "<cmd>tabprevious<cr>", desc = "Previous Tab" },
+
+  { "n", "<C-S-PageUp>", "<cmd>tabmove -1<cr>" },
+  { "n", "<C-S-PageDown>", "<cmd>tabmove +1<cr>" },
+  -- }}}
 }
---- }}}
 
--- {{{ Copy/Move
-vim.keymap.set("n", "<M-d>", ":t.<cr>", { silent = true, desc = "Duplicate line" })
-vim.keymap.set("n", "<M-j>", ":m +1<CR>==", { silent = true, desc = "Move line down" })
-vim.keymap.set("n", "<M-k>", ":m -2<CR>==", { silent = true, desc = "Move line up" })
-vim.keymap.set("x", "<M-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move line down" })
-vim.keymap.set("x", "<M-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move line up" })
--- }}}
-
--- {{{ Lines
-vim.keymap.set({ "n", "x", "i" }, "<M-S-l>", function()
-  local mode = vim.fn.mode()
-  if mode == "i" then
-    print(mode)
-    return "<Esc>V"
-  elseif mode == "n" then
-    print(mode)
-    return "V"
-  elseif mode == "V" or mode == "v" or mode == "x" then
-    print(mode)
-    return "j0"
-  end
-  print("other" .. mode)
-end, { desc = "Sel Line (emacs)", expr = true, silent = true })
-vim.keymap.set({ "n", "x", "i" }, "<M-S-h>", function()
-  local mode = vim.fn.mode()
-  if mode == "i" then
-    return "<Esc>vap"
-  elseif mode == "n" then
-    return "vap"
-  elseif mode == "V" or mode == "v" or mode == "x" then
-    return "ap"
-  end
-end, { desc = "Sel Paragraph(emacs)", expr = true, silent = true })
--- }}}
-
--- {{{ Terminal
-vim.keymap.set({ "i", "c", "n", "v", "x" }, "<C-c>", "<Esc>", { desc = "Fix <C-c>", silent = true })
-vim.keymap.set(
-  { "i", "t" },
-  "<M-;>",
-  "<C-\\><C-n>",
-  { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true }
-)
-vim.keymap.set("t", "<S-Esc>", "<C-\\><C-n>", { silent = true, desc = "Go To Normal Mode in Terminal", nowait = true })
--- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true })
-vim.keymap.set("n", "<M-t>", ":term ")
-vim.keymap.set("n", "<leader>tn", ":term ")
-vim.keymap.set("n", "<leader>th", ":hor term ")
-vim.keymap.set("n", "<leader>tv", ":vert term ")
-vim.keymap.set("n", "<leader>tg", ":hor term rg ")
---- }}}
-
--- {{{ Tabs
--- :tcd shortcut
-vim.keymap.set("n", "<leader><Tab>z", ":tcd ", { desc = "Tab Cd" })
-
-vim.keymap.set("n", "<leader><Tab><Tab>", function()
-  local count = vim.v.count
-  if count > 0 then
-    vim.cmd("norm " .. count .. "gt")
-    return
-  end
-  vim.cmd.tabnew()
-end, { desc = "New Tab" })
-
-vim.keymap.set("n", "<leader><Tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-vim.keymap.set("n", "<leader><Tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
-
-vim.keymap.set("n", "]<S-Tab>", "<cmd>tablast<cr>", { desc = "Last Tab" })
-vim.keymap.set("n", "[<S-Tab>", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-
-vim.keymap.set("n", "]<Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-vim.keymap.set("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-
-vim.keymap.set("n", "<C-S-PageUp>", "<cmd>tabmove -1<cr>")
-vim.keymap.set("n", "<C-S-PageDown>", "<cmd>tabmove +1<cr>")
 ---}}}
 
 -- -- {{{ Fold
@@ -399,43 +406,90 @@ end
 --   end,
 -- })
 
-vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-j>", function()
-  Fish.windows.cycle(true)
-end, { desc = "Cycle to next window (keep mode)" })
-
-vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-k>", function()
-  Fish.windows.cycle(false)
-end, { desc = "Cycle to prev window (keep mode)" })
-vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-j>", function()
-  vim.cmd.wincmd("w")
-end)
-vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-k>", function()
-  vim.cmd.wincmd("W")
-end)
-vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-s>", function()
-  vim.cmd.wincmd("s")
-end)
-vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-v>", function()
-  vim.cmd.wincmd("v")
-end)
-vim.keymap.set({ "x", "n", "i", "t" }, "<M-S-o>", function()
-  vim.cmd.wincmd("o")
-end)
-vim.keymap.set("n", "<M-=>", function()
-  vim.cmd.wincmd("=")
-end, { desc = "Windows" })
-vim.keymap.set("n", "<M-+>", function()
-  vim.cmd.wincmd("+")
-end, { desc = "Windows" })
-vim.keymap.set("n", "<M-->", function()
-  vim.cmd.wincmd("-")
-end, { desc = "Windows" })
-vim.keymap.set("n", "<M-,>", function()
-  vim.cmd.wincmd("<")
-end, { desc = "Windows" })
-vim.keymap.set("n", "<M-.>", function()
-  vim.cmd.wincmd(">")
-end, { desc = "Windows" })
+map {
+  {
+    { "x", "n", "i", "t" },
+    "<M-S-j>",
+    function()
+      Fish.windows.cycle(true)
+    end,
+    desc = "Cycle to next window (keep mode)",
+  },
+  {
+    { "x", "n", "i", "t" },
+    "<M-S-k>",
+    function()
+      Fish.windows.cycle(false)
+    end,
+    desc = "Cycle to prev window (keep mode)",
+  },
+  -- { {  "x", "n", "i", "t" }, "<M-S-j>", function() vim.cmd.wincmd("w") end, desc = "Move to next window" },
+  -- { {  "x", "n", "i", "t" }, "<M-S-k>", function() vim.cmd.wincmd("W") end, desc = "Move to next window" },
+  {
+    { "x", "n", "i", "t" },
+    "<M-S-s>",
+    function()
+      vim.cmd.wincmd("s")
+    end,
+    desc = "Split Vertical",
+  },
+  {
+    { "x", "n", "i", "t" },
+    "<M-S-v>",
+    function()
+      vim.cmd.wincmd("v")
+    end,
+    desc = "Split Horizontally",
+  },
+  {
+    { "x", "n", "i", "t" },
+    "<M-S-o>",
+    function()
+      vim.cmd.wincmd("o")
+    end,
+    desc = "Make Only Window",
+  },
+  {
+    "n",
+    "<M-=>",
+    function()
+      vim.cmd.wincmd("=")
+    end,
+    desc = "Windows",
+  },
+  {
+    "n",
+    "<M-+>",
+    function()
+      vim.cmd.wincmd("+")
+    end,
+    desc = "Windows",
+  },
+  {
+    "n",
+    "<M-->",
+    function()
+      vim.cmd.wincmd("-")
+    end,
+    desc = "Windows",
+  },
+  {
+    "n",
+    "<M-,>",
+    function()
+      vim.cmd.wincmd("<")
+    end,
+    desc = "Windows",
+  },
+  {
+    "n",
+    "<M-.>",
+    function()
+      vim.cmd.wincmd(">")
+    end,
+    desc = "Windows",
+  },
+}
 
 Fish.windows = {
   hydra_mode = {
@@ -491,222 +545,339 @@ end
 -- vim.keymap.set("n", "<leader>w.", hydra_keymap)
 -- vim.keymap.set("n", "<C-w>m.", hydra_keymap)
 
-vim.keymap.set("n", "<c-w>m", function()
-  require("fish.zoom").zoom()
-end, { desc = "Toggle pane/window zoom" })
-
-vim.keymap.set("n", "<leader>uz", function()
-  require("fish.zoom").zoom()
-end, { desc = "Toggle pane/window zoom" })
-
---- }}}
-
--- {{{ LocList
-vim.keymap.set("n", "<leader>ll", ":lwindow<Cr>", { desc = "Location List", silent = true })
-vim.keymap.set("n", "<leader>lp", ":lprev<Cr>", { desc = "Location List", silent = true })
-vim.keymap.set("n", "<leader>ln", ":lnext<Cr>", { desc = "Location List", silent = true })
-vim.keymap.set("n", "<leader>la", function()
-  local pos = vim.api.nvim_win_get_cursor(0)
-  local item = {
-    bufnr = vim.api.nvim_get_current_buf(),
-    lnum = pos[1],
-    col = pos[2] + 1,
-    text = vim.fn.getline("."),
-  }
-  vim.fn.setloclist(0, { item }, "a") -- "a" = append
-  vim.notify("Adicionado à Location List")
-end, { desc = "Adicionar item à Location List" })
-
-vim.keymap.set("n", "<leader>lr", function()
-  vim.fn.setloclist(0, {}, "r") -- "r" = replace (aqui com vazio)
-  vim.notify("Location List resetada")
-end, { desc = "Resetar Location List" })
---- }}}
-
--- {{{ Quickfix
-vim.keymap.set("n", "<leader>qn", "<Cmd>cnext<Cr>", { silent = true, desc = "Open Next in Quickfix List" })
-vim.keymap.set("n", "<leader>qp", "<Cmd>cprev<Cr>", { silent = true, desc = "Open Previous in Quickfix List" })
-
--- vim.keymap.set("n", "<leader>qo", vim.cmd.copen, { desc = "QuickFix Open", silent = true })
--- vim.keymap.set("n", "<leader>qc", vim.cmd.cclose, { desc = "QuickFix Close", silent = true })
-
-vim.keymap.set("n", "<leader>qo", "<Cmd>copen<Cr>", { silent = true, desc = "Open Quickfix List" })
-vim.keymap.set("n", "<leader>qc", "<Cmd>cclose<Cr>", { silent = true, desc = "Close Quickfix List" })
-vim.keymap.set("n", "<leader>qh", "<Cmd>chistory<Cr>", { silent = true, desc = "List Quick Fix History" })
-vim.keymap.set("n", "<leader>qn", "<Cmd>cnewer<Cr>", { silent = true, desc = "Next Quickfix List" })
-vim.keymap.set("n", "<leader>qp", "<Cmd>colder<Cr>", { silent = true, desc = "Previous Quickfix List" })
-for i = 1, 9 do
-  vim.keymap.set(
-    "n",
-    "<leader>q" .. i,
-    "<Cmd>chistory " .. i .. "<Cr>",
-    { silent = true, desc = "Go to " .. i .. " Quickfix" }
-  )
-end
--- }}}
-
--- {{{ Obsidian
-vim.keymap.set("n", "<leader>ad", function()
-  local current_date = os.date("%Y-%m-%d")
-  local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
-  vim.cmd("e " .. daily_note_date)
-end, { desc = "Today's Daily Note" })
-
--- TODO: change this keymaps
-vim.keymap.set("n", "<leader>ag", function()
-  local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
-  local commit_date = "vault backup: " .. current_date_and_time
-  vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
-  print("Commit: " .. commit_date)
-end, { desc = "Commit All Changes From Vault" })
---- }}}
-
--- {{{ Make
-vim.keymap.set("n", "<leader>cm", ":make ", { desc = "Make", remap = true })
-vim.keymap.set("n", "<leader>cM", "<Cmd>make<CR>", { desc = "Run Make" })
--- }}}
-
--- {{{ Toggle
--- Smart increase/decrease
-vim.keymap.set("n", "<C-a>", function()
-  require("fish.toggle").increase()
-end, { desc = "Inrease numbers and words" })
-vim.keymap.set("n", "<C-x>", function()
-  require("fish.toggle").decrease()
-end, { desc = "Inrease numbers and words" })
-
--- vim.keymap.set("n", "<leader>tt", function()
---   require("fish.toggle").toggle()
--- end, { desc = "Toggle Value" })
-
-vim.keymap.set("n", "<leader>uc", function()
-  if vim.opt.conceallevel:get() == 3 then
-    vim.o.conceallevel = 0
-    return
-  end
-  vim.o.conceallevel = 3
-end, { desc = "set conceallevel!" })
-
-vim.keymap.set("n", "<leader>ul", function()
-  vim.o.cursorline = not vim.opt.cursorline:get()
-end, { desc = "set cursorline!" })
-
-vim.keymap.set("n", "<leader>un", function()
-  vim.o.number = not vim.opt.number:get()
-end, { desc = "set number!" })
-
-vim.keymap.set("n", "<leader>ur", function()
-  vim.o.relativenumber = not vim.opt.relativenumber:get()
-end, { desc = "set relativenumber!" })
-
-vim.keymap.set("n", "<leader>uw", function()
-  vim.o.wrap = not vim.opt.wrap:get()
-end, { desc = "set wrap!" })
-
-vim.keymap.set("n", "<leader>us", function()
-  vim.o.spell = not vim.opt.spell:get()
-end, { desc = "set spell!" })
-
-vim.keymap.set("n", "<leader>ub", function()
-  if vim.opt.background:get() == "light" then
-    vim.o.background = "dark"
-    return
-  end
-  vim.o.background = "light"
-end, { desc = "set bg!" })
-
-vim.keymap.set("n", "<leader>ud", function()
-  if vim.diagnostic.is_enabled() then
-    vim.diagnostic.enable(false)
-    return
-  end
-  vim.diagnostic.enable(true)
-end, { desc = "set vim.diagnostic.enable()!" })
-
-vim.keymap.set("n", "<leader>ut", function()
-  local state = vim.b.ts_highlight
-  if state then
-    vim.treesitter.stop(0)
-    return
-  end
-  vim.treesitter.start(0)
-end, { desc = "set vim.treesitter()!" })
-
-vim.keymap.set("n", "<leader>uT", function()
-  local buf = vim.api.nvim_get_current_buf()
-  vim.lsp.semantic_tokens.enable(not vim.lsp.semantic_tokens.is_enabled({ bufnr = buf }), { bufnr = buf })
-end, { desc = "Toggle LSP semantic tokens" })
-
-vim.keymap.set("n", "<leader>u<C-t>", function()
-  local state = vim.b.ts_highlight
-  local buf = vim.api.nvim_get_current_buf()
-
-  if state then
-    vim.treesitter.stop(0)
-    vim.lsp.semantic_tokens.enable(false, { bufnf = buf })
-    return
-  end
-  vim.treesitter.start(0)
-  vim.lsp.semantic_tokens.enable(true, { bufnf = buf })
-end, { desc = "Toggle LSP and Treesitter Highlight" })
-
-vim.keymap.set("n", "<leader>uf", function()
-  local fmd = { "expr", "indent", "marker" }
-  local length = #fmd
-  local current = vim.opt.foldmethod:get()
-  local new
-  local vim_count = vim.v.count
-
-  if vim_count > 0 then
-    vim.o.foldmethod = fmd[vim_count]
-    return
-  end
-
-  for i = 1, length do
-    if fmd[i] == current then
-      -- wrap around if index goes out of range
-      if i == length then
-        new = fmd[1]
-      else
-        new = fmd[i + 1]
-      end
-    end
-  end
-
-  vim.o.foldmethod = new
-end, { desc = "set foldmethod!" })
-
-vim.keymap.set("n", "<leader>ui", function()
-  vim.o.list = not vim.opt.list:get()
-end, { desc = "set list!" })
-
-vim.keymap.set("n", "<leader>uS", function()
-  vim.o.laststatus = vim.opt.laststatus:get() == 3 and 2 or 3
-end, { desc = "set laststatus!" })
-
--- }}}
-
--- {{{ Zoxide
--- Keybinds using vim.ui.select
-vim.keymap.set("n", "<leader>z", function()
-  require("fish.zoxide").zoxide_select("Zoxide (cd):", "cd")
-end, { desc = "Zoxide picker (cd)" })
-
-vim.keymap.set("n", "<leader>Z", function()
-  require("fish.zoxide").zoxide_select("Zoxide (tcd):", "tcd")
-end, { desc = "Zoxide picker(tcb)" })
--- }}}
-
--- {{{ Git
---- Alias to vim.keymap.set
----@param k string
----@param f function|string
----@param o table
-local nmap = function(k, f, o)
-  vim.keymap.set("n", k, f, o)
-end
-
+-- Zoom
 map {
+  {
+    "n",
+    {
+      "<c-w>m",
+      "<leader>uz",
+    },
+    function()
+      require("fish.zoom").zoom()
+    end,
+    desc = "Toggle pane/window zoom",
+  },
+
+  --- }}}
+
+  -- {{{ LocList
+  { "n", "<leader>ll", ":lwindow<Cr>", desc = "Location List", silent = true },
+  { "n", "<leader>lp", ":lprev<Cr>", desc = "Location List", silent = true },
+  { "n", "<leader>ln", ":lnext<Cr>", desc = "Location List", silent = true },
+  {
+    "n",
+    "<leader>la",
+    function()
+      local pos = vim.api.nvim_win_get_cursor(0)
+      local item = {
+        bufnr = vim.api.nvim_get_current_buf(),
+        lnum = pos[1],
+        col = pos[2] + 1,
+        text = vim.fn.getline("."),
+      }
+      vim.fn.setloclist(0, { item }, "a") -- "a" = append
+      vim.notify("Adicionado à Location List")
+    end,
+    desc = "Adicionar item à Location List",
+  },
+
+  {
+    "n",
+    "<leader>lr",
+    function()
+      vim.fn.setloclist(0, {}, "r") -- "r" = replace (aqui com vazio)
+      vim.notify("Location List resetada")
+    end,
+    desc = "Resetar Location List",
+  },
+  --- }}}
+
+  -- {{{ Quickfix
+  { "n", "<leader>qn", "<Cmd>cnext<Cr>", silent = true, desc = "Open Next in Quickfix List" },
+  { "n", "<leader>qp", "<Cmd>cprev<Cr>", silent = true, desc = "Open Previous in Quickfix List" },
+
+  -- vim.keymap.set("n", "<leader>qo", vim.cmd.copen, { desc = "QuickFix Open", silent = true })
+  -- vim.keymap.set("n", "<leader>qc", vim.cmd.cclose, { desc = "QuickFix Close", silent = true })
+
+  { "n", "<leader>qo", "<Cmd>copen<Cr>", silent = true, desc = "Open Quickfix List" },
+  { "n", "<leader>qc", "<Cmd>cclose<Cr>", silent = true, desc = "Close Quickfix List" },
+  { "n", "<leader>qh", "<Cmd>chistory<Cr>", silent = true, desc = "List Quick Fix History" },
+  { "n", "<leader>qn", "<Cmd>cnewer<Cr>", silent = true, desc = "Next Quickfix List" },
+  { "n", "<leader>qp", "<Cmd>colder<Cr>", silent = true, desc = "Previous Quickfix List" },
+  {
+    "n",
+    "<leader>q{i}",
+    "<Cmd>chistory {i}<Cr>",
+    range = { 1, 9 },
+    silent = true,
+    desc = "Go to {i} Quickfix",
+  },
+  -- }}}
+
+  -- {{{ Obsidian
+  {
+    "n",
+    "<leader>ad",
+    function()
+      local current_date = os.date("%Y-%m-%d")
+      local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
+      vim.cmd("e " .. daily_note_date)
+    end,
+    desc = "Today's Daily Note",
+  },
+
+  -- TODO: change this keymaps
+  {
+    "n",
+    "<leader>ag",
+    function()
+      local current_date_and_time = os.date("%Y-%m-%d %H:%M:%S")
+      local commit_date = "vault backup: " .. current_date_and_time
+      vim.cmd('!git add ~/Notes && git commit -m "' .. commit_date .. '"')
+      print("Commit: " .. commit_date)
+    end,
+    desc = "Commit All Changes From Vault",
+  },
+
+  --- }}}
+
+  -- {{{ Make
+  { "n", "<leader>cm", ":make ", desc = "Make", remap = true },
+  { "n", "<leader>cM", "<Cmd>make<CR>", desc = "Run Make" },
+  -- }}}
+
+  -- {{{ Toggle
+  -- Smart increase/decrease
+  {
+    "n",
+    "<C-a>",
+    function()
+      require("fish.toggle").increase()
+    end,
+    desc = "Inrease numbers and words",
+  },
+  {
+    "n",
+    "<C-x>",
+    function()
+      require("fish.toggle").decrease()
+    end,
+    desc = "Inrease numbers and words",
+  },
+
+  -- vim.keymap.set("n", "<leader>tt", function()
+  --   require("fish.toggle").toggle()
+  -- end, { desc = "Toggle Value" })
+
+  {
+    "n",
+    "<leader>uc",
+    function()
+      if vim.opt.conceallevel:get() == 3 then
+        vim.o.conceallevel = 0
+        return
+      end
+      vim.o.conceallevel = 3
+    end,
+    desc = "set conceallevel!",
+  },
+
+  {
+    "n",
+    "<leader>ul",
+    function()
+      vim.o.cursorline = not vim.opt.cursorline:get()
+    end,
+    desc = "set cursorline!",
+  },
+
+  {
+    "n",
+    "<leader>un",
+    function()
+      vim.o.number = not vim.opt.number:get()
+    end,
+    desc = "set number!",
+  },
+
+  {
+    "n",
+    "<leader>ur",
+    function()
+      vim.o.relativenumber = not vim.opt.relativenumber:get()
+    end,
+    desc = "set relativenumber!",
+  },
+
+  {
+    "n",
+    "<leader>uw",
+    function()
+      vim.o.wrap = not vim.opt.wrap:get()
+    end,
+    desc = "set wrap!",
+  },
+
+  {
+    "n",
+    "<leader>us",
+    function()
+      vim.o.spell = not vim.opt.spell:get()
+    end,
+    desc = "set spell!",
+  },
+
+  {
+    "n",
+    "<leader>ub",
+    function()
+      if vim.opt.background:get() == "light" then
+        vim.o.background = "dark"
+        return
+      end
+      vim.o.background = "light"
+    end,
+    desc = "set bg!",
+  },
+
+  {
+    "n",
+    "<leader>ud",
+    function()
+      if vim.diagnostic.is_enabled() then
+        vim.diagnostic.enable(false)
+        return
+      end
+      vim.diagnostic.enable(true)
+    end,
+    desc = "set vim.diagnostic.enable()!",
+  },
+
+  {
+    "n",
+    "<leader>ut",
+    function()
+      local state = vim.b.ts_highlight
+      if state then
+        vim.treesitter.stop(0)
+        return
+      end
+      vim.treesitter.start(0)
+    end,
+    desc = "set vim.treesitter()!",
+  },
+
+  {
+    "n",
+    "<leader>uT",
+    function()
+      local buf = vim.api.nvim_get_current_buf()
+      vim.lsp.semantic_tokens.enable(not vim.lsp.semantic_tokens.is_enabled({ bufnr = buf }), { bufnr = buf })
+    end,
+    desc = "Toggle LSP semantic tokens",
+  },
+
+  {
+    "n",
+    "<leader>u<C-t>",
+    function()
+      local state = vim.b.ts_highlight
+      local buf = vim.api.nvim_get_current_buf()
+
+      if state then
+        vim.treesitter.stop(0)
+        vim.lsp.semantic_tokens.enable(false, { bufnf = buf })
+        return
+      end
+      vim.treesitter.start(0)
+      vim.lsp.semantic_tokens.enable(true, { bufnf = buf })
+    end,
+    desc = "Toggle LSP and Treesitter Highlight",
+  },
+
+  {
+    "n",
+    "<leader>uf",
+    function()
+      local fmd = { "expr", "indent", "marker" }
+      local length = #fmd
+      local current = vim.opt.foldmethod:get()
+      local new
+      local vim_count = vim.v.count
+
+      if vim_count > 0 then
+        new = fmd[vim_count]
+        vim.o.foldmethod = new
+        vim.notify("Current: " .. new, vim.log.levels.INFO)
+        return
+      end
+
+      for i = 1, length do
+        if fmd[i] == current then
+          -- wrap around if index goes out of range
+          if i == length then
+            new = fmd[1]
+          else
+            new = fmd[i + 1]
+          end
+        end
+      end
+
+      vim.o.foldmethod = new
+      vim.notify("Current: " .. new, vim.log.levels.INFO)
+    end,
+    desc = "set foldmethod!",
+  },
+
+  {
+    "n",
+    "<leader>ui",
+    function()
+      vim.o.list = not vim.opt.list:get()
+    end,
+    desc = "set list!",
+  },
+
+  {
+    "n",
+    "<leader>uS",
+    function()
+      vim.o.laststatus = vim.opt.laststatus:get() == 3 and 2 or 3
+    end,
+    desc = "set laststatus!",
+  },
+  -- }}}
+
+  {
+    "<leader>lf",
+    function()
+      vim.notify("current foldmethod: " .. vim.opt.foldmethod:get(), vim.log.levels.INFO)
+    end,
+  },
+
+  -- {{{ zoxide
+  -- Keybinds using vim.ui.select
+  {
+    "n",
+    "<leader>z",
+    function()
+      require("fish.zoxide").zoxide_select("Zoxide (cd):", "cd")
+    end,
+    desc = "Zoxide picker (cd)",
+  },
+
+  {
+    "n",
+    "<leader>Z",
+    function()
+      require("fish.zoxide").zoxide_select("Zoxide (tcd):", "tcd")
+    end,
+    desc = "Zoxide picker(tcb)",
+  },
+  -- }}}
+
+  -- {{{ Git
   {
     "<leader>gP",
     function()
@@ -735,12 +906,10 @@ map {
     end,
     desc = "Git add current directory",
   },
-}
--- }}}
+  -- }}}
 
-local argall = require "fish.argall"
+  -- {{{ Argall
 
-map {
   { "<leader>hl", argall.load, desc = "Load args session" },
   { "<leader>he", argall.show, desc = "Show args in tmp buffer" },
   {
@@ -757,18 +926,13 @@ map {
     end,
     desc = "Remove arg file",
   },
+
+  { "n", "<leader>{i}", "<CMD>argu {i}<CR>", silent = true, range = { 1, 9 }, desc = "Go to arg {i}" },
+  { "n", "<leader>h{i}", "<CMD>{i-1}arga<CR>", silent = true, range = { 1, 9 }, desc = "Add current to arg {i}" },
+  { "n", "<leader>hd{i}", "<CMD>{i}argd<CR>", silent = true, range = { 1, 9 }, desc = "Delete arg {i}" },
 }
 
-for i = 1, 9 do
-  vim.keymap.set("n", "<leader>" .. i, "<CMD>argu " .. i .. "<CR>", { silent = true, desc = "Go to arg " .. i })
-  vim.keymap.set(
-    "n",
-    "<leader>h" .. i,
-    "<CMD>" .. i - 1 .. "arga<CR>",
-    { silent = true, desc = "Add current to arg " .. i }
-  )
-  vim.keymap.set("n", "<leader>hd" .. i, "<CMD>" .. i .. "argd<CR>", { silent = true, desc = "Delete arg " .. i })
-end
+-- }}}
 
 -- FIXME: try to fix this
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })
