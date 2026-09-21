@@ -185,9 +185,11 @@ local function set_one(m, i)
   if m.silent ~= nil then
     opts.silent = m.silent
   end
+
   if m.buf ~= nil then
     opts.buffer = m.buf
   end
+
   if m.desc ~= nil then
     opts.desc = m.desc
   end

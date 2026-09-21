@@ -159,14 +159,14 @@ map {
   { { "n", "x" }, "<M-S-,>", "gg", noremap = true, silent = true },
   { { "n", "x" }, "<M-x>", ":", silent = false },
 
-  { "<C-a>", "<home>" },
-  { "<C-e>", "<end>" },
-  { "<C-f>", "<right>" },
-  { "<C-b>", "<left>" },
-  { "<M-f>", "<C-right>" },
-  { "<M-b>", "<C-left>" },
-  { "<C-d>", "<del>" },
-  { "<C-o>", "<C-f>" },
+  { "i", "<C-a>", "<home>" },
+  { "i", "<C-e>", "<end>" },
+  { "i", "<C-f>", "<right>" },
+  { "i", "<C-b>", "<left>" },
+  { "i", "<M-f>", "<C-right>" },
+  { "i", "<M-b>", "<C-left>" },
+  { "i", "<C-d>", "<del>" },
+  { "i", "<C-o>", "<C-f>" },
 
   -- " " Emacs shit
   -- nmap <M-x> :

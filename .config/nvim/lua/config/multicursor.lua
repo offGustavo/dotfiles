@@ -380,28 +380,92 @@ MultiCursor.actions.split_visual = function()
   -- How?
 end
 
-vim.keymap.set("n", "<Esc>", function()
-  MultiCursor.clear(0)
-  vim.cmd("nohls")
-  return "<Esc>"
-end, { expr = true, desc = "Clear on <Esc>" })
-                          
--- stylua: ignore star   t
-vim.keymap.set({ "n", "x" }, "<C-8>", function() MultiCursor.actions.search_current() end, { desc = "Expand search" }) -- <C-*>
--- vim.keymap.set("n", "<S-Right>", function() MultiCursor.actions.jump_next(1) end, { desc = "Cursors: next" })
--- vim.keymap.set("n", "<S-Left>", function() MultiCursor.actions.jump_next(-1) end, { desc = "Cursors: previous" })
--- vim.keymap.set("n", "<S-Down>", function() MultiCursor.actions.line_add(1) end, { desc = "Cursors: add below" })
--- vim.keymap.set("n", "<S-Up>", function() MultiCursor.actions.line_add(-1) end, { desc = "Cursors: add above" })
-vim.keymap.set("n", "<C-S-j>", function() MultiCursor.actions.line_add(1) end, { desc = "Cursors: add below" })
-vim.keymap.set("n", "<C-S-k>", function() MultiCursor.actions.line_add(-1) end, { desc = "Cursors: add above" })
--- vim.keymap.set({ "n", "x" }, "<Right>", function() MultiCursor.actions.match_add(1) end, { desc = "Cursors: add match next" })
--- vim.keymap.set({ "n", "x" }, "<Left>", function() MultiCursor.actions.match_add(-1) end, { desc = "Cursors: add match previous" })
--- vim.keymap.set({ "n", "x" }, "<Down>", function() MultiCursor.actions.match_skip(1) end, { desc = "Cursors: skip match next" })
--- vim.keymap.set({ "n", "x" }, "<Up>", function() MultiCursor.actions.match_skip(-1) end, { desc = "Cursors: skip match previous" })
-vim.keymap.set({ "n", "x" }, "<C-.>", function() MultiCursor.actions.match_add(1) end, { desc = "Cursors: add match next" })
-vim.keymap.set({ "n", "x" }, "<C-,>", function() MultiCursor.actions.match_add(-1) end, { desc = "Cursors: add match previous" })
-vim.keymap.set({ "n", "x" }, "<C-n>", function() MultiCursor.actions.match_skip(1) end, { desc = "Cursors: skip match next" })
-vim.keymap.set({ "n", "x" }, "<C-p>", function() MultiCursor.actions.match_skip(-1) end, { desc = "Cursors: skip match previous" })
--- vim.keymap.set("x", "gm", function() MultiCursor.actions.search() end, { desc = "Cursors: match search" })
--- vim.keymap.set("n", "gm", MultiCursor.actions.search_operator, { expr = true, desc = "Cursors: match search" })
-vim.keymap.set("n", "gQ", function() MultiCursor.actions.align() end, { desc = "Cursors: align" })
+map {
+  {
+    "n",
+    "<Esc>",
+    function()
+      MultiCursor.clear(0)
+      vim.cmd("nohls")
+      return "<Esc>"
+    end,
+    expr = true,
+    desc = "Clear on <Esc>",
+  },
+
+  {
+    { "n", "x" },
+    "<C-8>",
+    function()
+      MultiCursor.actions.search_current()
+    end,
+    desc = "Expand search",
+  },
+  -- <C -,
+  -- vim.keymap.set("n", "<S-Right>", function() MultiCursor.actions.jump_next(1) end, { desc = "Cursors: next" })
+  -- vim.keymap.set("n", "<S-Left>", function() MultiCursor.actions.jump_next(-1) end, { desc = "Cursors: previous" })
+  -- vim.keymap.set("n", "<S-Down>", function() MultiCursor.actions.line_add(1) end, { desc = "Cursors: add below" })
+  -- vim.keymap.set("n", "<S-Up>", function() MultiCursor.actions.line_add(-1) end, { desc = "Cursors: add above" })
+  {
+    "n",
+    "<C-S-j>",
+    function()
+      MultiCursor.actions.line_add(1)
+    end,
+    desc = "Cursors: add below",
+  },
+  {
+    "n",
+    "<C-S-k>",
+    function()
+      MultiCursor.actions.line_add(-1)
+    end,
+    desc = "Cursors: add above",
+  },
+  -- vim.keymap.set({ "n", "x" }, "<Right>", function() MultiCursor.actions.match_add(1) end, { desc = "Cursors: add match next" })
+  -- vim.keymap.set({ "n", "x" }, "<Left>", function() MultiCursor.actions.match_add(-1) end, { desc = "Cursors: add match previous" })
+  -- vim.keymap.set({ "n", "x" }, "<Down>", function() MultiCursor.actions.match_skip(1) end, { desc = "Cursors: skip match next" })
+  -- vim.keymap.set({ "n", "x" }, "<Up>", function() MultiCursor.actions.match_skip(-1) end, { desc = "Cursors: skip match previous" })
+  {
+    { "n", "x" },
+    "<C-.>",
+    function()
+      MultiCursor.actions.match_add(1)
+    end,
+    desc = "Cursors: add match next",
+  },
+  {
+    { "n", "x" },
+    "<C-,>",
+    function()
+      MultiCursor.actions.match_add(-1)
+    end,
+    desc = "Cursors: add match previous",
+  },
+  {
+    { "n", "x" },
+    "<C-n>",
+    function()
+      MultiCursor.actions.match_skip(1)
+    end,
+    desc = "Cursors: skip match next",
+  },
+  {
+    { "n", "x" },
+    "<C-p>",
+    function()
+      MultiCursor.actions.match_skip(-1)
+    end,
+    desc = "Cursors: skip match previous",
+  },
+  -- vim.keymap.set("x", "gm", function() MultiCursor.actions.search() end, { desc = "Cursors: match search" })
+  -- vim.keymap.set("n", "gm", MultiCursor.actions.search_operator, { expr = true, desc = "Cursors: match search" })
+  {
+    "n",
+    "gQ",
+    function()
+      MultiCursor.actions.align()
+    end,
+    desc = "Cursors: align",
+  },
+}
