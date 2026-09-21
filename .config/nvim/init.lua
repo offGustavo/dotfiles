@@ -22,7 +22,7 @@ vim.o.exrc = false
 vim.cmd("let g:loaded_fzf = 1")
 -- }}}
 
--- Config Files
+-- {{{ Config Files
 if os.getenv("SCROLL_MODE") then
   require("config.kitty_scroll_mode")
   return
@@ -34,7 +34,9 @@ require("config.commands")
 require("config.options")
 require("config.keymaps")
 require("config.lsp")
-require("config.neovide")
+if vim.g.neovide then
+  require("config.neovide")
+end
 
 -- TODO: remover quando 0.13 ser estavel
 if vim.fn.has("nvim-0.13") == 1 then
@@ -48,3 +50,5 @@ require("config.intern")
 -- External plugins
 require("config.lazy")
 -- require("config.pack")
+
+-- }}}

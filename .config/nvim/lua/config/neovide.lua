@@ -1,9 +1,6 @@
 -------------
 -- NEOVIDE --
 -------------
-if not vim.g.neovide then
-	return
-end
 
 vim.g.neovide_padding_top = 0
 vim.g.neovide_padding_bottom = 0
