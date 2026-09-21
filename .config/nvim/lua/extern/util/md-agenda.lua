@@ -24,7 +24,7 @@ return {
 
     --- OPTIONAL ---
     -- Number of days to display on one agenda view page. Default: 10
-    agendaViewPageItems = 10,
+    agendaViewPageItems = 30,
     -- Number of days before the deadline to show a reminder for the task in the agenda view. Default: 30
     remindDeadlineInDays = 30,
     -- Number of days before the scheduled time to show a reminder for the task in the agenda view. Default: 10
