@@ -134,31 +134,31 @@ vim.schedule(function()
     vim.o.findfunc = "v:lua.Fish.rg_find_files"
   end
 
-  if vim.fn.executable("fd") == 1 then
-    function Fish.fd_find_files(cmdarg, _cmdcomplete)
-      local fnames = vim.fn.systemlist("fd --hidden -t f --color=never")
-
-      if #cmdarg == 0 then
-        return fnames
-      end
-
-      -- build {path=..., filename=...} entries so matchfuzzy can key on filename only
-      local items = {}
-      for _, f in ipairs(fnames) do
-        table.insert(items, { path = f, filename = vim.fn.fnamemodify(f, ":t") })
-      end
-
-      local matched = vim.fn.matchfuzzy(items, cmdarg, { key = "filename" })
-
-      local results = {}
-      for _, m in ipairs(matched) do
-        table.insert(results, m.path)
-      end
-      print(results)
-      return results
-    end
-    vim.o.findfunc = "v:lua.Fish.fd_find_files"
-  end
+  -- if vim.fn.executable("fd") == 1 then
+  --   function Fish.fd_find_files(cmdarg, _cmdcomplete)
+  --     local fnames = vim.fn.systemlist("fd --hidden -t f --color=never")
+  --
+  --     if #cmdarg == 0 then
+  --       return fnames
+  --     end
+  --
+  --     -- build {path=..., filename=...} entries so matchfuzzy can key on filename only
+  --     local items = {}
+  --     for _, f in ipairs(fnames) do
+  --       table.insert(items, { path = f, filename = vim.fn.fnamemodify(f, ":t") })
+  --     end
+  --
+  --     local matched = vim.fn.matchfuzzy(items, cmdarg, { key = "filename" })
+  --
+  --     local results = {}
+  --     for _, m in ipairs(matched) do
+  --       table.insert(results, m.path)
+  --     end
+  --     print(vim.inspect(results))
+  --     return results
+  --   end
+  --   vim.o.findfunc = "v:lua.Fish.fd_find_files"
+  -- end
 end)
 -- }}}
 
