@@ -42,6 +42,11 @@ return {
     picker = {
       enabled = true,
       layout = "ivy_split",
+      sources = {
+        files = {
+          hidden = true,
+        },
+      },
     },
     layout = {
       ivy_split = {
