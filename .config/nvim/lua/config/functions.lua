@@ -4,6 +4,23 @@ function Fish.is_windows()
   return vim.fn.has("win32") == 1
 end
 
+local fish_group = vim.api.nvim_create_augroup("Fish.config", {})
+
+---comment
+---@param event string|table
+---@param callback? function
+---@param pattern? string|table
+---@param group? any
+---@param desc? string
+function _G.autocmd(event, callback, pattern, group, desc)
+  vim.api.nvim_create_autocmd(event, {
+    group = group or fish_group,
+    desc = desc or nil,
+    pattern = pattern or nil,
+    callback = callback or nil,
+  })
+end
+
 ---Set Neovim options in bulk.
 ---Scalar values (boolean/number/string) are applied via `vim.o`.
 ---Table values (lists/maps, e.g. `listchars`, `shortmess`) are applied via `vim.opt`,
@@ -32,10 +49,13 @@ function _G.map(keys)
   vim.list_extend(Fish.keymaps, keys)
 end
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.schedule(function()
-      require("fish.set_keymap").set(Fish.keymaps)
-    end)
-  end,
-})
+function _G.later(fn)
+  -- TODO: i should use async here?
+  vim.async.run(fn)
+end
+
+autocmd("VimEnter", function()
+  later(function()
+    require("fish.set_keymap").set(Fish.keymaps)
+  end)
+end)
