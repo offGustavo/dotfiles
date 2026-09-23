@@ -850,14 +850,16 @@ map {
   },
   -- }}}
 
+  -- {{{ Log
   {
     "<leader>lf",
     function()
       vim.notify("current foldmethod: " .. vim.opt.foldmethod:get(), vim.log.levels.INFO)
     end,
   },
+  --- }}}
 
-  -- {{{ zoxide
+  -- {{{ Zoxide
   -- Keybinds using vim.ui.select
   {
     "n",
