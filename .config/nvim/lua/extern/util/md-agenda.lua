@@ -1,6 +1,9 @@
 return {
-  "https://github.com/zenarvus/md-agenda.nvim",
+  -- "https://github.com/zenarvus/md-agenda.nvim",
+  "https://github.com/offGustavo/md-agenda.nvim",
+  -- path = "~/Projects/md-agenda.nvim/",
   dev = false,
+  enabled = true,
   ft = "markdown",
   keys = {
     { "<leader>aa",      "<Cmd>AgendaView<CR>",      desc = "Md Agenda" },
