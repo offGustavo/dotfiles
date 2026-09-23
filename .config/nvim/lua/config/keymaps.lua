@@ -1,5 +1,6 @@
+-- vim: foldmethod=marker
+
 -- {{{ Nvim
-local argall = require "fish.argall"
 
 -- basic keymaps for nvim (if lazy fails for some reason)
 vim.cmd([[
@@ -71,9 +72,9 @@ map {
   --- }}}
 
   -- Comment Line/Selection
-  { "n", "<C-/>", "gcc", silent = true },
-  { "i", "<C-/>", " <C-o>gcc", silent = true },
-  { "x", "<C-/>", " :norm gcc<Cr>", silent = true },
+  { "n", { "C-_", "<C-/>" }, "gcc", silent = true },
+  { "i", { "C-_", "<C-/>" }, " <C-o>gcc", silent = true },
+  { "x", { "C-_", "<C-/>" }, " :norm gcc<Cr>", silent = true },
 
   --- Scroll
   { "<S-ScrollWheelUp>", "zh" },
@@ -908,31 +909,40 @@ map {
   },
   -- }}}
 
-  -- {{{ Argall
-
-  { "<leader>hl", argall.load, desc = "Load args session" },
-  { "<leader>he", argall.show, desc = "Show args in tmp buffer" },
-  {
-    "<leader>ha",
-    function()
-      argall.add(vim.fn.expand("%"))
-    end,
-    desc = "Add arg file",
-  },
-  {
-    "<leader>hd",
-    function()
-      vim.cmd "argd %"
-    end,
-    desc = "Remove arg file",
-  },
-
-  { "n", "<leader>{i}", "<CMD>argu {i}<CR>", silent = true, range = { 1, 9 }, desc = "Go to arg {i}" },
-  { "n", "<leader>h{i}", "<CMD>{i-1}arga<CR>", silent = true, range = { 1, 9 }, desc = "Add current to arg {i}" },
-  { "n", "<leader>hd{i}", "<CMD>{i}argd<CR>", silent = true, range = { 1, 9 }, desc = "Delete arg {i}" },
+  --   -- {{{ Argall
+  --   {
+  --     "<leader>hl",
+  --     function()
+  --       require("fish.argall").load()
+  --     end,
+  --     desc = "Load args session",
+  --   },
+  --   {
+  --     "<leader>he",
+  --     function()
+  --       require("fish.argall").show()
+  --     end,
+  --     desc = "Show args in tmp buffer",
+  --   },
+  --   {
+  --     "<leader>ha",
+  --     function()
+  --       require("fish.argall").add(vim.fn.expand("%"))
+  --     end,
+  --     desc = "Add arg file",
+  --   },
+  --   {
+  --     "<leader>hd",
+  --     function()
+  --       vim.cmd "argd %"
+  --     end,
+  --     desc = "Remove arg file",
+  --   },
+  --   { "n", "<leader>{i}", "<CMD>argu {i}<CR>", silent = true, range = { 1, 9 }, desc = "Go to arg {i}" },
+  --   { "n", "<leader>h{i}", "<CMD>{i-1}arga<CR>", silent = true, range = { 1, 9 }, desc = "Add current to arg {i}" },
+  --   { "n", "<leader>hd{i}", "<CMD>{i}argd<CR>", silent = true, range = { 1, 9 }, desc = "Delete arg {i}" },
+  -- }}}
 }
-
--- }}}
 
 -- FIXME: try to fix this
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })

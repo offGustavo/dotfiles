@@ -13,6 +13,8 @@ require("fish.yazi").setup({
 
 -- require("forge.easymode")
 
+require("fish.espeto").setup()
+
 
 -- vim.keymap.set("n", "<leader>v", function()
 --   require("forge.vidir").open()
