@@ -1,5 +1,5 @@
 return {
-  "https://github.com/barrettruth/canola.nvim",
+  "https://forge.barrettruth.com/barrettruth/canola.nvim",
   branch = "canola",
   priority = 1000,
   lazy = true,
