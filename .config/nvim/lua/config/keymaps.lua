@@ -2,14 +2,14 @@
 
 -- {{{ Nvim
 
--- basic keymaps for nvim (if lazy fails for some reason)
-vim.cmd([[
-nmap <m-o> :fin<space>
-nmap <m-s> :grep<space>
-nmap <m-b> :b<space>
-nmap <m-e> :ex<cr>
-nmap <leader>vc :e $MYVIMRC<cr>
-]])
+-- -- basic keymaps for nvim (if lazy fails for some reason)
+-- vim.cmd([[
+-- nmap <m-o> :fin<space>
+-- nmap <m-s> :grep<space>
+-- nmap <m-b> :b<space>
+-- nmap <m-e> :ex<cr>
+-- nmap <leader>vc :e $MYVIMRC<cr>
+-- ]])
 
 -- vim.keymap.del("n", "gd")
 -- vim.keymap.del("n", "K")
@@ -27,6 +27,8 @@ map {
 
   -- Edit init.lua/init.vim/vimrc
   { "n", "<leader>fC", ":e $MYVIMRC<Cr>", silent = true, desc = "Edit the init config file" },
+
+  { "n", "<leader>vf", ":cd %:h<Cr>" },
 
   -- Fix <C-c> to work like <Esc>
   { "i", "<C-c>", "<Esc>" },
@@ -865,7 +867,7 @@ map {
     "n",
     "<leader>z",
     function()
-      require("fish.zoxide").zoxide_select("Zoxide (cd):", "cd")
+      require("fish.zoxide").zoxide_select("Zoxide (cd):", "cd", true)
     end,
     desc = "Zoxide picker (cd)",
   },
@@ -874,7 +876,7 @@ map {
     "n",
     "<leader>Z",
     function()
-      require("fish.zoxide").zoxide_select("Zoxide (tcd):", "tcd")
+      require("fish.zoxide").zoxide_select("Zoxide (tcd):", "tcd", true)
     end,
     desc = "Zoxide picker(tcb)",
   },

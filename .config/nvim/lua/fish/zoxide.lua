@@ -22,7 +22,7 @@ local function format_zoxide_item(item)
   return item
 end
 
-function M.zoxide_select(prompt, cmd)
+function M.zoxide_select(prompt, cmd, log)
   local items = zoxide_list()
   if #items == 0 then
     vim.notify("No zoxide entries found", vim.log.levels.WARN)
@@ -32,7 +32,9 @@ function M.zoxide_select(prompt, cmd)
   vim.ui.select(items, { prompt = prompt, format_item = format_zoxide_item }, function(choice)
     if choice then
       vim.cmd(cmd .. " " .. vim.fn.fnameescape(choice))
-      -- vim.notify("Changed directory to: " .. choice)
+      if log then
+        vim.notify("Changed directory to: " .. choice)
+      end
     end
   end)
 end
