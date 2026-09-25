@@ -54,6 +54,11 @@ function _G.later(fn)
   vim.async.run(fn)
 end
 
+---@param package string
+function _G.packadd(package)
+vim.cmd.packadd(package)
+end
+
 autocmd("VimEnter", function()
   later(function()
     require("fish.set_keymap").set(Fish.keymaps)

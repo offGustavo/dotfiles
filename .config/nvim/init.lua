@@ -48,8 +48,8 @@ end
 require("config.intern")
 
 -- External plugins
-require("config.lazy")
--- require("config.pack")
+-- require("config.lazy")
+require("config.pack")
 
 -- }}}
 
@@ -57,4 +57,3 @@ autocmd("FileType", function()
   vim.treesitter.stop(0)
   vim.lsp.semantic_tokens.enable(false)
 end)
-
