@@ -56,7 +56,7 @@ end
 
 ---@param package string
 function _G.packadd(package)
-vim.cmd.packadd(package)
+  vim.cmd.packadd(package)
 end
 
 autocmd("VimEnter", function()

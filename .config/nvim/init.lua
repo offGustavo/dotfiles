@@ -4,6 +4,16 @@ _G.Fish = {}
 -- PERF:
 vim.loader.enable()
 
+
+-- {{{ Map Leader and Local Leader
+-- <space> as leader
+vim.g.mapleader = " "
+-- \ as local leader
+vim.g.maplocalleader = "\\"
+-- }}}
+
+
+
 -- {{{ Set a temp theme here to prevent light/dark flicker
 if vim.o.background == "dark" then
   vim.cmd.colorscheme("tokyo")
@@ -53,7 +63,7 @@ require("config.pack")
 
 -- }}}
 
--- autocmd("FileType", function()
-  -- vim.treesitter.stop(0)
-  -- vim.lsp.semantic_tokens.enable(false)
--- end)
+autocmd("FileType", function()
+  vim.treesitter.stop(0)
+  vim.lsp.semantic_tokens.enable(false)
+end)

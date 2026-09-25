@@ -10,6 +10,7 @@ local M = {}
 ---@field remap? boolean inverse of noremap; ignored if `noremap` is set explicitly
 ---@field silent? boolean
 ---@field opts? table extra vim.keymap.set opts (desc, expr, nowait, etc.)
+---@field load? string name of a plugin to `:packadd` (once) before running rhs
 
 local VALID_MODES = {
   n = true,
@@ -159,6 +160,41 @@ local function expand(v, i)
   end
   return v
 end
+
+-- Nomes de plugins já carregados via :packadd (cache global do módulo,
+-- compartilhado entre todos os mapeamentos que apontam pro mesmo `load`)
+local loaded = {}
+
+---@param name string
+local function packadd_once(name)
+  if loaded[name] then
+    return
+  end
+  loaded[name] = true
+  vim.cmd.packadd(name)
+end
+
+---Embrulha o rhs original numa função que primeiro garante o `:packadd`
+---do plugin e só então executa o rhs, exatamente como ele seria executado
+---se não houvesse lazy-loading nenhum.
+---@param name string plugin to packadd
+---@param rhs string|function original rhs
+---@return function
+local function wrap_load(name, rhs)
+  return function(...)
+    packadd_once(name)
+
+    if type(rhs) == "function" then
+      return rhs(...)
+    end
+
+    -- rhs é string: mesmo comportamento que vim.keymap.set daria a ela,
+    -- ou seja, refeed das teclas/comando originais
+    local keys = vim.api.nvim_replace_termcodes(rhs, true, true, true)
+    vim.api.nvim_feedkeys(keys, "m", false)
+  end
+end
+
 ---@param m KeymapSpec
 ---@param i integer|nil current range value
 local function set_one(m, i)
@@ -175,13 +211,17 @@ local function set_one(m, i)
     lhs, rhs = m[1], m[2]
   end
 
-  local opts = vim.tbl_extend("force", { noremap = true, silent = true }, m.opts or {})
+  local opts = vim.tbl_extend("force", {}, m.opts or {})
 
+  -- NOTE: use remap or noremap
   if m.noremap ~= nil then
     opts.noremap = m.noremap
-  elseif m.remap ~= nil then
+  end
+
+  if m.remap ~= nil then
     opts.noremap = not m.remap
   end
+
   if m.silent ~= nil then
     opts.silent = m.silent
   end
@@ -192,6 +232,12 @@ local function set_one(m, i)
 
   if m.desc ~= nil then
     opts.desc = m.desc
+  end
+
+  -- lazy-load: embrulha o rhs original ANTES da expansão de range, pra que
+  -- a expansão de `{i}` (quando houver) continue funcionando sobre a ação real
+  if m.load then
+    rhs = wrap_load(m.load, rhs)
   end
 
   -- range expansion
@@ -231,3 +277,18 @@ function M.set(maps)
 end
 
 return M
+
+--[[
+Exemplo de uso (igual ao que você pediu):
+
+require("set_keymap").set({
+  { "n", "o", ":Oi<Cr>", load = "oi.nvim" },
+})
+
+Na primeira vez que "o" for pressionado em modo normal:
+  vim.cmd.packadd("oi.nvim")
+  -- e então o rhs original roda normalmente, como se tivesse sido
+  -- digitado agora: ":Oi<Cr>" é refeed via nvim_feedkeys
+
+Nas próximas vezes, o packadd é pulado (cache em `loaded`), só o rhs roda.
+--]]

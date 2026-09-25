@@ -1,13 +1,5 @@
 -- vim: foldmethod=marker
 
--- {{{ Map Leader and Local Leader
--- <space> as leader
-vim.g.mapleader = " "
--- \ as local leader
-vim.g.maplocalleader = "\\"
--- }}}
-
-
 -- {{{ Netrw
 vim.cmd [[
 " let g:netrw_banner = 0
