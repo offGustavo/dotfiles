@@ -21,6 +21,24 @@
 -- nmap <nowait> K K
 -- ]])
 
+-- TODO: remove this and use map  to set this option
+-- comment line/selection
+vim.cmd[[
+nmap <c-/> gcc
+imap <c-/> <c-o>gcc
+xmap <c-/> :norm gcc<cr>gv
+nmap <c-_> gcc
+imap <c-_> <c-o>gcc
+xmap <c-_> :norm gcc<cr>gv
+]]
+
+-- vim.keymap.set("n", "<c-/>",  "gcc", { remap = true} )
+-- vim.keymap.set("i", "<c-/>",  "<c-o>gcc", { remap = true} )
+-- vim.keymap.set("x", "<c-/>",  ":norm gcc<cr>gv", { remap = true} )
+-- vim.keymap.set("n", "<c-_>",  "gcc", { remap = true} )
+-- vim.keymap.set("i", "<c-_>",  "<c-o>gcc", { remap = true} c)
+-- vim.keymap.set("x", "<c-_>",  ":norm gcc<cr>gv", { remap = true} )
+
 map {
   -- Marks
   { "n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", desc = "Del mark <char>" },
@@ -73,10 +91,12 @@ map {
   { "n", "k", "gk", silent = true },
   --- }}}
 
-  -- Comment Line/Selection
-  { "n", { "C-_", "<C-/>" }, "gcc", silent = true },
-  { "i", { "C-_", "<C-/>" }, " <C-o>gcc", silent = true },
-  { "x", { "C-_", "<C-/>" }, " :norm gcc<Cr>", silent = true },
+  -- -- FIXME: Comment Line/Selection
+  -- map {
+  -- { "n", { "<C-_>", "<C-/>" }, "<Cmd>norm gcc<Cr>", silent = false, desc = "Toggle comment", remap = true },
+  -- { "i", { "<C-_>", "<C-/>" }, "<Cmd>norm gcc<Cr>", silent = false, desc = "Toggle comment", remap = true },
+  -- { "x", { "<C-_>", "<C-/>" }, "<Cmd>norm gcc<Cr>gv", silent = false, desc = "Toggle comment", remap = true },
+-- }
 
   --- Scroll
   { "<S-ScrollWheelUp>", "zh" },

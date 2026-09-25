@@ -175,13 +175,17 @@ local function set_one(m, i)
     lhs, rhs = m[1], m[2]
   end
 
-  local opts = vim.tbl_extend("force", { noremap = true, silent = true }, m.opts or {})
+  local opts = vim.tbl_extend("force", {}, m.opts or {})
 
+  -- NOTE: use remap or noremap
   if m.noremap ~= nil then
     opts.noremap = m.noremap
-  elseif m.remap ~= nil then
+  end
+
+  if m.remap ~= nil then
     opts.noremap = not m.remap
   end
+
   if m.silent ~= nil then
     opts.silent = m.silent
   end
