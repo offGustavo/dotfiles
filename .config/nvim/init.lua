@@ -53,7 +53,7 @@ require("config.pack")
 
 -- }}}
 
-autocmd("FileType", function()
-  vim.treesitter.stop(0)
-  vim.lsp.semantic_tokens.enable(false)
-end)
+-- autocmd("FileType", function()
+  -- vim.treesitter.stop(0)
+  -- vim.lsp.semantic_tokens.enable(false)
+-- end)

@@ -3,12 +3,14 @@ vim.pack.add({
   { src = "https://github.com/folke/tokyonight.nvim" },
   -- Canola/Oil
   { src = "https://github.com/barrettruth/canola.nvim", version = "canola" },
-  -- })
+})
 
-  -- vim.pack.add({
+vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/mason-org/mason-lspconfig.nvim",
   "https://github.com/mason-org/mason.nvim",
+
+  "https://github.com/ibhagwan/fzf-lua",
 
   { src = "https://github.com/folke/snacks.nvim" },
 
@@ -21,16 +23,126 @@ vim.pack.add({
   { src = "https://github.com/NeogitOrg/neogit" },
 
   "https://github.com/stevearc/conform.nvim",
+  -- })
+}, { load = function() end })
+
+require("tokyonight").setup({
+  dim_inactive = false,
+  light_style = "day", -- The theme is used when the background is set to light
+  style = "night",
+  transparent = false,
+  styles = {
+    sidebars = "transparent",
+    floats = "transparent",
+    functions = { bold = true },
+    keywords = { bold = true },
+  },
+  on_colors = function(colors)
+    -- colors.bg = "#000000" -- To check if its working try something like "#ff00ff" instead of colors.none
+    colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
+    colors.bg_statusline = colors.none
+  end,
 })
--- }, { load = function() end })
 
-local tokyonight_config = require("extern.themes.tokyonight")
-require("tokyonight").setup(tokyonight_config.opts)
-tokyonight_config.init()
+vim.cmd.colorscheme("tokyonight")
 
-local canola_config = require("extern.editor.canola")
-map(canola_config.keys)
-canola_config.init()
+vim.g.canola = {
+  columns = {
+    "icon",
+    "permissions",
+    "size",
+    "mtime",
+  },
+  cursor = true,
+  watch = false,
+  border = "rounded",
+
+  hidden = { enabled = false, patterns = { "^%." }, always = {} },
+
+  sort = "default",
+  highlights = { filename = {}, columns = true },
+
+  confirm = false,
+  save = "prompt",
+  delete = { wipe = false, recursive = true },
+  create = { file_mode = 420, dir_mode = 493 },
+  extglob = true,
+
+  keymaps = {
+    ["g?"] = { callback = "actions.show_help", mode = "n" },
+    ["<CR>"] = "actions.select",
+    ["<C-s>"] = { callback = "actions.select", opts = { vertical = true } },
+    ["<C-h>"] = { callback = "actions.select", opts = { horizontal = true } },
+    ["<C-t>"] = { callback = "actions.select", opts = { tab = true } },
+    ["<C-p>"] = "actions.preview",
+    ["<C-c>"] = { callback = "actions.close", mode = "n" },
+    ["<C-l>"] = "actions.refresh",
+    ["-"] = { callback = "actions.parent", mode = "n" },
+    ["_"] = { callback = "actions.open_cwd", mode = "n" },
+    ["`"] = { callback = "actions.cd", mode = "n" },
+    ["g~"] = { callback = "actions.cd", opts = { scope = "tab" }, mode = "n" },
+    ["gs"] = { callback = "actions.change_sort", mode = "n" },
+    ["gx"] = "actions.open_external",
+    ["g."] = { callback = "actions.toggle_hidden", mode = "n" },
+    ["q"] = { callback = "actions.close", mode = "n" },
+  },
+
+  lsp = { enabled = true, timeout_ms = 1000, autosave = false },
+
+  float = {
+    default = false,
+    title = true,
+    padding = 2,
+    max_width = 0,
+    max_height = 0,
+    border = nil,
+    preview_split = "auto",
+    win = { winblend = 0 },
+  },
+
+  preview = {
+    follow = true,
+    live = true,
+    max_file_size_mb = 10,
+    win = {},
+  },
+
+  confirmation = {
+    max_width = 0.9,
+    min_width = { 40, 0.4 },
+    width = nil,
+    max_height = 0.9,
+    min_height = { 5, 0.1 },
+    height = nil,
+    border = nil,
+    win = { winblend = 0 },
+  },
+
+  progress = {
+    max_width = 0.9,
+    min_width = { 40, 0.4 },
+    width = nil,
+    max_height = { 10, 0.9 },
+    min_height = { 5, 0.1 },
+    height = nil,
+    border = nil,
+    minimized_border = "rounded",
+    win = { winblend = 0 },
+  },
+
+  buf = { buflisted = true, bufhidden = "hide" },
+  win = {
+    wrap = false,
+    signcolumn = "no",
+    cursorcolumn = false,
+    foldcolumn = "0",
+    spell = false,
+    list = false,
+    conceallevel = 3,
+    concealcursor = "nvic",
+  },
+}
+vim.g.canola_trash = {}
 
 packadd("mini.nvim")
 --- Mini
@@ -331,6 +443,58 @@ require("conform").setup({
 })
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
+later(function()
+  packadd "fzf-lua"
+  require("fzf-lua").setup({
+    {
+      "ivy",
+      -- "fzf-native",
+      "telescope",
+      "hide",
+    },
+    -- Window options for Ivy layout
+    winopts = {
+      -- Ivy style: no floating window borders
+      border = "none",
+      -- Height relative to screen (use full height)
+      height = 1.0,
+      -- Width relative to screen
+      width = 1.0,
+      -- Row position: 1.0 pushes it to bottom
+      row = 1.0,
+      -- Column position
+      col = 0.5,
+      -- Preview options
+      preview = {
+        hidden = true,
+        -- Preview window position (ivy style: preview above results)
+        vertical = "up:70%",
+        -- Preview border
+        border = "none",
+        -- Preview layout
+        layout = "vertical",
+      },
+      -- Disable Treesitter in the picker window for performance
+      treesitter = false,
+    },
+    ui_select = {
+      winopts = {
+        height = 0.3,
+      },
+    },
+    colorschemes = {
+      winopts = { height = 0.55, width = 0.50, col = 0.5, row = 0.0, backdrop = false },
+    },
+    fzf_opts = {
+      ["--sort"] = false,
+    },
+    fzf_colors = {
+      true, -- inherit fzf colors that aren't specified below from
+    },
+  })
+end)
+packadd"neogit"
+
 map {
   -- Neogit
   { "n", "<M-G>", ":Neogit<Cr>", load = "neogit", silent = true, desc = "Neogit" },
@@ -344,5 +508,209 @@ map {
     end,
     desc = "Format buffer",
   },
-  canola_config.keys,
+
+  { "<M-e>", "<Cmd>Canola<Cr>", desc = "Oil" },
+  { "<leader><M-e>", "<Cmd>e.<Cr>", desc = "Open cwd" },
+  { "<leader>fd", ":Canola<Cr>", desc = "Oil Explore" },
+
+  -- FZF-lua
+  { "<M-o>", "<Cmd>FzfLua files<Cr>", desc = "Find" },
+  { "<M-s>", "<Cmd>FzfLua live_grep<Cr>", desc = "Grep" },
+  { "<M-b>", "<Cmd>FzfLua buffers<Cr>", desc = "Buffers" },
+  { "<M-r>", "<Cmd>FzfLua oldfiles<Cr>", desc = "Oldfiles" },
+  { "<M-p>", "<Cmd>FzfLua global<Cr>", desc = "Global" },
+
+  -- Builtin
+  { "<leader>fa", "<Cmd>FzfLua<Cr>", desc = "Builtin" },
+
+  -- Find
+  {
+    "<leader>ff",
+    function()
+      require("fzf-lua").files()
+    end,
+    desc = "Find",
+  },
+  {
+    "<leader>fo",
+    function()
+      require("fzf-lua").oldfiles()
+    end,
+    desc = "Oldfiles",
+  },
+  {
+    "<leader>fr",
+    function() end,
+    desc = "Recent",
+  },
+
+  -- Search
+  {
+    "<leader>ss",
+    function()
+      require("fzf-lua").live_grep()
+    end,
+    desc = "Grep",
+  },
+  {
+    "<leader>st",
+    function()
+      require("fzf-lua").live_grep({
+        regex = "TODO:",
+      })
+    end,
+    desc = "Grep 'TODO:'",
+  },
+  {
+    "<leader>sw",
+    function()
+      require("fzf-lua").grep_cword()
+    end,
+    desc = "Grep <cword>",
+  },
+  {
+    mode = "x",
+    "<leader>sw",
+    function()
+      require("fzf-lua").live_grep({
+        -- FIXME: this can have a better parser...
+        regex = require("fzf-lua").utils.get_visual_selection(),
+      })
+    end,
+    desc = "Grep <cword>",
+  },
+  {
+    "<leader>sW",
+    function()
+      require("fzf-lua").grep_cWORD()
+    end,
+    desc = "Grep <cWORD>",
+  },
+  {
+    "<leader>s=",
+    "<Cmd>FzfLua spell_suggest<Cr>",
+    desc = "Spell suggest",
+  },
+
+  -- Buffers
+  {
+    "<leader>bb",
+    function()
+      require("fzf-lua").buffers()
+    end,
+    desc = "Buffers",
+  },
+  {
+    "<leader>bs",
+    function()
+      require("fzf-lua").lines()
+    end,
+    desc = "Buffers",
+  },
+  {
+    "<leader>bw",
+    function()
+      require("fzf-lua").grep_curbuf({
+        regex = vim.fn.expand("<cWord>"),
+      })
+    end,
+    desc = "Vimgrep TODO: mod after",
+  },
+  {
+    "<leader>bW",
+    function()
+      require("fzf-lua").grep_curbuf({
+        regex = vim.fn.expand("<cWORD>"),
+      })
+    end,
+    desc = "Vimgrep TODO: mod after",
+  },
+  {
+    mode = "x",
+    "<leader>bw",
+    function()
+      require("fzf-lua").grep_curbuf({
+        -- regex = vim.fn.expand("<cWORD>"),
+        search = require("fzf-lua").utils.get_visual_selection(),
+      })
+    end,
+    desc = "Vimgrep TODO: mod after",
+  },
+  -- TODO: use lgrep_curbuf or locxation
+
+  -- Git
+  {
+    "<leader>gf",
+    "<Cmd>FzfLua git_files<Cr>",
+    desc = "Git files",
+  },
+  {
+    "<leader>gb",
+    "<Cmd>FzfLua git_branches<Cr>",
+    desc = "Git Branches",
+  },
+  {
+    "<leader>gl",
+    false,
+  },
+  -- TODO: add more git things...
+
+  -- Vim
+  {
+    "<leader>vf",
+    function()
+      require("fzf-lua").files({ cwd = vim.fn.stdpath("config") })
+    end,
+    desc = "Find in config files",
+  },
+  {
+    "<leader>vs",
+    function()
+      require("fzf-lua").live_grep({ cwd = vim.fn.stdpath("config") })
+    end,
+    desc = "Grep in config files",
+  },
+  {
+    "<leader>vh",
+    "<Cmd>FzfLua helptags<Cr>",
+    desc = "Helptags",
+  },
+  {
+    "<leader>vH",
+    "<Cmd>FzfLua highlights<Cr>",
+    desc = "Highlights",
+  },
+  {
+    "<leader>vt",
+    function()
+      require("fzf-lua").colorschemes()
+    end,
+    desc = "Colorschemes",
+  },
+
+  --- Agenda/Notes
+  {
+    "<leader>af",
+    function()
+      require("fzf-lua").files({ cwd = "~/Notes/" })
+    end,
+    desc = "Find in ~/Notes",
+  },
+  {
+    "<leader>as",
+    function()
+      require("fzf-lua").live_grep({ cwd = "~/Notes/" })
+    end,
+    desc = "Grep in ~/Notes",
+  },
+  {
+    "<leader>at",
+    function()
+      require("fzf-lua").live_grep({
+        cwd = "~/Notes/",
+        regex = "TODO:",
+      })
+    end,
+    desc = "Search TODO's in ~/Notes",
+  },
 }
