@@ -127,7 +127,7 @@ map {
     "n",
     "U",
     function()
-      vim.cmd("packadd nvim.undotree")
+      packadd"nvim.undotree"
       require("undotree").open()
     end,
     silent = true,
@@ -970,3 +970,4 @@ map {
 
 -- FIXME: try to fix this
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })
+
