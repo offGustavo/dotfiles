@@ -19,6 +19,8 @@
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("gnu" . "https://elpa.gnu.org/packages/")("gnu-devel" . "https://elpa.gnu.org/devel/")
                          ("nongnu-devel" . "https://elpa.nongnu.org/nongnu-devel/")))
+
+
 (package-initialize)
 
 ;; Bootstrap use-package

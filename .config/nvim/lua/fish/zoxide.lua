@@ -33,7 +33,7 @@ function M.zoxide_select(prompt, cmd, log)
     if choice then
       vim.cmd(cmd .. " " .. vim.fn.fnameescape(choice))
       if log then
-        vim.notify("Changed directory to: " .. choice)
+        vim.notify("Cd to: " .. choice)
       end
     end
   end)

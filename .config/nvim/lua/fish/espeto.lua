@@ -16,7 +16,7 @@ for i = 1, 9 do
   marks[i] = nil
 end
 
-local function load()
+function M.load()
   local path = get_storage_path()
   local file = io.open(path, "r")
   if file then
@@ -100,51 +100,6 @@ function M.go(index)
     return
   end
   vim.cmd("edit " .. vim.fn.fnameescape(path))
-end
-
--- Configuração e mapeamentos
-function M.setup(opts)
-  opts = opts or {}
-  load()
-
-  local map = vim.keymap.set
-  local prefix = opts.prefix or "<leader>"
-
-  for i = 1, 9 do
-    map("n", prefix .. i, function()
-      M.go(i)
-    end, { desc = "Go to file " .. i })
-  end
-
-  for i = 1, 9 do
-    map("n", prefix .. "h" .. i, function()
-      local buf = vim.api.nvim_get_current_buf()
-      local path = vim.api.nvim_buf_get_name(buf)
-      if path == "" then
-        vim.notify("No File", vim.log.levels.ERROR)
-        return
-      end
-      M.set(i, path)
-    end, { desc = "Espeto: add file in " .. i })
-  end
-
-  for i = 1, 9 do
-    map("n", prefix .. "hd" .. i, function()
-      M.remove(i)
-    end, { desc = "Espeto: delete file in " .. i })
-  end
-
-  map("n", prefix .. "he", M.list, { desc = "Espeto: list files" })
-
-  map("n", prefix .. "ha", function()
-    local buf = vim.api.nvim_get_current_buf()
-    local path = vim.api.nvim_buf_get_name(buf)
-    if path == "" then
-      vim.notify("Buffer sem nome", vim.log.levels.ERROR)
-      return
-    end
-    M.add(path)
-  end, { desc = "Espeto: add file" })
 end
 
 return M

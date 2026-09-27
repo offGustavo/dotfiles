@@ -4,8 +4,7 @@ local terminals = {}
 local current_index = 1
 M.terminal_win = nil
 
--- TabTerm Config
-local config = {
+local config = vim.tbl_extend("force", {
   -- Winbar Config
   separator_right = "",
   separator_left = "",
@@ -17,7 +16,7 @@ local config = {
   vertical_size = 20,
   float = false,
   default_maps = false,
-}
+}, vim.g.tabterm_config or {})
 
 -- Update Winbar, this uses config.style to customize
 local function update_winbar()
@@ -272,94 +271,6 @@ function M.go(index)
   end
   vim.api.nvim_set_current_buf(term.bufnr)
   update_winbar()
-end
-
--- Set the config and commands
-function M.setup(user_config)
-  config = vim.tbl_extend("force", config, user_config or {})
-  local TabTerm = require("fish.tabterm")
-  if config.default_maps then
-    vim.keymap.set({ "n", "i", "x", "t" }, "<A-n>", function()
-      TabTerm.new()
-    end, { desc = "TabTerm New" })
-    vim.keymap.set({ "n", "i", "x", "t" }, "<A-z>", function()
-      TabTerm.close()
-    end, { desc = "TabTerm Close" })
-    vim.keymap.set({ "n", "i", "x", "t" }, "<A-/>", function()
-      TabTerm.toggle()
-    end, { desc = "TabTerm Toggle" })
-    for i = 1, 9, 1 do
-      vim.keymap.set({ "n", "i", "x", "t" }, "<A-" .. i .. ">", function()
-        TabTerm.go(i)
-      end, { desc = "TabTerm Toggle" })
-    end
-  end
-
-  vim.api.nvim_create_autocmd("BufWipeout", {
-    callback = function(args)
-      local ok, created = pcall(vim.api.nvim_buf_get_var, args.buf, "tabterm_created")
-      if ok and created then
-        for i, term in ipairs(terminals) do
-          if term.bufnr == args.buf then
-            table.remove(terminals, i)
-            if current_index > #terminals then
-              current_index = #terminals
-            end
-            break
-          end
-        end
-        if M.terminal_win and not vim.api.nvim_win_is_valid(M.terminal_win) then
-          M.terminal_win = nil
-        end
-        if #terminals == 0 then
-          vim.wo.winbar = ""
-        end
-      end
-    end,
-  })
-  vim.api.nvim_create_user_command("TabTermToggle", M.toggle, {})
-
-  vim.api.nvim_create_user_command("TabTermNew", function(opts)
-    M.new(opts.args ~= "" and opts.args or nil)
-  end, { nargs = "?" })
-
-  vim.api.nvim_create_user_command("TabTermClose", function(opts)
-    if opts.args ~= "" then
-      local idx = tonumber(opts.args)
-      if idx then
-        M.close(idx)
-      end
-    else
-      M.close(nil)
-    end
-  end, { nargs = "?" })
-
-  vim.api.nvim_create_user_command("TabTermRename", function(opts)
-    M.rename(opts.args)
-  end, { nargs = "?" })
-
-  vim.api.nvim_create_user_command("TabTermGo", function(opts)
-    local index = tonumber(opts.args) or 1 -- defaults to 1 if not a number
-    M.go(index)
-  end, { nargs = "?" })
-
-  function M.go(index)
-    local term = terminals[index]
-    if not term then
-      print("Terminal " .. (index or "?") .. " doesn't exist.")
-      return
-    end
-
-    current_index = index
-    local win = find_terminal_window()
-    if win then
-      vim.api.nvim_set_current_win(win)
-    else
-      create_split()
-    end
-    vim.api.nvim_set_current_buf(term.bufnr)
-    update_winbar()
-  end
 end
 
 return M

@@ -36,6 +36,9 @@ vim.pack.add({
 
   "https://github.com/folke/which-key.nvim",
   { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("v1") },
+
+  "https://github.com/nvim-lua/plenary.nvim",
+  { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
   --)
 }, { load = function() end })
 
@@ -861,4 +864,272 @@ vim.schedule(function()
   vim.keymap.set({ "x", "o" }, "as", function()
     require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals")
   end)
+
+  packadd("plenary.nvim")
+  packadd("harpoon")
+
+  local harpoon = require("harpoon")
+  harpoon.setup({
+    menu = {
+      width = vim.api.nvim_win_get_width(0) - 4,
+    },
+    settings = {
+      save_on_toggle = true,
+    },
+  })
+  local harpoon_extensions = require("harpoon.extensions")
+  harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 end)
+
+map {
+  -- Neogit
+  { "n", "<M-G>", ":Neogit<Cr>", silent = true, desc = "Neogit" },
+  {
+    "n",
+    "<leader>cf",
+    function()
+      require("conform").format({
+        async = true,
+      })
+    end,
+    desc = "Format buffer",
+  },
+
+  { "<M-e>", "<Cmd>Canola<Cr>", desc = "Canola" },
+  { "-", "<Cmd>Canola<Cr>", desc = "Canola" },
+  { "<leader><M-e>", "<Cmd>e.<Cr>", desc = "Open cwd" },
+  { "<leader>fd", ":Canola<Cr>", desc = "Oil Explore" },
+
+  -- FZF-lua
+  { "<M-o>", "<Cmd>FzfLua files<Cr>", desc = "Find" },
+  { "<M-s>", "<Cmd>FzfLua live_grep<Cr>", desc = "Grep" },
+  { "<M-b>", "<Cmd>FzfLua buffers<Cr>", desc = "Buffers" },
+  { "<M-r>", "<Cmd>FzfLua oldfiles<Cr>", desc = "Oldfiles" },
+  { "<M-p>", "<Cmd>FzfLua global<Cr>", desc = "Global" },
+  { "<M-g>", "<Cmd>FzfLua git_files<Cr>", desc = "Git files" },
+
+  -- Builtin
+  { "<leader>fa", "<Cmd>FzfLua<Cr>", desc = "Builtin" },
+
+  -- Find
+  {
+    "<leader>ff",
+    function()
+      require("fzf-lua").files()
+    end,
+    desc = "Find",
+  },
+  {
+    "<leader>fo",
+    function()
+      require("fzf-lua").oldfiles()
+    end,
+    desc = "Oldfiles",
+  },
+  {
+    "<leader>fr",
+    function() end,
+    desc = "Recent",
+  },
+
+  -- Search
+  {
+    "<leader>ss",
+    function()
+      require("fzf-lua").live_grep()
+    end,
+    desc = "Grep",
+  },
+  {
+    "<leader>st",
+    function()
+      require("fzf-lua").live_grep({
+        regex = "TODO:",
+      })
+    end,
+    desc = "Grep 'TODO:'",
+  },
+  {
+    "<leader>sw",
+    function()
+      require("fzf-lua").grep_cword()
+    end,
+    desc = "Grep <cword>",
+  },
+  {
+    mode = "x",
+    "<leader>sw",
+    function()
+      require("fzf-lua").live_grep({
+        -- FIXME: this can have a better parser...
+        regex = require("fzf-lua").utils.get_visual_selection(),
+      })
+    end,
+    desc = "Grep <cword>",
+  },
+  {
+    "<leader>sW",
+    function()
+      require("fzf-lua").grep_cWORD()
+    end,
+    desc = "Grep <cWORD>",
+  },
+  {
+    "<leader>s=",
+    "<Cmd>FzfLua spell_suggest<Cr>",
+    desc = "Spell suggest",
+  },
+
+  -- Buffers
+  {
+    "<leader>bb",
+    function()
+      require("fzf-lua").buffers()
+    end,
+    desc = "Buffers",
+  },
+  {
+    "<leader>bs",
+    function()
+      require("fzf-lua").lines()
+    end,
+    desc = "Buffers",
+  },
+  {
+    "<leader>bw",
+    function()
+      require("fzf-lua").grep_curbuf({
+        regex = vim.fn.expand("<cWord>"),
+      })
+    end,
+    desc = "Vimgrep TODO: mod after",
+  },
+  {
+    "<leader>bW",
+    function()
+      require("fzf-lua").grep_curbuf({
+        regex = vim.fn.expand("<cWORD>"),
+      })
+    end,
+    desc = "Vimgrep TODO: mod after",
+  },
+  {
+    mode = "x",
+    "<leader>bw",
+    function()
+      require("fzf-lua").grep_curbuf({
+        -- regex = vim.fn.expand("<cWORD>"),
+        search = require("fzf-lua").utils.get_visual_selection(),
+      })
+    end,
+    desc = "Vimgrep TODO: mod after",
+  },
+  -- TODO: use lgrep_curbuf or locxation
+
+  -- Git
+  {
+    "<leader>gf",
+    "<Cmd>FzfLua git_files<Cr>",
+    desc = "Git files",
+  },
+  {
+    "<leader>gb",
+    "<Cmd>FzfLua git_branches<Cr>",
+    desc = "Git Branches",
+  },
+  -- {
+  --   "<leader>gl",
+  --   false,
+  -- },
+  -- TODO: add more git things...
+
+  -- Vim
+  {
+    "<leader>vf",
+    function()
+      require("fzf-lua").files({ cwd = vim.fn.stdpath("config") })
+    end,
+    desc = "Find in config files",
+  },
+  {
+    "<leader>vs",
+    function()
+      require("fzf-lua").live_grep({ cwd = vim.fn.stdpath("config") })
+    end,
+    desc = "Grep in config files",
+  },
+  {
+    "<leader>vh",
+    "<Cmd>FzfLua helptags<Cr>",
+    desc = "Helptags",
+  },
+  {
+    "<leader>vH",
+    "<Cmd>FzfLua highlights<Cr>",
+    desc = "Highlights",
+  },
+  {
+    "<leader>vt",
+    function()
+      require("fzf-lua").colorschemes()
+    end,
+    desc = "Colorschemes",
+  },
+
+  --- Agenda/Notes
+  {
+    "<leader>af",
+    function()
+      require("fzf-lua").files({ cwd = "~/Notes/" })
+    end,
+    desc = "Find in ~/Notes",
+  },
+  {
+    "<leader>as",
+    function()
+      require("fzf-lua").live_grep({ cwd = "~/Notes/" })
+    end,
+    desc = "Grep in ~/Notes",
+  },
+  {
+    "<leader>at",
+    function()
+      require("fzf-lua").live_grep({
+        cwd = "~/Notes/",
+        regex = "TODO:",
+      })
+    end,
+    desc = "Search TODO's in ~/Notes",
+  },
+  {
+    "n",
+    "<leader>ha",
+    function()
+      require("harpoon"):list():add()
+    end,
+    desc = "Harpoon File",
+  },
+  {
+    "n",
+    "<leader>he",
+    function()
+      require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+    end,
+    desc = "Harpoon Quick Menu",
+  },
+  {
+    "n",
+    "<leader>{i}",
+    ":lua require('harpoon'):list():select({i})<Cr>",
+    range = { 1, 9 },
+    desc = "Harpoon to File {i}",
+  },
+
+  {
+    "n",
+    "<leader>h{i}",
+    ":lua require('harpoon'):list():replace_at({i})<Cr>",
+    desc = "Add {i}",
+    range = { 1, 9 },
+  },
+}
