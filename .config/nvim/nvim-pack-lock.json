@@ -22,6 +22,14 @@
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "csv.vim": {
+      "rev": "375c1a81a4f186ce8949824f3b87ddc6727a63af",
+      "src": "https://github.com/chrisbra/csv.vim"
+    },
+    "csvview.nvim": {
+      "rev": "2466bdda54047f525d4faca53040fe657c9c33db",
+      "src": "https://github.com/hat0uma/csvview.nvim"
+    },
     "friendly-snippets": {
       "rev": "b4d01b0fdf3c9a549961c2f9ffe8dc09be166219",
       "src": "https://github.com/rafamadriz/friendly-snippets"

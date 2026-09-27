@@ -65,8 +65,29 @@ autocmd("FileType", function()
   vim.lsp.semantic_tokens.enable(false)
 end)
 
--- vim.pack.add({ "https://github.com/wurli/servery.nvim" })
---
+vim.pack.add({
+  "https://github.com/wurli/servery.nvim",
+  -- "https://github.com/chrisbra/csv.vim",
+  -- "https://github.com/hat0uma/csvview.nvim",
+})
+
+-- require("csvview").setup({
+--   parser = { comments = { "#", "//" } },
+--   keymaps = {
+--     -- Text objects for selecting fields
+--     textobject_field_inner = { "if", mode = { "o", "x" } },
+--     textobject_field_outer = { "af", mode = { "o", "x" } },
+--     -- Excel-like navigation:
+--     -- Use <Tab> and <S-Tab> to move horizontally between fields.
+--     -- Use <Enter> and <S-Enter> to move vertically between rows and place the cursor at the end of the field.
+--     -- Note: In terminals, you may need to enable CSI-u mode to use <S-Tab> and <S-Enter>.
+--     jump_next_field_end = { "<Tab>", mode = { "n", "v" } },
+--     jump_prev_field_end = { "<S-Tab>", mode = { "n", "v" } },
+--     jump_next_row = { "<Enter>", mode = { "n", "v" } },
+--     jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
+--   },
+-- })
+
 -- -- The following are the defaults - you don't need to change them
 -- -- but you probably should at least set `dirs` and `ui.provider`.
 -- require("servery").setup({
@@ -76,7 +97,7 @@ end)
 -- 	session_dir = vim.fs.joinpath(cache_dir, "servery.nvim"),
 -- 	ui = {
 -- 		-- Options: "builtin" | "snacks" | "fzf" | "telescope" | "mini_pick"
--- 		provider = "builtin", ---@type servery.ui_provider
+-- 		provider = "fzf", ---@type servery.ui_provider
 -- 		prompt = "Switch Nvim Session",
 -- 		icons = {
 -- 			current = "",

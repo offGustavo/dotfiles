@@ -1016,10 +1016,10 @@ map {
     "<Cmd>FzfLua git_branches<Cr>",
     desc = "Git Branches",
   },
-  {
-    "<leader>gl",
-    false,
-  },
+  -- {
+  --   "<leader>gl",
+  --   false,
+  -- },
   -- TODO: add more git things...
 
   -- Vim
