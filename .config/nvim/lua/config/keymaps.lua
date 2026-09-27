@@ -23,7 +23,7 @@
 
 -- TODO: remove this and use map  to set this option
 -- comment line/selection
-vim.cmd[[
+vim.cmd [[
 nmap <c-/> gcc
 imap <c-/> <c-o>gcc
 xmap <c-/> :norm gcc<cr>gv
@@ -96,7 +96,7 @@ map {
   -- { "n", { "<C-_>", "<C-/>" }, "<Cmd>norm gcc<Cr>", silent = false, desc = "Toggle comment", remap = true },
   -- { "i", { "<C-_>", "<C-/>" }, "<Cmd>norm gcc<Cr>", silent = false, desc = "Toggle comment", remap = true },
   -- { "x", { "<C-_>", "<C-/>" }, "<Cmd>norm gcc<Cr>gv", silent = false, desc = "Toggle comment", remap = true },
--- }
+  -- }
 
   --- Scroll
   { "<S-ScrollWheelUp>", "zh" },
@@ -127,7 +127,7 @@ map {
     "n",
     "U",
     function()
-      packadd"nvim.undotree"
+      packadd "nvim.undotree"
       require("undotree").open()
     end,
     silent = true,
@@ -137,9 +137,9 @@ map {
 
   -- {{{ Clipboard
   { { "n", "x" }, "<C-S-v>", '"+p' },
-  { "i", "<C-V>", "<C-r>+" },
-  { { "n", "x" }, "<C-C>", '"+y' },
-  { { "n", "x" }, "<C-X>", '"+d' },
+  { "i", "<C-S-v>", "<C-r>+" },
+  { { "n", "x" }, "<C-S-c>", '"+y' },
+  { { "n", "x" }, "<C-S-x>", '"+d' },
   { { "n", "x" }, "<S-Insert>", '"+p' },
   { "i", "<S-Insert>", "<C-r>+" },
   { { "n", "x" }, "<C-Insert>", '"+y' },
@@ -970,4 +970,3 @@ map {
 
 -- FIXME: try to fix this
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })
-

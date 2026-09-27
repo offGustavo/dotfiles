@@ -4,7 +4,7 @@
 -- let g:markdown_folding = 1
 -- ]])
 
-vim.lsp.enable("marksman")
+vim.lsp.enable("markdown_oxide")
 
 map {
   -- TODO: Modificar esse atalho e adicionar uma função para fazer o "toggle" do TODO
@@ -15,14 +15,14 @@ map {
   { "i", "<M-i><M-4>", "#### TODO: ", buf = 0 },
   { "i", "<M-i><M-5>", "##### TODO: ", buf = 0 },
 
-  { "<localleader>ic", ":Editor create<Cr>", desc = "Create a code block", ft = "markdown" },
-  { "<localleader>H", ":Headings increase<Cr>", desc = "Headings increase", ft = "markdown" },
-  { "<localleader>h", ":Headings decrease<Cr>", desc = "Headings decrease", ft = "markdown" },
-  { "<Cr>", "<Cmd>Checkbox toggle<Cr>", desc = "Checkbox", ft = "markdown" },
-  { "<localleader>i<Cr>", ":Checkbox interactive<Cr>", desc = "Checkbox interactive", ft = "markdown" },
-  { "<localleader>mm", "<Cmd>Markview Toggle<Cr>", desc = "Toggle Markview", ft = "markdown" },
-  { "<localleader>mh", "<Cmd>Markview hybridToggle<Cr>", desc = "Toggle Hybrid Mode", ft = "markdown" },
-  { "<localleader>ms", "<Cmd>Markview splitToggle<Cr>", desc = "Toggle Split View", ft = "markdown" },
+  { "<localleader>ic", ":Editor create<Cr>", desc = "Create a code block", buf = 0 },
+  { "<localleader>H", ":Headings increase<Cr>", desc = "Headings increase", buf = 0 },
+  { "<localleader>h", ":Headings decrease<Cr>", desc = "Headings decrease", buf = 0 },
+  { "<Cr>", "<Cmd>Checkbox toggle<Cr>", desc = "Checkbox", buf = 0 },
+  { "<localleader>i<Cr>", ":Checkbox interactive<Cr>", desc = "Checkbox interactive", buf = 0 },
+  { "<localleader>mm", "<Cmd>Markview Toggle<Cr>", desc = "Toggle Markview", buf = 0 },
+  { "<localleader>mh", "<Cmd>Markview hybridToggle<Cr>", desc = "Toggle Hybrid Mode", buf = 0 },
+  { "<localleader>ms", "<Cmd>Markview splitToggle<Cr>", desc = "Toggle Split View", buf = 0 },
 }
 
 vim.pack.add {

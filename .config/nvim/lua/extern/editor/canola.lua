@@ -6,7 +6,8 @@ return {
   enabled = true,
   event = "VeryLazy",
   keys = {
-    { "<M-e>", "<Cmd>Canola<Cr>", desc = "Oil" },
+    { "<M-e>", "<Cmd>Canola<Cr>", desc = "Canola" },
+    { "-", "<Cmd>Canola<Cr>", desc = "Canola" },
     { "<leader><M-e>", "<Cmd>e.<Cr>", desc = "Open cwd" },
     { "<leader>fd", ":Canola<Cr>", desc = "Oil Explore" },
   },

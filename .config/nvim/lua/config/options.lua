@@ -63,14 +63,14 @@ amenu PopUp.Exit <Cmd>qa!<CR>
 -- {{{ Windows
 if Fish.is_windows() then
   vim.cmd([[
-	set noshelltemp
-	let &shell = 'powershell'
-	let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command '
-	let &shellcmdflag .= '[Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();'
-	let &shellcmdflag .= '$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';'
-	let &shellpipe  = '> %s 2>&1'
-	set shellquote= shellxquote=
-	]])
+  set noshelltemp
+  let &shell = 'powershell'
+  let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command '
+  let &shellcmdflag .= '[Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();'
+  let &shellcmdflag .= '$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';'
+  let &shellpipe  = '> %s 2>&1'
+  set shellquote= shellxquote=
+  ]])
 end
 -- }}}
 
@@ -79,6 +79,7 @@ vim.o.title = true
 function Fish.cwd_title()
   -- vim.fs.normalize() converts the path, then ~ contract for readability
   local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+  cwd = vim.fs.basename(cwd)
   if vim.g.neovide then
     return "neovide <" .. cwd .. ">"
   end
@@ -91,8 +92,10 @@ vim.o.titlestring = "%{v:lua.Fish.cwd_title()}"
 -- [neovim native, built-in, lsp autocomplete · tomas vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
 -- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
 -- vim.o.autocomplete = true
--- vim.opt.completeopt = { "menuone", "noinsert", "popup" }
+-- vim.opt.completeopt = { "menuone", "popup" }
 -- vim.o.complete = "o,.,b"
+-- vim.opt.wildmode= { "lastused", "full" }
+-- vim.o.wildoptions="pum"
 -- }}}
 
 -- {{{ grepprg and findfunc
@@ -220,7 +223,7 @@ set {
   },
 }
 
--- vim.o.statuscolumn = "%s%l %C "
+-- vim.o.statuscolumn = "%s%l%C "
 vim.o.statuscolumn = "%!v:lua.require('fish.statuscolumn').build()"
 
 -- }}}

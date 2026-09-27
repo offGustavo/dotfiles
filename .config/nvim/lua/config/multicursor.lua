@@ -395,7 +395,7 @@ map {
 
   {
     { "n", "x" },
-    "<C-8>",
+    "<M-a>",
     function()
       MultiCursor.actions.search_current()
     end,
