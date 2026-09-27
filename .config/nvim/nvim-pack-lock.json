@@ -10,7 +10,7 @@
       "version": "1.0.0 - 2.0.0"
     },
     "canola.nvim": {
-      "rev": "3de261d21572be6debad2ad29701507f4fbdcef7",
+      "rev": "5e45863eecc760c0cfc14d914fb8da6327cf01c0",
       "src": "https://forge.barrettruth.com/barrettruth/canola.nvim",
       "version": "'canola'"
     },
@@ -21,14 +21,6 @@
     "conform.nvim": {
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
-    },
-    "csv.vim": {
-      "rev": "375c1a81a4f186ce8949824f3b87ddc6727a63af",
-      "src": "https://github.com/chrisbra/csv.vim"
-    },
-    "csvview.nvim": {
-      "rev": "2466bdda54047f525d4faca53040fe657c9c33db",
-      "src": "https://github.com/hat0uma/csvview.nvim"
     },
     "friendly-snippets": {
       "rev": "b4d01b0fdf3c9a549961c2f9ffe8dc09be166219",
@@ -42,10 +34,6 @@
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
     },
-    "markview.nvim": {
-      "rev": "190bb227c9d3eb4451b81fa16ea3d2efde2d67c5",
-      "src": "https://github.com/OXY2DEV/markview.nvim"
-    },
     "mason-lspconfig.nvim": {
       "rev": "137bd0feba2c1885545b6934d36f5e5aa6adb486",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
@@ -58,24 +46,28 @@
       "rev": "561751e839b99a4baca36b9d963166b66d2536a6",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
-    "minibuffer.nvim": {
-      "rev": "961f43586999b06fdda96e4477cedd7841a618fa",
-      "src": "https://github.com/simifalaye/minibuffer.nvim"
-    },
     "neogit": {
       "rev": "5adc81b26232954cd7a90f158aa7844c18fc3165",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-lspconfig": {
-      "rev": "046b1a797af1effe8e0474b9af9657a3761ec58a",
+      "rev": "a9bb4d5f4276aa5cddc015faa3ecc5a7b5a26b14",
       "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-treesitter": {
+      "rev": "25a9b06a09ea4e10712bec37e7b7d9f423262b91",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "nvim-treesitter-textobjects": {
+      "rev": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "servery.nvim": {
-      "rev": "79eb3dec8acbdbe726beec9d75dbb5b7759fa74b",
+      "rev": "6346d25806fabadff0f8b97ff611976899188dca",
       "src": "https://github.com/wurli/servery.nvim"
     },
     "snacks.nvim": {
@@ -93,10 +85,6 @@
     "ts-comments.nvim": {
       "rev": "a59d6092213447450191122c9346f309161504cb",
       "src": "https://github.com/folke/ts-comments.nvim"
-    },
-    "vim-fugitive": {
-      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
-      "src": "https://github.com/tpope/vim-fugitive"
     },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
