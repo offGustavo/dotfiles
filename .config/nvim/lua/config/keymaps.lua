@@ -663,6 +663,21 @@ map {
     desc = "Commit All Changes From Vault",
   },
 
+  {
+    "<leader>aP",
+    function()
+      vim.cmd("!git pull --git-dir=$HOME/notes/")
+    end,
+    desc = "Pull Changes",
+  },
+  {
+    "<leader>ap",
+    function()
+      vim.cmd("!git push --git-dir=$HOME/notes/")
+    end,
+    desc = "Push Changes",
+  },
+
   --- }}}
 
   -- {{{ Make

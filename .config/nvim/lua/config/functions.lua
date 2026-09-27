@@ -51,7 +51,8 @@ end
 
 function _G.later(fn)
   -- TODO: i should use async here?
-  vim.async.run(fn)
+  -- vim.async.run(fn)
+  vim.schedule(fn)
 end
 
 
