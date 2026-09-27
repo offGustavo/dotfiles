@@ -70,6 +70,27 @@ else
 end
 -- }}}
 
+
+-- autocmd("FileType", function()
+--   vim.treesitter.stop(0)
+--   vim.lsp.semantic_tokens.enable(false)
+--   vim.cmd("syntax on ")
+-- end)
+
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    callback = function()
+      if pcall(vim.treesitter.start) then
+        -- Only highlight with treesitter
+        vim.cmd("syntax off")
+        -- Indent expérimental
+        vim.bo[0].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        -- Folds
+        vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      end
+    end,
+  })
+
 -- Set EDITOR for terminal buffers
 -- vim.api.nvim_create_autocmd("TermOpen", {
 --   callback = function()

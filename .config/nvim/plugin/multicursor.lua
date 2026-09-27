@@ -1,3 +1,9 @@
+-- TODO: remover quando 0.13 ser estavel
+if not vim.fn.has("nvim-0.13") == 1 then
+  -- MultiCursor
+  return
+end
+
 -- vim.keymap.set("n", "<C-S-d>", ":g/<cword>/normal! Q<Cr>")
 -- map {
 --   { { "n", "x" }, "<M-q>", "Q" },

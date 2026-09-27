@@ -35,42 +35,37 @@ if os.getenv("SCROLL_MODE") then
   return
 end
 
-require("config.autocmds")
 require("config.functions")
-require("config.commands")
-require("config.options")
-require("config.keymaps")
-require("config.lsp")
+-- require("config.autocmds")
+-- require("config.commands")
+-- require("config.options")
+-- require("config.keymaps")
+-- require("config.lsp")
 if vim.g.neovide then
   require("config.neovide")
 end
 
--- TODO: remover quando 0.13 ser estavel
-if vim.fn.has("nvim-0.13") == 1 then
-  -- MultiCursor
-  require("config.multicursor")
-end
+-- -- TODO: remover quando 0.13 ser estavel
+-- if vim.fn.has("nvim-0.13") == 1 then
+--   -- MultiCursor
+--   require("config.multicursor")
+-- end
 
--- Intern plugins
-require("config.intern")
+-- -- Intern plugins
+-- require("config.intern")
 
 -- External plugins
 -- require("config.lazy")
+
 require("config.pack")
 
 -- }}}
 
--- autocmd("FileType", function()
---   vim.treesitter.stop(0)
---   vim.lsp.semantic_tokens.enable(false)
---   vim.cmd("syntax on ")
--- end)
-
-vim.pack.add({
-  "https://github.com/wurli/servery.nvim",
-  -- "https://github.com/chrisbra/csv.vim",
-  -- "https://github.com/hat0uma/csvview.nvim",
-})
+-- vim.pack.add({
+--   "https://github.com/wurli/servery.nvim",
+--   -- "https://github.com/chrisbra/csv.vim",
+--   -- "https://github.com/hat0uma/csvview.nvim",
+-- })
 
 -- require("csvview").setup({
 --   parser = { comments = { "#", "//" } },
@@ -92,31 +87,31 @@ vim.pack.add({
 -- -- The following are the defaults - you don't need to change them
 -- -- but you probably should at least set `dirs` and `ui.provider`.
 -- require("servery").setup({
--- 	-- Either supply the directories as an array of strings, or a function
--- 	-- which returns an array. Shorthands like `~` are expanded.
--- 	dirs = { "~" }, ---@type string[] | fun(): string[]
--- 	session_dir = vim.fs.joinpath(cache_dir, "servery.nvim"),
--- 	ui = {
--- 		-- Options: "builtin" | "snacks" | "fzf" | "telescope" | "mini_pick"
--- 		provider = "fzf", ---@type servery.ui_provider
--- 		prompt = "Switch Nvim Session",
--- 		icons = {
--- 			current = "",
--- 			active = "",
--- 			inactive = "",
--- 		},
--- 		actions = {
--- 			["<enter>"] = "switch",
--- 			["<c-g>"] = "switch_and_detach",
--- 			["<c-x>"] = "detach",
--- 			["<c-s>"] = "spawn",
--- 		},
--- 		-- fzf-lua uses fzf's keymap notation, so it gets its own actions table
--- 		fzf_actions = {
--- 			["enter"] = "switch",
--- 			["ctrl-g"] = "switch_and_detach",
--- 			["ctrl-x"] = "detach",
--- 			["ctrl-s"] = "spawn",
--- 		},
--- 	},
+--   -- Either supply the directories as an array of strings, or a function
+--   -- which returns an array. Shorthands like `~` are expanded.
+--   dirs = { "~" }, ---@type string[] | fun(): string[]
+--   session_dir = vim.fs.joinpath(cache_dir, "servery.nvim"),
+--   ui = {
+--     -- Options: "builtin" | "snacks" | "fzf" | "telescope" | "mini_pick"
+--     provider = "fzf", ---@type servery.ui_provider
+--     prompt = "Switch Nvim Session",
+--     icons = {
+--       current = "",
+--       active = "",
+--       inactive = "",
+--     },
+--     actions = {
+--       ["<enter>"] = "switch",
+--       ["<c-g>"] = "switch_and_detach",
+--       ["<c-x>"] = "detach",
+--       ["<c-s>"] = "spawn",
+--     },
+--     -- fzf-lua uses fzf's keymap notation, so it gets its own actions table
+--     fzf_actions = {
+--       ["enter"] = "switch",
+--       ["ctrl-g"] = "switch_and_detach",
+--       ["ctrl-x"] = "detach",
+--       ["ctrl-s"] = "spawn",
+--     },
+--   },
 -- })
