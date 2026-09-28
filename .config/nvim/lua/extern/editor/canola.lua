@@ -2,7 +2,7 @@ return {
   "https://forge.barrettruth.com/barrettruth/canola.nvim",
   branch = "canola",
   priority = 1000,
-  lazy = true,
+  lazy = false,
   enabled = true,
   event = "VeryLazy",
   keys = {
