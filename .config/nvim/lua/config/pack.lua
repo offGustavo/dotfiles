@@ -559,6 +559,8 @@ vim.schedule(function()
       { "<leader>s", group = "Search/Replace", icon = "" }, -- group
       { "<leader>g", group = "Git", icon = "" }, -- group
       { "Z", group = "Session", icon = "" }, -- group
+      { "s", group = "substitute", icon = "" }, -- group
+      { "S", group = "substitute", icon = "" }, -- group
       { "<leader>a", group = "Agenda", icon = "󱨰" }, -- group
       { "<leader>u", group = "Ui", icon = "" }, -- group
       { "<leader>c", group = "Code", icon = "" }, -- group

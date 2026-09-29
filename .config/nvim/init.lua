@@ -7,8 +7,8 @@ vim.loader.enable()
 -- {{{ Map Leader and Local Leader
 -- <space> as leader
 vim.g.mapleader = " "
--- \ as local leader
-vim.g.maplocalleader = "\\"
+-- <space><space> as local leader
+vim.g.maplocalleader = "  "
 -- }}}
 
 -- {{{ Set a temp theme here to prevent light/dark flicker

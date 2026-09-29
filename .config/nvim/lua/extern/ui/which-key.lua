@@ -47,6 +47,7 @@ return {
     triggers = {
       { "<auto>", mode = "nxsoi" },
       { "<M-i>", mode = "i" },
+      { "s", mode = "n" },
     },
     -- Start hidden and wait for a key to be pressed before showing the popup
     -- Only used by enabled xo mapping modes.

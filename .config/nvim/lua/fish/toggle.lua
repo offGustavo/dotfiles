@@ -5,6 +5,7 @@ local groups = {
   { "on",     "off" },
   { "true",   "false" },
   { "yes",    "no" },
+  { "start",    "end" },
   { "public", "private", "protected" },
 }
 

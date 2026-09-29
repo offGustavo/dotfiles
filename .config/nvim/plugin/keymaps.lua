@@ -27,9 +27,11 @@ vim.cmd [[
 nmap <c-/> gcc
 imap <c-/> <c-o>gcc
 xmap <c-/> :norm gcc<cr>gv
-nmap <c-_> gcc
-imap <c-_> <c-o>gcc
-xmap <c-_> :norm gcc<cr>gv
+if !exists('g:neovide')
+  nmap <c-_> gcc
+  imap <c-_> <c-o>gcc
+  xmap <c-_> :norm gcc<cr>gv
+endif
 ]]
 
 -- vim.keymap.set("n", "<c-/>",  "gcc", { remap = true} )
