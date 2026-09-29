@@ -55,23 +55,25 @@ vim.api.nvim_create_user_command("TabTermGo", function(opts)
   require("fish.tabterm").go(index)
 end, { nargs = "?" })
 
-autocmd("BufWipeout", function(args)
-  local ok, created = pcall(vim.api.nvim_buf_get_var, args.buf, "tabterm_created")
-  if ok and created then
-    for i, term in ipairs(terminals) do
-      if term.bufnr == args.buf then
-        table.remove(terminals, i)
-        if current_index > #terminals then
-          current_index = #terminals
+vim.api.nvim_create_autocmd("BufWipeout", {
+  callback = function(args)
+    local ok, created = pcall(vim.api.nvim_buf_get_var, args.buf, "tabterm_created")
+    if ok and created then
+      for i, term in ipairs(terminals) do
+        if term.bufnr == args.buf then
+          table.remove(terminals, i)
+          if current_index > #terminals then
+            current_index = #terminals
+          end
+          break
         end
-        break
+      end
+      if require("fish.tabterm").terminal_win and not vim.api.nvim_win_is_valid(M.terminal_win) then
+        require("fish.tabterm").terminal_win = nil
+      end
+      if #terminals == 0 then
+        vim.wo.winbar = ""
       end
     end
-    if require("fish.tabterm").terminal_win and not vim.api.nvim_win_is_valid(M.terminal_win) then
-      require("fish.tabterm").terminal_win = nil
-    end
-    if #terminals == 0 then
-      vim.wo.winbar = ""
-    end
-  end
-end)
+  end,
+})
