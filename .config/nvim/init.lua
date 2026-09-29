@@ -36,11 +36,11 @@ if os.getenv("SCROLL_MODE") then
 end
 
 require("config.functions")
--- require("config.autocmds")
--- require("config.commands")
--- require("config.options")
--- require("config.keymaps")
--- require("config.lsp")
+require("config.autocmds")
+require("config.commands")
+require("config.options")
+require("config.keymaps")
+require("config.lsp")
 if vim.g.neovide then
   require("config.neovide")
 end

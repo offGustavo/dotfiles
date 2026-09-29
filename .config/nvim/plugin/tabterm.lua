@@ -27,7 +27,9 @@ for i = 1, 9, 1 do
   end, { desc = "TabTerm Toggle" })
 end
 
-vim.api.nvim_create_user_command("TabTermToggle", require("fish.tabterm").toggle, {})
+vim.api.nvim_create_user_command("TabTermToggle", function()
+  require("fish.tabterm").toggle()
+end, {})
 
 vim.api.nvim_create_user_command("TabTermNew", function(opts)
   require("fish.tabterm").new(opts.args ~= "" and opts.args or nil)
