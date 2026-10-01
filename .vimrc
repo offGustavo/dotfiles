@@ -1,6 +1,29 @@
+let g:font_name = 'JetBrainsMono NFM'
+let g:font_size = 12
+
+if has('nvim')
+  let s:root = stdpath('data')
+  let s:plug = s:root . '/site/autoload/plug.vim'
+elseif has('win32') || has('win64')
+  let s:root = expand('~/vimfiles')
+  let s:plug = s:root . '/autoload/plug.vim'
+else
+  let s:root = expand('~/.vim')
+  let s:plug = s:root . '/autoload/plug.vim'
+endif
+
+function! s:SetFont(delta) abort
+  if a:delta == 0 
+    let g:font_size = 12
+  else
+    let g:font_size = max([6, min([48, g:font_size + a:delta])])
+  endif
+  let &guifont = g:font_name . ':h' . g:font_size
+endfunction
+
 silent color catppuccin
 set termguicolors nu rnu nowrap
-set guifont=JetBrainsMono\ NFM:h12
+call s:SetFont(0)
 if !has('nvim')
   set guioptions=!acC
 endif
@@ -12,15 +35,33 @@ if has('nvim')
 endif
 set fillchars=foldopen:-,foldclose:+,foldsep:\ ,foldinner:\ ,fold:\ 
 syntax on
-set nobackup noswapfile
+set nobackup noswapfile foldmethod=indent
 set hidden belloff=all
 set wildmode=noselect:lastused,full wildoptions=pum
 set complete=.,b completeopt=noinsert,menuone,popup autocomplete
+
 autocmd CmdlineChanged [:] call wildtrigger()
-nmap - :Ex<Cr>
-nmap <space>y "+y
-nmap <space>d "+d
-nmap <space>p "+p
-xmap <space>y "+y
-xmap <space>d "+d
-xmap <space>p "+p
+
+if empty(glob(s:plug)) && executable('curl')
+  silent execute '!curl -fLo ' . shellescape(s:plug) . ' --create-dirs '
+        \ . 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+endif
+
+call plug#begin(s:root . '/plugged')
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+call plug#end()
+
+nmap <M-e> :Ex<Cr>
+nmap <M-w> "+y
+nmap <M-m> "+d
+nmap <M-y> "+p
+xmap <M-w> "+y
+xmap <M-m> "+d
+xmap <M-y> "+p
+nmap <M-o> <Cmd>Files<CR>
+nmap <M-b> <Cmd>Buffers<CR>
+nmap <M-s> <Cmd>Rg<CR>
+nmap <M-=> <Cmd>call <SID>SetFont(1)<CR>
+nmap <M--> <Cmd>call <SID>SetFont(-1)<CR>
+nmap <M-0> <Cmd>call <SID>SetFont(0)<CR>
