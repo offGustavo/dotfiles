@@ -101,7 +101,7 @@ config = {
 	color_scheme = "tokyonight",
 
 	-- {{{ Keybinds
-	disable_default_key_bindings = true,
+	disable_default_key_bindings = false,
 
 	leader = { key = "s", mods = "CTRL" },
 	-- leader = { key = "Return", mods = "ALT" },

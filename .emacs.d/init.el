@@ -128,7 +128,7 @@
   (setq evil-want-integration t
         evil-want-keybinding nil          ; evil-collection handles other modes
         evil-want-C-u-scroll t            ; C-u scrolls up like Vim
-        evil-want-C-i-jump nil            ; keep TAB working in terminal/Org
+        evil-want-C-i-jump t            ; keep TAB working in terminal/Org
         evil-want-Y-yank-to-eol t         ; Y = y$
         evil-want-fine-undo t
         evil-undo-system 'undo-redo       ; u / C-r
