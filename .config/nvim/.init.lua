@@ -56,6 +56,54 @@ end
 
 -- External plugins
 -- require("config.lazy")
+-- require("config.pack")
+
+vim.pack.add({
+  -- Tokyonight
+  { src = "https://github.com/folke/tokyonight.nvim" },
+  -- Canola/Oil
+  { src = "https://forge.barrettruth.com/barrettruth/canola.nvim", version = "canola" },
+
+  "https://github.com/dstein64/vim-startuptime",
+})
+
+vim.pack.add({
+  "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/mason-org/mason-lspconfig.nvim",
+  "https://github.com/mason-org/mason.nvim",
+
+  "https://github.com/ibhagwan/fzf-lua",
+
+  { src = "https://github.com/folke/snacks.nvim" },
+
+  { src = "https://github.com/nvim-mini/mini.nvim" },
+
+  -- NeoGit
+  { src = "https://github.com/nvim-lua/plenary.nvim" }, -- required
+  { src = "https://github.com/esmuellert/codediff.nvim" }, -- optional
+  { src = "https://github.com/m00qek/baleia.nvim" }, -- optional
+  { src = "https://github.com/NeogitOrg/neogit" },
+
+  "https://github.com/stevearc/conform.nvim",
+
+  "https://github.com/folke/ts-comments.nvim",
+
+  "https://github.com/rafamadriz/friendly-snippets",
+  "https://github.com/folke/lazydev.nvim",
+
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+
+  "https://github.com/folke/which-key.nvim",
+  { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("v1") },
+
+  "https://github.com/nvim-lua/plenary.nvim",
+  { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
+
+  "https://github.com/folke/todo-comments.nvim",
+}, { load = function() end })
+
+
 require("config.pack")
 
 -- }}}

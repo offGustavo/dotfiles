@@ -38,6 +38,10 @@
       "rev": "78b85d2a522b1e6a2d154216b3e532a1df1ad6d7",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
+    "gitsigns.nvim": {
+      "rev": "070a5d7b985546cc57e1fc61e5bc507fecac6045",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
     "harpoon": {
       "rev": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3",
       "src": "https://github.com/ThePrimeagen/harpoon",
@@ -58,6 +62,10 @@
     "mason.nvim": {
       "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
+    },
+    "mini.completion": {
+      "rev": "15fb3542b11f23b20e126c873111297f41d740e5",
+      "src": "https://github.com/nvim-mini/mini.completion"
     },
     "mini.nvim": {
       "rev": "561751e839b99a4baca36b9d963166b66d2536a6",
@@ -86,6 +94,10 @@
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "quicker.nvim": {
+      "rev": "4a6883cb13fe097a20a046eb55f6dffd239276e3",
+      "src": "https://github.com/stevearc/quicker.nvim"
     },
     "servery.nvim": {
       "rev": "6346d25806fabadff0f8b97ff611976899188dca",

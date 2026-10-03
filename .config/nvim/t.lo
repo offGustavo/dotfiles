@@ -1,0 +1,177 @@
+--- Startup times for process: Primary (or UI client) ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.001  000.001: --- NVIM STARTING ---
+000.190  000.189: event init
+000.267  000.077: early init
+000.340  000.073: locale set
+000.386  000.046: init first window
+000.716  000.330: inits 1
+000.724  000.007: window checked
+000.726  000.002: parsing arguments
+001.189  000.047  000.047: require('vim._core.shared')
+001.270  000.004  000.004: require('string.buffer')
+001.291  000.044  000.040: require('vim.inspect')
+001.402  000.061  000.061: require('vim._core.options')
+001.411  000.219  000.113: require('vim._core.editor')
+001.455  000.043  000.043: require('vim._core.system')
+001.456  000.356  000.047: require('vim._init_packages')
+001.458  000.376: init lua interpreter
+003.050  001.592: nvim_ui_attach
+003.330  000.280: nvim_set_client_info
+003.332  000.002: --- NVIM STARTED ---
+
+--- Startup times for process: Embedded ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.000  000.000: --- NVIM STARTING ---
+000.143  000.142: event init
+000.215  000.072: early init
+000.284  000.069: locale set
+000.319  000.035: init first window
+000.606  000.287: inits 1
+000.646  000.040: window checked
+000.649  000.003: parsing arguments
+001.047  000.058  000.058: require('vim._core.shared')
+001.121  000.004  000.004: require('string.buffer')
+001.140  000.042  000.038: require('vim.inspect')
+001.170  000.023  000.023: require('vim._core.options')
+001.171  000.122  000.056: require('vim._core.editor')
+001.195  000.023  000.023: require('vim._core.system')
+001.196  000.220  000.017: require('vim._init_packages')
+001.197  000.329: init lua interpreter
+001.270  000.073: expanding arguments
+001.291  000.022: inits 2
+001.482  000.191: init highlight
+001.483  000.001: waiting for UI
+001.630  000.147: done waiting for UI
+001.636  000.005: clear screen
+001.782  000.054  000.054: require('vim._core.util')
+001.808  000.010  000.010: require('vim.keymap')
+002.709  000.097  000.097: sourcing nvim_exec2()
+002.739  000.003  000.003: require('vim._core.log')
+002.813  000.013  000.013: require('vim.tty')
+002.866  000.009  000.009: require('vim.F')
+003.469  000.050  000.050: require('vim._core.mcursor')
+003.537  001.899  001.663: require('vim._core.defaults')
+003.538  000.004: init default mappings & autocommands
+003.902  000.031  000.031: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/ftplugin.vim
+003.956  000.015  000.015: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/indent.vim
+004.028  000.029  000.029: sourcing /usr/share/nvim/archlinux.lua
+004.031  000.049  000.020: sourcing /etc/xdg/nvim/sysinit.vim
+004.184  000.026  000.026: require('vim.fs')
+004.598  000.411  000.411: require('vim.uri')
+004.614  000.475  000.038: require('vim.loader')
+005.082  000.348  000.348: sourcing /home/fish/.config/nvim/colors/tokyo.vim
+005.129  000.036  000.036: sourcing nvim_exec2() called at /home/fish/.config/nvim/init.lua:0
+005.417  000.282  000.282: require('config.functions')
+005.681  000.260  000.260: require('config.autocmds')
+005.816  000.132  000.132: require('config.commands')
+005.980  000.003  000.003: sourcing nvim_exec2() called at /home/fish/.config/nvim/init.lua:0
+006.053  000.016  000.016: sourcing nvim_exec2() called at /home/fish/.config/nvim/init.lua:0
+007.718  001.657  001.657: require('vim.filetype')
+007.780  001.962  000.285: require('config.options')
+008.044  000.016  000.016: sourcing nvim_exec2() called at /home/fish/.config/nvim/init.lua:0
+009.711  001.930  001.913: require('config.keymaps')
+009.774  000.060  000.060: require('config.lsp')
+010.491  000.173  000.173: require('vim.async._future')
+010.567  000.073  000.073: require('vim.async._runtime')
+010.716  000.147  000.147: require('coxpcall')
+010.728  000.520  000.126: require('vim.async._core')
+010.835  000.048  000.048: require('vim.async._event')
+010.837  000.107  000.059: require('vim.async._queue')
+010.925  000.086  000.086: require('vim.async._semaphore')
+010.931  000.821  000.107: require('vim.async')
+010.949  001.172  000.352: require('vim.pack')
+011.289  000.149  000.149: require('vim.version')
+012.578  000.112  000.112: require('config.pack')
+012.581  008.530  001.611: sourcing /home/fish/.config/nvim/init.lua
+012.587  000.423: sourcing vimrc file(s)
+012.745  000.047  000.047: sourcing nvim_exec2() called at /home/fish/.local/share/bob/nightly/share/nvim/runtime/filetype.lua:0
+012.747  000.101  000.054: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/filetype.lua
+012.930  000.063  000.063: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/syntax/synload.vim
+012.993  000.192  000.129: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/syntax/syntax.vim
+013.357  000.008  000.008: sourcing /home/fish/.config/nvim/plugin/startuptime.vim
+013.468  000.095  000.095: sourcing /home/fish/.config/nvim/plugin/tittlecase.vim
+013.529  000.032  000.032: sourcing /home/fish/.config/nvim/plugin/argall.lua
+013.613  000.066  000.066: sourcing /home/fish/.config/nvim/plugin/canola.lua
+013.655  000.023  000.023: sourcing /home/fish/.config/nvim/plugin/espeto.lua
+013.697  000.023  000.023: sourcing /home/fish/.config/nvim/plugin/fzf-lua.lua
+013.763  000.050  000.050: sourcing /home/fish/.config/nvim/plugin/harpoon.lua
+013.826  000.004  000.004: sourcing nvim_exec2() called at /home/fish/.config/nvim/plugin/lazygit.lua:0
+013.835  000.046  000.042: sourcing /home/fish/.config/nvim/plugin/lazygit.lua
+013.907  000.047  000.047: sourcing /home/fish/.config/nvim/plugin/mini.lua
+014.002  000.076  000.076: sourcing /home/fish/.config/nvim/plugin/neogit.lua
+014.160  000.137  000.137: sourcing /home/fish/.config/nvim/plugin/tabterm.lua
+014.217  000.023  000.023: sourcing /home/fish/.config/nvim/plugin/tatr.lua
+014.258  000.021  000.021: sourcing /home/fish/.config/nvim/plugin/tokyonight.lua
+014.307  000.032  000.032: sourcing /home/fish/.config/nvim/plugin/which-key.lua
+014.342  000.017  000.017: sourcing /home/fish/.config/nvim/plugin/yazi.lua
+014.630  000.115  000.115: sourcing /home/fish/.local/share/nvim/site/pack/core/opt/vim-startuptime/plugin/startuptime.vim
+014.983  000.243  000.243: require('canola.migration')
+017.244  000.176  000.176: require('canola')
+017.296  000.048  000.048: require('canola.ringbuf')
+017.356  000.058  000.058: require('canola.config')
+017.982  000.098  000.098: require('canola.highlights')
+018.283  000.033  000.033: require('canola.constants')
+018.581  000.295  000.295: require('canola.util')
+018.587  000.387  000.059: require('canola.cache')
+018.713  000.063  000.063: require('canola.icons')
+019.024  000.436  000.373: require('canola.columns')
+019.074  000.047  000.047: require('canola.cursor')
+019.155  000.080  000.080: require('canola.entry_format')
+019.370  000.063  000.063: require('vim.log')
+019.376  000.142  000.079: require('canola.log')
+019.388  000.231  000.089: require('canola.fs')
+019.433  000.044  000.044: require('canola.insert')
+019.591  000.123  000.123: require('canola.actions')
+019.593  000.159  000.036: require('canola.keymap_util')
+019.672  000.078  000.078: require('canola.loading')
+019.686  001.615  000.153: require('canola.view')
+020.482  005.773  003.535: sourcing /home/fish/.local/share/nvim/site/pack/core/opt/canola.nvim/plugin/canola.lua
+020.986  000.138  000.138: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/gzip.vim
+021.533  000.145  000.145: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+021.569  000.544  000.400: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/matchit.vim
+021.602  000.007  000.007: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/netrwPlugin.vim
+021.728  000.100  000.100: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/rplugin.vim
+021.812  000.059  000.059: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/tarPlugin.vim
+021.855  000.014  000.014: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/tutor.vim
+022.439  000.337  000.337: require('vim._watch')
+022.448  000.523  000.186: require('nvim.autoread')
+022.534  000.652  000.129: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/autoread.lua
+022.630  000.063  000.063: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/dir.lua
+022.725  000.066  000.066: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/editorconfig.lua
+022.861  000.107  000.107: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/man.lua
+023.032  000.095  000.095: require('nvim.matchparen')
+023.065  000.169  000.074: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/matchparen.lua
+023.175  000.079  000.079: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/net.lua
+023.271  000.067  000.067: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/osc52.lua
+023.441  000.107  000.107: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/shada.lua
+023.528  000.041  000.041: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/spellfile.lua
+023.802  000.242  000.242: sourcing /home/fish/.local/share/bob/nightly/share/nvim/runtime/plugin/zip.lua
+023.900  000.014  000.014: sourcing /usr/share/vim/vimfiles/plugin/fzf.vim
+023.905  001.970: loading rtp plugins
+023.999  000.094: loading packages
+024.007  000.008: loading after plugins
+024.019  000.012: inits 3
+025.599  001.579: reading ShaDa
+025.696  000.098: opening buffers
+026.071  000.351  000.351: require('canola.win_util')
+026.083  000.036: BufEnter autocommands
+026.084  000.002: editing files in windows
+026.183  000.099: VimEnter autocommands
+026.260  000.077: UIEnter autocommands
+026.261  000.001: before starting main loop
+026.583  000.266  000.266: require('vim.iter')
+026.759  000.061  000.061: require('fish.statuscolumn')
+027.025  000.143  000.143: require('fish.mode_colors')
+027.030  000.210  000.067: require('fish.statusline')
+027.153  000.355: first screen update
+027.154  000.001: --- NVIM STARTED ---
+
