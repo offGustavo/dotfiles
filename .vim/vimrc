@@ -21,7 +21,7 @@ function! s:SetFont(delta) abort
   let &guifont = g:font_name . ':h' . g:font_size
 endfunction
 
-silent color catppuccin
+silent color tokyo
 set termguicolors nu rnu nowrap
 call s:SetFont(0)
 if !has('nvim')
@@ -50,6 +50,7 @@ endif
 call plug#begin(s:root . '/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  " Plug 'ghifarit53/tokyonight-vim'
 call plug#end()
 
 nmap <M-e> :Ex<Cr>

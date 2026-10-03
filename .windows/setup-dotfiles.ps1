@@ -37,7 +37,7 @@ $Mappings = @(
         window_path  = "$env:LOCALAPPDATA\nvim"
     }
     @{
-        path_in_dots = '../.config/doom'
+        path_in_dots = '..\.config\doom'
         window_path  = '~\.doom.d'
     }
     @{
@@ -45,16 +45,16 @@ $Mappings = @(
         window_path  = '~\.emacs.d\init.el'
     }
     @{
-        path_in_dots = '..\.vimrc'
-        window_path  = '~\_vimrc'
+        path_in_dots = '..\.vim\vimrc'
+        window_path  = '~\vimfiles\vimrc'
     }
     @{
-        path_in_dots = '../.wezterm.lua'
+        path_in_dots = '..\.wezterm.lua'
         window_path  = '~\.wezterm.lua'
     }
     # Add more mappings below:
     @{
-        path_in_dots = '../.gitconfig'
+        path_in_dots = '..\.gitconfig'
         window_path  = '~\.gitconfig'
     }
 )
