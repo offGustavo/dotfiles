@@ -1,6 +1,7 @@
 return {
   "https://github.com/ibhagwan/fzf-lua",
-  enabled = not Fish.is_windows(),
+  -- enabled = not Fish.is_windows(),
+  lazy = false,
   opts = {
     {
       "ivy",

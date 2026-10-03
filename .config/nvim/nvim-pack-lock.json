@@ -83,6 +83,10 @@
       "rev": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
+    "org.nvim": {
+      "rev": "53b76361f70d122df40b9da64a240195e71bcdb3",
+      "src": "https://github.com/xheisenbugx/org.nvim"
+    },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"

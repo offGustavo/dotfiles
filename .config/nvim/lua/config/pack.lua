@@ -41,6 +41,8 @@ vim.pack.add({
   { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 
   "https://github.com/folke/todo-comments.nvim",
+
+  "https://github.com/xheisenbugx/org.nvim",
 }, { load = function() end })
 
 vim.g.startuptime_tries = 10
@@ -783,4 +785,11 @@ vim.schedule(function()
   })
   local harpoon_extensions = require("harpoon.extensions")
   harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
+
+  vim.cmd.packadd("org.nvim")
+  require("org").setup {
+    org_directory = "~/org",
+    agenda_files = { "~/org/**/*.org" },
+    default_notes_file = "~/org/refile.org",
+  }
 end)
