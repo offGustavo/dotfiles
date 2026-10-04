@@ -1,3 +1,5 @@
+-- TODO: move to lua
+vim.cmd([[
 " https://github.com/christoomey/vim-titlecase/blob/master/plugin/titlecase.vim
 
 " plugin/titlecase.vim
@@ -17,10 +19,11 @@ nnoremap <silent> <Plug>TitlecaseLine
 if !hasmapto('<Plug>Titlecase', 'n') && maparg('gz', 'n') ==# ''
   nmap gz <Plug>Titlecase
   endif
-  if !hasmapto('<Plug>Titlecase', 'x') && maparg('gz', 'x') ==# ''
-    xmap gz <Plug>Titlecase
-    xmap Z <Plug>Titlecase
+if !hasmapto('<Plug>Titlecase', 'x') && maparg('gz', 'x') ==# ''
+  xmap gz <Plug>Titlecase
+  xmap Z <Plug>Titlecase
+  endif
+  if !hasmapto('<Plug>TitlecaseLine', 'n') && maparg('gzz', 'n') ==# ''
+    nmap gzz <Plug>TitlecaseLine
     endif
-    if !hasmapto('<Plug>TitlecaseLine', 'n') && maparg('gzz', 'n') ==# ''
-      nmap gzz <Plug>TitlecaseLine
-      endif
+      ]])

@@ -29,39 +29,8 @@ vim.o.exrc = false
 vim.g.loaded_fzf = 1
 -- }}}
 
--- TODO: move this to other neovim config or use vim as pager for kitty
--- -- {{{ Config Files
--- if os.getenv("SCROLL_MODE") then
---   require("config.kitty_scroll_mode")
---   return
--- end
-
-require("config.functions")
--- require("config.autocmds")
--- require("config.commands")
--- require("config.options")
--- require("config.keymaps")
--- require("config.lsp")
--- if vim.g.neovide then
---   require("config.neovide")
--- end
-
--- -- TODO: remover quando 0.13 ser estavel
--- if vim.fn.has("nvim-0.13") == 1 then
---   -- MultiCursor
---   require("config.multicursor")
--- end
-
--- -- Intern plugins
--- require("config.intern")
-
--- External plugins
--- require("config.lazy")
--- require("config.pack")
-
--- }}}
-
 -- {{{ Plugins
+
 vim.pack.add({
   -- Tokyonight
   { src = "https://github.com/folke/tokyonight.nvim" },
@@ -106,7 +75,6 @@ vim.pack.add({
 
   "https://github.com/folke/todo-comments.nvim",
 }, { load = function() end })
-
 
 -- vim.pack.add({
 --   "https://github.com/wurli/servery.nvim",
@@ -165,3 +133,58 @@ vim.pack.add({
 
 -- }}}
 
+-- TODO: move this to other neovim config or use vim as pager for kitty
+-- -- {{{ Config Files
+-- if os.getenv("SCROLL_MODE") then
+--   require("config.kitty_scroll_mode")
+--   return
+-- end
+
+require("config.functions")
+-- require("config.autocmds")
+-- require("config.commands")
+-- require("config.options")
+-- require("config.keymaps")
+-- require("config.lsp")
+-- if vim.g.neovide then
+--   require("config.neovide")
+-- end
+
+require("offGustavo.argall")
+require("offGustavo.autocmds")
+require("offGustavo.canola")
+require("offGustavo.commands")
+require("offGustavo.espeto")
+require("offGustavo.fzf-lua")
+require("offGustavo.harpoon")
+require("offGustavo.keymaps")
+require("offGustavo.lazygit")
+require("offGustavo.lsp")
+require("offGustavo.mini")
+require("offGustavo.multicursor")
+require("offGustavo.neogit")
+require("offGustavo.neovide")
+require("offGustavo.options")
+require("offGustavo.startuptime")
+require("offGustavo.tabterm")
+require("offGustavo.tatr")
+require("offGustavo.tittlecase")
+require("offGustavo.tokyonight")
+require("offGustavo.treesitter")
+require("offGustavo.which-key")
+require("offGustavo.yazi")
+
+-- -- TODO: remover quando 0.13 ser estavel
+-- if vim.fn.has("nvim-0.13") == 1 then
+--   -- MultiCursor
+--   require("config.multicursor")
+-- end
+
+-- -- Intern plugins
+-- require("config.intern")
+
+-- External plugins
+-- require("config.lazy")
+-- require("config.pack")
+
+-- }}}
