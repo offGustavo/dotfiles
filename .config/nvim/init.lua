@@ -26,24 +26,25 @@ vim.o.exrc = false
 
 -- {{{ Disable Plugins
 -- disable custom nix/arch fzf.vim
-vim.cmd("let g:loaded_fzf = 1")
+vim.g.loaded_fzf = 1
 -- }}}
 
--- {{{ Config Files
-if os.getenv("SCROLL_MODE") then
-  require("config.kitty_scroll_mode")
-  return
-end
+-- TODO: move this to other neovim config or use vim as pager for kitty
+-- -- {{{ Config Files
+-- if os.getenv("SCROLL_MODE") then
+--   require("config.kitty_scroll_mode")
+--   return
+-- end
 
 require("config.functions")
-require("config.autocmds")
-require("config.commands")
-require("config.options")
-require("config.keymaps")
-require("config.lsp")
-if vim.g.neovide then
-  require("config.neovide")
-end
+-- require("config.autocmds")
+-- require("config.commands")
+-- require("config.options")
+-- require("config.keymaps")
+-- require("config.lsp")
+-- if vim.g.neovide then
+--   require("config.neovide")
+-- end
 
 -- -- TODO: remover quando 0.13 ser estavel
 -- if vim.fn.has("nvim-0.13") == 1 then
@@ -58,6 +59,9 @@ end
 -- require("config.lazy")
 -- require("config.pack")
 
+-- }}}
+
+-- {{{ Plugins
 vim.pack.add({
   -- Tokyonight
   { src = "https://github.com/folke/tokyonight.nvim" },
@@ -103,10 +107,6 @@ vim.pack.add({
   "https://github.com/folke/todo-comments.nvim",
 }, { load = function() end })
 
-
-require("config.pack")
-
--- }}}
 
 -- vim.pack.add({
 --   "https://github.com/wurli/servery.nvim",
@@ -162,3 +162,6 @@ require("config.pack")
 --     },
 --   },
 -- })
+
+-- }}}
+

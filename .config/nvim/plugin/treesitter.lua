@@ -1,57 +1,17 @@
 vim.schedule(function()
   vim.cmd [[
-  packadd nvim-lspconfig
-  packadd mason.nvim
-  packadd mason-lspconfig.nvim
+  packadd ts-comments.nvim
+  packadd nvim-treesitter-textobjects
+  packadd nvim-treesitter
   ]]
-
-  require("mason").setup({})
-  require("mason-lspconfig").setup({
-    automatic_enable = true,
-  })
-
-  packadd("conform.nvim")
-  require("conform").setup({
-    -- Define your formatters
-    formatters_by_ft = {
-      lua = { "stylua" },
-      nix = { "nixfmt" },
-      python = { "isort", "black" },
-      javascript = {
-        "prettierd",
-        "prettier",
-        stop_after_first = true,
-      },
-    },
-    -- Set default options
-    default_format_opts = {
-      lsp_format = "fallback",
-    },
-    -- Set up format-on-save
-    -- format_on_save = {},
-    -- Customize formatters
-    formatters = {
-      shfmt = {
-        append_args = { "-i", "2" },
-      },
-    },
-  })
-  vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-
-
-
-
-  packadd("ts-comments.nvim")
-  require("ts-comments").setup()
-
-  packadd("nvim-treesitter-textobjects")
-  packadd("nvim-treesitter")
 
   local ts = require("nvim-treesitter")
   ts.setup({
     install_dir = vim.fn.stdpath("data") .. "/site",
   })
   -- ts.install("all", { summary = false }, { max_jobs = 24 }):wait(1000000)
+
+  require("ts-comments").setup()
 
   vim.g.no_plugin_maps = true
   -- configuration
