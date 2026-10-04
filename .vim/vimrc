@@ -34,6 +34,7 @@ if has('nvim')
   set statuscolumn=%s%l%C\ 
 endif
 set fillchars=foldopen:-,foldclose:+,foldsep:\ ,foldinner:\ ,fold:\ 
+set viminfofile=NONE
 set nobackup noswapfile foldmethod=indent
 set hidden belloff=all
 set wildmode=noselect:lastused,full wildoptions=pum
