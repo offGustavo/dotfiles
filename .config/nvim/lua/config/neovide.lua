@@ -1,10 +1,6 @@
 -------------
 -- NEOVIDE --
 -------------
-if not vim.g.neovide then
-  return
-end
-
 vim.g.neovide_padding_top = 0
 vim.g.neovide_padding_bottom = 0
 vim.g.neovide_padding_right = 8
@@ -12,10 +8,10 @@ vim.g.neovide_padding_left = 8
 
 autocmd("UiEnter", function()
   --T TODO: prevent this to change directory when neovide is open with and argument
-    -- if vim.fn.argc() ~= 0 then
-    --     return
-    -- end
-    vim.cmd("cd ~")
+  -- if vim.fn.argc() ~= 0 then
+  --     return
+  -- end
+  vim.cmd("cd ~")
 end)
 
 local font_size = 12
