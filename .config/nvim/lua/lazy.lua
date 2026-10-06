@@ -19,13 +19,13 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		-- import your plugins
-		{ import = "extern" },
-		{ import = "extern.coding" },
-		{ import = "extern.editor" },
-		{ import = "extern.util" },
-		{ import = "extern.coding" },
-		{ import = "extern.themes" },
-    { import = "extern.ui" },
+		{ import = "plugins" },
+		{ import = "plugins.coding" },
+		{ import = "plugins.editor" },
+		{ import = "plugins.util" },
+		{ import = "plugins.coding" },
+		{ import = "plugins.themes" },
+    { import = "plugins.ui" },
 	},
 	root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
 	defaults = {
