@@ -65,7 +65,7 @@ map {
     "x",
     "<leader>a",
     function()
-      require("fish.align").align_regexp()
+      require("Fish.align").align_regexp()
     end,
     desc = "Align by regex",
     silent = true,
@@ -182,7 +182,29 @@ map {
   { "i", "<M-S-,>", "<C-o>gg", noremap = true, silent = true },
   { { "n", "x" }, "<M-S-.>", "G", noremap = true, silent = true },
   { { "n", "x" }, "<M-S-,>", "gg", noremap = true, silent = true },
-  { { "n", "x" }, "<M-x>", ":", silent = false },
+  -- TODO: use this intead of lua module
+  -- {
+  --   { "n", "x" },
+  --   "<M-x>",
+  --   function()
+  --     -- 1. Open the command-line window from normal mode
+  --     vim.cmd("normal! q:")
+  --
+  --     -- 2. Clear any accidental character entered by the macro and go to the end
+  --     local current_win = vim.api.nvim_get_current_win()
+  --     local current_buf = vim.api.nvim_win_get_buf(current_win)
+  --
+  --     -- 3. Map <Esc> locally inside this buffer to close it instantly
+  --     vim.keymap.set("n", "<Esc>", function()
+  --       -- Safely close the command-line window buffer
+  --       vim.cmd("quit")
+  --     end, { buffer = current_buf, silent = true, noremap = true })
+  --
+  --     -- 4. Start editing right away in Insert Mode
+  --     vim.cmd("startinsert!")
+  --   end,
+  --   silent = false,
+  -- },
 
   { "i", "<C-a>", "<home>" },
   { "i", "<C-e>", "<end>" },
@@ -590,7 +612,7 @@ map {
       "<leader>uz",
     },
     function()
-      require("fish.zoom").zoom()
+      require("Fish.zoom").zoom()
     end,
     desc = "Toggle pane/window zoom",
   },
@@ -704,7 +726,7 @@ map {
     "n",
     "<C-a>",
     function()
-      require("fish.toggle").increase()
+      require("Fish.toggle").increase()
     end,
     desc = "Inrease numbers and words",
   },
@@ -712,13 +734,13 @@ map {
     "n",
     "<C-x>",
     function()
-      require("fish.toggle").decrease()
+      require("Fish.toggle").decrease()
     end,
     desc = "Inrease numbers and words",
   },
 
   -- vim.keymap.set("n", "<leader>tt", function()
-  --   require("fish.toggle").toggle()
+  --   require("Fish.toggle").toggle()
   -- end, { desc = "Toggle Value" })
 
   {
@@ -919,7 +941,7 @@ map {
     "n",
     "<leader>z",
     function()
-      require("fish.zoxide").zoxide_select("Zoxide (cd):", "cd", true)
+      require("Fish.zoxide").zoxide_select("Zoxide (cd):", "cd", true)
     end,
     desc = "Zoxide picker (cd)",
   },
@@ -928,7 +950,7 @@ map {
     "n",
     "<leader>Z",
     function()
-      require("fish.zoxide").zoxide_select("Zoxide (tcd):", "tcd", true)
+      require("Fish.zoxide").zoxide_select("Zoxide (tcd):", "tcd", true)
     end,
     desc = "Zoxide picker(tcb)",
   },
@@ -969,21 +991,21 @@ map {
   --   {
   --     "<leader>hl",
   --     function()
-  --       require("fish.argall").load()
+  --       require("Fish.argall").load()
   --     end,
   --     desc = "Load args session",
   --   },
   --   {
   --     "<leader>he",
   --     function()
-  --       require("fish.argall").show()
+  --       require("Fish.argall").show()
   --     end,
   --     desc = "Show args in tmp buffer",
   --   },
   --   {
   --     "<leader>ha",
   --     function()
-  --       require("fish.argall").add(vim.fn.expand("%"))
+  --       require("Fish.argall").add(vim.fn.expand("%"))
   --     end,
   --     desc = "Add arg file",
   --   },

@@ -2,24 +2,24 @@ local command = vim.api.nvim_create_user_command
 
 -- Better Cd with Zoxide (window)
 command("Z", function(opts)
-  require("fish.zoxide").zoxide_commmand(opts.args, "cd")
+  require("Fish.zoxide").zoxide_commmand(opts.args, "cd")
 end, {
   nargs = "?",
   complete = function(_, cmd_line)
-    return require("fish.zoxide").zoxide_complete(cmd_line)
+    return require("Fish.zoxide").zoxide_complete(cmd_line)
   end,
 })
 
 -- Better Cd with Zoxide (tab)
 command("Zt", function(opts)
-  require("fish.zoxide").zoxide_commmand(opts.args, "tcd")
+  require("Fish.zoxide").zoxide_commmand(opts.args, "tcd")
 end, {
   nargs = "?",
   complete = function(_, cmd_line)
-    return require("fish.zoxide").zoxide_complete(cmd_line)
+    return require("Fish.zoxide").zoxide_complete(cmd_line)
   end,
 })
 
 command("AlignRegexp", function ()
-  require('fish.align').align_regexp(opts)
+  require('Fish.align').align_regexp(opts)
 end, { range = true })

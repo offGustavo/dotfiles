@@ -1,5 +1,17 @@
 -- vim: foldmethod=marker
 
+-- {{{ Map Leader and Local Leader
+-- <space> as leader
+vim.g.mapleader = " "
+-- <space><space> as local leader
+vim.g.maplocalleader = "  "
+-- }}}
+
+-- {{{ Disable Plugins
+-- disable custom nix/arch fzf.vim
+vim.g.loaded_fzf = 1
+-- }}}
+
 -- {{{ Netrw
 vim.cmd [[
 " let g:netrw_banner = 0
@@ -10,6 +22,11 @@ vim.cmd [[
 " -- autocmd BufEnter * lcd %:p:h
 ]]
 -- }}}
+
+-- {{{ Security Things
+vim.o.modeline = true
+vim.o.exrc = false
+--- }}}
 
 -- {{{ Options
 -- vim.opt.mouse = ""
@@ -196,7 +213,7 @@ vim.o.foldmethod = "indent"
 vim.o.foldlevel = 99
 
 -- vim.o.foldtext = ""
-vim.o.foldtext = "v:lua.require('fish.foldtext').build_fold_text()"
+vim.o.foldtext = "v:lua.require('Fish.foldtext').build_fold_text()"
 
 function Fish.clean_folded_hi()
   vim.api.nvim_set_hl(0, "Folded", { link = "Comment" })
@@ -209,137 +226,137 @@ vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, {
 })
 --- }}}
 
--- {{{ statuscolumn
-set {
-  foldcolumn = "1",
-  signcolumn = "yes:1",
-  -- Status column settings
-  fillchars = {
-    fold = " ",
-    foldopen = "",
-    foldclose = "",
-    foldsep = " ",
-    foldinner = " ",
-  },
-}
+-- -- {{{ statuscolumn
+-- set {
+--   foldcolumn = "1",
+--   signcolumn = "yes:1",
+--   -- Status column settings
+--   fillchars = {
+--     fold = " ",
+--     foldopen = "",
+--     foldclose = "",
+--     foldsep = " ",
+--     foldinner = " ",
+--   },
+-- }
+--
+-- -- vim.o.statuscolumn = "%s%l%C "
+-- vim.o.statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()"
+--
+-- -- }}}
 
--- vim.o.statuscolumn = "%s%l%C "
-vim.o.statuscolumn = "%!v:lua.require('fish.statuscolumn').build()"
+-- -- {{{ statusline
+-- set {
+--   laststatus = 3,
+--   showmode = false,
+-- }
+--
+-- -- vim.opt.fillchars:append({
+-- --   stl = "-",
+-- --   stlnc = "-"
+-- -- })
+--
+-- -- vim.opt.fillchars:append({
+-- --   vert = '┃',
+-- --   horiz = '━',
+-- --   horizup = '┻',
+-- --   horizdown = '┳'
+-- -- })
+--
+-- -- vim.opt.fillchars:append({
+-- -- vert = ' ',
+-- -- horiz = ' ',
+-- -- horizup = ' ',
+-- -- horizdown = ' '
+-- -- })
+--
+-- -- set statusline=%<%f\ %h%w%m%r\ %{%\ v:lua.require('vim._core.util').term_exitcode()\ %}%=%{%\ luaeval('(package.loaded[''vim.ui'']\ and\ vim.api.nvim_get_current_win()\ ==\ tonumber(vim.g.actual_curwin\ or\ -1)\ and\ vim.ui.progress_status())\ or\ ''''\ ')%}%{%\ &showcmdloc\ ==\ 'statusline'\ ?\ '%-10.S\ '\ :\ ''\ %}%{%\ exists('b:keymap_name')\ ?\ '<'..b:keymap_name..'>\ '\ :\ ''\ %}%{%\ &busy\ >\ 0\ ?\ '◐\ '\ :\ ''\ %}%{%\ luaeval('(package.loaded[''vim.diagnostic'']\ and\ next(vim.diagnostic.count())\ and\ vim.diagnostic.status()\ ..\ ''\ '')\ or\ ''''\ ')\ %}%{%\ &ruler\ ?\ (\ &rulerformat\ ==\ ''\ ?\ '%-14.(%l,%c%V%)\ %P'\ :\ &rulerformat\ )\ :\ ''\ %}
+--
+-- vim.o.statusline = "%!v:lua.require('Fish.statusline').build_statusline()"
+--
+-- -- From mini.statusline
+-- -- -- Set statusline globally and dynamically decide which content to use
+-- -- vim.go.statusline = [[ %{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.require('Fish.statusline').build_statusline() : v:lua.require('Fish.statusline').build_statusline_inactive()%} ]]
+--
+-- -- }}}
 
--- }}}
-
--- {{{ statusline
-set {
-  laststatus = 3,
-  showmode = false,
-}
-
--- vim.opt.fillchars:append({
---   stl = "-",
---   stlnc = "-"
+-- -- {{{ tabline
+-- vim.o.showtabline = 0
+-- vim.o.tabline = "%!v:lua.require('Fish.tabline').build_tabline()"
+-- -- Update when windows or tabs change
+-- vim.api.nvim_create_autocmd({ "VimEnter", "UiEnter", "WinNew", "WinClosed", "TabNew", "TabClosed" }, {
+--   callback = function()
+--     local ignore_ft = {
+--       "neo-tree",
+--       "NvimTree",
+--       "nvimtree",
+--       "toggleterm",
+--       "terminal",
+--       "lazy",
+--       "mason",
+--       "trouble",
+--       "qf",
+--       "help",
+--       "nofile",
+--       "TelescopePrompt",
+--       "telescope",
+--       "notify",
+--       "noice",
+--       "aerial",
+--       "outline",
+--       "dap-repl",
+--       "dapui_watches",
+--       "dapui_stacks",
+--       "dapui_breakpoints",
+--       "dapui_scopes",
+--       "dapui_console",
+--       "undotree",
+--       "diff",
+--       "packer",
+--       "lspinfo",
+--       "lsp-installer",
+--       "startify",
+--       "alpha",
+--       "dashboard",
+--     }
+--
+--     local ignore_ft_set = {}
+--     for _, ft in ipairs(ignore_ft) do
+--       ignore_ft_set[ft] = true
+--     end
+--
+--     -- Defer so WinClosed fires after the window is actually gone
+--     vim.schedule(function()
+--       local tabcount = #vim.api.nvim_list_tabpages()
+--       local windowcount = 0
+--
+--       for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+--         local buf = vim.api.nvim_win_get_buf(win)
+--         local ft = vim.bo[buf].filetype
+--         local bt = vim.bo[buf].buftype
+--         local cfg = vim.api.nvim_win_get_config(win)
+--
+--         -- Skip floating windows and UI filetypes/buftypes
+--         if cfg.relative == "" then
+--           if not ignore_ft_set[ft] and not ignore_ft_set[bt] then
+--             windowcount = windowcount + 1
+--           end
+--         end
+--       end
+--
+--       if tabcount > 1 or windowcount > 1 then
+--         vim.o.showtabline = 2
+--       else
+--         vim.o.showtabline = 0
+--       end
+--     end)
+--   end,
 -- })
-
--- vim.opt.fillchars:append({
---   vert = '┃',
---   horiz = '━',
---   horizup = '┻',
---   horizdown = '┳'
--- })
-
--- vim.opt.fillchars:append({
--- vert = ' ',
--- horiz = ' ',
--- horizup = ' ',
--- horizdown = ' '
--- })
-
--- set statusline=%<%f\ %h%w%m%r\ %{%\ v:lua.require('vim._core.util').term_exitcode()\ %}%=%{%\ luaeval('(package.loaded[''vim.ui'']\ and\ vim.api.nvim_get_current_win()\ ==\ tonumber(vim.g.actual_curwin\ or\ -1)\ and\ vim.ui.progress_status())\ or\ ''''\ ')%}%{%\ &showcmdloc\ ==\ 'statusline'\ ?\ '%-10.S\ '\ :\ ''\ %}%{%\ exists('b:keymap_name')\ ?\ '<'..b:keymap_name..'>\ '\ :\ ''\ %}%{%\ &busy\ >\ 0\ ?\ '◐\ '\ :\ ''\ %}%{%\ luaeval('(package.loaded[''vim.diagnostic'']\ and\ next(vim.diagnostic.count())\ and\ vim.diagnostic.status()\ ..\ ''\ '')\ or\ ''''\ ')\ %}%{%\ &ruler\ ?\ (\ &rulerformat\ ==\ ''\ ?\ '%-14.(%l,%c%V%)\ %P'\ :\ &rulerformat\ )\ :\ ''\ %}
-
-vim.o.statusline = "%!v:lua.require('fish.statusline').build_statusline()"
-
--- From mini.statusline
--- -- Set statusline globally and dynamically decide which content to use
--- vim.go.statusline = [[ %{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.require('fish.statusline').build_statusline() : v:lua.require('fish.statusline').build_statusline_inactive()%} ]]
-
--- }}}
-
--- {{{ tabline
-vim.o.showtabline = 0
-vim.o.tabline = "%!v:lua.require('fish.tabline').build_tabline()"
--- Update when windows or tabs change
-vim.api.nvim_create_autocmd({ "VimEnter", "UiEnter", "WinNew", "WinClosed", "TabNew", "TabClosed" }, {
-  callback = function()
-    local ignore_ft = {
-      "neo-tree",
-      "NvimTree",
-      "nvimtree",
-      "toggleterm",
-      "terminal",
-      "lazy",
-      "mason",
-      "trouble",
-      "qf",
-      "help",
-      "nofile",
-      "TelescopePrompt",
-      "telescope",
-      "notify",
-      "noice",
-      "aerial",
-      "outline",
-      "dap-repl",
-      "dapui_watches",
-      "dapui_stacks",
-      "dapui_breakpoints",
-      "dapui_scopes",
-      "dapui_console",
-      "undotree",
-      "diff",
-      "packer",
-      "lspinfo",
-      "lsp-installer",
-      "startify",
-      "alpha",
-      "dashboard",
-    }
-
-    local ignore_ft_set = {}
-    for _, ft in ipairs(ignore_ft) do
-      ignore_ft_set[ft] = true
-    end
-
-    -- Defer so WinClosed fires after the window is actually gone
-    vim.schedule(function()
-      local tabcount = #vim.api.nvim_list_tabpages()
-      local windowcount = 0
-
-      for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-        local buf = vim.api.nvim_win_get_buf(win)
-        local ft = vim.bo[buf].filetype
-        local bt = vim.bo[buf].buftype
-        local cfg = vim.api.nvim_win_get_config(win)
-
-        -- Skip floating windows and UI filetypes/buftypes
-        if cfg.relative == "" then
-          if not ignore_ft_set[ft] and not ignore_ft_set[bt] then
-            windowcount = windowcount + 1
-          end
-        end
-      end
-
-      if tabcount > 1 or windowcount > 1 then
-        vim.o.showtabline = 2
-      else
-        vim.o.showtabline = 0
-      end
-    end)
-  end,
-})
--- }}}
+-- -- }}}
 
 -- {{{ quickfix
 -- TODO: add custom quickfix list
--- vim.o.quickfixtextfunc = "v:lua.require('fish.quickfix').format()"
+-- vim.o.quickfixtextfunc = "v:lua.require('Fish.quickfix').format()"
 --- }}}
 
 -- {{{ ui2
@@ -348,7 +365,7 @@ if vim.fn.has("nvim-0.12") ~= 1 then
   return
 end
 
-vim.schedule(function()
+later(function()
   vim.o.cmdheight = 0
   require("vim._core.ui2").enable {
     enable = true, -- Whether to enable or disable the UI.
