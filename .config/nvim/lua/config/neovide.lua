@@ -16,8 +16,8 @@ end)
 
 local font_size = 12
 
----@param amount
----@param log
+---@param amount integer
+---@param log boolean
 local function set_font_size(amount, log)
   if amount == 0 then
     font_size = 12
@@ -39,12 +39,32 @@ end
 
 set_font_size(0, false)
 
-vim.keymap.set({ "i", "v", "n", "c" }, "<C-+>", function()
-  set_font_size(1, true)
-end, { desc = "Increase Font Size in neovide", silent = true })
-vim.keymap.set({ "i", "v", "n", "c" }, "<C-_>", function()
-  set_font_size(-1, true)
-end, { desc = "Decrease Font Size in neovide", silent = true })
-vim.keymap.set({ "i", "v", "n", "c" }, "<C-S-BS>", function()
-  set_font_size(0, true)
-end, { desc = "Restore Font Size in neovide", silent = true })
+map {
+  {
+    { "i", "v", "n", "c" },
+    "<C-+>",
+    function()
+      set_font_size(1, true)
+    end,
+    desc = "Increase Font Size in neovide",
+    silent = true,
+  },
+  {
+    { "i", "v", "n", "c" },
+    "<C-_>",
+    function()
+      set_font_size(-1, true)
+    end,
+    desc = "Decrease Font Size in neovide",
+    silent = true,
+  },
+  {
+    { "i", "v", "n", "c" },
+    "<C-S-BS>",
+    function()
+      set_font_size(0, true)
+    end,
+    desc = "Restore Font Size in neovide",
+    silent = true,
+  },
+}

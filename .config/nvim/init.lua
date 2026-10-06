@@ -19,17 +19,16 @@ if os.getenv("SCROLL_MODE") then
 end
 
 require("config.functions")
-
-if vim.g.neovide then
-  require("config.neovide")
-end
-
+require("config.options")
 require("config.autocmds")
 require("config.commands")
 require("config.keymaps")
 require("config.lsp")
 require("config.multicursor")
-require("config.options")
+
+if vim.g.neovide then
+  require("config.neovide")
+end
 -- }}}
 
 -- {{{ Local Plugins
