@@ -283,14 +283,14 @@ function M.setup(user_opts)
   end
 
   if opts.enable_cmds then
-    vim.cmd('command! Yazi lua require("fish.yazi").open()')
+    vim.cmd('command! Yazi lua require("Fish.yazi").open()')
     vim.keymap.set("n", "<M-S-y>", ":Yazi<CR>")
     -- vim.keymap.set("n", "-", function()
-    --     require("fish.yazi").open(vim.fn.expand("%:h"), nil)
+    --     require("Fish.yazi").open(vim.fn.expand("%:h"), nil)
     -- end, { desc = "Open Yazi File Manager" })
-    vim.cmd(string.format('command! Sex lua require("fish.yazi").open(nil, "%s")', M.OPEN_MODE.split))
-    vim.cmd(string.format('command! Vex lua require("fish.yazi").open(nil, "%s")', M.OPEN_MODE.vsplit))
-    vim.cmd(string.format('command! Tex lua require("fish.yazi").open(nil, "%s")', M.OPEN_MODE.tabedit))
+    vim.cmd(string.format('command! Sex lua require("Fish.yazi").open(nil, "%s")', M.OPEN_MODE.split))
+    vim.cmd(string.format('command! Vex lua require("Fish.yazi").open(nil, "%s")', M.OPEN_MODE.vsplit))
+    vim.cmd(string.format('command! Tex lua require("Fish.yazi").open(nil, "%s")', M.OPEN_MODE.tabedit))
   end
 end
 

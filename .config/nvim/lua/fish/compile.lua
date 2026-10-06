@@ -46,7 +46,7 @@ M.compile = function()
 end
 
 M.setup = function()
-	local c = require("fish.compile")
+	local c = require("Fish.compile")
 
 	vim.keymap.set("n", "<M-c>", function()
 		c.compile()

@@ -93,7 +93,7 @@ function M.build()
 	end
 	local lnum_str = "%=" .. num .. " "
 
-	return left .. lnum_str .. "%@v:lua.require'fish.statuscolumn'.click_fold@" .. right .. "%T"
+	return left .. lnum_str .. "%@v:lua.require'Fish.statuscolumn'.click_fold@" .. right .. "%T"
 end
 
 return M

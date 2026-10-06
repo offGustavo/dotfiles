@@ -1,7 +1,7 @@
 local M = {}
 
-local render_with_mode_color = require("fish.mode_colors").render_with_mode_color
-local render_with_mode_color_inverted = require("fish.mode_colors").render_with_mode_color_inverted
+local render_with_mode_color = require("Fish.mode_colors").render_with_mode_color
+local render_with_mode_color_inverted = require("Fish.mode_colors").render_with_mode_color_inverted
 
 local function get_file_name()
   local modified = vim.bo[0].modified

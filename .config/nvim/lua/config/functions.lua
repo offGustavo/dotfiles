@@ -4,12 +4,12 @@ function Fish.is_windows()
   return vim.fn.has("win32") == 1
 end
 
-local fish_group = vim.api.nvim_create_augroup("Fish.config", {})
+_G.fish_group = vim.api.nvim_create_augroup("Fish.config", {})
 
 ---comment
 ---@param event string|table
 ---@param callback? function
----@param pattern? string|table
+---@param pattern? string|table|function
 ---@param group? any
 ---@param desc? string
 function _G.autocmd(event, callback, pattern, group, desc)
@@ -399,14 +399,7 @@ local function set_one(m, i, idx)
   local function do_set(l)
     local ok, err = pcall(vim.keymap.set, mode, l, rhs, opts)
     if not ok then
-      error(
-        string.format(
-          "set_keymap: vim.keymap.set failed (%s) in %s",
-          tostring(err),
-          describe_spec(m, idx, i)
-        ),
-        0
-      )
+      error(string.format("set_keymap: vim.keymap.set failed (%s) in %s", tostring(err), describe_spec(m, idx, i)), 0)
     end
   end
 

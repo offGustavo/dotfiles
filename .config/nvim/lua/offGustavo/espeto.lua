@@ -5,7 +5,7 @@
 --
 --     for i = 1, 9 do
 --       map("n", prefix .. i, function()
---         require("fish.espeto").go(i)
+--         require("Fish.espeto").go(i)
 --       end, { desc = "Go to file " .. i })
 --     end
 --
@@ -17,17 +17,17 @@
 --           vim.notify("No File", vim.log.levels.ERROR)
 --           return
 --         end
---         require("fish.espeto").set(i, path)
+--         require("Fish.espeto").set(i, path)
 --       end, { desc = "Espeto: add file in " .. i })
 --     end
 --
 --     for i = 1, 9 do
 --       map("n", prefix .. "hd" .. i, function()
---         require("fish.espeto").remove(i)
+--         require("Fish.espeto").remove(i)
 --       end, { desc = "Espeto: delete file in " .. i })
 --     end
 --
---     map("n", prefix .. "he", require("fish.espeto").list, { desc = "Espeto: list files" })
+--     map("n", prefix .. "he", require("Fish.espeto").list, { desc = "Espeto: list files" })
 --
 --     map("n", prefix .. "ha", function()
 --       local buf = vim.api.nvim_get_current_buf()
@@ -36,9 +36,9 @@
 --         vim.notify("Buffer sem nome", vim.log.levels.ERROR)
 --         return
 --       end
---       require("fish.espeto").add(path)
+--       require("Fish.espeto").add(path)
 --     end, { desc = "Espeto: add file" })
 --
---     require("fish.espeto").load()
+--     require("Fish.espeto").load()
 --   end)
 -- end)

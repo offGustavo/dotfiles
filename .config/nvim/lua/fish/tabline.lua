@@ -1,6 +1,6 @@
-local render_with_mode_color = require("fish.mode_colors").render_with_mode_color
-local render_with_mode_color_inverted = require("fish.mode_colors").render_with_mode_color_inverted
-local mode_name = require("fish.mode_colors").mode_name
+local render_with_mode_color = require("Fish.mode_colors").render_with_mode_color
+local render_with_mode_color_inverted = require("Fish.mode_colors").render_with_mode_color_inverted
+local mode_name = require("Fish.mode_colors").mode_name
 
 local ignore_names = {
   "[Pager]",

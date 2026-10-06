@@ -1,5 +1,5 @@
 later(function()
-  require("fish.yazi").setup({
+  require("Fish.yazi").setup({
     enable_cmds = true,
     replace_netrw = false,
     ui = {
