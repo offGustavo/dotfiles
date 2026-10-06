@@ -2,7 +2,7 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  -- enabled = Fish.is_windows(),
+  -- enabled = is_windows(),
   -- enabled = true,
   enabled = false,
   ---@type snacks.Config

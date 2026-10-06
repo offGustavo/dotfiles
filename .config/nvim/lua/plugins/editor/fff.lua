@@ -1,6 +1,6 @@
 return {
 	"dmtrKovalenko/fff.nvim",
-  -- enabled = Fish.is_windows(),
+  -- enabled = is_windows(),
   enabled = false,
 	build = function()
 		-- downloads a prebuilt binary or falls back to cargo build

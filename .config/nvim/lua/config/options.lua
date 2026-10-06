@@ -78,7 +78,7 @@ amenu PopUp.Exit <Cmd>qa!<CR>
 --- }}}
 
 -- {{{ Windows
-if Fish.is_windows() then
+if is_windows() then
   vim.cmd([[
   set noshelltemp
   let &shell = 'powershell'
@@ -119,7 +119,7 @@ vim.o.titlestring = "%{v:lua.Fish.cwd_title()}"
 vim.schedule(function()
   -- better grep and find with ripgrep
   if vim.fn.executable("rg") == 1 then
-    if Fish.is_windows() then
+    if is_windows() then
       vim.o.grepprg = "rg --vimgrep --color=never"
     else
       vim.o.grepprg = "rg"
@@ -226,24 +226,24 @@ vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, {
 })
 --- }}}
 
--- -- {{{ statuscolumn
--- set {
---   foldcolumn = "1",
---   signcolumn = "yes:1",
---   -- Status column settings
---   fillchars = {
---     fold = " ",
---     foldopen = "",
---     foldclose = "",
---     foldsep = " ",
---     foldinner = " ",
---   },
--- }
---
--- -- vim.o.statuscolumn = "%s%l%C "
--- vim.o.statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()"
---
--- -- }}}
+-- {{{ statuscolumn
+set {
+  foldcolumn = "1",
+  signcolumn = "yes:1",
+  -- Status column settings
+  fillchars = {
+    fold = " ",
+    foldopen = "",
+    foldclose = "",
+    foldsep = " ",
+    foldinner = " ",
+  },
+}
+
+-- vim.o.statuscolumn = "%s%l%C "
+vim.o.statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()"
+
+-- }}}
 
 -- -- {{{ statusline
 -- set {
