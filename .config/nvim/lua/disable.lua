@@ -1,0 +1,55 @@
+
+-- vim.pack.add({
+--   "https://github.com/wurli/servery.nvim",
+--   -- "https://github.com/chrisbra/csv.vim",
+--   -- "https://github.com/hat0uma/csvview.nvim",
+-- })
+
+-- require("csvview").setup({
+--   parser = { comments = { "#", "//" } },
+--   keymaps = {
+--     -- Text objects for selecting fields
+--     textobject_field_inner = { "if", mode = { "o", "x" } },
+--     textobject_field_outer = { "af", mode = { "o", "x" } },
+--     -- Excel-like navigation:
+--     -- Use <Tab> and <S-Tab> to move horizontally between fields.
+--     -- Use <Enter> and <S-Enter> to move vertically between rows and place the cursor at the end of the field.
+--     -- Note: In terminals, you may need to enable CSI-u mode to use <S-Tab> and <S-Enter>.
+--     jump_next_field_end = { "<Tab>", mode = { "n", "v" } },
+--     jump_prev_field_end = { "<S-Tab>", mode = { "n", "v" } },
+--     jump_next_row = { "<Enter>", mode = { "n", "v" } },
+--     jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
+--   },
+-- })
+
+-- -- The following are the defaults - you don't need to change them
+-- -- but you probably should at least set `dirs` and `ui.provider`.
+-- require("servery").setup({
+--   -- Either supply the directories as an array of strings, or a function
+--   -- which returns an array. Shorthands like `~` are expanded.
+--   dirs = { "~" }, ---@type string[] | fun(): string[]
+--   session_dir = vim.fs.joinpath(cache_dir, "servery.nvim"),
+--   ui = {
+--     -- Options: "builtin" | "snacks" | "fzf" | "telescope" | "mini_pick"
+--     provider = "fzf", ---@type servery.ui_provider
+--     prompt = "Switch Nvim Session",
+--     icons = {
+--       current = "",
+--       active = "",
+--       inactive = "",
+--     },
+--     actions = {
+--       ["<enter>"] = "switch",
+--       ["<c-g>"] = "switch_and_detach",
+--       ["<c-x>"] = "detach",
+--       ["<c-s>"] = "spawn",
+--     },
+--     -- fzf-lua uses fzf's keymap notation, so it gets its own actions table
+--     fzf_actions = {
+--       ["enter"] = "switch",
+--       ["ctrl-g"] = "switch_and_detach",
+--       ["ctrl-x"] = "detach",
+--       ["ctrl-s"] = "spawn",
+--     },
+--   },
+-- })
