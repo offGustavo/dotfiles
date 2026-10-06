@@ -16,7 +16,7 @@
 --   group = augroup,
 --   once = true,
 --   callback = function()
---     require("fish.argall").load()
+--     require("Fish.argall").load()
 --   end,
 --   desc = "Auto-load aarguments from session",
 -- })
@@ -27,7 +27,7 @@
 --     group = augroup,
 --     once = true,
 --     callback = function()
---       require("fish.argall").save()
+--       require("Fish.argall").save()
 --     end,
 --     desc = "Auto-save arguments to session",
 --   })
@@ -36,7 +36,7 @@
 --     group = augroup,
 --     once = true,
 --     callback = function()
---       require("fish.argall").save()
+--       require("Fish.argall").save()
 --     end,
 --     desc = "Auto-save arguments to session",
 --   })
