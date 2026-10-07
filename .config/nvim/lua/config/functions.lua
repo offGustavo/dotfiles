@@ -7,58 +7,36 @@ end
 -- Augroup
 _G.fish_group = vim.api.nvim_create_augroup("Fish.config", {})
 
----Set Neovim options in bulk.
----  - boolean/number/string -> vim.o
----  - function(opt)         -> called with vim.opt[option]; use for append/prepend/remove
----  - { append, prepend, remove } table -> applied in order: prepend, append, remove
----  - any other table       -> vim.opt (full replacement of list/map/set)
----
----Operation tables accept a string or a list for each key. Note that a table
----with a key named `append`, `prepend` or `remove` is always treated as an
----operation table, so use the function form for options that are maps with
----such keys.
----@class OptOps
----@field prepend? string|string[]
----@field append?  string|string[]
----@field remove?  string|string[]
----
----@param opts table<string, boolean|number|string|table|OptOps|fun(opt: table)>
----@param global? nil|integer define if option should be set with set, set_local or set_global
----@usage
---- set {
----   number = true,
----   listchars  = { tab = "» ", trail = "·" },              -- replace
----   wildignore = { append = { "*.o", "*.obj" }, remove = "*.tmp" },
----   path       = { prepend = "src/**" },
----   shortmess  = function(o) o:remove("I") end,            -- function form
---- }
-
 ---Set options like `:set`.
+---
+---See `Fish.set` for the supported value types.
 ---@param opts table<string, OptValue>
----@param scope? OptScope
----@usage
+---@param scope? OptScope Defaults to `"both"`
+---@usage lua
 --- set {
 ---   number     = true,
----   listchars  = { tab = "» ", trail = "·" },
 ---   wildignore = { append = { "*.o", "*.obj" }, remove = "*.tmp" },
----   path       = { prepend = "src/**" },
 ---   shortmess  = function(o) o:remove("I") end,
 --- }
 --- set({ wrap = false }, "local") -- same as set_local
 function _G.set(opts, scope)
-  require("Fish.set").set(opts, scope)
+  require("Fish.set_opt").set(opts, scope)
 end
 
 ---Set options like `:setlocal` (current buffer/window only).
 ---@param opts table<string, OptValue>
+---@usage lua
+--- set_local { wrap = false, colorcolumn = "80" }
 function _G.set_local(opts)
-  require("Fish.set").set(opts, "local")
+  require("Fish.set_opt").set(opts, "local")
 end
 
 ---Set options like `:setglobal` (global value only, not the current buffer/window).
 ---@param opts table<string, OptValue>
+---@usage lua
+--- set_global { shiftwidth = 4 }
 function _G.set_global(opts)
-  require("Fish.set").set(opts, "global")
+  require("Fish.set_opt").set(opts, "global")
 end
 
 ---comment
@@ -76,18 +54,18 @@ function _G.autocmd(event, callback, pattern, group, desc)
   })
 end
 
+---Define keymaps in bulk.
+---
+---See `Fish.keymap_set` for the spec format, `{i}` range expansion and lazy loading.
+---@param maps KeymapSpec[]
+---@usage lua
+--- map {
+---   { "<leader>w", "<cmd>w<cr>", desc = "Save" },
+---   { "i", "jk", "<esc>" },
+---   { "<leader>{i}", "<cmd>b{i}<cr>", range = { 1, 9 }, desc = "Buffer {i}" },
+--- }
 function _G.map(maps)
-  local keymap_set  = require("Fish.keymap_set")
-  for idx, m in ipairs(maps) do
-    if m.range then
-      local first, last, step = m.range[1], m.range[2], m.range[3] or 1
-      for i = first, last, step do
-        keymap_set.set_one(m, i, idx)
-      end
-    else
-      keymap_set.set_one(m, nil, idx)
-    end
-  end
+  require("Fish.keymap_set").map(maps)
 end
 
 function _G.later(fn)
@@ -96,18 +74,27 @@ function _G.later(fn)
   vim.schedule(fn)
 end
 
--- ---@param package string|table
--- function _G.packadd(package)
---   if type(package) == "table" then
---     for _, v in pairs(package) do
---       vim.cmd.packadd(v)
---     end
---     return
---   end
---   vim.cmd.packadd(package)
--- end
+---Load one or more optional plugins with `:packadd`, in the order given.
+---
+---A plugin that can't be found is reported with `vim.notify` and skipped,
+---so one bad name doesn't abort the rest of your config.
+---@param names string|string[] plugin name, or a list of names
+---@return boolean ok `true` if every plugin was loaded
+---@usage lua
+--- packadd("nvim-treesitter")
+--- packadd({ "plenary.nvim", "telescope.nvim" })
+function _G.packadd(names)
+  if type(names) == "string" then
+    names = { names }
+  end
 
----@param package string
-function _G.packadd(package)
-  vim.cmd.packadd(package)
+  local ok_all = true
+  for _, name in ipairs(names) do
+    local ok, err = pcall(vim.cmd.packadd, name)
+    if not ok then
+      ok_all = false
+      vim.notify(("packadd: failed to load %q: %s"):format(name, err), vim.log.levels.ERROR)
+    end
+  end
+  return ok_all
 end

@@ -1,9 +1,5 @@
 vim.schedule(function()
-  vim.cmd [[
-  packadd ts-comments.nvim
-  packadd nvim-treesitter-textobjects
-  packadd nvim-treesitter
-  ]]
+  packadd { "ts-comments.nvim", "nvim-treesitter-textobjects", "nvim-treesitter" }
 
   local ts = require("nvim-treesitter")
   ts.setup({

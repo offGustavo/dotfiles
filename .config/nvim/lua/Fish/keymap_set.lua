@@ -1,16 +1,31 @@
 local M = {}
 
+---A `{ first, last, step? }` range. The spec is registered once per value `i`
+---from `first` to `last`, and `{i}` / `{i+1}` / `{i*2}` placeholders in `lhs`,
+---`desc` and a string `rhs` are expanded for each one.
+---@alias KeymapRange [integer, integer, integer?]
+
+---One keymap entry for `map {}`.
+---
+---Positional forms (the mode is detected from the first element):
+---  - `{ lhs, rhs }`           -> normal mode
+---  - `{ mode, lhs, rhs }`     -> explicit mode
+---  - `{ lhs, rhs, mode = m }` -> mode given by name
+---
+---`lhs` may be a list to map several keys to the same `rhs`.
 ---@class KeymapSpec
----@field [1] string|string[]|nil mode or lhs (see mode-detection rules)
----@field [2] string|function lhs or rhs
----@field [3]? string|function|nil rhs or nil
+---@field [1] string|string[] mode or lhs, see the forms above
+---@field [2] string|string[]|function lhs or rhs
+---@field [3]? string|function rhs, only with the `{ mode, lhs, rhs }` form
 ---@field mode? string|string[]
----@field buf? integer buffer number, or 0 for current buffer
+---@field buf? integer buffer number, or 0 for the current buffer
 ---@field noremap? boolean
----@field remap? boolean inverse of noremap; ignored if `noremap` is set explicitly
+---@field remap? boolean inverse of `noremap`, overrides it when both are set
 ---@field silent? boolean
----@field opts? table extra vim.keymap.set opts (desc, expr, nowait, etc.)
----@field load? string name of a plugin to `:packadd` (once) before running rhs
+---@field desc? string description; `{i}` placeholders are expanded with `range`
+---@field opts? table extra `vim.keymap.set` opts (expr, nowait, ...)
+---@field load? string plugin to `:packadd` (once) before the rhs runs
+---@field range? KeymapRange expand `{i}` placeholders for each value in the range
 
 local VALID_MODES = {
   n = true,
@@ -142,7 +157,11 @@ local function eval_expr(expr, i)
 end
 
 ---Replace `{expr}` placeholders (e.g. `{i}`, `{i-1}`, `{i*2}`) in strings,
----recursing into lhs lists. No-op when i is nil.
+---recursing into lhs lists. No-op when `i` is nil.
+---@generic T
+---@param v T string, list of strings, or any other value (returned unchanged)
+---@param i integer|nil range value
+---@return T
 local function expand(v, i)
   if i == nil then
     return v
@@ -286,6 +305,10 @@ local function validate_keymap(mode, lhs, rhs, m, idx, i)
   end
 end
 
+---Register a single keymap spec.
+---
+---When `i` is given, `{i}` placeholders are expanded in `lhs`, `desc` and a
+---string `rhs`, and a function `rhs` is called with `i` as its first argument.
 ---@param m KeymapSpec
 ---@param i integer|nil current range value
 ---@param idx integer|nil index of this spec inside its map() call
@@ -369,13 +392,32 @@ function M.set_one(m, i, idx)
   end
 end
 
-return M
+---Define keymaps in bulk.
+---
+---Each entry is a `KeymapSpec`. With `range`, the entry is registered once per
+---value of `i`, and a function `rhs` receives `i` as its first argument.
+---Entries are processed in order, and a bad entry raises an error that names
+---its index in `maps`.
+---@param maps KeymapSpec[]
+---@usage lua
+--- map {
+---   { "<leader>w", "<cmd>w<cr>", desc = "Save" },                   -- normal mode
+---   { "i", "jk", "<esc>" },                                          -- explicit mode
+---   { { "n", "x" }, { "<leader>y", "<leader>Y" }, '"+y' },           -- several modes and lhs
+---   { "<leader>{i}", "<cmd>b{i}<cr>", range = { 1, 9 }, desc = "Buffer {i}" },
+---   { "<leader>p", function() require("fzf").files() end, load = "fzf" }, -- lazy load
+--- }
+function M.map(maps)
+  for idx, m in ipairs(maps) do
+    if m.range then
+      local first, last, step = m.range[1], m.range[2], m.range[3] or 1
+      for i = first, last, step do
+        M.set_one(m, i, idx)
+      end
+    else
+      M.set_one(m, nil, idx)
+    end
+  end
+end
 
--- -- Make the module table itself callable as a function
--- return setmetatable(M, {
---     __call = function(self, ...)
---         print("Module was called directly as a function!")
---         return M.set_one(m, i, )
---     end
--- })
- 
+return M

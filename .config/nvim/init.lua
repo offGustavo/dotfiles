@@ -115,5 +115,4 @@ require("extern.startuptime")
 require("extern.tokyonight")
 require("extern.treesitter")
 require("extern.which-key")
-
 -- }}}
