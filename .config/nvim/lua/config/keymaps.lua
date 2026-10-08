@@ -138,19 +138,42 @@ map {
   --- }}}
 
   -- {{{ Clipboard
-  { { "n", "x" }, "<C-S-v>", '"+p' },
-  { "i", "<C-S-v>", "<C-r>+" },
-  { { "n", "x" }, "<C-S-c>", '"+y' },
-  { { "n", "x" }, "<C-S-x>", '"+d' },
-  { { "n", "x" }, "<S-Insert>", '"+p' },
-  { "i", "<S-Insert>", "<C-r>+" },
-  { { "n", "x" }, "<C-Insert>", '"+y' },
-  { { "n", "x" }, "<S-Del>", '"+d' },
-  { { "n", "x" }, "<leader>+", '"+', desc = "System clipboard" },
-  { { "n", "x" }, "<leader>_", '"_', desc = "Black Hole Register" },
-  { { "n", "x" }, "<leader>p", '"+p', desc = "Paste from system register" },
-  { { "n", "x" }, "<leader>y", '"+y', desc = "Yank to system register" },
-  { { "n", "x" }, "<leader>d", '"+d', desc = "Cut to system register" },
+  {
+    { "n", "x" },
+    { "<M-y>", "<C-S-v>", "<S-Insert>", "<leader>p" },
+    '"+p',
+    desc = "Paste from system clipboard",
+  },
+  {
+    "i",
+    { "<M-y>", "<C-S-v>", "<S-Insert>" },
+    "<C-r>+",
+    desc = "Paste from system clipboard",
+  },
+  {
+    { "n", "x" },
+    { "<M-w>", "<C-S-c>", "<C-Insert>", "<leader>y" },
+    '"+y',
+    desc = "Copy to system clipboard",
+  },
+  {
+    { "n", "x" },
+    { "<M-m>", "<C-S-x>", "<S-Del>", "<leader>d" },
+    '"+d',
+    desc = "Cut to system clipboard",
+  },
+  {
+    { "n", "x" },
+    "<leader>+",
+    '"+',
+    desc = "System clipboard",
+  },
+  {
+    { "n", "x" },
+    "<leader>_",
+    '"_',
+    desc = "Black Hole Register",
+  },
   -- }}}
 
   -- {{{ Buffer
@@ -1287,10 +1310,34 @@ map {
 
   -- FIX: move this keymaps to map {}
   -- You can use the capture groups defined in `textobjects.scm`
-  { { "x", "o" }, "am", function() require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects") end },
-  { { "x", "o" }, "im", function() require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects") end },
-  { { "x", "o" }, "ac", function() require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects") end },
-  { { "x", "o" }, "ic", function() require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects") end },
-  -- You can also use captures from other query groups like `locals.scm` 
+  {
+    { "x", "o" },
+    "am",
+    function()
+      require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
+    end,
+  },
+  {
+    { "x", "o" },
+    "im",
+    function()
+      require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
+    end,
+  },
+  {
+    { "x", "o" },
+    "ac",
+    function()
+      require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects")
+    end,
+  },
+  {
+    { "x", "o" },
+    "ic",
+    function()
+      require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
+    end,
+  },
+  -- You can also use captures from other query groups like `locals.scm`
   -- vim.keymap.set({ "x", "o" }, "as", function() require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals") end)
 }

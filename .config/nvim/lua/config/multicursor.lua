@@ -388,7 +388,8 @@ end
 
 -- stylua: ignore start
 map {
-  { "n", "<Esc>", function() MultiCursor.clear(0) vim.cmd("nohls") return "<Esc>" end, expr = true, desc = "Clear on <Esc>", },
+  -- { "n", "<Esc>", function() MultiCursor.clear(0) vim.cmd("nohls") return "<Esc>" end, expr = true, desc = "Clear on <Esc>", },
+  { "n", "<C-[>", function() MultiCursor.clear(0) end, expr = true, desc = "Clear MultiCursor", },
 
   { { "n", "x" }, "<M-a>", function() MultiCursor.actions.search_current() end, desc = "Expand search", },
   { { "n", "x" }, "<m-s-a>", ":norm *N2Q<Cr>",  desc = "Expand search", },
