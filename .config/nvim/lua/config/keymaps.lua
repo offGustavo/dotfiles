@@ -46,9 +46,11 @@ map {
   { "n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", desc = "Del mark <char>" },
 
   -- Edit init.lua/init.vim/vimrc
-  { "n", "<leader>fC", ":e $MYVIMRC<Cr>", silent = true, desc = "Edit the init config file" },
+  {  "n", "<leader>fC", ":e $MYVIMRC<Cr>", silent = true, desc = "Edit the init config file" },
 
   { "n", "<leader>vf", ":cd %:h<Cr>" },
+
+  { "n", "<S-Esc>", vim.cmd.nohl },
 
   -- Fix <C-c> to work like <Esc>
   { "i", "<C-c>", "<Esc>" },
