@@ -46,7 +46,7 @@ map {
   { "n", "dm", "<Cmd>exe 'delmarks ' . getcharstr()<Enter>", desc = "Del mark <char>" },
 
   -- Edit init.lua/init.vim/vimrc
-  {  "n", "<leader>fC", ":e $MYVIMRC<Cr>", silent = true, desc = "Edit the init config file" },
+  { "n", "<leader>fC", ":e $MYVIMRC<Cr>", silent = true, desc = "Edit the init config file" },
 
   { "n", "<leader>vf", ":cd %:h<Cr>" },
 
@@ -175,6 +175,18 @@ map {
     "<leader>_",
     '"_',
     desc = "Black Hole Register",
+  },
+  {
+    { "n", "x" },
+    "x",
+    '"_d',
+    desc = "Delete to black hole register",
+  },
+  {
+    { "n", "x" },
+    "X",
+    '"_dP',
+    desc = "Paste without copy to clipboard",
   },
   -- }}}
 
