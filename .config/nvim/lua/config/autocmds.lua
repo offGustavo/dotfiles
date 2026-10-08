@@ -70,7 +70,7 @@ else
 end
 -- }}}
 
-autocmd("FileType", function()
+autocmd({ "BufEnter", "FileType" }, function()
   vim.treesitter.stop(0)
   vim.lsp.semantic_tokens.enable(false)
   vim.cmd("syntax on ")

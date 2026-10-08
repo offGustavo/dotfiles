@@ -57,7 +57,7 @@ set {
     tab = "^I",
   },
   -- Mini Max
-  iskeyword = "@,48-57,192-255,-", -- _ works like an separate word
+  iskeyword = "@,48-57,192-255", -- -,_ work like separate words
   shortmess = "ICFOSWaco", -- Disable some built-in completion messages
   virtualedit = "block", -- Allow going past end of line in blockwise mode
   cursorlineopt = "screenline,number", -- Show cursor line per screen line
@@ -174,6 +174,11 @@ vim.schedule(function()
 end)
 -- }}}
 
+-- {{{ Syntax
+-- NOTE: fix syntax highlight when word contains `_` and `-`
+vim.cmd("syntax iskeyword @,48-57,_,-,192-255")
+-- }}}
+
 -- {{{ New Filetypes
 vim.filetype.add {
   extension = {
@@ -204,7 +209,7 @@ vim.schedule(function()
     local prompt = "Change " .. vim.inspect(cword) .. " to:"
     vim.ui.select(vim.fn.spellsuggest(cword, vim.o.lines), { prompt = prompt }, spell_on_choice)
   end
-  vim.keymap.set("n", "Z=", spellsuggest_select, { desc = "Custom spelling suggestions" })
+  vim.keymap.set("n", "Z+", spellsuggest_select, { desc = "Custom spelling suggestions" })
 end)
 -- }}}
 

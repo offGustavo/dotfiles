@@ -16,3 +16,4 @@ set_local {
   foldexpr = "v:lua.vim.treesitter.foldexpr()",
   indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()",
 }
+
