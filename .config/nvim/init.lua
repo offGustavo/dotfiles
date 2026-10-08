@@ -32,7 +32,6 @@ end
 -- }}}
 
 -- {{{ Local Plugins
-require("offGustavo.argall")
 require("offGustavo.espeto.setup")
 require("offGustavo.lazygit")
 require("offGustavo.tabterm.setup")
