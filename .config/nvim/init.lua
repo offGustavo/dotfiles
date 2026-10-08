@@ -34,7 +34,7 @@ end
 -- {{{ Local Plugins
 require("offGustavo.espeto.setup")
 require("offGustavo.lazygit")
-require("offGustavo.tabterm.setup")
+require("offGustavo.TabTerm.setup")
 require("offGustavo.todo")
 require("offGustavo.yazi")
 require("offGustavo.cedit").setup({ key = "<M-x>" })
