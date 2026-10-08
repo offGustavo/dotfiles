@@ -36,9 +36,10 @@ require("offGustavo.argall")
 require("offGustavo.espeto")
 require("offGustavo.lazygit")
 require("offGustavo.tabterm")
-require("offGustavo.tatr")
 require("offGustavo.todo")
 require("offGustavo.yazi")
+require("offGustavo.cedit").setup({ key = "<M-x>" })
+
 -- -- TODO: remover quando 0.13 ser estavel
 -- if vim.fn.has("nvim-0.13") == 1 then
 --   -- MultiCursor
@@ -115,4 +116,5 @@ require("extern.startuptime")
 require("extern.tokyonight")
 require("extern.treesitter")
 require("extern.which-key")
+
 -- }}}

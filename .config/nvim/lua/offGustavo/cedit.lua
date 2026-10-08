@@ -11,7 +11,7 @@ local function setup_cmdwin()
       local char = vim.fn.getcmdwintype() -- ":", "/" or "?"
 
       -- Show the cmdwin type char in the left gutter on every line
-      vim.wo[win].statuscolumn = "%#SignColumn#" .. char .. " "
+      vim.wo[win].statuscolumn = "%#PreProc#" .. char .. " "
       vim.wo[win].number = false
       vim.wo[win].relativenumber = false
       vim.wo[win].signcolumn = "no"
