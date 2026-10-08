@@ -106,15 +106,47 @@ vim.pack.add({
 -- {{{ Plugins Config
 
 require("extern.canola")
-require("extern.conform")
 require("extern.fzf-lua")
+
+-- TODO(harpoon): make `espeto` work like harpoon (a persistent list of marked
+-- files with quick jump), then drop this plugin.
 require("extern.harpoon")
+
+-- TODO(format): drop conform and format through Neovim itself.
+--   - set `formatprg` per filetype in `ftplugin/<ft>.lua` (e.g. "stylua -",
+--     "prettier --stdin-filepath %")
+--   - format with `gq`, and map it to a key for the whole buffer
+--   - keep conform only for formatters that can't work as a stdin filter
+require("extern.conform")
+
+-- TODO(lsp): remove Mason and the mason-lspconfig plugin.
+--   - install language servers with the system package manager
+--   - move the server setup into my own config with `vim.lsp.config()` and
+--     `vim.lsp.enable()` (needs Neovim 0.11+), one file per server in `lsp/`
+--   - keep `lspconfig` only for servers that have no native config
 require("extern.mason-lspconfig")
+
 require("extern.mini")
 require("extern.neogit")
 require("extern.startuptime")
 require("extern.tokyonight")
+
+-- TODO(treesitter): stop depending on the plugin to manage parsers.
+--   - install parsers with the system package manager or build them by hand
+--   - start highlighting per filetype with `vim.treesitter.start()` in
+--     `ftplugin/<ft>.lua`
+--   - set `foldexpr` and `indentexpr` in the same ftplugin where supported
 require("extern.treesitter")
+
 require("extern.which-key")
+-- TODO(todo-comments): make a lua module to replace todo-comments
+-- 1. highlighting Comments
+-- 2. highlighting colors
+-- 3. sign for TODOs
+require("extern.todo-comments")
+
+require("extern.blink")
+
+-- TODO: add "https://github.com/catgoose/nvim-colorizer.lua",
 
 -- }}}
