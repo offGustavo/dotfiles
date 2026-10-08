@@ -6,11 +6,13 @@ vim.g.neovide_padding_bottom = 0
 vim.g.neovide_padding_right = 8
 vim.g.neovide_padding_left = 8
 
+autocmd("Colorscheme", function()
+  local hl = vim.api.nvim_get_hl
+  vim.g.neovide_title_background_color = string.format("%x", hl(0, { name = "Normal" }).bg)
+  vim.g.neovide_title_text_color = string.format("%x", hl(0, { name = "Normal" }).fg)
+end)
+
 autocmd("UiEnter", function()
-  --T TODO: prevent this to change directory when neovide is open with and argument
-  -- if vim.fn.argc() ~= 0 then
-  --     return
-  -- end
   vim.cmd("cd ~")
 end)
 
