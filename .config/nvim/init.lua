@@ -35,7 +35,7 @@ end
 require("offGustavo.argall")
 require("offGustavo.espeto")
 require("offGustavo.lazygit")
-require("offGustavo.tabterm")
+require("offGustavo.tabterm.setup")
 require("offGustavo.todo")
 require("offGustavo.yazi")
 require("offGustavo.cedit").setup({ key = "<M-x>" })
