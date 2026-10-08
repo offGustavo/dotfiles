@@ -83,6 +83,7 @@ vim.pack.add({
   { src = "https://github.com/NeogitOrg/neogit" },
 
   "https://github.com/stevearc/conform.nvim",
+  "https://github.com/stevearc/quicker.nvim",
 
   "https://github.com/folke/ts-comments.nvim",
 
@@ -93,6 +94,7 @@ vim.pack.add({
   "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
 
   "https://github.com/folke/which-key.nvim",
+
   { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("v1") },
 
   -- "https://github.com/nvim-lua/plenary.nvim",
@@ -117,6 +119,7 @@ require("extern.fzf-lua")
 --   - format with `gq`, and map it to a key for the whole buffer
 --   - keep conform only for formatters that can't work as a stdin filter
 require("extern.conform")
+require("extern.quicker")
 
 -- TODO(lsp): remove Mason and the mason-lspconfig plugin.
 --   - install language servers with the system package manager
