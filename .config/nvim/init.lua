@@ -33,7 +33,7 @@ end
 
 -- {{{ Local Plugins
 require("offGustavo.argall")
-require("offGustavo.espeto")
+require("offGustavo.espeto.setup")
 require("offGustavo.lazygit")
 require("offGustavo.tabterm.setup")
 require("offGustavo.todo")
@@ -96,8 +96,8 @@ vim.pack.add({
   "https://github.com/folke/which-key.nvim",
   { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("v1") },
 
-  "https://github.com/nvim-lua/plenary.nvim",
-  { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
+  -- "https://github.com/nvim-lua/plenary.nvim",
+  -- { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 
   "https://github.com/folke/todo-comments.nvim",
 }, { load = function() end })
@@ -110,7 +110,7 @@ require("extern.fzf-lua")
 
 -- TODO(harpoon): make `espeto` work like harpoon (a persistent list of marked
 -- files with quick jump), then drop this plugin.
-require("extern.harpoon")
+-- require("extern.harpoon")
 
 -- TODO(format): drop conform and format through Neovim itself.
 --   - set `formatprg` per filetype in `ftplugin/<ft>.lua` (e.g. "stylua -",
