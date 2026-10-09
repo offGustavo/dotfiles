@@ -176,18 +176,19 @@ map {
     '"_',
     desc = "Black Hole Register",
   },
-  {
-    { "n", "x" },
-    "x",
-    '"_d',
-    desc = "Delete to black hole register",
-  },
-  {
-    { "n", "x" },
-    "X",
-    '"_dP',
-    desc = "Paste without copy to clipboard",
-  },
+  -- TODO: define this keymap
+  -- {
+  --   { "n", "x" },
+  --   "x",
+  --   '"_d',
+  --   desc = "Delete to black hole register",
+  -- },
+  -- {
+  --   { "n", "x" },
+  --   "X",
+  --   '"_dP',
+  --   desc = "Paste without copy to clipboard",
+  -- },
   -- }}}
 
   -- {{{ Buffer

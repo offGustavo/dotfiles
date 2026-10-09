@@ -95,6 +95,8 @@ vim.pack.add({
 
   "https://github.com/folke/which-key.nvim",
 
+  "https://github.com/catgoose/nvim-colorizer.lua",
+
   { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("v1") },
 
   -- "https://github.com/nvim-lua/plenary.nvim",
@@ -145,7 +147,8 @@ require("extern.which-key")
 -- 1. highlighting Comments
 -- 2. highlighting colors
 -- 3. sign for TODOs
-require("extern.todo-comments")
+-- require("extern.todo-comments")
+-- require("extern.nvim-colorizer")
 
 require("extern.blink")
 
