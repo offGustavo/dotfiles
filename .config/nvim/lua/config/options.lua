@@ -179,13 +179,26 @@ end)
 vim.cmd("syntax iskeyword @,48-57,_,-,192-255")
 -- }}}
 
--- {{{ New Filetypes
-vim.filetype.add {
-  extension = {
-    kbd = "kbd", -- maps *.kbd → filetype=kbd
-  },
-}
--- }}}
+-- -- {{{ New Filetypes
+-- -- TODO: improve performance when adding filetype
+-- local function new_filetype()
+--   vim.filetype.add {
+--     extension = {
+--       kbd = "kbd", -- maps *.kbd → filetype=kbd
+--     },
+--   }
+-- end
+--
+-- vim.api.nvim_create_autocmd("BufRead", {
+--   pattern = "*.kbd",
+--   group = fish_group,
+--   callback = function()
+--     new_filetype()
+--   end,
+-- })
+--
+-- later(new_filetype)
+-- -- }}}
 
 -- {{{ Spell
 vim.schedule(function()

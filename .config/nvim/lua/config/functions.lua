@@ -65,7 +65,9 @@ end
 ---   { "<leader>{i}", "<cmd>b{i}<cr>", range = { 1, 9 }, desc = "Buffer {i}" },
 --- }
 function _G.map(maps)
-  require("Fish.keymap_set").map(maps)
+  later(function()
+    require("Fish.keymap_set").map(maps)
+  end)
 end
 
 function _G.later(fn)
