@@ -19,7 +19,7 @@ M.commands = {
     name = "ls",
     desc = "List all tasks",
     fun = function()
-      require("tatr.file").ls()
+      require("Tatr.file").ls()
       vim.print "Tatr ls"
     end,
   },
