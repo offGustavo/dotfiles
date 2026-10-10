@@ -2,6 +2,7 @@ return {
   "https://github.com/ibhagwan/fzf-lua",
   -- enabled = not is_windows(),
   lazy = false,
+  enabled = false,
   opts = {
     {
       "ivy",

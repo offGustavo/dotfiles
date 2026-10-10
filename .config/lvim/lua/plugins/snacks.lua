@@ -4,7 +4,7 @@ return {
   lazy = false,
   -- enabled = is_windows(),
   -- enabled = true,
-  enabled = false,
+  -- enabled = false,
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
