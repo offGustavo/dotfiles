@@ -1,4 +1,4 @@
-autocmd({ "InsertEnter" }, function()
+autocmd({ "InsertEnter", "CmdlineEnter" }, function()
   packadd {
     "blink.cmp",
     "lazydev.nvim",
