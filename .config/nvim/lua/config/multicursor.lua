@@ -4,23 +4,6 @@ if not vim.fn.has("nvim-0.13") == 1 then
   return
 end
 
--- vim.keymap.set("n", "<C-S-d>", ":g/<cword>/normal! Q<Cr>")
--- map {
---   { { "n", "x" }, "<M-q>", "Q" },
---   { "<C-m>", "q=" },
---   { "<C-K>", ":norm! Qk<Cr>" },
---   { "<C-J>", ":norm! Qj<Cr>" },
---   -- TODO: fix this
---   { "<C-p>", "#" },
---   { "<C-n>", "*" },
---   -- { "<C-;>", function ()
---   { "<C-,>", ":normal! Q#<Cr>" },
---   { "<C-.>", ":normal! Q*<Cr>" },
---   --   print"oi"
---   -- end, mode = "x" },
---   -- { "<C-;>", "<Cmd>MultipleCursorsAddMatchesV<Cr>" },
--- }
-
 -- NOTE: See https://github.com/neovim/neovim/discussions/41997
 
 _G.MultiCursor = {}

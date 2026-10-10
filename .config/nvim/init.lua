@@ -38,20 +38,6 @@ require("offGustavo.TabTerm.setup")
 require("offGustavo.todo")
 require("offGustavo.yazi")
 require("offGustavo.cedit").setup({ key = "<M-x>" })
-
--- -- TODO: remover quando 0.13 ser estavel
--- if vim.fn.has("nvim-0.13") == 1 then
---   -- MultiCursor
---   require("config.multicursor")
--- end
-
--- -- Intern plugins
--- require("config.intern")
-
--- External plugins
--- require("config.lazy")
--- require("config.pack")
-
 -- }}}
 
 -- {{{ Plugins
