@@ -23,3 +23,24 @@ end, {
     return require("tatr.commands").complete()
   end,
 })
+
+vim.cmd [[
+function! s:Tatr(args) abort
+  let l:output = systemlist('tatr ' . a:args)
+
+  if v:shell_error != 0 && empty(l:output)
+    echohl ErrorMsg
+    echom 'tatr failed with exit code ' . v:shell_error
+    echohl None
+    return
+  endif
+
+  call setqflist([], ' ', {
+        \ 'title': 'tatr ' . a:args,
+        \ 'lines': l:output,
+        \ })
+  copen
+endfunction
+
+command! -nargs=* -complete=file Ta call s:Tatr(<q-args>)
+]]

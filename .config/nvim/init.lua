@@ -38,6 +38,8 @@ require("offGustavo.TabTerm.setup")
 require("offGustavo.todo")
 require("offGustavo.yazi")
 require("offGustavo.cedit").setup({ key = "<M-x>" })
+require("Fish.compile")
+require("Tatr")
 -- }}}
 
 -- {{{ Plugins
