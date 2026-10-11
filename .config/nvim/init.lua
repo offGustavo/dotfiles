@@ -132,7 +132,7 @@ require("extern.treesitter")
 
 require("extern.which-key")
 -- TODO(todo-comments): make a lua module to replace todo-comments
--- 1. highlighting Comments
+-- 1. DONE highlighting Comments
 -- 2. highlighting colors
 -- 3. sign for TODOs
 -- require("extern.todo-comments")
