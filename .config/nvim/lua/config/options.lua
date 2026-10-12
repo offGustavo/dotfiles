@@ -174,11 +174,6 @@ vim.schedule(function()
 end)
 -- }}}
 
--- {{{ Syntax
--- NOTE: fix syntax highlight when word contains `_` and `-`
-vim.cmd("syntax iskeyword @,48-57,_,-,192-255")
--- }}}
-
 -- -- {{{ New Filetypes
 -- -- TODO: improve performance when adding filetype
 -- local function new_filetype()
