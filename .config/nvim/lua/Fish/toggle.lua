@@ -2,11 +2,14 @@ local M = {}
 
 -- Groups of words to cycle through
 local groups = {
-  { "on",     "off" },
-  { "true",   "false" },
-  { "yes",    "no" },
-  { "start",    "end" },
+  { "on",     "off"                  },
+  { "true",   "false"                },
+  { "yes",    "no"                   },
+  { "start",  "end"                  },
+  { "OPEN",   "CLOSED"               },
+  { "open",   "closed"               },
   { "public", "private", "protected" },
+  { "TODO", "DONE" },
 }
 
 -- Helper: find the start/end (1-based, inclusive) of the number under or
