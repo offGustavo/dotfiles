@@ -1,5 +1,5 @@
 vim.api.nvim_create_user_command("Tatr", function(opts)
-  local commands = require("Tatr.commands").commands
+  local commands = require("tatr.commands").commands
   for _, v in pairs(commands) do
     if opts.fargs[1] == v.name then
       v.fun(opts)
@@ -10,7 +10,7 @@ vim.api.nvim_create_user_command("Tatr", function(opts)
   vim.notify(
     [[
   -- Not a Tatr Command.
-  Run :Tatr help to see all commands or :h Tatr-commands
+  Run :Tatr help to see all commands or :h tatr-commands
   ]],
     vim.log.levels.WARN
   )
@@ -20,9 +20,15 @@ vim.api.nvim_create_user_command("Tatr", function(opts)
 end, {
   nargs = "*",
   complete = function()
-    return require("Tatr.commands").complete()
+    return require("tatr.commands").complete()
   end,
 })
+
+vim.api.nvim_create_user_command("TT", function(o)
+  vim.fn.setqflist({}, " ", { title = "tatr " .. o.args, lines = vim.fn.systemlist("tatr " .. o.args) })
+  vim.cmd.copen()
+end, { nargs = "*" })
+
 
 vim.cmd [[
 function! s:Tatr(args) abort
