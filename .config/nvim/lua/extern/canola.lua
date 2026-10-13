@@ -95,3 +95,5 @@ vim.g.canola = {
   },
 }
 vim.g.canola_trash = {}
+
+packadd("canola.nvim")

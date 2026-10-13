@@ -51,9 +51,7 @@ vim.pack.add({
   { src = "https://forge.barrettruth.com/barrettruth/canola.nvim", version = "canola" },
 
   "https://github.com/dstein64/vim-startuptime",
-})
 
-vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/mason-org/mason-lspconfig.nvim",
   "https://github.com/mason-org/mason.nvim",
@@ -140,6 +138,7 @@ require("extern.which-key")
 
 require("extern.blink")
 
--- TODO: add "https://github.com/catgoose/nvim-colorizer.lua",
+-- vim.opt.runtimepath:append("~/Projects/nvim-sessionizer/")
+-- require("disable")
 
 -- }}}

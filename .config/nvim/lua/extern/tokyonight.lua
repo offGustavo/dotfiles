@@ -1,3 +1,5 @@
+packadd("tokyonight.nvim")
+
 require("tokyonight").setup({
   dim_inactive = false,
   light_style = "day", -- The theme is used when the background is set to light
