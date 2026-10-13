@@ -58,13 +58,18 @@ end
 ---
 ---See `Fish.keymap_set` for the spec format, `{i}` range expansion and lazy loading.
 ---@param maps KeymapSpec[]
+---@param now? boolean
 ---@usage lua
 --- map {
 ---   { "<leader>w", "<cmd>w<cr>", desc = "Save" },
 ---   { "i", "jk", "<esc>" },
 ---   { "<leader>{i}", "<cmd>b{i}<cr>", range = { 1, 9 }, desc = "Buffer {i}" },
 --- }
-function _G.map(maps)
+function _G.map(maps, now)
+  if now then
+    require("Fish.keymap_set").map(maps)
+    return
+  end
   later(function()
     require("Fish.keymap_set").map(maps)
   end)
