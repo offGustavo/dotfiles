@@ -1,7 +1,5 @@
 # Add Windows Support
 
-## Statistics:
-
 - TYPE: TODO
 - STATUS: OPEN
 - TAG: windows
@@ -12,3 +10,8 @@
 ## Description
  
 Currently, this plugin only supports Linux/Unix systems via Unix sockets. To achieve Windows compatibility, we need to implement support for Windows named pipes (or other IPC mechanisms native to Windows).
+
+
+## BUGS
+
+- [ ] When create a new session, fzf-lua stop find files

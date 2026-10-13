@@ -1,6 +1,16 @@
 local M = {}
 
-local sessions_dir = vim.fn.expand("/tmp/nvim-sessionizer/")
+local is_windows = vim.fn.has("win32") == 1
+
+-- On Windows, Neovim listens on named pipes instead of unix socket files.
+local PIPE_PREFIX = [[\\.\pipe\nvim-sessionizer-]]
+
+local sessions_dir
+if is_windows then
+  sessions_dir = vim.fs.normalize(vim.fn.stdpath("cache") .. "/nvim-sessionizer")
+else
+  sessions_dir = "/tmp/nvim-sessionizer"
+end
 vim.fn.mkdir(sessions_dir, "p")
 
 M.sessions = {}
@@ -88,6 +98,80 @@ local config = {
 
 --- Update Sessionzer config based on user config
 config = vim.tbl_extend("force", config, vim.g.sessionizer or {})
+
+---------------------------------------------------------------------------
+-- Platform helpers
+---------------------------------------------------------------------------
+
+---Path of the file that represents a session in `sessions_dir`.
+---On Linux/macOS this is the socket itself; on Windows it is an empty marker file.
+---@param name string
+---@return string
+local function marker_path(name)
+  return sessions_dir .. "/" .. name
+end
+
+---@param name string
+---@return string
+local function session_file_path(name)
+  return sessions_dir .. "/" .. name .. ".vim"
+end
+
+---Address passed to `nvim --listen` / `:connect`.
+---@param name string
+---@return string
+local function socket_address(name)
+  if is_windows then
+    return PIPE_PREFIX .. name
+  end
+  return marker_path(name)
+end
+
+---Check if a server is accepting connections at `address`.
+---@param address string
+---@return boolean
+local function is_alive(address)
+  local ok, chan = pcall(vim.fn.sockconnect, "pipe", address, { rpc = true })
+  if ok and type(chan) == "number" and chan > 0 then
+    pcall(vim.fn.chanclose, chan)
+    return true
+  end
+  return false
+end
+
+---Check if a session server is running.
+---@param name string
+---@return boolean
+local function session_exists(name)
+  if is_windows then
+    return is_alive(socket_address(name))
+  end
+  local socket = marker_path(name)
+  return vim.fn.filereadable(socket) == 1 or vim.fn.getftype(socket) == "socket"
+end
+
+---Files in `sessions_dir` that are not sessions.
+---@param filename string
+---@return boolean
+local function is_reserved(filename)
+  return filename == "session_order" or filename:match("%.vim$") ~= nil
+end
+
+---Build a safe session name from a path.
+---@param path string
+---@return string
+local function make_name(path)
+  local name = vim.fs.basename(vim.fs.normalize(path))
+  name = name:gsub('[%.%s\\/:*?"<>|]', "_")
+  if name == "" then
+    name = "root"
+  end
+  return name
+end
+
+---------------------------------------------------------------------------
+-- Session order
+---------------------------------------------------------------------------
 
 ---Save the session order to a file.
 ---@return nil
@@ -184,9 +268,17 @@ local function command_exists(cmd)
 end
 
 --- Return the current session name.
----@return string The current session name.
+---@return string The current session name ("" if this instance is not a sessionizer session on Windows).
 function M.get_current_session()
-  return vim.fn.fnamemodify(vim.v.servername, ":t")
+  local servername = vim.v.servername
+  if is_windows then
+    local normalized = (servername:gsub("/", "\\"))
+    if normalized:sub(1, #PIPE_PREFIX):lower() == PIPE_PREFIX:lower() then
+      return normalized:sub(#PIPE_PREFIX + 1)
+    end
+    return ""
+  end
+  return vim.fn.fnamemodify(servername, ":t")
 end
 
 --- Update the session list and set the current index.
@@ -196,9 +288,14 @@ function M.update_sessions()
   M.sessions = {}
   for _, path in ipairs(sessions) do
     local session_name = vim.fn.fnamemodify(path, ":t")
-    -- Ignora o arquivo de ordem das sessões
-    if session_name ~= "session_order" and not session_name:match("%.vim$") then
-      table.insert(M.sessions, session_name)
+    -- Ignora o arquivo de ordem das sessões e os arquivos de mksession
+    if not is_reserved(session_name) then
+      if is_windows and not is_alive(socket_address(session_name)) then
+        -- Stale marker (server is gone)
+        vim.fn.delete(path)
+      else
+        table.insert(M.sessions, session_name)
+      end
     end
   end
 
@@ -219,14 +316,31 @@ function M.update_sessions()
   end
 end
 
+---Wait until a session server is accepting connections, then call `on_ready`.
+---@param name string
+---@param on_ready fun()
+---@param tries? integer
+local function wait_for_session(name, on_ready, tries)
+  tries = tries or 0
+  if session_exists(name) then
+    on_ready()
+  elseif tries >= 50 then
+    vim.notify("Timed out waiting for session '" .. name .. "'", vim.log.levels.ERROR)
+  else
+    vim.defer_fn(function()
+      wait_for_session(name, on_ready, tries + 1)
+    end, 100)
+  end
+end
+
 --- Create (or connect to) a Neovim session.
 ---
 --- This function will:
 --- 1. Validate the provided path.
 --- 2. Derive a session name if one is not provided.
---- 3. Check if a socket for this session already exists.
+--- 3. Check if a server for this session already exists.
 ---    - If it exists, connect to the running session.
----    - If it doesn't, start a new Neovim instance with the session socket.
+---    - If it doesn't, start a new Neovim instance listening on the session address.
 --- 4. Attach the current client to the session.
 ---
 ---@param path string The filesystem path where the session will start.
@@ -237,30 +351,43 @@ local function create_session(path, name)
     return
   end
 
-  name = name or vim.fn.fnamemodify(path, ":t"):gsub("%.", "_")
-  local socket = sessions_dir .. "/" .. name
-  local session_file = sessions_dir .. "/" .. name .. ".vim" -- arquivo de mksession
+  name = name or make_name(path)
+  local address = socket_address(name)
+  local session_file = session_file_path(name)
 
-  -- Se o socket já existir, conecta
-  if vim.fn.filereadable(socket) == 1 or vim.fn.getftype(socket) == "socket" then
+  if session_exists(name) then
     vim.notify("Existing session found. Connecting to '" .. name .. "'...", vim.log.levels.INFO)
   else
+    local cmd = { vim.v.progpath, "--listen", address }
+    if is_windows then
+      -- No terminal available for the detached server on Windows
+      table.insert(cmd, 2, "--headless")
+    end
+
     -- Se houver arquivo de sessão salvo, carrega ele
-    local cmd
     if vim.fn.filereadable(session_file) == 1 then
       vim.notify("Session file found. Restoring session '" .. name .. "'...", vim.log.levels.INFO)
-      cmd = string.format('nohup nvim --listen "%s" -S "%s" >/dev/null 2>&1 &', socket, session_file)
-    else
-      -- Caso contrário, apenas abre Neovim no diretório
-      cmd = string.format('nohup nvim --listen "%s" -c "cd %s" >/dev/null 2>&1 &', socket, path)
+      vim.list_extend(cmd, { "-S", session_file })
     end
-    vim.fn.system(cmd)
+
+    -- Caso contrário, apenas abre Neovim no diretório (cwd)
+    local job = vim.fn.jobstart(cmd, { detach = true, cwd = path })
+    if job <= 0 then
+      vim.notify("Failed to start Neovim for session '" .. name .. "'", vim.log.levels.ERROR)
+      return
+    end
+
+    if is_windows then
+      -- Named pipes are not visible on the filesystem, so keep a marker file
+      -- to be able to list sessions.
+      vim.fn.writefile({}, marker_path(name))
+    end
   end
 
-  -- Conecta depois de iniciar
-  vim.defer_fn(function()
+  -- Conecta quando o servidor estiver pronto
+  wait_for_session(name, function()
     M.attach_session(name)
-  end, 500)
+  end)
 end
 
 --- Retrieve a list of directories for selection.
@@ -269,7 +396,8 @@ end
 --- 1. First tries to use zoxide if available and not disabled in config
 ---    - Returns directories with scores from zoxide query
 ---    - Format: "score path" for display
---- 2. Falls back to using find command in configured search directories
+--- 2. Falls back to scanning the configured search directories (pure Lua,
+---    no external `find`, so it also works on Windows)
 ---    - Searches directories specified in config.search_dirs
 ---    - Respects config.max_depth (default: 3)
 ---
@@ -278,24 +406,13 @@ end
 ---   - display (string): Formatted display string for UI presentation
 ---   Returns empty table if no directories found or on error
 ---
----@note The function validates that search directories exist before using them
----@warning If neither zoxide nor find are available, returns empty table with error notification
----
----@example Return structure:
----   {
----     { path = "/home/user/projects", display = "20 /home/user/projects" },  -- from zoxide
----     { path = "/tmp/test", display = "/tmp/test" }                         -- from find
----   }
----
 ---@see config.no_zoxide Configuration flag to disable zoxide usage
 ---@see config.search_dirs List of directories to search when zoxide is unavailable
----@see config.max_depth Maximum directory depth for find command (default: 3)
+---@see config.max_depth Maximum directory depth for the fallback scan (default: 3)
 function M.get_dirs()
-  local results = {}
-
   -- 1. Try zoxide if available and not disabled
   if not config.no_zoxide and command_exists("zoxide") then
-    results = vim.fn.systemlist("zoxide query -l -s", nil, 1)
+    local results = vim.fn.systemlist({ "zoxide", "query", "-l", "-s" }, nil, 1)
     if #results == 0 then
       vim.notify("No directories found by zoxide", vim.log.levels.WARN)
       return {}
@@ -317,7 +434,7 @@ function M.get_dirs()
   -- 2. Collect existing search directories from config
   local existing_dirs = {}
   for _, dir in ipairs(config.search_dirs or {}) do
-    local expanded = vim.fn.expand(dir)
+    local expanded = vim.fs.normalize(vim.fn.expand(dir))
     if vim.fn.isdirectory(expanded) == 1 then
       table.insert(existing_dirs, expanded)
     end
@@ -328,48 +445,47 @@ function M.get_dirs()
     return {}
   end
 
-  -- 3. Build search command using `find` (TODO: add fd command support)
-  local cmd = nil
-  if command_exists("find") then
-    cmd =
-      string.format("find %s -mindepth 1 -maxdepth %d -type d", table.concat(existing_dirs, " "), config.max_depth or 3)
-  else
-    vim.notify("Neither zoxide, fd, nor find are available", vim.log.levels.ERROR)
-    return {}
+  -- 3. Scan directories (TODO: add fd command support)
+  local ignored = { [".git"] = true, ["node_modules"] = true }
+  local items = {}
+  for _, dir in ipairs(existing_dirs) do
+    local iter = vim.fs.dir(dir, {
+      depth = config.max_depth or 3,
+      skip = function(d)
+        if ignored[vim.fs.basename(d)] then
+          return false -- do not descend
+        end
+      end,
+    })
+    for name, type in iter do
+      if type == "directory" and not ignored[vim.fs.basename(name)] then
+        local full = dir .. "/" .. name
+        table.insert(items, { path = full, display = full })
+      end
+    end
   end
 
-  results = vim.fn.systemlist(cmd, nil, 1)
-  if vim.v.shell_error ~= 0 then
-    vim.notify("Command failed: " .. cmd, vim.log.levels.ERROR)
-    return {}
-  end
-
-  if #results == 0 then
+  if #items == 0 then
     vim.notify("No directories found", vim.log.levels.WARN)
     return {}
-  end
-
-  -- 4. Prepare items for selection
-  local items = {}
-  for _, path in ipairs(results) do
-    table.insert(items, { path = path, display = path })
   end
 
   return items
 end
 
-local function connect_to_session(socket)
+---Save the current session state and connect to another session.
+---@param name string Target session name
+local function connect_to_session(name)
   local current = M.get_current_session()
-  if current == "" then
-    return
+  if current ~= "" then
+    -- Save session state before leaving
+    pcall(vim.cmd, "mksession! " .. vim.fn.fnameescape(session_file_path(current)))
   end
-  local session_file = sessions_dir .. "/" .. current .. ".vim"
-  -- Save session state before leaving
-  pcall(vim.cmd, "mksession! " .. vim.fn.fnameescape(session_file))
-  vim.cmd("connect " .. socket)
+  -- Table form avoids Ex-command parsing of backslashes in pipe names
+  vim.cmd({ cmd = "connect", args = { socket_address(name) } })
 end
 
---- Select a project directory using zoxide or find in configured search paths,
+--- Select a project directory using zoxide or a scan of the configured search paths,
 --- and call the provided callback with the selected path.
 ---@param callback fun(path:string) Function to call with the selected project path.
 ---@return nil
@@ -414,11 +530,10 @@ function M.new_session(path)
         return
       end
       if name == "" then
-        name = vim.fn.fnamemodify(path, ":t"):gsub("%.", "_")
+        name = make_name(path)
         vim.notify("No session name provided. Using default: " .. name, vim.log.levels.INFO)
       end
-      local session_file = sessions_dir .. "/" .. name .. ".vim"
-      vim.cmd("mksession! " .. vim.fn.fnameescape(session_file))
+      vim.cmd("mksession! " .. vim.fn.fnameescape(session_file_path(name)))
       create_session(path, name)
     end)
   end
@@ -433,8 +548,6 @@ end
 --- Otherwise, shows a session picker for manual selection.
 ---@param arg? string|number|nil Session selector (`+1`, `-1`, index number, name, or nil for manual choice).
 function M.attach_session(arg)
-  --- TODO: remove duplicated vim.cmd("connect ")
-  --- This function
   M.update_sessions()
   if #M.sessions == 0 then
     vim.notify("No sessions found", vim.log.levels.WARN)
@@ -465,9 +578,7 @@ function M.attach_session(arg)
     end
 
     local next_session = M.sessions[new_index]
-    local socket = sessions_dir .. "/" .. next_session
-    -- vim.cmd("connect " .. socket)
-    connect_to_session(socket)
+    connect_to_session(next_session)
     vim.notify("Connected to session: " .. next_session .. " (index " .. new_index .. ")")
     M.current_index = new_index
 
@@ -482,9 +593,7 @@ function M.attach_session(arg)
     end
 
     if found_index then
-      local socket = sessions_dir .. "/" .. arg
-      -- vim.cmd("connect " .. socket)
-      connect_to_session(socket)
+      connect_to_session(arg)
       vim.notify("Connected to session: " .. arg)
       M.current_index = found_index
     else
@@ -495,9 +604,7 @@ function M.attach_session(arg)
   else
     vim.ui.select(M.sessions, { prompt = "Select a session to connect:" }, function(choice)
       if choice then
-        local socket = sessions_dir .. "/" .. choice
-        -- vim.cmd("connect " .. socket)
-        connect_to_session(socket)
+        connect_to_session(choice)
         vim.notify("Connected to session: " .. choice)
         M.update_sessions()
       end
@@ -505,46 +612,92 @@ function M.attach_session(arg)
   end
 end
 
----comment
+---Stop a session's server and clean up its files.
 ---@param session_name string Session name to be removed
--- TODO: make this function return a status...
--- true: if success
--- false: if failed
+---@return boolean success true if the session was found and asked to quit
 local function kill_session(session_name)
-  local socket = sessions_dir .. "/" .. session_name
-  if vim.fn.filereadable(socket) == 1 or vim.fn.getftype(socket) == "socket" then
-    -- Send :qa! to the remote nvim instance
-    vim.fn.system(string.format("nvim --server '%s' --remote-send '<Esc>:qa!<CR>'", socket))
-    vim.defer_fn(function()
-      -- Force-remove the socket if still present
-      vim.fn.delete(socket)
-    end, 300)
+  if not session_exists(session_name) then
+    vim.notify("Socket not found: " .. socket_address(session_name), vim.log.levels.WARN)
+    return false
   end
+
+  -- Ask the remote nvim instance to quit over RPC (works with pipes and unix sockets,
+  -- no shell quoting involved)
+  local ok, chan = pcall(vim.fn.sockconnect, "pipe", socket_address(session_name), { rpc = true })
+  if ok and type(chan) == "number" and chan > 0 then
+    pcall(vim.rpcnotify, chan, "nvim_command", "qa!")
+  end
+
+  -- Wait for the server to go away
+  vim.wait(1000, function()
+    return not session_exists(session_name)
+  end, 20)
+
+  if ok and type(chan) == "number" and chan > 0 then
+    pcall(vim.fn.chanclose, chan)
+  end
+
+  -- Remove leftover socket (Linux) or marker file (Windows)
+  vim.fn.delete(marker_path(session_name))
+
+  -- Update the saved order
+  for i, name in ipairs(M.session_order) do
+    if name == session_name then
+      table.remove(M.session_order, i)
+      break
+    end
+  end
+  save_session_order()
+
+  return true
 end
 
---- Kill all orphaned nvim sessions that have no active socket
+--- Kill all orphaned nvim processes started with --embed and clean up stale session files
 function M.cleanup_sessions()
-    local results = vim.fn.systemlist("pgrep -a nvim")
-    local killed = 0
-    for _, line in ipairs(results) do
-        local pid, args = line:match("(%d+)%s+(.+)")
-        -- Kill --embed processes (these are orphaned UI clients)
-        if args and args:match("--embed") then
-            vim.fn.system("kill " .. pid)
-            killed = killed + 1
-        end
+  local self_pid = vim.fn.getpid()
+  local procs
+  if is_windows then
+    procs = vim.fn.systemlist({
+      "powershell",
+      "-NoProfile",
+      "-NonInteractive",
+      "-Command",
+      "Get-CimInstance Win32_Process | Where-Object { $_.Name -eq 'nvim.exe' } | ForEach-Object { '{0} {1}' -f $_.ProcessId, $_.CommandLine }",
+    })
+  else
+    procs = vim.fn.systemlist("pgrep -a nvim")
+  end
+
+  local killed = 0
+  for _, line in ipairs(procs) do
+    local pid, args = line:match("(%d+)%s+(.+)")
+    pid = tonumber(pid)
+    -- Kill --embed processes (these are orphaned UI clients), but never ourselves
+    if pid and pid ~= self_pid and args and args:find("--embed", 1, true) then
+      if pcall(vim.uv.kill, pid, "sigterm") then
+        killed = killed + 1
+      end
     end
-    -- Also clean up stale socket files with no running process
-    local sockets = vim.fn.globpath(sessions_dir, "*", false, true)
-    for _, path in ipairs(sockets) do
-        local name = vim.fn.fnamemodify(path, ":t")
-        if name ~= "session_order" and not name:match("%.vim$") then
-            if vim.fn.getftype(path) ~= "socket" then
-                vim.fn.delete(path)
-            end
-        end
+  end
+
+  -- Also clean up stale session files with no running server
+  local files = vim.fn.globpath(sessions_dir, "*", false, true)
+  for _, path in ipairs(files) do
+    local name = vim.fn.fnamemodify(path, ":t")
+    if not is_reserved(name) then
+      local stale
+      if is_windows then
+        stale = not is_alive(socket_address(name))
+      else
+        stale = vim.fn.getftype(path) ~= "socket"
+      end
+      if stale then
+        vim.fn.delete(path)
+      end
     end
-    vim.notify(string.format("Cleaned up %d orphaned processes", killed), vim.log.levels.INFO)
+  end
+
+  vim.notify(string.format("Cleaned up %d orphaned processes", killed), vim.log.levels.INFO)
 end
 
 --- Remove a session by ID, name, or path.
@@ -585,55 +738,13 @@ function M.remove_session(id, name)
       end
     end
 
-    -- Remove the found session
-    local socket = sessions_dir .. "/" .. target_session
-    if vim.fn.filereadable(socket) == 1 or vim.fn.getftype(socket) == "socket" then
-      -- TODO: move this out of if
-      kill_session(target_session)
-      -- -- Send command to close Neovim
-      -- vim.cmd(string.format("silent! call server2client('%s', 'qa!')", socket))
-      -- -- Give time for the process to close before removing
-      -- vim.defer_fn(function()
-      --   vim.fn.delete(socket)
-      --   vim.notify("Session removed: " .. target_session)
-      --   M.update_sessions()
-      --   -- Atualiza a ordem após remover a sessão
-      --   for i, session_name in ipairs(M.session_order) do
-      --     if session_name == target_session then
-      --       table.remove(M.session_order, i)
-      --       break
-      --     end
-      --   end
-      --   save_session_order()
-      -- end, 200)
-    else
-      vim.notify("Socket not found: " .. socket, vim.log.levels.WARN)
-    end
+    kill_session(target_session)
   else
     -- No arguments provided, show selection popup
     vim.ui.select(M.sessions, { prompt = "Select a session to remove:" }, function(choice)
-      if choice then
-        local socket = sessions_dir .. "/" .. choice
-        if vim.fn.filereadable(socket) == 1 or vim.fn.getftype(socket) == "socket" then
-          -- Send command to close Neovim
-          vim.cmd(string.format("silent! call server2client('%s', 'qa!')", socket))
-          -- Give time for the process to close before removing
-          vim.defer_fn(function()
-            vim.fn.delete(socket)
-            vim.notify("Session removed: " .. choice)
-            M.update_sessions()
-            -- Atualiza a ordem após remover a sessão
-            for i, session_name in ipairs(M.session_order) do
-              if session_name == choice then
-                table.remove(M.session_order, i)
-                break
-              end
-            end
-            save_session_order()
-          end, 200)
-        else
-          vim.notify("Socket not found: " .. socket, vim.log.levels.WARN)
-        end
+      if choice and kill_session(choice) then
+        vim.notify("Session removed: " .. choice)
+        M.update_sessions()
       end
     end)
   end
@@ -648,15 +759,6 @@ end
 ---@param line integer The index (1-based) of the session to move.
 ---@param up boolean If true, move the session up; if false or nil, move it down.
 ---@return boolean success True if the session was successfully moved, false otherwise.
----
----@example
---- -- Move the second session down
---- local ok = move_session(2, false)
---- print(ok) -- true if moved
----
---- -- Move the third session up
---- local ok = move_session(3, true)
---- print(ok) -- true if moved
 local function move_session(line, up)
   if line < #M.sessions and not up then
     -- Move a sessão na lista
@@ -684,7 +786,6 @@ local function move_session(line, up)
     return true
   end
 
-  render_sessions()
   return false
 end
 
@@ -730,8 +831,7 @@ function M.manage_sessions(opts)
 
   local function render_sessions()
     local formatted = {}
-    for i, name in ipairs(M.sessions) do
-      -- Usa apenas o número da linha para representar a ordem
+    for _, name in ipairs(M.sessions) do
       table.insert(formatted, string.format("%s", name))
     end
 
@@ -745,7 +845,6 @@ function M.manage_sessions(opts)
     -- Atualiza o current_index para refletir a nova posição da sessão atual
     if M.current_index then
       local current_session = M.get_current_session()
-      -- Encontra a nova posição da sessão atual na lista reordenada
       for i, name in ipairs(M.sessions) do
         if name == current_session then
           M.current_index = i
@@ -776,8 +875,6 @@ function M.manage_sessions(opts)
   -- All mappings use the configured keybinds and are buffer-local with nowait
 
   -- Default: <CR> - Attach to the selected session
-  -- When pressed, attaches to the session at the current cursor line
-  -- Customize: Modify config.ui.keymap.attach to change this binding
   vim.keymap.set("n", config.ui.keymap.attach, function()
     local line = vim.fn.line(".")
     local session = M.sessions[line]
@@ -788,53 +885,39 @@ function M.manage_sessions(opts)
   end, { buffer = buf, nowait = true })
 
   -- Default: Shift+D - Delete the selected session
-  -- Removes the session at the current cursor line and updates the list
-  -- Customize: Modify config.ui.keymap.delete to change this binding
   vim.keymap.set("n", config.ui.keymap.delete, function()
     local line = vim.fn.line(".")
     local session = M.sessions[line]
     if session then
-      M.remove_session(line)
-      vim.defer_fn(function()
-        M.update_sessions()
-        render_sessions()
-      end, 300)
+      M.remove_session(line) -- blocks until the server has exited
+      M.update_sessions()
+      if #M.sessions == 0 then
+        vim.api.nvim_win_close(win, true)
+        return
+      end
+      render_sessions()
     end
   end, { buffer = buf, nowait = true })
 
   -- Default: Shift+K - Move session up in the list
-  -- Moves the current session up one position and moves cursor to follow it
-  -- Customize: Modify config.ui.keymap.move_up to change this binding
   vim.keymap.set("n", config.ui.keymap.move_up, function()
-    -- Get current cursor line (1-based index)
     local line = vim.fn.line(".")
-    -- Attempt to move session up; if successful, update cursor position
     if move_session(line, true) then
-      -- Move cursor up to follow the moved session
       vim.api.nvim_win_set_cursor(win, { line - 1, 0 })
     end
-    -- Refresh the session list display to show new order
     render_sessions()
   end, { buffer = buf, nowait = true })
 
   -- Default: Shift+J - Move session down in the list
-  -- Moves the current session down one position and moves cursor to follow it
-  -- Customize: Modify config.ui.keymap.move_down to change this binding
   vim.keymap.set("n", config.ui.keymap.move_down, function()
-    -- Get current cursor line (1-based index)
     local line = vim.fn.line(".")
-    -- Attempt to move session down; if successful, update cursor position
     if move_session(line, false) then
-      -- Move cursor down to follow the moved session
       vim.api.nvim_win_set_cursor(win, { line + 1, 0 })
     end
-    -- Refresh the session list display to show new order
     render_sessions()
   end, { buffer = buf, nowait = true })
 
   -- Default: q - Close the session management window
-  -- Safely closes the floating window without affecting sessions
-  -- Customize: Modify config.ui.keymap.quit to change this binding
   vim.keymap.set("n", config.ui.keymap.quit, function()
     vim.api.nvim_win_close(win, true)
   end, { buffer = buf, nowait = true })
