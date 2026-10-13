@@ -1,5 +1,3 @@
-packadd("canola.nvim")
-
 vim.g.canola = {
   columns = {
     "icon",
