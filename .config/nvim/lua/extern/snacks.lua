@@ -177,13 +177,13 @@ map {
   --     end,
   --     desc = "Notification History",
   --   },
-  --   {
-  --     "<leader>fe",
-  --     function()
-  --       Snacks.explorer()
-  --     end,
-  --     desc = "File Explorer",
-  --   },
+  {
+    "<leader>fe",
+    function()
+      Snacks.explorer()
+    end,
+    desc = "File Explorer",
+  },
   --   -- find
   --   {
   --     "<leader>fc",
