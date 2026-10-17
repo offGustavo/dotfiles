@@ -25,56 +25,56 @@ map {
   { "<localleader>ms", "<Cmd>Markview splitToggle<Cr>", desc = "Toggle Split View", buf = 0 },
 }
 
-vim.pack.add {
-  "https://github.com/OXY2DEV/markview.nvim",
-}
+-- vim.pack.add {
+--   "https://github.com/OXY2DEV/markview.nvim",
+-- }
 
-require("markview").setup({
-  preview = {
-    modes = { "n", "no", "c" },
-    hybrid_modes = { "n", "i" },
-    linewise_hybrid_mode = true,
-  },
-  latex = {
-    enable = true,
-  },
-  -- list_items
-  ---@diagnostic disable-next-line: missing-fields
-  markdown = {
-    list_items = {
-      enable = true,
-      wrap = false,
-      indent_size = 2,
-      shift_width = 4,
-      marker_minus = {
-        add_padding = true,
-        conceal_on_checkboxes = true,
-        text = "-",
-        hl = "MarkviewListItemMinus",
-      },
-      marker_plus = {
-        add_padding = true,
-        conceal_on_checkboxes = true,
-        text = "+",
-        hl = "MarkviewListItemPlus",
-      },
-      marker_star = {
-        add_padding = true,
-        conceal_on_checkboxes = true,
-        text = "*",
-        hl = "MarkviewListItemStar",
-      },
-      marker_dot = {
-        add_padding = true,
-        conceal_on_checkboxes = true,
-      },
-      marker_parenthesis = {
-        add_padding = true,
-        conceal_on_checkboxes = true,
-      },
-    },
-  },
-})
-require("markview.extras.checkboxes").setup()
-require("markview.extras.headings").setup()
-require("markview.extras.editor").setup()
+-- require("markview").setup({
+--   preview = {
+--     modes = { "n", "no", "c" },
+--     hybrid_modes = { "n", "i" },
+--     linewise_hybrid_mode = true,
+--   },
+--   latex = {
+--     enable = true,
+--   },
+--   -- list_items
+--   ---@diagnostic disable-next-line: missing-fields
+--   markdown = {
+--     list_items = {
+--       enable = true,
+--       wrap = false,
+--       indent_size = 2,
+--       shift_width = 4,
+--       marker_minus = {
+--         add_padding = true,
+--         conceal_on_checkboxes = true,
+--         text = "-",
+--         hl = "MarkviewListItemMinus",
+--       },
+--       marker_plus = {
+--         add_padding = true,
+--         conceal_on_checkboxes = true,
+--         text = "+",
+--         hl = "MarkviewListItemPlus",
+--       },
+--       marker_star = {
+--         add_padding = true,
+--         conceal_on_checkboxes = true,
+--         text = "*",
+--         hl = "MarkviewListItemStar",
+--       },
+--       marker_dot = {
+--         add_padding = true,
+--         conceal_on_checkboxes = true,
+--       },
+--       marker_parenthesis = {
+--         add_padding = true,
+--         conceal_on_checkboxes = true,
+--       },
+--     },
+--   },
+-- })
+-- require("markview.extras.checkboxes").setup()
+-- require("markview.extras.headings").setup()
+-- require("markview.extras.editor").setup()

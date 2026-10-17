@@ -410,7 +410,8 @@ end
 function M.map(maps)
   for idx, m in ipairs(maps) do
     if m.range then
-      local first, last, step = m.range[1], m.range[2], m.range[3] or 1
+
+       local first, last, step = m.range[1], m.range[2], m.range[3] or 1
       for i = first, last, step do
         M.set_one(m, i, idx)
       end

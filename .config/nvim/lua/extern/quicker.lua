@@ -14,7 +14,14 @@ later(function()
     use_default_opts = true,
     -- Keymaps to set for the quickfix buffer
     keys = {
-      -- { ">", "<cmd>lua require('quicker').expand()<CR>", desc = "Expand quickfix content" },
+      { ">", "<cmd>lua require('quicker').expand()<CR>", desc = "Expand quickfix content" },
+      {
+        "<",
+        function()
+          require("quicker").collapse()
+        end,
+        desc = "Collapse quickfix context",
+      },
     },
     -- Callback function to run any custom logic or keymaps for the quickfix buffer
     on_qf = function(bufnr) end,
@@ -29,9 +36,9 @@ later(function()
     constrain_cursor = true,
     highlight = {
       -- Use treesitter highlighting
-      treesitter = true,
+      treesitter = false,
       -- Use LSP semantic token highlighting
-      lsp = true,
+      lsp = false,
       -- Load the referenced buffers to apply more accurate highlights (may be slow)
       load_buffers = false,
     },

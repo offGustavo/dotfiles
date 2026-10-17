@@ -96,4 +96,11 @@ vim.g.canola = {
 }
 vim.g.canola_trash = {}
 
+map {
+  { "<M-e>", "<Cmd>Canola<Cr>", desc = "Canola" },
+  { "-", "<Cmd>Canola<Cr>", desc = "Canola" },
+  { "<leader><M-e>", "<Cmd>e.<Cr>", desc = "Open cwd" },
+  { "<leader>fd", ":Canola<Cr>", desc = "Oil Explore" },
+}
+
 packadd("canola.nvim")

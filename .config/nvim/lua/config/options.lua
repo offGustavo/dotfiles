@@ -280,79 +280,79 @@ vim.o.statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()"
 --
 -- -- }}}
 
--- -- {{{ tabline
--- vim.o.showtabline = 0
--- vim.o.tabline = "%!v:lua.require('Fish.tabline').build_tabline()"
--- -- Update when windows or tabs change
--- vim.api.nvim_create_autocmd({ "VimEnter", "UiEnter", "WinNew", "WinClosed", "TabNew", "TabClosed" }, {
---   callback = function()
---     local ignore_ft = {
---       "neo-tree",
---       "NvimTree",
---       "nvimtree",
---       "toggleterm",
---       "terminal",
---       "lazy",
---       "mason",
---       "trouble",
---       "qf",
---       "help",
---       "nofile",
---       "TelescopePrompt",
---       "telescope",
---       "notify",
---       "noice",
---       "aerial",
---       "outline",
---       "dap-repl",
---       "dapui_watches",
---       "dapui_stacks",
---       "dapui_breakpoints",
---       "dapui_scopes",
---       "dapui_console",
---       "undotree",
---       "diff",
---       "packer",
---       "lspinfo",
---       "lsp-installer",
---       "startify",
---       "alpha",
---       "dashboard",
---     }
---
---     local ignore_ft_set = {}
---     for _, ft in ipairs(ignore_ft) do
---       ignore_ft_set[ft] = true
---     end
---
---     -- Defer so WinClosed fires after the window is actually gone
---     vim.schedule(function()
---       local tabcount = #vim.api.nvim_list_tabpages()
---       local windowcount = 0
---
---       for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
---         local buf = vim.api.nvim_win_get_buf(win)
---         local ft = vim.bo[buf].filetype
---         local bt = vim.bo[buf].buftype
---         local cfg = vim.api.nvim_win_get_config(win)
---
---         -- Skip floating windows and UI filetypes/buftypes
---         if cfg.relative == "" then
---           if not ignore_ft_set[ft] and not ignore_ft_set[bt] then
---             windowcount = windowcount + 1
---           end
---         end
---       end
---
---       if tabcount > 1 or windowcount > 1 then
---         vim.o.showtabline = 2
---       else
---         vim.o.showtabline = 0
---       end
---     end)
---   end,
--- })
--- -- }}}
+-- {{{ tabline
+vim.o.showtabline = 0
+vim.o.tabline = "%!v:lua.require('Fish.tabline').build_tabline()"
+-- Update when windows or tabs change
+vim.api.nvim_create_autocmd({ "VimEnter", "UiEnter", "WinNew", "WinClosed", "TabNew", "TabClosed" }, {
+  callback = function()
+    local ignore_ft = {
+      "neo-tree",
+      "NvimTree",
+      "nvimtree",
+      "toggleterm",
+      "terminal",
+      "lazy",
+      "mason",
+      "trouble",
+      "qf",
+      "help",
+      "nofile",
+      "TelescopePrompt",
+      "telescope",
+      "notify",
+      "noice",
+      "aerial",
+      "outline",
+      "dap-repl",
+      "dapui_watches",
+      "dapui_stacks",
+      "dapui_breakpoints",
+      "dapui_scopes",
+      "dapui_console",
+      "undotree",
+      "diff",
+      "packer",
+      "lspinfo",
+      "lsp-installer",
+      "startify",
+      "alpha",
+      "dashboard",
+    }
+
+    local ignore_ft_set = {}
+    for _, ft in ipairs(ignore_ft) do
+      ignore_ft_set[ft] = true
+    end
+
+    -- Defer so WinClosed fires after the window is actually gone
+    vim.schedule(function()
+      local tabcount = #vim.api.nvim_list_tabpages()
+      local windowcount = 0
+
+      for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+        local buf = vim.api.nvim_win_get_buf(win)
+        local ft = vim.bo[buf].filetype
+        local bt = vim.bo[buf].buftype
+        local cfg = vim.api.nvim_win_get_config(win)
+
+        -- Skip floating windows and UI filetypes/buftypes
+        if cfg.relative == "" then
+          if not ignore_ft_set[ft] and not ignore_ft_set[bt] then
+            windowcount = windowcount + 1
+          end
+        end
+      end
+
+      if tabcount > 1 or windowcount > 1 then
+        vim.o.showtabline = 2
+      else
+        vim.o.showtabline = 0
+      end
+    end)
+  end,
+})
+-- }}}
 
 -- {{{ quickfix
 -- TODO: add custom quickfix list

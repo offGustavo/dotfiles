@@ -1,4 +1,5 @@
 later(function()
+  vim.keymap.set("n", "<M-G>", ":Neogit<Cr>", { silent = true, desc = "Neogit" })
   packadd "neogit"
   require("neogit").setup({
     -- Hides the hints at the top of the status buffer

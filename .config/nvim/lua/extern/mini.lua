@@ -70,7 +70,7 @@ later(function()
       -- x = { "x()x()x" },
 
       -- Whole buffer
-      g = function()
+      B = function()
         local from = { line = 1, col = 1 }
         local to = {
           line = vim.fn.line("$"),

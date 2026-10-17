@@ -63,10 +63,10 @@ vim.pack.add({
   { src = "https://github.com/nvim-mini/mini.nvim" },
 
   -- NeoGit
-  { src = "https://github.com/nvim-lua/plenary.nvim" }, -- required
-  { src = "https://github.com/esmuellert/codediff.nvim" }, -- optional
-  { src = "https://github.com/m00qek/baleia.nvim" }, -- optional
-  { src = "https://github.com/NeogitOrg/neogit" },
+  "https://github.com/nvim-lua/plenary.nvim", -- required
+  "https://github.com/esmuellert/codediff.nvim", -- optional
+  "https://github.com/m00qek/baleia.nvim", -- optional
+  "https://github.com/NeogitOrg/neogit",
 
   "https://github.com/stevearc/conform.nvim",
   "https://github.com/stevearc/quicker.nvim",
@@ -83,12 +83,18 @@ vim.pack.add({
 
   "https://github.com/catgoose/nvim-colorizer.lua",
 
+  "https://github.com/nvzone/showkeys",
+  -- "https://github.com/nstefan002/screenkey.nvim", 
+
   { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("v1") },
 
   -- "https://github.com/nvim-lua/plenary.nvim",
   -- { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 
   "https://github.com/folke/todo-comments.nvim",
+
+  "https://github.com/xheisenbugx/org.nvim",
+  -- "https://github.com/offGustavo/md-agenda.nvim"
 }, { load = function() end })
 --- }}}
 
@@ -129,6 +135,7 @@ require("extern.tokyonight")
 require("extern.treesitter")
 
 require("extern.which-key")
+
 -- TODO(todo-comments): make a lua module to replace todo-comments
 -- 1. DONE highlighting Comments
 -- 2. highlighting colors
@@ -137,8 +144,6 @@ require("extern.which-key")
 -- require("extern.nvim-colorizer")
 
 require("extern.blink")
-
--- vim.opt.runtimepath:append("~/Projects/nvim-sessionizer/")
--- require("disable")
+require("extern.org")
 
 -- }}}

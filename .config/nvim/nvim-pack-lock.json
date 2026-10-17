@@ -63,6 +63,10 @@
       "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
     },
+    "md-agenda.nvim": {
+      "rev": "0278a941ed294a4f63276a3d63d693ab14b30bdb",
+      "src": "https://github.com/offGustavo/md-agenda.nvim"
+    },
     "mini.completion": {
       "rev": "15fb3542b11f23b20e126c873111297f41d740e5",
       "src": "https://github.com/nvim-mini/mini.completion"
@@ -111,9 +115,17 @@
       "rev": "4a6883cb13fe097a20a046eb55f6dffd239276e3",
       "src": "https://github.com/stevearc/quicker.nvim"
     },
+    "screenkey.nvim": {
+      "rev": "740e238d1f143cb5f3a9d932f9c5142d3581b986",
+      "src": "https://github.com/nstefan002/screenkey.nvim"
+    },
     "servery.nvim": {
       "rev": "6346d25806fabadff0f8b97ff611976899188dca",
       "src": "https://github.com/wurli/servery.nvim"
+    },
+    "showkeys": {
+      "rev": "cb0a50296f11f1e585acffba8c253b9e8afc1f84",
+      "src": "https://github.com/nvzone/showkeys"
     },
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",

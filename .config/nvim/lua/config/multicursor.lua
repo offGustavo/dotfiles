@@ -369,6 +369,9 @@ MultiCursor.actions.split_visual = function()
   -- How?
 end
 
+
+-- vim.keymap.set("n", "<Esc>", function() vim.notify("use <C-c>", vim.log.levels.ERROR) end)
+
 -- stylua: ignore start
 map {
   -- { "n", "<Esc>", function() MultiCursor.clear(0) vim.cmd("nohls") return "<Esc>" end, expr = true, desc = "Clear on <Esc>", },

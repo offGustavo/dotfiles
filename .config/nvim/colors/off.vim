@@ -80,10 +80,15 @@ hi Define        guifg=#7dcfff
 hi Macro         guifg=#7dcfff
 hi PreCondit     guifg=#7dcfff
 
-hi Type          guifg=#73daca
-hi StorageClass  guifg=#9d7cd8
-hi Structure     guifg=#73daca
-hi Typedef       guifg=#73daca
+
+hi! link Type Normal
+hi! link StorageClass Normal
+hi! link Structure Normal
+hi! link Typedef Normal
+"hi Type          guifg=#73daca
+"hi StorageClass  guifg=#9d7cd8
+"hi Structure     guifg=#73daca
+"hi Typedef       guifg=#73daca
 
 hi Special       guifg=#bb9af7
 hi SpecialChar   guifg=#bb9af7

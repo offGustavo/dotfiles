@@ -208,6 +208,8 @@ map {
   { "n", "SV", [[S<Esc>]], silent = false },
   { "x", "SV", [[:normal S<Esc>]], silent = true },
 
+  { {"x", "n" }, "sn", ":g//norm!<Left><Left><Left><Left><Left><Left>" },
+
   -- {{{ Insert/Command Mode
   { "i", "<C-Bs>", "<C-w>" },
 
@@ -770,11 +772,19 @@ map {
   },
   {
     "n",
+    "<C-A>",
+    function()
+      require("Fish.toggle").decrease()
+    end,
+    desc = "Decrease numbers and words",
+  },
+  {
+    "n",
     "<C-x>",
     function()
       require("Fish.toggle").decrease()
     end,
-    desc = "Inrease numbers and words",
+    desc = "Decrease numbers and words",
   },
 
   -- vim.keymap.set("n", "<leader>tt", function()
@@ -1024,99 +1034,7 @@ map {
     desc = "Git add current directory",
   },
   -- }}}
-
-  --   -- {{{ Argall
-  --   {
-  --     "<leader>hl",
-  --     function()
-  --       require("Fish.argall").load()
-  --     end,
-  --     desc = "Load args session",
-  --   },
-  --   {
-  --     "<leader>he",
-  --     function()
-  --       require("Fish.argall").show()
-  --     end,
-  --     desc = "Show args in tmp buffer",
-  --   },
-  --   {
-  --     "<leader>ha",
-  --     function()
-  --       require("Fish.argall").add(vim.fn.expand("%"))
-  --     end,
-  --     desc = "Add arg file",
-  --   },
-  --   {
-  --     "<leader>hd",
-  --     function()
-  --       vim.cmd "argd %"
-  --     end,
-  --     desc = "Remove arg file",
-  --   },
-  --   { "n", "<leader>{i}", "<CMD>argu {i}<CR>", silent = true, range = { 1, 9 }, desc = "Go to arg {i}" },
-  --   { "n", "<leader>h{i}", "<CMD>{i-1}arga<CR>", silent = true, range = { 1, 9 }, desc = "Add current to arg {i}" },
-  --   { "n", "<leader>hd{i}", "<CMD>{i}argd<CR>", silent = true, range = { 1, 9 }, desc = "Delete arg {i}" },
-  -- }}}
 }
 
 -- FIXME: try to fix this
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })
-
-map {
-  -- Neogit
-  { "n", "<M-G>", ":Neogit<Cr>", silent = true, desc = "Neogit" },
-
-  -- Conform
-  {
-    "n",
-    "<leader>cf",
-    function()
-      require("conform").format({
-        async = true,
-      })
-    end,
-    desc = "Format buffer",
-  },
-
-  ---{{{ Canola
-  { "<M-e>", "<Cmd>Canola<Cr>", desc = "Canola" },
-  { "-", "<Cmd>Canola<Cr>", desc = "Canola" },
-  { "<leader><M-e>", "<Cmd>e.<Cr>", desc = "Open cwd" },
-  { "<leader>fd", ":Canola<Cr>", desc = "Oil Explore" },
-  ---}}}
-
-
-  -- FIX: move this keymaps to map {}
-  -- You can use the capture groups defined in `textobjects.scm`
-  {
-    { "x", "o" },
-    "am",
-    function()
-      require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
-    end,
-  },
-  {
-    { "x", "o" },
-    "im",
-    function()
-      require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
-    end,
-  },
-  {
-    { "x", "o" },
-    "ac",
-    function()
-      require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects")
-    end,
-  },
-  {
-    { "x", "o" },
-    "ic",
-    function()
-      require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
-    end,
-  },
-  -- You can also use captures from other query groups like `locals.scm`
-  -- vim.keymap.set({ "x", "o" }, "as", function() require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals") end)
-}

@@ -39,4 +39,40 @@ vim.schedule(function()
       include_surrounding_whitespace = false,
     },
   }
+
+  map {
+
+    -- FIX: move this keymaps to map {}
+    -- You can use the capture groups defined in `textobjects.scm`
+    {
+      { "x", "o" },
+      "am",
+      function()
+        require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
+      end,
+    },
+    {
+      { "x", "o" },
+      "im",
+      function()
+        require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
+      end,
+    },
+    {
+      { "x", "o" },
+      "ac",
+      function()
+        require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects")
+      end,
+    },
+    {
+      { "x", "o" },
+      "ic",
+      function()
+        require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
+      end,
+    },
+    -- You can also use captures from other query groups like `locals.scm`
+    -- vim.keymap.set({ "x", "o" }, "as", function() require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals") end)
+  }
 end)

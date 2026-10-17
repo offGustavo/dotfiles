@@ -25,5 +25,14 @@ later(function()
       },
     },
   })
+  vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+  vim.keymap.set("n", "<leader>cf", function()
+    require("conform").format({
+      async = true,
+    })
+  end, {
+    desc = "Format buffer",
+  })
+
 end)
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
