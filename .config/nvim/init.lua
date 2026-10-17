@@ -122,6 +122,7 @@ require("extern.quicker")
 --   - keep `lspconfig` only for servers that have no native config
 require("extern.mason-lspconfig")
 
+require("extern.snacks")
 require("extern.mini")
 require("extern.neogit")
 require("extern.startuptime")

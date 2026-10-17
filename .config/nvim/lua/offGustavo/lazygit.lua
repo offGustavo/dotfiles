@@ -17,10 +17,10 @@ vim.g.lazygit_config = {
   enable_cmds = true,
 }
 
-vim.cmd('command! Lazygit lua require("Fish.lazygit").open()')
-vim.keymap.set("n", "<leader>gg", function()
-  require("Fish.lazygit").open()
-end, { desc = "Open lazygit" })
+-- vim.cmd('command! Lazygit lua require("Fish.lazygit").open()')
+-- vim.keymap.set("n", "<leader>gg", function()
+--   require("Fish.lazygit").open()
+-- end, { desc = "Open lazygit" })
 
 -- -- Optional: commands that open lazygit in different directories
 -- -- e.g., current file's directory, Neovim's cwd, etc.
