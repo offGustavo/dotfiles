@@ -18,7 +18,7 @@ local M = {}
 ---@field on_exit function|nil              Called after lazygit exits successfully
 
 ---@type Options
-local opts = vim.tbl_deep_extend("force", {
+local cfg = vim.tbl_deep_extend("force", {
   enable_cmds = false,
   theme = true,
   remote_edit = true,
@@ -128,10 +128,10 @@ local IS_WINDOWS = vim.fn.has("win32") == 1
 ---@return string
 local function build_config_yaml()
   local sections = {}
-  if opts.remote_edit then
+  if cfg.remote_edit then
     table.insert(sections, IS_WINDOWS and WINDOWS_REMOTE_EDIT_YAML or UNIX_REMOTE_EDIT_YAML)
   end
-  if opts.theme then
+  if cfg.theme then
     table.insert(sections, build_gui_theme())
   end
   return table.concat(sections, "\n") .. "\n"
@@ -156,7 +156,7 @@ end
 ---merging in the user's own config (if present) so it still applies.
 ---@return string|nil
 local function config_files()
-  if not (opts.theme or opts.remote_edit) then
+  if not (cfg.theme or cfg.remote_edit) then
     return nil
   end
 
@@ -174,13 +174,13 @@ end
 
 ---@return { height: number, width: number, row: number, col: number }
 local function get_window_dimensions()
-  local height = math.ceil(vim.o.lines * opts.ui.height)
-  local width = math.ceil(vim.o.columns * opts.ui.width)
+  local height = math.ceil(vim.o.lines * cfg.ui.height)
+  local width = math.ceil(vim.o.columns * cfg.ui.width)
   return {
     height = height,
     width = width,
-    row = math.ceil((vim.o.lines - height) * opts.ui.y - 1),
-    col = math.ceil((vim.o.columns - width) * opts.ui.x),
+    row = math.ceil((vim.o.lines - height) * cfg.ui.y - 1),
+    col = math.ceil((vim.o.columns - width) * cfg.ui.x),
   }
 end
 
@@ -193,7 +193,7 @@ local function open_win()
     true,
     vim.tbl_extend("error", {
       relative = "editor",
-      border = opts.ui.border,
+      border = cfg.ui.border,
       style = "minimal",
     }, get_window_dimensions())
   )
@@ -222,25 +222,34 @@ local function open_win()
   --   end,
   -- })
 
-  for keybind, command in pairs(opts.keybindings) do
+  for keybind, command in pairs(cfg.keybindings) do
     vim.api.nvim_buf_set_keymap(buf, "t", keybind, command, { silent = true })
   end
 
   return buf, win
 end
 
+---@class LazyGitOpts
+---@field path string
+---@field subcmd string
+
 ---Opens lazygit in a floating window, themed to match the current colorscheme.
----@param path string|nil Working directory (default: current file's directory, else cwd)
-function M.open(path)
+---@param opts? LazyGitOpts Working directory (default: current file's directory, else cwd)
+function M.open(opts)
   if vim.fn.executable("lazygit") ~= 1 then
     vim.notify("lazygit executable not found in PATH", vim.log.levels.ERROR, { title = "lazygit.nvim" })
     return
   end
 
-  local cwd = path or vim.fn.expand("%:p:h")
-  if cwd == "" then
-    cwd = vim.loop.cwd()
-  end
+  local cmd = "lazygit"
+  local cwd = vim.loop.cwd()
+    if opts ~= nil and opts.subcmd ~= nil and opts.subcmd ~= "" then
+      cmd = cmd .. " " .. opts.subcmd
+    end
+
+    if opts ~= nil and opts.path ~= nil and opts.path ~= "" then
+      cwd = vim.fn.expand(opts.path)
+    end
 
   local last_win = vim.api.nvim_get_current_win()
   local config = config_files()
@@ -248,7 +257,7 @@ function M.open(path)
 
   open_win()
 
-  vim.fn.jobstart("lazygit", {
+  vim.fn.jobstart(cmd, {
     term = true,
     cwd = cwd,
     env = env,
@@ -259,8 +268,8 @@ function M.open(path)
       if vim.api.nvim_win_is_valid(last_win) then
         vim.api.nvim_set_current_win(last_win)
       end
-      if code == 0 and opts.on_exit then
-        opts.on_exit()
+      if code == 0 and cfg.on_exit then
+        cfg.on_exit()
       end
     end,
   })

@@ -17,12 +17,39 @@ vim.g.lazygit_config = {
   enable_cmds = true,
 }
 
--- vim.cmd('command! Lazygit lua require("Fish.lazygit").open()')
--- vim.keymap.set("n", "<leader>gg", function()
---   require("Fish.lazygit").open()
--- end, { desc = "Open lazygit" })
+vim.api.nvim_create_user_command("LazyGit", function(o)
+  require("Fish.lazygit").open({ subcmd = o.fargs[1] })
+end, {
+  nargs = "*",
+  complete = function()
+    return {
+      "log",
+      "stash",
+      "branch",
+      "status",
+    }
+  end,
+})
 
--- -- Optional: commands that open lazygit in different directories
--- -- e.g., current file's directory, Neovim's cwd, etc.
--- vim.cmd('command! LazygitCwd lua require("Fish.lazygit").open(vim.loop.cwd())')
--- vim.cmd('command! LazygitFileDir lua require("Fish.lazygit").open(vim.fn.expand("%:p:h"))')
+vim.api.nvim_create_user_command("LazyGitDir", function(o)
+  require("Fish.lazygit").open({ path = o.fargs[1] })
+end, {
+  nargs = "*",
+  complete = "dir",
+})
+
+vim.api.nvim_create_user_command("LazyGitCwd", function()
+  require("Fish.lazygit").open({ path = vim.loop.cwd() })
+end, {
+  nargs = 0,
+})
+
+vim.api.nvim_create_user_command("LazyGitFileDir", function()
+  require("Fish.lazygit").open({ path = vim.fn.expand("%:p:h") })
+end, {
+  nargs = 0,
+})
+
+vim.keymap.set("n", "<leader>gg", function()
+  require("Fish.lazygit").open()
+end, { desc = "Open lazygit" })
