@@ -1,3 +1,4 @@
+local M = {}
 local last_cmd = ""
 
 local function append(lines)
@@ -9,7 +10,7 @@ local function append(lines)
   end
 end
 
-local function compile(cmd)
+function M.compile(cmd)
   if cmd == nil or cmd == "" then
     cmd = vim.fn.input({
       -- prompt = "Compile command: ",
@@ -43,15 +44,11 @@ local function compile(cmd)
   })
 end
 
-vim.api.nvim_create_user_command("Compile", function(o)
-  compile(o.args)
-end, { nargs = "*", complete = "shellcmd" })
+function M.recompile()
+  M.compile(last_cmd)
+end
 
-vim.api.nvim_create_user_command("Recompile", function()
-  compile(last_cmd)
-end, {})
-vim.keymap.set("n", "<M-C>","<Cmd>Compile<Cr>" , { desc = "Compile" })
--- vim.keymap.set("n", "<M-C","<Cmd>Recompile<Cr>" , { desc = "Recompile" })
+return M
 
 -- local M = {}
 --
