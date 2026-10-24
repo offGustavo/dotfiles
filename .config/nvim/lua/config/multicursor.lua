@@ -1,6 +1,39 @@
 -- TODO: remover quando 0.13 ser estavel
-if not vim.fn.has("nvim-0.13") == 1 then
+if not is("nvim-0.13") then
   -- MultiCursor
+  vim.pack.add { "https://github.com/brenton-leighton/multiple-cursors.nvim" }
+  require("multiple-cursors").setup {
+    pre_hook = function()
+      -- require("vim._core.ui2").enable({
+      --   enable = false, -- Whether to enable or disable the UI.
+      -- })
+    end,
+    post_hook = function()
+      -- require("vim._core.ui2").enable({
+      --   enable = true, -- Whether to enable or disable the UI.
+      --   msg = {        -- Options related to the message module.
+      --     ---@type 'cmd'|'msg' Default message target, either in the
+      --     ---cmdline or in a separate ephemeral message window.
+      --     ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
+      --     ---or table mapping |ui-messages| kinds and triggers to a target.
+      --     targets = "msg",
+      --   },
+      -- })
+    end,
+  }
+  map {
+    { "<M-q>", "<Cmd>MultipleCursorsAddDelete<Cr>" },
+    { "<C-m>", "<Cmd>MultipleCursorsLock<Cr>" },
+    { "<C-S-d>", "<Cmd>MultipleCursorsAddMatches<Cr>" },
+    { "<C-S-k>", "<Cmd>MultipleCursorsAddUp<Cr>" },
+    { "<C-S-j>", "<Cmd>MultipleCursorsAddDown<Cr>" },
+    { "<C-;>", "<Cmd>MultipleCursorsAddVisualArea<Cr>" },
+    { "<C-;>", "<Cmd>MultipleCursorsAddMatchesV<Cr>" },
+    { "<C-.>", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>" },
+    { "<C-,>", "<Cmd>MultipleCursorsAddJumpPrevMatch<CR>" },
+    { "<C-p>", "<Cmd>MultipleCursorsJumpPrevMatch<Cr>" },
+    { "<C-n>", "<Cmd>MultipleCursorsJumpNextMatch<Cr>" },
+  }
   return
 end
 
@@ -38,8 +71,7 @@ end
 
 ---@param pos vim.Pos
 MultiCursor.set = function(pos)
-  local ns = vim.api.nvim_create_namespace('nvim.multicursor')
-  vim.api.nvim_buf_set_extmark(0, ns, pos.row, pos.col, {})
+  vim.api.nvim_buf_set_extmark(0, ns_mc, pos.row, pos.col, {})
 end
 
 ---@param pos vim.Pos
@@ -49,6 +81,18 @@ MultiCursor.del = function(pos)
   for _, extm in ipairs(extmarks) do
     local id = extm[1]
     vim.api.nvim_buf_del_extmark(pos.buf, ns_mc, id)
+  end
+end
+
+---@param pos vim.Pos
+MultiCursor.toggle = function(pos)
+  local buf = pos.buf or 0
+  local at = { pos:to_extmark() }
+  local extmarks = vim.api.nvim_buf_get_extmarks(buf, ns_mc, at, at)
+  if #extmarks > 0 then
+    MultiCursor.del(pos)
+  else
+    MultiCursor.set(pos)
   end
 end
 
@@ -371,36 +415,25 @@ MultiCursor.actions.split_visual = function()
 end
 
 
--- vim.keymap.set("n", "<Esc>", function() vim.notify("use <C-c>", vim.log.levels.ERROR) end)
-
 -- stylua: ignore start
 map {
   -- { "n", "<Esc>", function() MultiCursor.clear(0) vim.cmd("nohls") return "<Esc>" end, expr = true, desc = "Clear on <Esc>", },
   { "n", "<C-[>", function() MultiCursor.clear(0) end, expr = true, desc = "Clear MultiCursor", },
 
-  { { "n", "x" }, "<M-a>", function() MultiCursor.actions.search_current() end, desc = "Expand search", },
-  { { "n", "x" }, "<m-s-a>", ":norm *N2Q<Cr>",  desc = "Expand search", },
+  { { "n", "x" }, "<M-q>", function ()
+    MultiCursor.toggle(vim.pos.cursor())
+  end,  desc = "Add/Remove cursors", },
+  { { "n", "x" }, "<C-m>", ":norm! q=<Cr>",  desc = "Toggle lock cursor", },
+  -- { { "n", "x" }, "<M-a>", function() MultiCursor.actions.search_current() end, desc = "Expand search", },
+  { { "n", "x" }, "<M-a>", ":norm! zq*<Cr>",  desc = "Expand search", },
   -- <C -,
-  -- vim.keymap.set("n", "<S-Right>", function() MultiCursor.actions.jump_next(1) end, { desc = "Cursors: next" })
-  -- vim.keymap.set("n", "<S-Left>", function() MultiCursor.actions.jump_next(-1) end, { desc = "Cursors: previous" })
-  -- vim.keymap.set("n", "<S-Down>", function() MultiCursor.actions.line_add(1) end, { desc = "Cursors: add below" })
-  -- vim.keymap.set("n", "<S-Up>", function() MultiCursor.actions.line_add(-1) end, { desc = "Cursors: add above" })
   { "n", "sn", function() MultiCursor.actions.jump_next(1) end, desc = "Cursors: next", },
   { "n", "sp", function() MultiCursor.actions.jump_next(-1) end, desc = "Cursors: previous", },
   { "n", "sj", function() MultiCursor.actions.line_add(1) end, desc = "Cursors: add below", },
   { "n", "sk", function() MultiCursor.actions.line_add(-1) end, desc = "Cursors: add above", },
 
-  { "n", "<M-->", function() MultiCursor.actions.jump_next(1) end, desc = "Cursors: next", },
-  { "n", "<M-=>", function() MultiCursor.actions.jump_next(-1) end, desc = "Cursors: previous", },
-  -- TODO: add a remove current and move to next
-  { "n", "<M-_>", function() MultiCursor.actions.jump_next(1) end, desc = "Cursors: next", },
-  { "n", "<M-+>", function() MultiCursor.actions.jump_next(-1) end, desc = "Cursors: previous", },
   { "n", "<C-S-j>", function() MultiCursor.actions.line_add(1) end, desc = "Cursors: add below", },
   { "n", "<C-S-k>", function() MultiCursor.actions.line_add(-1) end, desc = "Cursors: add above", },
-  -- vim.keymap.set({ "n", "x" }, "<Right>", function() MultiCursor.actions.match_add(1) end, { desc = "Cursors: add match next" }) vim.keymap.set({ "n", "x" }, "<Left>", function() MultiCursor.actions.match_add(-1) end, { desc = "Cursors: add match previous" })
-  -- vim.keymap.set({ "n", "x" }, "<Down>", function() MultiCursor.actions.match_skip(1) end, { desc = "Cursors: skip match next" })
-  -- vim.keymap.set({ "n", "x" }, "<Up>", function() MultiCursor.actions.match_skip(-1) end, { desc = "Cursors: skip match previous" })
-
   { { "n", "x" }, "sm", function() MultiCursor.actions.match_add(1) end,  desc = "Cursors: add match next" },
   { { "n", "x" }, "s,", function() MultiCursor.actions.match_add(-1) end,  desc = "Cursors: add match previous" },
   { { "n", "x" }, "sn", function() MultiCursor.actions.match_skip(1) end,  desc = "Cursors: skip match next" },
@@ -412,6 +445,11 @@ map {
   { { "n", "x" }, "<C-p>", function() MultiCursor.actions.match_skip(-1) end, desc = "Cursors: skip match previous", },
   -- vim.keymap.set("x", "gm", function() MultiCursor.actions.search() end, { desc = "Cursors: match search" })
   -- vim.keymap.set("n", "gm", MultiCursor.actions.search_operator, { expr = true, desc = "Cursors: match search" })
-  { "n", "gQ", function() MultiCursor.actions.align() end, desc = "Cursors: align", },
+  -- { "n", "z=", function() MultiCursor.actions.align() end, desc = "Cursors: align", },
 }
+
+vim.cmd[[
+command! MultiCursorAlign lua MultiCursor.actions.align()
+]]
+
 -- stylua: ignore end
