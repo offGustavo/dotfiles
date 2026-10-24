@@ -69,6 +69,13 @@ vim.pack.add({
 
   -- LSP
   "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/mason-org/mason-lspconfig.nvim",
+  "https://github.com/mason-org/mason.nvim",
+
+  -- Treesitter
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+  "https://github.com/folke/ts-comments.nvim",
 
   -- Format
   "https://github.com/stevearc/conform.nvim",
@@ -77,11 +84,6 @@ vim.pack.add({
   "https://github.com/rafamadriz/friendly-snippets",
   "https://github.com/folke/lazydev.nvim",
   { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("v1") },
-
-  -- Treesitter
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-  "https://github.com/folke/ts-comments.nvim",
 
   -- UI
   "https://github.com/folke/which-key.nvim",

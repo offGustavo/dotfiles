@@ -1,15 +1,30 @@
-vim.schedule(function()
+if is_windows() then
+  return
+end
+
+later(function()
   packadd { "ts-comments.nvim", "nvim-treesitter-textobjects", "nvim-treesitter" }
 
   local ts = require("nvim-treesitter")
   ts.setup({
     install_dir = vim.fn.stdpath("data") .. "/site",
   })
-  -- ts.install("all", { summary = false }, { max_jobs = 24 }):wait(1000000)
+
+  ts.install("all", { summary = false }, { max_jobs = 24 }):wait(1000000)
+
+  -- ts.install({
+  --   "rust",
+  --   "javascript",
+  --   "zig",
+  --   "lua",
+  --   "markdown",
+  --   "vim",
+  --   "c"
+  -- }):wait(300000) -- max. 5 minutes
 
   require("ts-comments").setup()
 
-  vim.g.no_plugin_maps = true
+  -- vim.g.no_plugin_maps = true
   -- configuration
   require("nvim-treesitter-textobjects").setup {
     select = {
@@ -72,7 +87,7 @@ vim.schedule(function()
         require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
       end,
     },
-    -- You can also use captures from other query groups like `locals.scm`
-    -- vim.keymap.set({ "x", "o" }, "as", function() require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals") end)
   }
+  -- You can also use captures from other query groups like `locals.scm`
+  -- vim.keymap.set({ "x", "o" }, "as", function() require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals") end)
 end)

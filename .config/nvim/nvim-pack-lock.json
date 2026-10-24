@@ -79,6 +79,10 @@
       "rev": "961f43586999b06fdda96e4477cedd7841a618fa",
       "src": "https://github.com/simifalaye/minibuffer.nvim"
     },
+    "multiple-cursors.nvim": {
+      "rev": "eae76d4c5f7ede2d45746dc2affb5e7a139e4aa8",
+      "src": "https://github.com/brenton-leighton/multiple-cursors.nvim"
+    },
     "neogit": {
       "rev": "5adc81b26232954cd7a90f158aa7844c18fc3165",
       "src": "https://github.com/NeogitOrg/neogit"
@@ -158,6 +162,10 @@
     "vim-startuptime": {
       "rev": "5f33e50f1e2e2a80370c9094e4c303ea54cd2aea",
       "src": "https://github.com/dstein64/vim-startuptime"
+    },
+    "vim-teal": {
+      "rev": "a416397cf7aad7b03ef53fd3d9847fd764bcbfee",
+      "src": "https://github.com/teal-language/vim-teal"
     },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
