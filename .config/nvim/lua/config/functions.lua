@@ -4,6 +4,9 @@ function _G.is_windows()
   return vim.fn.has("win32") == 1
 end
 
+function _G.is(real)
+  return vim.fn.has(real) == 1
+end
 -- Augroup
 _G.fish_group = vim.api.nvim_create_augroup("Fish.config", {})
 
