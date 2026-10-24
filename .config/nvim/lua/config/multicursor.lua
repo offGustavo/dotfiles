@@ -38,7 +38,8 @@ end
 
 ---@param pos vim.Pos
 MultiCursor.set = function(pos)
-  vim.api.nvim_mcursor(pos.buf, pos:to_cursor())
+  local ns = vim.api.nvim_create_namespace('nvim.multicursor')
+  vim.api.nvim_buf_set_extmark(0, ns, pos.row, pos.col, {})
 end
 
 ---@param pos vim.Pos
