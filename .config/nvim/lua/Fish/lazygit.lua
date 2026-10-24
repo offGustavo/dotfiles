@@ -230,8 +230,8 @@ local function open_win()
 end
 
 ---@class LazyGitOpts
----@field path string
----@field subcmd string
+---@field path? string
+---@field subcmd? string
 
 ---Opens lazygit in a floating window, themed to match the current colorscheme.
 ---@param opts? LazyGitOpts Working directory (default: current file's directory, else cwd)
