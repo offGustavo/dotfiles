@@ -1,8 +1,8 @@
-# Add Windows Support
+# Add Windows Support 
 
 - TYPE: TODO
 - STATUS: OPEN
-- TAG: windows
+- TAG: windows,nvim-sessionizer
 - PRIORITY: 30
 - OPEN DATE (UTC): 2026/01/05 22:15:03
 - CLOSE DATE (UTC): 
@@ -10,7 +10,6 @@
 ## Description
  
 Currently, this plugin only supports Linux/Unix systems via Unix sockets. To achieve Windows compatibility, we need to implement support for Windows named pipes (or other IPC mechanisms native to Windows).
-
 
 ## BUGS
 

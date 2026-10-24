@@ -1,7 +1,7 @@
 # test from vim command
 
-- STATUS: OPEN
-- PRIORITY: 100
+- STATUS: CLOSED
+- PRIORITY: 87
 - TAGS:
 
 No description.
