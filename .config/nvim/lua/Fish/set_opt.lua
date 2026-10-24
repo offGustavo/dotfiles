@@ -48,6 +48,7 @@ local scopes = {
 ---@param opts table<string, OptValue> Map of option name -> value
 ---@param scope? OptScope Defaults to `"both"` (`:set`)
 ---@usage lua
+--- ```lua
 --- local set = require("Fish.set").set
 --- set {
 ---   number     = true,
@@ -57,6 +58,7 @@ local scopes = {
 ---   shortmess  = function(o) o:remove("I") end,                  -- function form
 --- }
 --- set({ wrap = false }, "local")
+--- ```
 function M.set(opts, scope)
   scope = scope or "both"
   local target = scopes[scope]

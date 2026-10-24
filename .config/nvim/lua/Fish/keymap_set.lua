@@ -21,7 +21,10 @@ local M = {}
 ---@field buf? integer buffer number, or 0 for the current buffer
 ---@field noremap? boolean
 ---@field remap? boolean inverse of `noremap`, overrides it when both are set
+---@field nowait? boolean 
+---@field wait? boolean 
 ---@field silent? boolean
+---@field expr? boolean
 ---@field desc? string description; `{i}` placeholders are expanded with `range`
 ---@field opts? table extra `vim.keymap.set` opts (expr, nowait, ...)
 ---@field load? string plugin to `:packadd` (once) before the rhs runs
@@ -339,6 +342,18 @@ function M.set_one(m, i, idx)
 
   if m.silent ~= nil then
     opts.silent = m.silent
+  end
+
+  if m.wait ~= nil  then
+    opts.wait = m.wait
+  end
+
+  if m.nowait ~= nil  then
+    opts.nowait = m.nowait
+  end
+
+  if m.expr ~= nil then
+    opts.expr = m.expr
   end
 
   if m.buf ~= nil then

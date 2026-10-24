@@ -42,12 +42,18 @@ function _G.set_global(opts)
   require("Fish.set_opt").set(opts, "global")
 end
 
----comment
+--- Autocommand Wrapper 
 ---@param event string|table
----@param callback? function
----@param pattern? string|table|function
+---@param callback function
+---@param pattern? string|table|function|nil
 ---@param group? any
----@param desc? string
+---@param desc? string|nil
+---@usage
+---```lua
+---autocmd("User", function() 
+---  print("User defined autocmd")
+---end, "Lazy", "UserGroup", "Print user autocmd")
+---```
 function _G.autocmd(event, callback, pattern, group, desc)
   vim.api.nvim_create_autocmd(event, {
     group = group or fish_group,
@@ -91,8 +97,10 @@ end
 ---@param names string|string[] plugin name, or a list of names
 ---@return boolean ok `true` if every plugin was loaded
 ---@usage lua
+--- ```lua
 --- packadd("nvim-treesitter")
 --- packadd({ "plenary.nvim", "telescope.nvim" })
+--- ```
 function _G.packadd(names)
   if type(names) == "string" then
     names = { names }
