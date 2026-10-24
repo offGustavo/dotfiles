@@ -38,64 +38,70 @@ require("offGustavo.TabTerm.setup")
 require("offGustavo.todo")
 require("offGustavo.yazi")
 require("offGustavo.cedit").setup({ key = "<M-x>" })
--- require("Tatr")
 require("offGustavo.compile-mode")
+require("Tatr")
 -- }}}
 
 -- {{{ Plugins
 
 vim.pack.add({
-  -- Tokyonight
-  { src = "https://github.com/folke/tokyonight.nvim" },
-  -- Canola/Oil
+
+  -- General
+  "https://github.com/folke/snacks.nvim",
+  "https://github.com/nvim-mini/mini.nvim",
+
+  -- File Explorer
   { src = "https://forge.barrettruth.com/barrettruth/canola.nvim", version = "canola" },
+  -- "https://github.com/nvim-lua/plenary.nvim",
+  -- { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 
-  "https://github.com/dstein64/vim-startuptime",
-
-  "https://github.com/neovim/nvim-lspconfig",
-  "https://github.com/mason-org/mason-lspconfig.nvim",
-  "https://github.com/mason-org/mason.nvim",
-
+  -- Picker
   "https://github.com/ibhagwan/fzf-lua",
 
-  { src = "https://github.com/folke/snacks.nvim" },
-
-  { src = "https://github.com/nvim-mini/mini.nvim" },
-
-  -- NeoGit
+  -- Git
   "https://github.com/nvim-lua/plenary.nvim", -- required
   "https://github.com/esmuellert/codediff.nvim", -- optional
   "https://github.com/m00qek/baleia.nvim", -- optional
   "https://github.com/NeogitOrg/neogit",
 
-  "https://github.com/stevearc/conform.nvim",
+  -- Quickfix 
   "https://github.com/stevearc/quicker.nvim",
 
-  "https://github.com/folke/ts-comments.nvim",
+  -- LSP
+  "https://github.com/neovim/nvim-lspconfig",
 
+  -- Format
+  "https://github.com/stevearc/conform.nvim",
+
+  -- Completion
   "https://github.com/rafamadriz/friendly-snippets",
   "https://github.com/folke/lazydev.nvim",
-
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-
-  "https://github.com/folke/which-key.nvim",
-
-  "https://github.com/catgoose/nvim-colorizer.lua",
-
-  "https://github.com/nvzone/showkeys",
-  -- "https://github.com/nstefan002/screenkey.nvim", 
-
   { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("v1") },
 
-  -- "https://github.com/nvim-lua/plenary.nvim",
-  -- { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
+  -- Treesitter
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+  "https://github.com/folke/ts-comments.nvim",
 
-  "https://github.com/folke/todo-comments.nvim",
+  -- UI
+  "https://github.com/folke/which-key.nvim",
+  -- "https://github.com/catgoose/nvim-colorizer.lua",
+  -- "https://github.com/folke/todo-comments.nvim",
 
+  -- Theme
+  "https://github.com/folke/tokyonight.nvim",
+
+
+  -- Agenda
   "https://github.com/xheisenbugx/org.nvim",
   -- "https://github.com/offGustavo/md-agenda.nvim"
-}, { load = function() end })
+
+  -- On Demand
+  "https://github.com/dstein64/vim-startuptime",
+  "https://github.com/nvzone/showkeys",
+  -- "https://github.com/nstefan002/screenkey.nvim", 
+})
+-- }, { load = function() end })
 --- }}}
 
 -- {{{ Plugins Config

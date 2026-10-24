@@ -3,8 +3,8 @@
 -- {{{ Map Leader and Local Leader
 -- <space> as leader
 vim.g.mapleader = " "
--- <space><space> as local leader
-vim.g.maplocalleader = "  "
+-- \ as local leader
+vim.g.maplocalleader = "\\"
 -- }}}
 
 -- {{{ Disable Plugins

@@ -208,7 +208,7 @@ map {
   { "n", "SV", [[S<Esc>]], silent = false },
   { "x", "SV", [[:normal S<Esc>]], silent = true },
 
-  { {"x", "n" }, "sn", ":g//norm!<Left><Left><Left><Left><Left><Left>" },
+  { { "x", "n" }, "sn", ":g//norm!<Left><Left><Left><Left><Left><Left>" },
 
   -- {{{ Insert/Command Mode
   { "i", "<C-Bs>", "<C-w>" },
@@ -643,8 +643,33 @@ end
 -- vim.keymap.set("n", "<leader>w.", hydra_keymap)
 -- vim.keymap.set("n", "<C-w>m.", hydra_keymap)
 
--- Zoom
+-- local function move_to_window()
+--   local count = vim.v.count
+--   if count ~= 0 then
+--     return count .. "<C-w>w"
+--   end
+--   return "<C-w>"
+-- end
+--
+--
+-- vim.keymap.set("n", "<C-w>", function()
+--   move_to_window()
+-- end, {
+--   nowait = true,
+--   expr = true,
+--   silent = true,
+-- })
+--
+-- vim.keymap.set("n", "<leader>w", function()
+--   move_to_window()
+-- end, {
+--   nowait = true,
+--   expr = true,
+--   silent = true,
+-- })
+
 map {
+  -- Zoom
   {
     "n",
     {
@@ -694,6 +719,9 @@ map {
   -- {{{ Quickfix
   { "n", "<leader>qn", "<Cmd>cnext<Cr>", silent = true, desc = "Open Next in Quickfix List" },
   { "n", "<leader>qp", "<Cmd>cprev<Cr>", silent = true, desc = "Open Previous in Quickfix List" },
+
+  { "n", "<C-j>", "<Cmd>cnext<Cr>" },
+  { "n", "<C-k>", "<Cmd>cprev<Cr>" },
 
   -- vim.keymap.set("n", "<leader>qo", vim.cmd.copen, { desc = "QuickFix Open", silent = true })
   -- vim.keymap.set("n", "<leader>qc", vim.cmd.cclose, { desc = "QuickFix Close", silent = true })
@@ -772,7 +800,7 @@ map {
   },
   {
     "n",
-    "<C-A>",
+    "<C-S-a>",
     function()
       require("Fish.toggle").decrease()
     end,

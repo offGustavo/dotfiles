@@ -1,13 +1,10 @@
--- {{{ Kitty scroll mode
-vim.cmd([[
-	nmap q <Cmd>qa!<CR>
-	xmap q <Cmd>qa!<CR> 
-	nnoremap yy "+yy<Cmd>qa!<Cr>
-	nnoremap <space>y "+yy<Cmd>qa!<Cr>
-	xmap y "+y<Cmd>qa!<Cr>
-	xmap <space>y "+y<Cmd>qa!<Cr>
-	set laststatus=0 nonu nornu signcolumn=no cursorline cmdheight=0
-	$ 
-	]])
--- NOTE: Stop config here
--- }}}
+vim.keymap.set({ "n", "x" }, "q", "<Cmd>qa!<CR>")
+
+vim.o.clipboard = "unnamed,unnamedplus"
+vim.o.readonly = true
+vim.o.laststatus = 0
+vim.o.number = false
+vim.o.relativenumber = false
+vim.o.signcolumn = "no"
+vim.o.cursorline = false
+vim.o.cmdheight = 0
