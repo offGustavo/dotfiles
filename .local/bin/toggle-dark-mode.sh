@@ -36,9 +36,10 @@ fi
 
 if command -v swaybg &>/dev/null; then
   kill $(pgrep swaybg) 2>/dev/null
-  [ "$THEME" = "light" ] &&
-    swaybg -i /home/gustavo/Pictures/Wallpapers/bliss.jpg ||
-    swaybg -i /home/gustavo/Pictures/Wallpapers/The-Path-of-Giants.png
+  # [ "$THEME" = "light" ] &&
+  #   swaybg -i /home/gustavo/Pictures/Wallpapers/bliss.jpg ||
+    swaybg -i ~/Downloads/pine-watt-2Hzmz15wGik-unsplash.jpg
+  # swaybg -i /home/gustavo/Pictures/Wallpapers/The-Path-of-Giants.png
 fi
 
 PID_dms=$(pgrep dms)
