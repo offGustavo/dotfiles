@@ -93,7 +93,6 @@ vim.pack.add({
   -- Theme
   "https://github.com/folke/tokyonight.nvim",
 
-
   -- Agenda
   "https://github.com/xheisenbugx/org.nvim",
   -- "https://github.com/offGustavo/md-agenda.nvim"
@@ -101,7 +100,7 @@ vim.pack.add({
   -- On Demand
   "https://github.com/dstein64/vim-startuptime",
   "https://github.com/nvzone/showkeys",
-  -- "https://github.com/nstefan002/screenkey.nvim", 
+  -- "https://github.com/nstefan002/screenkey.nvim",
 })
 -- }, { load = function() end })
 --- }}}

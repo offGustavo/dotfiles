@@ -41,7 +41,8 @@ require("fzf-lua").setup({
     winopts = { height = 0.55, width = 0.50, col = 0.5, row = 0.0, backdrop = false },
   },
   fzf_opts = {
-    ["--sort"] = false,
+    ["--sort"] = true,
+    ["--tiebreak"] = "chunk,length",
   },
   fzf_colors = {
     true, -- inherit fzf colors that aren't specified below from
