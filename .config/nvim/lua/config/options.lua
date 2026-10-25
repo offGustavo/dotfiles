@@ -115,70 +115,34 @@ vim.o.titlestring = "%{v:lua.Fish.cwd_title()}"
 -- vim.o.wildoptions="pum"
 -- }}}
 
--- {{{ grepprg and findfunc
-vim.schedule(function()
-  -- better grep and find with ripgrep
-  if vim.fn.executable("rg") == 1 then
-    if is_windows() then
-      vim.o.grepprg = "rg --vimgrep --color=never"
-    else
-      vim.o.grepprg = "rg"
-    end
+-- {{{ grepprg
+-- better grep and find with ripgrep
+Fish.grep_cmd = "rg --vimgrep -uu --color=never"
 
-    vim.api.nvim_create_user_command("Rg", function(args)
-      local result = vim.fn.systemlist("rg --vimgrep " .. args.args)
-      vim.fn.setqflist({}, "r", {
-        title = "Results",
-        lines = result,
-      })
-      vim.cmd("copen")
-    end, { nargs = 1 })
+if vim.fn.executable("rg") == 1 then
+  vim.o.grepprg = Fish.grep_cmd
 
-    -- [native fuzzy finder in neovim with lua and cool bindings :: cherry's blog](https://cherryramatis.xyz/posts/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings/)
-    function Fish.rg_find_files(cmdarg, _cmdcomplete)
-      local fnames = vim.fn.systemlist("rg --files --hidden --color=never ")
-      if #cmdarg == 0 then
-        return fnames
-      else
-        return vim.fn.matchfuzzy(fnames, cmdarg)
-      end
-    end
-    vim.o.findfunc = "v:lua.Fish.rg_find_files"
-  end
+  vim.api.nvim_create_user_command("Rg", function(fargs)
+    local cmd = Fish.grep_cmd .. fargs.args
+    local result = vim.fn.systemlist(cmd)
+    vim.fn.setqflist({}, "r", {
+      title = "Results" .. cmd,
+      lines = result,
+    })
+    vim.cmd("copen")
+  end, { nargs = 1 })
+end
+---}}}
 
-  -- if vim.fn.executable("fd") == 1 then
-  --   function Fish.fd_find_files(cmdarg, _cmdcomplete)
-  --     local fnames = vim.fn.systemlist("fd --hidden -t f --color=never")
-  --
-  --     if #cmdarg == 0 then
-  --       return fnames
-  --     end
-  --
-  --     -- build {path=..., filename=...} entries so matchfuzzy can key on filename only
-  --     local items = {}
-  --     for _, f in ipairs(fnames) do
-  --       table.insert(items, { path = f, filename = vim.fn.fnamemodify(f, ":t") })
-  --     end
-  --
-  --     local matched = vim.fn.matchfuzzy(items, cmdarg, { key = "filename" })
-  --
-  --     local results = {}
-  --     for _, m in ipairs(matched) do
-  --       table.insert(results, m.path)
-  --     end
-  --     print(vim.inspect(results))
-  --     return results
-  --   end
-  --   vim.o.findfunc = "v:lua.Fish.fd_find_files"
-  -- end
-end)
+-- {{{ findfunc
+vim.o.findfunc = require("Fish.find_files")
 -- }}}
 
 -- {{{ New Filetypes
 vim.filetype.add {
   extension = {
     kbd = "kbd", -- maps *.kbd → filetype=kbd
-    teal = "tl"
+    teal = "tl",
   },
 }
 -- }}}
