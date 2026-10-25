@@ -4,11 +4,16 @@ function _G.is_windows()
   return vim.fn.has("win32") == 1
 end
 
+---Check is (n)vim has some feature using `vim.fn.has(feature)
+---@param real string
+---@return boolean
+---@usage lua
+---```lua
+--- if is("nvim-0.13") then return "We are in 0.13" end
+---```
 function _G.is(real)
   return vim.fn.has(real) == 1
 end
--- Augroup
-_G.fish_group = vim.api.nvim_create_augroup("Fish.config", {})
 
 ---Set options like `:set`.
 ---
@@ -42,7 +47,7 @@ function _G.set_global(opts)
   require("Fish.set_opt").set(opts, "global")
 end
 
---- Autocommand Wrapper 
+--- Autocommand Wrapper
 ---@param event string|table
 ---@param callback function
 ---@param pattern? string|table|function|nil
@@ -50,7 +55,7 @@ end
 ---@param desc? string|nil
 ---@usage
 ---```lua
----autocmd("User", function() 
+---autocmd("User", function()
 ---  print("User defined autocmd")
 ---end, "Lazy", "UserGroup", "Print user autocmd")
 ---```

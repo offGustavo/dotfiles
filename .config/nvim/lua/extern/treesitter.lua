@@ -104,7 +104,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     if pcall(vim.treesitter.start) then
       -- Only highlight with treesitter
-      vim.cmd("syntax off")
+      -- vim.cmd("syntax off")
       -- Indent expérimental
       vim.bo[0].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       -- Folds

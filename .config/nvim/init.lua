@@ -1,8 +1,14 @@
 -- vim: foldmethod=marker
-_G.Fish = {}
 
 -- PERF:
 vim.loader.enable()
+
+_G.Fish = {}
+
+-- Custom AuGroup
+_G.fish_group = vim.api.nvim_create_augroup("Fish.config", {
+  clear = false,
+})
 
 -- {{{ Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
 if vim.o.background == "dark" then
