@@ -3,7 +3,7 @@ return {
   branch = "canola",
   priority = 1000,
   lazy = false,
-  enabled = true,
+  enabled = false,
   event = "VeryLazy",
   keys = {
     { "<M-e>", "<Cmd>Canola<Cr>", desc = "Canola" },

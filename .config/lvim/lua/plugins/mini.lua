@@ -1,6 +1,7 @@
 return {
   "nvim-mini/mini.nvim",
   event = "VeryLazy",
+  enabled = false,
   config = function()
     -- require("mini.statusline").setup()
     -- require("mini.tabline").setup()
@@ -202,10 +203,10 @@ return {
     -- require("mini.completion").setup()
     -- require("mini.cmdline").setup()
 
-    require("mini.files").setup()
-    vim.keymap.set("n", "<leader>fe", function()
-      require("mini.files").open()
-    end)
+    -- require("mini.files").setup()
+    -- vim.keymap.set("n", "<leader>fe", function()
+    --   require("mini.files").open()
+    -- end)
 
     require("mini.align").setup({
       -- Module mappings. Use `''` (empty string) to disable one.

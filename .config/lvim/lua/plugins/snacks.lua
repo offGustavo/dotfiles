@@ -1,3 +1,10 @@
+vim.g.custom_snacks = true
+vim.g.snacks_animate = false
+
+if vim.g.custom_snacks then
+  return {}
+end
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -21,7 +28,7 @@ return {
 ░░░ ░███ ░███ ░███░░░   ░░███ ███   ░███  ░███ 
  ███░░████████░░██████   ░░█████    █████ █████
 ░░░  ░░░░░░░░  ░░░░░░     ░░░░░    ░░░░░ ░░░░░ 
-        ]],
+]],
       },
       sections = {
         { section = "header" },

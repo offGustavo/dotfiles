@@ -15,7 +15,7 @@ return {
   enabled = false,
   keys = {
     -- { "<M-e>",      "<Cmd>Oil<Cr>", desc = "Open current dir" },
-    { "<leader>fd", "<Cmd>Oil<Cr>", desc = "Open current dir" }
+    { "<leader>fd", "<Cmd>Oil<Cr>", desc = "Open current dir" },
   },
   opts = {
     -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
