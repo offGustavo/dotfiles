@@ -78,6 +78,9 @@
 (savehist-mode 1)
 (electric-pair-mode 1)
 
+;; better completion in cmd line
+(fido-vertical-mode 1)
+
 ;; Separate system clipboard from the kill ring (like Vim's "+ register)
 ;;   "+y / "+p in Evil, or C-S-c / C-S-v anywhere
 (setq select-enable-clipboard nil)
@@ -138,8 +141,9 @@
         evil-search-module 'evil-search   ; / ? n N with :s-style regexps
         evil-ex-search-highlight-all t
         evil-shift-width 4)
-  :config
-  (evil-mode 1))
+  ;; :config
+  ;; (evil-mode 1)
+  )
 
 ;; Evil keybindings for Magit, Dired, help buffers, Vertico, etc.
 (use-package evil-collection
