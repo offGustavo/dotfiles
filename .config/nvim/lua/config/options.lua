@@ -106,32 +106,30 @@ vim.o.titlestring = "%{v:lua.Fish.cwd_title()}"
 -- }}}
 
 -- {{{ Autocomplete
--- [neovim native, built-in, lsp autocomplete · tomas vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
--- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
--- vim.o.autocomplete = true
+-- -- [neovim native, built-in, lsp autocomplete · tomas vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
+-- -- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
+-- vim.o.autocomplete = false
 -- vim.opt.completeopt = { "menuone", "popup" }
--- vim.o.complete = "o,.,b"
+-- vim.o.complete = "o,.,b,spell"
 -- vim.opt.wildmode= { "lastused", "full" }
 -- vim.o.wildoptions="pum"
 -- }}}
 
 -- {{{ grepprg
 -- better grep and find with ripgrep
-Fish.grep_cmd = "rg --vimgrep -uu --color=never"
+Fish.grep_cmd = { "rg", "--vimgrep", "-uu", "--color=never" }
 
-if vim.fn.executable("rg") == 1 then
-  vim.o.grepprg = Fish.grep_cmd
-
-  vim.api.nvim_create_user_command("Rg", function(fargs)
-    local cmd = Fish.grep_cmd .. fargs.args
-    local result = vim.fn.systemlist(cmd)
-    vim.fn.setqflist({}, "r", {
-      title = "Results" .. cmd,
-      lines = result,
-    })
-    vim.cmd("copen")
-  end, { nargs = 1 })
-end
+vim.api.nvim_create_user_command("Rg", function(fargs)
+  local args, cmd = Fish.grep_cmd, ""
+  table.insert(args, fargs.args)
+  cmd = table.concat(args, " ")
+  local result = vim.fn.systemlist(cmd)
+  vim.fn.setqflist({}, "r", {
+    title = "Results: " .. cmd,
+    lines = result,
+  })
+  vim.cmd("copen")
+end, { nargs = 1 })
 ---}}}
 
 -- {{{ findfunc
@@ -238,7 +236,8 @@ vim.o.statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()"
 
 -- From mini.statusline
 -- Set statusline globally and dynamically decide which content to use
-vim.go.statusline = [[ %{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.require('Fish.statusline').build_statusline() : v:lua.require('Fish.statusline').build_statusline_inactive()%} ]]
+vim.go.statusline =
+  [[ %{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.require('Fish.statusline').build_statusline() : v:lua.require('Fish.statusline').build_statusline_inactive()%} ]]
 
 -- }}}
 
