@@ -1,14 +1,5 @@
 -- REF: [native fuzzy finder in neovim with lua and cool bindings :: cherry's blog](https://cherryramatis.xyz/posts/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings/)
 
-local function has(cmd)
-  return vim.fn.executable(cmd)
-end
-
-local function is_git_repo()
-  local res = vim.fn.system("git rev-parse --is-inside-work-tree")
-  return vim.v.shell_error == 0 and res:match("true") ~= nil
-end
-
 local function lua_fallback(cmdarg)
   local results = {}
 
@@ -45,28 +36,27 @@ local function lua_fallback(cmdarg)
   return results
 end
 
-local function find(cmdarg, cmdcomplete)
-  local cmd = nil
-
-  if has("fd") then
-    cmd = { "fd", "--hidden --type", "f" }
-    -- // If the user typed a search query, append it to the command (e.g., for fd <query>)
-    if cmdarg and #cmdarg > 0 then
-      table.insert(cmd, cmdarg)
+local function get_cmd()
+  if vim.fn.executable("fd") then
+    return { "fd", "--hidden --type", "f" }
+  end
+  if vim.fn.executable("rg") then
+    return { "rg", "--files" }
+  end
+  if vim.fn.executable("find") then
+    return { "find", "-type", "f" }
+  end
+  if vim.fn.executable("git") then
+    if vim.v.shell_error == 0 and vim.fn.system("git rev-parse"):match("true") ~= nil then
+      return
     end
+    return { "git", "ls-files" }
   end
+  return nil
+end
 
-  if has("rg") then
-    cmd = { "rg", "--files" }
-  end
-
-  if has("find") then
-    cmd = { "find", "-type", "f" }
-  end
-
-  if has("git") and is_git_repo() then
-    cmd = { "git", "ls-files" }
-  end
+local function find(cmdarg, cmdcomplete)
+  local cmd = get_cmd()
 
   if cmd ~= nil then
     local ok, result = pcall(vim.fn.systemlist, table.concat(cmd, " "))
@@ -74,6 +64,7 @@ local function find(cmdarg, cmdcomplete)
       return result
     else
       vim.notify(tostring(result), vim.log.levels.ERROR)
+      return
     end
   end
 
