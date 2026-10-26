@@ -41,7 +41,7 @@ syntax region kanataParens matchgroup=Delimiter start="(" end=")" transparent co
 " ============
 " Keywords
 " ============
-syn iskeyword @,48-57,192-255,-,_ 
+" syn iskeyword @,48-57,192-255,-,_ 
 syntax keyword kanataKeyword defcfg defsrc deflayer deflayermap
 syntax keyword kanataKeyword deflayer defcfg defsrc defchordsv2 defalias
 syntax keyword kanataKeyword layer-toggle layer-switch deflocalkeys-win deflocalkeys-linux
