@@ -34,7 +34,7 @@ require "snacks".setup({
     timeout = 3000,
   },
   picker = {
-    enabled = true,
+    enabled = false,
     layout = "ivy_split",
     sources = {
       files = {
