@@ -107,7 +107,7 @@ vim.o.titlestring = "%{v:lua.Fish.cwd_title()}"
 
 -- {{{ Autocomplete
 -- -- [neovim native, built-in, lsp autocomplete · tomas vik](https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/)
--- -- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
+-- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
 -- vim.o.autocomplete = false
 -- vim.opt.completeopt = { "menuone", "popup" }
 -- vim.o.complete = "o,.,b,spell"
@@ -133,7 +133,18 @@ end, { nargs = 1 })
 ---}}}
 
 -- {{{ findfunc
-vim.o.findfunc = require("Fish.find_files")
+-- TODO: remove when 0.13 is stable
+if is("nvim-0.13") then
+  vim.o.findfunc = require("Fish.find_files")
+else
+  vim.cmd [[
+  func FindFiles(cmdarg, cmdcomplete)                                                                                                                                         
+  let fnames = systemlist('git ls-files')                                                                                                                                    
+  return fnames->filter('v:val =~? a:cmdarg')                                                                                                                                
+  endfunc                                                                                                                                                                        
+  set findfunc=FindFiles                                                                                                                                                      
+  ]]
+end
 -- }}}
 
 -- {{{ New Filetypes
@@ -178,15 +189,12 @@ vim.o.foldlevel = 99
 -- vim.o.foldtext = ""
 vim.o.foldtext = "v:lua.require('Fish.foldtext').build_fold_text()"
 
-function Fish.clean_folded_hi()
-  vim.api.nvim_set_hl(0, "Folded", { link = "Comment" })
-end
-
 vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, {
   callback = function()
-    Fish.clean_folded_hi()
+    vim.api.nvim_set_hl(0, "Folded", { link = "Comment" })
   end,
 })
+
 --- }}}
 
 -- {{{ statuscolumn
