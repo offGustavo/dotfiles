@@ -13,12 +13,45 @@ let g:font_size = 12
 " endif
 
 function! s:SetFont(delta) abort
-  if a:delta == 0 
+  " 1. If global font name isn't set, parse it from the current &guifont
+  if empty(g:font_name) && !empty(&guifont)
+    if &guifont =~# ':h\d\+'
+      " Windows / MacVim / Neovim GUI style (e.g., JetBrainsMono_NFM:h12)
+      let l:match = matchlist(&guifont, '^\(.\+\):h\(\d\+\)')
+      if !empty(l:match)
+        let g:font_name = l:match[1]
+        let g:font_size = str2nr(l:match[2])
+      endif
+    elseif &guifont =~# ' \d\+$'
+      " GTK / Linux style (e.g., Monospace 12)
+      let l:match = matchlist(&guifont, '^\(.\+\) \(\d\+\)$')
+      if !empty(l:match)
+        let g:font_name = l:match[1]
+        let g:font_size = str2nr(l:match[2])
+      endif
+    else
+      let g:font_name = &guifont
+    endif
+  endif
+
+  " Fallback default if name is still empty
+  if empty(g:font_name)
+    let g:font_name = 'JetBrainsMono NFM'
+  endif
+
+  " 2. Handle size adjustment and bounds (min: 6, max: 48)
+  if a:delta == 0
     let g:font_size = 12
   else
     let g:font_size = max([6, min([48, g:font_size + a:delta])])
   endif
-  let &guifont = g:font_name . ':h' . g:font_size
+
+  " 3. Apply the font format based on your operating system/GUI
+  if has('gui_gtk')
+    let &guifont = g:font_name . ' ' . g:font_size
+  else
+    let &guifont = g:font_name . ':h' . g:font_size
+  endif
 endfunction
 
 let s:fnames = []
@@ -54,6 +87,33 @@ func FindFiles(cmdarg, cmdcomplete) abort
   return matchfuzzy(s:fnames, a:cmdarg)
 endfunc
 
+let s:last_cmd = ""
+function! Compile(...)
+  let l:cmd = ""
+  if a:0 > 0
+    let l:cmd = a:1
+  endif
+  let l:cmd = input('$ ', s:last_cmd, 'shellcmdline')
+
+  if empty(l:cmd)
+    echoe 'Empty input, provide a command to compile. Operation canceled'
+    return
+  endif
+
+  call setqflist([], ' ', {'title': l:cmd, 'lines': []})
+  call setqflist([], 'a', {'lines': ["Compilation Started", " "]})
+  
+  copen
+
+  call job_start(l:cmd, {
+        \ 'out_cb': {_, data -> setqflist([], 'a', {'lines': [data]})},
+        \ 'err_cb': {_, data -> setqflist([], 'a', {'lines': [data]})},
+        \ 'exit_cb': {_, code -> setqflist([], 'a', {'lines': ['', 'finished (code ' . code . ')']})},
+        \ })
+
+  let s:last_cmd = l:cmd
+endfunction
+
 syntax on
 silent color tokyo
 set termguicolors nu rnu nowrap
@@ -61,6 +121,7 @@ call s:SetFont(0)
 if !has('nvim')
   set guioptions=!acC
 endif
+set mouse=a
 set laststatus=2 keymodel=startsel,stopsel
 set shiftwidth=2 softtabstop=2 expandtab
 set signcolumn=yes foldcolumn=2 
@@ -81,11 +142,17 @@ endif
 
 autocmd CmdlineChanged [:] call wildtrigger()
 
-" Refresh the cached file list every time a new ':' command line starts
 augroup FindFilesCache
   autocmd!                                                             
   autocmd CmdlineEnter : let s:fnames = []                             
 augroup END                                                            
+
+command! Compile   call Compile()
+command! Recompile call Compile(s:last_cmd)
+
+command! IncreaseFont call s:SetFont(1)
+command! DecreaseFont call s:SetFont(-1)
+command! ResetFont    call s:SetFont(0)
 
 "if empty(glob(s:plug)) && executable('curl')
 "  silent execute '!curl -fLo ' . shellescape(s:plug) . ' --create-dirs '
@@ -104,16 +171,19 @@ augroup END
 " let g:vimexplorer_detail      = 0   " show perms + size prefix (default: 1)
 " let g:vimexplorer_show_header = 0   " show path/hint header lines (default: 1)
 
-nmap <M-e> :Ex<Cr>
-nmap <M-w> "+y
-nmap <M-m> "+d
-nmap <M-y> "+p
-xmap <M-w> "+y
-xmap <M-m> "+d
-xmap <M-y> "+p
-nmap <M-o> :find<space>
-nmap <M-b> :b<space>
-nmap <M-s> :grep<space>
-nmap <M-=> <Cmd>call <SID>SetFont(1)<CR>
-nmap <M--> <Cmd>call <SID>SetFont(-1)<CR>
-nmap <M-0> <Cmd>call <SID>SetFont(0)<CR>
+nmap <M-e>  :Ex<Cr>
+tmap <M-;>  <C-\><C-n>
+nmap <M-w>  "+y
+nmap <M-m>  "+d
+nmap <M-y>  "+p
+xmap <M-w>  "+y
+xmap <M-m>  "+d
+xmap <M-y>  "+p
+nmap <M-o>  :find<space>
+nmap <M-b>  :b<space>
+nmap <M-s>  :grep<space>
+nmap <M-=>  <Cmd>IncreaseFont<CR>
+nmap <M-->  <Cmd>DecreaseFont<CR>
+nmap <M-0>  <Cmd>ResetFont<CR>
+nmap <M-C>  <Cmd>Compile<CR>
+nmap <M-CR> <Cmd>Recompile<CR>
