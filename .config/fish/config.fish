@@ -109,12 +109,12 @@ alias untar='tar -zxvf '
 # alias l.="eza -a | grep -e '^\.'" # show only dotfiles
 
 # Dotfiles
-alias dot='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git'
-alias dotui='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit'
-alias doted='GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME nvim'
+abbr --add dot 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git'
+abbr --add dotui 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit'
+abbr --add doted 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME nvim'
 
 alias emacs='emacs -nw'
-alias zed=zeditor
+abbr --add zed 'zeditor'
 
 alias :e.='nvim .'
 alias :e='nvim'
