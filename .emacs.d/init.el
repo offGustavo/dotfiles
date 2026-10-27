@@ -233,7 +233,7 @@
 ;;; Compile
 ;;; ------------------------------------------------------------
 (global-set-key (kbd "M-C")   'compile)
-(global-set-key (kbd "C-M-c") 'recompile)
+(global-set-key (kbd "M-RET") 'recompile)
 
 ;;; ------------------------------------------------------------
 ;;; Leader key (SPC) — which-key is built in since Emacs 30
