@@ -36,16 +36,16 @@ $Mappings = @(
         path_in_dots = '..\.config\nvim'
         window_path  = "$env:LOCALAPPDATA\nvim"
     }
+    # @{
+    #     path_in_dots = '..\.config\doom'
+    #     window_path  = '~\.doom.d'
+    # }
     @{
-        path_in_dots = '..\.config\doom'
-        window_path  = '~\.doom.d'
-    }
-    @{
-        path_in_dots = '..\.emacs.d\init.el'
+        path_in_dots = '..\.config\emacs\init.el'
         window_path  = '~\.emacs.d\init.el'
     }
     @{
-        path_in_dots = '..\.vim\vimrc'
+        path_in_dots = '..\.config\vim\vimrc'
         window_path  = '~\vimfiles\vimrc'
     }
     @{
