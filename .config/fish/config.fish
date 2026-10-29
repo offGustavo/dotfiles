@@ -112,6 +112,7 @@ alias untar='tar -zxvf '
 abbr --add dot 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git'
 abbr --add dotui 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit'
 abbr --add doted 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME nvim'
+abbr --add dothide 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git config --local status.showUntrackedFiles no'
 
 alias emacs='emacs -nw'
 abbr --add zed 'zeditor'
