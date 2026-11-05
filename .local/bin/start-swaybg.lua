@@ -7,28 +7,32 @@ local wallpapers = {
 			path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/vinland-saga-manga-5120x2880-14832.jpg",
 		},
 
-    {
-      name = "02",
-      path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/a_train_going_through_a_lake.jpg"
-    }
+		{
+			name = "02",
+			path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/a_train_going_through_a_lake.jpg",
+		},
 	},
 	Dark = {
+		{
+			name = "Mountains",
+			path = "/home/gustavo/Downloads/pexels-david-jusko-2674423-6245540.jpg",
+		},
 		-- {
 		-- 	name = "Compline",
 		-- 	path = "/home/gustavo/Pictures/Wallpapers/my/compline.png",
 		-- },
-		{
-			name = "A Girl with Purple Flowers",
-			path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/a_cartoon_of_a_girl_standing_under_a_tree_with_purple_flowers.png",
-		},
-		{
-			name = "Tokyo Night",
-			path = "/home/gustavo/Pictures/Wallpapers/tokyo-nigth-wallpapers/night/os/arch_01_1920x1080.png",
-		},
-		{
-			name = "The Path of Giants",
-			path = "/home/gustavo/Pictures/Wallpapers/The-Path-of-Giants.png",
-		},
+		-- {
+		-- 	name = "A Girl with Purple Flowers",
+		-- 	path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/a_cartoon_of_a_girl_standing_under_a_tree_with_purple_flowers.png",
+		-- },
+		-- {
+		-- 	name = "Tokyo Night",
+		-- 	path = "/home/gustavo/Pictures/Wallpapers/tokyo-nigth-wallpapers/night/os/arch_01_1920x1080.png",
+		-- },
+		-- {
+		-- 	name = "The Path of Giants",
+		-- 	path = "/home/gustavo/Pictures/Wallpapers/The-Path-of-Giants.png",
+		-- },
 	},
 }
 
@@ -39,7 +43,7 @@ local function kill_swaybg_if_running()
 	handle:close()
 
 	if result and result ~= "" then
-    -- TODO: Use kill here, pgrep so find swaybg PID
+		-- TODO: Use kill here, pgrep so find swaybg PID
 		os.execute("killall swaybg 2>/dev/null")
 		-- Esperar um pouco para garantir que o processo terminou
 		os.execute("sleep 0.1")

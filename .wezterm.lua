@@ -239,9 +239,9 @@ config = {
 }
 
 -- If running in windows ser powershell as default shell
--- if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-config.default_prog = { "pwsh.exe" }
--- end
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  config.default_prog = { "pwsh.exe" }
+end
 
 wezterm.plugin.require("https://github.com/sei40kr/wez-tmux").apply_to_config(config, {
   -- Optional: Customize tab index base (0-based or 1-based)

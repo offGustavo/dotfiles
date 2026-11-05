@@ -1,6 +1,6 @@
 :root {
   --border-radius: 22px;
-  --cc-bg: transparent;
+  --cc-bg: rgba(0, 0, 0, 0.0);
 
   --widget-background: rgba(46, 46, 46, 0.7);
   --noti-bg-alpha: 0.6;
@@ -31,8 +31,8 @@
 }
 
 .widget.widget-mpris {
-  background: transparent;
-  background: transparent;
+  background: var(--cc-bg);
+  background: var(--cc-bg);
   border-radius: 0;
   padding: 0;
   border: none;
@@ -46,7 +46,7 @@
   margin-top: var(--padding);
 }
 .widget-mpris > box > button:hover {
-  background: rgba(46, 46, 46, 1);
+  background: var(--widget-background);
 }
 .widget-mpris-player {
   box-shadow: none;

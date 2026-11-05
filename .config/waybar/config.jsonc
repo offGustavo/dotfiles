@@ -34,7 +34,8 @@
     "bluetooth",
     // "custom/hotspot",
     "group/networking",
-    "battery"
+    "battery",
+    "custom/notification"
   ],
   "reload_style_on_change": true,
   "custom/logo": {
@@ -42,24 +43,24 @@
     "tooltip": true,
     "on-click": "fuzzel -a top-left -w 20 -l 10"
   },
-    "wlr/taskbar": {
-      "format": "{icon}",
-      "icon-size": 30,
-      "icon-theme": "adwaita",
-      "tooltip-format": "{title}",
-      "on-click": "activate",
-      "on-click-middle": "close",
-      "ignore-list": [
-        "Alacritty"
-      ],
-      "app_ids-mapping": {
-        "firefoxdeveloperedition": "firefox-developer-edition"
-      },
-      "rewrite": {
-        "Firefox Web Browser": "Firefox",
-        "Foot Server": "Terminal"
-      }
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 30,
+    "icon-theme": "adwaita",
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [
+      "Alacritty"
+    ],
+    "app_ids-mapping": {
+      "firefoxdeveloperedition": "firefox-developer-edition"
     },
+    "rewrite": {
+      "Firefox Web Browser": "Firefox",
+      "Foot Server": "Terminal"
+    }
+  },
   "clock": {
     "format": "{:%H:%M %a %d, %b }",
     "interval": 1,
@@ -125,21 +126,21 @@
     "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
   },
   "niri/workspaces": {
-	"format": "{name}",
-	"format-icons": {
-		// Named workspaces
-		// (you need to configure them in niri)
-		// "zen": "<b>󰖟</b>",
-		// "term": "",
-		// "note": "",
-		// "temp": "",
-		// // Icons by state
-		// "active": "{name}",
-		// "default": "{index}"
-		// "active": "",
-		// "default": ""
-	}
-},
+    "format": "{name}",
+    "format-icons": {
+    // Named workspaces
+    // (you need to configure them in niri)
+    // "zen": "<b>󰖟</b>",
+    // "term": "",
+    // "note": "",
+    // "temp": "",
+    // // Icons by state
+    // "active": "{name}",
+    // "default": "{index}"
+    // "active": "",
+    // "default": ""
+    }
+  },
   "hyprland/workspaces": {
     // "format": "<span font='18px'>{icon}</span>",
     "format": "{icon}",
@@ -172,17 +173,17 @@
       "(.*) - zsh": "> [$1]"
     }
   },
-	"tray": {
-		// "icon-size": 16,
-		"show-passive-items": true,
-		// "smooth-scrolling-threshold":
-		"spacing": 5,
-		// "reverse-direction":
-		// "on-update":
-		// "expand":
-		// "icons":
-		"cursor": true
-	},
+  "tray": {
+    // "icon-size": 16,
+    "show-passive-items": true,
+    // "smooth-scrolling-threshold":
+    "spacing": 7,
+    // "reverse-direction":
+    // "on-update":
+    // "expand":
+    // "icons":
+    "cursor": true
+  },
   "custom/updates": {
     "format": "{}",
     "interval": 60,
@@ -425,7 +426,7 @@
     "escape": false,
     "markup": "pango"
   },
-"privacy": {
+  "privacy": {
     "icon-spacing": 5,
     "icon-size": 12,
     "transition-duration": 250,
@@ -458,4 +459,24 @@
     //   }
     // ]
   },
+  "custom/notification": {
+    "tooltip": true,
+    "format": "<span>{icon}</span>",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  }
 }

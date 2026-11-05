@@ -35,10 +35,11 @@ if command -v i3 &>/dev/null; then
 fi
 
 if command -v swaybg &>/dev/null; then
-  kill $(pgrep swaybg) 2>/dev/null
+  $HOME/.local/bin/start-swaybg.lua
+  # kill $(pgrep swaybg) 2>/dev/null
   # [ "$THEME" = "light" ] &&
   #   swaybg -i /home/gustavo/Pictures/Wallpapers/bliss.jpg ||
-    swaybg -i ~/Downloads/pine-watt-2Hzmz15wGik-unsplash.jpg
+    # swaybg -i ~/Downloads/pine-watt-2Hzmz15wGik-unsplash.jpg
   # swaybg -i /home/gustavo/Pictures/Wallpapers/The-Path-of-Giants.png
 fi
 

@@ -1,7 +1,7 @@
 * {
   border: none;
   font-size: 12px;
-  font-family: "JetBrainsMono Nerd Font Propo" ;
+  font-family: "JetBrainsMono Nerd Font Propo";
   color: @fg;
   /* background-color: transparent; */
   padding: 0;
@@ -18,11 +18,11 @@ window#waybar {
   border-radius: 0px 5px 5px 0px;
 }
 
-#custom-privacydots{
+#custom-privacydots {
   background-color: @bg;
 }
 
-#custom-weather{
+#custom-weather {
   background-color: @bg;
   color: @fg;
 }
@@ -81,17 +81,18 @@ window#waybar {
 
 #workspaces button.focused,
 #workspaces button.active,
-#workspaces button.visible{
+#workspaces button.visible {
   background: @blue;
   color: @bg;
 }
 
-#workspaces button.urgent{
+#workspaces button.urgent {
   background: @red;
   color: @bg;
 }
+
 #workspaces button.visible label,
-#workspaces button.urgent label{
+#workspaces button.urgent label {
   background: @blue;
   color: @bg;
 }
@@ -127,7 +128,8 @@ window#waybar {
 #pulseaudio.muted {
   color: @red ;
 }
-#temperature.critical{
+
+#temperature.critical {
   padding-top: 0;
   color: @red ;
 }
@@ -166,17 +168,35 @@ window#waybar {
     color: #000000;
   }
 }
-#tray.active{
+
+
+#tray {
+  padding: 0 5px;
+}
+ 
+#tray.active {
   color: @red;
   background-color: @bg;
-}       
+}
 
 /* #tray > .passive         */
 /* #tray > .active           */
 /* #tray > .needs-attention  */
 
-#taskbar {         
-  font-size: 20px; 
-  padding: 0px;    
+#taskbar {
+  font-size: 20px;
+  padding: 0px;
   margin: 0px;
+}
+
+#custom-notification {
+  /* font-family: "NotoSansMono Nerd Font"; */
+  font-size: 16px;
+  padding: 0px 10px;
+}
+
+
+#custom-notification.focused {
+  background-color: @blue;
+  background-color: @bg;
 }

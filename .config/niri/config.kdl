@@ -812,7 +812,10 @@ binds {
   Mod+Shift+z { spawn "sh" "-c" "pkill -SIGUSR1 wayscriber --freeze"; }
 
   // Notification
-  Mod+Shift+n { spawn "sh" "-c" "makoctl dismiss -a"; }
+  // Mod+Shift+n { spawn "sh" "-c" "makoctl dismiss -a"; }
+  Mod+Shift+n { spawn "sh" "-c" "swaync-client --hide-all"; }
+  Mod+a { spawn "sh" "-c" "swaync-client -t -sw"; }
+  Mod+Shift+a { spawn "sh" "-c" "swaync-client --reload-config"; }
 }
 
 recent-windows {
@@ -844,5 +847,5 @@ recent-windows {
 }
 // }}}
 
-
-// include "dms/cursor.kdl"
+// DMS Include Configs
+include "dms/cursor.kdl"

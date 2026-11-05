@@ -1,6 +1,6 @@
 [user]
-	email = change_later@example.com
-	name = Gustavo
+  email = change_later@example.com
+  name = Gustavo
 ; [diff]
 ; 	tool = kitty
 ; [difftool]
@@ -9,7 +9,7 @@
 ; [difftool "kitty"]
 ; 	cmd = kitten diff $LOCAL $REMOTE
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
