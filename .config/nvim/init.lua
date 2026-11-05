@@ -59,8 +59,6 @@ vim.pack.add({
 
   -- File Explorer
   { src = "https://forge.barrettruth.com/barrettruth/canola.nvim", version = "canola" },
-  -- "https://github.com/nvim-lua/plenary.nvim",
-  -- { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 
   -- Picker
   "https://github.com/ibhagwan/fzf-lua",
@@ -71,7 +69,7 @@ vim.pack.add({
   "https://github.com/m00qek/baleia.nvim", -- optional
   "https://github.com/NeogitOrg/neogit",
 
-  -- Quickfix 
+  -- Quickfix
   "https://github.com/stevearc/quicker.nvim",
 
   -- LSP
@@ -102,11 +100,11 @@ vim.pack.add({
 
   -- Agenda
   "https://github.com/xheisenbugx/org.nvim",
-  -- "https://github.com/offGustavo/md-agenda.nvim"
+  -- "https://github.com/offGustavo/md-agenda.nvim",
 
   -- On Demand
-  "https://github.com/dstein64/vim-startuptime",
-  "https://github.com/nvzone/showkeys",
+  -- "https://github.com/dstein64/vim-startuptime",
+  -- "https://github.com/nvzone/showkeys",
   -- "https://github.com/nstefan002/screenkey.nvim",
 })
 -- }, { load = function() end })
@@ -116,10 +114,6 @@ vim.pack.add({
 
 require("extern.canola")
 require("extern.fzf-lua")
-
--- TODO(harpoon): make `espeto` work like harpoon (a persistent list of marked
--- files with quick jump), then drop this plugin.
--- require("extern.harpoon")
 
 -- TODO(format): drop conform and format through Neovim itself.
 --   - set `formatprg` per filetype in `ftplugin/<ft>.lua` (e.g. "stylua -",
