@@ -91,7 +91,7 @@ local function lsp_diagnostics()
 end
 
 local function lsp_info()
-  if not M.did_lsp_setup then
+  if not Fish.did_lsp_setup then
     return ""
   end
   local msg = ""

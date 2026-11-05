@@ -59,6 +59,8 @@ later(function()
   })
 
   require("mini.ai").setup({
+    -- Custom textobjects to be used on top of builtin ones.
+    -- For more information with examples, see `:h MiniAi.config`.
     custom_textobjects = {
       -- Tweak argument textobject
       -- a = require("mini.ai").gen_spec.argument({ brackets = { "%b()" } }),
@@ -79,6 +81,38 @@ later(function()
         return { from = from, to = to }
       end,
     },
+
+    -- Module mappings. Use `''` (empty string) to disable one.
+    mappings = {
+      -- Main textobject prefixes
+      around = 'a',
+      inside = 'i',
+
+      -- Next/last textobjects
+      -- NOTE: This (deliberately) overrides Neovim>=0.12 built-in incremental
+      -- selection mappings. See `:h MiniAi-default-an-in` for more details.
+      around_next = 'an',
+      inside_next = 'in',
+      around_last = 'al',
+      inside_last = 'il',
+
+      -- Move cursor to corresponding edge of `a` textobject
+      goto_left = 'g[',
+      goto_right = 'g]',
+    },
+
+    -- Number of lines within which textobject is searched
+    n_lines = 1000,
+
+    -- How to search for object (first inside current line, then inside
+    -- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
+    -- 'cover_or_nearest', 'next', 'prev', 'nearest'.
+    search_method = 'cover_or_nearest',
+
+    -- Whether to disable showing non-error feedback
+    -- This also affects (purely informational) helper messages shown after
+    -- idle time if user input is required.
+    silent = false,
   })
 
   -- require("mini.sessions").setup({})

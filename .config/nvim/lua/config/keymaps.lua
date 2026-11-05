@@ -195,6 +195,7 @@ map {
   { "<leader>ba", ":b #<Cr>", desc = "Alternative Buffer" },
   { "<leader>bd", ":bd<Cr>", desc = "Delete Buffer" },
   { "<leader>bD", ":bufdo bd<Cr>", desc = "Delete All Buffers" },
+  { "<leader>bz", ":bcd ", desc = "Buffer Cd" },
   -- }}}
 
   -- {{{ Substitute
@@ -246,14 +247,14 @@ map {
   --   silent = false,
   -- },
 
-  { "i", "<C-a>", "<home>" },
-  { "i", "<C-e>", "<end>" },
-  { "i", "<C-f>", "<right>" },
-  { "i", "<C-b>", "<left>" },
-  { "i", "<M-f>", "<C-right>" },
-  { "i", "<M-b>", "<C-left>" },
-  { "i", "<C-d>", "<del>" },
-  { "i", "<C-o>", "<C-f>" },
+  { { "c", "i" }, "<C-a>", "<home>" },
+  { { "c", "i" }, "<C-e>", "<end>" },
+  { { "c", "i" }, "<C-f>", "<right>" },
+  { { "c", "i" }, "<C-b>", "<left>" },
+  { { "c", "i" }, "<M-f>", "<C-right>" },
+  { { "c", "i" }, "<M-b>", "<C-left>" },
+  { { "c", "i" }, "<C-d>", "<del>" },
+  { { "c", "i" }, "<C-o>", "<C-f>" },
 
   -- " " Emacs shit
   -- nmap <M-x> :
@@ -380,6 +381,9 @@ map {
 
   { "n", "<C-S-PageUp>", "<cmd>tabmove -1<cr>" },
   { "n", "<C-S-PageDown>", "<cmd>tabmove +1<cr>" },
+
+  { "t", "<C-PageUp>", "<Cmd>tabnext<Cr>" },
+  { "t", "<C-PageDown>", "<Cmd>tabprev<Cr>" },
   -- }}}
 }
 
@@ -464,7 +468,7 @@ end
 
 ---Move between windows keeping the mode each window was left in.
 ---@param forward boolean  true = next window (wincmd w), false = prev (wincmd W)
-function Fish.windows.cycle(forward)
+local function windows_cycle(forward)
   local from_win = vim.api.nvim_get_current_win()
 
   -- 1. Record + leave current mode
@@ -509,7 +513,7 @@ map {
     { "x", "n", "i", "t" },
     "<M-S-j>",
     function()
-      Fish.windows.cycle(true)
+      windows_cycle(true)
     end,
     desc = "Cycle to next window (keep mode)",
   },
@@ -517,7 +521,7 @@ map {
     { "x", "n", "i", "t" },
     "<M-S-k>",
     function()
-      Fish.windows.cycle(false)
+      windows_cycle(false)
     end,
     desc = "Cycle to prev window (keep mode)",
   },
@@ -589,55 +593,55 @@ map {
   },
 }
 
-Fish.windows = {
-  hydra_mode = {
-    _active = false,
-    keys = {
-      { "=", "=", "Equaly? window height" },
-      { "+", "+", "Increase window height" },
-      { "-", "-", "Decrease window height" },
-      { "<", "<", "Increase window height" },
-      { ">", ">", "Increase window height" },
-      { "s", "s", "Increase window height" },
-      { "v", "v", "Increase window height" },
-      { "o", "o", "Increase window height" },
-      { "w", "w", "Increase window height" },
-    },
-    exit = {
-      "<Esc>",
-      "<C-c>",
-      "<C-g>",
-    },
-  },
-}
-
-local function hydra_keymap()
-  if Fish.windows.hydra_mode._active then
-    -- TODO: better logs
-    vim.notify("active", vim.log.levels.WARN)
-    return
-  end
-
-  Fish.windows.hydra_mode._active = true
-  vim.notify("activate", vim.log.levels.WARN)
-
-  for i, key in pairs(Fish.windows.hydra_mode.keys) do
-    vim.keymap.set("n", key[1], function()
-      vim.cmd.wincmd(key[2])
-    end, { desc = key[3], nowait = true })
-  end
-  -- exit submode
-  vim.keymap.set("n", "<Esc>", function()
-    Fish.windows.hydra_win_mode = false
-    for i, key in pairs(Fish.windows.hydra_mode.keys) do
-      pcall(vim.keymap.del, "n", key[1])
-    end
-    for i, key in pairs(Fish.windows.hydra_mode.exit) do
-      pcall(vim.keymap.del, "n", key[1])
-    end
-    vim.notify("Exit window submode", vim.log.levels.INFO)
-  end)
-end
+-- Fish.windows = {
+--   hydra_mode = {
+--     _active = false,
+--     keys = {
+--       { "=", "=", "Equaly? window height" },
+--       { "+", "+", "Increase window height" },
+--       { "-", "-", "Decrease window height" },
+--       { "<", "<", "Increase window height" },
+--       { ">", ">", "Increase window height" },
+--       { "s", "s", "Increase window height" },
+--       { "v", "v", "Increase window height" },
+--       { "o", "o", "Increase window height" },
+--       { "w", "w", "Increase window height" },
+--     },
+--     exit = {
+--       "<Esc>",
+--       "<C-c>",
+--       "<C-g>",
+--     },
+--   },
+-- }
+--
+-- local function hydra_keymap()
+--   if Fish.windows.hydra_mode._active then
+--     -- TODO: better logs
+--     vim.notify("active", vim.log.levels.WARN)
+--     return
+--   end
+--
+--   Fish.windows.hydra_mode._active = true
+--   vim.notify("activate", vim.log.levels.WARN)
+--
+--   for i, key in pairs(Fish.windows.hydra_mode.keys) do
+--     vim.keymap.set("n", key[1], function()
+--       vim.cmd.wincmd(key[2])
+--     end, { desc = key[3], nowait = true })
+--   end
+--   -- exit submode
+--   vim.keymap.set("n", "<Esc>", function()
+--     Fish.windows.hydra_win_mode = false
+--     for i, key in pairs(Fish.windows.hydra_mode.keys) do
+--       pcall(vim.keymap.del, "n", key[1])
+--     end
+--     for i, key in pairs(Fish.windows.hydra_mode.exit) do
+--       pcall(vim.keymap.del, "n", key[1])
+--     end
+--     vim.notify("Exit window submode", vim.log.levels.INFO)
+--   end)
+-- end
 
 -- vim.keymap.set("n", "<M-R>", hydra_keymap)
 -- vim.keymap.set("n", "<leader>w.", hydra_keymap)
@@ -1063,6 +1067,7 @@ map {
   },
   -- }}}
 }
+
 
 -- FIXME: try to fix this
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })

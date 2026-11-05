@@ -10,17 +10,22 @@ later(function()
     install_dir = vim.fn.stdpath("data") .. "/site",
   })
 
-  ts.install("all", { summary = false }, { max_jobs = 24 }):wait(1000000)
+  -- ts.install("all", { summary = false }, { max_jobs = 24 }):wait(1000000)
 
-  -- ts.install({
-  --   "rust",
-  --   "javascript",
-  --   "zig",
-  --   "lua",
-  --   "markdown",
-  --   "vim",
-  --   "c"
-  -- }):wait(300000) -- max. 5 minutes
+  ts.install({
+    "rust",
+    "javascript",
+    "zig",
+    "lua",
+    "markdown",
+    "vim",
+    "c",
+    "kdl",
+    "bash",
+    "html",
+    "css",
+    "json",
+  }):wait(300000) -- max. 5 minutes
 
   require("ts-comments").setup()
 

@@ -28,7 +28,7 @@ vim.g.canola = {
     ["<C-t>"] = { callback = "actions.select", opts = { tab = true } },
     ["<C-p>"] = "actions.preview",
     ["<C-c>"] = { callback = "actions.close", mode = "n" },
-    ["<C-l>"] = "actions.refresh",
+    ["g/"] = "actions.refresh",
     ["-"] = { callback = "actions.parent", mode = "n" },
     ["_"] = { callback = "actions.open_cwd", mode = "n" },
     ["`"] = { callback = "actions.cd", mode = "n" },

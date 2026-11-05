@@ -1,3 +1,4 @@
+-- TODO(1+): move this to a global wrapper
 local command = vim.api.nvim_create_user_command
 
 -- Better Cd with Zoxide (window)
@@ -20,6 +21,6 @@ end, {
   end,
 })
 
-command("AlignRegexp", function ()
+command("AlignRegexp", function (opts)
   require('Fish.align').align_regexp(opts)
 end, { range = true })

@@ -22,8 +22,10 @@ if not is("nvim-0.13") then
     end,
   }
   map {
-    { "<M-q>", "<Cmd>MultipleCursorsAddDelete<Cr>" },
-    { "<C-m>", "<Cmd>MultipleCursorsLock<Cr>" },
+    -- { "<M-q>", "<Cmd>MultipleCursorsAddDelete<Cr>" },
+    -- { "<C-m>", "<Cmd>MultipleCursorsLock<Cr>" },
+    { "Q", "<Cmd>MultipleCursorsAddDelete<Cr>" },
+    { "q=", "<Cmd>MultipleCursorsLock<Cr>" },
     { "<C-S-d>", "<Cmd>MultipleCursorsAddMatches<Cr>" },
     { "<C-S-k>", "<Cmd>MultipleCursorsAddUp<Cr>" },
     { "<C-S-j>", "<Cmd>MultipleCursorsAddDown<Cr>" },

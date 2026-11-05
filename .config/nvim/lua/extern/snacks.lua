@@ -1,3 +1,7 @@
+if true then
+  return
+end
+
 packadd("snacks.nvim")
 
 require "snacks".setup({

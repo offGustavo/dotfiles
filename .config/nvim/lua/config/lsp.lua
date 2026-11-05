@@ -9,7 +9,10 @@ vim.schedule(function()
       ".git",
     },
   })
+  
   autocmd("LspAttach", function(ev)
+    -- NOTE: Used in our custom statusline
+    Fish.lsp_did_setup = true;
     vim.diagnostic.config({
       virtual_lines = false,
       virtual_text = true,

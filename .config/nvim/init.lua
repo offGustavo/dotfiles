@@ -93,7 +93,7 @@ vim.pack.add({
 
   -- UI
   "https://github.com/folke/which-key.nvim",
-  -- "https://github.com/catgoose/nvim-colorizer.lua",
+  "https://github.com/catgoose/nvim-colorizer.lua",
   -- "https://github.com/folke/todo-comments.nvim",
 
   -- Theme
@@ -155,7 +155,7 @@ require("extern.which-key")
 -- 2. highlighting colors
 -- 3. sign for TODOs
 -- require("extern.todo-comments")
--- require("extern.nvim-colorizer")
+require("extern.nvim-colorizer")
 
 require("extern.blink")
 require("extern.org")
