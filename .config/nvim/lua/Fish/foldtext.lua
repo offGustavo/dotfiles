@@ -39,6 +39,44 @@ local function resolve_style(name)
   return nil
 end
 
+-- LSP semantic token at (row, col): mirror Neovim's own precedence
+-- (typemod > mod > type) and only accept groups that have a real style.
+local function semantic_hl(buffer, filetype, row, col)
+  local ok, tokens = pcall(vim.lsp.semantic_tokens.get_at_pos, buffer, row, col)
+  if not ok or not tokens then
+    return nil
+  end
+
+  for i = #tokens, 1, -1 do
+    local t = tokens[i]
+    local line = t.line or t.row
+    -- Make sure the token really covers this exact position.
+    local inside = (line == nil or line == row)
+      and (t.start_col == nil or t.start_col <= col)
+      and (t.end_col == nil or col < t.end_col)
+
+    if inside and t.type then
+      local candidates = {}
+      for mod in pairs(t.modifiers or {}) do
+        table.insert(candidates, "@lsp.typemod." .. t.type .. "." .. mod .. "." .. filetype)
+      end
+      for mod in pairs(t.modifiers or {}) do
+        table.insert(candidates, "@lsp.mod." .. mod .. "." .. filetype)
+      end
+      table.insert(candidates, "@lsp.type." .. t.type .. "." .. filetype)
+
+      for _, name in ipairs(candidates) do
+        local resolved = resolve_style(name)
+        if resolved then
+          return resolved
+        end
+      end
+    end
+  end
+
+  return nil
+end
+
 -- Resolve a highlight group for (row, col) in `buffer`.
 -- - If treesitter is NOT highlighting the buffer: use Vim's native :syntax,
 --   falling back to "Normal" when a position has no syntax group at all
@@ -59,22 +97,24 @@ local function hl_at(buffer, filetype, ts_active, row, col)
     return "Normal"
   end
 
-  local ok, tokens = pcall(vim.lsp.semantic_tokens.get_at_pos, buffer, row, col)
-  if ok and tokens and #tokens > 0 then
-    local token = tokens[#tokens]
-    local resolved = resolve_style("@lsp.type." .. token.type .. "." .. filetype)
+  -- 1. LSP semantic token (only if it resolves to a styled group)
+  local lsp = semantic_hl(buffer, filetype, row, col)
+  if lsp then
+    return lsp
+  end
+
+  -- 2. Treesitter: last capture that actually has a style
+  local captures = vim.treesitter.get_captures_at_pos(buffer, row, col)
+  for i = #captures, 1, -1 do
+    local c = captures[i]
+    local resolved = resolve_style("@" .. c.capture .. "." .. c.lang)
     if resolved then
       return resolved
     end
   end
 
-  local hl_captures = vim.treesitter.get_captures_at_pos(buffer, row, col)
-  if #hl_captures > 0 then
-    local last = hl_captures[#hl_captures]
-    return "@" .. last.capture .. "." .. last.lang
-  end
-
-  return nil
+  -- 3. Nothing styled: normal highlight
+  return "Normal"
 end
 
 M.build_fold_text = function()
@@ -121,9 +161,11 @@ M.build_fold_text = function()
     -- Is treesitter actually highlighting this buffer right now?
     local ts_active = require("vim.treesitter.highlighter").active[buffer] ~= nil
 
-    for p, char in ipairs(vim.fn.split(first_line, "\\zs")) do
-      local hl = hl_at(buffer, filetype, ts_active, vim.v.foldstart - 1, p - 1)
-      table.insert(fragments, hl and { char, hl } or { char })
+    local col = 0
+    for _, char in ipairs(vim.fn.split(first_line, "\\zs")) do
+      local hl = hl_at(buffer, filetype, ts_active, vim.v.foldstart - 1, col)
+      table.insert(fragments, { char, hl })
+      col = col + #char
     end
 
     for _, char in ipairs(vim.fn.split(" ... ", "\\zs")) do
@@ -131,13 +173,14 @@ M.build_fold_text = function()
     end
 
     local whitespace = #(last_line:match("^%s*") or "")
+    col = 0
     for p, char in ipairs(vim.fn.split(last_line, "\\zs")) do
       if p > whitespace then
-        local hl = hl_at(buffer, filetype, ts_active, vim.v.foldend - 1, p - 1)
-        table.insert(fragments, hl and { char, hl } or { char })
+        local hl = hl_at(buffer, filetype, ts_active, vim.v.foldend - 1, col)
+        table.insert(fragments, { char, hl })
       end
+      col = col + #char
     end
-
     return fragments
   end
 
