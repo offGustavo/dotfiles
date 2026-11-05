@@ -54,7 +54,7 @@ $Mappings = @(
     }
     # Add more mappings below:
     @{
-        path_in_dots = '..\.gitconfig'
+        path_in_dots = '..\.config\git\config'
         window_path  = '~\.gitconfig'
     }
 )
