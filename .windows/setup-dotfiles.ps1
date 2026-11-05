@@ -49,7 +49,7 @@ $Mappings = @(
         window_path  = '~\vimfiles\vimrc'
     }
     @{
-        path_in_dots = '..\.wezterm.lua'
+        path_in_dots = '..\.config\wezterm\wezterm.lua'
         window_path  = '~\.wezterm.lua'
     }
     # Add more mappings below:
