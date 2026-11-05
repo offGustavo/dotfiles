@@ -190,9 +190,8 @@ vim.o.foldlevel = 99
 -- vim.o.foldtext = ""
 vim.o.foldtext = "v:lua.require('Fish.foldtext').build_fold_text()"
 
-vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, {
-  callback = function()
-    vim.api.nvim_set_hl(0, "Folded", { link = "Comment" })
+vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, { callback = function()
+    vim.api.nvim_set_hl(0, "Folded", { bg = "NONE" })
   end,
 })
 
