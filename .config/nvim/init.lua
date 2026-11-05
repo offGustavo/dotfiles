@@ -31,6 +31,7 @@ require("config.commands")
 require("config.keymaps")
 require("config.lsp")
 require("config.multicursor")
+require("config.syntax_highlight")
 
 if vim.g.neovide then
   require("config.neovide")

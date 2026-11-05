@@ -911,16 +911,17 @@ map {
     "n",
     "<leader>ut",
     function()
-      local state = vim.b.ts_highlight
-      if state then
-        vim.treesitter.stop(0)
+      local buf = vim.api.nvim_get_current_buf()
+      if vim.treesitter.highlighter.active[buf] then
+        vim.treesitter.stop(buf)
         vim.cmd("syntax on")
-        return
+      else
+        if pcall(vim.treesitter.start, buf) then
+          vim.cmd("syntax off")
+        end
       end
-      vim.treesitter.start(0)
-      vim.cmd("syntax off")
     end,
-    desc = "set vim.treesitter()!",
+    desc = "Toggle Treesitter highlight",
   },
 
   {
@@ -928,7 +929,8 @@ map {
     "<leader>uT",
     function()
       local buf = vim.api.nvim_get_current_buf()
-      vim.lsp.semantic_tokens.enable(not vim.lsp.semantic_tokens.is_enabled({ bufnr = buf }), { bufnr = buf })
+      local enabled = vim.lsp.semantic_tokens.is_enabled({ bufnr = buf })
+      vim.lsp.semantic_tokens.enable(not enabled, { bufnr = buf })
     end,
     desc = "Toggle LSP semantic tokens",
   },
@@ -937,22 +939,10 @@ map {
     "n",
     "<leader>u<C-t>",
     function()
-      local state = vim.b.ts_highlight
-      local buf = vim.api.nvim_get_current_buf()
-
-      if state then
-        vim.treesitter.stop(0)
-        vim.lsp.semantic_tokens.enable(false, { bufnf = buf })
-        vim.cmd("syntax on")
-        return
-      end
-      vim.treesitter.start(0)
-      vim.lsp.semantic_tokens.enable(true, { bufnf = buf })
-      vim.cmd("syntax off")
+      toggle_highlight()
     end,
-    desc = "Toggle LSP and Treesitter Highlight",
+    desc = "Toggle LSP and Treesitter highlight",
   },
-
   {
     "n",
     "<leader>uf",
@@ -1067,7 +1057,6 @@ map {
   },
   -- }}}
 }
-
 
 -- FIXME: try to fix this
 -- vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })

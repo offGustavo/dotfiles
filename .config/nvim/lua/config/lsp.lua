@@ -9,10 +9,10 @@ vim.schedule(function()
       ".git",
     },
   })
-  
+
   autocmd("LspAttach", function(ev)
     -- NOTE: Used in our custom statusline
-    Fish.lsp_did_setup = true;
+    Fish.lsp_did_setup = true
     vim.diagnostic.config({
       virtual_lines = false,
       virtual_text = true,
@@ -47,12 +47,6 @@ vim.schedule(function()
     }) -- Diagnostics
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
-
-    -- -- Disable LSP Highlight
-    -- if client and client.server_capabilities then
-    --   client.server_capabilities.semanticTokensProvider = nil
-    -- end
-
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = false })
     end
