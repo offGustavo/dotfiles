@@ -269,7 +269,7 @@ map {
   { "i", "<C-b>", " <left>" },
   { "i", "<M-f>", " <C-right>" },
   { "i", "<M-b>", " <C-left>" },
-  { "i", "<C-d>", " <del>" },
+  { "i", "<C-d>", " <Del>" },
   { "i", "<M-d>", " <C-o>de" },
 
   -- " nmap <C-á> ^
@@ -287,57 +287,57 @@ map {
   { "<M-k>", ":m '<-2<CR>gv=gv", silent = true, desc = "Move line up" },
   -- }}}
 
-  -- {{{ Lines
-  {
-    { "n", "x", "i" },
-    "<M-S-l>",
-    function()
-      local mode = vim.fn.mode()
-      if mode == "i" then
-        -- print(mode)
-        return "<Esc>V"
-      elseif mode == "n" then
-        -- print(mode)
-        return "V"
-      elseif mode == "V" or mode == "v" or mode == "x" then
-        -- print(mode)
-        return "j0"
-      end
-      -- print("other" .. mode)
-    end,
-    desc = "Sel Line (emacs)",
-    expr = true,
-    silent = true,
-  },
-  {
-    { "n", "x", "i" },
-    "<M-S-h>",
-    function()
-      local mode = vim.fn.mode()
-      if mode == "i" then
-        return "<Esc>vap"
-      elseif mode == "n" then
-        return "vap"
-      elseif mode == "V" or mode == "v" or mode == "x" then
-        return "ap"
-      end
-    end,
-    desc = "Sel Paragraph(emacs)",
-    expr = true,
-    silent = true,
-  },
-  {
-    "i",
-    "<M-i><M-[>",
-    "---{{{",
-  },
-  {
-    "i",
-    "<M-i><M-]>",
-    "---}}}",
-  },
-
-  -- }}}
+  -- -- {{{ Lines
+  -- {
+  --   { "n", "x", "i" },
+  --   "<M-S-l>",
+  --   function()
+  --     local mode = vim.fn.mode()
+  --     if mode == "i" then
+  --       -- print(mode)
+  --       return "<Esc>V"
+  --     elseif mode == "n" then
+  --       -- print(mode)
+  --       return "V"
+  --     elseif mode == "V" or mode == "v" or mode == "x" then
+  --       -- print(mode)
+  --       return "j0"
+  --     end
+  --     -- print("other" .. mode)
+  --   end,
+  --   desc = "Sel Line (emacs)",
+  --   expr = true,
+  --   silent = true,
+  -- },
+  -- {
+  --   { "n", "x", "i" },
+  --   "<M-S-h>",
+  --   function()
+  --     local mode = vim.fn.mode()
+  --     if mode == "i" then
+  --       return "<Esc>vap"
+  --     elseif mode == "n" then
+  --       return "vap"
+  --     elseif mode == "V" or mode == "v" or mode == "x" then
+  --       return "ap"
+  --     end
+  --   end,
+  --   desc = "Sel Paragraph(emacs)",
+  --   expr = true,
+  --   silent = true,
+  -- },
+  -- {
+  --   "i",
+  --   "<M-i><M-[>",
+  --   "---{{{",
+  -- },
+  -- {
+  --   "i",
+  --   "<M-i><M-]>",
+  --   "---}}}",
+  -- },
+  --
+  -- -- }}}
 
   -- {{{ Terminal
   { { "i", "c", "n", "v", "x" }, "<C-c>", "<Esc>", desc = "Fix <C-c>", silent = true },
