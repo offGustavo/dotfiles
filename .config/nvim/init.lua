@@ -63,11 +63,12 @@ vim.pack.add({
   -- Picker
   "https://github.com/ibhagwan/fzf-lua",
 
-  -- Git
-  "https://github.com/nvim-lua/plenary.nvim", -- required
-  "https://github.com/esmuellert/codediff.nvim", -- optional
-  "https://github.com/m00qek/baleia.nvim", -- optional
-  "https://github.com/NeogitOrg/neogit",
+  -- -- Git
+  -- "https://github.com/nvim-lua/plenary.nvim", -- required
+  -- "https://github.com/esmuellert/codediff.nvim", -- optional
+  -- "https://github.com/m00qek/baleia.nvim", -- optional
+  -- "https://github.com/NeogitOrg/neogit",
+  "https://github.com/tpope/vim-fugitive",
 
   -- Quickfix
   "https://github.com/stevearc/quicker.nvim",
@@ -132,9 +133,14 @@ require("extern.mason-lspconfig")
 
 require("extern.snacks")
 require("extern.mini")
-require("extern.neogit")
-require("extern.startuptime")
+
+-- require("extern.startuptime")
+--
 require("extern.tokyonight")
+
+require("extern.fugitive")
+-- require("extern.neogit")
+-- require("extern.baleia")
 
 -- TODO(treesitter): stop depending on the plugin to manage parsers.
 --   - install parsers with the system package manager or build them by hand

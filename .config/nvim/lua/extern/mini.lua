@@ -12,9 +12,9 @@ later(function()
   })
   icons.mock_nvim_web_devicons()
 
-  -- Git
-  require("mini.git").setup({})
-  vim.keymap.set({ "n", "x" }, "<leader>gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", { desc = "Show at cursor" })
+  -- -- Git
+  -- require("mini.git").setup({})
+  -- vim.keymap.set({ "n", "x" }, "<leader>gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", { desc = "Show at cursor" })
 
   -- Use only HEAD name as summary string
   local branch_format_summary = function(data)
