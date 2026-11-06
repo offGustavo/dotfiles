@@ -58,6 +58,8 @@ later(function()
     },
   })
 
+  vim.cmd("command MiniDiffOverlay lua MiniDiff.toggle_overlay()<Cr>")
+
   require("mini.ai").setup({
     -- Custom textobjects to be used on top of builtin ones.
     -- For more information with examples, see `:h MiniAi.config`.

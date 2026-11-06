@@ -143,11 +143,6 @@ require("extern.fugitive")
 -- require("extern.neogit")
 -- require("extern.baleia")
 
--- TODO(treesitter): stop depending on the plugin to manage parsers.
---   - install parsers with the system package manager or build them by hand
---   - start highlighting per filetype with `vim.treesitter.start()` in
---     `ftplugin/<ft>.lua`
---   - set `foldexpr` and `indentexpr` in the same ftplugin where supported
 require("extern.treesitter")
 
 require("extern.which-key")
