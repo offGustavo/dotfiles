@@ -107,6 +107,10 @@
       "rev": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
+    "org-lsp": {
+      "rev": "93e468d65a21d1fa30b33dd7f48e430f53dba3d8",
+      "src": "https://github.com/kristijanhusak/org-lsp"
+    },
     "org.nvim": {
       "rev": "53b76361f70d122df40b9da64a240195e71bcdb3",
       "src": "https://github.com/xheisenbugx/org.nvim"
