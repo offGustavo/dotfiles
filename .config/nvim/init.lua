@@ -101,6 +101,7 @@ vim.pack.add({
 
   -- Agenda
   "https://github.com/xheisenbugx/org.nvim",
+  "https://github.com/kristijanhusak/org-lsp",
   -- "https://github.com/offGustavo/md-agenda.nvim",
 
   -- On Demand

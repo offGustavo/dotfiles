@@ -1,6 +1,7 @@
 later(function()
   packadd({
     "org.nvim",
+    -- "org-lsp",
     -- "md-agenda.nvim"
   })
 
