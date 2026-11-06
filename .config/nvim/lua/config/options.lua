@@ -33,7 +33,7 @@ vim.o.exrc = false
 -- vim.opt.mouse = ""
 set {
   number = true,
-  relativenumber = true,
+  relativenumber = false,
   breakindent = true,
   linebreak = true,
   undofile = true,

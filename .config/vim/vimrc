@@ -116,7 +116,7 @@ endfunction
 
 syntax on
 silent color tokyo
-set termguicolors nu rnu nowrap
+set termguicolors nu nowrap
 call s:SetFont(0)
 if !has('nvim')
   set guioptions=!acC

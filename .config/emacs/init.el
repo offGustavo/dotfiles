@@ -64,7 +64,7 @@
       scroll-preserve-screen-position t)
 
 ;; Relative line numbers, like `set relativenumber`
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type 't)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
 
