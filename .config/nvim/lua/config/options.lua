@@ -200,20 +200,25 @@ vim.api.nvim_create_autocmd("FileType", {
     -- Check if pcall succeeded AND a valid parser was actually returned
     if ok and parser then
       -- Use treesitter folding
-      vim.opt_local.foldmethod = "expr"
-      vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      set_local {
+        foldmethod = "expr",
+        foldexpr = "v:lua.vim.treesitter.foldexpr()",
+      }
     else
       -- Fallback to indent-based folding
-      vim.opt_local.foldmethod = "indent"
-      vim.opt_local.foldexpr = "" -- clear foldexpr so it doesn't leak from previous buffers
+      set_local {
+        foldmethod = "indent",
+        foldexpr = "", -- clear foldexpr so it doesn't leak from previous buffers
+      }
     end
   end,
 })
 
-vim.o.foldlevel = 99
-
--- vim.o.foldtext = ""
-vim.o.foldtext = "v:lua.require('Fish.foldtext').build_fold_text()"
+set {
+  foldlevel = 99,
+  -- foldtext = "",
+  foldtext = "v:lua.require('Fish.foldtext').build_fold_text()",
+}
 
 -- vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, { callback = function()Z
 --     vim.api.nvim_set_hl(0, "Folded", { bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg })
@@ -246,10 +251,10 @@ set {
     foldsep = " ",
     foldinner = " ",
   },
-}
 
--- vim.o.statuscolumn = "%s%l%C "
-vim.o.statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()"
+  -- statuscolumn = "%s%l%C "
+  statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()"
+}
 
 -- }}}
 
