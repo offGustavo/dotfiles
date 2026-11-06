@@ -6,3 +6,15 @@
 --
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+
+local function set_hl_folded()
+  vim.api.nvim_set_hl(0, "Folded", { bg = "NONE" })
+end
+
+vim.api.nvim_create_autocmd({ "ColorScheme" }, {
+  callback = function()
+    set_hl_folded()
+  end,
+})
+
+set_hl_folded()

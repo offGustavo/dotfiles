@@ -1,7 +1,7 @@
 return {
   "https://github.com/nvim-lualine/lualine.nvim",
   event = "UiEnter",
-  enabled = false,
+  enabled = true,
   config = function()
     local function show_macro_recording()
       local recording_register = vim.fn.reg_recording()
@@ -22,7 +22,7 @@ return {
         },
         ignore_focus = {},
         always_divide_middle = true,
-        globalstatus = false,
+        globalstatus = true,
         refresh = {
           statusline = 1000,
           tabline = 1000,
@@ -140,8 +140,8 @@ return {
             "fileformat",
             symbols = {
               unix = "UNIX", -- e712
-              dos = "DOS",   -- e70f
-              mac = "MAC",   -- e711
+              dos = "DOS", -- e70f
+              mac = "MAC", -- e711
             },
           },
         },
@@ -156,18 +156,11 @@ return {
           },
         },
       },
-      inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = { "filename" },
-        lualine_x = { "location" },
-        lualine_y = {},
-        lualine_z = {},
-      },
+      inactive_sections = {},
       tabline = {},
       winbar = {},
       inactive_winbar = {},
       extensions = {},
     })
-  end
+  end,
 }

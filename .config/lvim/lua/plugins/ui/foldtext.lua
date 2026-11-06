@@ -1,7 +1,7 @@
 return {
   "OXY2DEV/foldtext.nvim",
   event = "VeryLazy",
-  enabled = false,
+  enabled = true,
   opts = {
     -- Ignore buffers with these buftypes.
     ignore_buftypes = {},
