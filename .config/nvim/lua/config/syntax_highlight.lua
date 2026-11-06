@@ -1,13 +1,34 @@
-Fish.highlight_state = false -- true = Treesitter + LSP semantic tokens
+local M = {}
 
+--- Initial default and runtime state tracker for syntax highlighting mode.
+--- Controls if Treesitter and LSP semantic highlighting are enabled.
+---
+--- @type boolean
+---
+--- @usage
+--- ```lua
+--- -- Enable Treesitter + LSP semantic tokens
+--- Fish.highlight_state = true
+---
+--- -- Fallback to classic Vim syntax only
+--- Fish.highlight_state = false
+--- ```
+Fish.highlight_state = false
+
+--- Applies or removes Treesitter and LSP semantic highlighting for a specific buffer.
+--- Automatically falls back to classic regex syntax if a Treesitter parser is unavailable.
+---
+--- @param buf number The buffer handle/ID to modify.
+--- @param enabled boolean `true` to enable Treesitter and semantic tokens; `false` to fallback to regex syntax.
+--- @return boolean `true` if Treesitter was successfully enabled for the buffer, `false` otherwise.
 local function apply_highlight(buf, enabled)
   local ok
   if not (vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_is_loaded(buf)) then
-    return
+    return false
   end
   -- skip special buffers (terminal, help, quickfix, etc.)
   if vim.bo[buf].buftype ~= "" then
-    return
+    return false
   end
 
   vim.api.nvim_buf_call(buf, function()
@@ -37,7 +58,16 @@ local function apply_highlight(buf, enabled)
   return false
 end
 
-function _G.toggle_highlight(state)
+--- Toggles or explicitly sets the global syntax highlighting state across all open buffers.
+--- Updates `Fish.highlight_state`, refreshes all valid buffers, and triggers a notification.
+---
+--- @param state? boolean Optional explicit state to set. If omitted or `nil`, toggles the current `Fish.highlight_state`.
+--- @usage
+--- ```lua
+--- require("config.syntax_highlight").toggle_highlight(true)  -- Force enable everywhere
+--- require("config.syntax_highlight").toggle_highlight()      -- Toggle current state
+--- ```
+function M.toggle_highlight(state)
   local ok
   if state == nil then
     state = not Fish.highlight_state
@@ -69,3 +99,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+return M
