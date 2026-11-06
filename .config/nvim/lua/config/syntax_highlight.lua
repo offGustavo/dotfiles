@@ -1,6 +1,7 @@
 Fish.highlight_state = false -- true = Treesitter + LSP semantic tokens
 
 local function apply_highlight(buf, enabled)
+  local ok
   if not (vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_is_loaded(buf)) then
     return
   end
@@ -14,7 +15,8 @@ local function apply_highlight(buf, enabled)
     pcall(vim.treesitter.stop, buf)
 
     if enabled then
-      if pcall(vim.treesitter.start, buf) then
+      ok = pcall(vim.treesitter.start, buf)
+      if ok then
         vim.cmd("syntax clear") -- buffer-local: drop regex highlight
         vim.lsp.semantic_tokens.enable(true, { bufnr = buf })
         pcall(vim.lsp.semantic_tokens.force_refresh, buf)
@@ -28,19 +30,27 @@ local function apply_highlight(buf, enabled)
       vim.bo[buf].syntax = vim.bo[buf].filetype
     end
   end)
+
+  if ok then
+    return true
+  end
+  return false
 end
 
 function _G.toggle_highlight(state)
+  local ok
   if state == nil then
     state = not Fish.highlight_state
   end
   Fish.highlight_state = state
 
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    apply_highlight(buf, state)
+    ok = apply_highlight(buf, state)
   end
 
-  vim.notify("Treesitter + LSP highlight: " .. (state and "on" or "off"))
+  if ok then
+    vim.notify("Treesitter + LSP highlight: " .. (state and "on" or "off"))
+  end
 end
 
 vim.api.nvim_create_autocmd("FileType", {

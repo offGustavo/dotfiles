@@ -1,4 +1,4 @@
-if is_windows() then
+if vim.fn.executable("tree-sitter") ~= 1 then
   return
 end
 

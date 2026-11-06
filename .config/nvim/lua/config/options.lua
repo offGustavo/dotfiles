@@ -184,16 +184,53 @@ end)
 -- }}}
 
 -- {{{ foldtext
-vim.o.foldmethod = "indent"
+-- vim.o.foldmethod = "indent"
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    -- NOTE: If the current foldmethod is not the default(which is 'manual'), then we overwrite the option
+    -- In this case when a plugin like fugitive do `set foldmethod=syntax`, it wont be overwrite by our autocmd
+    if vim.wo[0].foldmethod ~= "manual" then
+      return
+    end
+
+    -- pcall returns: success (boolean), parser (parser object or nil)
+    local ok, parser = pcall(vim.treesitter.get_parser, args.buf)
+
+    -- Check if pcall succeeded AND a valid parser was actually returned
+    if ok and parser then
+      -- Use treesitter folding
+      vim.opt_local.foldmethod = "expr"
+      vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    else
+      -- Fallback to indent-based folding
+      vim.opt_local.foldmethod = "indent"
+      vim.opt_local.foldexpr = "" -- clear foldexpr so it doesn't leak from previous buffers
+    end
+  end,
+})
+
 vim.o.foldlevel = 99
 
 -- vim.o.foldtext = ""
 vim.o.foldtext = "v:lua.require('Fish.foldtext').build_fold_text()"
 
-vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, { callback = function()
-    vim.api.nvim_set_hl(0, "Folded", { bg = "NONE" })
+-- vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, { callback = function()Z
+--     vim.api.nvim_set_hl(0, "Folded", { bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg })
+--   end,
+-- })
+
+local function set_hl_folded()
+  vim.api.nvim_set_hl(0, "Folded", { bg = "NONE" })
+end
+
+vim.api.nvim_create_autocmd({ "ColorScheme" }, {
+  callback = function()
+    set_hl_folded()
   end,
 })
+
+set_hl_folded()
 
 --- }}}
 
