@@ -1,42 +1,61 @@
+-- -- TODO(local plugins): add a custom highlither here
+--
+-- -- Comment
+-- -- TODO: this is a todo
+-- -- FIX: this is a fix
+-- -- FIXME: this is a fixme
+-- -- PERF: this is a perf
+-- -- NOTE: this is a note
+
 local ns = vim.api.nvim_create_namespace("keyword_highlight")
-
-autocmd({ "BufEnter", "Colorscheme" }, function()
-  local nr = vim.api.nvim_get_hl(0, { name = "Comment" })
-  vim.api.nvim_set_hl(0, "Todo", { fg = nr.fg, bg = nr.bg })
-end, nil, fish_group, "Remove default Todo highlight")
-
--- Highlight groups (mini.hipatterns defined these for you; now we do)
-local function define_groups()
-  local function diag_fg(name)
-    local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
-    return hl.fg
-  end
-  local normal = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
-  local function set(name, diag)
-    vim.api.nvim_set_hl(0, name, { fg = normal.bg, bg = diag_fg(diag), bold = true })
-  end
-  set("KwFix", "DiagnosticError")
-  set("KwHack", "DiagnosticWarn")
-  set("KwTodo", "DiagnosticInfo")
-  set("KwNote", "DiagnosticHint")
-  set("KwPerf", "DiagnosticOk")
-end
-define_groups()
-vim.api.nvim_create_autocmd("ColorScheme", { callback = define_groups })
-
--- FIX also covers FIXME because [^:]* consumes the "ME"
-local keywords = {
-  { "FIX", "KwFix" },
-  { "HACK", "KwHack" },
-  { "TODO", "KwTodo" },
-  { "NOTE", "KwNote" },
-  { "PERF", "KwPerf" },
+local config = {
+  keywords = {
+    { word = "FIX",   hl = "TodoFix",  icon = " " },
+    { word = "BUG",   hl = "TodoFix",  icon = " " },
+    { word = "ISSUE", hl = "TodoFix",  icon = " " },
+    { word = "HACK",  hl = "TodoHack", icon = " " },
+    { word = "TODO",  hl = "TodoTodo", icon = " " },
+    { word = "NOTE",  hl = "TodoNote", icon = " " },
+    { word = "PERF",  hl = "TodoPerf", icon = " " },
+  },
 }
+
+---Create a new highlight
+---@param name string highlight name to be created
+---@param hl string highlight color to be used as background
+local function set_hl(name, hl)
+  vim.api.nvim_set_hl(0, name, {
+    fg = vim.api.nvim_get_hl(0, { name = "Normal", link = false }).bg,
+    bg = vim.api.nvim_get_hl(0, { name = hl, link = false }).fg,
+    bold = true,
+  })
+end
+
+--- Define 
+local function define_groups()
+  -- Clean Default Todo highlight
+  set_hl("Todo", "Comment")
+
+  -- Set new highlights
+  set_hl("TodoFix", "DiagnosticError")
+  set_hl("TodoHack", "DiagnosticWarn")
+  set_hl("TodoTodo", "DiagnosticInfo")
+  set_hl("TodoNote", "DiagnosticHint")
+  set_hl("TodoPerf", "DiagnosticOk")
+end
+
+autocmd(
+  { "BufEnter", "Colorscheme" },
+  define_groups,
+  nil,
+  fish_group,
+  "Remove default Todo highlight and Add Our Custom"
+)
 
 -- Same idea as grep "TODO.*:" but stops at the first colon, with a word boundary
 local patterns = {}
-for _, k in ipairs(keywords) do
-  patterns[#patterns + 1] = { "%f[%w]" .. k[1] .. "[^:]*:", k[2] }
+for _, keyword in ipairs(config.keywords) do
+  patterns[#patterns + 1] = { "%f[%w]" .. keyword.word .. "[^:]*:", keyword.hl }
 end
 
 vim.api.nvim_set_decoration_provider(ns, {
@@ -68,61 +87,3 @@ vim.api.nvim_set_decoration_provider(ns, {
     end
   end,
 })
-
--- -- TODO(local plugins): add a custom highlither here
---
--- -- Comment
--- -- TODO: this is a todo
--- -- FIX: this is a fix
--- -- FIXME: this is a fixme
--- -- PERF: this is a perf
--- -- NOTE: this is a note
---
--- -- green: #006000
---
--- autocmd({ "BufEnter", "Colorscheme" }, function()
---   local nr = vim.api.nvim_get_hl(0, { name = "Comment" })
---   vim.api.nvim_set_hl(0, "Todo", { fg = nr.fg, bg = nr.bg })
--- end, nil, fish_group, "Remove default Todo highlight")
---
--- later(function()
---   packadd("mini.nvim")
---
---   local censor_extmark_opts = function(_, match, _)
---     local mask = string.rep("x", vim.fn.strchars(match))
---     return {
---       virt_text = { { mask, "Comment" } },
---       virt_text_pos = "overlay",
---       priority = 200,
---       right_gravity = false,
---     }
---   end
---
---   -- require("mini.hipatterns").setup({
---   --   highlighters = {
---   --     censor = {
---   --       pattern = "password: ()%S+()",
---   --       group = "",
---   --       extmark_opts = censor_extmark_opts,
---   --     },
---   --   },
---   -- })
---
---   local hipatterns = require("mini.hipatterns")
---   hipatterns.setup({
---     highlighters = {
---       fix = { pattern = "%f[%w]FIXME[^:]*:", group = "MiniHipatternsFixme" },
---       fixme = { pattern = "%f[%w]FIX[^:]*:", group = "MiniHipatternsFixme" },
---       hack = { pattern = "%f[%w]HACK[^:]*:", group = "MiniHipatternsHack" },
---       todo = { pattern = "%f[%w]TODO[^:]*:", group = "MiniHipatternsTodo" },
---       note = { pattern = "%f[%w]NOTE[^:]*:", group = "MiniHipatternsNote" },
---       perf = { pattern = "%f[%w]PERF[^:]*:", group = "MiniIconsPurple" },
---       hex_color = hipatterns.gen_highlighter.hex_color(),
---       -- censor = {
---       --   pattern = "password: ()%S+()",
---       --   group = "",
---       --   extmark_opts = censor_extmark_opts,
---       -- },
---     },
---   })
--- end)
