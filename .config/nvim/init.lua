@@ -20,7 +20,7 @@ end
 
 -- {{{ Config Files
 if os.getenv("SCROLL_MODE") then
-  vim.fn["kitty#setup"]()
+  vim.cmd.call("kitty#setup()")
   return
 end
 

@@ -9,5 +9,6 @@ function! kitty#setup() abort
   set signcolumn=no
   set nocursorline
   set cmdheight=0
+  autocmd TextYankPost * silent! lua vim.hl.hl_op({ higroup='Search', timeout=100 })
 endfunction
 
