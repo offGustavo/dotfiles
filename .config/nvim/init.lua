@@ -20,7 +20,7 @@ end
 
 -- {{{ Config Files
 if os.getenv("SCROLL_MODE") then
-  require("config.kitty_scroll_mode")
+  vim.fn["kitty#setup"]()
   return
 end
 
@@ -54,47 +54,31 @@ require("config.lazy").add({
   -- { import = "plugins.fzf-lua" },
 
   -- Git
-  { import = "plugins.fugitive-neogit" },
+  { import = "plugins.fugitive" },
+  -- { import = "plugins.neogit" },
 
   -- Quickfix
   { import = "plugins.quicker" },
 
   -- LSP
-  -- TODO(lsp): remove Mason and the mason-lspconfig plugin.
-  --   - install language servers with the system package manager
-  --   - move the server setup into my own config with `vim.lsp.config()` and
-  --     `vim.lsp.enable()` (needs Neovim 0.11+), one file per server in `lsp/`
-  --   - keep `lspconfig` only for servers that have no native config
   { import = "plugins.mason-lspconfig" },
 
   -- Treesitter
   { import = "plugins.treesitter" },
 
   -- Format
-  -- TODO(format): drop conform and format through Neovim itself.
-  --   - set `formatprg` per filetype in `ftplugin/<ft>.lua` (e.g. "stylua -",
-  --     "prettier --stdin-filepath %")
-  --   - format with `gq`, and map it to a key for the whole buffer
-  --   - keep conform only for formatters that can't work as a stdin filter
   { import = "plugins.conform" },
 
   -- Completion
   { import = "plugins.blink" },
 
   -- System
-  -- "https://github.com/tpope/vim-eunuch",
+  -- { "https://github.com/tpope/vim-eunuch", lazy = true, event = "CmdLineEnter" },
 
-  --   -- UI
+  -- UI
   { import = "plugins.which-key" },
-
-  -- TODO(todo-comments): make a lua module to replace todo-comments
-  -- 1. DONE highlighting Comments
-  -- 2. DONE highlighting colors
-  -- 3. DONE sign for TODOs
   -- { import =  "plugins.todo-comments" },
   -- { import =  "plugins.nvim-colorizer" },
-  -- "https://github.com/catgoose/nvim-colorizer.lua",
-  -- "https://github.com/folke/todo-comments.nvim",
 
   -- Agenda
   { import = "plugins.org" },

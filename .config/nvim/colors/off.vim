@@ -70,7 +70,6 @@ hi Conditional   guifg=#9d7cd8
 hi Repeat        guifg=#9d7cd8
 hi Label         guifg=#9d7cd8
 hi Operator      guifg=#89b4fa
-ff
 hi Keyword       guifg=#9d7cd8
 hi Exception     guifg=#9d7cd8
 

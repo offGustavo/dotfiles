@@ -4,7 +4,7 @@
 -- let g:markdown_folding = 1
 -- ]])
 
-vim.lsp.enable("markdown_oxide")
+-- vim.lsp.enable("markdown_oxide")
 
 map {
   -- TODO: Modificar esse atalho e adicionar uma função para fazer o "toggle" do TODO

@@ -5,7 +5,6 @@ return {
   opts = {
     bigfile = { enabled = true },
     dashboard = {
-      --       enabled = true,
       enabled = true,
       preset = {
         header = [[
@@ -22,8 +21,8 @@ return {
       sections = {
         { section = "header" },
         {
-        section = "startup",
-        padding = { 1, 0 },
+          section = "startup",
+          padding = { 1, 0 },
         },
       },
     },

@@ -1,5 +1,7 @@
 return {
   "https://github.com/stevearc/conform.nvim",
+  lazy = true,
+  event = "BufReadPost",
   opts = {
     -- Define your formatters
     formatters_by_ft = {
@@ -37,6 +39,6 @@ return {
         })
       end,
       desc = "Format buffer",
-    }
-  }
+    },
+  },
 }

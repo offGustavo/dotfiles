@@ -1,5 +1,3 @@
--- TODO: Arrumar a configuraçào do treesitter
-
 return {
   {
     "https://github.com/nvim-treesitter/nvim-treesitter",

@@ -1,22 +1,25 @@
 -- -- Comment
--- -- TODO: this is a todo
--- -- FIX: this is a fix
--- -- FIXME(test): this is a fixme
--- -- ISSUE(test): this is a fixme
--- -- PERF: this is a perf
--- -- NOTE: this is a note
+-- -- TODO:
+-- -- FIX:
+-- -- FIXME():
+-- -- ISSUE(test):
+-- -- PERF:
+-- -- NOTE:
+-- -- TASK:
+-- -- TASK(20261108-1218):
 
 local ns = vim.api.nvim_create_namespace("keyword_highlight")
 
 local config = {
   keywords = {
-    ["%f[%w]FIX[^:]*:"] = { hl = "TodoFix", sign_hl = "TodoSignFix", icon = "" },
-    ["%f[%w]BUG[^:]*:"] = { hl = "TodoFix", sign_hl = "TodoSignFix", icon = "" },
-    ["%f[%w]ISSUE[^:]*:"] = { hl = "TodoFix", sign_hl = "TodoSignFix", icon = "" },
-    ["%f[%w]HACK[^:]*:"] = { hl = "TodoHack", sign_hl = "TodoSignHack", icon = "" },
-    ["%f[%w]TODO[^:]*:"] = { hl = "TodoTodo", sign_hl = "TodoSignTodo", icon = "" },
-    ["%f[%w]NOTE[^:]*:"] = { hl = "TodoNote", sign_hl = "TodoSignNote", icon = "" },
-    ["%f[%w]PERF[^:]*:"] = { hl = "TodoPerf", sign_hl = "TodoSignPerf", icon = "" },
+    ["%f[%w]FIX[^:]*:"]   = { hl = "TodoFix",  sign_hl = "TodoSignFix",  icon = "" },
+    ["%f[%w]BUG[^:]*:"]   = { hl = "TodoFix",  sign_hl = "TodoSignFix",  icon = "" },
+    ["%f[%w]ISSUE[^:]*:"] = { hl = "TodoFix",  sign_hl = "TodoSignFix",  icon = "" },
+    ["%f[%w]HACK[^:]*:"]  = { hl = "TodoHack", sign_hl = "TodoSignHack", icon = "" },
+    ["%f[%w]TODO[^:]*:"]  = { hl = "TodoTodo", sign_hl = "TodoSignTodo", icon = "" },
+    ["%f[%w]TASK[^:]*:"]  = { hl = "TodoTask", sign_hl = "TodoSignTask", icon = "" },
+    ["%f[%w]NOTE[^:]*:"]  = { hl = "TodoNote", sign_hl = "TodoSignNote", icon = "" },
+    ["%f[%w]PERF[^:]*:"]  = { hl = "TodoPerf", sign_hl = "TodoSignPerf", icon = "" },
   },
   show_sign = true,
 }
@@ -50,6 +53,7 @@ local function define_groups()
   set_hl("TodoTodo", "TodoSignTodo", "DiagnosticInfo")
   set_hl("TodoNote", "TodoSignNote", "DiagnosticHint")
   set_hl("TodoPerf", "TodoSignPerf", "DiagnosticOk")
+  set_hl("TodoTask", "TodoSignTask", "Boolean")
 end
 
 local function in_comment(buf, row, col)

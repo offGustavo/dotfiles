@@ -1,3 +1,4 @@
+  -- "https://github.com/folke/todo-comments.nvim",
 autocmd({ "BufReadPost", "Colorscheme" }, function()
   later(function()
     packadd "todo-comments.nvim"

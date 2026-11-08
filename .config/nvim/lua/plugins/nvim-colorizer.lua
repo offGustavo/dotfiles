@@ -1,6 +1,8 @@
-autocmd("BufReadPre", function()
-  packadd("nvim-colorizer.lua")
-  require("colorizer").setup({
+return {
+  "https://github.com/catgoose/nvim-colorizer.lua",
+  lazy = true,
+  event = "BufReadPre",
+  opts = {
     filetypes = { "*" }, -- filetypes to highlight, "*" for all
     buftypes = {}, -- buftypes to highlight
     user_commands = true, -- enable user commands (ColorizerToggle, etc.)
@@ -86,5 +88,5 @@ autocmd("BufReadPre", function()
       always_update = false, -- update highlights even in unfocused buffers
       debounce_ms = 0, -- debounce highlight updates (ms); 0 = no debounce
     },
-  })
-end)
+  },
+}

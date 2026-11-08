@@ -11,9 +11,8 @@ map {
 vim.lsp.enable("lua_ls")
 
 set_local {
-  formatprg = "stylua",
+  formatprg = "stylua -",
   foldmethod = "expr",
   foldexpr = "v:lua.vim.treesitter.foldexpr()",
   indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()",
 }
-
