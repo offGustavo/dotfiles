@@ -1,12 +1,14 @@
-autocmd({ "InsertEnter", "CmdlineEnter" }, function()
-  packadd {
-    "blink.cmp",
-    "lazydev.nvim",
-  }
+return {
+  "https://github.com/Saghen/blink.cmp",
+  version = "v1",
+  lazy = true,
+  event = { "InsertEnter", "CmdlineEnter" },
+  dependencies = {
+    "https://github.com/rafamadriz/friendly-snippets",
+    { "https://github.com/folke/lazydev.nvim", opts = {} },
+  },
+  opts = {
 
-  require("lazydev").setup()
-
-  require("blink.cmp").setup({
     -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
     -- 'super-tab' for mappings similar to vscode (tab to accept)
     -- 'enter' for enter to accept
@@ -76,5 +78,5 @@ autocmd({ "InsertEnter", "CmdlineEnter" }, function()
     --
     -- See the fuzzy documentation for more information
     fuzzy = { implementation = "prefer_rust" },
-  })
-end)
+  },
+}

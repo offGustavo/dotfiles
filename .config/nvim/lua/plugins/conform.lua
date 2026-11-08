@@ -1,6 +1,6 @@
-later(function()
-  packadd "conform.nvim"
-  require("conform").setup({
+return {
+  "https://github.com/stevearc/conform.nvim",
+  opts = {
     -- Define your formatters
     formatters_by_ft = {
       lua = { "stylua" },
@@ -24,15 +24,19 @@ later(function()
         append_args = { "-i", "2" },
       },
     },
-  })
-  vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-
-  vim.keymap.set("n", "<leader>cf", function()
-    require("conform").format({
-      async = true,
-    })
-  end, {
-    desc = "Format buffer",
-  })
-
-end)
+  },
+  init = function()
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+  end,
+  keys = {
+    {
+      "<leader>cf",
+      function()
+        require("conform").format({
+          async = true,
+        })
+      end,
+      desc = "Format buffer",
+    }
+  }
+}

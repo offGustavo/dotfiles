@@ -1,6 +1,8 @@
-later(function()
-  packadd("which-key.nvim")
-  require("which-key").setup({
+return {
+  "https://github.com/folke/which-key.nvim",
+  lazy = true,
+  event = "VeryLazy",
+  opts = {
     ---@type false | "classic" | "modern" | "helix"
     preset = "classic",
     -- Delay before showing the popup. Can be a number or a function that returns a number.
@@ -192,5 +194,5 @@ later(function()
       bt = {},
     },
     debug = false, -- enable wk.log in the current directory
-  })
-end)
+  },
+}

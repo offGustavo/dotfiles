@@ -38,6 +38,72 @@ if vim.g.neovide then
 end
 -- }}}
 
+-- {{{ Lazy Plugins
+require("config.lazy").add({
+  -- General
+  { import = "plugins.mini" },
+  { import = "plugins.snacks" },
+
+  -- Theme
+  { import = "plugins.tokyonight" },
+
+  -- File Explorer
+  { import = "plugins.canola" },
+
+  -- Picker
+  -- { import = "plugins.fzf-lua" },
+
+  -- Git
+  { import = "plugins.fugitive-neogit" },
+
+  -- Quickfix
+  { import = "plugins.quicker" },
+
+  -- LSP
+  -- TODO(lsp): remove Mason and the mason-lspconfig plugin.
+  --   - install language servers with the system package manager
+  --   - move the server setup into my own config with `vim.lsp.config()` and
+  --     `vim.lsp.enable()` (needs Neovim 0.11+), one file per server in `lsp/`
+  --   - keep `lspconfig` only for servers that have no native config
+  { import = "plugins.mason-lspconfig" },
+
+  -- Treesitter
+  { import = "plugins.treesitter" },
+
+  -- Format
+  -- TODO(format): drop conform and format through Neovim itself.
+  --   - set `formatprg` per filetype in `ftplugin/<ft>.lua` (e.g. "stylua -",
+  --     "prettier --stdin-filepath %")
+  --   - format with `gq`, and map it to a key for the whole buffer
+  --   - keep conform only for formatters that can't work as a stdin filter
+  { import = "plugins.conform" },
+
+  -- Completion
+  { import = "plugins.blink" },
+
+  -- System
+  -- "https://github.com/tpope/vim-eunuch",
+
+  --   -- UI
+  { import = "plugins.which-key" },
+
+  -- TODO(todo-comments): make a lua module to replace todo-comments
+  -- 1. DONE highlighting Comments
+  -- 2. DONE highlighting colors
+  -- 3. DONE sign for TODOs
+  -- { import =  "plugins.todo-comments" },
+  -- { import =  "plugins.nvim-colorizer" },
+  -- "https://github.com/catgoose/nvim-colorizer.lua",
+  -- "https://github.com/folke/todo-comments.nvim",
+
+  -- Agenda
+  { import = "plugins.org" },
+
+  -- On Demand
+  -- { "https://github.com/nstefan002/screenkey.nvim" },
+})
+-- }}}
+
 -- {{{ Local Plugins
 require("offGustavo.espeto.setup")
 require("offGustavo.lazygit")
@@ -46,121 +112,5 @@ require("offGustavo.todo")
 require("offGustavo.yazi")
 require("offGustavo.cedit").setup({ key = "<M-x>" })
 require("offGustavo.compile-mode")
-require("Tatr")
--- }}}
-
--- {{{ Plugins
-
-vim.pack.add({
-
-  -- General
-  "https://github.com/folke/snacks.nvim",
-  "https://github.com/nvim-mini/mini.nvim",
-
-  -- File Explorer
-  { src = "https://forge.barrettruth.com/barrettruth/canola.nvim", version = "canola" },
-
-  -- Picker
-  -- "https://github.com/ibhagwan/fzf-lua",
-
-  -- -- Git
-  -- "https://github.com/nvim-lua/plenary.nvim", -- required
-  -- "https://github.com/esmuellert/codediff.nvim", -- optional
-  -- "https://github.com/m00qek/baleia.nvim", -- optional
-  -- "https://github.com/NeogitOrg/neogit",
-  "https://github.com/tpope/vim-fugitive",
-
-  -- System
-  -- "https://github.com/tpope/vim-eunuch",
-
-  -- Quickfix
-  "https://github.com/stevearc/quicker.nvim",
-
-  -- LSP
-  "https://github.com/neovim/nvim-lspconfig",
-  "https://github.com/mason-org/mason-lspconfig.nvim",
-  "https://github.com/mason-org/mason.nvim",
-
-  -- Treesitter
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-  "https://github.com/folke/ts-comments.nvim",
-
-  -- Format
-  "https://github.com/stevearc/conform.nvim",
-
-  -- Completion
-  "https://github.com/rafamadriz/friendly-snippets",
-  "https://github.com/folke/lazydev.nvim",
-  { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("v1") },
-
-  -- UI
-  "https://github.com/folke/which-key.nvim",
-  "https://github.com/catgoose/nvim-colorizer.lua",
-  -- "https://github.com/folke/todo-comments.nvim",
-
-  -- Theme
-  "https://github.com/folke/tokyonight.nvim",
-
-  -- Agenda
-  -- "https://github.com/xheisenbugx/org.nvim",
-  -- "https://github.com/kristijanhusak/org-lsp",
-  "https://github.com/nvim-orgmode/orgmode",
-  -- "https://github.com/offGustavo/md-agenda.nvim",
-
-  -- On Demand
-  -- "https://github.com/dstein64/vim-startuptime",
-  -- "https://github.com/nvzone/showkeys",
-  -- "https://github.com/nstefan002/screenkey.nvim",
-  -- })
-}, { load = function() end })
---- }}}
-
--- {{{ Plugins Config
-
-require("extern.canola")
--- require("extern.fzf-lua")
-
--- TODO(format): drop conform and format through Neovim itself.
---   - set `formatprg` per filetype in `ftplugin/<ft>.lua` (e.g. "stylua -",
---     "prettier --stdin-filepath %")
---   - format with `gq`, and map it to a key for the whole buffer
---   - keep conform only for formatters that can't work as a stdin filter
-require("extern.conform")
-require("extern.quicker")
-
--- TODO(lsp): remove Mason and the mason-lspconfig plugin.
---   - install language servers with the system package manager
---   - move the server setup into my own config with `vim.lsp.config()` and
---     `vim.lsp.enable()` (needs Neovim 0.11+), one file per server in `lsp/`
---   - keep `lspconfig` only for servers that have no native config
-require("extern.mason-lspconfig")
-
-require("extern.snacks")
-require("extern.mini")
-
--- require("extern.startuptime")
---
-require("extern.tokyonight")
-
-require("extern.fugitive")
--- require("extern.neogit")
--- require("extern.baleia")
-
--- packadd("vim-eunuch")
-
-require("extern.treesitter")
-
-require("extern.which-key")
-
--- TODO(todo-comments): make a lua module to replace todo-comments
--- 1. DONE highlighting Comments
--- 2. highlighting colors
--- 3. sign for TODOs
--- require("extern.todo-comments")
-require("extern.nvim-colorizer")
-
-require("extern.blink")
-require("extern.org")
-
+-- require("Tatr")
 -- }}}
