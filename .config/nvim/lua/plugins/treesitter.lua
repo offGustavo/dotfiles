@@ -3,7 +3,7 @@
 return {
   {
     "https://github.com/nvim-treesitter/nvim-treesitter",
-    enabled = not is_windows(),
+    enabled = executable("tree-sitter"),
     lazy = true,
     event = "VeryLazy",
     build = function()
