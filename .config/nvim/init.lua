@@ -77,7 +77,6 @@ require("config.lazy").add({
 
   -- UI
   { import = "plugins.which-key" },
-  -- { import =  "plugins.todo-comments" },
   -- { import =  "plugins.nvim-colorizer" },
 
   -- Agenda
@@ -92,7 +91,7 @@ require("config.lazy").add({
 require("offGustavo.espeto.setup")
 require("offGustavo.lazygit")
 require("offGustavo.TabTerm.setup")
-require("offGustavo.todo")
+require("offGustavo.todo-comments")
 require("offGustavo.yazi")
 require("offGustavo.cedit").setup({ key = "<M-x>" })
 require("offGustavo.compile-mode")
