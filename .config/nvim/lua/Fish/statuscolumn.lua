@@ -56,6 +56,7 @@ local function render_sign(sign)
 	return text
 end
 
+-- TODO(statuscolumn): Make statuscolumn use all sign column space available
 function M.build()
 	local win = vim.g.statusline_winid
 	local buf = vim.api.nvim_win_get_buf(win)

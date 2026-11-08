@@ -344,7 +344,6 @@ map {
   { { "i", "t" }, "<M-;>", "<C-\\><C-n>", silent = true, desc = "Go To Normal Mode in Terminal", nowait = true },
   { "t", "<S-Esc>", "<C-\\><C-n>", silent = true, desc = "Go To Normal Mode in Terminal", nowait = true },
   -- { 't', '<Esc><Esc>', '<C-\\><C-n>',  silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true },
-  { "n", "<M-t>", ":term " },
   { "n", "<leader>tn", ":term " },
   { "n", "<leader>th", ":hor term " },
   { "n", "<leader>tv", ":vert term " },

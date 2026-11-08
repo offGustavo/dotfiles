@@ -55,13 +55,13 @@ map({
   { "<M-s>", "<Cmd>FzfLua live_grep<Cr>", desc = "Grep" },
   { "<M-b>", "<Cmd>FzfLua buffers<Cr>", desc = "Buffers" },
   { "<M-r>", "<Cmd>FzfLua oldfiles<Cr>", desc = "Oldfiles" },
-  { "<M-p>", "<Cmd>FzfLua global<Cr>", desc = "Global" },
   { "<M-g>", "<Cmd>FzfLua git_files<Cr>", desc = "Git files" },
 
   -- Builtin
   { "<leader>fa", "<Cmd>FzfLua<Cr>", desc = "Builtin" },
 
   -- Find
+  { "<leader>f.", "<Cmd>FzfLua global<Cr>", desc = "Global" },
   {
     "<leader>ff",
     function()

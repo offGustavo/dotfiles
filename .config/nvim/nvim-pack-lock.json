@@ -115,6 +115,10 @@
       "rev": "53b76361f70d122df40b9da64a240195e71bcdb3",
       "src": "https://github.com/xheisenbugx/org.nvim"
     },
+    "orgmode": {
+      "rev": "a7fdbd3cfdd94b425c655cc72e3a6c4dd0a3959f",
+      "src": "https://github.com/nvim-orgmode/orgmode"
+    },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
@@ -162,6 +166,10 @@
     "ts-comments.nvim": {
       "rev": "a59d6092213447450191122c9346f309161504cb",
       "src": "https://github.com/folke/ts-comments.nvim"
+    },
+    "vim-eunuch": {
+      "rev": "929490937745cd96130d3e7948f762f0aa403314",
+      "src": "https://github.com/tpope/vim-eunuch"
     },
     "vim-fugitive": {
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",

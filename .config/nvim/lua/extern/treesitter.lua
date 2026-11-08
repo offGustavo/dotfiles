@@ -1,4 +1,4 @@
-if vim.fn.executable("tree-sitter") ~= 1 then
+if executable("tree-sitter") then
   return
 end
 

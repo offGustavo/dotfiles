@@ -14,17 +14,18 @@ tabterm.setup({
   default_maps = true,
 })
 
-vim.keymap.set({ "n", "i", "x", "t" }, "<A-n>", function()
+vim.keymap.set({ "n", "i", "x", "t" }, "<M-t>", function()
   tabterm.new()
 end, { desc = "TabTerm New" })
-vim.keymap.set({ "n", "i", "x", "t" }, "<A-z>", function()
+vim.keymap.set({ "n", "i", "x", "t" }, "<M-z>", function()
   tabterm.close()
 end, { desc = "TabTerm Close" })
-vim.keymap.set({ "n", "i", "x", "t" }, "<A-/>", function()
+vim.keymap.set({ "n", "i", "x", "t" }, "<M-/>", function()
   tabterm.toggle()
 end, { desc = "TabTerm Toggle" })
 for i = 1, 9, 1 do
-  vim.keymap.set({ "n", "i", "x", "t" }, "<A-" .. i .. ">", function()
+  vim.keymap.set({ "n", "i", "x", "t" }, "<M-" .. i .. ">", function()
     tabterm.go(i)
   end, { desc = "TabTerm Toggle" })
 end
+

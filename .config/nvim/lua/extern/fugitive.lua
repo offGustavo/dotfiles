@@ -21,6 +21,14 @@ nnoremap <space>gb :Git branch<Space>
 nnoremap <space>go :Git checkout<Space>
 nnoremap <space>gps :Dispatch! git push<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
+
 ]]
 
+-- vim.keymap.set("n", "<leader>gD", function ()
+--   vim.b.git_dir = "$HOME/.dotfiles"
+--   vim.env.GIT_DIR = "$HOME/.dotfiles"
+--   vim.env.GIT_WORK_TREE = "$HOME"
+--   vim.cmd.cd("$HOME/.dotfiles")
+--   vim.cmd.Git()
+-- end, { desc = "Dotfiles" })
 

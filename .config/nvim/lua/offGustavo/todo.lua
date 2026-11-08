@@ -1,89 +1,142 @@
--- -- TODO(local plugins): add a custom highlither here
---
 -- -- Comment
 -- -- TODO: this is a todo
 -- -- FIX: this is a fix
--- -- FIXME: this is a fixme
+-- -- FIXME(test): this is a fixme
+-- -- ISSUE(test): this is a fixme
 -- -- PERF: this is a perf
 -- -- NOTE: this is a note
 
 local ns = vim.api.nvim_create_namespace("keyword_highlight")
+
 local config = {
   keywords = {
-    { word = "FIX",   hl = "TodoFix",  icon = " " },
-    { word = "BUG",   hl = "TodoFix",  icon = " " },
-    { word = "ISSUE", hl = "TodoFix",  icon = " " },
-    { word = "HACK",  hl = "TodoHack", icon = " " },
-    { word = "TODO",  hl = "TodoTodo", icon = " " },
-    { word = "NOTE",  hl = "TodoNote", icon = " " },
-    { word = "PERF",  hl = "TodoPerf", icon = " " },
+    ["%f[%w]FIX[^:]*:"] = { hl = "TodoFix", sign_hl = "TodoSignFix", icon = "" },
+    ["%f[%w]BUG[^:]*:"] = { hl = "TodoFix", sign_hl = "TodoSignFix", icon = "" },
+    ["%f[%w]ISSUE[^:]*:"] = { hl = "TodoFix", sign_hl = "TodoSignFix", icon = "" },
+    ["%f[%w]HACK[^:]*:"] = { hl = "TodoHack", sign_hl = "TodoSignHack", icon = "" },
+    ["%f[%w]TODO[^:]*:"] = { hl = "TodoTodo", sign_hl = "TodoSignTodo", icon = "" },
+    ["%f[%w]NOTE[^:]*:"] = { hl = "TodoNote", sign_hl = "TodoSignNote", icon = "" },
+    ["%f[%w]PERF[^:]*:"] = { hl = "TodoPerf", sign_hl = "TodoSignPerf", icon = "" },
   },
+  show_sign = true,
 }
 
----Create a new highlight
----@param name string highlight name to be created
----@param hl string highlight color to be used as background
-local function set_hl(name, hl)
-  vim.api.nvim_set_hl(0, name, {
-    fg = vim.api.nvim_get_hl(0, { name = "Normal", link = false }).bg,
-    bg = vim.api.nvim_get_hl(0, { name = hl, link = false }).fg,
+-- name: keyword badge group, sign_name: sign group, src: group to take the color from
+local function set_hl(text_hl, sign_hl, src)
+  local normal = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
+  local signcol = vim.api.nvim_get_hl(0, { name = "SignColumn", link = false })
+  local color = vim.api.nvim_get_hl(0, { name = src, link = false }).fg
+
+  -- keyword text: colored badge (dark text on colored background)
+  vim.api.nvim_set_hl(0, text_hl, {
+    fg = normal.bg,
+    bg = color,
+    bold = true,
+  })
+
+  -- sign: colored icon on the sign column background
+  vim.api.nvim_set_hl(0, sign_hl, {
+    fg = color,
+    bg = signcol.bg,
     bold = true,
   })
 end
 
---- Define 
 local function define_groups()
-  -- Clean Default Todo highlight
-  set_hl("Todo", "Comment")
+  vim.api.nvim_set_hl(0, "Todo", { link = "Comment" })
 
-  -- Set new highlights
-  set_hl("TodoFix", "DiagnosticError")
-  set_hl("TodoHack", "DiagnosticWarn")
-  set_hl("TodoTodo", "DiagnosticInfo")
-  set_hl("TodoNote", "DiagnosticHint")
-  set_hl("TodoPerf", "DiagnosticOk")
+  set_hl("TodoFix", "TodoSignFix", "DiagnosticError")
+  set_hl("TodoHack", "TodoSignHack", "DiagnosticWarn")
+  set_hl("TodoTodo", "TodoSignTodo", "DiagnosticInfo")
+  set_hl("TodoNote", "TodoSignNote", "DiagnosticHint")
+  set_hl("TodoPerf", "TodoSignPerf", "DiagnosticOk")
 end
 
-autocmd(
-  { "BufEnter", "Colorscheme" },
-  define_groups,
-  nil,
-  fish_group,
-  "Remove default Todo highlight and Add Our Custom"
-)
-
--- Same idea as grep "TODO.*:" but stops at the first colon, with a word boundary
-local patterns = {}
-for _, keyword in ipairs(config.keywords) do
-  patterns[#patterns + 1] = { "%f[%w]" .. keyword.word .. "[^:]*:", keyword.hl }
-end
-
-vim.api.nvim_set_decoration_provider(ns, {
-  on_win = function(_, _, bufnr)
-    -- skip special buffers (terminals, prompts, etc.)
-    return vim.bo[bufnr].buftype == ""
-  end,
-  on_line = function(_, _, bufnr, row)
-    local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1]
-    if not line or line == "" then
-      return
+local function in_comment(buf, row, col)
+  -- row/col are 0-indexed
+  -- 1) Treesitter: walk up from the node under the cursor position
+  local ok, node = pcall(vim.treesitter.get_node, { bufnr = buf, pos = { row, col } })
+  if ok and node then
+    while node do
+      if node:type():find("comment") then
+        return true
+      end
+      node = node:parent()
     end
+    return false
+  end
 
-    for _, p in ipairs(patterns) do
+  -- 2) Fallback: classic :syntax groups (no parser available)
+  for _, id in ipairs(vim.fn.synstack(row + 1, col + 1)) do
+    if vim.fn.synIDattr(vim.fn.synIDtrans(id), "name") == "Comment" then
+      return true
+    end
+  end
+  return false
+end
+
+local function refresh(buf)
+  if not vim.api.nvim_buf_is_valid(buf) or vim.bo[buf].buftype ~= "" then
+    return
+  end
+  vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+
+  -- make sure the syntax tree is current (matters for TextChangedI)
+  local has_parser, parser = pcall(vim.treesitter.get_parser, buf)
+  if has_parser and parser then
+    parser:parse()
+  end
+
+  for row, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
+    local first_s, first_e, first_p
+    for pattern, p in pairs(config.keywords) do
       local init = 1
       while true do
-        local s, e = line:find(p[1], init)
+        local s, e = line:find(pattern, init)
         if not s then
           break
         end
-        vim.api.nvim_buf_set_extmark(bufnr, ns, row, s - 1, {
-          end_col = e,
-          hl_group = p[2],
-          ephemeral = true,
-          priority = 200,
-        })
-        init = e + 1
+        -- only accept matches that sit inside a comment
+        if in_comment(buf, row - 1, s - 1) then
+          if not first_s or s < first_s then
+            first_s, first_e, first_p = s, e, p
+          end
+          break -- earliest valid match for this pattern is enough
+        end
+        init = e + 1 -- not in a comment, keep looking on this line
       end
     end
+
+    if first_p then
+      vim.api.nvim_buf_set_extmark(buf, ns, row - 1, first_s - 1, {
+        end_col = first_e,
+        hl_group = first_p.hl,
+        sign_text = config.show_sign and first_p.icon or nil,
+        sign_hl_group = config.show_sign and first_p.sign_hl or nil,
+        priority = 200,
+      })
+    end
+  end
+end
+
+local group = vim.api.nvim_create_augroup("KeywordHighlight", { clear = true })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = group,
+  desc = "Redefine custom Todo highlights",
+  callback = function()
+    define_groups()
+    refresh(vim.api.nvim_get_current_buf())
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufEnter", "TextChanged", "TextChangedI" }, {
+  group = group,
+  desc = "Refresh keyword highlights and signs",
+  callback = function(ev)
+    refresh(ev.buf)
+  end,
+})
+
+define_groups()
+refresh(vim.api.nvim_get_current_buf())

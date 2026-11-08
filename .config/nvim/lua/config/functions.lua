@@ -15,6 +15,20 @@ function _G.is(real)
   return vim.fn.has(real) == 1
 end
 
+
+---Verify if and program or a list of programs are in $PATH
+---@param prg string|string[]
+---@return boolean
+function _G.executable(prg)
+  local ok
+  -- if type(prg) == table then
+  --   for _, p in ipairs(prg) do
+  --     ok = vim.fn.executable(prg) == 1
+  --   end
+  ok = vim.fn.executable(prg) == 1
+  return ok
+end
+
 ---Set options like `:set`.
 ---
 ---See `Fish.set` for the supported value types.

@@ -161,9 +161,18 @@ vim.filetype.add {
 vim.schedule(function()
   set {
     spelllang = "pt_br,en_us,es",
-    spell = true,
+    -- spell = true,
     spelloptions = "camel", -- Treat camelCase word parts as separate words
   }
+
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "*.md", "*.org", "*.txt" },
+    callback = function()
+      set_local {
+        spell = true,
+      }
+    end,
+  })
 
   local spell_on_choice = vim.schedule_wrap(function(_, idx)
     if type(idx) == "number" then
@@ -253,7 +262,7 @@ set {
   },
 
   -- statuscolumn = "%s%l%C "
-  statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()"
+  statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()",
 }
 
 -- }}}

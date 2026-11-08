@@ -61,7 +61,7 @@ vim.pack.add({
   { src = "https://forge.barrettruth.com/barrettruth/canola.nvim", version = "canola" },
 
   -- Picker
-  "https://github.com/ibhagwan/fzf-lua",
+  -- "https://github.com/ibhagwan/fzf-lua",
 
   -- -- Git
   -- "https://github.com/nvim-lua/plenary.nvim", -- required
@@ -69,6 +69,9 @@ vim.pack.add({
   -- "https://github.com/m00qek/baleia.nvim", -- optional
   -- "https://github.com/NeogitOrg/neogit",
   "https://github.com/tpope/vim-fugitive",
+
+  -- System
+  -- "https://github.com/tpope/vim-eunuch",
 
   -- Quickfix
   "https://github.com/stevearc/quicker.nvim",
@@ -100,22 +103,23 @@ vim.pack.add({
   "https://github.com/folke/tokyonight.nvim",
 
   -- Agenda
-  "https://github.com/xheisenbugx/org.nvim",
-  "https://github.com/kristijanhusak/org-lsp",
+  -- "https://github.com/xheisenbugx/org.nvim",
+  -- "https://github.com/kristijanhusak/org-lsp",
+  "https://github.com/nvim-orgmode/orgmode",
   -- "https://github.com/offGustavo/md-agenda.nvim",
 
   -- On Demand
   -- "https://github.com/dstein64/vim-startuptime",
   -- "https://github.com/nvzone/showkeys",
   -- "https://github.com/nstefan002/screenkey.nvim",
-})
--- }, { load = function() end })
+  -- })
+}, { load = function() end })
 --- }}}
 
 -- {{{ Plugins Config
 
 require("extern.canola")
-require("extern.fzf-lua")
+-- require("extern.fzf-lua")
 
 -- TODO(format): drop conform and format through Neovim itself.
 --   - set `formatprg` per filetype in `ftplugin/<ft>.lua` (e.g. "stylua -",
@@ -142,6 +146,8 @@ require("extern.tokyonight")
 require("extern.fugitive")
 -- require("extern.neogit")
 -- require("extern.baleia")
+
+-- packadd("vim-eunuch")
 
 require("extern.treesitter")
 
