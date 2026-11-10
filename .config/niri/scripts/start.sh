@@ -6,13 +6,13 @@ systemctl --user start gnome-keyring-daemon.service & disown
 
 # cosmic-ext-alternative-startup & disown
 
-# killall mako 
-# # mako & disown
-# swaync & disown
-# killall waybar 
-# waybar & disown
+killall mako 
+# mako & disown
+swaync & disown
+killall waybar 
+waybar & disown
 
-dms run & disown
+# dms run & disown
 
 
 killall wayscriber 
