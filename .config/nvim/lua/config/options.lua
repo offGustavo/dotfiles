@@ -1,10 +1,12 @@
 -- vim: foldmethod=marker
 
 -- {{{ Map Leader and Local Leader
--- <space> as leader
-vim.g.mapleader = " "
--- \ as local leader
-vim.g.maplocalleader = "\\"
+vim.cmd([[
+" <space> as leader
+let g:mapleader = " "
+" <C-c> as local leader
+let g:maplocalleader = "\<C-c>"
+]])
 -- }}}
 
 -- {{{ Disable Plugins
@@ -267,38 +269,38 @@ set {
 
 -- }}}
 
--- -- {{{ statusline
+-- {{{ statusline
+
+-- set {
+--   laststatus = 3,
+--   showmode = false,
+-- }
 --
--- -- set {
--- --   laststatus = 3,
--- --   showmode = false,
--- -- }
--- --
--- -- -- vim.opt.fillchars:append({
--- -- --   stl = "-",
--- -- --   stlnc = "-"
--- -- -- })
--- --
--- -- -- vim.opt.fillchars:append({
--- -- --   vert = '┃',
--- -- --   horiz = '━',
--- -- --   horizup = '┻',
--- -- --   horizdown = '┳'
--- -- -- })
--- --
--- -- -- vim.opt.fillchars:append({
--- -- -- vert = ' ',
--- -- -- horiz = ' ',
--- -- -- horizup = ' ',
--- -- -- horizdown = ' '
--- -- -- })
+-- -- vim.opt.fillchars:append({
+-- --   stl = "-",
+-- --   stlnc = "-"
+-- -- })
 --
--- -- From mini.statusline
--- -- Set statusline globally and dynamically decide which content to use
--- vim.go.statusline =
---   [[ %{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.require('Fish.statusline').build_statusline() : v:lua.require('Fish.statusline').build_statusline_inactive()%} ]]
+-- -- vim.opt.fillchars:append({
+-- --   vert = '┃',
+-- --   horiz = '━',
+-- --   horizup = '┻',
+-- --   horizdown = '┳'
+-- -- })
 --
--- -- }}}
+-- -- vim.opt.fillchars:append({
+-- -- vert = ' ',
+-- -- horiz = ' ',
+-- -- horizup = ' ',
+-- -- horizdown = ' '
+-- -- })
+
+-- From mini.statusline
+-- Set statusline globally and dynamically decide which content to use
+vim.go.statusline =
+  [[ %{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.require('Fish.statusline').build_statusline() : v:lua.require('Fish.statusline').build_statusline_inactive()%} ]]
+
+-- }}}
 
 -- -- {{{ tabline
 -- vim.o.showtabline = 0

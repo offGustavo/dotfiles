@@ -42,7 +42,7 @@ end
 require("config.lazy").add({
   -- General
   { import = "plugins.mini" },
-  { import = "plugins.snacks" },
+  -- { import = "plugins.snacks" },
 
   -- Theme
   { import = "plugins.tokyonight" },
@@ -51,7 +51,7 @@ require("config.lazy").add({
   { import = "plugins.canola" },
 
   -- Picker
-  -- { import = "plugins.fzf-lua" },
+  { import = "plugins.fzf-lua" },
 
   -- Git
   { import = "plugins.fugitive" },
@@ -80,7 +80,8 @@ require("config.lazy").add({
   -- { import =  "plugins.nvim-colorizer" },
 
   -- Agenda
-  { import = "plugins.org" },
+  { import = "plugins.org-nvim" },
+  -- { import = "plugins.orgmode" },
 
   -- On Demand
   -- { "https://github.com/nstefan002/screenkey.nvim" },
@@ -95,5 +96,6 @@ require("offGustavo.todo-comments")
 require("offGustavo.yazi")
 require("offGustavo.cedit").setup({ key = "<M-x>" })
 require("offGustavo.compile-mode")
+require("Fish.git_branch").setup()
 -- require("Tatr")
 -- }}}

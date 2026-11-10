@@ -1,6 +1,7 @@
 return {
   "https://github.com/ibhagwan/fzf-lua",
   lazy = true,
+  enabled = executable("fzf"),
   event = "VeryLazy",
   opts = {
     {
@@ -53,7 +54,7 @@ return {
 
 
   keys = {
-    ---{{{ FZF-lua
+    ---{{{ fzf-lua
     { "<M-o>", "<Cmd>FzfLua files<Cr>", desc = "Find" },
     { "<M-s>", "<Cmd>FzfLua live_grep<Cr>", desc = "Grep" },
     { "<M-b>", "<Cmd>FzfLua buffers<Cr>", desc = "Buffers" },

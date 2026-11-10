@@ -1,0 +1,46 @@
+return {
+  -- {
+  --   "https://github.com/nvim-orgmode/orgmode",
+  --   lazy = true,
+  --   event = "VeryLazy",
+  --   opts = {
+  --     org_agenda_files = "~/Notes/**/*",
+  --     org_default_notes_file = "~/Notes/notes.org",
+  --   },
+  -- },
+  -- {
+  --   "https://github.com/kristijanhusak/org-lsp",
+  --   lazy = true,
+  --   ft = "org",
+  --   build = ":OrgLspDownload",
+  --   opts = {
+  --     -- The server's options: Org's variables, named with `_`.
+  --     settings = {
+  --       org_agenda_files = { "~/Notes", "~/Notes/**/*.org" },
+  --       org_todo_keywords = { "TODO(t)", "NEXT(n)", "WAIT(w@/!)", "|", "DONE(d!)", "CANCELLED(c@)" },
+  --       org_log_done = "time",
+  --       org_capture_templates = {
+  --         {
+  --           key = "t",
+  --           description = "Task",
+  --           target = { "file+headline", "~/org/inbox.org", "Tasks" },
+  --           template = "* TODO %?\n  %U",
+  --         },
+  --       },
+  --       org_agenda_custom_commands = {
+  --         {
+  --           key = "d",
+  --           description = "Today, then what is waiting",
+  --           blocks = {
+  --             { type = "agenda", settings = { org_agenda_span = "day" } },
+  --             { type = "todo", match = "WAIT", header = "Waiting for" },
+  --           },
+  --         },
+  --       },
+  --     },
+  --     -- The plugin's own.
+  --     win_split_mode = "vsplit",
+  --     calendar_win_mode = "cursor",
+  --   },
+  -- },
+}

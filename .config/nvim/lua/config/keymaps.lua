@@ -53,7 +53,7 @@ map {
   { "n", "<S-Esc>", vim.cmd.nohl },
 
   -- Fix <C-c> to work like <Esc>
-  { "i", "<C-c>", "<Esc>" },
+  -- { "i", "<C-c>", "<Esc>" },
 
   --- Better Go to file
   { "n", "gf", ":e <cfile><Cr>", silent = true, desc = "Better gf" },
@@ -340,7 +340,7 @@ map {
   -- -- }}}
 
   -- {{{ Terminal
-  { { "i", "c", "n", "v", "x" }, "<C-c>", "<Esc>", desc = "Fix <C-c>", silent = true },
+  -- { { "i", "c", "n", "v", "x" }, "<C-c>", "<Esc>", desc = "Fix <C-c>", silent = true },
   { { "i", "t" }, "<M-;>", "<C-\\><C-n>", silent = true, desc = "Go To Normal Mode in Terminal", nowait = true },
   { "t", "<S-Esc>", "<C-\\><C-n>", silent = true, desc = "Go To Normal Mode in Terminal", nowait = true },
   -- { 't', '<Esc><Esc>', '<C-\\><C-n>',  silent = true, desc = 'Go To Normal Mode in Terminal', nowait = true },
@@ -800,14 +800,6 @@ map {
       require("Fish.toggle").increase()
     end,
     desc = "Inrease numbers and words",
-  },
-  {
-    "n",
-    "<C-S-a>",
-    function()
-      require("Fish.toggle").decrease()
-    end,
-    desc = "Decrease numbers and words",
   },
   {
     "n",

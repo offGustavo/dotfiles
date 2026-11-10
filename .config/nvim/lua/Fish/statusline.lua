@@ -11,10 +11,10 @@ local function get_file_name()
   local buftype = vim.bo[0].buftype
   local filetype = vim.bo[0].filetype
   if
-      vim.fn.isdirectory(vim.fn.expand("%:p")) == 1
-      or filetype == "netrw"
-      or filetype == "oil"
-      or filetype == "canola"
+    vim.fn.isdirectory(vim.fn.expand("%:p")) == 1
+    or filetype == "netrw"
+    or filetype == "oil"
+    or filetype == "canola"
   then
     local dir_name = vim.fn.fnamemodify(full_path, ":t")
     if dir_name == "" then
@@ -42,31 +42,55 @@ local function get_file_name()
   end
 end
 
-local function git_info()
-  if vim.b.minigit_summary_string and vim.b.minidiff_summary_string then
-    local diff_parts = vim.split(vim.b.minidiff_summary_string, " ")
-    local highlighted_parts = {}
-
-    for _, part in ipairs(diff_parts) do
-      if part:match("^%+%d+") then
-        -- Added lines: +1, +42, etc.
-        table.insert(highlighted_parts, "%#StatuslineDiffAdd#" .. part)
-      elseif part:match("^%~%d+") then
-        -- Modified lines: ~1, ~42, etc.
-        table.insert(highlighted_parts, "%#StatuslineDiffChange#" .. part)
-      elseif part:match("^%-%d+") then
-        -- Deleted lines: -1, -42, etc.
-        table.insert(highlighted_parts, "%#StatuslineDiffDelete#" .. part)
-      else
-        -- Any other non-matching parts (shouldn't happen with normal diff output)
-        table.insert(highlighted_parts, part)
-      end
-    end
-
-    local highlighted_diff = table.concat(highlighted_parts, " ")
-    return vim.b.minigit_summary_string .. " %#Normal#" .. highlighted_diff .. "%#Normal# "
+local function git_branch()
+  local branch_name = nil
+  if vim.g.fish_git_branch ~= nil then
+    branch_name = vim.g.fish_git_branch
   end
-  return ""
+  if vim.b.fish_git_branch ~= nil then
+    branch_name = vim.b.fish_git_branch
+  end
+  if branch_name == nil then
+    return ""
+  end
+
+  local branch = {}
+  table.insert(branch, "<")
+  table.insert(branch, branch_name)
+  table.insert(branch, ">")
+  table.insert(branch, " ")
+  return table.concat(branch)
+end
+
+local function git_info()
+  local diff_summary = vim.b.minidiff_summary_string
+  if diff_summary == nil or diff_summary == "" then
+    return ""
+  end
+
+  local diff_parts = vim.split(diff_summary, " ")
+  local highlighted_parts = {}
+  table.insert(highlighted_parts, "%#Normal#")
+  for _, part in ipairs(diff_parts) do
+    if part:match("^%+%d+") then
+      -- Added lines: +1, +42, etc.
+      table.insert(highlighted_parts, "%#StatuslineDiffAdd#")
+      table.insert(highlighted_parts, part)
+      table.insert(highlighted_parts, " ")
+    elseif part:match("^%~%d+") then
+      -- Modified lines: ~1, ~42, etc.
+      table.insert(highlighted_parts, "%#StatuslineDiffChange#")
+      table.insert(highlighted_parts, part)
+      table.insert(highlighted_parts, " ")
+    elseif part:match("^%-%d+") then
+      -- Deleted lines: -1, -42, etc.
+      table.insert(highlighted_parts, "%#StatuslineDiffDelete#")
+      table.insert(highlighted_parts, part)
+      table.insert(highlighted_parts, " ")
+    end
+  end
+  table.insert(highlighted_parts, "%#Normal#")
+  return table.concat(highlighted_parts)
 end
 
 local function show_macro_recording()
@@ -94,20 +118,37 @@ local function lsp_info()
   if not Fish.did_lsp_setup then
     return ""
   end
-  local msg = ""
+  local msg = {}
+  table.insert(msg, "{")
   -- local msg = "No Active Lsp"
   local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
   local clients = vim.lsp.get_clients()
   if next(clients) == nil then
-    return msg
+    return ""
   end
   for _, client in ipairs(clients) do
     local filetypes = client.config.filetypes
     if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-      return client.name .. " "
+      table.insert(msg, client.name)
     end
   end
-  return msg
+  table.insert(msg, "}")
+  return table.concat(msg)
+end
+
+local function filetype()
+  local ft = vim.bo.filetype
+  if ft == "" or ft == nil then
+    return ""
+  end
+  local text = {}
+
+  table.insert(text, "[")
+  table.insert(text, ft)
+  table.insert(text, "]")
+  table.insert(text, " ")
+
+  return table.concat(text)
 end
 
 local function fileformat()
@@ -121,22 +162,22 @@ end
 
 function M.build_statusline()
   return render_with_mode_color(" ")
-      .. render_with_mode_color_inverted("  ")
-      .. "%#Normal#"
-      .. get_file_name()
-      .. "%#Normal#"
-      .. lsp_diagnostics()
-      .. "%l:%c %L:%p%% "
-      .. "%="
-      .. show_macro_recording()
-      .. git_info()
-      -- .. "%S "
-      -- .. "%r "
-      .. "%#Normal#"
-      .. lsp_info()
-      .. "%y "
-      .. fileformat()
-      .. render_with_mode_color("  ")
+    .. render_with_mode_color_inverted("  ")
+    .. "%#Normal#"
+    .. get_file_name()
+    .. "%#Normal#"
+    .. "%l:%c %L:%p%% "
+    .. lsp_diagnostics()
+    .. lsp_info()
+    .. "%="
+    .. show_macro_recording()
+    .. git_branch()
+    .. git_info()
+    -- .. "%S "
+    -- .. "%r "
+    .. filetype()
+    .. fileformat()
+    .. render_with_mode_color("  ")
 end
 
 function M.build_statusline_inactive()
@@ -144,13 +185,13 @@ function M.build_statusline_inactive()
   local status_win = vim.g.statusline_winid
   if status_win ~= active_win then
     return render_with_mode_color(" ")
-        .. render_with_mode_color_inverted("   ")
-        .. "%#StatusLineNC#"
-        .. get_file_name()
-        .. "%#StatusLineNC#"
-        .. "%l:%c %L:%p%%"
-        .. "%="
-        .. render_with_mode_color("  ")
+      .. render_with_mode_color_inverted("   ")
+      .. "%#StatusLineNC#"
+      .. get_file_name()
+      .. "%#StatusLineNC#"
+      .. "%l:%c %L:%p%%"
+      .. "%="
+      .. render_with_mode_color("  ")
   end
 end
 

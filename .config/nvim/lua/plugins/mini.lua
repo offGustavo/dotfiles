@@ -19,14 +19,14 @@ return {
     -- require("mini.git").setup({})
     -- vim.keymap.set({ "n", "x" }, "<leader>gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", { desc = "Show at cursor" })
 
-    -- Use only HEAD name as summary string
-    local branch_format_summary = function(data)
-      -- Utilize buffer-local table summary
-      local summary = vim.b[data.buf].minigit_summary
-      vim.b[data.buf].minigit_summary_string = summary.head_name or ""
-    end
-    local branch_au_opts = { pattern = "MiniGitUpdated", callback = branch_format_summary }
-    vim.api.nvim_create_autocmd("User", branch_au_opts)
+    -- -- Use only HEAD name as summary string
+    -- local branch_format_summary = function(data)
+    --   -- Utilize buffer-local table summary
+    --   local summary = vim.b[data.buf].minigit_summary
+    --   vim.b[data.buf].minigit_summary_string = summary.head_name or ""
+    -- end
+    -- local branch_au_opts = { pattern = "MiniGitUpdated", callback = branch_format_summary }
+    -- vim.api.nvim_create_autocmd("User", branch_au_opts)
 
     local diff_summary = function(data)
       local summary = vim.b[data.buf].minidiff_summary
