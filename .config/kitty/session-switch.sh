@@ -1,18 +1,16 @@
 #!/usr/bin/env bash
 
-# TODO: make this work
-
-# Get the list of sessions
-sessions=$(kitty @ ls | jq -r '.[] | .id + " " + .name')
+# Modificado para extrair as abas/janelas do JSON enviado
+sessions=$(kitty @ ls | jq -r '.[] | .tabs[] | .id, .title' | paste -d ' ' - -)
 
 # Use fzf to select a session
 selected_session=$(echo "$sessions" | fzf --height 40% --reverse)
 
-# Extract the session ID
-session_id=$(echo "$selected_session" | awk '{print $1}')
+# Extract the tab ID
+tab_id=$(echo "$selected_session" | awk '{print $1}')
 
-# Switch to the selected session
-if [ -n "$session_id" ]; then
-    kitty @ goto-session "$session_id"
+# Switch to the selected tab/session
+if [ -n "$tab_id" ]; then
+    # O kitty usa focus-tab para alternar dinamicamente entre contextos ativos
+    kitty @ focus-tab --match id:"$tab_id"
 fi
-
