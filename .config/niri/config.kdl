@@ -508,11 +508,13 @@ binds {
   // shows a list of important hotkeys.
   Mod+Shift+Slash { show-hotkey-overlay; }
 
+  // TODO: enable when it be add in niri
+  // ref: https://github.com/niri-wm/niri/issues/932 https://github.com/niri-wm/niri/pull/3205
   // Mod+Shift+P { toggle-window-pinned; }
 
-  // Suggested binds for running programs: terminal, app launcher, screen locker.
+  // Open Terminal and Gui Editor
   Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
-  Mod+Shift+Return  hotkey-overlay-title="Kitty Quake Terminal" { spawn-sh "kitten quick-access-terminal"; }
+  Mod+Shift+Return  hotkey-overlay-title="Gui Editor" { spawn-sh "emacs"; }
 
   // FIXME: not working
   // Mod+C { spawn-sh "wl-copy"; }
@@ -520,7 +522,7 @@ binds {
 
   Mod+D { spawn-sh "rofi -show run"; }
   Mod+Slash { spawn-sh "rofi -show drun"; }
-  Alt+Space { spawn-sh "rofi -show drun"; }
+  // Alt+Space { spawn-sh "rofi -show drun"; }
 
   // Super+Escape hotkey-overlay-title="Lock the Screen And Suspend" { spawn-sh "$HOME/.config/niri/scripts/lock.sh"; }
   Mod+Ctrl+Escape hotkey-overlay-title="Lock the Screen" { spawn-sh "hyprlock"; }
@@ -849,3 +851,4 @@ recent-windows {
 
 // DMS Include Configs
 include "dms/cursor.kdl"
+include "dms/binds.kdl"
