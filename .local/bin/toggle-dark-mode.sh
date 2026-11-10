@@ -30,10 +30,6 @@ if command -v fuzzel &>/dev/null; then
   fi
 fi
 
-if command -v i3 &>/dev/null; then
-  "$HOME"/.config/i3/scripts/toggle-dark-mode.sh "$THEME"
-fi
-
 if command -v swaybg &>/dev/null; then
   $HOME/.local/bin/start-swaybg.lua
   # kill $(pgrep swaybg) 2>/dev/null
@@ -47,4 +43,3 @@ PID_dms=$(pgrep dms)
 if [[ -n "$PID_dms" ]]; then
   dms ipc theme toggle
 fi
-

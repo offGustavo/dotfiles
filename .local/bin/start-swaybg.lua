@@ -4,12 +4,12 @@ local wallpapers = {
 	Light = {
 		{
 			name = "Tokyo Night (day)",
-			path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/vinland-saga-manga-5120x2880-14832.jpg",
+			path = "/home/gustavo/Pictures/walls/anime/vinland-saga-manga-5120x2880-14832.jpg",
 		},
 
 		{
 			name = "02",
-			path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/a_train_going_through_a_lake.jpg",
+			path = "/home/gustavo/Pictures/walls/anime/a_train_going_through_a_lake.jpg",
 		},
 	},
 	Dark = {
@@ -21,10 +21,10 @@ local wallpapers = {
 		-- 	name = "Compline",
 		-- 	path = "/home/gustavo/Pictures/Wallpapers/my/compline.png",
 		-- },
-		-- {
-		-- 	name = "A Girl with Purple Flowers",
-		-- 	path = "/home/gustavo/Pictures/Wallpapers/dharmx-Walls/anime/a_cartoon_of_a_girl_standing_under_a_tree_with_purple_flowers.png",
-		-- },
+		{
+			name = "A Girl with Purple Flowers",
+			path = "/home/gustavo/Pictures/walls/anime/a_cartoon_of_a_girl_standing_under_a_tree_with_purple_flowers.png",
+		},
 		-- {
 		-- 	name = "Tokyo Night",
 		-- 	path = "/home/gustavo/Pictures/Wallpapers/tokyo-nigth-wallpapers/night/os/arch_01_1920x1080.png",
@@ -35,6 +35,64 @@ local wallpapers = {
 		-- },
 	},
 }
+
+local Cmd = {}
+Cmd.__index = Cmd
+
+-- Constructor: creates a new command object
+function Cmd.new(initial)
+	local self = setmetatable({}, Cmd)
+	self.args = {}
+	if initial then
+		self:append(initial)
+	end
+	return self
+end
+
+-- Append arguments (supports flat values, nested tables, and flattening)
+function Cmd:append(...)
+	for _, v in ipairs({ ... }) do
+		if type(v) == "table" then
+			for _, sub in ipairs(v) do
+				table.insert(self.args, tostring(sub))
+			end
+		elseif v ~= nil then
+			table.insert(self.args, tostring(v))
+		end
+	end
+	return self -- returns self for method chaining
+end
+
+-- METAMETHOD: Allows calling the object directly like a function to add args
+-- e.g., my_cmd("-Wall", "-O3")
+function Cmd.__call(self, ...)
+	return self:add(...)
+end
+
+-- Join arguments into a shell-ready string
+function Cmd:join()
+	-- Helper to escape arguments safely
+	local function escape_arg(arg)
+		arg = tostring(arg)
+		if arg:match("[ \t\n\"'\\$`*?#()<>|&;]") then
+			arg = '"' .. arg:gsub('"', '\\"') .. '"'
+		end
+		return arg
+	end
+
+	local escaped = {}
+	for _, arg in ipairs(self.args) do
+		table.insert(escaped, escape_arg(arg))
+	end
+	return table.concat(escaped, " ")
+end
+
+-- Execute the command
+function Cmd:run()
+	local cmd_str = self:join()
+	print("[CMD] " .. cmd_str)
+	return os.execute(cmd_str)
+end
 
 -- Função para verificar e matar processos
 local function kill_swaybg_if_running()
@@ -133,7 +191,7 @@ local function get_wallpaper(name)
 		if path then
 			return path, wp_name, theme
 		else
-			print("Warning: " .. wp_name .. ". Using random wallpaper instead.")
+			print("[WARN]: " .. wp_name .. ". Using random wallpaper instead.")
 		end
 	end
 
@@ -141,28 +199,62 @@ local function get_wallpaper(name)
 	return path, wp_name, theme
 end
 
--- Função para iniciar swaybg
-local function start_swaybg(wallpaper_path)
+--- Verify Wallpaper Path Exists in System
+---@param  wallpaper_path string
+---@return boolean path_exists
+function verify_wallpaper_path(wallpaper_path)
 	if not wallpaper_path then
-		print("Error: No wallpaper path provided")
+		print("[ERROR]: No wallpaper path provided")
 		return false
 	end
 
 	-- Verifica se o arquivo existe
 	local file = io.open(wallpaper_path, "r")
 	if not file then
-		print("Error: Wallpaper file not found: " .. wallpaper_path)
+		print("[ERROR]: Wallpaper file not found: " .. wallpaper_path)
 		return false
 	end
 	file:close()
 
-	-- -- Mata o swaybg se estiver rodando
+	return true
+end
+
+--- Start Swaybg
+---@param wallpaper_path string
+---@return boolean
+local function start_swaybg(wallpaper_path)
+	if not verify_wallpaper_path(wallpaper_path) then
+		return
+	end
+
 	kill_swaybg_if_running()
 
-	-- Inicia o swaybg com o wallpaper
-	local cmd = "swaybg -i '" .. wallpaper_path .. "' -m fill &"
-	print("Starting swaybg with: " .. wallpaper_path)
-	os.execute(cmd)
+	local cmd = Cmd:new()
+
+	cmd:append("swaybg")
+	cmd:append("-i")
+	cmd:append(wallpaper_path)
+	cmd:append("-m fill &")
+
+	cmd:run()
+
+	return true
+end
+
+--- Start Xwallpaper
+---@param wallpaper_path string
+---@return boolean
+local function start_xwallpaper(wallpaper_path)
+	if not verify_wallpaper_path(wallpaper_path) then
+		return
+	end
+
+	local cmd = Cmd.new("xwallpaper")
+
+	cmd:append("--zoom")
+	cmd:append(wallpaper_path)
+
+	cmd:run()
 
 	return true
 end
@@ -194,76 +286,99 @@ local function add_wallpaper(name, path, theme)
 	print("Added wallpaper: " .. name .. " to " .. theme .. " theme")
 end
 
--- Função principal
-local function main()
-	-- Inicializa random seed
-	math.randomseed(os.time())
+---Verify if we are running under X11 or Wayland
+---@return string|nil Sessions Type Name
+local function get_session_type()
+	-- Check XDG_SESSION_TYPE environment variable first
+	local handle = io.popen("echo $XDG_SESSION_TYPE 2>/dev/null")
+	local result = handle:read("*a"):gsub("%s+", "") -- trim whitespace
+	handle:close()
 
-	-- Parse arguments
-	local name = nil
-	local list = false
-	local add = false
-	local add_theme = "Light"
-	local add_path = nil
-
-	for i = 1, #arg do
-		if arg[i] == "--list" or arg[i] == "-l" then
-			list = true
-		elseif arg[i] == "--name" or arg[i] == "-n" then
-			name = arg[i + 1]
-		elseif arg[i] == "--add" or arg[i] == "-a" then
-			add = true
-			name = arg[i + 1]
-			add_path = arg[i + 2]
-		elseif arg[i] == "--theme" or arg[i] == "-t" then
-			add_theme = arg[i + 1]
-		elseif arg[i] == "--help" or arg[i] == "-h" then
-			print("Usage: " .. arg[0] .. " [OPTIONS]")
-			print("Options:")
-			print("  -l, --list              List all available wallpapers")
-			print("  -n, --name NAME         Use wallpaper with specific name")
-			print("  -a, --add NAME PATH     Add a new wallpaper")
-			print("  -t, --theme THEME       Specify theme when adding (Light/Dark)")
-			print("  -h, --help              Show this help message")
-			print("")
-			print("Examples:")
-			print("  " .. arg[0] .. "                    # Use random wallpaper based on system theme")
-			print("  " .. arg[0] .. ' -n "White mountain"  # Use specific wallpaper')
-			print("  " .. arg[0] .. ' -a "New Wall" /path/to/image.jpg -t Dark')
-			return
-		end
+	if result == "wayland" or result == "x11" then
+		return result
 	end
 
-	if list then
-		list_wallpapers()
+  return
+end
+
+-- Inicializa random seed
+math.randomseed(os.time())
+
+-- Parse arguments
+local name = nil
+local list = false
+local add = false
+local add_theme = "Light"
+local add_path = nil
+
+for i = 1, #arg do
+	if arg[i] == "--list" or arg[i] == "-l" then
+		list = true
+	elseif arg[i] == "--name" or arg[i] == "-n" then
+		name = arg[i + 1]
+	elseif arg[i] == "--add" or arg[i] == "-a" then
+		add = true
+		name = arg[i + 1]
+		add_path = arg[i + 2]
+	elseif arg[i] == "--theme" or arg[i] == "-t" then
+		add_theme = arg[i + 1]
+	elseif arg[i] == "--help" or arg[i] == "-h" then
+		print("Usage: " .. arg[0] .. " [OPTIONS]")
+		print("Options:")
+		print("  -l, --list              List all available wallpapers")
+		print("  -n, --name NAME         Use wallpaper with specific name")
+		print("  -a, --add NAME PATH     Add a new wallpaper")
+		print("  -t, --theme THEME       Specify theme when adding (Light/Dark)")
+		print("  -h, --help              Show this help message")
+		print("")
+		print("Examples:")
+		print("  " .. arg[0] .. "                    # Use random wallpaper based on system theme")
+		print("  " .. arg[0] .. ' -n "White mountain"  # Use specific wallpaper')
+		print("  " .. arg[0] .. ' -a "New Wall" /path/to/image.jpg -t Dark')
 		return
-	end
-
-	if add then
-		if not name or not add_path then
-			print("Error: --add requires name and path arguments")
-			return
-		end
-		add_wallpaper(name, add_path, add_theme)
-		return
-	end
-
-	-- Obtém o wallpaper
-	local wallpaper_path, wallpaper_name, theme = get_wallpaper(name)
-
-	if wallpaper_path then
-		print("Selected wallpaper: " .. wallpaper_name)
-		print("Theme: " .. theme)
-		print("Path: " .. wallpaper_path)
-
-		-- Inicia o swaybg
-		if start_swaybg(wallpaper_path) then
-			print("Wallpaper set successfully!")
-		end
-	else
-		print("Error: Could not get wallpaper")
 	end
 end
 
--- Executa o programa
-main()
+if list then
+	list_wallpapers()
+	return
+end
+
+if add then
+	if not name or not add_path then
+		print("[ERROR]: --add requires name and path arguments")
+		return
+	end
+	add_wallpaper(name, add_path, add_theme)
+	return
+end
+
+local wallpaper_path, wallpaper_name, theme = get_wallpaper(name)
+local ok
+
+if wallpaper_path then
+	print("[LOG]: Selected wallpaper: " .. wallpaper_name)
+	print("[LOG]: Theme: " .. theme)
+	print("[LOG]: Path: " .. wallpaper_path)
+
+	local session_type = get_session_type()
+
+	if session_type == nil then
+		print("[ERROR]: Unable to get current sessions type")
+		print("Sessions Types Supported: { 'wayland', 'x11' }")
+		return false
+	end
+
+	if session_type == "wayland" then
+		ok = start_swaybg(wallpaper_path)
+	else
+		ok = start_xwallpaper(wallpaper_path)
+	end
+end
+
+if not ok then
+	print("[ERROR]: Could not get wallpaper")
+	return 1
+end
+
+return 0

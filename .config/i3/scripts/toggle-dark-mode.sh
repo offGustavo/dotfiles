@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
-current_scheme="$1"
+
+toggle-dark-mode.sh
+CURRENT_SCHEME=$(dconf read /org/gnome/desktop/interface/color-scheme)
 
 THEME_FILE=~/.config/i3/config
 BASE="include ~/.config/i3/i3.config"
 
-if [ "$current_scheme" = "light" ]; then
+if [ "$CURRENT_SCHEME" = "'prefer-light'" ]; then
   # Wallpaper
-  xwallpaper --zoom ~/Pictures/Wallpapers/dharmx-Walls/cherry/a_tree_with_pink_flowers.jpg
+  # xwallpaper --zoom ~/Pictures/Wallpapers/dharmx-Walls/cherry/a_tree_with_pink_flowers.jpg
+  # xwallpaper --zoom /home/gustavo/Downloads/pexels-op23-12518942.jpg
 
   cat > "$THEME_FILE" <<'EOF'
 # WARN: AUTOGEN FILE
@@ -26,7 +29,8 @@ EOF
 
 else
   # Wallpaper
-  xwallpaper --zoom /home/gustavo/Pictures/Wallpapers/dharmx-Walls/spam/a_street_with_signs_and_lights_01.png
+  # xwallpaper --zoom /home/gustavo/Pictures/Wallpapers/dharmx-Walls/spam/a_street_with_signs_and_lights_01.png
+  # xwallpaper --zoom /home/gustavo/Downloads/pexels-op23-12518942.jpg
 
   cat > "$THEME_FILE" <<'EOF'
 # WARN: AUTOGEN FILE
@@ -45,3 +49,4 @@ EOF
 fi
 
 i3-msg reload
+
