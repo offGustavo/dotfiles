@@ -95,11 +95,11 @@ end
 --- }
 function _G.map(maps, now)
   if now then
-    require("Fish.keymap_set").map(maps)
+    require("Fish.keymap_set").set_keymap(maps)
     return
   end
   later(function()
-    require("Fish.keymap_set").map(maps)
+    require("Fish.keymap_set").set_keymap(maps)
   end)
 end
 

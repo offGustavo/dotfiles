@@ -422,7 +422,7 @@ end
 ---   { "<leader>{i}", "<cmd>b{i}<cr>", range = { 1, 9 }, desc = "Buffer {i}" },
 ---   { "<leader>p", function() require("fzf").files() end, load = "fzf" }, -- lazy load
 --- }
-function M.map(maps)
+function M.set_keymap(maps)
   for idx, m in ipairs(maps) do
     if m.range then
 
