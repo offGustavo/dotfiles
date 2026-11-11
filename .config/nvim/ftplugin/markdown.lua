@@ -6,6 +6,9 @@
 
 -- vim.lsp.enable("markdown_oxide")
 
+-- Enable Treesitter Syntax Highlight 
+require("config.syntax_highlight").toggle_highlight(true, true)
+
 map {
   -- TODO: Modificar esse atalho e adicionar uma função para fazer o "toggle" do TODO
   { "i", "<M-i><M-l>", "- [ ] ", buf = 0 },

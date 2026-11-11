@@ -62,12 +62,13 @@ end
 --- Updates `Fish.highlight_state`, refreshes all valid buffers, and triggers a notification.
 ---
 --- @param state? boolean Optional explicit state to set. If omitted or `nil`, toggles the current `Fish.highlight_state`.
+--- @param silent? boolean Option Set Log
 --- @usage
 --- ```lua
 --- require("config.syntax_highlight").toggle_highlight(true)  -- Force enable everywhere
 --- require("config.syntax_highlight").toggle_highlight()      -- Toggle current state
 --- ```
-function M.toggle_highlight(state)
+function M.toggle_highlight(state, silent)
   local ok
   if state == nil then
     state = not Fish.highlight_state
@@ -79,7 +80,9 @@ function M.toggle_highlight(state)
   end
 
   if ok then
-    vim.notify("Treesitter + LSP highlight: " .. (state and "on" or "off"))
+    if not silent then
+      vim.notify("Treesitter + LSP highlight: " .. (state and "on" or "off"))
+    end
   end
 end
 

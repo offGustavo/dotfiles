@@ -18,6 +18,7 @@ return {
 
       ts.install({
         "rust",
+        "java",
         "javascript",
         "zig",
         "lua",

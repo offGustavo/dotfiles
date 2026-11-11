@@ -1,1 +1,1 @@
-require("config.syntax_highlight").toggle_highlight(true)
+require("config.syntax_highlight").toggle_highlight(true, true)

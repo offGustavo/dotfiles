@@ -930,7 +930,7 @@ map {
     "n",
     "<leader>u<C-t>",
     function()
-      require("config.syntax_highlight").toggle_highlight()
+      require("config.syntax_highlight").toggle_highlight(nil, true)
     end,
     desc = "Toggle LSP and Treesitter highlight",
   },
