@@ -19,12 +19,13 @@ end
 -- }}}
 
 -- {{{ Config Files
+require("config.functions")
+
 if os.getenv("SCROLL_MODE") then
-  vim.cmd.call("kitty#setup()")
+  source("kitty")
   return
 end
 
-require("config.functions")
 require("config.options")
 require("config.autocmds")
 require("config.commands")
