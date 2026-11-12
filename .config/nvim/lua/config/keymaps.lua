@@ -24,14 +24,14 @@
 -- TODO: remove this and use map  to set this option
 -- comment line/selection
 vim.cmd [[
-nmap <c-/> gcc
-imap <c-/> <c-o>gcc
-xmap <c-/> :norm gcc<cr>gv
-if !exists('g:neovide')
-  nmap <c-_> gcc
-  imap <c-_> <c-o>gcc
-  xmap <c-_> :norm gcc<cr>gv
-endif
+nmap <c-;> gcc
+imap <c-;> <c-o>gcc
+xmap <c-;> :norm gcc<cr>gv
+" if !exists('g:neovide')
+"   nmap <c-_> gcc
+"   imap <c-_> <c-o>gcc
+"   xmap <c-_> :norm gcc<cr>gv
+" endif
 ]]
 
 -- vim.keymap.set("n", "<c-/>",  "gcc", { remap = true} )
@@ -82,7 +82,7 @@ map {
       if file ~= "" then
         vim.ui.open(file)
       else
-        vim.notify("no file to open", vim.log.levels.WARN)
+        vim.notify("yes file to open", vim.log.levels.WARN)
       end
     end,
     silent = true,
@@ -254,23 +254,27 @@ map {
   { { "c", "i" }, "<M-f>", "<C-right>" },
   { { "c", "i" }, "<M-b>", "<C-left>" },
   { { "c", "i" }, "<C-d>", "<del>" },
-  { { "c", "i" }, "<C-o>", "<C-f>" },
+  { { "c", "i" }, "<C-Bs>", "<C-w>" },
+  -- Enter in cedit
+  { "c", "<M-d>", "<C-del>" },
+  { "c", "<C-o>", "<C-f>" },
 
-  -- " " Emacs shit
+  -- " " Emacs shitN
   -- nmap <M-x> :
   -- imap <M-x> <C-o>:
 
-  { "i", "<Tab>", "<C-t>" },
-  { "i", "<S-Tab>", "<C-d>" },
+  { "i", "<Tab>",  "<C-t>" },
+  { "i", "<S-Tab>","<C-d>" },
 
-  { "i", "<C-a>", " <home>" },
-  { "i", "<C-e>", " <end>" },
-  { "i", "<C-f>", " <right>" },
-  { "i", "<C-b>", " <left>" },
-  { "i", "<M-f>", " <C-right>" },
-  { "i", "<M-b>", " <C-left>" },
-  { "i", "<C-d>", " <Del>" },
-  { "i", "<M-d>", " <C-o>de" },
+  { "i", "<C-a>", "<Home>" },
+  { "i", "<C-e>", "<End>" },
+  { "i", "<C-f>", "<right>" },
+  { "i", "<C-b>", "<left>" },
+  { "i", "<M-f>", "<C-right>" },
+  { "i", "<M-b>", "<C-left>" },
+  { "i", "<C-d>", "<Del>" },
+  { "i", "<M-d>", "<C-o>de" },
+  { "i", "<C-/>", "<C-o>u" },
 
   -- " nmap <C-á> ^
   -- " nmap <C-é> $
@@ -803,7 +807,7 @@ map {
   },
   {
     "n",
-    "<C-x>",
+    "<M-a>",
     function()
       require("Fish.toggle").decrease()
     end,
