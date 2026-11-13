@@ -1,17 +1,16 @@
 return {
   "https://github.com/folke/which-key.nvim",
+  lazy = true,
   event = "VeryLazy",
-  enabled = true,
-  --@class wk.Opts
   opts = {
     ---@type false | "classic" | "modern" | "helix"
-    preset = "helix",
+    preset = "classic",
     -- Delay before showing the popup. Can be a number or a function that returns a number.
     ---@type number | fun(ctx: { keys: string, mode: string, plugin?: string }):number
-    -- delay = function(ctx)
-    -- 	return ctx.plugin and 0 or 200
-    -- end,
-    delay = 1000,
+    delay = function(ctx)
+      return ctx.plugin and 0 or 200
+    end,
+    -- delay = 1000,
     ---@param mapping wk.Mapping
     filter = function(mapping)
       -- example to exclude mappings without a description
@@ -27,6 +26,8 @@ return {
       { "<leader>s", group = "Search/Replace", icon = "" }, -- group
       { "<leader>g", group = "Git", icon = "" }, -- group
       { "Z", group = "Session", icon = "" }, -- group
+      { "s", group = "substitute", icon = "" }, -- group
+      { "S", group = "substitute", icon = "" }, -- group
       { "<leader>a", group = "Agenda", icon = "󱨰" }, -- group
       { "<leader>u", group = "Ui", icon = "" }, -- group
       { "<leader>c", group = "Code", icon = "" }, -- group
@@ -47,7 +48,6 @@ return {
     triggers = {
       { "<auto>", mode = "nxsoi" },
       { "<M-i>", mode = "i" },
-      { "s", mode = "n" },
     },
     -- Start hidden and wait for a key to be pressed before showing the popup
     -- Only used by enabled xo mapping modes.

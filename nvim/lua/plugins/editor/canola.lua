@@ -1,16 +1,10 @@
 return {
   "https://forge.barrettruth.com/barrettruth/canola.nvim",
   branch = "canola",
-  priority = 1000,
-  lazy = false,
-  enabled = true,
-  event = "VeryLazy",
-  keys = {
-    { "<M-e>", "<Cmd>Canola<Cr>", desc = "Canola" },
-    { "-", "<Cmd>Canola<Cr>", desc = "Canola" },
-    { "<leader><M-e>", "<Cmd>e.<Cr>", desc = "Open cwd" },
-    { "<leader>fd", ":Canola<Cr>", desc = "Oil Explore" },
-  },
+  cmd = "Canola",
+  lazy = true,
+  -- event = "VeryLazy",
+  ft = "directory",
   init = function()
     vim.g.canola = {
       columns = {
@@ -42,7 +36,7 @@ return {
         ["<C-t>"] = { callback = "actions.select", opts = { tab = true } },
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = { callback = "actions.close", mode = "n" },
-        ["<C-l>"] = "actions.refresh",
+        ["g/"] = "actions.refresh",
         ["-"] = { callback = "actions.parent", mode = "n" },
         ["_"] = { callback = "actions.open_cwd", mode = "n" },
         ["`"] = { callback = "actions.cd", mode = "n" },
@@ -110,4 +104,10 @@ return {
     }
     vim.g.canola_trash = {}
   end,
+  keys = {
+    { "<M-e>", "<Cmd>Canola<Cr>", desc = "Canola" },
+    { "-", "<Cmd>Canola<Cr>", desc = "Canola" },
+    -- { "<leader><M-e>", "<Cmd>e.<Cr>", desc = "Open cwd" },
+    -- { "<leader>fd", ":Canola<Cr>", desc = "Oil Explore" },
+  }
 }

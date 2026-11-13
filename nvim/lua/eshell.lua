@@ -29,7 +29,7 @@ vim.cmd("new")
 vim.bo.buftype = "prompt"
 local buf = vim.api.nvim_get_current_buf()
 vim.fn.prompt_setcallback(buf, on_submit)
-vim.fn.prompt_setprompt(buf, "shell command: ")
+vim.fn.prompt_setprompt(buf, "$ ")
 
 -- Start accepting shell commands.
 vim.cmd("startinsert")

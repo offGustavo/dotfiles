@@ -1,7 +1,7 @@
 return {
-  "folke/tokyonight.nvim",
-  -- lazy = false,
-  -- priority = 1000,
+  "https://github.com/folke/tokyonight.nvim",
+  priority = 1000,
+  lazy = false,
   opts = {
     dim_inactive = false,
     light_style = "day", -- The theme is used when the background is set to light
@@ -15,12 +15,11 @@ return {
     },
     on_colors = function(colors)
       -- colors.bg = "#000000" -- To check if its working try something like "#ff00ff" instead of colors.none
-      colors.bg_statusline = colors
-          .none -- To check if its working try something like "#ff00ff" instead of colors.none
+      colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
       colors.bg_statusline = colors.none
     end,
   },
   init = function()
     vim.cmd.colorscheme("tokyonight")
-  end
+  end,
 }
