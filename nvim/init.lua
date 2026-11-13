@@ -123,12 +123,13 @@ require("config.lazy").add({
   -- { import = "plugins.baleia" },
 
   -- My Plugins
-  { dir = "~/Projects/nvim-sessionizer", lazy = false },
+  { dir = "~/Projects/nvim-sessionizer", enabled = not is_windows(), lazy = false },
 
-  { dir = "~/Projects/tatr.vim/", lazy = false  },
+  { dir = "~/Projects/tatr.vim/", enabled = not is_windows(), lazy = false },
 
   {
     dir = "~/Projects/cuik.vim/",
+    enabled = not is_windows(),
     lazy = false,
     cmd = "CuikCompile",
     init = function()
