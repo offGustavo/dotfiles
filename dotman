@@ -1,0 +1,262 @@
+#!/usr/bin/env bash
+# dot - tiny dotfiles manager
+
+set -euo pipefail
+
+DOTFILES="${DOTFILES:-$HOME/dotfiles}"
+MANIFEST="$DOTFILES/MANIFEST"
+
+STAMP="$(date +%Y%m%d-%H%M%S)"
+DOTFILES_REAL="$(readlink -f "$DOTFILES" 2>/dev/null || echo "$DOTFILES")"
+DRY_RUN=0
+
+usage() {
+  cat << 'USAGE'
+Usage:
+  dot [-n]               Link every entry of the manifest into $HOME
+  dot -a PATH... [-n]    Move PATH (file or dir) to $DOTFILES/<basename>,
+                         symlink it back and add it to the manifest
+                         (~/.vimrc -> ".vimrc", ~/.local/bin/x -> "x|.local/bin")
+  dot -h                 Show this help
+
+Options:
+  -n, --dry-run          Show what would happen, change nothing
+
+Manifest ($DOTFILES/MANIFEST), one entry per line, "#" starts a comment:
+  source|destdir   $DOTFILES/source  ->  $HOME/destdir/<basename of source>
+  source           $DOTFILES/source  ->  $HOME/<basename of source>
+
+Examples:
+  HOME/vim|.config     $DOTFILES/HOME/vim  ->  $HOME/.config/vim
+  dotman|.local/bin    $DOTFILES/dotman    ->  $HOME/.local/bin/dotman
+  .tmux.conf           $DOTFILES/.tmux.conf -> $HOME/.tmux.conf
+  # .emacs             commented, does nothing
+
+Existing targets are renamed to <target>.backup<YYYYmmdd-HHMMSS>.
+USAGE
+}
+
+run() {
+  if ((DRY_RUN)); then
+    printf '[dry-run]'
+    printf ' %q' "$@"
+    echo
+  else
+    "$@"
+  fi
+}
+
+trim() {
+  local s="$1"
+  s="${s#"${s%%[![:space:]]*}"}"
+  s="${s%"${s##*[![:space:]]}"}"
+  printf '%s' "$s"
+}
+
+# Parses a manifest line.
+# Sets ENTRY_SRC (relative to $DOTFILES) and ENTRY_DEST (absolute target).
+# Both are empty for blank, commented or invalid lines.
+parse_entry() {
+  local line="${1%%#*}" src dest_dir
+  ENTRY_SRC=""
+  ENTRY_DEST=""
+  line="$(trim "$line")"
+  [[ -z "$line" ]] && return 0
+
+  if [[ "$line" == *"|"* ]]; then
+    src="$(trim "${line%%|*}")"
+    dest_dir="$(trim "${line#*|}")"
+  else
+    src="$line"
+    dest_dir=""
+  fi
+
+  src="${src#./}";           src="${src#/}";           src="${src%/}"
+  dest_dir="${dest_dir#./}"; dest_dir="${dest_dir#/}"; dest_dir="${dest_dir%/}"
+  [[ "$dest_dir" == "." ]] && dest_dir=""
+
+  if [[ -z "$src" ]]; then
+    echo "warn    invalid manifest line: '$line'" >&2
+    return 0
+  fi
+
+  ENTRY_SRC="$src"
+  ENTRY_DEST="$HOME/${dest_dir:+$dest_dir/}${src##*/}"
+}
+
+# True if the manifest already has an entry whose target is $1 (absolute)
+manifest_has() {
+  local dest="$1" line
+  [[ -f "$MANIFEST" ]] || return 1
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    parse_entry "$line"
+    [[ -n "$ENTRY_DEST" && "$ENTRY_DEST" == "$dest" ]] && return 0
+  done < "$MANIFEST"
+  return 1
+}
+
+# manifest_add <source relative to $DOTFILES> <absolute target>
+manifest_add() {
+  local src_rel="$1" dest="$2" rel destdir entry
+  rel="${dest#"$HOME"/}"
+
+  if manifest_has "$dest"; then
+    echo "manifest already lists $rel"
+    return 0
+  fi
+
+  destdir="$(dirname "$rel")"
+  if [[ "$destdir" == "." ]]; then entry="$src_rel"; else entry="$src_rel|$destdir"; fi
+
+  if ((DRY_RUN)); then
+    echo "[dry-run] append to manifest: $entry"
+    return 0
+  fi
+  mkdir -p "$(dirname "$MANIFEST")"
+  # make sure the file ends with a newline before appending
+  if [[ -s "$MANIFEST" && -n "$(tail -c1 "$MANIFEST")" ]]; then
+    echo >> "$MANIFEST"
+  fi
+  echo "$entry" >> "$MANIFEST"
+  echo "manifest + $entry"
+}
+
+# ---------------------------------------------------------------- link mode
+link_all() {
+  local linked=0 skipped=0 backed_up=0 missing=0
+  local line src dest backup
+
+  [[ -d "$DOTFILES" ]] || { echo "Dotfiles folder not found: $DOTFILES" >&2; exit 1; }
+  [[ -f "$MANIFEST" ]] || { echo "Manifest not found: $MANIFEST" >&2; exit 1; }
+
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    parse_entry "$line"
+    [[ -z "$ENTRY_SRC" ]] && continue
+
+    src="$DOTFILES/$ENTRY_SRC"
+    dest="$ENTRY_DEST"
+
+    if [[ ! -e "$src" && ! -L "$src" ]]; then
+      echo "missing $src (skipped)" >&2
+      missing=$((missing + 1))
+      continue
+    fi
+
+    if [[ -e "$dest" && "$(readlink -f "$dest")" == "$(readlink -f "$src")" ]]; then
+      echo "skip    $dest (already linked)"
+      skipped=$((skipped + 1))
+      continue
+    fi
+
+    run mkdir -p "$(dirname "$dest")"
+
+    if [[ -e "$dest" || -L "$dest" ]]; then
+      backup="$dest.backup$STAMP"
+      run mv "$dest" "$backup"
+      echo "backup  $dest -> $backup"
+      backed_up=$((backed_up + 1))
+    fi
+
+    run ln -s "$src" "$dest"
+    echo "link    $dest -> $src"
+    linked=$((linked + 1))
+  done < "$MANIFEST"
+
+  echo
+  echo "Done: $linked linked, $skipped skipped, $backed_up backed up, $missing missing."
+}
+
+# ----------------------------------------------------------------- add mode
+add_path() {
+  local input="$1" abs rel name src resolved
+
+  abs="$(realpath -s -- "$input" 2>/dev/null)" || abs=""
+  if [[ -z "$abs" || ( ! -e "$abs" && ! -L "$abs" ) ]]; then
+    echo "error   $input does not exist" >&2
+    return 1
+  fi
+
+  if [[ "$abs" == "$DOTFILES" || "$abs" == "$DOTFILES"/* ]]; then
+    echo "error   $abs is inside the dotfiles repo; pass the path under \$HOME" >&2
+    return 1
+  fi
+  if [[ "$abs" != "$HOME"/* ]]; then
+    echo "error   $abs is not inside $HOME" >&2
+    return 1
+  fi
+
+  rel="${abs#"$HOME"/}"
+  resolved="$(readlink -f "$abs")"
+
+  # Already managed (symlink into the repo, or inside a linked directory)
+  if [[ "$resolved" == "$DOTFILES_REAL"/* ]]; then
+    if [[ -L "$abs" ]]; then
+      echo "skip    $rel (already a link into the repo)"
+      if [[ "$(basename "$resolved")" != "$(basename "$abs")" ]]; then
+        echo "warn    link name differs from its source name; the manifest can't express that, not adding" >&2
+      else
+        manifest_add "${resolved#"$DOTFILES_REAL"/}" "$abs"
+      fi
+    else
+      echo "skip    $rel (already managed through a linked parent directory)"
+    fi
+    return 0
+  fi
+
+  if [[ -L "$abs" ]]; then
+    echo "error   $abs is a symlink pointing outside the repo; not adding it" >&2
+    return 1
+  fi
+
+  # Stored flat in the repo root: $DOTFILES/<basename>
+  name="$(basename "$abs")"
+  src="$DOTFILES/$name"
+
+  if [[ -e "$src" || -L "$src" ]]; then
+    echo "error   $src already exists in the repo; rename or remove it first" >&2
+    return 1
+  fi
+
+  run mkdir -p "$(dirname "$src")"
+  run mv "$abs" "$src"
+  run ln -s "$src" "$abs"
+  echo "added   $abs -> $src"
+  manifest_add "$name" "$abs"
+}
+
+add_all() {
+  local p rc=0
+  for p in "$@"; do
+    add_path "$p" || rc=1
+  done
+  return "$rc"
+}
+
+# --------------------------------------------------------------------- main
+MODE=link
+ADD=()
+
+while (($#)); do
+  case "$1" in
+    -n | --dry-run) DRY_RUN=1; shift ;;
+    -h | --help) usage; exit 0 ;;
+    -a | --add)
+      MODE=add
+      shift
+      while (($#)) && [[ "$1" != -* ]]; do ADD+=("$1"); shift; done
+      ;;
+    *)
+      echo "Unknown option: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+done
+
+case "$MODE" in
+  link) link_all ;;
+  add)
+    ((${#ADD[@]})) || { echo "dot -a needs at least one path" >&2; exit 1; }
+    add_all "${ADD[@]}"
+    ;;
+esac
