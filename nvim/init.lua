@@ -22,9 +22,11 @@ end
 require("config.functions")
 
 if os.getenv("SCROLL_MODE") then
+  -- require("config.helix").setup()
   source("kitty")
   return
 end
+
 
 require("config.options")
 require("config.autocmds")
@@ -38,7 +40,9 @@ require("config.syntax_highlight")
 if vim.g.neovide then
   require("config.neovide")
 end
+
 -- }}}
+--
 
 -- {{{ Local Plugins
 require("offGustavo.espeto.setup")
