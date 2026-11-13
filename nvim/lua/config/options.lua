@@ -388,7 +388,7 @@ if vim.fn.has("nvim-0.12") ~= 1 then
 end
 
 later(function()
-  vim.o.cmdheight = 0
+  vim.o.cmdheight = 1
   require("vim._core.ui2").enable {
     enable = true, -- Whether to enable or disable the UI.
     msg = { -- Options related to the message module.
