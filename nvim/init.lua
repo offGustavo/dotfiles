@@ -42,7 +42,6 @@ if vim.g.neovide then
 end
 
 -- }}}
---
 
 -- {{{ Local Plugins
 require("offGustavo.espeto.setup")
@@ -50,6 +49,7 @@ require("offGustavo.lazygit")
 require("offGustavo.TabTerm.setup")
 require("offGustavo.todo-comments")
 require("offGustavo.yazi")
+require("offGustavo.highlight_operation")
 -- require("offGustavo.compile-mode")
 require("Fish.git_branch").setup()
 
