@@ -5,36 +5,36 @@ return {
   event = "VeryLazy",
   opts = {
     {
-      "ivy",
+      -- "ivy",
       -- "fzf-native",
-      "telescope",
-      "hide",
+      -- "telescope",
+      -- "hide",
     },
     -- Window options for Ivy layout
-    winopts = {
-      -- Ivy style: no floating window borders
-      border = "none",
-      -- Height relative to screen (use full height)
-      height = 1.0,
-      -- Width relative to screen
-      width = 1.0,
-      -- Row position: 1.0 pushes it to bottom
-      row = 1.0,
-      -- Column position
-      col = 0.5,
-      -- Preview options
-      preview = {
-        hidden = true,
-        -- Preview window position (ivy style: preview above results)
-        vertical = "up:70%",
-        -- Preview border
-        border = "none",
-        -- Preview layout
-        layout = "vertical",
-      },
-      -- Disable Treesitter in the picker window for performance
-      treesitter = false,
-    },
+    -- winopts = {
+    --   -- Ivy style: no floating window borders
+    --   border = "none",
+    --   -- Height relative to screen (use full height)
+    --   height = 1.0,
+    --   -- Width relative to screen
+    --   width = 1.0,
+    --   -- Row position: 1.0 pushes it to bottom
+    --   row = 1.0,
+    --   -- Column position
+    --   col = 0.5,
+    --   -- Preview options
+    --   preview = {
+    --     hidden = true,
+    --     -- Preview window position (ivy style: preview above results)
+    --     vertical = "up:70%",
+    --     -- Preview border
+    --     border = "none",
+    --     -- Preview layout
+    --     layout = "vertical",
+    --   },
+    --   -- Disable Treesitter in the picker window for performance
+    --   treesitter = false,
+    -- },
     ui_select = {
       winopts = {
         height = 0.3,
@@ -58,8 +58,6 @@ return {
     { "<M-o>", "<Cmd>FzfLua files<Cr>", desc = "Find" },
     { "<M-s>", "<Cmd>FzfLua live_grep<Cr>", desc = "Grep" },
     { "<M-b>", "<Cmd>FzfLua buffers<Cr>", desc = "Buffers" },
-    { "<M-r>", "<Cmd>FzfLua oldfiles<Cr>", desc = "Oldfiles" },
-    { "<M-g>", "<Cmd>FzfLua git_files<Cr>", desc = "Git files" },
 
     -- Builtin
     { "<leader>fa", "<Cmd>FzfLua<Cr>", desc = "Builtin" },

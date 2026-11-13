@@ -1,0 +1,93 @@
+-- -- Emacs Binds
+-- vim.cmd [[
+-- nmap <c-x><c-;> gcc 
+-- imap <c-x><c-;> <c-o>gcc 
+-- xmap <c-x><c-;> gcc 
+-- ]]
+--
+-- map {
+--   { "i", { "<M-S-[>", "<C-Up>" }, "<C-o>{", noremap = true, silent = true },
+--   { "i", { "<M-S-]>", "<C-Down>" }, "<C-o>}", noremap = true, silent = true },
+--   { { "n", "x" }, { "<M-S-[>", "<C-Up>" }, "{", noremap = true, silent = true },
+--   { { "n", "x" }, { "<M-S-]>", "<C-Down>" }, "}", noremap = true, silent = true },
+--
+--   { "i", "<M-S-,>", "<C-o>gg", noremap = true, silent = true },
+--   { "i", "<M-S-.>", "<C-o>G", noremap = true, silent = true },
+--   { { "n", "x" }, "<M-S-,>", "gg", noremap = true, silent = true },
+--   { { "n", "x" }, "<M-S-.>", "G", noremap = true, silent = true },
+--
+--   { { "c", "i" }, "<C-a>", "<home>" },
+--   { { "c", "i" }, "<C-e>", "<end>" },
+--   { { "c", "i" }, "<C-p>", "<Up>" },
+--   { { "c", "i" }, "<C-n>", "<Down>" },
+--   { { "c", "i" }, "<C-f>", "<Right>" },
+--   { { "c", "i" }, "<C-b>", "<Left>" },
+--   { { "c", "i" }, "<M-f>", "<C-right>" },
+--   { { "c", "i" }, "<M-b>", "<C-left>" },
+--   { { "c", "i" }, "<C-d>", "<del>" },
+--   { { "c", "i" }, "<C-Bs>", "<C-w>" },
+--
+--   { "c", "<C-g>", "<Esc>" },
+--   { "c", "<M-d>", "<C-del>" },
+--   { "c", "<C-o>", "<C-f>" },
+--
+--   { "i", "<Tab>", "<C-t>" },
+--   { "i", "<S-Tab>", "<C-d>" },
+--
+--   { "i", "<C-a>", "<Home>" },
+--   { "i", "<C-e>", "<End>" },
+--   { "i", "<C-f>", "<right>" },
+--   { "i", "<C-b>", "<left>" },
+--   { "i", "<M-f>", "<C-right>" },
+--   { "i", "<M-b>", "<C-left>" },
+--   { "i", "<C-d>", "<Del>" },
+--   { "i", "<M-d>", "<C-o>de" },
+--   { "i", "<C-/>", "<C-o>u" },
+--   { "i", "<M-/>", "<C-n>" },
+--
+--   { "<C-x><C-f>", ":e<space>", desc = "<emacs> Find file" },
+--   { "<C-x>d", ":e.<Cr>", desc = "<emacs> Open Dir" },
+--   { "<C-x>b", ":b<space>", desc = "<emacs> Swtich Buffer" },
+--
+--   {
+--     { "n", "x", "i" },
+--     "<M-S-l>",
+--     function()
+--       local mode = vim.fn.mode()
+--       if mode == "i" then
+--         -- print(mode)
+--         return "<Esc>V"
+--       elseif mode == "n" then
+--         -- print(mode)
+--         return "V"
+--       elseif mode == "V" or mode == "v" or mode == "x" then
+--         -- print(mode)
+--         return "j0"
+--       end
+--       -- print("other" .. mode)
+--     end,
+--     desc = "Sel Line (emacs)",
+--     expr = true,
+--     silent = true,
+--   },
+--
+--   {
+--     { "n", "x", "i" },
+--     "<M-S-h>",
+--     function()
+--       local mode = vim.fn.mode()
+--       if mode == "i" then
+--         return "<Esc>vap"
+--       elseif mode == "n" then
+--         return "vap"
+--       elseif mode == "V" or mode == "v" or mode == "x" then
+--         return "ap"
+--       end
+--     end,
+--     desc = "Sel Paragraph(emacs)",
+--     expr = true,
+--     silent = true,
+--   },
+-- }
+--
+-- -- require("offGustavo.cedit").setup({ key = "<M-x>" })

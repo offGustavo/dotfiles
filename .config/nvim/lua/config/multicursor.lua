@@ -420,13 +420,14 @@ end
 -- stylua: ignore start
 map {
   { "n", "<C-[>", function() MultiCursor.clear(0) end, expr = true, desc = "Clear MultiCursor", },
+  -- { { "n", "x" }, "Q", function () MultiCursor.toggle(vim.pos.cursor()) start,  desc = "Add/Remove cursors", },
   { { "n", "x" }, "<M-q>", ":norm! zq*<Cr>",  desc = "Expand search", },
   { "n", "<C-S-j>", function() MultiCursor.actions.line_add(1) end, desc = "Cursors: add below", },
   { "n", "<C-S-k>", function() MultiCursor.actions.line_add(-1) end, desc = "Cursors: add above", },
-  { { "n", "x" }, "<C-.>", function() MultiCursor.actions.match_add(1) end, desc = "Cursors: add match next", },
-  { { "n", "x" }, "<C-,>", function() MultiCursor.actions.match_add(-1) end, desc = "Cursors: add match previous", },
-  { { "n", "x" }, "<M-n>", function() MultiCursor.actions.match_skip(1) end, desc = "Cursors: skip match next", },
-  { { "n", "x" }, "<M-p>", function() MultiCursor.actions.match_skip(-1) end, desc = "Cursors: skip match previous", },
+  { { "n", "x" }, "<M-n>", function() MultiCursor.actions.match_add(1) end, desc = "Cursors: add match next", },
+  { { "n", "x" }, "<M-p>", function() MultiCursor.actions.match_add(-1) end, desc = "Cursors: add match previous", },
+  { { "n", "x" }, "<C-n>", function() MultiCursor.actions.match_skip(1) end, desc = "Cursors: skip match next", },
+  { { "n", "x" }, "<C-p>", function() MultiCursor.actions.match_skip(-1) end, desc = "Cursors: skip match previous", },
   { { "n", "x" }, "<C-m>", function() MultiCursor.actions.align() end, desc = "Toggle lock cursor", },
 }
 

@@ -27,6 +27,7 @@ vim.cmd [[
 nmap <c-;> gcc
 imap <c-;> <c-o>gcc
 xmap <c-;> :norm gcc<cr>gv
+
 " if !exists('g:neovide')
 "   nmap <c-_> gcc
 "   imap <c-_> <c-o>gcc
@@ -50,10 +51,8 @@ map {
 
   { "n", "<leader>vf", ":cd %:h<Cr>" },
 
-  { "n", "<S-Esc>", vim.cmd.nohl },
-
-  -- Fix <C-c> to work like <Esc>
-  -- { "i", "<C-c>", "<Esc>" },
+  -- Clean Highlight
+  { "n", "<Esc>", vim.cmd.nohl },
 
   --- Better Go to file
   { "n", "gf", ":e <cfile><Cr>", silent = true, desc = "Better gf" },
@@ -211,137 +210,14 @@ map {
 
   { { "x", "n" }, "sn", ":g//norm!<Left><Left><Left><Left><Left><Left>" },
 
-  -- {{{ Insert/Command Mode
-  { "i", "<C-Bs>", "<C-w>" },
-
-  -- }}}
-
-  -- Emacs Binds
-  { "n", "<C-Down>", "}", noremap = true, silent = true },
-  { "n", "<C-Up>", "{", noremap = true, silent = true },
-  { "i", "<M-S-.>", "<C-o>G", noremap = true, silent = true },
-  { "i", "<M-S-,>", "<C-o>gg", noremap = true, silent = true },
-  { { "n", "x" }, "<M-S-.>", "G", noremap = true, silent = true },
-  { { "n", "x" }, "<M-S-,>", "gg", noremap = true, silent = true },
-  -- TODO: use this intead of lua module
-  -- {
-  --   { "n", "x" },
-  --   "<M-x>",
-  --   function()
-  --     -- 1. Open the command-line window from normal mode
-  --     vim.cmd("normal! q:")
-  --
-  --     -- 2. Clear any accidental character entered by the macro and go to the end
-  --     local current_win = vim.api.nvim_get_current_win()
-  --     local current_buf = vim.api.nvim_win_get_buf(current_win)
-  --
-  --     -- 3. Map <Esc> locally inside this buffer to close it instantly
-  --     vim.keymap.set("n", "<Esc>", function()
-  --       -- Safely close the command-line window buffer
-  --       vim.cmd("quit")
-  --     end, { buffer = current_buf, silent = true, noremap = true })
-  --
-  --     -- 4. Start editing right away in Insert Mode
-  --     vim.cmd("startinsert!")
-  --   end,
-  --   silent = false,
-  -- },
-
-  { { "c", "i" }, "<C-a>", "<home>" },
-  { { "c", "i" }, "<C-e>", "<end>" },
-  { { "c", "i" }, "<C-f>", "<right>" },
-  { { "c", "i" }, "<C-b>", "<left>" },
-  { { "c", "i" }, "<M-f>", "<C-right>" },
-  { { "c", "i" }, "<M-b>", "<C-left>" },
-  { { "c", "i" }, "<C-d>", "<del>" },
-  { { "c", "i" }, "<C-Bs>", "<C-w>" },
-  -- Enter in cedit
-  { "c", "<M-d>", "<C-del>" },
-  { "c", "<C-o>", "<C-f>" },
-
-  -- " " Emacs shitN
-  -- nmap <M-x> :
-  -- imap <M-x> <C-o>:
-
-  { "i", "<Tab>",  "<C-t>" },
-  { "i", "<S-Tab>","<C-d>" },
-
-  { "i", "<C-a>", "<Home>" },
-  { "i", "<C-e>", "<End>" },
-  { "i", "<C-f>", "<right>" },
-  { "i", "<C-b>", "<left>" },
-  { "i", "<M-f>", "<C-right>" },
-  { "i", "<M-b>", "<C-left>" },
-  { "i", "<C-d>", "<Del>" },
-  { "i", "<M-d>", "<C-o>de" },
-  { "i", "<C-/>", "<C-o>u" },
-
-  -- " nmap <C-á> ^
-  -- " nmap <C-é> $
-  -- " imap <C-á> <Home>
-  -- " imap <C-é> <End>
-
-  --- }}}
 
   -- {{{ Copy/Move
-  { "<M-d>", ":t.<cr>", silent = true, desc = "Duplicate line" },
+  { "<C-.>", ":t.<cr>", silent = true, desc = "Duplicate line" },
   { "<M-j>", ":m +1<CR>==", silent = true, desc = "Move line down" },
   { "<M-k>", ":m -2<CR>==", silent = true, desc = "Move line up" },
   { "<M-j>", ":m '>+1<CR>gv=gv", silent = true, desc = "Move line down" },
   { "<M-k>", ":m '<-2<CR>gv=gv", silent = true, desc = "Move line up" },
   -- }}}
-
-  -- -- {{{ Lines
-  -- {
-  --   { "n", "x", "i" },
-  --   "<M-S-l>",
-  --   function()
-  --     local mode = vim.fn.mode()
-  --     if mode == "i" then
-  --       -- print(mode)
-  --       return "<Esc>V"
-  --     elseif mode == "n" then
-  --       -- print(mode)
-  --       return "V"
-  --     elseif mode == "V" or mode == "v" or mode == "x" then
-  --       -- print(mode)
-  --       return "j0"
-  --     end
-  --     -- print("other" .. mode)
-  --   end,
-  --   desc = "Sel Line (emacs)",
-  --   expr = true,
-  --   silent = true,
-  -- },
-  -- {
-  --   { "n", "x", "i" },
-  --   "<M-S-h>",
-  --   function()
-  --     local mode = vim.fn.mode()
-  --     if mode == "i" then
-  --       return "<Esc>vap"
-  --     elseif mode == "n" then
-  --       return "vap"
-  --     elseif mode == "V" or mode == "v" or mode == "x" then
-  --       return "ap"
-  --     end
-  --   end,
-  --   desc = "Sel Paragraph(emacs)",
-  --   expr = true,
-  --   silent = true,
-  -- },
-  -- {
-  --   "i",
-  --   "<M-i><M-[>",
-  --   "---{{{",
-  -- },
-  -- {
-  --   "i",
-  --   "<M-i><M-]>",
-  --   "---}}}",
-  -- },
-  --
-  -- -- }}}
 
   -- {{{ Terminal
   -- { { "i", "c", "n", "v", "x" }, "<C-c>", "<Esc>", desc = "Fix <C-c>", silent = true },

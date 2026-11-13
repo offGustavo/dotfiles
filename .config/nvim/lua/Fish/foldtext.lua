@@ -19,6 +19,11 @@ local style_attrs = {
   "nocombine",
 }
 
+local no_tail_ft = {
+  "markdown",
+  "md",
+}
+
 -- Does `name` (or one of its dotted fallbacks, e.g. "@a.b.c" -> "@a.b" -> "@a")
 -- resolve to a highlight group with any actual visual attribute? Mirrors the
 -- fallback Neovim itself does when rendering "@..." highlight names, since
@@ -170,6 +175,11 @@ M.build_fold_text = function()
 
     for _, char in ipairs(vim.fn.split(" ... ", "\\zs")) do
       table.insert(fragments, { char, "@comment" })
+    end
+
+    -- If the current filetype in on no_tail filetype, return the fragments without the 'tail'
+    if vim.tbl_contains(no_tail_ft, filetype) then
+      return fragments
     end
 
     local whitespace = #(last_line:match("^%s*") or "")

@@ -297,8 +297,8 @@ set {
 
 -- From mini.statusline
 -- Set statusline globally and dynamically decide which content to use
-vim.go.statusline =
-  [[ %{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.require('Fish.statusline').build_statusline() : v:lua.require('Fish.statusline').build_statusline_inactive()%} ]]
+-- vim.go.statusline =
+--   [[ %{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.require('Fish.statusline').build_statusline() : v:lua.require('Fish.statusline').build_statusline_inactive()%} ]]
 
 -- }}}
 

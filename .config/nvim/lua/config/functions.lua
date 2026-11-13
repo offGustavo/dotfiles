@@ -15,7 +15,6 @@ function _G.is(real)
   return vim.fn.has(real) == 1
 end
 
-
 ---Verify if and program or a list of programs are in $PATH
 ---@param prg string|string[]
 ---@return boolean
@@ -134,4 +133,36 @@ function _G.packadd(names)
     end
   end
   return ok_all
+end
+
+--- Use vim.cmd.source("file") like require("module")
+---@param name string
+---@usage
+---```lua
+---source("options") -- Source vim/options.vim
+---```
+function _G.source(name)
+  -- Convert dots to path separators (e.g., "settings.keymaps" -> "settings/keymaps")
+  local relative_path = name:gsub("%.", "/")
+
+  -- Construct the full path pointing to your vim/ directory
+  local config_path = vim.fn.stdpath("config")
+  local base_path = string.format("%s/vim/%s", config_path, relative_path)
+
+  -- Try extensions in order: .vim, or raw path if extension was included
+  local target_file = nil
+  for _, ext in ipairs({ ".vim", "" }) do
+    local path = base_path .. ext
+    if vim.fn.filereadable(path) == 1 then
+      target_file = path
+      break
+    end
+  end
+
+  -- Source the file if found, otherwise throw a friendly error
+  if target_file then
+    vim.cmd.source(target_file)
+  else
+    vim.api.nvim_err_writeln(string.format("[source] File not found for: %s (checked vim/%s)", name, relative_path))
+  end
 end

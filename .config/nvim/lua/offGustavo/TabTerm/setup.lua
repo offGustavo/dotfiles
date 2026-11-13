@@ -20,7 +20,7 @@ end, { desc = "TabTerm New" })
 vim.keymap.set({ "n", "i", "x", "t" }, "<M-z>", function()
   tabterm.close()
 end, { desc = "TabTerm Close" })
-vim.keymap.set({ "n", "i", "x", "t" }, "<M-/>", function()
+vim.keymap.set({ "n", "i", "x", "t" }, "<M-Bs>", function()
   tabterm.toggle()
 end, { desc = "TabTerm Toggle" })
 for i = 1, 9, 1 do

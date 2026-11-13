@@ -22,6 +22,9 @@ return {
     -- See :h blink-cmp-config-keymap for defining your own keymap
     keymap = {
       ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+      -- Emacs
+      ["<M-/>"] = { "show", "select_next" },
+
       ["<C-e>"] = { "hide", "fallback" },
       ["<C-y>"] = { "select_and_accept", "fallback" },
 
