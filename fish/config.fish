@@ -108,11 +108,12 @@ alias untar='tar -zxvf '
 # alias lt='eza -aT --color=always --group-directories-first --icons=always --hyperlink' # tree listing
 # alias l.="eza -a | grep -e '^\.'" # show only dotfiles
 
-# Dotfiles
-abbr --add dot 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git'
-abbr --add dotui 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit'
-abbr --add doted 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME nvim'
-abbr --add dothide 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git config --local status.showUntrackedFiles no'
+# # Dotfiles
+# alias dot='cd $HOME/dotfiles/'
+# abbr --add dot 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git'
+# abbr --add dotui 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit'
+# abbr --add doted 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME nvim'
+# abbr --add dothide 'GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME git config --local status.showUntrackedFiles no'
 
 alias emacs='emacs -nw'
 abbr --add zed 'zeditor'

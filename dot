@@ -4,7 +4,7 @@
 set -euo pipefail
 
 DOTFILES="${DOTFILES:-$HOME/dotfiles}"
-MANIFEST="$DOTFILES/MANIFEST"
+MANIFEST="$DOTFILES/MANIFEST.linux"
 
 STAMP="$(date +%Y%m%d-%H%M%S)"
 DOTFILES_REAL="$(readlink -f "$DOTFILES" 2>/dev/null || echo "$DOTFILES")"
@@ -26,9 +26,13 @@ Manifest ($DOTFILES/MANIFEST), one entry per line, "#" starts a comment:
   source|destdir   $DOTFILES/source  ->  $HOME/destdir/<basename of source>
   source           $DOTFILES/source  ->  $HOME/<basename of source>
 
+  "source" may be a glob (* ? [..]); every match is linked on its own,
+  dotfiles included.
+
 Examples:
   HOME/vim|.config     $DOTFILES/HOME/vim  ->  $HOME/.config/vim
   dotman|.local/bin    $DOTFILES/dotman    ->  $HOME/.local/bin/dotman
+  bin/*|.local/bin     $DOTFILES/bin/<each> -> $HOME/.local/bin/<each>
   .tmux.conf           $DOTFILES/.tmux.conf -> $HOME/.tmux.conf
   # .emacs             commented, does nothing
 
@@ -54,12 +58,13 @@ trim() {
 }
 
 # Parses a manifest line.
-# Sets ENTRY_SRC (relative to $DOTFILES) and ENTRY_DEST (absolute target).
-# Both are empty for blank, commented or invalid lines.
+# Sets ENTRY_SRC (relative to $DOTFILES, may be a glob) and ENTRY_DESTDIR
+# (relative to $HOME, may be empty). ENTRY_SRC is empty for blank, commented
+# or invalid lines.
 parse_entry() {
   local line="${1%%#*}" src dest_dir
   ENTRY_SRC=""
-  ENTRY_DEST=""
+  ENTRY_DESTDIR=""
   line="$(trim "$line")"
   [[ -z "$line" ]] && return 0
 
@@ -81,16 +86,41 @@ parse_entry() {
   fi
 
   ENTRY_SRC="$src"
-  ENTRY_DEST="$HOME/${dest_dir:+$dest_dir/}${src##*/}"
+  ENTRY_DESTDIR="$dest_dir"
+}
+
+# Prints the paths (relative to $DOTFILES) that a manifest source stands for.
+# A plain path is printed as is (even if it doesn't exist, so callers can
+# report it); a glob is expanded, dotfiles included.
+expand_src() {
+  local pattern="$1"
+  if [[ "$pattern" != *[*?[]* ]]; then
+    printf '%s\n' "$pattern"
+    return 0
+  fi
+  (
+    shopt -s nullglob dotglob
+    IFS=
+    cd "$DOTFILES" || exit 0
+    for m in $pattern; do printf '%s\n' "$m"; done
+  )
+}
+
+# Absolute target for one expanded source of the entry being parsed
+entry_dest() {
+  printf '%s' "$HOME/${ENTRY_DESTDIR:+$ENTRY_DESTDIR/}${1##*/}"
 }
 
 # True if the manifest already has an entry whose target is $1 (absolute)
 manifest_has() {
-  local dest="$1" line
+  local dest="$1" line m
   [[ -f "$MANIFEST" ]] || return 1
   while IFS= read -r line || [[ -n "$line" ]]; do
     parse_entry "$line"
-    [[ -n "$ENTRY_DEST" && "$ENTRY_DEST" == "$dest" ]] && return 0
+    [[ -z "$ENTRY_SRC" ]] && continue
+    while IFS= read -r m; do
+      [[ -n "$m" && "$(entry_dest "$m")" == "$dest" ]] && return 0
+    done < <(expand_src "$ENTRY_SRC")
   done < "$MANIFEST"
   return 1
 }
@@ -122,9 +152,40 @@ manifest_add() {
 }
 
 # ---------------------------------------------------------------- link mode
+LINKED=0 SKIPPED=0 BACKED_UP=0 MISSING=0
+
+# link_one <absolute source> <absolute target>
+link_one() {
+  local src="$1" dest="$2" backup
+
+  if [[ ! -e "$src" && ! -L "$src" ]]; then
+    echo "missing $src (skipped)" >&2
+    MISSING=$((MISSING + 1))
+    return 0
+  fi
+
+  if [[ -e "$dest" && "$(readlink -f "$dest")" == "$(readlink -f "$src")" ]]; then
+    echo "skip    $dest (already linked)"
+    SKIPPED=$((SKIPPED + 1))
+    return 0
+  fi
+
+  run mkdir -p "$(dirname "$dest")"
+
+  if [[ -e "$dest" || -L "$dest" ]]; then
+    backup="$dest.backup$STAMP"
+    run mv "$dest" "$backup"
+    echo "backup  $dest -> $backup"
+    BACKED_UP=$((BACKED_UP + 1))
+  fi
+
+  run ln -s "$src" "$dest"
+  echo "link    $dest -> $src"
+  LINKED=$((LINKED + 1))
+}
+
 link_all() {
-  local linked=0 skipped=0 backed_up=0 missing=0
-  local line src dest backup
+  local line m found
 
   [[ -d "$DOTFILES" ]] || { echo "Dotfiles folder not found: $DOTFILES" >&2; exit 1; }
   [[ -f "$MANIFEST" ]] || { echo "Manifest not found: $MANIFEST" >&2; exit 1; }
@@ -133,37 +194,21 @@ link_all() {
     parse_entry "$line"
     [[ -z "$ENTRY_SRC" ]] && continue
 
-    src="$DOTFILES/$ENTRY_SRC"
-    dest="$ENTRY_DEST"
+    found=0
+    while IFS= read -r m; do
+      [[ -z "$m" ]] && continue
+      found=1
+      link_one "$DOTFILES/$m" "$(entry_dest "$m")"
+    done < <(expand_src "$ENTRY_SRC")
 
-    if [[ ! -e "$src" && ! -L "$src" ]]; then
-      echo "missing $src (skipped)" >&2
-      missing=$((missing + 1))
-      continue
+    if ((!found)); then
+      echo "missing $DOTFILES/$ENTRY_SRC (no match, skipped)" >&2
+      MISSING=$((MISSING + 1))
     fi
-
-    if [[ -e "$dest" && "$(readlink -f "$dest")" == "$(readlink -f "$src")" ]]; then
-      echo "skip    $dest (already linked)"
-      skipped=$((skipped + 1))
-      continue
-    fi
-
-    run mkdir -p "$(dirname "$dest")"
-
-    if [[ -e "$dest" || -L "$dest" ]]; then
-      backup="$dest.backup$STAMP"
-      run mv "$dest" "$backup"
-      echo "backup  $dest -> $backup"
-      backed_up=$((backed_up + 1))
-    fi
-
-    run ln -s "$src" "$dest"
-    echo "link    $dest -> $src"
-    linked=$((linked + 1))
   done < "$MANIFEST"
 
   echo
-  echo "Done: $linked linked, $skipped skipped, $backed_up backed up, $missing missing."
+  echo "Done: $LINKED linked, $SKIPPED skipped, $BACKED_UP backed up, $MISSING missing."
 }
 
 # ----------------------------------------------------------------- add mode

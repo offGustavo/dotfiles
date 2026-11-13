@@ -47,7 +47,6 @@ require("offGustavo.TabTerm.setup")
 require("offGustavo.todo-comments")
 require("offGustavo.yazi")
 -- require("offGustavo.compile-mode")
-require("offGustavo.cuik")
 require("Fish.git_branch").setup()
 
 -- require("Tatr")
@@ -88,8 +87,8 @@ require("config.lazy").add({
   -- { import = "plugins.editor.telescope" },
 
   -- Git
-  -- { import = "plugins.fugitive" },
-  { import = "plugins.neogit" },
+  { import = "plugins.fugitive" },
+  -- { import = "plugins.neogit" },
 
   -- Quickfix
   { import = "plugins.quicker" },
@@ -140,7 +139,8 @@ require("config.lazy").add({
       }
     end,
     keys = {
-      { "<M-C>", ":CuikCompile " },
+      { "<M-C>", ":CuikCompile<Cr>" },
+      { "<M-CR>", ":CuikRecompile<Cr>" },
       { "<M-g><M-n>", ":cn<Cr>" },
       { "<M-g><M-p>", ":cp<Cr>" },
       { "<M-g><M-n>", ":cn<Cr>" },
