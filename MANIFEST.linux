@@ -13,8 +13,8 @@ niri|.config
 rofi|.config      
 swaync|.config    
 systemd|.config   
-tmux|.config      
 waybar|.config    
 wezterm|.config   
 yazi|.config      
 ripgreprc|.config
+.tmux.conf
