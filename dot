@@ -13,16 +13,18 @@ DRY_RUN=0
 usage() {
   cat << 'USAGE'
 Usage:
+  dot    [-n]
+  dot -h [-n]                 Show this help
+
   dot ui                      Open Lazygit in $DOTFILES_DIR
   dot ed                      Open $EDITOR in $DOTFILES_DIR
   dot cd                      Change Direcotro to $DOTFILES_DIR
-  dot [-n]                    Link every entry of the manifest into $HOME
+  dot link [-n]                    Link every entry of the manifest into $HOME
   dot add   PATH... [-n]
   dot --add PATH... [-n]
   dot -a    PATH... [-n]      Move PATH (file or dir) to $DOTFILES/<basename>,
                               symlink it back and add it to the manifest
                               (~/.vimrc -> ".vimrc", ~/.local/bin/x -> "x|.local/bin")
-  dot -h                      Show this help
 
 Options:
   -n, --dry-run               Show what would happen, change nothing
@@ -283,17 +285,21 @@ add_all() {
 }
 
 # --------------------------------------------------------------------- main
-MODE=link
+MODE=help
 ADD=()
 
 while (($#)); do
   case "$1" in
     # TODO: change this variable name to $DOTFILES_DIR
+    -n | --dry-run) DRY_RUN=1; shift ;;
     cd) cd $DOTFILES && exit 0 ;;
     ui) cd $DOTFILES && lazygit && exit 0 ;;
     ed) cd $DOTFILES && $EDITOR && exit 0 ;;
-    -n | --dry-run) DRY_RUN=1; shift ;;
     -h | --help) usage; exit 0 ;;
+    -l | --link | link)
+        shift
+        MODE=link
+        ;;
     -a | --add | add)
       MODE=add
       shift
@@ -313,4 +319,5 @@ case "$MODE" in
     ((${#ADD[@]})) || { echo "dot -a needs at least one path" >&2; exit 1; }
     add_all "${ADD[@]}"
     ;;
+  help) usage >&2 ;;
 esac
