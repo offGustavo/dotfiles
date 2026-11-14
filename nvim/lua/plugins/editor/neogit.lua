@@ -285,9 +285,11 @@ return {
     },
   },
   keys = {
-    "<M-G>",
-    ":Neogit<Cr>",
-    silent = true,
-    desc = "Neogit",
+    {
+      "<M-G>",
+      ":Neogit<Cr>",
+      silent = true,
+      desc = "Neogit",
+    },
   },
 }
