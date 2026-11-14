@@ -15,16 +15,16 @@ vim.g.loaded_fzf = 1
 vim.g.loaded_netrwPlugin = 1
 -- }}}
 
--- {{{ Netrw
-vim.cmd [[
-" let g:netrw_banner = 0
-
-" -- vim.o.acd = true
-" -- vim.g.netrw_keepdir = 0
-" -- vim.cmd([[
-" -- autocmd BufEnter * lcd %:p:h
-]]
--- }}}
+-- -- {{{ Netrw
+-- vim.cmd [[
+-- " let g:netrw_banner = 0
+--
+-- " -- vim.o.acd = true
+-- " -- vim.g.netrw_keepdir = 0
+-- " -- vim.cmd([[
+-- " -- autocmd BufEnter * lcd %:p:h
+-- ]]
+-- -- }}}
 
 -- {{{ Security Things
 vim.o.modeline = true
@@ -295,10 +295,11 @@ set {
 -- -- horizdown = ' '
 -- -- })
 
--- From mini.statusline
--- Set statusline globally and dynamically decide which content to use
--- vim.go.statusline =
---   [[ %{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.require('Fish.statusline').build_statusline() : v:lua.require('Fish.statusline').build_statusline_inactive()%} ]]
+-- -- From mini.statusline
+-- -- Set statusline globally and dynamically decide which content to use
+-- -- stylua: ignore start
+-- vim.go.statusline = [[ %{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.require('Fish.statusline').build_statusline() : v:lua.require('Fish.statusline').build_statusline_inactive()%} ]]
+-- -- stylua: ignore end
 
 -- }}}
 
@@ -388,7 +389,7 @@ if vim.fn.has("nvim-0.12") ~= 1 then
 end
 
 later(function()
-  vim.o.cmdheight = 0
+  vim.o.cmdheight = 1
   require("vim._core.ui2").enable {
     enable = true, -- Whether to enable or disable the UI.
     msg = { -- Options related to the message module.

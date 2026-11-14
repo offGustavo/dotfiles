@@ -849,6 +849,6 @@ recent-windows {
 }
 // }}}
 
-// DMS Include Configs
-include "dms/cursor.kdl"
-include "dms/binds.kdl"
+// // DMS Include Configs
+// include "dms/cursor.kdl"
+// include "dms/binds.kdl"

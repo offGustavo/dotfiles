@@ -1,7 +1,7 @@
 return {
   "https://github.com/catgoose/nvim-colorizer.lua",
+  lazy = true,
   event = "BufReadPre",
-  enabled = true,
   opts = {
     filetypes = { "*" }, -- filetypes to highlight, "*" for all
     buftypes = {}, -- buftypes to highlight

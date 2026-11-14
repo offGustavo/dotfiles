@@ -234,7 +234,7 @@ local function start_swaybg(wallpaper_path)
 	cmd:append("swaybg")
 	cmd:append("-i")
 	cmd:append(wallpaper_path)
-	cmd:append("-m fill &")
+    cmd:append({  "-m", "fill" })
 
 	cmd:run()
 

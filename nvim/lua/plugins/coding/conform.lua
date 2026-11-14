@@ -1,17 +1,7 @@
 return {
   "https://github.com/stevearc/conform.nvim",
-  event = "VeryLazy",
-  keys = {
-    {
-      "<leader>cf",
-      function()
-        require("conform").format({
-          async = true,
-        })
-      end,
-      desc = "Format buffer",
-    },
-  },
+  lazy = true,
+  event = "BufReadPost",
   opts = {
     -- Define your formatters
     formatters_by_ft = {
@@ -40,4 +30,15 @@ return {
   init = function()
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
+  keys = {
+    {
+      "<leader>cf",
+      function()
+        require("conform").format({
+          async = true,
+        })
+      end,
+      desc = "Format buffer",
+    },
+  },
 }

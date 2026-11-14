@@ -1,6 +1,6 @@
 return {
-  -- "https://github.com/zenarvus/md-agenda.nvim",
-  "https://github.com/offGustavo/md-agenda.nvim",
+  "https://github.com/zenarvus/md-agenda.nvim",
+  -- "https://github.com/offGustavo/md-agenda.nvim",
   -- path = "~/Projects/md-agenda.nvim/",
   dev = false,
   enabled = true,
@@ -67,7 +67,7 @@ return {
         },
         --{...}, Additional filter maps can be added in the same group.
       },
-      --{"Other Group", {...}, ...}
+      -- {"Other Group", {...}, ...}
       {
         "Aniversários",
         { type = "NIVER" },
@@ -75,7 +75,7 @@ return {
         deadline = "today",
         scheduled = "",
       },
-      --...
+      -- ...
     },
 
     -- Optional: Change agenda colors.

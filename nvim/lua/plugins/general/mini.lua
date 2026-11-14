@@ -1,30 +1,32 @@
 return {
-  "nvim-mini/mini.nvim",
+  "https://github.com/nvim-mini/mini.nvim",
+  lazy = true,
   event = "VeryLazy",
-  enabled = true,
   config = function()
+    --- Mini
     -- require("mini.statusline").setup()
     -- require("mini.tabline").setup()
     -- require('mini.statuscolumnsetup()
 
-    require("mini.icons").setup({
+    local icons = require("mini.icons")
+    icons.setup({
       -- -- Icon style: 'glyph' or 'ascii'
       -- style = 'ascii',
     })
-    MiniIcons.mock_nvim_web_devicons()
+    icons.mock_nvim_web_devicons()
 
-    -- Git
-    require("mini.git").setup({})
-    vim.keymap.set({ "n", "x" }, "<leader>gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", { desc = "Show at cursor" })
+    -- -- Git
+    -- require("mini.git").setup({})
+    -- vim.keymap.set({ "n", "x" }, "<leader>gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", { desc = "Show at cursor" })
 
-    -- Use only HEAD name as summary string
-    local branch_format_summary = function(data)
-      -- Utilize buffer-local table summary
-      local summary = vim.b[data.buf].minigit_summary
-      vim.b[data.buf].minigit_summary_string = summary.head_name or ""
-    end
-    local branch_au_opts = { pattern = "MiniGitUpdated", callback = branch_format_summary }
-    vim.api.nvim_create_autocmd("User", branch_au_opts)
+    -- -- Use only HEAD name as summary string
+    -- local branch_format_summary = function(data)
+    --   -- Utilize buffer-local table summary
+    --   local summary = vim.b[data.buf].minigit_summary
+    --   vim.b[data.buf].minigit_summary_string = summary.head_name or ""
+    -- end
+    -- local branch_au_opts = { pattern = "MiniGitUpdated", callback = branch_format_summary }
+    -- vim.api.nvim_create_autocmd("User", branch_au_opts)
 
     local diff_summary = function(data)
       local summary = vim.b[data.buf].minidiff_summary
@@ -59,7 +61,11 @@ return {
       },
     })
 
+    vim.cmd("command MiniDiffOverlay lua MiniDiff.toggle_overlay()<Cr>")
+
     require("mini.ai").setup({
+      -- Custom textobjects to be used on top of builtin ones.
+      -- For more information with examples, see `:h MiniAi.config`.
       custom_textobjects = {
         -- Tweak argument textobject
         -- a = require("mini.ai").gen_spec.argument({ brackets = { "%b()" } }),
@@ -71,7 +77,7 @@ return {
         -- x = { "x()x()x" },
 
         -- Whole buffer
-        g = function()
+        B = function()
           local from = { line = 1, col = 1 }
           local to = {
             line = vim.fn.line("$"),
@@ -80,6 +86,38 @@ return {
           return { from = from, to = to }
         end,
       },
+
+      -- Module mappings. Use `''` (empty string) to disable one.
+      mappings = {
+        -- Main textobject prefixes
+        around = 'a',
+        inside = 'i',
+
+        -- Next/last textobjects
+        -- NOTE: This (deliberately) overrides Neovim>=0.12 built-in incremental
+        -- selection mappings. See `:h MiniAi-default-an-in` for more details.
+        around_next = 'an',
+        inside_next = 'in',
+        around_last = 'al',
+        inside_last = 'il',
+
+        -- Move cursor to corresponding edge of `a` textobject
+        goto_left = 'g[',
+        goto_right = 'g]',
+      },
+
+      -- Number of lines within which textobject is searched
+      n_lines = 1000,
+
+      -- How to search for object (first inside current line, then inside
+      -- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
+      -- 'cover_or_nearest', 'next', 'prev', 'nearest'.
+      search_method = 'cover_or_nearest',
+
+      -- Whether to disable showing non-error feedback
+      -- This also affects (purely informational) helper messages shown after
+      -- idle time if user input is required.
+      silent = false,
     })
 
     -- require("mini.sessions").setup({})
@@ -113,17 +151,17 @@ return {
       },
     })
 
-    -- local hipatterns = require("mini.hipatterns")
-    -- hipatterns.setup({
-    --   highlighters = {
-    --     -- fixme = { pattern = "FIXME", group = "MiniHipatternsFixme" },
-    --     -- hack = { pattern = "HACK", group = "MiniHipatternsHack" },
-    --     -- todo = { pattern = "TODO", group = "MiniHipatternsTodo" },
-    --     -- note = { pattern = "NOTE", group = "MiniHipatternsNote" },
-    --     -- perf = { pattern = "PERF", group = "MiniIconsPurple" },
-    --     hex_color = hipatterns.gen_highlighter.hex_color(),
-    --   },
-    -- })
+    local hipatterns = require("mini.hipatterns")
+    hipatterns.setup({
+      highlighters = {
+        -- fixme = { pattern = "FIXME", group = "MiniHipatternsFixme" },
+        -- hack = { pattern = "HACK", group = "MiniHipatternsHack" },
+        -- todo = { pattern = "TODO", group = "MiniHipatternsTodo" },
+        -- note = { pattern = "NOTE", group = "MiniHipatternsNote" },
+        -- perf = { pattern = "PERF", group = "MiniIconsPurple" },
+        hex_color = hipatterns.gen_highlighter.hex_color(),
+      },
+    })
 
     -- local miniclue = require("mini.clue")
     -- miniclue.setup({
@@ -132,10 +170,10 @@ return {
     --     { mode = { "n", "x" }, keys = "<Leader>" },
     --     { mode = { "n", "x" }, keys = "<localleader>" },
     --     -- `[` and `]` keys
-    --     { mode = "n",          keys = "[" },
-    --     { mode = "n",          keys = "]" },
+    --     { mode = "n", keys = "[" },
+    --     { mode = "n", keys = "]" },
     --     -- Built-in completion
-    --     { mode = "i",          keys = "<C-x>" },
+    --     { mode = "i", keys = "<C-x>" },
     --     -- `g` key
     --     { mode = { "n", "x" }, keys = "g" },
     --     -- Marks
@@ -145,7 +183,7 @@ return {
     --     { mode = { "n", "x" }, keys = '"' },
     --     { mode = { "i", "c" }, keys = "<C-r>" },
     --     -- Window commands
-    --     { mode = "n",          keys = "<C-w>" },
+    --     { mode = "n", keys = "<C-w>" },
     --     -- `z` key
     --     { mode = { "n", "x" }, keys = "z" },
     --   },
@@ -158,21 +196,21 @@ return {
     --     miniclue.gen_clues.registers(),
     --     miniclue.gen_clues.windows(),
     --     miniclue.gen_clues.z(),
-    --     { mode = "n", keys = "<Leader>b",     desc = "+Buffer" },
-    --     { mode = "n", keys = "<Leader>s",     desc = "+Search" },
-    --     { mode = "n", keys = "<Leader>f",     desc = "+Find" },
-    --     { mode = "n", keys = "<Leader>g",     desc = "+Git" },
-    --     { mode = "n", keys = "<Leader>gc",    desc = "+Commit" },
-    --     { mode = "n", keys = "<Leader>c",     desc = "+Code" },
-    --     { mode = "n", keys = "<Leader>u",     desc = "+Ui" },
+    --     { mode = "n", keys = "<Leader>b", desc = "+Buffer" },
+    --     { mode = "n", keys = "<Leader>s", desc = "+Search" },
+    --     { mode = "n", keys = "<Leader>f", desc = "+Find" },
+    --     { mode = "n", keys = "<Leader>g", desc = "+Git" },
+    --     { mode = "n", keys = "<Leader>gc", desc = "+Commit" },
+    --     { mode = "n", keys = "<Leader>c", desc = "+Code" },
+    --     { mode = "n", keys = "<Leader>u", desc = "+Ui" },
     --     -- TODO: improve this
-    --     { mode = "n", keys = "<Leader>o",     desc = "+Other" },
-    --     { mode = "n", keys = "<Leader>t",     desc = "+Terminal" },
-    --     { mode = "n", keys = "<Leader>r",     desc = "+Replace" },
-    --     { mode = "n", keys = "<Leader>h",     desc = "+Harpoon" },
+    --     { mode = "n", keys = "<Leader>o", desc = "+Other" },
+    --     { mode = "n", keys = "<Leader>t", desc = "+Terminal" },
+    --     { mode = "n", keys = "<Leader>r", desc = "+Replace" },
+    --     { mode = "n", keys = "<Leader>h", desc = "+Harpoon" },
     --     { mode = "n", keys = "<Leader><Tab>", desc = "+Tabs" },
-    --     { mode = "n", keys = "<Leader>l",     desc = "+Location List" },
-    --     { mode = "n", keys = "<Leader>q",     desc = "+Quickfix/Quit" },
+    --     { mode = "n", keys = "<Leader>l", desc = "+Location List" },
+    --     { mode = "n", keys = "<Leader>q", desc = "+Quickfix/Quit" },
     --   },
     -- })
 
@@ -182,23 +220,23 @@ return {
     --   local height = math.floor(0.618 * vim.o.lines)
     --   local width = math.floor(0.618 * vim.o.columns)
     --   return {
-    --     anchor = 'NW',
+    --     anchor = "NW",
     --     height = height,
     --     width = width,
     --     row = math.floor(0.5 * (vim.o.lines - height)),
     --     col = math.floor(0.5 * (vim.o.columns - width)),
     --   }
     -- end
-    -- require("mini.pick").setup(
-    --   { window = { config = win_config } })
+    -- require("mini.pick").setup({ window = { config = win_config } })
     -- -- vim.ui.select = ui_select_orig
     -- vim.cmd([[
-    --   nmap <M-o> :Pick files<Cr>
-    --   nmap <M-s> :Pick grep_live<Cr>
-    --   nmap <M-b> :Pick buffers<Cr>
-    --   nmap <M-r> :Pick oldfiles<Cr>
-    -- ]])
+    --     nmap <M-o> :Pick files<Cr>
+    --     nmap <M-s> :Pick grep_live<Cr>
+    --     nmap <M-b> :Pick buffers<Cr>
+    --     nmap <M-r> :Pick oldfiles<Cr>
+    --   ]])
 
+    -- TODO: move back to blink.nvim
     -- require("mini.snippets").setup()
     -- require("mini.completion").setup()
     -- require("mini.cmdline").setup()
@@ -260,5 +298,5 @@ return {
       -- idle time if user input is required.
       silent = false,
     })
-  end,
+  end
 }

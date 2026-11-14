@@ -22,9 +22,11 @@ end
 require("config.functions")
 
 if os.getenv("SCROLL_MODE") then
+  -- require("config.helix").setup()
   source("kitty")
   return
 end
+
 
 require("config.options")
 require("config.autocmds")
@@ -38,6 +40,7 @@ require("config.syntax_highlight")
 if vim.g.neovide then
   require("config.neovide")
 end
+
 -- }}}
 
 -- {{{ Local Plugins
@@ -46,6 +49,7 @@ require("offGustavo.lazygit")
 require("offGustavo.TabTerm.setup")
 require("offGustavo.todo-comments")
 require("offGustavo.yazi")
+require("offGustavo.highlight_operation")
 -- require("offGustavo.compile-mode")
 require("Fish.git_branch").setup()
 
@@ -58,69 +62,60 @@ require("config.lazy").add({
   -- -- add LazyVim and import its plugins
   -- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
-  -- -- import/override with your plugins
-  -- { import = "plugins" },
-  -- { import = "plugins.coding" },
-  -- { import = "plugins.editor" },
-  -- { import = "plugins.util" },
-  -- { import = "plugins.coding" },
-  -- { import = "plugins.themes" },
-  -- { import = "plugins.ui" },
-  -- { import = "plugins.general" },
-
   -- General
-  { import = "plugins.mini" },
-  -- { import = "plugins.snacks" },
+  { import = "plugins.general.mini" },
+  -- { import = "plugins.general.snacks" },
 
   -- Theme
-  { import = "plugins.tokyonight" },
+  { import = "plugins.themes.tokyonight" },
 
   -- File Explorer
-  -- { import = "plugins.canola" },
-  { import = "plugins.editor.oil" },
-  -- { import = "plugins.editor.yazi" },
-  -- { import = "plugins.vim-dirvish" },
-  -- { import = "plugins.dired" },
+  -- { import = "plugins.editor.explorer.canola" },
+  -- { import = "plugins.editor.explorer.oil" },
+  -- { import = "plugins.editor.explorer.yazi" },
+  -- { import = "plugins.editor.explorer.vim-dirvish" },
+  -- { import = "plugins.editor.explorer.dired" },
 
   -- Picker
-  { import = "plugins.editor.fzf-lua" },
-  -- { import = "plugins.editor.telescope" },
+  { import = "plugins.editor.picker.fzf-lua" },
+  -- { import = "plugins.editor.picker.telescope" },
+  -- { import = "plugins.editor.picker.minibuffer" },
 
   -- Git
-  { import = "plugins.fugitive" },
-  -- { import = "plugins.neogit" },
+  -- { import = "plugins.editor.fugitive" },
+  { import = "plugins.editor.neogit" },
 
   -- Quickfix
-  { import = "plugins.quicker" },
+  { import = "plugins.editor.quicker" },
 
   -- LSP
-  { import = "plugins.mason-lspconfig" },
+  { import = "plugins.coding.mason-lspconfig" },
 
   -- Treesitter
-  { import = "plugins.treesitter" },
+  { import = "plugins.coding.treesitter" },
 
   -- Format
-  { import = "plugins.conform" },
+  { import = "plugins.coding.conform" },
 
   -- Completion
-  { import = "plugins.blink" },
+  -- { import = "plugins.coding.blink" },
 
   -- System
   -- { "https://github.com/tpope/vim-eunuch", lazy = true, event = "CmdLineEnter" },
 
   -- UI
-  { import = "plugins.which-key" },
+  { import = "plugins.ui.which-key" },
   -- { import =  "plugins.nvim-colorizer" },
 
   -- Agenda
-  { import = "plugins.org-nvim" },
-  { import = "plugins.orgmode" },
+  { import = "plugins.util.org-nvim" },
+  { import = "plugins.util.orgmode" },
 
   -- Markdown
-  -- { import = "plugins.markview" },
-  -- { import = "plugins.md-agenda" },
+  -- { import = "plugins.ui.markview" },
+  -- { import = "plugins.util.md-agenda" },
 
-  -- { import = "plugins.baleia" },
+  -- { import = "plugins.ui.baleia" },
 
   -- My Plugins
   { dir = "~/Projects/nvim-sessionizer", enabled = not is_windows(), lazy = false },
