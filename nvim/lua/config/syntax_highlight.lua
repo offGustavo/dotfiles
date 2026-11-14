@@ -13,7 +13,7 @@ local M = {}
 --- -- Fallback to classic Vim syntax only
 --- Fish.highlight_state = false
 --- ```
-Fish.highlight_state = false
+Fish.highlight_state = true
 
 --- Applies or removes Treesitter and LSP semantic highlighting for a specific buffer.
 --- Automatically falls back to classic regex syntax if a Treesitter parser is unavailable.

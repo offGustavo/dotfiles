@@ -1,11 +1,12 @@
 return {
   "simifalaye/minibuffer.nvim",
   enabled = false,
+  lazy = false,
   event = "VeryLazy",
   config = function()
     vim.ui.select = require("minibuffer.builtin.ui_select")
     vim.ui.input = require("minibuffer.builtin.ui_input")
-    vim.keymap.set("n", "<M-;>", require("minibuffer.builtin.cmdline"))
+    -- vim.keymap.set("n", "<M-;>", require("minibuffer.builtin.cmdline"))
     vim.keymap.set("n", "<M-.>", function()
       require("minibuffer").resume(true)
     end)

@@ -70,15 +70,16 @@ require("config.lazy").add({
   { import = "plugins.themes.tokyonight" },
 
   -- File Explorer
-  { import = "plugins.editor.canola" },
-  -- { import = "plugins.editor.oil" },
-  -- { import = "plugins.editor.yazi" },
-  -- { import = "plugins.vim-dirvish" },
-  -- { import = "plugins.dired" },
+  -- { import = "plugins.editor.explorer.canola" },
+  -- { import = "plugins.editor.explorer.oil" },
+  -- { import = "plugins.editor.explorer.yazi" },
+  -- { import = "plugins.editor.explorer.vim-dirvish" },
+  -- { import = "plugins.editor.explorer.dired" },
 
   -- Picker
-  { import = "plugins.editor.fzf-lua" },
-  -- { import = "plugins.editor.telescope" },
+  { import = "plugins.editor.picker.fzf-lua" },
+  -- { import = "plugins.editor.picker.telescope" },
+  -- { import = "plugins.editor.picker.minibuffer" },
 
   -- Git
   -- { import = "plugins.editor.fugitive" },
@@ -97,7 +98,7 @@ require("config.lazy").add({
   { import = "plugins.coding.conform" },
 
   -- Completion
-  { import = "plugins.coding.blink" },
+  -- { import = "plugins.coding.blink" },
 
   -- System
   -- { "https://github.com/tpope/vim-eunuch", lazy = true, event = "CmdLineEnter" },
