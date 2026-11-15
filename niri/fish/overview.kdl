@@ -1,0 +1,10 @@
+// Optionally, disable the workspace shadows in the overview.
+overview {
+  zoom 0.67
+  workspace-shadow {
+    on
+  }
+  // backdrop-color "#777777"
+  // backdrop-color "#000000"
+  // backdrop-color "#1A1B26"
+}
