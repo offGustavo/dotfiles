@@ -1,9 +1,9 @@
 return {
-  -- "https://github.com/X3eRo0/dired.nvim",
-  dir = "~/Projects/dired.nvim",
+  "https://github.com/X3eRo0/dired.nvim",
+  -- dir = "~/Projects/dired.nvim/",
   dependencies = { "MunifTanjim/nui.nvim" },
   lazy = false,
-  cmd = "Dired",
+  -- cmd = "Dired",
   event = "VeryLazy",
   -- Set up the 'dired' plugin with custom options
   opts = {

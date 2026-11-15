@@ -27,7 +27,6 @@ if os.getenv("SCROLL_MODE") then
   return
 end
 
-
 require("config.options")
 require("config.autocmds")
 require("config.commands")
@@ -64,7 +63,7 @@ require("config.lazy").add({
 
   -- General
   { import = "plugins.general.mini" },
-  -- { import = "plugins.general.snacks" },
+  { import = "plugins.general.snacks" },
 
   -- Theme
   { import = "plugins.themes.tokyonight" },
@@ -98,7 +97,7 @@ require("config.lazy").add({
   { import = "plugins.coding.conform" },
 
   -- Completion
-  -- { import = "plugins.coding.blink" },
+  { import = "plugins.coding.blink" },
 
   -- System
   -- { "https://github.com/tpope/vim-eunuch", lazy = true, event = "CmdLineEnter" },
@@ -142,6 +141,12 @@ require("config.lazy").add({
       { "<M-g><M-p>", ":cp<Cr>" },
       { "<M-g><M-n>", ":cn<Cr>" },
     },
+  },
+
+  {
+    dir = "~/Projects/dired.lua/",
+    lazy = false,
+    opts = {},
   },
 
   -- On Demand

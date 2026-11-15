@@ -1,13 +1,23 @@
 return {
   "https://forge.barrettruth.com/barrettruth/canola.nvim",
+  dependencies = {
+    { "https://github.com/barrettruth/canola-collection" },
+  },
   branch = "canola",
   cmd = "Canola",
   lazy = true,
   -- event = "VeryLazy",
   ft = "directory",
   init = function()
+
+    vim.g.canola_git = {
+      show = { untracked = true, ignored = false },
+      format = 'compact', -- 'compact' | 'symbol' | 'porcelain'
+    }
+
     vim.g.canola = {
       columns = {
+        'git_status',
         "icon",
         "permissions",
         "size",
@@ -40,6 +50,7 @@ return {
         ["-"] = { callback = "actions.parent", mode = "n" },
         ["_"] = { callback = "actions.open_cwd", mode = "n" },
         ["`"] = { callback = "actions.cd", mode = "n" },
+        ["="] = { callback = "actions.open_cmdline", mode = "n" },
         ["g~"] = { callback = "actions.cd", opts = { scope = "tab" }, mode = "n" },
         ["gs"] = { callback = "actions.change_sort", mode = "n" },
         ["gx"] = "actions.open_external",
@@ -107,7 +118,7 @@ return {
   keys = {
     { "<M-e>", "<Cmd>Canola<Cr>", desc = "Canola" },
     { "-", "<Cmd>Canola<Cr>", desc = "Canola" },
-    -- { "<leader><M-e>", "<Cmd>e.<Cr>", desc = "Open cwd" },
-    -- { "<leader>fd", ":Canola<Cr>", desc = "Oil Explore" },
-  }
+    { "<leader><M-e>", "<Cmd>e.<Cr>", desc = "Open Cwd" },
+    { "<leader>fd", ":Canola ", desc = "Explore Dir", silent = false },
+  },
 }

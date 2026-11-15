@@ -214,36 +214,41 @@ return {
     --   },
     -- })
 
-    require("mini.extra").setup()
-    -- Centered on screen
-    local win_config = function()
-      local height = math.floor(0.618 * vim.o.lines)
-      local width = math.floor(0.618 * vim.o.columns)
-      return {
-        anchor = "NW",
-        height = height,
-        width = width,
-        row = math.floor(0.5 * (vim.o.lines - height)),
-        col = math.floor(0.5 * (vim.o.columns - width)),
-      }
-    end
-    require("mini.pick").setup({ window = { config = win_config } })
-    -- vim.ui.select = ui_select_orig
-    vim.cmd([[
-        nmap <M-o> :Pick files<Cr>
-        nmap <M-s> :Pick grep_live<Cr>
-        nmap <M-b> :Pick buffers<Cr>
-        nmap <M-r> :Pick oldfiles<Cr>
-      ]])
+    -- require("mini.extra").setup()
+    -- -- -- Centered on screen
+    -- -- local win_config = function()
+    --   -- local height = math.floor(0.618 * vim.o.lines)
+    --   -- local width = math.floor(0.618 * vim.o.columns)
+    --   -- return {
+    --     -- anchor = "NW",
+    --     -- height = height,
+    --     -- width = width,
+    --     -- row = math.floor(0.5 * (vim.o.lines - height)),
+    --     -- col = math.floor(0.5 * (vim.o.columns - width)),
+    --   -- }
+    -- -- end
+    -- -- require("mini.pick").setup({ window = { config = win_config } })
+    -- require("mini.pick").setup()
+    -- -- vim.ui.select = ui_select_orig
+    -- vim.cmd([[
+    --     nmap <M-o> :Pick files<Cr>
+    --     nmap <M-s> :Pick grep_live<Cr>
+    --     nmap <M-b> :Pick buffers<Cr>
+    --     nmap <M-r> :Pick oldfiles<Cr>
+    --     nmap <leader>vh :Pick help<Cr>
+    --     nmap <leader>bs :Pick buf_lines<Cr>
+    --   ]])
 
-    require("mini.snippets").setup()
-    require("mini.completion").setup()
-    require("mini.cmdline").setup()
+    -- require("mini.snippets").setup()
 
-    require("mini.files").setup()
-    vim.keymap.set("n", "<M-e>", function()
-    require("mini.files").open()
-    end)
+    -- vim.o.pumheight = 8
+    -- require("mini.completion").setup()
+    -- require("mini.cmdline").setup()
+
+    -- -- require("mini.files").setup()
+    -- vim.keymap.set("n", "<M-e>", function()
+    -- require("mini.files").open()
+    -- end)
 
     require("mini.align").setup({
       -- Module mappings. Use `''` (empty string) to disable one.
