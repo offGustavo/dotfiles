@@ -18,5 +18,4 @@ wezterm|.config
 yazi|.config      
 ripgreprc|.config
 .tmux.conf
-.custom.emacs.d
 doom|.config
