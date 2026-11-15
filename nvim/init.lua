@@ -77,7 +77,7 @@ require("config.lazy").add({
   -- { import = "plugins.editor.explorer.dired" },
 
   -- Picker
-  { import = "plugins.editor.picker.fzf-lua" },
+  -- { import = "plugins.editor.picker.fzf-lua" },
   -- { import = "plugins.editor.picker.telescope" },
   -- { import = "plugins.editor.picker.minibuffer" },
 
