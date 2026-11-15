@@ -129,3 +129,12 @@
   (map! :map compilation-mode-map
         :n "C-k" nil
         :n "C-k" nil))
+
+;; System clipboard (explicit)
+(setq select-enable-clipboard nil)
+(global-set-key (kbd "C-S-c") #'clipboard-kill-ring-save)
+(global-set-key (kbd "C-S-x") #'clipboard-kill-region)
+(global-set-key (kbd "C-S-v") #'clipboard-yank)
+
+(global-set-key (kbd "M-C")   #'compile)
+(global-set-key (kbd "M-RET") #'recompile)
