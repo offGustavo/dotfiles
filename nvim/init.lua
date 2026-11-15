@@ -102,6 +102,7 @@ require("config.lazy").add({
 
   -- System
   -- { "https://github.com/tpope/vim-eunuch", lazy = true, event = "CmdLineEnter" },
+  { import = "plugins.util.kitty-scrollback" },
 
   -- UI
   { import = "plugins.ui.which-key" },
