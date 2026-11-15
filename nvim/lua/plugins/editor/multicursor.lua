@@ -1,6 +1,6 @@
 return {
   "https://github.com/brenton-leighton/multiple-cursors.nvim",
--- TODO: remover quando 0.13 ser estavel
+  -- TODO: remover quando 0.13 ser estavel
   enabled = vim.fn.has("nvim-0.13") ~= 1,
   lazy = true,
   opts = {
@@ -23,15 +23,15 @@ return {
     end,
   }, -- This causes the plugin setup function to be called
   keys = {
-    { "<M-q>", "<Cmd>MultipleCursorsAddDelete<Cr>" },
-    { "<C-m>", "<Cmd>MultipleCursorsLock<Cr>" },
-    { "<C-S-d>", "<Cmd>MultipleCursorsAddMatches<Cr>" },
-    { "<C-S-k>", "<Cmd>MultipleCursorsAddUp<Cr>" },
-    { "<C-S-j>", "<Cmd>MultipleCursorsAddDown<Cr>" },
-    { "<C-;>", "<Cmd>MultipleCursorsAddVisualArea<Cr>" },
-    { "<C-;>", "<Cmd>MultipleCursorsAddMatchesV<Cr>" },
-    { "<C-.>", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>" },
-    { "<C-,>", "<Cmd>MultipleCursorsAddJumpPrevMatch<CR>" },
+    { "Q", "<Cmd>MultipleCursorsAddDelete<Cr>" },
+    { "q=", "<Cmd>MultipleCursorsLock<Cr>" },
+    { "<C-S-L>", "<Cmd>MultipleCursorsAddMatches<Cr>" },
+    { "<C-S-K>", "<Cmd>MultipleCursorsAddUp<Cr>" },
+    { "<C-S-J>", "<Cmd>MultipleCursorsAddDown<Cr>" },
+    { "<C-;>", "<Cmd>MultipleCursorsAddVisualArea<Cr>", mode = "x" },
+    { "<C-;>", "<Cmd>MultipleCursorsAddMatchesV<Cr>", mode = "n" },
+    { "<M-p>", "<Cmd>MultipleCursorsAddJumpPrevMatch<CR>" },
+    { "<M-n>", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>" },
     { "<C-p>", "<Cmd>MultipleCursorsJumpPrevMatch<Cr>" },
     { "<C-n>", "<Cmd>MultipleCursorsJumpNextMatch<Cr>" },
   },
