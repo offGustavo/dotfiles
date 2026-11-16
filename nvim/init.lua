@@ -111,7 +111,7 @@ require("config.lazy").add({
 
   -- Agenda
   { import = "plugins.util.org-nvim" },
-  { import = "plugins.util.orgmode" },
+  -- { import = "plugins.util.orgmode" },
 
   -- Markdown
   -- { import = "plugins.ui.markview" },

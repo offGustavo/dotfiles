@@ -630,8 +630,8 @@ map {
     "<leader>ad",
     function()
       local current_date = os.date("%Y-%m-%d")
-      local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".md"
-      vim.cmd("e " .. daily_note_date)
+      local daily_note_date = "~/Notes/DailyNotes/" .. current_date .. ".org"
+      vim.cmd.edit(daily_note_date)
     end,
     desc = "Today's Daily Note",
   },
