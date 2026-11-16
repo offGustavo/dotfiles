@@ -81,8 +81,8 @@ require("config.lazy").add({
   -- { import = "plugins.editor.picker.minibuffer" },
 
   -- Git
-  -- { import = "plugins.editor.fugitive" },
-  { import = "plugins.editor.neogit" },
+  { import = "plugins.editor.fugitive" },
+  -- { import = "plugins.editor.neogit" },
 
   -- Quickfix
   { import = "plugins.editor.quicker" },
@@ -147,6 +147,10 @@ require("config.lazy").add({
     dir = "~/Projects/dired.lua/",
     lazy = false,
     opts = {},
+    keys = {
+      { "<M-e>", ":DiredJump<Cr>" },
+      { "<leader>fd", ":Dired<Cr>" },
+    },
   },
 
   -- On Demand
