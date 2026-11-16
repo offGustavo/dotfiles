@@ -1,3 +1,4 @@
+# vim: ft=pymanifest
 git\config|.gitconfig
 nvim|APPDATA\Local
 wezterm|.config

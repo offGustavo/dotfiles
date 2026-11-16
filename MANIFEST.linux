@@ -1,3 +1,5 @@
+# vim: ft=pymanifest
+
 dot|.local/bin
 nvim|.config
 bat|.config       
