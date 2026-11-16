@@ -1,0 +1,9 @@
+include "%L"
+
+# Corrige o cedilha usando dead_acute (') + c
+<dead_acute> <c> : "ç" ccedilla
+<dead_acute> <C> : "Ç" Ccedilla
+
+# Opcional: também permite usar a tecla Compose (Multi_key) + , + c
+<Multi_key> <comma> <c> : "ç" ccedilla
+<Multi_key> <comma> <C> : "Ç" Ccedilla
