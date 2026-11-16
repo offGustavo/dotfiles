@@ -7,12 +7,12 @@ fastfetch|.config
 fish|.config      
 git|.config       
 i3|.config        
-kanata|.config    
+kanata/kanata|.config    
+# kanata/systemd|.config   
 kitty|.config     
 niri|.config      
 rofi|.config      
 swaync|.config    
-systemd|.config   
 waybar|.config    
 wezterm|.config   
 yazi|.config      
