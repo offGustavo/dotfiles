@@ -51,3 +51,12 @@
 ;; (unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
+
+
+(package! exwm)
+(package! exwm-evil :recipe (:host github :repo "LemonBreezes/exwm-evil"))
+(package! exwm-firefox-evil)
+(package! exwm-edit)
+(package! language-detection)
+(package! exwm-mff)
+(package! app-launcher :recipe (:host github :repo "SebastienWae/app-launcher"))

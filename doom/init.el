@@ -113,6 +113,7 @@
        ;;upload            ; map local to remote projects via ssh/ftp
 
        :os
+       ;; exwm ;; custom
        (:if (featurep :system 'macos) macos)  ; improve compatibility with macOS
        ;;tty               ; improve the terminal Emacs experience
 
@@ -191,11 +192,11 @@
        ;;(wanderlust +gmail)
 
        :app
-       ;;calendar
-       ;;emms
-       ;;everywhere        ; *leave* Emacs!? You must be joking
-       ;;irc               ; how neckbeards socialize
-       ;;(rss +org)        ; emacs as an RSS reader
+       calendar
+       emms
+       everywhere        ; *leave* Emacs!? You must be joking
+       irc               ; how neckbeards socialize
+       (rss +org)        ; emacs as an RSS reader
 
        :config
        ;;literate

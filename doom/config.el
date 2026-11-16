@@ -32,11 +32,11 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-tokyo-night)
+;; (setq doom-theme 'doom-one)
 ;; Specify both a dark and light theme, like so and Doom will choose which one
 ;; to load based on your system light/dark setting:
 ;;
-;;   (setq doom-theme '(doom-one   . doom-one-light))   ; (DARK . LIGHT)
+  (setq doom-theme '(doom-tokyo-night   . doom-nord-light))   ; (DARK . LIGHT)
 ;;
 ;; If you want more pro-active theme switching based on OS light/dark mode, look
 ;; up the `auto-dark' package.
@@ -47,7 +47,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Notes/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -138,3 +138,111 @@
 
 (global-set-key (kbd "M-C")   #'compile)
 (global-set-key (kbd "M-RET") #'recompile)
+
+;;; EXWM ---------------------------------------------------------------
+
+;; ;; Only act as the window manager when the session asks for it (EXWM=1),
+;; ;; so Emacs still starts normally inside any other X/Wayland session.
+;; (defvar +exwm-active-p (and (eq window-system 'x) (getenv "EXWM"))
+;;   "Non-nil when this Emacs should run as the X window manager.")
+
+;; (when +exwm-active-p
+(require 'exwm)
+
+(setq exwm-workspace-number 4
+      exwm-layout-show-all-buffers t)
+
+;; Readable buffer names: "Class: title"
+(defun +exwm-rename-buffer-h ()
+  (exwm-workspace-rename-buffer
+   (format "%s: %s" exwm-class-name
+           (truncate-string-to-width (or exwm-title "") 40 nil nil "…"))))
+(add-hook 'exwm-update-class-hook #'+exwm-rename-buffer-h)
+(add-hook 'exwm-update-title-hook #'+exwm-rename-buffer-h)
+
+;; Evil keys in any X application
+(use-package! exwm-evil
+  :hook (exwm-manage-finish . exwm-evil-mode))
+
+;; Vim keys + link hints in Firefox/Chrome (needs the Link Hints extension)
+(use-package! exwm-firefox-evil
+  :hook (exwm-manage-finish . exwm-firefox-evil-mode))
+
+;; ;; Focus follows mouse
+;; (use-package! exwm-mff
+;;   :config (exwm-mff-mode 1))
+
+
+;; ;; Edit any input field in Emacs with C-c '
+;; (use-package! exwm-edit
+;;   :config
+;;   (defvar +exwm-edit-default-major-mode 'org-mode
+;;     "Major mode used when no language can be detected.")
+;;   (defvar +exwm-edit-language-modes
+;;     '((python . python-mode) (javascript . js-mode) (c . c-mode)
+;;       (bash . sh-mode) (emacslisp . emacs-lisp-mode) (html . html-mode)
+;;       (css . css-mode) (java . java-mode))
+;;     "Map `language-detection' results to major modes.")
+;;   (defun +exwm-edit-pick-mode-h ()
+;;     (let* ((lang (ignore-errors (language-detection-buffer)))
+;;            (mode (or (alist-get lang +exwm-edit-language-modes)
+;;                      +exwm-edit-default-major-mode)))
+;;       (funcall mode)))
+;;   (add-hook 'exwm-edit-compose-hook #'+exwm-edit-pick-mode-h))
+;; (map! "C-c '" #'exwm-edit--compose)
+
+;; ;; App launcher and a nested vanilla Emacs
+;; (use-package! app-launcher :commands app-launcher-run-app)
+;; (defun +exwm/nested-vanilla-emacs ()
+;;   (interactive)
+;;   (start-process "nested-emacs" nil "emacs" "-Q"))
+;; (map! :leader
+;;       :desc "Launch application"     "$"   #'app-launcher-run-app
+;;       :desc "Nested vanilla Emacs"   "o N" #'+exwm/nested-vanilla-emacs)
+
+
+(defun +exwm/rofi ()
+  "Launch rofi's application launcher."
+  (interactive)
+  (start-process "rofi" nil "rofi" "-show" "drun"))
+
+;; i3-style global keys (vim-style hjkl; change to taste)
+(windmove-mode +1)
+(map! "s-j" #'windmove-left
+      "s-k" #'windmove-down
+      "s-i" #'windmove-up
+      "s-l" #'windmove-right
+      "s-J" #'windmove-swap-states-left
+      "s-K" #'windmove-swap-states-down
+      "s-I" #'windmove-swap-states-up
+      "s-L" #'windmove-swap-states-right
+      "s-h" #'split-window-right
+      "s-v" #'split-window-below
+      "s-q" #'delete-window
+      "s-d" #'+exwm/rofi)
+
+(when (modulep! :ui workspaces)
+  (map! "s-1" #'+workspace/switch-to-0
+        "s-2" #'+workspace/switch-to-1
+        "s-3" #'+workspace/switch-to-2
+        "s-4" #'+workspace/switch-to-3
+        "s-5" #'+workspace/switch-to-4
+        "s-6" #'+workspace/switch-to-5
+        "s-7" #'+workspace/switch-to-6
+        "s-8" #'+workspace/switch-to-7
+        "s-9" #'+workspace/switch-to-8
+        "s-0" #'+workspace/switch-to-final))
+
+(when (modulep! :ui workspaces)
+  (add-hook 'exwm-manage-finish-hook
+            (defun +exwm-add-to-workspace-h ()
+              (persp-add-buffer (current-buffer)))))
+
+;; Let EXWM windows pass these keys to Emacs instead of the application
+(dolist (key '(?\s-h ?\s-j ?\s-k ?\s-l ?\s-H ?\s-J ?\s-K ?\s-L
+               ?\s-v ?\s-s ?\s-Q ?\s-d
+               ?\s-0 ?\s-1 ?\s-2 ?\s-3 ?\s-4 ?\s-5 ?\s-6 ?\s-7 ?\s-8 ?\s-9))
+  (cl-pushnew key exwm-input-prefix-keys))
+
+;; ;; Start EXWM (`exwm-wm-mode' on exwm >= 0.30, `exwm-enable' before)
+;; (if (fboundp 'exwm-wm-mode) (exwm-wm-mode 1) (exwm-enable))
