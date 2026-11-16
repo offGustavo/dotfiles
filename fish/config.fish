@@ -101,12 +101,21 @@ alias tarnow='tar -acf '
 alias untar='tar -zxvf '
 
 # ## Useful aliases
+# # Replace ls with lsd
+# alias ls='lsd -al --color=always --group-directories-first --hyperlink=always' # preferred listing
+# alias la='lsd -a  --color=always --group-directories-first --hyperlink=always' # all files and dirs
+# alias ll='lsd -l  --color=always --group-directories-first --hyperlink=always' # long format
+# alias lt='lsd --tree --color=always --group-directories-first --hyperlink=always'
+# alias l.="lsd -a | grep -e '^\.'" # show only dotfiles
+
+# ## Useful aliases
 # # Replace ls with eza
-# alias ls='eza -al --color=always --group-directories-first --icons=always --hyperlink' # preferred listing
-# alias la='eza -a  --color=always --group-directories-first --icons=always --hyperlink' # all files and dirs
-# alias ll='eza -l  --color=always --group-directories-first --icons=always --hyperlink' # long format
-# alias lt='eza -aT --color=always --group-directories-first --icons=always --hyperlink' # tree listing
-# alias l.="eza -a | grep -e '^\.'" # show only dotfiles
+alias ls='eza -al --color=always --group-directories-first --icons=always --hyperlink' # preferred listing
+alias la='eza -a  --color=always --group-directories-first --icons=always --hyperlink' # all files and dirs
+alias ll='eza -l  --color=always --group-directories-first --icons=always --hyperlink' # long format
+alias lt='eza -aT --color=always --group-directories-first --icons=always --hyperlink' # tree listing
+alias lc='eza --code --color=always --group-directories-first --icons=always --hyperlink' # tree listing
+alias l.="eza -a | grep -e '^\.'" # show only dotfiles
 
 # # Dotfiles
 # alias dot='cd $HOME/dotfiles/'
