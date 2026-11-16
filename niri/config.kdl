@@ -171,8 +171,9 @@ layout {
   // fullscreen-backdrop-color "transparent"
   
   // background-color "#1a1b26FF"
-  // background-color "transparent"
-  background-color "#1A1B2660"
+  background-color "transparent"
+  // background-color "#1A1B2660"
+  // background-color "#00000060"
 
   // When to center a column when changing focus, options are:
   // - "never", default behavior, focusing an off-screen column will keep at the left
