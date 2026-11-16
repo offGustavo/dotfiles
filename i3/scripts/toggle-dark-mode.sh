@@ -4,7 +4,7 @@ toggle-dark-mode.sh
 CURRENT_SCHEME=$(dconf read /org/gnome/desktop/interface/color-scheme)
 
 THEME_FILE=~/.config/i3/config
-BASE="include ~/.config/i3/i3.config"
+BASE="include ~/.config/i3/src/i3.config"
 
 if [ "$CURRENT_SCHEME" = "'prefer-light'" ]; then
   # Wallpaper
