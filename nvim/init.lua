@@ -146,6 +146,7 @@ require("config.lazy").add({
   {
     dir = "~/Projects/dired.lua/",
     lazy = false,
+    enabled = not is_windows(),
     opts = {},
     keys = {
       { "<M-e>", ":DiredJump<Cr>" },
