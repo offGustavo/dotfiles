@@ -9,11 +9,21 @@
 @define-color red #f7768e;
 
 /* Theme: Compline */
-/* @define-color bg #1a1d21; */
-/* @define-color bg-highlight #22262b; */
-/* @define-color blue #b4bcc4; */
-/* @define-color fg #f0efeb; */
-/* @define-color fg-dark #ccc4b4; */
-/* @define-color green #b8c4b8; */
-/* @define-color orange @fg-dark; */
-/* @define-color red #cdacac; */
+@define-color bg #1a1d21;
+@define-color bg-highlight #22262b;
+@define-color blue #b4bcc4;
+@define-color fg #f0efeb;
+@define-color fg-dark #ccc4b4;
+@define-color green #b8c4b8;
+@define-color orange #ccc4b4;
+@define-color red #cdacac;
+
+/* Theme: Nord */
+@define-color bg #2e3440;
+@define-color bg-highlight #3b4252;
+@define-color blue #88c0d0;
+@define-color fg #d8dee9;
+@define-color fg-dark #a3acbd;
+@define-color green #a3be8c;
+@define-color orange #d08770;
+@define-color red #bf616a;
