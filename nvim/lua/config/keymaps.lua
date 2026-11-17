@@ -24,9 +24,9 @@
 -- TODO: remove this and use map  to set this option
 -- comment line/selection
 vim.cmd [[
-nmap <c-;> gcc
-imap <c-;> <c-o>gcc
-xmap <c-;> :norm gcc<cr>gv
+" nmap <c-;> gcc
+" imap <c-;> <c-o>gcc
+" xmap <c-;> :norm gcc<cr>gv
 
 " if !exists('g:neovide')
 "   nmap <c-_> gcc
@@ -48,8 +48,6 @@ map {
 
   -- Edit init.lua/init.vim/vimrc
   { "n", "<leader>fC", ":e $MYVIMRC<Cr>", silent = true, desc = "Edit the init config file" },
-
-  { "n", "<leader>vf", ":cd %:h<Cr>" },
 
   -- Clean Highlight
   { "n", "<Esc>", vim.cmd.nohl },
@@ -194,7 +192,6 @@ map {
   { "<leader>ba", ":b #<Cr>", desc = "Alternative Buffer" },
   { "<leader>bd", ":bd<Cr>", desc = "Delete Buffer" },
   { "<leader>bD", ":bufdo bd<Cr>", desc = "Delete All Buffers" },
-  { "<leader>bz", ":bcd ", desc = "Buffer Cd" },
   -- }}}
 
   -- {{{ Substitute
@@ -210,6 +207,7 @@ map {
 
   { { "x", "n" }, "sn", ":g//norm!<Left><Left><Left><Left><Left><Left>" },
 
+  --- }}}
 
   -- {{{ Copy/Move
   { "<C-.>", ":t.<cr>", silent = true, desc = "Duplicate line" },
@@ -231,8 +229,6 @@ map {
   --- }}}
 
   -- {{{ Tabs
-  -- :tcd shortcut
-  { "n", "<leader><Tab>z", ":tcd ", desc = "Tab Cd" },
 
   {
     "n",
@@ -876,11 +872,18 @@ map {
   },
   --- }}}
 
+  --- {{{ Cd
+  -- :<t,b, >cd shortcut
+  -- :b
+  { "<leader>zf", ":cd %:h<Cr>", silent = false, desc = "d" },
+  { "<leader>zc", ":cd<space>", silent = false, desc = "Cd" },
+  { "<leader>zb", ":bcd ", silent = false, desc = "Buffer Cd" },
+  { "<leader>zt", ":tcd ", silent = false, desc = "Tab Cd" },
   -- {{{ Zoxide
   -- Keybinds using vim.ui.select
   {
     "n",
-    "<leader>z",
+    "<leader>zz",
     function()
       require("Fish.zoxide").zoxide_select("Zoxide (cd):", "cd", true)
     end,
@@ -889,12 +892,22 @@ map {
 
   {
     "n",
-    "<leader>Z",
+    "<leader>z<Tab>",
     function()
       require("Fish.zoxide").zoxide_select("Zoxide (tcd):", "tcd", true)
     end,
     desc = "Zoxide picker(tcb)",
   },
+  {
+    "n",
+    "<leader>z<Space>",
+    function()
+      require("Fish.zoxide").zoxide_select("Zoxide (vcd):", "bcd", true)
+    end,
+    desc = "Zoxide picker(tcb)",
+  },
+
+  -- }}}
   -- }}}
 
   -- {{{ Git

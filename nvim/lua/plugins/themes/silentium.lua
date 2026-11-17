@@ -1,10 +1,10 @@
 return {
   "https://github.com/silentium-theme/silentium.nvim",
-  enabled = false,
+  enabled = true,
   config = function()
-local silentium = require("silentium")
+    local silentium = require("silentium")
     silentium.setup({
-      accent = silentium.accents.yellow,
+      accent = "#9d7cd8",
       white = "#c0caf5", -- fg
       light_gray = "#a9b1d6", -- fg_dark
       gray = "#565f89", -- comment

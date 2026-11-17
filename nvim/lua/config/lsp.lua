@@ -1,14 +1,15 @@
 vim.schedule(function()
-  vim.lsp.config("*", {
-    capabilities = {
-      textDocument = {
-        semanticTokens = { multilineTokenSupport = true },
-      },
-    },
-    root_markers = {
-      ".git",
-    },
-  })
+  -- NOTE: we are usign nvim-lsp-config
+  -- vim.lsp.config("*", {
+  --   capabilities = {
+  --     textDocument = {
+  --       semanticTokens = { multilineTokenSupport = true },
+  --     },
+  --   },
+  --   root_markers = {
+  --     ".git",
+  --   },
+  -- })
 
   autocmd("LspAttach", function(ev)
     -- NOTE: Used in our custom statusline
@@ -102,16 +103,15 @@ vim.schedule(function()
         buf = ev.buf,
       },
       { "<leader>ce", vim.diagnostic.open_float, desc = "Line Diagnostics Error", buf = ev.buf },
-      { "<leader>K", vim.lsp.buf.hover, desc = "Go to lsp help", buf = ev.buf },
-      { "", vim.lsp.buf.hover, desc = "Go to lsp help", buf = ev.buf },
-      { "<S-space>K", vim.lsp.buf.hover, desc = "Go to lsp help", buf = ev.buf },
+      { "<C-s>", vim.lsp.buf.hover, desc = "Go to lsp help", buf = ev.buf },
+      -- { "<S-space>K", vim.lsp.buf.hover, desc = "Go to lsp help", buf = ev.buf },
       { "<leader>ch", vim.lsp.buf.hover, desc = "Line Diagnostics Error", buf = ev.buf },
     })
 
     -- NOTE: Remove lsp-default mappings
     pcall(function()
       vim.cmd([[
-        nnoremap <nowait> gr gr
+        " nnoremap <nowait> gr gr
         nnoremap <nowait> gd gd
         nnoremap <nowait> K K
         " unamp gd

@@ -37,6 +37,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     })
     vim.cmd.redraw() -- paint the highlight now
     vim.wait(67) -- keep it on screen before the delete happens
+    vim.defer_fn(function()
     vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+  end, 100)
   end,
 })

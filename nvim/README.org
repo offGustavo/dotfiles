@@ -1,0 +1,202 @@
+* Neovim Config
+
+** Dependencies
+
+- [[https://github.com/neovim/neovim][Nvim]]
+- [[https://github.com/junegunn/fzf][fzf]]
+- [[https://github.com/burntsushi/ripgrep][rg]]
+- [[https://github.com/jesseduffield/lazygit][layzgit]]
+
+** About this config
+
+#+BEGIN_EXAMPLE
+$HOME/.config/nvim
+├──  after
+│   └──  ftplugin
+│       ├──  fugitive.vim
+│       ├──  org.lua
+│       └──  qf.lua
+├──  autoload
+│   └──  titlecase.vim
+├──  colors
+│   ├──  base16-spacemacs.vim
+│   ├──  nocolor.lua
+│   ├──  off.vim
+│   ├──  shibuya.lua
+│   ├──  tokyo-day.vim
+│   └──  tokyo.vim
+├──  ftplugin
+│   ├──  gitcommit.vim
+│   ├──  go.lua
+│   ├──  kbd.vim
+│   ├──  lua.lua
+│   ├──  man.vim
+│   ├──  markdown.lua
+│   ├──  py.lua
+│   ├──  rust.lua
+│   ├──  sh.lua
+│   └──  teal.lua
+├──  lsp
+│   └──  lua_ls.lua
+├──  lua
+│   ├──  config
+│   │   ├──  autocmds.lua
+│   │   ├──  commands.lua
+│   │   ├──  emacs.lua
+│   │   ├──  functions.lua
+│   │   ├──  helix.lua
+│   │   ├──  keymaps.lua
+│   │   ├──  lazy.lua
+│   │   ├──  lsp.lua
+│   │   ├──  multicursor.lua
+│   │   ├──  neovide.lua
+│   │   ├──  options.lua
+│   │   ├──  syntax_highlight.lua
+│   │   ├──  theme.lua
+│   │   └──  windows.lua
+│   ├──  Fish
+│   │   ├──  align.lua
+│   │   ├──  compile.lua
+│   │   ├──  day-theme.lua
+│   │   ├──  easymode.lua
+│   │   ├──  find_files.lua
+│   │   ├──  foldtext.lua
+│   │   ├──  fuzzel.lua
+│   │   ├──  git_branch.lua
+│   │   ├──  keymap_set.lua
+│   │   ├──  kitty.lua
+│   │   ├──  lazygit.lua
+│   │   ├──  mode_colors.lua
+│   │   ├──  picker.lua
+│   │   ├──  quickfix.lua
+│   │   ├──  set_opt.lua
+│   │   ├──  statuscolumn.lua
+│   │   ├──  statusline.lua
+│   │   ├──  tabline.lua
+│   │   ├──  terminal.lua
+│   │   ├──  theme.lua
+│   │   ├──  toggle.lua
+│   │   ├──  vidir.lua
+│   │   ├──  winbar.lua
+│   │   ├──  yazi.lua
+│   │   ├──  zoom.lua
+│   │   └──  zoxide.lua
+│   ├──  lv
+│   │   └──  init.lua
+│   ├──  offGustavo
+│   │   ├──  espeto
+│   │   │   ├──  init.lua
+│   │   │   └──  setup.lua
+│   │   ├──  TabTerm
+│   │   │   ├──  init.lua
+│   │   │   └──  setup.lua
+│   │   ├──  cedit.lua
+│   │   ├──  compile-mode.lua
+│   │   ├──  highlight_operation.lua
+│   │   ├──  lazygit.lua
+│   │   ├──  todo-comments.lua
+│   │   └──  yazi.lua
+│   ├──  plugins
+│   │   ├──  coding
+│   │   │   ├──  blink.lua
+│   │   │   ├──  conform.lua
+│   │   │   ├──  lazydev.lua
+│   │   │   ├──  mason-lspconfig.lua
+│   │   │   ├──  old_blink.lua
+│   │   │   ├──  old_conform.lua
+│   │   │   ├──  old_nvim-lspconfig-mason.lua
+│   │   │   ├──  old_nvim-treesitter.lua
+│   │   │   ├──  old_ts-comments.lua
+│   │   │   └──  treesitter.lua
+│   │   ├──  editor
+│   │   │   ├──  explorer
+│   │   │   │   ├──  canola.lua
+│   │   │   │   ├──  dired.lua
+│   │   │   │   ├──  oil.lua
+│   │   │   │   ├──  vim-dirvish.lua
+│   │   │   │   └──  yazi.lua
+│   │   │   ├──  picker
+│   │   │   │   ├──  artio.lua
+│   │   │   │   ├──  fff.lua
+│   │   │   │   ├──  fzf-lua.lua
+│   │   │   │   ├──  minibuffer.lua
+│   │   │   │   ├──  refer.lua
+│   │   │   │   └──  telescope.lua
+│   │   │   ├──  flash.lua
+│   │   │   ├──  fugitive.lua
+│   │   │   ├──  harpoon.lua
+│   │   │   ├──  multicursor.lua
+│   │   │   ├──  neogit.lua
+│   │   │   └──  quicker.lua
+│   │   ├──  general
+│   │   │   ├──  disable.lua
+│   │   │   ├──  example.lua
+│   │   │   ├──  mini.lua
+│   │   │   ├──  noice.lua
+│   │   │   ├──  org.lua
+│   │   │   └──  snacks.lua
+│   │   ├──  themes
+│   │   │   ├──  base16.lua
+│   │   │   ├──  gruber-dark.lua
+│   │   │   ├──  nord.lua
+│   │   │   ├──  silentium.lua
+│   │   │   └──  tokyonight.lua
+│   │   ├──  ui
+│   │   │   ├──  baleia.lua
+│   │   │   ├──  foldtext.lua
+│   │   │   ├──  lualine.lua
+│   │   │   ├──  markview.lua
+│   │   │   ├──  noice.lua
+│   │   │   ├──  nvim-colorizer.lua
+│   │   │   ├──  todo-comments.lua
+│   │   │   └──  which-key.lua
+│   │   └──  util
+│   │       ├──  grug-far.lua
+│   │       ├──  hydra.lua
+│   │       ├──  img-clip.lua
+│   │       ├──  kitty-scrollback.lua
+│   │       ├──  md-agenda.lua
+│   │       ├──  nvim-sessionizer.lua
+│   │       ├──  org-nvim.lua
+│   │       ├──  orgmode.lua
+│   │       ├──  startuptime.lua
+│   │       ├──  term-edit.lua
+│   │       └──  vim-eunuch.lua
+│   ├──  Tatr
+│   │   ├──  commands
+│   │   │   ├──  help.lua
+│   │   │   ├──  init.lua
+│   │   │   └──  ls.lua
+│   │   ├──  util
+│   │   │   └──  file.lua
+│   │   └──  init.lua
+│   ├──  disable.lua
+│   ├──  eshell.lua
+│   └──  file.lua
+├──  plugin
+│   └──  tittlecase.vim
+├──  spell
+│   ├──  en.utf-8.add
+│   ├──  es.utf-8.add
+│   ├──  es.utf-8.spl
+│   ├──  es.utf-8.sug
+│   ├──  pt.utf-8.add
+│   ├──  pt.utf-8.add.spl
+│   └──  pt.utf-8.spl
+├──  syntax
+│   └──  kbd.vim
+├──  vim
+│   └──  kitty.vim
+├── 󰊢 .gitignore
+├──  .luarc.json
+├──  .neoconf.json
+├──  .stylua.toml
+├──  .theme
+├──  init.lua
+├──  lazy-lock.json
+├──  lazyvim.json
+├──  nvim-pack-lock.json
+├──  nvim.version
+├──  README.org
+└──  TODO.org
+#+END_EXAMPLE

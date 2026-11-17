@@ -37,6 +37,7 @@ set {
   number = true,
   relativenumber = false,
   breakindent = true,
+  termguicolors = true,
   linebreak = true,
   undofile = true,
   swapfile = false,
@@ -270,7 +271,6 @@ set {
 -- }}}
 
 -- {{{ statusline
-
 -- set {
 --   laststatus = 3,
 --   showmode = false,

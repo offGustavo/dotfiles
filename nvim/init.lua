@@ -10,13 +10,13 @@ _G.fish_group = vim.api.nvim_create_augroup("Fish.config", {
   clear = false,
 })
 
--- {{{ Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
-if vim.o.background == "dark" then
-  vim.cmd.colorscheme("tokyo")
-else
-  vim.cmd.colorscheme("tokyo-day")
-end
--- }}}
+-- -- {{{ Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
+-- if vim.o.background == "dark" then
+--   vim.cmd.colorscheme("tokyo")
+-- else
+--   vim.cmd.colorscheme("tokyo-day")
+-- end
+-- -- }}}
 
 -- {{{ Config Files
 require("config.functions")
@@ -48,9 +48,8 @@ require("offGustavo.lazygit")
 require("offGustavo.TabTerm.setup")
 require("offGustavo.todo-comments")
 require("offGustavo.yazi")
-require("offGustavo.highlight_operation")
-
--- require("Fish.compile").setup()
+require("offGustavo.ui.highlight_operation")
+-- require("offGustavo.compile-mode")
 require("Fish.git_branch").setup()
 
 -- require("Tatr")
@@ -67,7 +66,10 @@ require("config.lazy").add({
   { import = "plugins.general.snacks" },
 
   -- Theme
-  { import = "plugins.themes.tokyonight" },
+  -- { import = "plugins.themes.tokyonight" },
+  -- { import = "plugins.themes.nord" },
+  { import = "plugins.themes.base16" },
+  -- { import = "plugins.themes.silentium" },
 
   -- File Explorer
   -- { import = "plugins.editor.explorer.canola" },
@@ -122,7 +124,14 @@ require("config.lazy").add({
   -- My Plugins
   { dir = "~/Projects/nvim-sessionizer", enabled = not is_windows(), lazy = false },
 
-  { dir = "~/Projects/tatr.vim/", enabled = not is_windows(), lazy = false },
+  {
+    dir = "~/Projects/tatr.vim/",
+    enabled = not is_windows(),
+    lazy = false,
+    init = function()
+      vim.g.tatr_short_cmd = true
+    end,
+  },
 
   {
     "offGustavo/cuik.vim",
@@ -134,7 +143,7 @@ require("config.lazy").add({
       vim.g.cuik = {
         default_cmd = "grep -rn ",
         run_async = true,
-        short_cuik_cmds = true,
+        short_cmds = true,
       }
     end,
     keys = {
