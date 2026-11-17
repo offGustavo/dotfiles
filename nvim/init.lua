@@ -49,7 +49,8 @@ require("offGustavo.TabTerm.setup")
 require("offGustavo.todo-comments")
 require("offGustavo.yazi")
 require("offGustavo.highlight_operation")
--- require("offGustavo.compile-mode")
+
+-- require("Fish.compile").setup()
 require("Fish.git_branch").setup()
 
 -- require("Tatr")
@@ -102,6 +103,7 @@ require("config.lazy").add({
   -- System
   -- { "https://github.com/tpope/vim-eunuch", lazy = true, event = "CmdLineEnter" },
   { import = "plugins.util.kitty-scrollback" },
+  -- { import = "plugins.util.compile-mode" },
 
   -- UI
   { import = "plugins.ui.which-key" },
@@ -123,9 +125,10 @@ require("config.lazy").add({
   { dir = "~/Projects/tatr.vim/", enabled = not is_windows(), lazy = false },
 
   {
-    dir = "~/Projects/cuik.vim/",
-    enabled = not is_windows(),
-    lazy = false,
+    "offGustavo/cuik.vim",
+    -- dir = "~/Projects/cuik.vim/",
+    -- enabled = not is_windows(),
+    lazy = true,
     cmd = "CuikCompile",
     init = function()
       vim.g.cuik = {
@@ -135,11 +138,13 @@ require("config.lazy").add({
       }
     end,
     keys = {
-      { "<M-C>", ":CuikCompile<Cr>" },
-      { "<M-CR>", ":CuikRecompile<Cr>" },
-      { "<M-g><M-n>", ":cn<Cr>" },
-      { "<M-g><M-p>", ":cp<Cr>" },
-      { "<M-g><M-n>", ":cn<Cr>" },
+      { "<M-C>", "<Cmd>CuikCompile<Cr>" },
+      { "<M-CR>", "<Cmd>CuikRecompile<Cr>" },
+      { "<M-g><M-k>", "<Cmd>CuikKill<CR>" },
+      { "<M-g><M-o>", "<Cmd>cope<Cr>" },
+      { "<M-g><M-c>", "<Cmd>cclose<Cr>" },
+      { "<M-g><M-n>", "<Cmd>cnext<Cr>" },
+      { "<M-g><M-p>", "<Cmd>cprev<Cr>" },
     },
   },
 

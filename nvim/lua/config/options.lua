@@ -11,8 +11,8 @@ let g:maplocalleader = "\<C-c>"
 
 -- {{{ Disable Plugins
 -- disable custom nix/arch fzf.vim
-vim.g.loaded_fzf = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_fzf = 1
+-- vim.g.loaded_netrwPlugin = 0
 -- }}}
 
 -- -- {{{ Netrw
