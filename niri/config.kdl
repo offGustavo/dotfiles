@@ -343,8 +343,8 @@ layout {
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which ma be more convenient to use.
 // See the binds section below for more spawn examples.
-
 spawn-at-startup "sh" "-c" "$HOME/.config/niri/scripts/start.sh"
+
 // spawn-at-startup "sh" "-c" "systemctl --user start gnome-keyring-daemon.service"
 // // spawn-at-startup "sh" "-c" "cosmic-ext-alternative-startup"
 // // spawn-at-startup "sh" "-c" "dms run"
@@ -417,16 +417,17 @@ window-rule {
   default-window-height {}
 }
 
-// // Work around WezTerm's initial configure bug
-// // by setting an empty default-column-width.
-// window-rule {
-//   // This regular expression is intentionally made as specific as possible,
-//   // since this is the default config, and we want no false positives.
-//   // You can get away with just app-id="wezterm" if you want.
-//   match app-id=r#"^org\.wezfurlong\.wezterm$"#
-//   match app-id=r#"^app\.zen_browser\.zen$"#
-//   default-column-width { proportion 1.0; }
-// }
+// Work around WezTerm's initial configure bug
+// by setting an empty default-column-width.
+window-rule {
+  // This regular expression is intentionally made as specific as possible,
+  // since this is the default config, and we want no false positives.
+  // You can get away with just app-id="wezterm" if you want.
+  match app-id=r#"^org\.wezfurlong\.wezterm$"#
+  match app-id=r#"^app\.zen_browser\.zen$"#
+  match app-id=r#"^vivaldi-stable$"#
+  default-column-width { proportion 1.0; }
+}
 
 // // Open the Firefox picture-in-picture player as floating by default.
 // window-rule {
@@ -504,5 +505,8 @@ include "fish/binds.kdl"
 include "fish/style.kdl"
 
 // // DMS Include Configs
-// include "dms/cursor.kdl"
-// include "dms/binds.kdl"
+// include optional=true "dms/cursor.kdl"
+// include optional=true "dms/binds.kdl"
+// include optional=true "dms/input.kdl"
+// include optional=true "dms/windowrules.kdl"
+// include optional=true "dms/layout.kdl"

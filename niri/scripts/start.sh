@@ -25,3 +25,5 @@ $(which start-swaybg.lua)
 
 # $HOME/.local/bin/start-swaybg.lua
 
+# REF: https://github.com/probeldev/niri-float-sticky
+niri-float-sticky

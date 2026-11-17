@@ -232,7 +232,8 @@ binds {
   Mod+Shift+Equal { set-window-height "-1%"; }
 
   // Move the focused window between the floating and the tiling layout.
-  Mod+g           { toggle-window-floating; }
+  Mod+G           { toggle-window-floating; }
+  Mod+Shift+P     { spawn "niri-float-sticky" "-ipc" "toggle_sticky"; }
   Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
 
   // TODO: Make this resize the windows to fit with the new 'paddind'
