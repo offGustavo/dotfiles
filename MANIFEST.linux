@@ -20,5 +20,5 @@ wezterm|.config
 yazi|.config      
 ripgreprc|.config
 .tmux.conf
-doom|.config
+.doom.d
 .XCompose
