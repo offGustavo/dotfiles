@@ -1,83 +1,104 @@
+/* Uses the @define-color variables from your theme file
+   (bg, bg-highlight, blue, fg, fg-dark, green, orange, red) */
+
 * {
   border: none;
-  font-size: 12px;
-  font-family: "JetBrainsMono Nerd Font Propo";
-  color: @fg;
-  /* background-color: transparent; */
+  border-radius: 0;
+  min-height: 0;
   padding: 0;
+  margin: 0;
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-size: 12px;
+  color: @fg;
 }
 
 window#waybar {
   background: @bg;
 }
 
-#custom-logo {
-  font-size: 18px;
-  background-color: @blue;
-  color: @bg;
-  border-radius: 0px 5px 5px 0px;
+tooltip {
+  background: @bg-highlight;
+  border: 1px solid @fg-dark;
+  border-radius: 6px;
 }
 
-#custom-privacydots {
-  background-color: @bg;
-}
-
-#custom-weather {
-  background-color: @bg;
+tooltip label {
+  padding: 2px 4px;
   color: @fg;
 }
 
-/*.modules-right {*/
-/*  padding-left: 5px;*/
-/*  border-radius: 15px 0 0 15px;*/
-/*  margin-top: 2px;*/
-/*}*/
+/* ── Shared module look ─────────────────────────────── */
 
-/*.modules-center {*/
-/*  padding: 0 15px;*/
-/*  margin-top: 2px;*/
-/*  border-radius: 15px 15px 15px 15px;*/
-/*  background: #000000;*/
-/*}*/
-
-/*.modules-left {*/
-/*  border-radius: 0 15px 15px 0;*/
-/*  margin-top: 2px;*/
-/*}*/
-
-#workspaces button {
-  padding: 0px 5px;
-  margin: 2px;
-  border-radius: 5px;
-  background-color: @bg;
+#clock,
+#cpu,
+#memory,
+#temperature,
+#custom-weather,
+#custom-privacydots,
+#submap,
+#tray,
+#language,
+#backlight,
+#pulseaudio,
+#bluetooth,
+#network,
+#battery,
+#custom-notification {
+  padding: 0 8px;
+  background: transparent;
+  transition: background-color 150ms ease;
 }
 
-/* #workspaces button */
-/* #workspaces button.focused: The single focused workspace. */
-/* #workspaces  button.active:  The workspace is active (visi‐ */
-/* ble) on its output. */
-/* #workspaces button.urgent: The workspace has  one  or  more */
-/* urgent windows. */
-/* #workspaces button.empty: The workspace is empty. */
-/* #workspaces  button.current_output:  The  workspace is from */
-/* the same output as the bar that it is displayed on. */
-/* #workspaces button#niri-workspace-<name>: Workspaces  named */
-/* this, or index for unnamed workspaces. */
+#clock:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#custom-weather:hover,
+#language:hover,
+#backlight:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#network:hover,
+#battery:hover,
+#custom-notification:hover {
+  background: @bg-highlight;
+}
 
-/* #workspaces button label{ */
-/*   font-size: 12px; */
-/* } */
+/* ── Left ───────────────────────────────────────────── */
 
-/*#workspaces button.active {*/
-/*}*/
-/*workspaces{*/
-/*}*/
-/*#workspaces button.empty{*/
-/*}*/
-/*#workspaces button.persistent{*/
-/*}*/
-/*#workspaces button.special{*/
-/*}*/
+#custom-logo {
+  font-size: 18px;
+  padding: 0 5px;
+  background: @blue;
+  color: @bg;
+  border-radius: 0 6px 6px 0;
+}
+
+#submap {
+  color: @orange;
+}
+
+#workspaces {
+  padding: 0 4px;
+}
+
+#workspaces button {
+  padding: 0 7px;
+  margin: 3px 2px;
+  border-radius: 5px;
+  background: transparent;
+  color: @fg-dark;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+#workspaces button:hover {
+  background: @bg-highlight;
+  color: @fg;
+}
+
+#workspaces button.empty {
+  color: @fg-dark;
+}
 
 #workspaces button.focused,
 #workspaces button.active,
@@ -91,112 +112,62 @@ window#waybar {
   color: @bg;
 }
 
-#workspaces button.visible label,
-#workspaces button.urgent label {
-  background: @blue;
-  color: @bg;
-}
-
-#custom-logo,
-#battery,
-#custom-clipboard,
-#custom-colorpicker,
-#custom-powerDraw,
-#bluetooth,
-#pulseaudio,
-#network,
-#disk,
-#memory,
-#backlight,
-#cpu,
-#temperature,
-#custom-weather,
-#idle_inhibitor,
-#jack,
-#tray,
-#window,
-#workspaces,
-#clock {
-  padding: 0 5px;
-}
-
-/* #custom-weather, */
-/* #pulseaudio { */
-/*   padding-top: 4px; */
-/* } */
-
-#pulseaudio.muted {
-  color: @red ;
-}
+/* ── Status colors ──────────────────────────────────── */
 
 #temperature.critical {
-  padding-top: 0;
-  color: @red ;
+  color: @red;
 }
 
-/*#clock{*/
-/*  color: #5fd1fa;*/
-/*}*/
-
-#battery {
-  border-radius: 5px 0px 0px 5px;
+#pulseaudio.muted {
+  color: @red;
 }
 
-#battery.charging {
+#network.disconnected {
+  color: @red;
+}
+
+#network.speed {
+  color: @fg-dark;
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background: @red;
+}
+
+/* ── Battery ────────────────────────────────────────── */
+
+#battery.charging,
+#battery.plugged {
+  background: @green;
   color: @bg;
-  background-color: @green;
 }
 
-#battery.warning:not(.charging) {
+#battery.warning:not(.charging):not(.plugged) {
+  background: @orange;
   color: @bg;
-  background-color: @orange;
 }
 
-#battery.critical:not(.charging) {
-  color: @fg;
-  background-color: @red;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+#battery.critical:not(.charging):not(.plugged) {
+  background: @red;
+  color: @bg;
+  animation: blink 0.6s linear infinite alternate;
 }
 
 @keyframes blink {
   to {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: @fg;
+    color: @bg;
   }
 }
 
-
-#tray {
-  padding: 0 5px;
-}
- 
-#tray.active {
-  color: @red;
-  background-color: @bg;
-}
-
-/* #tray > .passive         */
-/* #tray > .active           */
-/* #tray > .needs-attention  */
-
-#taskbar {
-  font-size: 20px;
-  padding: 0px;
-  margin: 0px;
-}
+/* ── Notifications ──────────────────────────────────── */
 
 #custom-notification {
-  /* font-family: "NotoSansMono Nerd Font"; */
   font-size: 16px;
-  padding: 0px 10px;
-}
-
-
-#custom-notification.focused {
-  background-color: @blue;
-  background-color: @bg;
+  padding: 0 10px;
 }
