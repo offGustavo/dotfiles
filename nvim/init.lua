@@ -63,7 +63,7 @@ require("config.lazy").add({
 
   -- General
   { import = "plugins.general.mini" },
-  { import = "plugins.general.snacks" },
+  -- { import = "plugins.general.snacks" },
 
   -- Theme
   -- { import = "plugins.themes.tokyonight" },
@@ -79,7 +79,7 @@ require("config.lazy").add({
   -- { import = "plugins.editor.explorer.dired" },
 
   -- Picker
-  -- { import = "plugins.editor.picker.fzf-lua" },
+  { import = "plugins.editor.picker.fzf-lua" },
   -- { import = "plugins.editor.picker.telescope" },
   -- { import = "plugins.editor.picker.minibuffer" },
 
@@ -108,7 +108,7 @@ require("config.lazy").add({
   -- { import = "plugins.util.compile-mode" },
 
   -- UI
-  { import = "plugins.ui.which-key" },
+  -- { import = "plugins.ui.which-key" },
   -- { import =  "plugins.nvim-colorizer" },
 
   -- Agenda
@@ -172,3 +172,7 @@ require("config.lazy").add({
   -- { "https://github.com/nstefan002/screenkey.nvim" },
 })
 -- }}}
+
+if os.getenv("DIRED_MODE") then
+  source("kitty")
+end

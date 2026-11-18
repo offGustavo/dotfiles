@@ -168,7 +168,7 @@ function M.build_statusline()
     .. "%#Normal#"
     .. "%l:%c %L:%p%% "
     .. lsp_diagnostics()
-    .. lsp_info()
+    -- .. lsp_info()
     .. "%="
     .. show_macro_recording()
     .. git_branch()
@@ -180,19 +180,51 @@ function M.build_statusline()
     .. render_with_mode_color("  ")
 end
 
+-- local FILL = "━"
+--
+-- -- Display width of a statusline fragment, with highlight and format codes
+-- -- resolved for the window being drawn.
+-- local function stl_width(str, winid)
+--   return vim.api.nvim_eval_statusline(str, { winid = winid }).width
+-- end
+--
+-- function M.build_statusline_inactive()
+--   local hl = "%#StatusLineNC#"
+--
+--   local left = {
+--     render_with_mode_color(" "),
+--     hl .. FILL:rep(6) .. " ", -- leading "━━━━━━ "
+--     get_file_name(),
+--     hl,
+--     "%l:%c %L:%p%% ",
+--   }
+--
+--   local right = {
+--     hl .. " ",
+--     render_with_mode_color("  "),
+--   }
+--
+--   local used = 0
+--   for _, part in ipairs(left) do
+--     used = used + stl_width(part, win)
+--   end
+--   for _, part in ipairs(right) do
+--     used = used + stl_width(part, win)
+--   end
+--
+--   local gap = math.max(0, vim.api.nvim_win_get_width(win) - used)
+--
+--   return table.concat(left) .. hl .. FILL:rep(gap) .. table.concat(right)
+-- end
+
 function M.build_statusline_inactive()
-  local active_win = vim.fn.win_getid()
-  local status_win = vim.g.statusline_winid
-  if status_win ~= active_win then
     return render_with_mode_color(" ")
-      .. render_with_mode_color_inverted("   ")
-      .. "%#StatusLineNC#"
+      .. "%#StatusLineNC#   "
       .. get_file_name()
       .. "%#StatusLineNC#"
       .. "%l:%c %L:%p%%"
       .. "%="
       .. render_with_mode_color("  ")
-  end
 end
 
 function M.build_quickfix_statusline()

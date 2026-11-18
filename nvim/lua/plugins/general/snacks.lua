@@ -688,5 +688,14 @@ return {
         })
       end,
     },
+
+    {
+      "<M-\\>",
+      function()
+        Snacks.terminal("tmux")
+      end,
+      mode = { "i", "x", "n", "t" },
+      desc = "Tmux",
+    },
   },
 }

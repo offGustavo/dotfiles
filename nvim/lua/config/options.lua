@@ -273,7 +273,7 @@ set {
 -- {{{ statusline
 -- set {
 --   laststatus = 3,
---   showmode = false,
+--   showmode = true,
 -- }
 --
 -- -- vim.opt.fillchars:append({
@@ -281,12 +281,12 @@ set {
 -- --   stlnc = "-"
 -- -- })
 --
--- -- vim.opt.fillchars:append({
--- --   vert = '┃',
--- --   horiz = '━',
--- --   horizup = '┻',
--- --   horizdown = '┳'
--- -- })
+-- vim.opt.fillchars:append({
+--   vert = '┃',
+--   horiz = '━',
+--   horizup = '┻',
+--   horizdown = '┳'
+-- })
 --
 -- -- vim.opt.fillchars:append({
 -- -- vert = ' ',
