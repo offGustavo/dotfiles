@@ -792,12 +792,12 @@ binds {
   Mod+Shift+E { set-column-width "-1%"; }
 
   // Height
-  Mod+Minus       { switch-preset-window-height; }
-  Mod+Equal       { switch-preset-window-height-back; }
-  Mod+Ctrl+Minus  { set-window-height "+10%"; }
-  Mod+Ctrl+Equal  { set-window-height "-10%"; }
-  Mod+Shift+Minus { set-window-height "+1%"; }
-  Mod+Shift+Equal { set-window-height "-1%"; }
+  Mod+Minus       { switch-preset-window-height-back; }
+  Mod+Equal       { switch-preset-window-height; }
+  Mod+Ctrl+Minus  { set-window-height "-10%"; }
+  Mod+Ctrl+Equal  { set-window-height "+10%"; }
+  Mod+Shift+Minus { set-window-height "-1%"; }
+  Mod+Shift+Equal { set-window-height "+1%"; }
 
   // Move the focused window between the floating and the tiling layout.
   Mod+G           { toggle-window-floating; }
