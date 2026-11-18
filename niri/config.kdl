@@ -509,6 +509,8 @@ window-rule {
   // - host Firefox (app-id is "firefox")
   // - Flatpak Firefox (app-id is "org.mozilla.firefox")
   match title="^Picture-in-Picture$"
+  match app-id="^com.ezratweaver.AdwBluetooth$"
+  match app-id="^com.network.manager$"
   open-floating true
 }
 
