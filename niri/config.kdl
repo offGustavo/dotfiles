@@ -350,7 +350,7 @@ layout {
   // You can enable drop shadows for windows.
   shadow {
     // Uncomment the next line to enable shadows.
-    // on
+    on
 
     // By default, the shadow draws only around its window, and not behind it.
     // Uncomment this setting to make the shadow draw behind its window.
@@ -375,13 +375,13 @@ layout {
     softness 10
 
     // Spread expands the shadow.
-    spread 1
+    spread 10
 
     // Offset moves the shadow relative to the window.
     offset x=0 y=0
 
     // You can also change the shadow color and opacity.
-    color "#292e42ff"
+    color "#292e42"
   }
 
   // Struts shrink the area occupied by windows, similarly to layer-shell panels.
@@ -587,7 +587,6 @@ binds {
 
   // Open Terminal and Gui Editor
   Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
-  Mod+Shift+Return  hotkey-overlay-title="Gui Editor" { spawn-sh "emacs"; }
 
   // FIXME: not working
   // Mod+C { spawn-sh "wl-copy"; }
