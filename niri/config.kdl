@@ -140,7 +140,7 @@ output "DP-1" {
   scale 1.0
   // Transform allows to rotate the output counter-clockwise, valid values are:
   // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-  transform "90"
+  transform "normal"
   // Position of the output in the global coordinate space.
   // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
   // The cursor can only move between directly adjacent outputs.
@@ -161,6 +161,7 @@ output "DP-1" {
 //   // off
 //   // Resolution and, optionally, refresh rate of the output.
 //   // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
+
 //   // If the refresh rate is omitted, niri will pick the highest refresh rate
 //   // for the resolution.
 //   // If the mode is omitted altogether or is invalid, niri will pick one automatically.
@@ -599,23 +600,23 @@ binds {
 
   // Example volume keys mappings for PipeWire & WirePlumber.
   // The allow-when-locked=true property makes them work even when the session is locked.
-  XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-  Ctrl+XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
-  Ctrl+XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
+  XF86AudioRaiseVolume       allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+  XF86AudioLowerVolume       allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+  Ctrl+XF86AudioRaiseVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
+  Ctrl+XF86AudioLowerVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
   Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.01+"; }
   Shift+XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.01-"; }
-  XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-  XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+  XF86AudioMute              allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+  XF86AudioMicMute           allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-  // TODO: Add 
-  XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "10%+"; }
-  XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
+  // Brightness
+  XF86MonBrightnessUp         allow-when-locked=true { spawn "brightnessctl" "set" "10%+"; }
+  XF86MonBrightnessDown       allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
   Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "1%+"; }
   Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "1%-"; }
 
-  Mod+XF86MonBrightnessUp   allow-when-locked=true { spawn "ddc-brightness.sh" "+10"; }
-  Mod+XF86MonBrightnessDown allow-when-locked=true { spawn "ddc-brightness.sh" "-10"; }
+  Mod+XF86MonBrightnessUp         allow-when-locked=true { spawn "ddc-brightness.sh" "+10"; }
+  Mod+XF86MonBrightnessDown       allow-when-locked=true { spawn "ddc-brightness.sh" "-10"; }
   Mod+Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "ddc-brightness.sh" "+1"; }
   Mod+Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "ddc-brightness.sh" "-1"; }
 
@@ -634,6 +635,7 @@ binds {
   // Alt+Tab repeat=true { spawn "~/.config/niri/scripts/alt_tab.sh"; }
   // Alt+Shift+Tab repeat=true { spawn "sh" "-c" "~/.config/niri/scripts/alt_tab.sh prev"; }
 
+  // Windows
   Mod+q  { close-window; }
   Alt+F4 { close-window; }
 
@@ -650,21 +652,22 @@ binds {
   Mod+Ctrl+Shift+J { consume-or-expel-window-left; }
   Mod+Ctrl+Shift+L { consume-or-expel-window-right; }
 
+  // Workspaces
   Mod+O       { focus-workspace-down; }
   Mod+U       { focus-workspace-up; }
   Mod+Shift+O { move-window-to-workspace-down; }
   Mod+Shift+U { move-window-to-workspace-up; }
-
-  Mod+Comma        { focus-monitor-left; }
-  Mod+Period       { focus-monitor-right; }
-  Mod+Shift+Comma  { move-window-to-monitor-left; }
-  Mod+Shift+period { move-window-to-monitor-right; }
-
-  Mod+Ctrl+Comma   { move-workspace-to-monitor-left; }
-  Mod+Ctrl+Period  { move-workspace-to-monitor-right; }
-
   Mod+Ctrl+U  { move-workspace-up; }
   Mod+Ctrl+O  { move-workspace-down; }
+
+  // Monitors
+  Mod+Comma        { focus-monitor-next; }
+  Mod+Period       { focus-monitor-previous; }
+  Mod+Shift+Comma  { move-window-to-monitor-next; }
+  Mod+Shift+period { move-window-to-monitor-previous; }
+  Mod+Ctrl+Comma   { move-workspace-to-monitor-next; }
+  Mod+Ctrl+Period  { move-workspace-to-monitor-previous; }
+
 
   // You can bind mouse wheel scroll ticks using the following syntax.
   // These binds will change direction based on the natural-scroll setting.
