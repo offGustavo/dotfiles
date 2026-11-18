@@ -169,7 +169,3 @@ require("config.lazy").add({
   -- { "https://github.com/nstefan002/screenkey.nvim" },
 })
 -- }}}
-
-if os.getenv("DIRED_MODE") then
-  source("kitty")
-end
