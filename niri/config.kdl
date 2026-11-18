@@ -905,10 +905,3 @@ recent-windows {
     Alt+Shift+escape { previous-window scope="workspace"; }
   }
 }
-
-// // DMS Include Configs
-// include optional=true "dms/cursor.kdl"
-// include optional=true "dms/binds.kdl"
-// include optional=true "dms/input.kdl"
-// include optional=true "dms/windowrules.kdl"
-// include optional=true "dms/layout.kdl"
