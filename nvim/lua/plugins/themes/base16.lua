@@ -3,6 +3,10 @@ return {
   enabled = true,
   lazy = false,
   config = function ()
-    vim.cmd.colorscheme("base16-nord")
+    colorscheme({
+      dark = "base16-nord",
+      light = "base16-gruvbox-light"
+    })
+    -- vim.cmd.colorscheme("base16-nord")
   end
 }

@@ -1,7 +1,7 @@
 return {
   "https://github.com/shaunsingh/nord.nvim",
-  lazy = false, 
+  lazy = false,
   config = function()
-    vim.cmd.colorscheme("nord")
+    colorscheme({ dark = "nord", light = "retrobox" })
   end,
 }

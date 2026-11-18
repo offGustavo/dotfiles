@@ -10,16 +10,13 @@ _G.fish_group = vim.api.nvim_create_augroup("Fish.config", {
   clear = false,
 })
 
--- -- {{{ Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
--- if vim.o.background == "dark" then
---   vim.cmd.colorscheme("tokyo")
--- else
---   vim.cmd.colorscheme("tokyo-day")
--- end
--- -- }}}
 
 -- {{{ Config Files
 require("config.functions")
+
+-- -- {{{ Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
+-- colorscheme({ "tokyo", "tokyo-day" })
+-- -- }}}
 
 if os.getenv("SCROLL_MODE") then
   -- require("config.helix").setup()
@@ -67,8 +64,8 @@ require("config.lazy").add({
 
   -- Theme
   -- { import = "plugins.themes.tokyonight" },
-  -- { import = "plugins.themes.nord" },
-  { import = "plugins.themes.base16" },
+  { import = "plugins.themes.nord" },
+  -- { import = "plugins.themes.base16" },
   -- { import = "plugins.themes.silentium" },
 
   -- File Explorer

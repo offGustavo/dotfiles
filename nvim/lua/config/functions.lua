@@ -166,3 +166,33 @@ function _G.source(name)
     vim.api.nvim_err_writeln(string.format("[source] File not found for: %s (checked vim/%s)", name, relative_path))
   end
 end
+
+Fish.colors = {
+  dark = "tokyo",
+  light = "tokyo-day",
+}
+
+-- Listen to background option changes instead of colorscheme events
+vim.api.nvim_create_autocmd("OptionSet", {
+  pattern = "background",
+  callback = function()
+    _G.colorscheme()
+  end,
+})
+
+---@param names? table Dictionary of colorschemes e.g. { dark = "tokyo", light = "tokyo-day" }
+---@return boolean ok
+function _G.colorscheme(names)
+  if names ~= nil then
+    Fish.colors.dark = names.dark
+    Fish.colors.light = names.light or names.dark
+  end
+
+  local ok, err = pcall(vim.cmd.colorscheme, Fish.colors[vim.o.background])
+
+  if not ok then
+    vim.notify(err, vim.log.levels.ERROR)
+    vim.notify("Current colorschemes: " .. vim.inspect(Fish.colors), vim.log.levels.ERROR)
+  end
+  return ok
+end
