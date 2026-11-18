@@ -10,7 +10,6 @@ _G.fish_group = vim.api.nvim_create_augroup("Fish.config", {
   clear = false,
 })
 
-
 -- {{{ Config Files
 require("config.functions")
 
@@ -105,7 +104,7 @@ require("config.lazy").add({
   -- { import = "plugins.util.compile-mode" },
 
   -- UI
-  -- { import = "plugins.ui.which-key" },
+  { import = "plugins.ui.which-key" },
   -- { import =  "plugins.nvim-colorizer" },
 
   -- Agenda

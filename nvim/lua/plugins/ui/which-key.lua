@@ -5,7 +5,7 @@ return {
   config = function()
     require("which-key").setup({
       ---@type false | "classic" | "modern" | "helix"
-      preset = "helix",
+      preset = "modern",
       -- Delay before showing the popup. Can be a number or a function that returns a number.
       ---@type number | fun(ctx: { keys: string, mode: string, plugin?: string }):number
       delay = function(ctx)
