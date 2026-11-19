@@ -90,20 +90,20 @@ return {
       -- Module mappings. Use `''` (empty string) to disable one.
       mappings = {
         -- Main textobject prefixes
-        around = 'a',
-        inside = 'i',
+        around = "a",
+        inside = "i",
 
         -- Next/last textobjects
         -- NOTE: This (deliberately) overrides Neovim>=0.12 built-in incremental
         -- selection mappings. See `:h MiniAi-default-an-in` for more details.
-        around_next = 'an',
-        inside_next = 'in',
-        around_last = 'al',
-        inside_last = 'il',
+        around_next = "an",
+        inside_next = "in",
+        around_last = "al",
+        inside_last = "il",
 
         -- Move cursor to corresponding edge of `a` textobject
-        goto_left = 'g[',
-        goto_right = 'g]',
+        goto_left = "g[",
+        goto_right = "g]",
       },
 
       -- Number of lines within which textobject is searched
@@ -112,7 +112,7 @@ return {
       -- How to search for object (first inside current line, then inside
       -- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
       -- 'cover_or_nearest', 'next', 'prev', 'nearest'.
-      search_method = 'cover_or_nearest',
+      search_method = "cover_or_nearest",
 
       -- Whether to disable showing non-error feedback
       -- This also affects (purely informational) helper messages shown after
@@ -163,59 +163,68 @@ return {
       },
     })
 
-    -- local miniclue = require("mini.clue")
-    -- miniclue.setup({
-    --   triggers = {
-    --     -- Leader triggers
-    --     { mode = { "n", "x" }, keys = "<Leader>" },
-    --     { mode = { "n", "x" }, keys = "<localleader>" },
-    --     -- `[` and `]` keys
-    --     { mode = "n", keys = "[" },
-    --     { mode = "n", keys = "]" },
-    --     -- Built-in completion
-    --     { mode = "i", keys = "<C-x>" },
-    --     -- `g` key
-    --     { mode = { "n", "x" }, keys = "g" },
-    --     { mode = { "n", "x" }, keys = "z" },
-    --     { mode = { "n", "x" }, keys = "Z" },
-    --     { mode = { "n", "x" }, keys = "<C-c>" },
-    --     -- Marks
-    --     { mode = { "n", "x" }, keys = "'" },
-    --     { mode = { "n", "x" }, keys = "`" },
-    --     -- Registers
-    --     { mode = { "n", "x" }, keys = '"' },
-    --     { mode = { "i", "c" }, keys = "<C-r>" },
-    --     -- Window commands
-    --     { mode = "n", keys = "<C-w>" },
-    --     -- `z` key
-    --     { mode = { "n", "x" }, keys = "z" },
-    --   },
-    --   clues = {
-    --     -- Enhance this by adding descriptions for <Leader> mapping groups
-    --     miniclue.gen_clues.square_brackets(),
-    --     miniclue.gen_clues.builtin_completion(),
-    --     miniclue.gen_clues.g(),
-    --     miniclue.gen_clues.marks(),
-    --     miniclue.gen_clues.registers(),
-    --     miniclue.gen_clues.windows(),
-    --     miniclue.gen_clues.z(),
-    --     { mode = "n", keys = "<Leader>b", desc = "+Buffer" },
-    --     { mode = "n", keys = "<Leader>s", desc = "+Search" },
-    --     { mode = "n", keys = "<Leader>f", desc = "+Find" },
-    --     { mode = "n", keys = "<Leader>g", desc = "+Git" },
-    --     { mode = "n", keys = "<Leader>gc", desc = "+Commit" },
-    --     { mode = "n", keys = "<Leader>c", desc = "+Code" },
-    --     { mode = "n", keys = "<Leader>u", desc = "+Ui" },
-    --     -- TODO: improve this
-    --     { mode = "n", keys = "<Leader>o", desc = "+Other" },
-    --     { mode = "n", keys = "<Leader>t", desc = "+Terminal" },
-    --     { mode = "n", keys = "<Leader>r", desc = "+Replace" },
-    --     { mode = "n", keys = "<Leader>h", desc = "+Harpoon" },
-    --     { mode = "n", keys = "<Leader><Tab>", desc = "+Tabs" },
-    --     { mode = "n", keys = "<Leader>l", desc = "+Location List" },
-    --     { mode = "n", keys = "<Leader>q", desc = "+Quickfix/Quit" },
-    --   },
-    -- })
+    local miniclue = require("mini.clue")
+    miniclue.setup({
+      triggers = {
+        -- Leader triggers
+        { mode = { "n", "x" }, keys = "<Leader>" },
+        { mode = { "n", "x" }, keys = "<localleader>" },
+        -- `[` and `]` keys
+        { mode = "n", keys = "[" },
+        { mode = "n", keys = "]" },
+        -- Built-in completion
+        { mode = "i", keys = "<C-x>" },
+        -- `g` key
+        { mode = { "n", "x" }, keys = "g" },
+        { mode = { "n", "x" }, keys = "z" },
+        { mode = { "n", "x" }, keys = "Z" },
+        { mode = { "n", "x" }, keys = "s" },
+        { mode = { "n", "x" }, keys = "S" },
+        { mode = { "n", "x" }, keys = "<C-c>" },
+        -- Marks
+        { mode = { "n", "x" }, keys = "'" },
+        { mode = { "n", "x" }, keys = "`" },
+        -- Registers
+        { mode = { "n", "x" }, keys = '"' },
+        { mode = { "i", "c" }, keys = "<C-r>" },
+        -- Window commands
+        { mode = "n", keys = "<C-w>" },
+        -- `z` key
+        { mode = { "n", "x" }, keys = "z" },
+      },
+      clues = {
+        -- Enhance this by adding descriptions for <Leader> mapping groups
+        miniclue.gen_clues.square_brackets(),
+        miniclue.gen_clues.builtin_completion(),
+        miniclue.gen_clues.g(),
+        miniclue.gen_clues.marks(),
+        miniclue.gen_clues.registers({
+          show_contents = true,
+        }),
+        miniclue.gen_clues.windows({
+          submode_move = true,
+          submode_navigate = true,
+          submode_resize = true,
+        }),
+        miniclue.gen_clues.z(),
+        { mode = "n", keys = "<Leader>b", desc = "+Buffer" },
+        { mode = "n", keys = "<Leader>s", desc = "+Search" },
+        { mode = "n", keys = "<Leader>f", desc = "+Find" },
+        { mode = "n", keys = "<Leader>g", desc = "+Git" },
+        { mode = "n", keys = "<Leader>gc", desc = "+Commit" },
+        { mode = "n", keys = "<Leader>c", desc = "+Code" },
+        { mode = "n", keys = "<Leader>u", desc = "+Ui" },
+        -- TODO: improve this
+        { mode = "n", keys = "<Leader>o", desc = "+Other" },
+        { mode = "n", keys = "<Leader>t", desc = "+Terminal" },
+        { mode = "n", keys = "<Leader>r", desc = "+Replace" },
+        { mode = "n", keys = "s", desc = "+Surround|Align" },
+        { mode = "n", keys = "<Leader>h", desc = "+Harpoon" },
+        { mode = "n", keys = "<Leader><Tab>", desc = "+Tabs" },
+        { mode = "n", keys = "<Leader>l", desc = "+Location List" },
+        { mode = "n", keys = "<Leader>q", desc = "+Quickfix/Quit" },
+      },
+    })
 
     -- require("mini.extra").setup()
     -- -- -- Centered on screen
@@ -305,5 +314,5 @@ return {
       -- idle time if user input is required.
       silent = false,
     })
-  end
+  end,
 }

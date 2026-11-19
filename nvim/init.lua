@@ -106,7 +106,7 @@ require("config.lazy").add({
   { import = "plugins.util.cuik" },
 
   -- UI
-  { import = "plugins.ui.which-key" },
+  -- { import = "plugins.ui.which-key" },
   -- { import = "plugins.ui.menu" },
   -- { import =  "plugins.nvim-colorizer" },
   -- { import = "plugins.ui.baleia" },
