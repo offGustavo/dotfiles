@@ -5,7 +5,7 @@ return {
   config = function ()
     colorscheme({
       dark = "base16-nord",
-      light = "base16-gruvbox-light"
+      light = "base16-nord-light"
     })
     -- vim.cmd.colorscheme("base16-nord")
   end
