@@ -11,12 +11,11 @@ _G.fish_group = vim.api.nvim_create_augroup("Fish.config", {
 })
 
 -- {{{ Config Files
--- NOTE: this should be load first, this entire config depends on functions provided by this module
+-- WARN: this should be load first, this entire config depends on functions provided by this module
 require("config.functions")
 
--- {{{ Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
+-- NOTE: Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
 colorscheme({ dark = "tokyo", light = "tokyo-day" })
--- }}}
 
 if os.getenv("SCROLL_MODE") then
   -- require("config.helix").setup()
@@ -44,7 +43,6 @@ require("offGustavo.espeto.setup")
 require("offGustavo.lazygit")
 require("offGustavo.TabTerm.setup")
 require("offGustavo.todo-comments")
-require("offGustavo.yazi")
 require("offGustavo.ui.highlight_operation")
 -- require("offGustavo.compile-mode")
 require("Fish.git_branch").setup()
@@ -63,8 +61,8 @@ require("config.lazy").add({
 
   -- Theme
   -- { import = "plugins.themes.tokyonight" },
-  { import = "plugins.themes.nord" },
-  -- { import = "plugins.themes.base16" },
+  -- { import = "plugins.themes.nord" },
+  { import = "plugins.themes.base16" },
   -- { import = "plugins.themes.silentium" },
 
   -- File Explorer
@@ -108,7 +106,8 @@ require("config.lazy").add({
   -- UI
   -- { import = "plugins.ui.which-key" },
   -- { import = "plugins.ui.menu" },
-  -- { import =  "plugins.nvim-colorizer" },
+  -- { import =  "plugins.ui.nvim-colorizer" },
+  -- { import =  "plugins.ui.todo-comments" },
   -- { import = "plugins.ui.baleia" },
   -- { "https://github.com/nstefan002/screenkey.nvim" },
 
@@ -134,7 +133,5 @@ require("config.lazy").add({
       vim.g.tatr_short_cmd = true
     end,
   },
-
 })
 -- }}}
-

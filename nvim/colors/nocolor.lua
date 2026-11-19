@@ -22,7 +22,7 @@ M.accents = {
 
 --- @class Colors
 M.colors = {
-	accent = M.accents.yellow,
+	accent = M.accents.blue,
 	white = "#E6E6E6",
 	light_gray = "#A6A6A6",
 	gray = "#737373",
@@ -157,4 +157,3 @@ end
 M.colorscheme()
 
 return M
-
