@@ -3,6 +3,7 @@ if not is("nvim-0.13") then
   return
 end
 
+-- TODO: Improve and fix this module
 vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, {
   pattern = "*",
   callback = function()
@@ -21,24 +22,24 @@ vim.api.nvim_create_autocmd({ "TextYankPost", "TextPutPost" }, {
   end,
 })
 
-local ns = vim.api.nvim_create_namespace("pre_delete_hl")
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight text about to be deleted",
-  group = vim.api.nvim_create_augroup("PreDeleteHighlight", { clear = true }),
-  callback = function()
-    local ev = vim.v.event
-    if ev.operator ~= "d" and ev.operator ~= "c" then
-      return
-    end
-    local hl = ev.regname == "+" and "HighlightYankSystem" or "HighlightCut"
-    vim.hl.range(0, ns, hl, "'[", "']", {
-      regtype = ev.regtype:sub(1, 1), -- blockwise comes as "\22{width}"
-      inclusive = true,
-    })
-    vim.cmd.redraw() -- paint the highlight now
-    vim.wait(67) -- keep it on screen before the delete happens
-    vim.defer_fn(function()
-    vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
-  end, 100)
-  end,
-})
+-- local ns = vim.api.nvim_create_namespace("pre_delete_hl")
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--   desc = "Highlight text about to be deleted",
+--   group = vim.api.nvim_create_augroup("PreDeleteHighlight", { clear = true }),
+--   callback = function()
+--     local ev = vim.v.event
+--     if ev.operator ~= "d" and ev.operator ~= "c" then
+--       return
+--     end
+--     local hl = ev.regname == "+" and "HighlightYankSystem" or "HighlightCut"
+--     vim.hl.range(0, ns, hl, "'[", "']", {
+--       regtype = ev.regtype:sub(1, 1), -- blockwise comes as "\22{width}"
+--       inclusive = true,
+--     })
+--     vim.cmd.redraw() -- paint the highlight now
+--     vim.wait(67) -- keep it on screen before the delete happens
+--     vim.defer_fn(function()
+--     vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+--   end, 100)
+--   end,
+-- })

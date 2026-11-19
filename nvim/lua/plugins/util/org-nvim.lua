@@ -1,7 +1,9 @@
 return {
   {
     "https://github.com/xheisenbugx/org.nvim",
-    lazy = false,
+    lazy = true,
+    ft = "org",
+    event = "VeryLazy",
     opts = {
       org_directory = "~/Notes",
       agenda_files = { "~/Notes/**/*.org" },

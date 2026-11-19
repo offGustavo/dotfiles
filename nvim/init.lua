@@ -11,11 +11,12 @@ _G.fish_group = vim.api.nvim_create_augroup("Fish.config", {
 })
 
 -- {{{ Config Files
+-- NOTE: this should be load first, this entire config depends on functions provided by this module
 require("config.functions")
 
--- -- {{{ Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
--- colorscheme({ "tokyo", "tokyo-day" })
--- -- }}}
+-- {{{ Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
+colorscheme({ dark = "tokyo", light = "tokyo-day" })
+-- }}}
 
 if os.getenv("SCROLL_MODE") then
   -- require("config.helix").setup()
@@ -47,7 +48,6 @@ require("offGustavo.yazi")
 require("offGustavo.ui.highlight_operation")
 -- require("offGustavo.compile-mode")
 require("Fish.git_branch").setup()
-
 -- require("Tatr")
 -- }}}
 
@@ -72,7 +72,7 @@ require("config.lazy").add({
   -- { import = "plugins.editor.explorer.oil" },
   -- { import = "plugins.editor.explorer.yazi" },
   -- { import = "plugins.editor.explorer.vim-dirvish" },
-  -- { import = "plugins.editor.explorer.dired" },
+  { import = "plugins.editor.explorer.dired" },
 
   -- Picker
   { import = "plugins.editor.picker.fzf-lua" },
@@ -97,15 +97,20 @@ require("config.lazy").add({
 
   -- Completion
   { import = "plugins.coding.blink" },
+  { import = "plugins.coding.lazydev" },
 
   -- System
   -- { "https://github.com/tpope/vim-eunuch", lazy = true, event = "CmdLineEnter" },
   { import = "plugins.util.kitty-scrollback" },
   -- { import = "plugins.util.compile-mode" },
+  { import = "plugins.util.cuik" },
 
   -- UI
   { import = "plugins.ui.which-key" },
+  -- { import = "plugins.ui.menu" },
   -- { import =  "plugins.nvim-colorizer" },
+  -- { import = "plugins.ui.baleia" },
+  -- { "https://github.com/nstefan002/screenkey.nvim" },
 
   -- Agenda
   { import = "plugins.util.org-nvim" },
@@ -115,10 +120,11 @@ require("config.lazy").add({
   -- { import = "plugins.ui.markview" },
   -- { import = "plugins.util.md-agenda" },
 
-  -- { import = "plugins.ui.baleia" },
+  -- Typing
+  -- { import = "plugins.util.typr" },
 
-  -- My Plugins
-  { dir = "~/Projects/nvim-sessionizer", enabled = not is_windows(), lazy = false },
+  -- Sessions
+  -- { import = "plugins.util.nvim-sessionizer" },
 
   {
     dir = "~/Projects/tatr.vim/",
@@ -129,42 +135,6 @@ require("config.lazy").add({
     end,
   },
 
-  {
-    "offGustavo/cuik.vim",
-    -- dir = "~/Projects/cuik.vim/",
-    -- enabled = not is_windows(),
-    lazy = true,
-    cmd = "CuikCompile",
-    init = function()
-      vim.g.cuik = {
-        default_cmd = "grep -rn ",
-        run_async = true,
-        short_cmds = true,
-      }
-    end,
-    keys = {
-      { "<M-C>", "<Cmd>CuikCompile<Cr>" },
-      { "<M-CR>", "<Cmd>CuikRecompile<Cr>" },
-      { "<M-g><M-k>", "<Cmd>CuikKill<CR>" },
-      { "<M-g><M-o>", "<Cmd>cope<Cr>" },
-      { "<M-g><M-c>", "<Cmd>cclose<Cr>" },
-      { "<M-g><M-n>", "<Cmd>cnext<Cr>" },
-      { "<M-g><M-p>", "<Cmd>cprev<Cr>" },
-    },
-  },
-
-  {
-    dir = "~/Projects/dired.lua/",
-    lazy = false,
-    enabled = not is_windows(),
-    opts = {},
-    keys = {
-      { "<M-e>", ":DiredJump<Cr>" },
-      { "<leader>fd", ":Dired<Cr>" },
-    },
-  },
-
-  -- On Demand
-  -- { "https://github.com/nstefan002/screenkey.nvim" },
 })
 -- }}}
+

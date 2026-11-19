@@ -66,12 +66,6 @@ return {
             end
           }
         },
-				lazydev = {
-					name = "LazyDev",
-					module = "lazydev.integrations.blink",
-					-- make lazydev completions top priority (see `:h blink.cmp`)
-					score_offset = 100,
-				},
 			},
 		},
 		-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance

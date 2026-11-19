@@ -5,7 +5,6 @@ return {
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "https://github.com/rafamadriz/friendly-snippets",
-    { "https://github.com/folke/lazydev.nvim", opts = {} },
   },
   opts = {
     -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
@@ -52,7 +51,7 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "path", "snippets", "buffer" },
       providers = {
         buffer = {
           opts = {
@@ -65,12 +64,6 @@ return {
               end, vim.api.nvim_list_bufs())
             end,
           },
-        },
-        lazydev = {
-          name = "LazyDev",
-          module = "lazydev.integrations.blink",
-          -- make lazydev completions top priority (see `:h blink.cmp`)
-          score_offset = 100,
         },
       },
     },
