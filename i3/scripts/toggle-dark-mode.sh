@@ -4,19 +4,20 @@ toggle-dark-mode.sh
 CURRENT_SCHEME=$(dconf read /org/gnome/desktop/interface/color-scheme)
 
 THEME_FILE=~/.config/i3/config
-BASE="include ~/.config/i3/src/i3.config"
 
-if [ "$CURRENT_SCHEME" = "'prefer-light'" ]; then
-  # Wallpaper
-  # xwallpaper --zoom ~/Pictures/Wallpapers/dharmx-Walls/cherry/a_tree_with_pink_flowers.jpg
-  # xwallpaper --zoom /home/gustavo/Downloads/pexels-op23-12518942.jpg
+# BASE
+cat << 'EOF' > "$THEME_FILE"
 
-  cat > "$THEME_FILE" <<'EOF'
 # WARN: AUTOGEN FILE
 # Do not edit there, use the included file to edit the config
-# I3 Config
-include ~/.config/i3/i3.config
 
+include ~/.config/i3/src/i3.config
+
+EOF
+
+if [ "$CURRENT_SCHEME" = "'prefer-light'" ]; then
+
+  cat >> "$THEME_FILE" <<'EOF'
 # Tokyo Night Day Theme
 set $fg #3760bf
 set $bg #e1e2e7
@@ -28,15 +29,8 @@ set $purple #7847bd
 EOF
 
 else
-  # Wallpaper
-  # xwallpaper --zoom /home/gustavo/Pictures/Wallpapers/dharmx-Walls/spam/a_street_with_signs_and_lights_01.png
-  # xwallpaper --zoom /home/gustavo/Downloads/pexels-op23-12518942.jpg
 
-  cat > "$THEME_FILE" <<'EOF'
-# WARN: AUTOGEN FILE
-# Do not edit there, use the included file to edit the config
-# I3 Config
-include ~/.config/i3/i3.config
+  cat >> "$THEME_FILE" <<'EOF'
 # Tokyo Night Theme
 set $fg #c0caf5
 set $bg #1a1b26
