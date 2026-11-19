@@ -10,17 +10,19 @@
   ...
 }:
 let
-  sources = import ./lon.nix;
-  lanzaboote = import sources.lanzaboote {
-    inherit pkgs;
-  };
+  # sources = import ./lon.nix;
+  # lanzaboote = import sources.lanzaboote {
+  #   inherit pkgs;
+  # };
 in
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # ./flatpak.nix
+    # /home/gustavo/TMP/ewm/nix/service.nix
     # Secure Boot
-    lanzaboote.nixosModules.lanzaboote 
+    # lanzaboote.nixosModules.lanzaboote
   ];
 
   # # Set the swapfile
@@ -35,16 +37,23 @@ in
 
   # Bootloader.
 
+  boot.loader.systemd-boot = {
+    enable = true;
+    windows = {
+      # If Windows is on the SAME EFI partition as NixOS, this is often all you need:
+      # systemd-boot automatically scans /EFI/Microsoft/Boot/bootmgfw.efi
+    };
+  };
   # Lanzaboote currently replaces the systemd-boot module.
   # This setting is usually set to true in configuration.nix
   # generated at installation time. So we force it to false
   # for now.
-  boot.loader.systemd-boot.enable = lib.mkForce false;
+  # boot.loader.systemd-boot.enable = lib.mkForce false;
 
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
-  };
+  # boot.lanzaboote = {
+  #   enable = true;
+  #   pkiBundle = "/var/lib/sbctl";
+  # };
 
   # # boot.loader.limine.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
@@ -97,7 +106,11 @@ in
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [
-    "nvidia"
+    "modesetting"
+    "amdgpu"
+    "vesa"
+    "fbdev"
+    # "nvidia"
   ];
 
   hardware.bluetooth = {
@@ -122,45 +135,45 @@ in
     };
   };
 
-  hardware.nvidia = {
-    # Modesetting is required.
-    modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
-    # of just the bare essentials.
-    powerManagement.enable = true;
-
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    # Use the NVidia open source kernel module (not to be confused with the
-    # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of
-    # supported GPUs is at:
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
-    # Only available from driver 515.43.04+
-    open = true;
-
-    # Enable the Nvidia settings menu,
-    # accessible via `nvidia-settings`.
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
+  # hardware.nvidia = {
+  #   # Modesetting is required.
+  #   modesetting.enable = true;
+  #
+  #   # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+  #   # Enable this if you have graphical corruption issues or application crashes after waking
+  #   # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
+  #   # of just the bare essentials.
+  #   powerManagement.enable = true;
+  #
+  #   # Fine-grained power management. Turns off GPU when not in use.
+  #   # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+  #   powerManagement.finegrained = false;
+  #
+  #   # Use the NVidia open source kernel module (not to be confused with the
+  #   # independent third-party "nouveau" open source driver).
+  #   # Support is limited to the Turing and later architectures. Full list of
+  #   # supported GPUs is at:
+  #   # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
+  #   # Only available from driver 515.43.04+
+  #   open = true;
+  #
+  #   # Enable the Nvidia settings menu,
+  # accessible via `nvidia-settings`.
+  #   nvidiaSettings = true;
+  #
+  #   # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #
+  #   # prime = {
+  #   #   offload = {
+  #   #     enable = true;
+  #   #     enableOffloadCmd = true;
+  #   #   };
+  #   #
+  #   #   intelBusId = "PCI:0:2:0";
+  #   #   nvidiaBusId = "PCI:1:0:0";
+  #   # };
+  # };
 
   # # -- Fix gnome and kde
   # programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
@@ -174,34 +187,31 @@ in
       #   xterm.enable = false;
       # };
       windowManager = {
-        # awesome.enable = true;
-        # qtile.enable = true;
         i3 = {
           enable = true;
           extraPackages = with pkgs; [
-            dmenu # application launcher most people use
-            i3status # gives you the default i3 status bar
-            i3blocks # if you are planning on using i3blocks over i3status
+            i3status
             arandr
             xwallpaper
             flameshot
             xclip
             rofi
-            alacritty
+            kitty
           ];
         };
-        # session = [
-        #   {
-        #     name = "exwm";
-        #     start = ''
-        #       emacs --daemon
-        #       exec emacsclient -c -a "" \
-        #       --eval "(progn (require 'exwm) (exwm-wm-mode))"
-        #     '';
-        #   }
-        # ];
+        # Emacs Window Manager
+        # exwm = {
+        #   enable = true;
+        #   loadScript = ''
+        #     (require 'exwm)
+        #     (exwm-enable)
+        #   '';
+        # };
       };
     };
+
+    # Display Manager/ Greeter
+    displayManager.ly.enable = true;
 
     # # Enable the KDE Plasma Desktop Environment.
     # displayManager.sddm.wayland.enable = true;
@@ -209,7 +219,7 @@ in
     # desktopManager.plasma6.enable = true;
 
     # Gnome
-    displayManager.gdm.enable = true;
+    # displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
 
     # # Enable the COSMIC login manager
@@ -231,16 +241,15 @@ in
     #   "app.zen_browser.zen"
     #   "io.github.flattool.warehouse"
     # ];
-
   };
 
   # specialisation = {
-    # kde.configuration = {
-      # desktopManager.gnome.enable = lib.mkForce false;
-      # displayManager.gdm.enable = lib.mkForce false;
-      # services.displayManager.sddm.enable = true;
-      # services.desktopManager.plasma6.enable = true;
-    # };
+  # kde.configuration = {
+  # desktopManager.gnome.enable = lib.mkForce false;
+  # displayManager.gdm.enable = lib.mkForce false;
+  # services.displayManager.sddm.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+  # };
   # };
   # #   gnomo = {
   # #     # inheritParentConfig = false;
@@ -300,7 +309,7 @@ in
     extraGroups = [
       "networkmanager"
       "wheel"
-      "libvirtd"
+      # "libvirtd"
       "input"
       "uinput"
     ];
@@ -308,11 +317,13 @@ in
     packages = with pkgs; [
       # claude-code
       kitty
-      vscode
+      # ghostty
+      # wezterm
+      # vscode
       # zed-editor
       lazygit
-      google-chrome
-      # vivaldi
+      # google-chrome
+      vivaldi
       yazi
       tmux
       fastfetch
@@ -320,22 +331,20 @@ in
       gcc
       gnumake
       cmake
-      # libvterm
-      # emacs-vterm
-      # emacs
+      emacs
       # texlive
-      neovide
       kanata
-      niri
       hyprlock
+      hyprpicker
       gsettings-desktop-schemas
       xdg-desktop-portal-gtk
-      fuzzel
+      # fuzzel
       wayscriber
-      darkman
+      # darkman
       # neovide
+      # vim-full
       # vim
-      vis
+      # vis
       qmk
       # vial
       keypunch
@@ -344,8 +353,6 @@ in
       # TODO: add android camera plugin
       pwvucontrol
       via
-      # vivaldi
-      # google-chrome
       # Gnome Apps
       gnome-tweaks
       gnome-boxes
@@ -386,15 +393,27 @@ in
       zoxide
       xwayland-satellite
       fuzzel
+      helix
+      lsd
+      btop
+      killall
+      python3
+      universal-ctags
+      bitwarden-desktop
+      appimage-run
       rofi
       rofimoji
       wlsunset
       playerctl
       brightnessctl
       wl-clipboard
-      mako
+      # mako
+      swaynotificationcenter
+      libnotify
       adw-bluetooth
       nmgui
+      mpv
+      mpd
     ];
   };
 
@@ -410,6 +429,8 @@ in
     poppins
   ];
 
+  # EWM
+  # programs.ewm.enable = true;
   programs.dms-shell = {
     enable = true;
 
@@ -427,47 +448,57 @@ in
     #   enableCalendarEvents = true;       # Calendar integration (khal)
   };
 
+  environment.etc."xdg/nvim/sysinit.vim".text = ''
+    set notermguicolors
+    set nu rnu
+    set wrap
+    set tabstop=2
+    set expandtab
+    set softtabstop=2
+    set shiftwidth=2
+    " Find
+    set findfunc=Find
+    func Find(arg, _)
+      if empty(s:filescache)
+        let s:filescache = globpath('.', '**', 1, 1)
+        call filter(s:filescache, '!isdirectory(v:val)')
+        call map(s:filescache, "fnamemodify(v:val, ':.')")
+      endif
+      return a:arg == '''''' ? s:filescache : matchfuzzy(s:filescache, a:arg)
+    endfunc
+    let s:filescache = []
+    autocmd CmdlineEnter : let s:filescache = []
+
+    nmap <M-o> :find<space>
+    nmap <M-s> :grep<space>
+    nmap <M-b> :b<space>
+    nmap <M-e> :e %:h<Cr>
+    tmap <M-;> <C-\><C-n>
+  '';
+
+  environment.etc."xdg/gtk-2.0/gtkrc".text = ''
+    gtk-key-theme-name = "Emacs"
+  '';
+
+  environment.etc."xdg/gtk-3.0/settings.ini".text = ''
+    [Settings]
+    gtk-key-theme-name = "Emacs"
+  '';
+
   programs = {
-    # Install firefox.
-    firefox.enable = true;
+    # firefox.enable = true;
 
     neovim = {
       enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
-      configure = {
-#   customRC = ''
-# " Find
-# set findfunc=Find
-# func Find(arg, _)
-#   if empty(s:filescache)
-#     let s:filescache = globpath('.', '**', 1, 1)
-#     call filter(s:filescache, '!isdirectory(v:val)')
-#     call map(s:filescache, "fnamemodify(v:val, ':.')")
-#   endif
-#   return a:arg == '''''' ? s:filescache : matchfuzzy(s:filescache, a:arg) 
-# endfunc
-# let s:filescache = []
-# autocmd CmdlineEnter : let s:filescache = []
-#
-# nmap <M-o> :find 
-# nmap <M-s> :grep 
-# nmap <M-b> :b 
-# nmap <M-e> <Cmd>Ex<Cr> 
-#   '';
-      };
     };
 
-    # Shell
     fish.enable = true;
-    zsh.enable = true;
 
-    # Fix the liked
+    # TODO: Explain This
     nix-ld.enable = true;
-
-    niri.enable = true;
-    # hyprland.enable = true;
 
     virt-manager.enable = true;
 
@@ -477,39 +508,29 @@ in
       #   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       #   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
-    # gamescope setup
-    # gamescope = {
-    #   enable = true;
-    #   capSysNice = false;
-    # };
-
     gamescope.enable = true;
     gamemode.enable = true;
 
+    kdeconnect.enable = true;
   };
+
+  # Niri
+  programs.niri.enable = true;
+  security.polkit.enable = true; # polkit
+  security.pam.services.swaylock = { };
+
+  # Enables Gnome Keyring to store secrets for applications.
+  services.gnome.gnome-keyring.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  #   nixpkgs.overlays = [
-  #   (final: prev: {
-  #     neovim = prev.neovim.overrideAttrs (old: {
-  #       src = neovim-src;
-  #       version = "master";
-  #       # Let nix tell you the correct hash first
-  #       vendorHash = null;
-  #     });
-  #   })
-  # ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Secure Boot
     sbctl
-    neovim
     podman-compose
-    distrobox
     (distrobox.overrideAttrs (oldAttrs: {
       postInstall = (oldAttrs.postInstall or "") + ''
         for file in $out/bin/*; do
@@ -527,9 +548,9 @@ in
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true; # Required for cont>
     };
-    libvirtd = {
-      enable = true;
-    };
+    # libvirtd = {
+    #   enable = true;
+    # };
     spiceUSBRedirection.enable = true;
   };
 
@@ -586,6 +607,23 @@ in
     enableSSHSupport = true;
   };
 
+  # TODO: Organizar Melhor, Mover para um arquivo somente para o app image
+  programs.appimage.enable = true;
+  # programs.appimage.binfmt = true;
+  # programs.appimage.package = pkgs.appimage-run.override
+  # {
+  #   extraPkgs = pkgs:
+  #   [
+  #     # note that these are just examples and pytorch (a machine learning framework)
+  #     # triggers a ~3 GiB download as of 2026-11-08
+  #     # Most programs will not need these packages.
+  #     pkgs.icu
+  #     pkgs.libxcrypt-legacy
+  #     pkgs.python312
+  #     pkgs.python312Packages.torch
+  #   ];
+  # };
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -593,20 +631,41 @@ in
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedUDPPorts = [
+    # KDE connect
+    59100
+    59200
+    59716
+    # KDE connect
+  ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; # Did you read the comment?
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  # system.copySystemConfiguration = true;
+
+  # This option defines the first version of NixOS you have installed on this particular machine,
+  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+  #
+  # Most users should NEVER change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  #
+  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
+  # to actually do that.
+  #
+  # This value being lower than the current NixOS release does NOT mean your system is
+  # out of date, out of support, or vulnerable.
+  #
+  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+  # and migrated your data accordingly.
+  #
+  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+  system.stateVersion = "26.05"; # Did you read the comment?
 
   # # Dangerous things
   # system.autoUpgrade.enable = true;
   # system.autoUpgrade.allowReboot = true;
-
 }
