@@ -29,6 +29,7 @@ local config = {
     ISSUE = "fix",
     HACK = "hack",
     NOTE = "note",
+    WARN = "note",
     PERF = "perf",
     TASK = "task",
     TODO = "todo",
