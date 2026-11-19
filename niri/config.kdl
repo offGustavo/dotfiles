@@ -493,17 +493,7 @@ window-rule {
   default-column-width { proportion 1.0; }
 }
 
-// // Open the Firefox picture-in-picture player as floating by default.
-// window-rule {
-//   // This app-id regular expression will work for both:
-//   // - host Firefox (app-id is "firefox")
-//   // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-//   // match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-//   match title="^Picture-in-Picture$"
-//   open-floating true
-// }
-
-// Open the picture-in-picture player as floating by default.
+// Open the windows as floating by default.
 window-rule {
   // This app-id regular expression will work for both:
   // - host Firefox (app-id is "firefox")
@@ -519,6 +509,7 @@ window-rule {
 window-rule {
   match app-id=r#"^org\.keepassxc\.KeePassXC$"#
   match app-id=r#"^org\.gnome\.World\.Secrets$"#
+  match app-id="bitwarden"
 
   block-out-from "screen-capture"
 
