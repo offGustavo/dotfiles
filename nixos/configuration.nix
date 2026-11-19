@@ -183,10 +183,11 @@ in
     # You can disable this if you're only using the Wayland session.
     xserver = {
       enable = true;
-      # desktopManager = {
-      #   xterm.enable = false;
-      # };
+      desktopManager = {
+        xterm.enable = false;
+      };
       windowManager = {
+        awesome.enable = true;
         i3 = {
           enable = true;
           extraPackages = with pkgs; [

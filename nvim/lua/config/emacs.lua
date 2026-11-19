@@ -1,10 +1,3 @@
--- Emacs Binds
-vim.cmd [[
-nmap <c-x><c-;> gcc
-imap <c-x><c-;> <c-o>gcc
-xmap <c-x><c-;> gcc
-]]
-
 map {
   { "i", { "<M-S-[>", "<C-Up>" }, "<C-o>{", noremap = true, silent = true },
   { "i", { "<M-S-]>", "<C-Down>" }, "<C-o>}", noremap = true, silent = true },
@@ -43,11 +36,11 @@ map {
   { "i", "<C-d>", "<Del>" },
   { "i", "<M-d>", "<C-o>de" },
   { "i", "<C-/>", "<C-o>u" },
-  { "i", "<M-/>", "<C-n>" },
+  -- { "i", "<M-/>", "<C-n>" },
 
-  { "<C-x><C-f>", ":e<space>", desc = "<emacs> Find file" },
-  { "<C-x>d", ":e.<Cr>", desc = "<emacs> Open Dir" },
-  { "<C-x>b", ":b<space>", desc = "<emacs> Swtich Buffer" },
+  -- { "<C-x><C-f>", ":e<space>", desc = "<emacs> Find file" },
+  -- { "<C-x>d", ":e.<Cr>", desc = "<emacs> Open Dir" },
+  -- { "<C-x>b", ":b<space>", desc = "<emacs> Swtich Buffer" },
 
   {
     "<M-S-l>",

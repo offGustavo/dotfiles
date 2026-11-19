@@ -24,15 +24,9 @@
 -- TODO: remove this and use map  to set this option
 -- comment line/selection
 vim.cmd [[
-" nmap <c-;> gcc
-" imap <c-;> <c-o>gcc
-" xmap <c-;> :norm gcc<cr>gv
-
-" if !exists('g:neovide')
-"   nmap <c-_> gcc
-"   imap <c-_> <c-o>gcc
-"   xmap <c-_> :norm gcc<cr>gv
-" endif
+  nmap <c-;> gcc
+  imap <c-;> <c-o>gcc
+  xmap <c-;> :norm gcc<cr>gv
 ]]
 
 -- vim.keymap.set("n", "<c-/>",  "gcc", { remap = true} )
@@ -679,7 +673,7 @@ map {
   },
   {
     "n",
-    "<M-a>",
+    "<C-x>",
     function()
       require("Fish.toggle").decrease()
     end,
