@@ -2,37 +2,22 @@
 
 local wallpapers = {
 	Light = {
-		{
-			name = "Tokyo Night (day)",
-			path = "/home/gustavo/Pictures/walls/anime/vinland-saga-manga-5120x2880-14832.jpg",
-		},
-
+		-- {
+		-- 	name = "Tokyo Night (day)",
+		-- 	path = "/home/gustavo/Pictures/walls/anime/vinland-saga-manga-5120x2880-14832.jpg",
+		-- },
 		{
 			name = "02",
 			path = "/home/gustavo/Pictures/walls/anime/a_train_going_through_a_lake.jpg",
 		},
 	},
 	Dark = {
-		{
-			name = "Mountains",
-			path = "/home/gustavo/Downloads/pexels-david-jusko-2674423-6245540.jpg",
-		},
-		-- {
-		-- 	name = "Compline",
-		-- 	path = "/home/gustavo/Pictures/Wallpapers/my/compline.png",
-		-- },
-		{
-			name = "A Girl with Purple Flowers",
-			path = "/home/gustavo/Pictures/walls/anime/a_cartoon_of_a_girl_standing_under_a_tree_with_purple_flowers.png",
-		},
-		-- {
-		-- 	name = "Tokyo Night",
-		-- 	path = "/home/gustavo/Pictures/Wallpapers/tokyo-nigth-wallpapers/night/os/arch_01_1920x1080.png",
-		-- },
-		-- {
-		-- 	name = "The Path of Giants",
-		-- 	path = "/home/gustavo/Pictures/Wallpapers/The-Path-of-Giants.png",
-		-- },
+		{ name = "Nord", path = "/home/gustavo/Pictures/walls/nord/a_lightning_in_the_sky.jpg", },
+		-- { name = "Mountains", path = "/home/gustavo/Downloads/pexels-david-jusko-2674423-6245540.jpg", },
+		-- { name = "Compline", path = "/home/gustavo/Pictures/Wallpapers/my/compline.png", },
+		-- { name = "A Girl with Purple Flowers", path = "/home/gustavo/Pictures/walls/anime/a_cartoon_of_a_girl_standing_under_a_tree_with_purple_flowers.png", },
+		-- { name = "Tokyo Night", path = "/home/gustavo/Pictures/Wallpapers/tokyo-nigth-wallpapers/night/os/arch_01_1920x1080.png", },
+		-- { name = "The Path of Giants", path = "/home/gustavo/Pictures/Wallpapers/The-Path-of-Giants.png", },
 	},
 }
 
