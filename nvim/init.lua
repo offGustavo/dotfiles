@@ -3,6 +3,9 @@
 -- PERF:
 vim.loader.enable()
 
+-- NvChad
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+
 _G.Fish = {}
 
 -- Custom AuGroup
@@ -15,7 +18,7 @@ _G.fish_group = vim.api.nvim_create_augroup("Fish.config", {
 require("config.functions")
 
 -- NOTE: Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
-colorscheme({ dark = "tokyo", light = "tokyo-day" })
+-- colorscheme({ dark = "tokyo", light = "tokyo-day" })
 
 if os.getenv("SCROLL_MODE") then
   -- require("config.helix").setup()
@@ -24,13 +27,14 @@ if os.getenv("SCROLL_MODE") then
 end
 
 require("config.options")
+require("config.syntax_highlight")
+-- require("config.ui2")
 require("config.autocmds")
 require("config.commands")
 require("config.keymaps")
 require("config.emacs")
 require("config.lsp")
 require("config.multicursor")
-require("config.syntax_highlight")
 
 if vim.g.neovide then
   require("config.neovide")
@@ -55,14 +59,36 @@ require("config.lazy").add({
   -- -- add LazyVim and import its plugins
   -- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
+  -- -- NvChad
+  -- {
+  --   "NvChad/NvChad",
+  --   lazy = false,
+  --   branch = "v2.5",
+  --   import = "nvchad.plugins",
+  -- },
+
+  -- {
+  --   "AstroNvim/AstroNvim",
+  --   version = "^6", -- Remove version tracking to elect for nightly AstroNvim
+  --   import = "astronvim.plugins",
+  --   opts = { -- AstroNvim options must be set here with the `import` key
+  --     mapleader = " ", -- This ensures the leader key must be configured before Lazy is set up
+  --     maplocalleader = "\\", -- This ensures the localleader key must be configured before Lazy is set up
+  --     icons_enabled = true, -- Set to false to disable icons (if no Nerd Font is available)
+  --     pin_plugins = nil, -- Default will pin plugins when tracking `version` of AstroNvim, set to true/false to override
+  --     update_notifications = true, -- Enable/disable notification about running `:Lazy update` twice to update pinned plugins
+  --   },
+  -- },
+  -- { import = "astronvim.community" },
+
   -- General
   { import = "plugins.general.mini" },
-  -- { import = "plugins.general.snacks" },
+  { import = "plugins.general.snacks" },
 
   -- Theme
   -- { import = "plugins.themes.tokyonight" },
-  -- { import = "plugins.themes.nord" },
-  { import = "plugins.themes.base16" },
+  { import = "plugins.themes.nord" },
+  -- { import = "plugins.themes.base16" },
   -- { import = "plugins.themes.silentium" },
 
   -- File Explorer
@@ -73,8 +99,9 @@ require("config.lazy").add({
   { import = "plugins.editor.explorer.dired" },
 
   -- Picker
-  { import = "plugins.editor.picker.fzf-lua" },
-  -- { import = "plugins.editor.picker.telescope" },
+  -- { import = "plugins.editor.picker.fzf-lua" },
+  { import = "plugins.editor.picker.telescope" },
+  -- { import = "plugins.general.snacks.picker" },
   -- { import = "plugins.editor.picker.minibuffer" },
 
   -- Git
@@ -105,10 +132,13 @@ require("config.lazy").add({
 
   -- UI
   -- { import = "plugins.ui.which-key" },
-  -- { import = "plugins.ui.menu" },
+  { import = "plugins.ui.menu" },
   -- { import =  "plugins.ui.nvim-colorizer" },
   -- { import =  "plugins.ui.todo-comments" },
   -- { import = "plugins.ui.baleia" },
+  -- { import = "plugins.ui.nvchad-ui" },
+  { import = "plugins.ui.noice" },
+  { import = "plugins.ui.lualine" },
   -- { "https://github.com/nstefan002/screenkey.nvim" },
 
   -- Agenda
@@ -134,4 +164,13 @@ require("config.lazy").add({
     end,
   },
 })
+
+-- -- NvChad: load theme
+-- dofile(vim.g.base46_cache .. "defaults")
+-- dofile(vim.g.base46_cache .. "statusline")
+
+-- require "nvchad.options"
+-- require "nvchad.mappings"
+-- require "nvchad.autocmds"
+
 -- }}}

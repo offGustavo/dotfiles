@@ -1,10 +1,10 @@
 return {
   "https://github.com/shaunsingh/nord.nvim",
-  lazy = true,
+  lazy = false,
   config = function()
     colorscheme({
       dark = "nord",
-      light = "retrobox",
+      light = "default",
     })
   end,
 }

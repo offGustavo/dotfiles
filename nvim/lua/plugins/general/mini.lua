@@ -68,7 +68,7 @@ return {
       -- For more information with examples, see `:h MiniAi.config`.
       custom_textobjects = {
         -- Tweak argument textobject
-        -- a = require("mini.ai").gen_spec.argument({ brackets = { "%b()" } }),
+        a = require("mini.ai").gen_spec.argument({ brackets = { "%b()" } }),
 
         -- Disable brackets alias in favor of builtin block textobject
         -- b = false,
@@ -77,7 +77,7 @@ return {
         -- x = { "x()x()x" },
 
         -- Whole buffer
-        B = function()
+        A = function()
           local from = { line = 1, col = 1 }
           local to = {
             line = vim.fn.line("$"),
@@ -166,31 +166,43 @@ return {
     local miniclue = require("mini.clue")
     miniclue.setup({
       triggers = {
+        -- Text objects (Visual and Operator-pending modes)
+        { mode = { 'x', 'o' }, keys = 'i' },
+        { mode = { 'x', 'o' }, keys = 'a' },
+
         -- Leader triggers
         { mode = { "n", "x" }, keys = "<Leader>" },
         { mode = { "n", "x" }, keys = "<localleader>" },
+
+        -- { mode = { "n", "x" }, keys = "<C-c>" },
         -- `[` and `]` keys
         { mode = "n", keys = "[" },
         { mode = "n", keys = "]" },
+
         -- Built-in completion
         { mode = "i", keys = "<C-x>" },
+
         -- `g` key
         { mode = { "n", "x" }, keys = "g" },
+
+        -- Marks
+        { mode = { "n", "x" }, keys = "'" },
+        { mode = { "n", "x" }, keys = "`" },
+
+        -- Registers
+        { mode = { "n", "x" }, keys = '"' },
+        { mode = { "i", "c" }, keys = "<C-r>" },
+
+        -- Window commands
+        { mode = "n", keys = "<C-w>" },
+
+        -- more keys
+        { mode = { "n", "x" }, keys = "c" },
+        { mode = { "n", "x" }, keys = "d" },
         { mode = { "n", "x" }, keys = "z" },
         { mode = { "n", "x" }, keys = "Z" },
         { mode = { "n", "x" }, keys = "s" },
         { mode = { "n", "x" }, keys = "S" },
-        { mode = { "n", "x" }, keys = "<C-c>" },
-        -- Marks
-        { mode = { "n", "x" }, keys = "'" },
-        { mode = { "n", "x" }, keys = "`" },
-        -- Registers
-        { mode = { "n", "x" }, keys = '"' },
-        { mode = { "i", "c" }, keys = "<C-r>" },
-        -- Window commands
-        { mode = "n", keys = "<C-w>" },
-        -- `z` key
-        { mode = { "n", "x" }, keys = "z" },
       },
       clues = {
         -- Enhance this by adding descriptions for <Leader> mapping groups
@@ -314,5 +326,7 @@ return {
       -- idle time if user input is required.
       silent = false,
     })
+
+    -- require("mini.notify").setup()
   end,
 }

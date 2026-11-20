@@ -1,1 +1,10 @@
 * TODO Make a Dired implementation for neovim
+
+* TODO Add new miniclue 
++ [ ] =d=, =c= motions and =i= / =a= 
+  examples:
+  - diw
+  - di,
++ [ ] Show Spell Options
+
+

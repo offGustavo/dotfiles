@@ -9,7 +9,7 @@
 
 ** About this config
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC fish
 $HOME/.config/nvim
 ├──  after
 │   └──  ftplugin
@@ -199,4 +199,4 @@ $HOME/.config/nvim
 ├──  nvim.version
 ├──  README.org
 └──  TODO.org
-#+END_EXAMPLE
+#+END_SRC

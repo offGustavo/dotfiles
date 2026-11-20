@@ -487,7 +487,7 @@ map {
 -- local function hydra_keymap()
 --   if Fish.windows.hydra_mode._active then
 --     -- TODO: better logs
---     vim.notify("active", vim.log.levels.WARN)
+-- vim.notify("active", vim.log.levels.WARN)
 --     return
 --   end
 --
@@ -547,7 +547,7 @@ map {
     "n",
     {
       "<c-w>m",
-      "<leader>uz",
+      -- "<leader>uz",
     },
     function()
       require("Fish.zoom").zoom()
