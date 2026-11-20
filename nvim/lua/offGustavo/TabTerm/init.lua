@@ -44,6 +44,7 @@ local function update_winbar()
     })
 
     local winbar = ""
+    winbar = winbar .. config.default_highlight
     -- TODO: Make this more customizable similar to what statusline does
     if config.center then
       winbar = winbar ..  "%="
@@ -79,6 +80,7 @@ local function update_winbar()
     if config.center then
     winbar = winbar ..  "%="
     end
+
     vim.wo.winbar = winbar
   else
     vim.wo.winbar = ""

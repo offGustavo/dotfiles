@@ -3,8 +3,7 @@
 -- PERF:
 vim.loader.enable()
 
--- NvChad
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+-- vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 
 _G.Fish = {}
 
@@ -83,7 +82,7 @@ require("config.lazy").add({
 
   -- General
   { import = "plugins.general.mini" },
-  { import = "plugins.general.snacks" },
+  { import = "plugins.general.snacks.init" },
 
   -- Theme
   -- { import = "plugins.themes.tokyonight" },
@@ -112,10 +111,13 @@ require("config.lazy").add({
   { import = "plugins.editor.quicker" },
 
   -- LSP
+  { import = "plugins.coding.nvim-lspconfig" },
+  { import = "plugins.coding.mason" },
   { import = "plugins.coding.mason-lspconfig" },
 
   -- Treesitter
-  { import = "plugins.coding.treesitter" },
+  { import = "plugins.coding.nvim-treesitter" },
+  { import = "plugins.coding.nvim-treesitter-textobjects" },
 
   -- Format
   { import = "plugins.coding.conform" },
@@ -137,8 +139,9 @@ require("config.lazy").add({
   -- { import =  "plugins.ui.todo-comments" },
   -- { import = "plugins.ui.baleia" },
   -- { import = "plugins.ui.nvchad-ui" },
-  { import = "plugins.ui.noice" },
-  { import = "plugins.ui.lualine" },
+  -- { import = "plugins.ui.noice" },
+  -- { import = "plugins.ui.lualine" },
+  -- { import = "plugins.ui.tabby" },
   -- { "https://github.com/nstefan002/screenkey.nvim" },
 
   -- Agenda

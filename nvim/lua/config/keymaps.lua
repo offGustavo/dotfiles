@@ -869,10 +869,10 @@ map {
   --- {{{ Cd
   -- :<t,b, >cd shortcut
   -- :b
-  { "<leader>zf", ":cd %:h<Cr>", silent = false, desc = "d" },
-  { "<leader>zc", ":cd<space>", silent = false, desc = "Cd" },
-  { "<leader>zb", ":bcd ", silent = false, desc = "Buffer Cd" },
-  { "<leader>zt", ":tcd ", silent = false, desc = "Tab Cd" },
+  { "<leader>zf", ":cd %:h<Cr>", silent = false, desc = "Cd To File CWD" },
+  { "<leader>zc", ":cd<space>", silent = false, desc = ":cd" },
+  { "<leader>zb", ":bcd ", silent = false, desc = ":bcd" },
+  { "<leader>zt", ":tcd ", silent = false, desc = ":tcd" },
   -- {{{ Zoxide
   -- Keybinds using vim.ui.select
   {
@@ -890,15 +890,15 @@ map {
     function()
       require("Fish.zoxide").zoxide_select("Zoxide (tcd):", "tcd", true)
     end,
-    desc = "Zoxide picker(tcb)",
+    desc = "Zoxide picker (tcb)",
   },
   {
     "n",
     "<leader>z<Space>",
     function()
-      require("Fish.zoxide").zoxide_select("Zoxide (vcd):", "bcd", true)
+      require("Fish.zoxide").zoxide_select("Zoxide (bcd):", "bcd", true)
     end,
-    desc = "Zoxide picker(tcb)",
+    desc = "Zoxide picker (vcb)",
   },
 
   -- }}}

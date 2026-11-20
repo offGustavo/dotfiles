@@ -1,3 +1,14 @@
+if is_windows() then
+  vim.cmd[[
+  packadd netrw
+  nmap <M-e> :Ex<CR>
+  nmap - :Ex<CR>
+  nmap <leader>fd :.<CR>
+  ]]
+  return {}
+-- }}}
+end
+
 return {
   -- "https://github.com/offGustavo/dired.lua",
   dir = "~/Projects/dired.lua/",

@@ -52,7 +52,6 @@ return {
     },
   },
 
-
   keys = {
     ---{{{ fzf-lua
     { "<M-o>", "<Cmd>FzfLua files<Cr>", desc = "Find" },

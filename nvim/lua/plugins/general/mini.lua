@@ -8,6 +8,7 @@ return {
     -- require("mini.tabline").setup()
     -- require('mini.statuscolumnsetup()
 
+    require("mini.extra").setup()
     local icons = require("mini.icons")
     icons.setup({
       -- -- Icon style: 'glyph' or 'ascii'
@@ -63,6 +64,8 @@ return {
 
     vim.cmd("command MiniDiffOverlay lua MiniDiff.toggle_overlay()<Cr>")
 
+
+    local spec_treesitter = require("mini.ai").gen_spec.treesitter
     require("mini.ai").setup({
       -- Custom textobjects to be used on top of builtin ones.
       -- For more information with examples, see `:h MiniAi.config`.
@@ -70,21 +73,19 @@ return {
         -- Tweak argument textobject
         a = require("mini.ai").gen_spec.argument({ brackets = { "%b()" } }),
 
-        -- Disable brackets alias in favor of builtin block textobject
-        -- b = false,
+        -- Makes `aB` equivalent to built-in `al`
+        B = MiniExtra.gen_ai_spec.buffer(),
+        -- Makes `iL` equivalent to built-in `il`
+        L = MiniExtra.gen_ai_spec.line(),
 
-        -- Now `vax` should select `xxx` and `vix` - middle `x`
-        -- x = { "x()x()x" },
-
-        -- Whole buffer
-        A = function()
-          local from = { line = 1, col = 1 }
-          local to = {
-            line = vim.fn.line("$"),
-            col = math.max(vim.fn.getline("$"):len(), 1),
-          }
-          return { from = from, to = to }
-        end,
+        -- REF: https://github.com/nvim-mini/mini.nvim/discussions/243
+        -- This will override default "function call" textobject
+        f = spec_treesitter({ a = "@function.outer", i = "@function.inner" }),
+        c = spec_treesitter({ a = "@class.outer", i = "@class.inner" }),
+        -- This will possibly conflict with textobjects from 'mini.indentscope':
+        -- If typed quickly (within 'timeoutlen' milliseconds),
+        -- 'mini.indentscope' will be used, this one otherwise.
+        i = spec_treesitter({ a = "@conditional.outer", i = "@conditional.inner" }),
       },
 
       -- Module mappings. Use `''` (empty string) to disable one.
@@ -167,8 +168,8 @@ return {
     miniclue.setup({
       triggers = {
         -- Text objects (Visual and Operator-pending modes)
-        { mode = { 'x', 'o' }, keys = 'i' },
-        { mode = { 'x', 'o' }, keys = 'a' },
+        { mode = { "x", "o" }, keys = "i" },
+        { mode = { "x", "o" }, keys = "a" },
 
         -- Leader triggers
         { mode = { "n", "x" }, keys = "<Leader>" },
@@ -238,7 +239,6 @@ return {
       },
     })
 
-    -- require("mini.extra").setup()
     -- -- -- Centered on screen
     -- -- local win_config = function()
     --   -- local height = math.floor(0.618 * vim.o.lines)
