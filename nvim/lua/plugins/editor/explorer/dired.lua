@@ -1,9 +1,25 @@
+if is_windows() then
+  vim.cmd[[
+  packadd netrw
+  nmap <M-e> :Ex<CR>
+  nmap - :Ex<CR>
+  nmap <leader>fd :.<CR>
+  ]]
+  return {}
+-- }}}
+end
+
 return {
   -- "https://github.com/offGustavo/dired.lua",
   dir = "~/Projects/dired.lua/",
-  lazy = false,
+  lazy = true,
+  ft = "directory",
   enabled = not is_windows(),
   opts = {},
+  init = function ()
+    vim.g.loaded_netrw = true
+    vim.g.loaded_nvim_dir_plugin = true
+  end,
   keys = {
     { "<M-e>", ":DiredJump<Cr>" },
     { "-", ":DiredJump<Cr>" },

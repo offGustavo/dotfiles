@@ -7,4 +7,5 @@
   - di,
 + [ ] Show Spell Options
 
-
+* TODO Remake the TabTerm Plugin
+* TODO Remove mason/mason-lspconfig and nvim-lspconfig

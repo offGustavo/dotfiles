@@ -72,9 +72,9 @@ config = {
   },
 
   -- https://wezterm.org/config/lua/config/window_decorations.html
-  window_decorations = "RESIZE",
+  -- window_decorations = "RESIZE",
 
-  tab_bar_at_bottom = true,
+  tab_bar_at_bottom = false,
   hide_tab_bar_if_only_one_tab = true,
   use_fancy_tab_bar = false,
 

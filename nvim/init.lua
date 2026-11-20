@@ -1,10 +1,10 @@
 -- vim: foldmethod=marker
 
+-- {{{ Global Things
 -- PERF:
 vim.loader.enable()
 
--- NvChad
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+-- vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 
 _G.Fish = {}
 
@@ -12,6 +12,7 @@ _G.Fish = {}
 _G.fish_group = vim.api.nvim_create_augroup("Fish.config", {
   clear = false,
 })
+-- }}}
 
 -- {{{ Config Files
 -- WARN: this should be load first, this entire config depends on functions provided by this module
@@ -28,7 +29,7 @@ end
 
 require("config.options")
 require("config.syntax_highlight")
--- require("config.ui2")
+require("config.ui2")
 require("config.autocmds")
 require("config.commands")
 require("config.keymaps")
@@ -83,12 +84,12 @@ require("config.lazy").add({
 
   -- General
   { import = "plugins.general.mini" },
-  { import = "plugins.general.snacks" },
+  { import = "plugins.general.snacks.init" },
 
   -- Theme
   -- { import = "plugins.themes.tokyonight" },
-  { import = "plugins.themes.nord" },
-  -- { import = "plugins.themes.base16" },
+  -- { import = "plugins.themes.nord" },
+  { import = "plugins.themes.base16" },
   -- { import = "plugins.themes.silentium" },
 
   -- File Explorer
@@ -99,8 +100,8 @@ require("config.lazy").add({
   { import = "plugins.editor.explorer.dired" },
 
   -- Picker
-  -- { import = "plugins.editor.picker.fzf-lua" },
-  { import = "plugins.editor.picker.telescope" },
+  { import = "plugins.editor.picker.fzf-lua" },
+  -- { import = "plugins.editor.picker.telescope" },
   -- { import = "plugins.general.snacks.picker" },
   -- { import = "plugins.editor.picker.minibuffer" },
 
@@ -112,33 +113,39 @@ require("config.lazy").add({
   { import = "plugins.editor.quicker" },
 
   -- LSP
+  { import = "plugins.coding.nvim-lspconfig" },
+  { import = "plugins.coding.mason" },
   { import = "plugins.coding.mason-lspconfig" },
 
   -- Treesitter
-  { import = "plugins.coding.treesitter" },
+  { import = "plugins.coding.nvim-treesitter" },
+  { import = "plugins.coding.nvim-treesitter-textobjects" },
 
   -- Format
   { import = "plugins.coding.conform" },
 
   -- Completion
   { import = "plugins.coding.blink" },
-  { import = "plugins.coding.lazydev" },
+  -- { import = "plugins.coding.lazydev" },
 
   -- System
   -- { "https://github.com/tpope/vim-eunuch", lazy = true, event = "CmdLineEnter" },
   { import = "plugins.util.kitty-scrollback" },
   -- { import = "plugins.util.compile-mode" },
   { import = "plugins.util.cuik" },
+  { import = "plugins.util.tatr" },
+
 
   -- UI
   -- { import = "plugins.ui.which-key" },
-  { import = "plugins.ui.menu" },
+  -- { import = "plugins.ui.menu" },
   -- { import =  "plugins.ui.nvim-colorizer" },
   -- { import =  "plugins.ui.todo-comments" },
   -- { import = "plugins.ui.baleia" },
   -- { import = "plugins.ui.nvchad-ui" },
-  { import = "plugins.ui.noice" },
-  { import = "plugins.ui.lualine" },
+  -- { import = "plugins.ui.noice" },
+  -- { import = "plugins.ui.lualine" },
+  -- { import = "plugins.ui.tabby" },
   -- { "https://github.com/nstefan002/screenkey.nvim" },
 
   -- Agenda
@@ -154,15 +161,6 @@ require("config.lazy").add({
 
   -- Sessions
   -- { import = "plugins.util.nvim-sessionizer" },
-
-  {
-    dir = "~/Projects/tatr.vim/",
-    enabled = not is_windows(),
-    lazy = false,
-    init = function()
-      vim.g.tatr_short_cmd = true
-    end,
-  },
 })
 
 -- -- NvChad: load theme
