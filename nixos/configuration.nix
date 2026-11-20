@@ -187,7 +187,14 @@ in
         xterm.enable = false;
       };
       windowManager = {
-        awesome.enable = true;
+        # awesome = {
+        #   enable = true;
+        #   luaModules = with pkgs.luaPackages; [
+        #     luarocks # is the package manager for Lua modules
+        #     luadbi-mysql # Database abstraction layer
+        #     awesome-wm-widgets # Community collection of widgets
+        #   ];
+        # };
         i3 = {
           enable = true;
           extraPackages = with pkgs; [
