@@ -135,7 +135,6 @@ require("config.lazy").add({
   { import = "plugins.util.cuik" },
   { import = "plugins.util.tatr" },
 
-
   -- UI
   -- { import = "plugins.ui.which-key" },
   -- { import = "plugins.ui.menu" },
