@@ -375,6 +375,7 @@ in
       cargo
       lua
       jq
+      tree-sitter
       luarocks
       moreutils
       git

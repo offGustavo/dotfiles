@@ -4,7 +4,6 @@ return {
   lazy = true,
   event = "VeryLazy",
   build = function()
-    vim.cmd.MasonInstall("tree-sitter-cli")
     require("nvim-treesitter").update()
   end,
   config = function()
