@@ -2,7 +2,7 @@
 
 - STATUS: OPEN
 - PRIORITY: 20
-- TAGS: feature
+- TAGS: feature,cuik
 
 `:CuikCompile` to `:Cuik compile`
 

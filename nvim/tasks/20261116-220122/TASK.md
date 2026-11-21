@@ -1,5 +1,5 @@
 # add suport for other chmod modes
 
-- STATUS: OPEN
+- STATUS: CLOSED
 - PRIORITY: 100
-- TAGS:
+- TAGS: dired

@@ -44,18 +44,18 @@ end
 -- }}}
 
 -- {{{ Local Plugins
-require("TMP.cuik")
-require("TMP.tatr")
-require("TMP.dired")
+require("intern.cuik")
+require("intern.tatr")
+require("intern.dired")
+require("intern.espeto")
+require("intern.lazygit")
+require("intern.TabTerm")
 
 -- TODO: Change The config files to Fish.
-require("offGustavo.espeto.setup")
-require("offGustavo.lazygit")
-require("offGustavo.TabTerm.setup")
 require("offGustavo.todo-comments")
 require("offGustavo.ui.highlight_operation")
--- require("offGustavo.compile-mode")
 require("Fish.git_branch").setup()
+-- require("offGustavo.compile-mode")
 -- require("Tatr")
 -- }}}
 
@@ -88,83 +88,83 @@ require("config.lazy").add({
   -- { import = "astronvim.community" },
 
   -- General
-  { import = "plugins.general.mini" },
-  { import = "plugins.general.snacks.init" },
+  { import = "extern.general.mini" },
+  { import = "extern.general.snacks.init" },
 
   -- Theme
-  -- { import = "plugins.themes.tokyonight" },
-  -- { import = "plugins.themes.nord" },
-  { import = "plugins.themes.base16" },
-  -- { import = "plugins.themes.silentium" },
+  -- { import = "extern.themes.tokyonight" },
+  -- { import = "extern.themes.nord" },
+  { import = "extern.themes.base16" },
+  -- { import = "extern.themes.silentium" },
 
   -- File Explorer
-  -- { import = "plugins.editor.explorer.canola" },
-  -- { import = "plugins.editor.explorer.oil" },
-  -- { import = "plugins.editor.explorer.yazi" },
-  -- { import = "plugins.editor.explorer.vim-dirvish" },
-  -- { import = "plugins.editor.explorer.dired" },
+  -- { import = "extern.editor.explorer.canola" },
+  -- { import = "extern.editor.explorer.oil" },
+  -- { import = "extern.editor.explorer.yazi" },
+  -- { import = "extern.editor.explorer.vim-dirvish" },
+  -- { import = "extern.editor.explorer.dired" },
 
   -- Picker
-  { import = "plugins.editor.picker.fzf-lua" },
-  -- { import = "plugins.editor.picker.telescope" },
-  -- { import = "plugins.general.snacks.picker" },
-  -- { import = "plugins.editor.picker.minibuffer" },
+  { import = "extern.editor.picker.fzf-lua" },
+  -- { import = "extern.editor.picker.telescope" },
+  -- { import = "extern.general.snacks.picker" },
+  -- { import = "extern.editor.picker.minibuffer" },
 
   -- Git
-  { import = "plugins.editor.fugitive" },
-  -- { import = "plugins.editor.neogit" },
+  { import = "extern.editor.fugitive" },
+  -- { import = "extern.editor.neogit" },
 
   -- Quickfix
-  { import = "plugins.editor.quicker" },
+  { import = "extern.editor.quicker" },
 
   -- LSP
-  -- { import = "plugins.coding.nvim-lspconfig" },
-  -- { import = "plugins.coding.mason" },
-  -- { import = "plugins.coding.mason-lspconfig" },
+  -- { import = "extern.coding.nvim-lspconfig" },
+  -- { import = "extern.coding.mason" },
+  -- { import = "extern.coding.mason-lspconfig" },
 
   -- Treesitter
-  { import = "plugins.coding.nvim-treesitter" },
-  { import = "plugins.coding.nvim-treesitter-textobjects" },
+  { import = "extern.coding.nvim-treesitter" },
+  { import = "extern.coding.nvim-treesitter-textobjects" },
 
   -- Format
-  { import = "plugins.coding.conform" },
+  { import = "extern.coding.conform" },
 
   -- Completion
-  { import = "plugins.coding.blink" },
-  -- { import = "plugins.coding.lazydev" },
+  { import = "extern.coding.blink" },
+  -- { import = "extern.coding.lazydev" },
 
   -- System
   -- { "https://github.com/tpope/vim-eunuch", lazy = true, event = "CmdLineEnter" },
-  -- { import = "plugins.util.kitty-scrollback" },
-  -- { import = "plugins.util.compile-mode" },
-  -- { import = "plugins.util.cuik" },
-  -- { import = "plugins.util.tatr" },
+  -- { import = "extern.util.kitty-scrollback" },
+  -- { import = "extern.util.compile-mode" },
+  -- { import = "extern.util.cuik" },
+  -- { import = "extern.util.tatr" },
 
   -- UI
-  -- { import = "plugins.ui.which-key" },
-  -- { import = "plugins.ui.menu" },
-  -- { import =  "plugins.ui.nvim-colorizer" },
-  -- { import =  "plugins.ui.todo-comments" },
-  -- { import = "plugins.ui.baleia" },
-  -- { import = "plugins.ui.nvchad-ui" },
-  -- { import = "plugins.ui.noice" },
-  -- { import = "plugins.ui.lualine" },
-  -- { import = "plugins.ui.tabby" },
+  -- { import = "extern.ui.which-key" },
+  -- { import = "extern.ui.menu" },
+  -- { import =  "extern.ui.nvim-colorizer" },
+  -- { import =  "extern.ui.todo-comments" },
+  -- { import = "extern.ui.baleia" },
+  -- { import = "extern.ui.nvchad-ui" },
+  -- { import = "extern.ui.noice" },
+  -- { import = "extern.ui.lualine" },
+  -- { import = "extern.ui.tabby" },
   -- { "https://github.com/nstefan002/screenkey.nvim" },
 
   -- Agenda
-  { import = "plugins.util.org-nvim" },
-  -- { import = "plugins.util.orgmode" },
+  { import = "extern.util.org-nvim" },
+  -- { import = "extern.util.orgmode" },
 
   -- Markdown
-  -- { import = "plugins.ui.markview" },
-  -- { import = "plugins.util.md-agenda" },
+  -- { import = "extern.ui.markview" },
+  -- { import = "extern.util.md-agenda" },
 
   -- Typing
-  -- { import = "plugins.util.typr" },
+  -- { import = "extern.util.typr" },
 
   -- Sessions
-  -- { import = "plugins.util.nvim-sessionizer" },
+  -- { import = "extern.util.nvim-sessionizer" },
 })
 
 -- -- NvChad: load theme

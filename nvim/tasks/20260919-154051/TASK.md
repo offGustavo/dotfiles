@@ -2,6 +2,6 @@
 
 - STATUS: OPEN
 - PRIORITY: 100
-- TAGS: plugin
+- TAGS: plugin,tatr
 
 No description.

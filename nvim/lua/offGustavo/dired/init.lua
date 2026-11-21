@@ -2,7 +2,7 @@
 ---
 --- Install: put this file at  ~/.config/nvim/lua/dired.lua  (needs Neovim >= 0.10)
 ---
----   require("dired").setup()                      -- defaults
+---   require("offGustavo.dired").setup()                      -- defaults
 ---   vim.keymap.set("n", "-", "<cmd>DiredJump<cr>") -- like dired-jump (C-x C-j)
 ---
 --- Commands:  :Dired [dir]   :DiredJump
