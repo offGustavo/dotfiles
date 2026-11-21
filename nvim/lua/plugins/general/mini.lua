@@ -64,7 +64,6 @@ return {
 
     vim.cmd("command MiniDiffOverlay lua MiniDiff.toggle_overlay()<Cr>")
 
-
     local spec_treesitter = require("mini.ai").gen_spec.treesitter
     require("mini.ai").setup({
       -- Custom textobjects to be used on top of builtin ones.
@@ -239,29 +238,31 @@ return {
       },
     })
 
-    -- -- -- Centered on screen
-    -- -- local win_config = function()
-    --   -- local height = math.floor(0.618 * vim.o.lines)
-    --   -- local width = math.floor(0.618 * vim.o.columns)
-    --   -- return {
-    --     -- anchor = "NW",
-    --     -- height = height,
-    --     -- width = width,
-    --     -- row = math.floor(0.5 * (vim.o.lines - height)),
-    --     -- col = math.floor(0.5 * (vim.o.columns - width)),
-    --   -- }
-    -- -- end
-    -- -- require("mini.pick").setup({ window = { config = win_config } })
-    -- require("mini.pick").setup()
-    -- -- vim.ui.select = ui_select_orig
-    -- vim.cmd([[
-    --     nmap <M-o> :Pick files<Cr>
-    --     nmap <M-s> :Pick grep_live<Cr>
-    --     nmap <M-b> :Pick buffers<Cr>
-    --     nmap <M-r> :Pick oldfiles<Cr>
-    --     nmap <leader>vh :Pick help<Cr>
-    --     nmap <leader>bs :Pick buf_lines<Cr>
-    --   ]])
+    if not executable("fzf") then
+      -- -- Centered on screen
+      -- local win_config = function()
+      -- local height = math.floor(0.618 * vim.o.lines)
+      -- local width = math.floor(0.618 * vim.o.columns)
+      -- return {
+      -- anchor = "NW",
+      -- height = height,
+      -- width = width,
+      -- row = math.floor(0.5 * (vim.o.lines - height)),
+      -- col = math.floor(0.5 * (vim.o.columns - width)),
+      -- }
+      -- end
+      -- require("mini.pick").setup({ window = { config = win_config } })
+      require("mini.pick").setup()
+      -- vim.ui.select = ui_select_orig
+      vim.cmd([[
+        nmap <M-o> :Pick files<Cr>
+        nmap <M-s> :Pick grep_live<Cr>
+        nmap <M-b> :Pick buffers<Cr>
+        nmap <M-r> :Pick oldfiles<Cr>
+        nmap <leader>vh :Pick help<Cr>
+        nmap <leader>bs :Pick buf_lines<Cr>
+      ]])
+    end
 
     -- require("mini.snippets").setup()
 

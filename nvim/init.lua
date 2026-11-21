@@ -87,9 +87,9 @@ require("config.lazy").add({
   { import = "plugins.general.snacks.init" },
 
   -- Theme
-  { import = "plugins.themes.tokyonight" },
+  -- { import = "plugins.themes.tokyonight" },
   -- { import = "plugins.themes.nord" },
-  -- { import = "plugins.themes.base16" },
+  { import = "plugins.themes.base16" },
   -- { import = "plugins.themes.silentium" },
 
   -- File Explorer
