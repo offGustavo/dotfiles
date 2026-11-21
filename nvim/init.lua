@@ -44,6 +44,11 @@ end
 -- }}}
 
 -- {{{ Local Plugins
+require("TMP.cuik")
+require("TMP.tatr")
+require("TMP.dired")
+
+-- TODO: Change The config files to Fish.
 require("offGustavo.espeto.setup")
 require("offGustavo.lazygit")
 require("offGustavo.TabTerm.setup")
@@ -97,7 +102,7 @@ require("config.lazy").add({
   -- { import = "plugins.editor.explorer.oil" },
   -- { import = "plugins.editor.explorer.yazi" },
   -- { import = "plugins.editor.explorer.vim-dirvish" },
-  { import = "plugins.editor.explorer.dired" },
+  -- { import = "plugins.editor.explorer.dired" },
 
   -- Picker
   { import = "plugins.editor.picker.fzf-lua" },
@@ -132,8 +137,8 @@ require("config.lazy").add({
   -- { "https://github.com/tpope/vim-eunuch", lazy = true, event = "CmdLineEnter" },
   -- { import = "plugins.util.kitty-scrollback" },
   -- { import = "plugins.util.compile-mode" },
-  { import = "plugins.util.cuik" },
-  { import = "plugins.util.tatr" },
+  -- { import = "plugins.util.cuik" },
+  -- { import = "plugins.util.tatr" },
 
   -- UI
   -- { import = "plugins.ui.which-key" },
