@@ -14,6 +14,7 @@ return {
   dir = "~/Projects/dired.lua/",
   lazy = true,
   ft = "directory",
+  cmd = { "Dired", "DiredJump" },
   enabled = not is_windows(),
   opts = {},
   init = function ()

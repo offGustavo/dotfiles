@@ -151,15 +151,6 @@ else
 end
 -- }}}
 
--- {{{ New Filetypes
-vim.filetype.add {
-  extension = {
-    kbd = "kbd", -- maps *.kbd → filetype=kbd
-    teal = "tl",
-  },
-}
--- }}}
-
 -- {{{ Spell
 vim.schedule(function()
   set {

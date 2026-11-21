@@ -113,9 +113,9 @@ require("config.lazy").add({
   { import = "plugins.editor.quicker" },
 
   -- LSP
-  { import = "plugins.coding.nvim-lspconfig" },
-  { import = "plugins.coding.mason" },
-  { import = "plugins.coding.mason-lspconfig" },
+  -- { import = "plugins.coding.nvim-lspconfig" },
+  -- { import = "plugins.coding.mason" },
+  -- { import = "plugins.coding.mason-lspconfig" },
 
   -- Treesitter
   { import = "plugins.coding.nvim-treesitter" },

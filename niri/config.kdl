@@ -844,7 +844,8 @@ binds {
   Mod+Ctrl+b    { spawn "sh" "-c" "$HOME/.local/bin/toggle-dark-mode.sh"; }
   Mod+Shift+b   { spawn "sh" "-c" "$HOME/.config/niri/scripts/toggle-sunset.sh"; }
 
-  Mod+Ctrl+W    { spawn "sh" "-c" "$HOME/.config/niri/scripts/windows.sh"; }
+  Mod+Ctrl+W    { spawn "sh" "-c" "rofi -show window"; }
+  // Mod+Ctrl+W    { spawn "sh" "-c" "$HOME/.config/niri/scripts/windows.sh"; }
 
   Mod+n         { spawn "sh" "-c" "nmgui"; }
   Mod+Ctrl+n    { spawn "sh" "-c" "$HOME/.config/rofi/scripts/network.lua"; }

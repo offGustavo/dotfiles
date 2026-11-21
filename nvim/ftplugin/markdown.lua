@@ -4,7 +4,7 @@
 -- let g:markdown_folding = 1
 -- ]])
 
--- vim.lsp.enable("markdown_oxide")
+vim.lsp.enable("markdown_oxide")
 
 -- Enable Treesitter Syntax Highlight 
 require("config.syntax_highlight").toggle_highlight(true, true)

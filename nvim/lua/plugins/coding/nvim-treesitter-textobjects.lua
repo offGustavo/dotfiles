@@ -3,6 +3,7 @@ return {
   "nvim-treesitter/nvim-treesitter-textobjects",
   branch = "main",
   event = "VeryLazy",
+  enabled = executable("tree-sitter"),
   init = function()
     vim.g.no_plugin_maps = true
   end,
