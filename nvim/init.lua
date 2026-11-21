@@ -87,9 +87,9 @@ require("config.lazy").add({
   { import = "plugins.general.snacks.init" },
 
   -- Theme
-  -- { import = "plugins.themes.tokyonight" },
+  { import = "plugins.themes.tokyonight" },
   -- { import = "plugins.themes.nord" },
-  { import = "plugins.themes.base16" },
+  -- { import = "plugins.themes.base16" },
   -- { import = "plugins.themes.silentium" },
 
   -- File Explorer
@@ -130,7 +130,7 @@ require("config.lazy").add({
 
   -- System
   -- { "https://github.com/tpope/vim-eunuch", lazy = true, event = "CmdLineEnter" },
-  { import = "plugins.util.kitty-scrollback" },
+  -- { import = "plugins.util.kitty-scrollback" },
   -- { import = "plugins.util.compile-mode" },
   { import = "plugins.util.cuik" },
   { import = "plugins.util.tatr" },

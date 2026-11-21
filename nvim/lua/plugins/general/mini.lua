@@ -78,14 +78,14 @@ return {
         -- Makes `iL` equivalent to built-in `il`
         L = MiniExtra.gen_ai_spec.line(),
 
-        -- REF: https://github.com/nvim-mini/mini.nvim/discussions/243
-        -- This will override default "function call" textobject
-        f = spec_treesitter({ a = "@function.outer", i = "@function.inner" }),
-        c = spec_treesitter({ a = "@class.outer", i = "@class.inner" }),
-        -- This will possibly conflict with textobjects from 'mini.indentscope':
-        -- If typed quickly (within 'timeoutlen' milliseconds),
-        -- 'mini.indentscope' will be used, this one otherwise.
-        i = spec_treesitter({ a = "@conditional.outer", i = "@conditional.inner" }),
+        -- -- REF: https://github.com/nvim-mini/mini.nvim/discussions/243
+        -- -- This will override default "function call" textobject
+        -- f = spec_treesitter({ a = "@function.outer", i = "@function.inner" }),
+        -- c = spec_treesitter({ a = "@class.outer", i = "@class.inner" }),
+        -- -- This will possibly conflict with textobjects from 'mini.indentscope':
+        -- -- If typed quickly (within 'timeoutlen' milliseconds),
+        -- -- 'mini.indentscope' will be used, this one otherwise.
+        -- i = spec_treesitter({ a = "@conditional.outer", i = "@conditional.inner" }),
       },
 
       -- Module mappings. Use `''` (empty string) to disable one.
