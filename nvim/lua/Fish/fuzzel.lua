@@ -1,7 +1,7 @@
  -- File picker using fd + fuzzel
  local function fuzzel_pick_files()
    local fd_cmd = "fd --type f --hidden --exclude .git"
-   local fuzzel_cmd = "fuzzel --dmenu --lines=15 --prompt='File: '"
+   local fuzzel_cmd = "rofi -dmenu"
    local full_cmd = fd_cmd .. " | " .. fuzzel_cmd
 
    local handle = io.popen(full_cmd)

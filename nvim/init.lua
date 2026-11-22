@@ -20,6 +20,9 @@ require("config.functions")
 
 -- NOTE: Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
 -- colorscheme({ dark = "tokyo", light = "tokyo-day" })
+set {
+  termguicolors = false,
+}
 
 if os.getenv("SCROLL_MODE") then
   -- require("config.helix").setup()
@@ -106,6 +109,7 @@ require("config.lazy").add({
 
         -- Picker
         { import = "extern.editor.picker.fzf-lua" },
+        -- { import = "extern.editor.picker.fzf-vim" },
         -- { import = "extern.editor.picker.telescope" },
         -- { import = "extern.general.snacks.picker" },
         -- { import = "extern.editor.picker.minibuffer" },
@@ -153,7 +157,7 @@ require("config.lazy").add({
         -- { "https://github.com/nstefan002/screenkey.nvim" },
 
         -- Agenda
-        { import = "extern.util.org-nvim" },
+        -- { import = "extern.util.org-nvim" },
         -- { import = "extern.util.orgmode" },
 
         -- Markdown

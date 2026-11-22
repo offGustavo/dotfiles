@@ -501,6 +501,7 @@ window-rule {
   match title="^Picture-in-Picture$"
   match app-id="^com.ezratweaver.AdwBluetooth$"
   match app-id="^com.network.manager$"
+  match title="^float-term$"
   open-floating true
 }
 
@@ -579,6 +580,8 @@ binds {
 
   // Open Terminal and Gui Editor
   Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
+  Mod+Ctrl+Return hotkey-overlay-title="Open Terminal" { spawn-sh "kitten quick-access-terminal"; }
+  Mod+Shift+Return hotkey-overlay-title="GUI Editor" { spawn "emacs"; }
 
   // FIXME: not working
   // Mod+C { spawn-sh "wl-copy"; }
@@ -586,7 +589,7 @@ binds {
 
   Mod+D  hotkey-overlay-title="Lancher: Run bin"    { spawn-sh "rofi -show run"; }
   Mod+Slash hotkey-overlay-title="Lancher: Run apps" { spawn-sh "rofi -show drun"; }
-  // Alt+Space { spawn-sh "rofi -show drun"; }
+  Alt+Space { spawn-sh "kitty --title 'float-term' -e fzf-run.sh"; }
 
   // Super+Escape hotkey-overlay-title="Lock the Screen And Suspend" { spawn-sh "$HOME/.config/niri/scripts/lock.sh"; }
   Mod+Ctrl+Escape hotkey-overlay-title="Lock Screen" { spawn-sh "hyprlock"; }

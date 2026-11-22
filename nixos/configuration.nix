@@ -325,10 +325,10 @@ in
     packages = with pkgs; [
       # claude-code
       kitty
-      # ghostty
-      # wezterm
-      # vscode
-      # zed-editor
+      ghostty
+      wezterm
+      vscode
+      zed-editor
       lazygit
       # google-chrome
       vivaldi
@@ -352,7 +352,9 @@ in
       # neovide
       # vim-full
       # vim
-      # vis
+      vis
+      # luakit
+      # vieb
       qmk
       # vial
       keypunch

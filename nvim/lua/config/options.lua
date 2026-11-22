@@ -9,12 +9,6 @@ let g:maplocalleader = "\<C-c>"
 ]])
 -- }}}
 
--- {{{ Disable Plugins
--- disable custom nix/arch fzf.vim
--- vim.g.loaded_fzf = 1
--- vim.g.loaded_netrwPlugin = 0
--- }}}
-
 -- -- {{{ Netrw
 -- vim.cmd [[
 -- " let g:netrw_banner = 0
@@ -40,7 +34,7 @@ set {
   termguicolors = true,
   linebreak = true,
   undofile = true,
-  swapfile = false,
+  swapfile = true,
   updatetime = 100,
   timeoutlen = 400,
   splitright = true,
