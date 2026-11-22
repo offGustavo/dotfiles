@@ -16,15 +16,33 @@ Usage:
   dot    [-n]
   dot -h [-n]                 Show this help
 
+  dot -ui
   dot ui                      Open Lazygit in $DOTFILES_DIR
+
+  dot -ed
   dot ed                      Open $EDITOR in $DOTFILES_DIR
+
+  dot -cd
   dot cd                      Change Direcotro to $DOTFILES_DIR
-  dot link [-n]                    Link every entry of the manifest into $HOME
+
+  # TODO: Add the option to link one or more files
+  dot -l
+  dot --link
+  dot link [-n]               Link every entry of the manifest into $HOME
   dot add   PATH... [-n]
   dot --add PATH... [-n]
   dot -a    PATH... [-n]      Move PATH (file or dir) to $DOTFILES/<basename>,
                               symlink it back and add it to the manifest
                               (~/.vimrc -> ".vimrc", ~/.local/bin/x -> "x|.local/bin")
+  dot -g [OPTION] 
+  dot --git [OPTION]
+  dot git [OPTION]           Interact with git
+  dot -s
+  dot --status
+  dot status                  Show Git status
+  # TODO: dot -rm                     Remove File from repo
+  # TODO: dot -rm -f                  Remove File from repo and locally
+
 
 Options:
   -n, --dry-run               Show what would happen, change nothing
@@ -50,8 +68,8 @@ USAGE
 run() {
   if ((DRY_RUN)); then
     printf '[dry-run]'
-    printf ' %q' "$@"
-    echo
+    printf ' %s' "$@"
+    printf '\n'
   else
     "$@"
   fi
@@ -131,6 +149,12 @@ manifest_has() {
   done < "$MANIFEST"
   return 1
 }
+
+# log (INFO){
+#   if ((DRY_RUN)){
+#     printf '%s' "$INFO"
+#   }
+# }
 
 # manifest_add <source relative to $DOTFILES> <absolute target>
 manifest_add() {
@@ -272,7 +296,7 @@ add_path() {
   run mkdir -p "$(dirname "$src")"
   run mv "$abs" "$src"
   run ln -s "$src" "$abs"
-  echo "added   $abs -> $src"
+  run printf "%s %s -> %s" "added" "$abs" "$src"
   manifest_add "$name" "$abs"
 }
 
@@ -288,23 +312,80 @@ add_all() {
 MODE=help
 ADD=()
 
+# TODO: We need a better way to parse options...
+# Run git against the dotfiles repo, respecting --dry-run
+dotgit() {
+  if ((DRY_RUN)); then
+    echo "[dry-run] git -C $DOTFILES $*"
+  else
+    git -C "$DOTFILES" "$@"
+  fi
+}
+
 while (($#)); do
   case "$1" in
-    # TODO: change this variable name to $DOTFILES_DIR
     -n | --dry-run) DRY_RUN=1; shift ;;
-    cd) cd $DOTFILES && exit 0 ;;
-    ui) cd $DOTFILES && lazygit && exit 0 ;;
-    ed) cd $DOTFILES && $EDITOR && exit 0 ;;
     -h | --help) usage; exit 0 ;;
+
+    cd | -cd)
+      # A script can't change your shell's directory, so open a subshell there
+      run cd "$DOTFILES" 
+      run exec "${SHELL:-bash}"
+      ;;
+
+    ui | -ui)
+      run cd "$DOTFILES" 
+      run exec lazygit
+      exit 0
+      ;;
+
+    ed | -ed)
+      run cd "$DOTFILES" 
+      run exec "$EDITOR"
+      exit 0
+      ;;
+
     -l | --link | link)
-        shift
-        MODE=link
-        ;;
+      MODE=link
+      shift
+      ;;
+
     -a | --add | add)
       MODE=add
       shift
       while (($#)) && [[ "$1" != -* ]]; do ADD+=("$1"); shift; done
       ;;
+
+    -s | --status | status)
+      dotgit status
+      exit 0
+      ;;
+
+    -g | --git | git)
+      shift
+      sub="${1:-status}"
+      (($#)) && shift
+      case "$sub" in
+        a  | add)
+          if (($#)); then dotgit add -- "$@"; else dotgit add -A; fi
+          ;;
+        c  | commit)
+          if (($#)); then dotgit commit -m "$*"; else dotgit commit; fi
+          ;;
+        p  | push)    dotgit push "$@" ;;
+        pl | pull)   dotgit pull --rebase "$@" ;;
+        d  | diff)    dotgit diff "$@" ;;
+        l  | log)     dotgit log --oneline --graph --decorate -n "${1:-20}" ;;
+        s  | status)  dotgit status -sb ;;
+        b  | branch)  dotgit branch "$@" ;;
+        co | checkout) dotgit checkout "$@" ;;
+        st | stash)  dotgit stash "$@" ;;
+        r  | restore) dotgit restore "$@" ;;
+        *)           dotgit "$sub" "$@" ;;   # passthrough: any other git command
+      esac
+      exit 0
+      ;;
+
     *)
       echo "Unknown option: $1" >&2
       usage >&2

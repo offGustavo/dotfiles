@@ -340,6 +340,7 @@ in
       gnumake
       cmake
       emacs
+      # emacs-pgtk
       # texlive
       kanata
       hyprlock
