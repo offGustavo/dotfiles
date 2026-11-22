@@ -23,6 +23,9 @@ return {
       end,
     })
 
-    vim.cmd.colorscheme("tokyonight")
+    colorscheme({
+      dark = "tokyonight-night",
+      light = "tokyonight-day",
+    })
   end,
 }
