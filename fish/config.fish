@@ -46,11 +46,7 @@ bind -a alt-Z zoxide_cd
 
 bind -a alt-G lazygit
 
-function fzf_nvim
-    nvim (fzf)
-end
-
-bind -a alt-o fzf_nvim
+bind -a alt-o fzf-nvim.sh
 
 function yazi_cd
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
