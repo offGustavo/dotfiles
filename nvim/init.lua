@@ -95,9 +95,9 @@ require("config.lazy").add({
   { import = "extern.general.snacks.init" },
 
   -- Theme
-  { import = "extern.themes.tokyonight" },
+  -- { import = "extern.themes.tokyonight" },
   -- { import = "extern.themes.nord" },
-  -- { import = "extern.themes.base16" },
+  { import = "extern.themes.base16" },
   -- { import = "extern.themes.silentium" },
 
   -- File Explorer
@@ -144,6 +144,22 @@ require("config.lazy").add({
   -- { import = "extern.util.cuik" },
   -- { import = "extern.util.tatr" },
 
+
+  -- Typing
+  -- { import = "extern.util.typr" },
+
+  -- Sessions
+  -- { import = "extern.util.nvim-sessionizer" },
+
+  -- Agenda
+  -- { import = "extern.util.org-nvim" },
+  { import = "extern.util.orgmode" },
+
+  -- Markdown
+  -- { import = "extern.ui.markview" },
+  { import = "extern.ui.helpview" },
+  -- { import = "extern.util.md-agenda" },
+
   -- UI
   -- { import = "extern.ui.which-key" },
   -- { import = "extern.ui.menu" },
@@ -156,19 +172,6 @@ require("config.lazy").add({
   -- { import = "extern.ui.tabby" },
   -- { "https://github.com/nstefan002/screenkey.nvim" },
 
-  -- Agenda
-  -- { import = "extern.util.org-nvim" },
-  { import = "extern.util.orgmode" },
-
-  -- Markdown
-  -- { import = "extern.ui.markview" },
-  -- { import = "extern.util.md-agenda" },
-
-  -- Typing
-  -- { import = "extern.util.typr" },
-
-  -- Sessions
-  -- { import = "extern.util.nvim-sessionizer" },
 })
 
 -- -- NvChad: load theme
