@@ -144,7 +144,6 @@ require("config.lazy").add({
   -- { import = "extern.util.cuik" },
   -- { import = "extern.util.tatr" },
 
-
   -- Typing
   -- { import = "extern.util.typr" },
 
