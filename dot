@@ -4,7 +4,7 @@
 set -euo pipefail
 
 DOTFILES="${DOTFILES:-$HOME/dotfiles}"
-MANIFEST="$DOTFILES/MANIFEST.linux"
+MANIFEST="$DOTFILES/MANIFEST"
 
 STAMP="$(date +%Y%m%d-%H%M%S)"
 DOTFILES_REAL="$(readlink -f "$DOTFILES" 2>/dev/null || echo "$DOTFILES")"
