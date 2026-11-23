@@ -62,6 +62,9 @@ bind -a alt-Y yazi_cd
 # Nvim
 set -gx EDITOR nvim
 
+# Man pages.
+set -gx MANPAGER 'nvim +Man!'
+
 # Edit File with Sudo
 alias svim='sudoedit'
 
