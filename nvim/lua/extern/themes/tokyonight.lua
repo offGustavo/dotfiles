@@ -2,6 +2,7 @@ return {
   "https://github.com/folke/tokyonight.nvim",
   priority = 1000,
   lazy = false,
+  event = "VeryLazy",
   config = function()
     require("tokyonight").setup({
       dim_inactive = false,

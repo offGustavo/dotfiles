@@ -1,6 +1,7 @@
 return {
   "https://github.com/shaunsingh/nord.nvim",
-  lazy = false,
+  lazy = true,
+  event = "VeryLazy",
   config = function()
     colorscheme({
       dark = "nord",
