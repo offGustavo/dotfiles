@@ -28,7 +28,7 @@ vim.lsp.config("*", {
   },
 })
 
-autocmd("LspAttach", function(ev)
+autocmd("LspAttach", augroup(), function(ev)
   -- NOTE: Used in our custom statusline
   Fish.did_lsp_setup = true
   vim.diagnostic.config({

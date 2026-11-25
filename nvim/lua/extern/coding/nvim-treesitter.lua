@@ -28,6 +28,24 @@ return {
       "html",
       "css",
       "json",
+      "nix",
     }):wait(300000) -- max. 5 minutes
+
+    --- Initial default and runtime state tracker for syntax highlighting mode.
+    --- Controls if Treesitter and LSP semantic highlighting are enabled.
+    ---
+    --- @type boolean
+    ---
+    --- @usage
+    --- ```lua
+    --- -- Enable Treesitter + LSP semantic tokens
+    --- Fish.highlight_state = true
+    ---
+    --- -- Fallback to classic Vim syntax only
+    --- Fish.highlight_state = false
+    --- ```
+    Fish.highlight_state = true
+
+    require("config.syntax_highlight")
   end,
 }

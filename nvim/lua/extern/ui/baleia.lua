@@ -26,7 +26,8 @@ return {
     -- Command to show logs
     vim.api.nvim_create_user_command("BaleiaLogs", vim.cmd.messages, { bang = true })
 
-    autocmd("FileType", function()
+    autocmd("FileType", augroup("Fish.baleiaConfig"),
+    function()
       vim.g.baleia.once(vim.api.nvim_get_current_buf())
     end, "qf")
   end,

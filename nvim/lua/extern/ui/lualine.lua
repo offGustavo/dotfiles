@@ -156,10 +156,136 @@ return {
         },
       },
     },
-    inactive_sections = {},
-    tabline = {},
-    winbar = {},
-    inactive_winbar = {},
+    inactive_sections = {
+      lualine_a = {
+        {
+          function()
+            return "▊"
+          end,
+          -- color = { fg = "blue" },
+          padding = { left = 0, right = 1 },
+        },
+        {
+          function()
+            return ""
+            -- return ""
+          end,
+          -- color = function()
+          --   local mode_color = {
+          --     n = "red",
+          --     i = "green",
+          --     v = "blue",
+          --     [""] = "blue",
+          --     V = "blue",
+          --     c = "magenta",
+          --     no = "red",
+          --     s = "orange",
+          --     S = "orange",
+          --     [""] = "orange",
+          --     ic = "yellow",
+          --     R = "violet",
+          --     Rv = "violet",
+          --     cv = "red",
+          --     ce = "red",
+          --     r = "cyan",
+          --     rm = "cyan",
+          --     ["r?"] = "cyan",
+          --     ["!"] = "red",
+          --     t = "red",
+          --   }
+          --   return { fg = mode_color[vim.fn.mode()] }
+          -- end,
+          padding = { right = 1 },
+        },
+      },
+      tabline = {},
+      winbar = {},
+      inactive_winbar = {},
+      lualine_b = {},
+      lualine_c = {
+        {
+          "filename",
+          file_status = true,
+          newfile_status = false,
+          path = 4,
+          -- shorting_target = 20,
+          symbols = {
+            modified = "[+]",
+            readonly = "[-]",
+            unnamed = "[No Name]",
+            newfile = "[*]",
+          },
+        },
+        "filesize",
+        "location",
+        "progress",
+        -- "selectioncount",
+        {
+          "diagnostics",
+          sources = { "nvim_diagnostic" },
+          symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" },
+          colored = true,
+          update_in_insert = false,
+          always_visible = false,
+        },
+        --
+        -- "%=",
+        -- "tabs",
+        -- "%=",
+      },
+      lualine_x = {
+        {
+          "macro-recording",
+          fmt = show_macro_recording,
+        },
+        -- "searchcount",
+        {
+          "branch",
+          -- icon = "",
+          icon = "",
+        },
+        "diff",
+        {
+          function()
+            local msg = ""
+            -- local msg = "No Active Lsp"
+            local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+            local clients = vim.lsp.get_clients()
+            if next(clients) == nil then
+              return msg
+            end
+            for _, client in ipairs(clients) do
+              local filetypes = client.config.filetypes
+              if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                return client.name
+              end
+            end
+            return msg
+          end,
+          -- icon = " LSP:",
+          -- color = { fg = "white", gui = "bold" },
+        },
+        "encoding",
+        {
+          "fileformat",
+          symbols = {
+            unix = "UNIX", -- e712
+            dos = "DOS", -- e70f
+            mac = "MAC", -- e711
+          },
+        },
+      },
+      lualine_y = {},
+      lualine_z = {
+        {
+          function()
+            return "▊"
+          end,
+          -- color = { fg = "blue" },
+          padding = { left = 1 },
+        },
+      },
+    },
     extensions = {},
   },
 }

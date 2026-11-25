@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd({ "UiEnter", "ColorScheme" }, {
 
 vim.api.nvim_create_autocmd({ "TextYankPost", "TextPutPost" }, {
   desc = "Highlight yanked or pasted text with different colors based on register",
-  group = fish_group,
+  group = augroup(),
   callback = function()
     local hl = vim.v.event.regname == "+" and "HighlightYankSystem" or "HighlightYank"
     vim.hl.hl_op({ higroup = hl, timeout = 200 })

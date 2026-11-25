@@ -1,14 +1,5 @@
 -- vim: foldmethod=marker
 
--- {{{ Map Leader and Local Leader
-vim.cmd([[
-" <space> as leader
-let g:mapleader = " "
-" <C-c> as local leader
-let g:maplocalleader = "\<C-c>"
-]])
--- }}}
-
 -- -- {{{ Netrw
 -- vim.cmd [[
 -- " let g:netrw_banner = 0
@@ -34,7 +25,7 @@ set {
   termguicolors = true,
   linebreak = true,
   undofile = true,
-  swapfile = true,
+  swapfile = false,
   updatetime = 100,
   timeoutlen = 400,
   splitright = true,
@@ -57,7 +48,7 @@ set {
   -- Mini Max
   iskeyword = "@,48-57,192-255", -- -,_ work like separate words
   shortmess = "ICFOSWaco", -- Disable some built-in completion messages
-  virtualedit = "block", -- Allow going past end of line in blockwise mode
+  virtualedit = "all", -- Allow going past end of line in blockwise mode
   cursorlineopt = "screenline,number", -- Show cursor line per screen line
   keymodel = "startsel,stopsel",
 }
@@ -149,7 +140,7 @@ end
 vim.schedule(function()
   set {
     spelllang = "pt_br,en_us,es",
-    -- spell = true,
+    spell = false,
     spelloptions = "camel", -- Treat camelCase word parts as separate words
   }
 

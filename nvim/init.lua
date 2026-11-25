@@ -8,59 +8,29 @@ vim.loader.enable()
 
 _G.Fish = {}
 
--- Custom AuGroup
-_G.fish_group = vim.api.nvim_create_augroup("Fish.config", {
-  clear = false,
-})
--- }}}
-
--- {{{ Config Files
 -- WARN: this should be load first, this entire config depends on functions provided by this module
 require("config.functions")
 
--- NOTE: Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
--- colorscheme({ dark = "tokyo", light = "tokyo-day" })
-set {
-  termguicolors = false,
-}
+-- {{{ Map Leader and Local Leader
+vim.cmd([[
+" <space> as leader
+let g:mapleader = " "
+" <C-c> as local leader
+let g:maplocalleader = "\<C-c>"
+]])
+-- }}}
 
+-- }}}
+
+-- NOTE: Set a temp theme here to prevent light/dark flicker and for kitty_scroll_mode
+colorscheme({ dark = "tokyo", light = "tokyo-day" })
+
+-- WARN: When the SCROLL_MODE env var is set the config stop here
 if os.getenv("SCROLL_MODE") then
   -- require("config.helix").setup()
   source("kitty")
   return
 end
-
-require("config.options")
-require("config.syntax_highlight")
-require("config.ui2")
-require("config.autocmds")
-require("config.commands")
-require("config.keymaps")
-require("config.emacs")
-require("config.lsp")
-require("config.multicursor")
-
-if vim.g.neovide then
-  require("config.neovide")
-end
-
--- }}}
-
--- {{{ Local Plugins
-require("intern.cuik")
-require("intern.tatr")
-require("intern.dired")
-require("intern.espeto")
-require("intern.lazygit")
-require("intern.TabTerm")
-
--- TODO: Change The config files to Fish.
-require("offGustavo.todo-comments")
-require("offGustavo.ui.highlight_operation")
-require("Fish.git_branch").setup()
--- require("offGustavo.compile-mode")
--- require("Tatr")
--- }}}
 
 -- {{{ Lazy Plugins
 require("config.lazy").add({
@@ -91,13 +61,13 @@ require("config.lazy").add({
   -- { import = "astronvim.community" },
 
   -- General
-  { import = "extern.general.mini" },
-  { import = "extern.general.snacks.init" },
+  -- { import = "extern.general.mini" },
+  -- { import = "extern.general.snacks.init" },
 
   -- Theme
   -- { import = "extern.themes.tokyonight" },
-  -- { import = "extern.themes.nord" },
-  { import = "extern.themes.base16" },
+  { import = "extern.themes.nord" },
+  -- { import = "extern.themes.base16" },
   -- { import = "extern.themes.silentium" },
 
   -- File Explorer
@@ -115,11 +85,11 @@ require("config.lazy").add({
   -- { import = "extern.editor.picker.minibuffer" },
 
   -- Git
-  { import = "extern.editor.fugitive" },
+  -- { import = "extern.editor.fugitive" },
   -- { import = "extern.editor.neogit" },
 
   -- Quickfix
-  { import = "extern.editor.quicker" },
+  -- { import = "extern.editor.quicker" },
 
   -- LSP
   -- { import = "extern.coding.nvim-lspconfig" },
@@ -156,7 +126,7 @@ require("config.lazy").add({
 
   -- Markdown
   -- { import = "extern.ui.markview" },
-  { import = "extern.ui.helpview" },
+  -- { import = "extern.ui.helpview" },
   -- { import = "extern.util.md-agenda" },
 
   -- UI
@@ -181,4 +151,36 @@ require("config.lazy").add({
 -- require "nvchad.mappings"
 -- require "nvchad.autocmds"
 
+-- }}}
+
+-- {{{ Config Files
+require("config.options")
+require("config.ui2")
+require("config.autocmds")
+require("config.commands")
+require("config.keymaps")
+require("config.emacs")
+require("config.lsp")
+require("config.multicursor")
+
+if vim.g.neovide then
+  require("config.neovide")
+end
+
+-- }}}
+
+-- {{{ Local Plugins
+require("intern.cuik")
+require("intern.tatr")
+require("intern.dired")
+require("intern.espeto")
+require("intern.lazygit")
+require("intern.TabTerm")
+
+-- TODO: Change The config files to Fish.
+require("offGustavo.todo-comments")
+-- require("offGustavo.ui.highlight_operation")
+require("Fish.git_branch").setup()
+-- require("offGustavo.compile-mode")
+-- require("Tatr")
 -- }}}
