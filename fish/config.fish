@@ -171,7 +171,7 @@ function fish_prompt --description 'Write out the prompt'
 end
 
 # Ripgrep
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
+export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
 
 export FZF_DEFAULT_OPTS="
   --ansi
