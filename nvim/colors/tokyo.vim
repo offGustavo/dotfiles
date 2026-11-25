@@ -41,8 +41,10 @@ hi Error guibg=NONE guifg=#db4b4b
 hi ErrorMsg guibg=NONE guifg=#db4b4b
 hi FloatBorder guibg=#16161e guifg=#27a1b9
 hi FloatTitle guibg=#16161e guifg=#27a1b9
-hi FoldColumn guibg=#1a1b26 guifg=#565f89
-hi Folded guibg=#3b4261 guifg=#7aa2f7
+"hi FoldColumn guibg=#1a1b26 guifg=#565f89
+"hi Folded guibg=#3b4261 guifg=#7aa2f7
+hi! link FoldColumn Normal
+hi! link Folded Normal
 hi Foo guibg=#ff007c guifg=#c0caf5
 hi Function guibg=NONE guifg=#7aa2f7
 hi GitGutterAdd guibg=NONE guifg=#449dab
