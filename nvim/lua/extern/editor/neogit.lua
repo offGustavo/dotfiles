@@ -2,7 +2,7 @@ return {
   "https://github.com/NeogitOrg/neogit",
   enabled = true,
   lazy = true,
-  event = "VeryLazy",
+  -- event = "VeryLazy",
   cmd = "Neogit",
   dependencies = {
     "https://github.com/nvim-lua/plenary.nvim", -- required

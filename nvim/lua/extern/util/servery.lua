@@ -1,5 +1,6 @@
 return {
   "https://github.com/wurli/servery.nvim",
+  cmd = "Sv",
   config = function()
   -- The following are the defaults - you don't need to change them
   -- but you probably should at least set `dirs` and `ui.provider`.

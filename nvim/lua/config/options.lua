@@ -1,21 +1,5 @@
 -- vim: foldmethod=marker
 
--- -- {{{ Netrw
--- vim.cmd [[
--- " let g:netrw_banner = 0
---
--- " -- vim.o.acd = true
--- " -- vim.g.netrw_keepdir = 0
--- " -- vim.cmd([[
--- " -- autocmd BufEnter * lcd %:p:h
--- ]]
--- -- }}}
-
--- {{{ Security Things
-vim.o.modeline = true
-vim.o.exrc = false
---- }}}
-
 -- {{{ Options
 -- vim.opt.mouse = ""
 set {
@@ -240,8 +224,8 @@ set {
     foldinner = " ",
   },
 
-  -- statuscolumn = "%s%l%C "
-  statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()",
+  statuscolumn = "%s%l %C "
+  -- statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()",
 }
 
 -- }}}

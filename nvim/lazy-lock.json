@@ -4,9 +4,12 @@
   "friendly-snippets": { "branch": "main", "commit": "7a1c9f7897a4eb078b157a04c7af81e5869215b1" },
   "fzf-lua": { "branch": "main", "commit": "a3b5e6bebcc604d0286fffa1c4eb05b066a2a198" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
-  "nord.nvim": { "branch": "master", "commit": "80c1e5321505aeb22b7a9f23eb82f1e193c12470" },
+  "mini.nvim": { "branch": "main", "commit": "24cf4ad5840f0d092e3d8296b17eaf7026bf27f3" },
   "nvim-treesitter": { "branch": "main", "commit": "52773f0d13a0c11d0c3ef33c14ab6ecc1c17148b" },
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187" },
   "org-lsp": { "branch": "main", "commit": "d8687b4c0116163f704d209762340d37d86d1321" },
-  "orgmode": { "branch": "master", "commit": "0a4344a2e9fe8bf39543eecf7e8dfacea9867d9d" }
+  "orgmode": { "branch": "master", "commit": "0a4344a2e9fe8bf39543eecf7e8dfacea9867d9d" },
+  "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },
+  "tokyonight.nvim": { "branch": "main", "commit": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6" },
+  "vim-fugitive": { "branch": "master", "commit": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0" }
 }

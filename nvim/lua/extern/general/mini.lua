@@ -3,10 +3,9 @@ return {
   lazy = true,
   event = "VeryLazy",
   config = function()
-    --- Mini
     -- require("mini.statusline").setup()
     -- require("mini.tabline").setup()
-    -- require('mini.statuscolumnsetup()
+    -- require("mini.statuscolumn").setup()
 
     require("mini.extra").setup()
     local icons = require("mini.icons")
@@ -16,18 +15,17 @@ return {
     })
     icons.mock_nvim_web_devicons()
 
-    -- -- Git
-    require("mini.git").setup({})
-    vim.keymap.set({ "n", "x" }, "<leader>gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", { desc = "Show at cursor" })
-
-    -- -- Use only HEAD name as summary string
-    -- local branch_format_summary = function(data)
-    --   -- Utilize buffer-local table summary
-    --   local summary = vim.b[data.buf].minigit_summary
-    --   vim.b[data.buf].minigit_summary_string = summary.head_name or ""
-    -- end
-    -- local branch_au_opts = { pattern = "MiniGitUpdated", callback = branch_format_summary }
-    -- vim.api.nvim_create_autocmd("User", branch_au_opts)
+--     -- Git
+--     require("mini.git").setup({})
+--     vim.keymap.set({ "n", "x" }, "<leader>gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", { desc = "Show at cursor" })
+--     -- Use only HEAD name as summary string
+--     local branch_format_summary = function(data)
+--       -- Utilize buffer-local table summary
+--       local summary = vim.b[data.buf].minigit_summary
+--       vim.b[data.buf].minigit_summary_string = summary.head_name or ""
+--     end
+--     local branch_au_opts = { pattern = "MiniGitUpdated", callback = branch_format_summary }
+--     vim.api.nvim_create_autocmd("User", branch_au_opts)
 
     local diff_summary = function(data)
       local summary = vim.b[data.buf].minidiff_summary
@@ -43,10 +41,8 @@ return {
       end
       vim.b[data.buf].minidiff_summary_string = table.concat(t, " ")
     end
-
     local diff_au_opts = { pattern = "MiniDiffUpdated", callback = diff_summary }
     vim.api.nvim_create_autocmd("User", diff_au_opts)
-
     require("mini.diff").setup({
       -- Options for how hunks are visualized
       view = {

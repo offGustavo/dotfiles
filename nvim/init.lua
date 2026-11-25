@@ -1,5 +1,8 @@
 -- vim: foldmethod=marker
 
+vim.o.modeline = true
+vim.o.exrc = false
+
 -- {{{ Global Things
 -- PERF:
 vim.loader.enable()
@@ -61,12 +64,13 @@ require("config.lazy").add({
   -- { import = "astronvim.community" },
 
   -- General
-  -- { import = "extern.general.mini" },
-  -- { import = "extern.general.snacks.init" },
+  { import = "extern.general.mini" },
+  { import = "extern.general.snacks.init" },
 
   -- Theme
-  -- { import = "extern.themes.tokyonight" },
-  { import = "extern.themes.nord" },
+  { import = "extern.themes.tokyonight" },
+  -- { import = "extern.themes.omni" },
+  -- { import = "extern.themes.nord" },
   -- { import = "extern.themes.base16" },
   -- { import = "extern.themes.silentium" },
 
@@ -119,6 +123,7 @@ require("config.lazy").add({
 
   -- Sessions
   -- { import = "extern.util.nvim-sessionizer" },
+  -- { import = "extern.util.servery" },
 
   -- Agenda
   -- { import = "extern.util.org-nvim" },
@@ -180,7 +185,7 @@ require("intern.TabTerm")
 -- TODO: Change The config files to Fish.
 require("offGustavo.todo-comments")
 -- require("offGustavo.ui.highlight_operation")
-require("Fish.git_branch").setup()
+-- require("Fish.git_branch").setup()
 -- require("offGustavo.compile-mode")
 -- require("Tatr")
 -- }}}
