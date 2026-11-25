@@ -81,6 +81,7 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;;; Disable Evil Mode in MiniBuffer ---------------------------------------------------------------
 ;; NOTE: Disable Evil Mode in MiniBuffer
 ;; REF: https://github.com/doomemacs/core/issues/7780
 ;; evil-toggle-key (C-z) enables evil in the minibuffer.
@@ -130,14 +131,42 @@
         :n "C-k" nil
         :n "C-k" nil))
 
-;; System clipboard (explicit)
+;;; System clipboard (explicit) ---------------------------------------------------------------
 (setq select-enable-clipboard nil)
 (global-set-key (kbd "C-S-c") #'clipboard-kill-ring-save)
 (global-set-key (kbd "C-S-x") #'clipboard-kill-region)
 (global-set-key (kbd "C-S-v") #'clipboard-yank)
 
+;;; Compile ---------------------------------------------------------------
 (global-set-key (kbd "M-C")   #'compile)
 (global-set-key (kbd "M-RET") #'recompile)
+
+;;; Zoxide ---------------------------------------------------------------
+(map!
+ :leader
+ :n
+ :desc "Zoxide"
+ "z z"
+ #'zoxide-travel)
+
+;;; FZF ---------------------------------------------------------------
+(map!
+ :n
+ :desc "FZF Files"
+ "M-o"
+ #'fzf)
+
+(map!
+ :n
+ :desc "FZF Live Grep"
+ "M-s"
+ #'fzf-grep)
+
+(map!
+ :n
+ :desc "FZF Buffers"
+ "M-b"
+ #'fzf-switch-buffer)
 
 ;;; EXWM ---------------------------------------------------------------
 
