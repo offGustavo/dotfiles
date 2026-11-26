@@ -79,7 +79,7 @@ require("config.lazy").add({
   -- { import = "extern.editor.explorer.oil" },
   -- { import = "extern.editor.explorer.yazi" },
   -- { import = "extern.editor.explorer.vim-dirvish" },
-  -- { import = "extern.editor.explorer.dired" },
+  { import = "extern.editor.explorer.dired" },
 
   -- Picker
   { import = "extern.editor.picker.fzf-lua" },
@@ -89,7 +89,7 @@ require("config.lazy").add({
   -- { import = "extern.editor.picker.minibuffer" },
 
   -- Git
-  -- { import = "extern.editor.fugitive" },
+  { import = "extern.editor.fugitive" },
   -- { import = "extern.editor.neogit" },
 
   -- Quickfix
@@ -177,10 +177,10 @@ end
 -- {{{ Local Plugins
 require("intern.cuik")
 require("intern.tatr")
-require("intern.dired")
+-- require("intern.dired")
 require("intern.espeto")
-require("intern.lazygit")
-require("intern.TabTerm")
+-- require("intern.lazygit")
+-- require("intern.TabTerm")
 
 -- TODO: Change The config files to Fish.
 require("offGustavo.todo-comments")

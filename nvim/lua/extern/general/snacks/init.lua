@@ -192,6 +192,7 @@ return {
       function()
         Snacks.terminal()
       end,
+      mode = { "t", "x", "n", },
       desc = "Toggle Terminal",
     },
     {
@@ -199,6 +200,7 @@ return {
       function()
         Snacks.terminal()
       end,
+      mode = { "t", "x", "n", },
       desc = "which_key_ignore",
     },
     {
