@@ -51,7 +51,7 @@ endfunction
 
 " Ask the user for a command.
 function! s:get_user_cmd() abort
-  let l:default = s:state.last_cmd !=# '' ? s:state.last_cmd : g:cuik.default_cmd
+  let l:default = s:state.last_cmd !=# '' ? s:state.last_cmd : exists('b:cuik_cmd') ? b:cuik_cmd :  g:cuik.default_cmd 
   " 'shellcmdline' completion is not available in every Vim version
   let l:completion = s:is_nvim ? 'shellcmdline' : 'shellcmd'
   return input(g:cuik.prompt, l:default, l:completion)

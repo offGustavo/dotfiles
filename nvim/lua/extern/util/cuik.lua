@@ -1,6 +1,6 @@
 return {
-  "offGustavo/cuik.vim",
-  -- dir = "~/Projects/cuik.vim/",
+  -- "offGustavo/cuik.vim",
+  dir = "~/Projects/cuik.vim/",
   -- enabled = not is_windows(),
   lazy = true,
   cmd = "CuikCompile",

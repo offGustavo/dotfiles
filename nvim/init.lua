@@ -116,7 +116,7 @@ require("config.lazy").add({
   -- { import = "extern.util.kitty-scrollback" },
   -- { import = "extern.util.compile-mode" },
   -- { import = "extern.util.cuik" },
-  -- { import = "extern.util.tatr" },
+  { import = "extern.util.tatr" },
 
   -- Typing
   -- { import = "extern.util.typr" },
@@ -176,7 +176,7 @@ end
 
 -- {{{ Local Plugins
 require("intern.cuik")
-require("intern.tatr")
+-- require("intern.tatr")
 -- require("intern.dired")
 require("intern.espeto")
 -- require("intern.lazygit")
