@@ -22,18 +22,18 @@
 # Zoxide
 zoxide init fish | source
 
+bind -a alt-G lazygit
 function zoxide_cd
-    set -l use_fuzzel 0
-
+    # set -l use_fuzzel 0
+    #
     # if string match -qi "*Hyprland*" "$XDG_CURRENT_DESKTOP"
     #     set use_fuzzel 1
     # end
     #
     # if test $use_fuzzel -eq 1
-    set -l dir (zoxide query -l -s | rofi -dmenu | awk "{print \$2}")
-    bind -a alt-G lazygit
+    # set -l dir (zoxide query -l -s | rofi -dmenu | awk "{print \$2}")
     # else
-    # set -l dir (zoxide query -l | fzf)
+    set -l dir (zoxide query -l | fzf --preview 'eza --icons -la {}')
     # end
 
     if test -n "$dir"
@@ -46,11 +46,7 @@ bind -a alt-Z zoxide_cd
 
 bind -a alt-G lazygit
 
-function fzf_nvim
-    nvim (fzf)
-end
-
-bind -a alt-o fzf_nvim
+bind -a alt-o fzf-nvim.sh
 
 function yazi_cd
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
@@ -65,6 +61,9 @@ bind -a alt-Y yazi_cd
 
 # Nvim
 set -gx EDITOR nvim
+
+# Man pages.
+set -gx MANPAGER 'nvim +Man!'
 
 # Edit File with Sudo
 alias svim='sudoedit'
@@ -172,23 +171,30 @@ function fish_prompt --description 'Write out the prompt'
 end
 
 # Ripgrep
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
+export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
 
-# Fzf config
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-  --info=inline-right \
-  --ansi \
-  --layout=reverse \
-  --border=none \
-  --style=minimal \
-  --margin=0% \
-  --color=base16 \
-  --preview-window 'right,border-rounded,hidden'
-  --multi \
-  --bind ctrl-q:toggle-all,alt-q:toggle-all,ctrl-o:toggle-preview \
-  --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up "
+export FZF_DEFAULT_OPTS="
+  --ansi
+  --multi
+  --layout=default
+  --height=45%
+  --min-height=15
+  --margin=0
+  --info=inline-right
+  --color=base16
+  --border=none
+  --input-border=none
+  --list-border=none
+  --preview-border=left
+  --preview 'bat --color=always --style=numbers --line-range=:300 {}'
+  --preview-window 'right,55%,hidden'
+  --bind alt-a:toggle-all
+  --bind alt-o:toggle-preview
+  --bind ctrl-d:preview-half-page-down
+  --bind ctrl-u:preview-half-page-up
+"
 
-# fzf --fish | source
+fzf --fish | source
 
 function start-kanata
     if tmux has-session -t kanata 2>/dev/null

@@ -1,20 +1,5 @@
 local M = {}
 
---- Initial default and runtime state tracker for syntax highlighting mode.
---- Controls if Treesitter and LSP semantic highlighting are enabled.
----
---- @type boolean
----
---- @usage
---- ```lua
---- -- Enable Treesitter + LSP semantic tokens
---- Fish.highlight_state = true
----
---- -- Fallback to classic Vim syntax only
---- Fish.highlight_state = false
---- ```
-Fish.highlight_state = true
-
 --- Applies or removes Treesitter and LSP semantic highlighting for a specific buffer.
 --- Automatically falls back to classic regex syntax if a Treesitter parser is unavailable.
 ---
@@ -43,7 +28,13 @@ local function apply_highlight(buf, enabled)
         pcall(vim.lsp.semantic_tokens.force_refresh, buf)
       else
         -- no parser for this filetype: fall back to regex syntax
-        vim.bo[buf].syntax = vim.bo[buf].filetype
+        -- vim.bo[buf].syntax = vim.bo[buf].filetype
+        vim.cmd("syntax on")
+
+        -- NOTE: fix syntax highlight when word contains `_` and `-`
+        autocmd({ "BufEnter", "BufLeave", "Filetype" }, augroup(), function()
+          vim.cmd("syntax iskeyword @,48-57,_,-,192-255")
+        end)
       end
     else
       vim.lsp.semantic_tokens.enable(false, { bufnr = buf })

@@ -60,25 +60,62 @@ function _G.set_global(opts)
   require("Fish.set_opt").set(opts, "global")
 end
 
---- Autocommand Wrapper
----@param event string|table
----@param callback function
----@param pattern? string|table|function|nil
----@param group? any
----@param desc? string|nil
----@usage
----```lua
----autocmd("User", function()
----  print("User defined autocmd")
----end, "Lazy", "UserGroup", "Print user autocmd")
----```
-function _G.autocmd(event, callback, pattern, group, desc)
-  vim.api.nvim_create_autocmd(event, {
-    group = group or fish_group,
-    desc = desc or nil,
-    pattern = pattern or nil,
-    callback = callback or nil,
-  })
+--- TODO: add docs
+function _G.augroup(name, clear)
+ if name == nil then
+   name = "Fish.config"
+ end
+ return vim.api.nvim_create_augroup(name, { clear = clear and true or false })
+end
+
+-- --- Autocommand Wrapper
+-- ---@param event string|table
+-- ---@param callback function
+-- ---@param pattern? string|table|function|nil
+-- ---@param group? any
+-- ---@param desc? string|nil
+-- ---@usage
+-- ---```lua
+-- ---autocmd("User", function()
+-- ---  print("User defined autocmd")
+-- ---end, "Lazy", "UserGroup", "Print user autocmd")
+-- ---```
+-- function _G.autocmd(event, callback, pattern, group, desc)
+--   vim.api.nvim_create_autocmd(event, {
+--     group = group or augroup(),
+--     desc = desc or nil,
+--     pattern = pattern or nil,
+--     callback = callback or nil,
+--   })
+-- end
+
+--- Define event-handlers (autocmds) ergonomically.
+---
+--- Examples:
+--- ```lua
+---   local nvim_on = require('vim._core.util').nvim_on
+---   nvim_on('BufWritePost', group, function(ev) print(ev.file) end)
+---   nvim_on({ 'BufRead', 'BufNew' }, group, { pattern = '*.lua' }, function(ev) end)
+---   nvim_on('VimLeavePre', nil, function() end)
+--- ```
+---
+--- @param events vim.api.keyset.events|vim.api.keyset.events[] Event(s) to watch. See |autocmd-events|.
+--- @param group string|integer? Group name or id, or `nil`.
+--- @param opts_or_fn vim.api.keyset.create_autocmd Options.
+--- @param fn fun(ev: vim.api.keyset.create_autocmd.callback_args): boolean? Event handler.
+--- @return integer # Autocmd id (see |nvim_create_autocmd()|).
+--- @overload fun(events: vim.api.keyset.events|vim.api.keyset.events[], group: string|integer?, fn: fun(ev: vim.api.keyset.create_autocmd.callback_args): boolean?): integer
+function _G.autocmd(events, group, opts_or_fn, fn)
+  vim.validate('opts_or_fn', opts_or_fn, { 'function', 'table' })
+  local opts --- @type vim.api.keyset.create_autocmd
+  if type(opts_or_fn) == 'function' then
+    fn, opts = opts_or_fn, {}
+  else
+    opts = opts_or_fn
+  end
+  opts.group = group
+  opts.callback = fn
+  return vim.api.nvim_create_autocmd(events, opts)
 end
 
 ---Define keymaps in bulk.

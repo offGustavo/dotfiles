@@ -1,4 +1,4 @@
-# Edit this configuration file to define what should be installed on
+# Edit this configuration file to define what should be installed off
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
@@ -325,10 +325,10 @@ in
     packages = with pkgs; [
       # claude-code
       kitty
-      # ghostty
-      # wezterm
-      # vscode
-      # zed-editor
+      ghostty
+      wezterm
+      vscode
+      zed-editor
       lazygit
       # google-chrome
       vivaldi
@@ -340,6 +340,7 @@ in
       gnumake
       cmake
       emacs
+      # emacs-pgtk
       # texlive
       kanata
       hyprlock
@@ -352,7 +353,9 @@ in
       # neovide
       # vim-full
       # vim
-      # vis
+      vis
+      # luakit
+      # vieb
       qmk
       # vial
       keypunch
@@ -375,6 +378,7 @@ in
       cargo
       lua
       jq
+      tree-sitter
       luarocks
       moreutils
       git

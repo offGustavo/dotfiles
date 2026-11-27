@@ -56,8 +56,10 @@ hi Error guibg=NONE guifg=#c64343
 hi ErrorMsg guibg=NONE guifg=#c64343
 hi FloatBorder guibg=#d0d5e3 guifg=#4094a3
 hi FloatTitle guibg=#d0d5e3 guifg=#4094a3
-hi FoldColumn guibg=#e1e2e7 guifg=#848cb5
-hi Folded guibg=#a8aecb guifg=#2e7de9
+"hi FoldColumn guibg=#e1e2e7 guifg=#848cb5
+"hi Folded guibg=#a8aecb guifg=#2e7de9
+hi! link Folded Normal
+hi! link FoldColumn Normal
 hi Foo guibg=#d20065 guifg=#3760bf
 hi Function guibg=NONE guifg=#2e7de9
 hi FzfLuaBorder guibg=#d0d5e3 guifg=#4094a3

@@ -8,6 +8,7 @@
 --   end,
 -- })
 
+
 -- {{{ Marks
 -- REF: https://github.com/neovim/neovim/discussions/39260
 local mark_names = vim.split("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "") -- .><^
@@ -59,12 +60,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "MarkSet" }, {
 })
 -- }}}
 
--- {{{ Syntax
--- NOTE: fix syntax highlight when word contains `_` and `-`
-autocmd({ "BufEnter", "BufLeave", "Filetype" }, function()
-  vim.cmd("syntax iskeyword @,48-57,_,-,192-255")
-end)
--- }}}
 
 -- {{{ Kitty
 vim.api.nvim_create_autocmd({ "VimEnter", "VimResume", "UIEnter" }, {

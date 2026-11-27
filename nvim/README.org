@@ -200,3 +200,34 @@ $HOME/.config/nvim
 ├──  README.org
 └──  TODO.org
 #+END_SRC
+
+** Plugins
+
+
+#+BEGIN_EXAMPLE
+Total: 20 plugins
+
+Loaded (16)
+  ● blink.cmp 7.66ms  CmdlineEnter
+  ● conform.nvim 0.67ms  BufReadPost
+  ● dired.lua 0.55ms  start
+  ● friendly-snippets 0.28ms  blink.cmp
+  ● fzf-lua 7.06ms  VeryLazy
+  ● lazy.nvim 4.5ms  init.lua
+  ● mason-lspconfig.nvim 19.33ms  VeryLazy
+  ● mason.nvim 1.32ms  mason-lspconfig.nvim
+  ● mini.nvim 16.02ms  VeryLazy
+  ● nord.nvim 4.32ms  start
+  ● nvim-lspconfig 0.15ms  mason-lspconfig.nvim
+  ● nvim-treesitter 11.45ms  VeryLazy
+  ● nvim-treesitter-textobjects 0.47ms  VeryLazy
+  ● org.nvim 3.38ms  VeryLazy
+  ● snacks.nvim 0.6ms 󰢱 snacks  plugins.general.snacks.init
+  ● tatr.vim 0.1ms  start
+
+Not Loaded (4)
+  ○ cuik.vim  CuikCompile  <M-g><M-o>  <M-g><M-c>  <M-g><M-n>  <M-g><M-p>  <M-C>  <M-CR>  <M-g><M-k> 
+  ○ kitty-scrollback.nvim  KittyScrollbackGenerateCommandLineEditing  KittyScrollbackGenerateKittens  KittyScrollbackCheckHealth  User KittyScrollbackLaunch 
+  ○ quicker.nvim  qf 
+  ○ vim-fugitive  Git  G  <space>ge  <space>gr  <space>gw  <space>gp  <space>gm  <space>gb  <space>go  <space>gps  <space>gpl  <M-G>  <space>gl  <space>ga  <space>gc  <space>gt  <space>gd 
+#+END_EXAMPLE

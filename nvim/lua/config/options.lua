@@ -1,36 +1,5 @@
 -- vim: foldmethod=marker
 
--- {{{ Map Leader and Local Leader
-vim.cmd([[
-" <space> as leader
-let g:mapleader = " "
-" <C-c> as local leader
-let g:maplocalleader = "\<C-c>"
-]])
--- }}}
-
--- {{{ Disable Plugins
--- disable custom nix/arch fzf.vim
--- vim.g.loaded_fzf = 1
--- vim.g.loaded_netrwPlugin = 0
--- }}}
-
--- -- {{{ Netrw
--- vim.cmd [[
--- " let g:netrw_banner = 0
---
--- " -- vim.o.acd = true
--- " -- vim.g.netrw_keepdir = 0
--- " -- vim.cmd([[
--- " -- autocmd BufEnter * lcd %:p:h
--- ]]
--- -- }}}
-
--- {{{ Security Things
-vim.o.modeline = true
-vim.o.exrc = false
---- }}}
-
 -- {{{ Options
 -- vim.opt.mouse = ""
 set {
@@ -63,7 +32,7 @@ set {
   -- Mini Max
   iskeyword = "@,48-57,192-255", -- -,_ work like separate words
   shortmess = "ICFOSWaco", -- Disable some built-in completion messages
-  virtualedit = "block", -- Allow going past end of line in blockwise mode
+  virtualedit = "all", -- Allow going past end of line in blockwise mode
   cursorlineopt = "screenline,number", -- Show cursor line per screen line
   keymodel = "startsel,stopsel",
 }
@@ -151,20 +120,11 @@ else
 end
 -- }}}
 
--- {{{ New Filetypes
-vim.filetype.add {
-  extension = {
-    kbd = "kbd", -- maps *.kbd → filetype=kbd
-    teal = "tl",
-  },
-}
--- }}}
-
 -- {{{ Spell
 vim.schedule(function()
   set {
     spelllang = "pt_br,en_us,es",
-    -- spell = true,
+    spell = false,
     spelloptions = "camel", -- Treat camelCase word parts as separate words
   }
 
@@ -264,8 +224,8 @@ set {
     foldinner = " ",
   },
 
-  -- statuscolumn = "%s%l%C "
-  statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()",
+  statuscolumn = "%s%l %C "
+  -- statuscolumn = "%!v:lua.require('Fish.statuscolumn').build()",
 }
 
 -- }}}
